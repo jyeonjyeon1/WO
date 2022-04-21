@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  
+<configuration>
+	<typeAliases> <!-- 특정 클래스의 별칭(Alias)을 선언 -->
+		<typeAlias alias="UserVO" type="three.aws.wo.user.vo.UserVO" />
+	</typeAliases>
+	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
+		<mapper resource="mappings/user-mapping.xml" />
+	</mappers>
+</configuration>

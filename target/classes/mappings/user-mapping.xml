@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+	<insert id="insertUser" parameterType="UserVO">
+		INSERT INTO testuser (u_seq, u_id, u_password, u_name, u_email, u_sms_usable,u_email_usable, u_telnum)
+		VALUES(NEXTVAL('TEST_SEQ'), #{u_id}, #{u_password}, #{u_name}, #{u_email}, #{u_sms_usable}, #{u_email_usable}, #{u_tel})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	<update id="updateUser" parameterType="UserVO">
+		UPDATE myboard
+		SET title=#{title}, content=#{content}
+		WHERE seq = #{seq}
+	</update>
+	<delete id="deleteBoard" parameterType="UserVO">
+		DELETE FROM myboard WHERE seq = #{seq}
+	</delete>
+</mapper>
+ 

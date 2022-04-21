@@ -43,7 +43,7 @@
 
 	<servlet-mapping>
 		<servlet-name>user</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.user</url-pattern>
 	</servlet-mapping>
 	
 	<!-- USER 접근 -->

@@ -86,13 +86,13 @@ public class UserController {
 		return "/login/login_login";
 	}
 
-	@GetMapping("/register.user")
-	public String toregisterPage() {
-		System.out.println("회원가입화면");
-		return "/login/login_register";
-	}
+//	@GetMapping("/join.user")
+//	public String toregisterPage() {
+//		System.out.println("회원가입화면");
+//		return "/login/login_register";
+//	}
 
-	@GetMapping("/register2.user")
+	@GetMapping("/join.user")
 	public String toregister2Page() {
 		System.out.println("회원가입화면2");
 		return "/login/login_register2";

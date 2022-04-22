@@ -12,9 +12,10 @@ public class UserRegController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/register.do")
+	@RequestMapping("/register.user")
 	public String insertUser(UserVO vo) {
 		userService.insertUser(vo);
+		System.out.println("회원가입 처리 완료 DB확인");
 		return "/index/index";
 	}
 }

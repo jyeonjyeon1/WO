@@ -11,6 +11,12 @@ public class AdminController {
 		System.out.println("index");
 		return "/index";
 	}
+	
+	@GetMapping("/smarteditor.admin")
+	public String naversmartEditor() {
+		System.out.println("smarteditor");
+		return "/SmartEditor2Skin";
+	}
 
 //	==================== board ============================
 	@GetMapping("/board_mng.admin")
@@ -58,7 +64,7 @@ public class AdminController {
 	@GetMapping("/review_mng.admin")
 	public String toreview_mng() {
 		System.out.println("review_mng");
-		return "/board/review_mn/";
+		return "/board/review_mng";
 	}
 	
 //	==================== message ============================
@@ -93,7 +99,7 @@ public class AdminController {
 	}
 	
 //	==================== order ============================
-	@GetMapping("/store_orderv.admin")
+	@GetMapping("/store_order.admin")
 	public String tostore_order() {
 		System.out.println("store_order");
 		return "/order/store_order";

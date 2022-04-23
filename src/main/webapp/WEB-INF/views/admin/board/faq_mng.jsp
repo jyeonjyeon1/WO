@@ -35,7 +35,7 @@
     <!--header start-->
     <header class="header black-bg">
       <div class="sidebar-toggle-box">
-        <div class="openup tooltips" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
+        <div class="openup tooltips" style="background-image: url(resources/assets/images/admin/logo/logo_white.svg);" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
       </div>
       <!--logo start-->
       <a href="../index.admin" class="logo"><b>walking<span>order</span></b></a>
@@ -82,7 +82,7 @@
               <li><a id="user-mng" href="user_mng.admin">회원 관리</a></li>
               <li><a id="coupon-mng" href="coupon_mng.admin">쿠폰 관리</a></li>
               <li><a id="point-mng" href="point_mng.admin">포인트 관리</a></li>
-              <li><a id="connect-hist" href="connect_hist.do">접속 이력</a></li>
+              <li><a id="connect-hist" href="connect_hist.admin">접속 이력</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -91,7 +91,7 @@
               <span>매장 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="store-mng" href="store_mng.admin>매장 관리</a></li>
+              <li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
               <li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
               <li><a id="store-pending" href="store_pending.admin">승인 대기</a></li>
               <li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>

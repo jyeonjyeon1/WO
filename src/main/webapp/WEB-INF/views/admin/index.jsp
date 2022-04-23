@@ -30,7 +30,7 @@
     <!--header start-->
     <header class="header black-bg">
       <div class="sidebar-toggle-box">
-        <div class="openup tooltips" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
+        <div class="openup tooltips" style="background-image: url(resources/assets/images/admin/logo/logo_white.svg);" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
       </div>
       <!--logo start-->
       <a href="index.html" class="logo"><b>walking<span>order</span></b></a>
@@ -185,7 +185,6 @@
     <section id="main-content">
      <form class="allmenu-form">
         <section class="allmenu site-min-height">
-          <form>
             <span class="all"><b> All Menu</b></span>
             <span class="reset_btn"><button type="reset">reset</button></span>
             <span class="reset_btn"><button class="all_menu_save_btn" type="button">save</button>

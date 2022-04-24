@@ -12,16 +12,16 @@
   <title>워킹오더 관리자 페이지</title>
 
   <!-- Favicons -->
-  <link href="../resources/assets/images/admin/logo/logo_only.svg" rel="icon">
-  <link href="../resources/assets/images/admin/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
+  <link href="resources/assets/images/admin/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
-  <link href="../resources/assets/js/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
-  <link href="../resources/assets/js/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="resources/assets/js/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
-  <link href="../resources/assets/css/admin/style.css" rel="stylesheet">
-  <link href="../resources/assets/css/admin/style-responsive.css" rel="stylesheet">
+  <link href="resources/assets/css/admin/style.css" rel="stylesheet">
+  <link href="resources/assets/css/admin/style-responsive.css" rel="stylesheet">
   <!-- 테이블용 css -->
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
@@ -30,27 +30,8 @@
 
 <body>
   <section id="container">
-    <!-- **********************************************************************************************************************************************************
-        TOP BAR CONTENT & NOTIFICATIONS
-        *********************************************************************************************************************************************************** -->
-    <!--header start-->
-    <header class="header black-bg">
-      <div class="sidebar-toggle-box">
-        <div class="openup tooltips" style="background-image: url(resources/assets/images/admin/logo/logo_white.svg);" data-placement="right" data-original-title="메뉴 여/닫기"></div>
-      </div>
-      <!--logo start-->
-      <a href="../index.admin" class="logo"><b>walking<span>order</span></b></a>
-      <!--logo end-->
-      <div class="nav notify-row" id="top_menu">
-
-      </div>
-      <div class="top-menu">
-        <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="../login.admin">Logout</a></li>
-        </ul>
-      </div>
-    </header>
-    <!--header end-->
+    <!-- 헤더 import -->
+    <%@ include file="../inc/admin_header.jsp" %>
     <!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
@@ -59,12 +40,12 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a><img src="../resources/assets/images/admin/doggy.jpg" class="img-circle"
+          <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle"
                 width="80"></a></p>
           <h5 class="centered">김 버터</h5>
           <p class="sidebar-title">설정</p>
           <li class="sub-menu">
-            <a href="../index.admin">
+            <a href="index.admin">
               <i class="fa fa-h-square"></i>
               <span>Home</span>
             </a>
@@ -85,7 +66,7 @@
           <li><a id="user-mng" href="user_mng.admin">회원 관리</a></li>
           <li><a id="coupon-mng" href="coupon_mng.admin">쿠폰 관리</a></li>
           <li><a id="point-mng" href="point_mng.admin">포인트 관리</a></li>
-          <li><a id="connect-hist" href="connect_hist..admin">접속 이력</a></li>
+          <li><a id="connect-hist" href="connect_hist.admin">접속 이력</a></li>
         </ul>
         </li>
         <li class="sub-menu">
@@ -856,7 +837,7 @@
         <p>
           &copy; Copyrights <strong>WalkingOrder</strong>. All Rights Reserved
         </p>
-        <a href="../index.html#" class="go-top">
+        <a href="index.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
         </a>
       </div>
@@ -866,20 +847,20 @@
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="../resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
-  <script src="../resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>
+  <script src="resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
+  <script src="resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>
   <script class="include" type="text/javascript"
-    src="../resources/assets/js/admin/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="../resources/assets/js/admin/jquery.scrollTo.min.js"></script>
-  <script src="../resources/assets/js/admin/jquery.nicescroll.js" type="text/javascript"></script>
+    src="resources/assets/js/admin/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="resources/assets/js/admin/jquery.scrollTo.min.js"></script>
+  <script src="resources/assets/js/admin/jquery.nicescroll.js" type="text/javascript"></script>
   <!--common script for all pages-->
-  <script src="../resources/assets/js/admin/common-scripts.js"></script>
+  <script src="resources/assets/js/admin/common-scripts.js"></script>
   <!--script for this page-->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="../resources/assets/js/admin/datatable/datatable-modified.js" ></script>
-  <script src="../resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
+  <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 </body>
 
 </html>

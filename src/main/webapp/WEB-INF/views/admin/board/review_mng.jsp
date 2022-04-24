@@ -772,18 +772,8 @@
 
 
 
-		<!--footer start-->
-		<footer class="site-footer">
-			<div class="text-center">
-				<p>
-					&copy; Copyrights <strong>WalkingOrder</strong>. All Rights
-					Reserved
-				</p>
-				<a href="../../index.html#" class="go-top"> <i
-					class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
+		<!-- 푸더 import -->
+		<%@ include file="../inc/admin_footer.jsp" %>
 		<!--footer end-->
 	</section>
 	<!-- js placed at the end of the document so the pages load faster -->
@@ -802,7 +792,7 @@
 	<!--script for this page-->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-	<script src="resources/assets/js/admin/datatable/datatable-modified.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
 	<script
 		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 </body>

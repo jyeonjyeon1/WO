@@ -25,7 +25,7 @@
 <body>
   <section id="container">
     <!-- 헤더 import -->
-    <%@ include file="../inc/admin_header.jsp" %>
+    <%@ include file="inc/admin_header.jsp" %>
     <!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
@@ -38,7 +38,7 @@
           <h5 class="centered">김 버터</h5>
           <p class="sidebar-title" >설정</p>
           <li class="sub-menu">
-            <a class="active" href="index.html">
+            <a class="active" href="index.admin">
               <i class="fa fa-h-square"></i>
               <span>Home</span>
               </a>
@@ -56,10 +56,10 @@
               <span>&nbsp;회원 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="user-mng" href="user/user_mng.html">회원 관리</a></li>
-              <li><a id="coupon-mng" href="user/coupon_mng.html">쿠폰 관리</a></li>
-              <li><a id="point-mng" href="user/point_mng.html">포인트 관리</a></li>
-              <li><a id="connect-hist" href="user/connect_hist.html">접속 이력</a></li>
+              <li><a id="user-mng" href="user_mng.admin">회원 관리</a></li>
+              <li><a id="coupon-mng" href="coupon_mng.admin">쿠폰 관리</a></li>
+              <li><a id="point-mng" href="point_mng.admin">포인트 관리</a></li>
+              <li><a id="connect-hist" href="connect_hist.admin">접속 이력</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -68,10 +68,10 @@
               <span>매장 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="store-mng" href="store/store_mng.html">매장 관리</a></li>
-              <li><a id="store-menu" href="store/store_menu.html">매장 메뉴 관리</a></li>
-              <li><a id="store-pending" href="store/store_pending.html">승인 대기</a></li>
-              <li><a id="join-inq" href="store/join_inq.html">입점 문의</a></li>
+              <li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
+              <li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
+              <li><a id="store-pending" href="store_pending.admin">승인 대기</a></li>
+              <li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -80,10 +80,10 @@
               <span>주문 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="total-order" href="order/total_order.html">전체 주문 관리</a></li>
-              <li><a id="store-order" href="order/store_order.html">매장별 주문 관리</a></li>
-              <li><a id="cancel-order" href="order/cancel_order.html">취소 주문 관리</a></li>
-              <li><a id="refund-order" href="order/refund_order.html">환불 주문 관리</a></li>
+              <li><a id="total-order" href="total_order.admin">전체 주문 관리</a></li>
+              <li><a id="store-order" href="store_order.admin">매장별 주문 관리</a></li>
+              <li><a id="cancel-order" href="cancel_order.admin">취소 주문 관리</a></li>
+              <li><a id="refund-order" href="refund_order.admin">환불 주문 관리</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -92,11 +92,11 @@
               <span>보드 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="notices" href="board/notices.html">공지사항</a></li>
-              <li><a id="faq-mng" href="board/faq_mng.html">FAQ 관리</a></li>
-              <li><a id="board-mng" href="board/board_mng.html">게시판 관리</a></li>
-              <li><a id="review-mng" href="board/review_mng.html">리뷰 관리</a></li>
-              <li><a id="inquiry" href="board/inquiry.html">1:1 문의</a></li>
+              <li><a id="notices" href="notices.admin">공지사항</a></li>
+              <li><a id="faq-mng" href="faq_mng.admin">FAQ 관리</a></li>
+              <li><a id="board-mng" href="board_mng.admin">게시판 관리</a></li>
+              <li><a id="review-mng" href="review_mng.admin">리뷰 관리</a></li>
+              <li><a id="inquiry" href="inquiry.admin">1:1 문의</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -105,10 +105,10 @@
               <span>페이지 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="banner-mng" href="page/banner_mng.html">배너 관리</a></li>
-              <li><a id="terms-mng" href="page/terms_mng.html">약관 관리</a></li>
-              <li><a id="policy-mng" href="page/policy_mng.html">정책 관리</a></li>
-              <li><a id="doc-form" href="page/doc_form.html">증빙서류</a></li>
+              <li><a id="banner-mng" href="banner_mng.admin">배너 관리</a></li>
+              <li><a id="terms-mng" href="terms_mng.admin">약관 관리</a></li>
+              <li><a id="policy-mng" href="policy_mng.admin">정책 관리</a></li>
+              <li><a id="doc-form" href="doc_form.admin">증빙서류</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -117,11 +117,11 @@
               <span>메세지 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="ka-tmplt" href="message/ka_tmplt.html">알림톡 템플릿</a></li>
-              <li><a id="ka-hist" href="message/ka_hist.html">알림톡 전송이력</a></li>
-              <li><a id="mess-send" href="message/mess_send.html">문자 전송</a></li>
-              <li><a id="mess-send-group" href="message/mess_send_group.html">단체 문자 전송</a></li>
-              <li><a id="mess-hist" href="message/mess_hist.html">문자 전송 이력</a></li>
+              <li><a id="ka-tmplt" href="ka_tmplt.admin">알림톡 템플릿</a></li>
+              <li><a id="ka-hist" href="ka_hist.admin">알림톡 전송이력</a></li>
+              <li><a id="mess-send" href="mess_send.admin">문자 전송</a></li>
+              <li><a id="mess-send-group" href="mess_send_group.admin">단체 문자 전송</a></li>
+              <li><a id="mess-hist" href="mess_hist.admin">문자 전송 이력</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -130,11 +130,11 @@
               <span>정산</span>
               </a>
             <ul class="sub">
-              <li><a id="pg-comm" href="settlement/pg_comm.html">PG 수수료</a></li>
-              <li><a id="pg-stlmt" href="settlement/pg_stlmt.html">PG 정산</a></li>
-              <li><a id="store-rev" href="settlement/store_rev.html">매장별 수익</a></li>
-              <li><a id="store-stlmt" href="settlement/store_stlmt.html">매장별 정산</a></li>
-              <li><a id="stlmt-hist" href="settlement/stlmt_hist.html">정산 내역</a></li>
+              <li><a id="pg-comm" href="pg_comm.admin">PG 수수료</a></li>
+              <li><a id="pg-stlmt" href="pg_stlmt.admin">PG 정산</a></li>
+              <li><a id="store-rev" href="store_rev.admin">매장별 수익</a></li>
+              <li><a id="store-stlmt" href="store_stlmt.admin">매장별 정산</a></li>
+              <li><a id="stlmt-hist" href="stlmt_hist.admin">정산 내역</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -143,11 +143,11 @@
               <span>통계</span>
               </a>
             <ul class="sub">
-              <li><a id="order-period" href="statistics/order_period.html">기간별 주문 통계</a></li>
-              <li><a id="store-sales" href="statistics/store_sales.html">매장별 매출 통계</a></li>
-              <li><a id="user-sales" href="statistics/user_sales.html">사용자별 매출 통계</a></li>
-              <li><a id="by-chart" href="statistics/by_chart.html">표로 확인</a></li>
-              <li><a id="by-graph" href="statistics/by_graph.html">그래프로 확인</a></li>
+              <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li>
+              <li><a id="store-sales" href="store_sales.admin">매장별 매출 통계</a></li>
+              <li><a id="user-sales" href="user_sales.admin">사용자별 매출 통계</a></li>
+              <li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
+              <li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
             </ul>
           </li>
           
@@ -165,153 +165,8 @@
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-     <form class="allmenu-form">
-        <section class="allmenu site-min-height">
-            <span class="all"><b> All Menu</b></span>
-            <span class="reset_btn"><button type="reset">reset</button></span>
-            <span class="reset_btn"><button class="all_menu_save_btn" type="button">save</button>
-            </span>
-            <div class="row mt">
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class="fa fa-user" style="font-size: 12px;"></i>
-                      <span>&nbsp;회원 관리</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>회원 관리</span></li>
-                      <li><input id="" type="checkbox"><span>쿠폰 관리</span></li>
-                      <li><input id="" type="checkbox"><span>포인트 관리</span></li>
-                      <li><input id="" type="checkbox"><span>접속 이력</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class="fa fa-group" style="font-size: 12px;"></i>
-                      <span>매장 관리</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>매장 관리</span></li>
-                      <li><input id="" type="checkbox"><span>매장 메뉴 관리</span></li>
-                      <li><input id="" type="checkbox"><span>승인 대기</span></li>
-                      <li><input id="" type="checkbox"><span>입점 문의</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class="fa fa-shopping-cart"></i>
-                      <span>주문 관리</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>전체 주문 관리</span></li>
-                      <li><input id="" type="checkbox"><span>매장별 주문 관리</span></li>
-                      <li><input id="" type="checkbox"><span>취소 주문</span></li>
-                      <li><input id="" type="checkbox"><span>환불 주문</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class="fa fa-pencil-square"></i>
-                      <span>보드 관리</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>공지사항</span></li>
-                      <li><input id="" type="checkbox"><span>FAQ 관리</span></li>
-
-                      <li><input id="" type="checkbox"><span>리뷰 관리</span></li>
-                      <li><input id="" type="checkbox"><span>1:1 문의</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="row mt">
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class="fa fa-sticky-note" style="font-size: 12px;"></i>
-                      <span>페이지 관리</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>배너 관리</span></li>
-                      <li><input id="" type="checkbox"><span>오늘의 음료</span></li>
-                      <li><input id="" type="checkbox"><span>검색어 관리</span></li>
-                      <li><input id="" type="checkbox"><span>약관/정책 관리</span></li>
-                      <li><input id="" type="checkbox"><span>증빙서류</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class="fa fa-envelope-open-o" style="font-size: 13px;"></i>
-                      <span>메세지 관리</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>알림톡 템플릿</span></li>
-                      <li><input id="" type="checkbox"><span>알림톡 전송이력</span></li>
-                      <li><input id="" type="checkbox"><span>문자 전송</span></li>
-                      <li><input id="" type="checkbox"><span>단체 문자 전송</span></li>
-                      <li><input id="" type="checkbox"><span>문자 전송 이력</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class=" fa fa-krw"></i>
-                      <span>정산</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>PG 수수료</span></li>
-                      <li><input id="" type="checkbox"><span>PG 정산 내역</span></li>
-                      <li><input id="" type="checkbox"><span>매장별 수익</span></li>
-                      <li><input id="" type="checkbox"><span>매장별 정산</span></li>
-                      <li><input id="" type="checkbox"><span>정산 내역</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12">
-                <ul class="all_menu">
-                  <li class="sub-menu">
-                    <a id="user-manage">
-                      <i class=" fa fa-bar-chart-o"></i>
-                      <span>통계</span>
-                    </a>
-                    <ul class="sub">
-                      <li><input id="" type="checkbox"><span>기간별 주문 통계</span></li>
-                      <li><input id="" type="checkbox"><span>매장별 매출 통계</span></li>
-                      <li><input id="" type="checkbox"><span>사용자별 매출 통계</span></li>
-                      <li><input id="" type="checkbox"><span>차트로 확인</span></li>
-                      <li><input id="" type="checkbox"><span>그래프로 확인</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-        </section>
-      </form>
+    <!-- allmenu import -->
+    <%@ include file="inc/admin_allmenu.jsp" %>
       <section class="wrapper">
          
 
@@ -325,7 +180,7 @@
        
             <div class="col-lg-3 col-md-6 dash-div" >
               <div id= "" class="dash-top">일 매출
-                <a href="statistics/order_period.html"><i class=" fa fa-angle-right" ></i>
+                <a href="order_period.admin"><i class=" fa fa-angle-right" ></i>
                   </a>
                 </div>
               <div id= "" class="dash-bottom incr">
@@ -333,7 +188,7 @@
             </div>
             <div class="col-lg-3 col-md-6 dash-div" >
               <div id= "" class="dash-top">신규 회원
-                <a href="user/user_mng.html"><i class=" fa fa-angle-right" ></i>
+                <a href="user_mng.admin"><i class=" fa fa-angle-right" ></i>
                 </a>
               </div>
               <div id= "" class="dash-bottom decr">
@@ -341,7 +196,7 @@
             </div>
             <div class="col-lg-3 col-md-6 dash-div" >
               <div id= "" class="dash-top">방문자
-                <a href="statistics/by_graph.html"><i class=" fa fa-angle-right" ></i>
+                <a href="by_graph.admin"><i class=" fa fa-angle-right" ></i>
                 </a>
               </div>
               <div id= "" class="dash-bottom incr">
@@ -349,7 +204,7 @@
             </div>
             <div class="col-lg-3 col-md-6 dash-div" >
               <div id= "" class="dash-top">최고 매출 매장
-                <a href="store/store_mng.html"><i class=" fa fa-angle-right" ></i>
+                <a href="store_mng.admin"><i class=" fa fa-angle-right" ></i>
                 </a>
               </div>
               <div id= "" class="dash-bottom">
@@ -425,18 +280,18 @@
               <div class="col-md-4 col-sm-4 mb">
                 <div class="grey-panel pn donut-chart dash-list-top">
                   <div class="grey-header">
-                    <h5>공지사항 <a href="board/notices.html"><i class=" fa fa-angle-right" ></i></a></h5>
+                    <h5>공지사항 <a href="notices.admin"><i class=" fa fa-angle-right" ></i></a></h5>
                   </div>
                   
                   <div class="row">
                     <div class="goleft dash-list">
                       <ul>
-                        <a href="board/notices.html"><li>[공지] 어떤 글 1</li></a>
-                        <a href="board/notices.html"><li>[공지] 어떤 글 2</li></a>
-                        <a href="board/notices.html"><li>[공지] 어떤 글 3</li></a>
-                        <a href="board/notices.html"><li>[공지] 어떤 글 4</li></a>
-                        <a href="board/notices.html"><li>[공지] 어떤 글 5</li></a>
-                        <a href="board/notices.html"><li>[공지] 어떤 글 6</li></a>
+                        <a href="notices.admin"><li>[공지] 어떤 글 1</li></a>
+                        <a href="notices.admin"><li>[공지] 어떤 글 2</li></a>
+                        <a href="notices.admin"><li>[공지] 어떤 글 3</li></a>
+                        <a href="notices.admin"><li>[공지] 어떤 글 4</li></a>
+                        <a href="notices.admin"><li>[공지] 어떤 글 5</li></a>
+                        <a href="notices.admin"><li>[공지] 어떤 글 6</li></a>
                       </ul>
                     </div>
                   </div>
@@ -447,17 +302,17 @@
               <div class="col-md-4 col-sm-4 mb">
                 <div class="darkblue-panel pn dash-list-top">
                   <div class="darkblue-header">
-                    <h5>1:1 문의<a href="board/notices.html"><i class=" fa fa-angle-right" ></i></a></h5>
+                    <h5>1:1 문의<a href="notices.admin"><i class=" fa fa-angle-right" ></i></a></h5>
                   </div>
                   <div class="row">
                     <div class="goleft dash-list white">
                       <ul>
-                        <a href="board/notices.html"><li>[이용] 어떤 문의 1</li></a>
-                        <a href="board/notices.html"><li>[건의] 어떤 문의 2</li></a>
-                        <a href="board/notices.html"><li>[신고] 어떤 문의 3</li></a>
-                        <a href="board/notices.html"><li>[기타] 어떤 문의 4</li></a>
-                        <a href="board/notices.html"><li>[이벤트] 어떤 문의 5</li></a>
-                        <a href="board/notices.html"><li>[이용] 어떤 문의 6</li></a>
+                        <a href="notices.admin"><li>[이용] 어떤 문의 1</li></a>
+                        <a href="notices.admin"><li>[건의] 어떤 문의 2</li></a>
+                        <a href="notices.admin"><li>[신고] 어떤 문의 3</li></a>
+                        <a href="notices.admin"><li>[기타] 어떤 문의 4</li></a>
+                        <a href="notices.admin"><li>[이벤트] 어떤 문의 5</li></a>
+                        <a href="notices.admin"><li>[이용] 어떤 문의 6</li></a>
                       </ul>
                     </div>
                   </div>
@@ -735,18 +590,8 @@
 
 
 
-    <!--footer start-->
-    <footer class="site-footer">
-      <div class="text-center">
-        <p>
-          &copy; Copyrights <strong>WalkingOrder</strong>. All Rights Reserved
-        </p>
-        <a href="../index.html#" class="go-top">
-          <i class="fa fa-angle-up"></i>
-          </a>
-      </div>
-    </footer>
-    <!--footer end-->
+	<!-- 푸더 import -->
+		<%@ include file="inc/admin_footer.jsp" %>
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

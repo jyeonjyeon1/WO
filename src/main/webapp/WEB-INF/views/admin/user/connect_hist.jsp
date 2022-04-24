@@ -82,7 +82,7 @@
           <li><a id="user-mng" href="user_mng.admin">회원 관리</a></li>
           <li><a id="coupon-mng" href="coupon_mng.admin">쿠폰 관리</a></li>
           <li><a id="point-mng" href="point_mng.admin">포인트 관리</a></li>
-          <li class="active"><a id="connect-hist" href="connect_hist.admin">접속 이력</a></li>
+          <li class="active"><a id="connect-hist" href="connect_hist..admin">접속 이력</a></li>
         </ul>
         </li>
         <li class="sub-menu">
@@ -615,7 +615,7 @@
   <!--script for this page-->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="resources/assets/js/admin/datatable/datatable-modified.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
   <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 </body>
 

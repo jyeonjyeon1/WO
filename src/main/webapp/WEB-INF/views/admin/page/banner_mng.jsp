@@ -511,7 +511,7 @@
 
 
 
-  <script src="resources/assets/js/admin/datatable/datatable-modified.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
   <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 </body>
 

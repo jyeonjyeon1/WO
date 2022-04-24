@@ -1,10 +1,14 @@
 package three.aws.wo.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import three.aws.wo.admin.service.AUserService;
+
 @Controller
 public class AdminController {
+	
 //	==================== index ============================
 	@GetMapping("/index.admin")
 	public String toindex() {
@@ -285,7 +289,7 @@ public class AdminController {
 		return "/store/store_pending";
 	}
 //	==================== user ============================
-	@GetMapping("/user_mng.admin")
+	@GetMapping("/user_mng_.admin")
 	public String touser_mng() {
 		System.out.println("user_mng");
 		return "/user/user_mng";

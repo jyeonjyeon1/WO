@@ -20,11 +20,13 @@ input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 }
 
-.idCheck_label_false, .idCheck_label_true, .match_password, .email_form , .tel_form{
+.idCheck_label_false, .idCheck_label_true, 
+.match_password, .email_form , .tel_form,
+.valid_password{
 	display: none;
 }
 
-.idCheck_label_false.active, .email_form.active, .tel_form.active {
+.idCheck_label_false.active, .email_form.active, .tel_form.active, .valid_password.active {
 	display: block;
 	padding-left: 5px;
 	color: red;
@@ -83,55 +85,40 @@ input::-webkit-inner-spin-button {
 	box-shadow: 0 1px 3px rgba(0, 12, 173, 0.4);
 	background-color: rgb(249, 248, 255);
 }
-/* .reg-form-control[type="button"]{ */
-/*     display: block; */
-/*     width: 100%; */
-/*     padding: auto 1rem; */
-/*     font-size: 16px; */
-/*     font-weight: 400; */
-/*     height: 45.6px; */
-/*     color: #212529; */
-/*     background-color: #fff; */
-/*     background-clip: padding-box; */
-/*     border: 1px solid #ced4da; */
-/*     -webkit-appearance: none; */
-/*     -moz-appearance: none; */
-/*     appearance: none; */
-/*     border-radius: .25rem; */
-/*     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out */
-/* } */
-.plr-0 {
-	
-}
 </style>
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
 	jQuery(document).ready(
 		function() {
-			var ch1, ch2, ch3, ch4;
-			ch1 = false;
-			ch2 = false;
-			ch3 = false;
-			ch4 = false;
-			
-			//이메일+전화번호 정규식
-			var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+			var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9;
+			ch1 = false;//CheckId
+			ch9 = false;//regId
+			ch2 = false;//regPassword
+			ch3 = false;//Passwork recheck match
+			ch4 = false;//regName
+			ch5 = false;//phone authentication
+			ch6 = false;//regEmail
+			ch7 = false;//Terms agreed
+			ch8 = false;//Pricacyterms agreed
+			// 정규식 친구들
+			var regId = /^[a-zA-Z0-9]{4,14}$/;
+			var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
+			var regName = /^[가-힣]+$/;
+			var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
 			var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 			
+			//Check Same ID
 			$("#u_id").on(
 				"propertychange change keyup paste input",
 				function() {
-					var currentVal = $("#u_id").val();
-					if (currentVal == "1111") {
-						$(".idCheck_label_false")
-								.addClass('active');
-						$(".idCheck_label_true")
-								.removeClass('active');
+					var insert_id = $("#u_id").val();
+					if (insert_id == "1111") {
+						$(".idCheck_label_false").addClass('active');
+						$(".idCheck_label_true").removeClass('active');
 						return;
 					}
-
-					if (currentVal == '' && $(".idCheck_label_true").hasClass('active') == true) {
+					if (insert_id == '' && $(".idCheck_label_true").hasClass('active') == true) {
 						$(".idCheck_label_true").removeClass('active');
 						$(".idCheck_label_false").removeClass('active');
 					} else {
@@ -139,7 +126,21 @@ input::-webkit-inner-spin-button {
 						$(".idCheck_label_false").removeClass('active');
 					}
 				});
-
+			
+			//Check valid Password
+			$("#u_password").on("propertychange change keyup paste input",
+					function() {
+				var pwd = $("#u_password").val();
+				
+				if (pwd.length>3 && regPassword.test(pwd)==false) {
+					$(".valid_password").addClass('active');
+				}
+				else{
+					$(".valid_password").removeClass('active');
+				}
+			});
+			
+			//Check pass & passcheck match
 			$("#passCheck").on(
 				"propertychange change keyup paste input",
 				function() {
@@ -147,8 +148,10 @@ input::-webkit-inner-spin-button {
 					var pwc = $("#passCheck").val();
 					if (pwc != '' && pw != pwc) {
 						$(".match_password").addClass('false');
+						ch3 = false;
 					} else {
 						$(".match_password").removeClass('false');
+						ch3 = true;
 					}
 				});
 			
@@ -156,7 +159,7 @@ input::-webkit-inner-spin-button {
 					function() {
 				var tel = $("#u_tel").val();
 				
-				if (tel.length>4 && regPhone.test(tel)==false) {
+				if (tel.length>7 && regPhone.test(tel)==false) {
 					$(".tel_form").addClass('active');
 				}
 				else{
@@ -210,7 +213,7 @@ input::-webkit-inner-spin-button {
 				<div class="col-12 mt-10">
 					<input type="password" name="u_password" id="u_password"
 						placeholder="비밀번호 (필수)" class="reg-form-control">
-
+					<p class="valid_password">특수기호 대소문자 어쩌구</p>
 				</div>
 			</div>
 			<div class="row">

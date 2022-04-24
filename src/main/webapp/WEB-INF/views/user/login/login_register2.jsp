@@ -20,13 +20,13 @@ input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 }
 
-.idCheck_label_false, .idCheck_label_true, 
-.match_password, .email_form , .tel_form,
-.valid_password{
+.idCheck_label_false, .idCheck_label_true, .match_password, .email_form,
+	.tel_form, .valid_password, .regName_label {
 	display: none;
 }
 
-.idCheck_label_false.active, .email_form.active, .tel_form.active, .valid_password.active {
+.idCheck_label_false.active, .email_form.active, .tel_form.active,
+	.valid_password.active, .regName_label.active {
 	display: block;
 	padding-left: 5px;
 	color: red;
@@ -89,108 +89,163 @@ input::-webkit-inner-spin-button {
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
+	var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8;
+	ch1 = false;//CheckId
+	ch2 = false;//regPassword
+	ch3 = false;//Passwork recheck match
+	ch4 = false;//regName
+	ch5 = false;//phone authentication
+	ch6 = false;//regEmail
+	ch7 = false;//Terms agreed
+	ch8 = false;//Pricacyterms agreed
+	// 정규식 친구들
+	var regId = /^[a-zA-Z0-9]{4,14}$/;
+	var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
+	var regName = /^[가-힣]+$/;
+	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
+	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
 	jQuery(document).ready(
-		function() {
-			var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9;
-			ch1 = false;//CheckId
-			ch9 = false;//regId
-			ch2 = false;//regPassword
-			ch3 = false;//Passwork recheck match
-			ch4 = false;//regName
-			ch5 = false;//phone authentication
-			ch6 = false;//regEmail
-			ch7 = false;//Terms agreed
-			ch8 = false;//Pricacyterms agreed
-			// 정규식 친구들
-			var regId = /^[a-zA-Z0-9]{4,14}$/;
-			var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
-			var regName = /^[가-힣]+$/;
-			var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
-			var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-			
-			//Check Same ID
-			$("#u_id").on(
-				"propertychange change keyup paste input",
-				function() {
-					var insert_id = $("#u_id").val();
-					if (insert_id == "1111") {
-						$(".idCheck_label_false").addClass('active');
-						$(".idCheck_label_true").removeClass('active');
-						return;
-					}
-					if (insert_id == '' && $(".idCheck_label_true").hasClass('active') == true) {
-						$(".idCheck_label_true").removeClass('active');
-						$(".idCheck_label_false").removeClass('active');
-					} else {
-						$(".idCheck_label_true").addClass('active');
-						$(".idCheck_label_false").removeClass('active');
-					}
+			function() {
+				//Check Same ID
+				$("#u_id").on("propertychange change keyup paste input",
+					function() {
+						var insert_id = $("#u_id").val();
+						if (insert_id == "1111") {
+							$(".idCheck_label_false").addClass(
+									'active');
+							$(".idCheck_label_true").removeClass(
+									'active');
+							ch1 = false;
+							return;
+						}else{ch1=true;}
+						
+						if (insert_id == '') {
+							$(".idCheck_label_true").removeClass(
+									'active');
+							$(".idCheck_label_false").removeClass(
+									'active');
+							ch1 = false;
+						} else if (regId.test(insert_id) == false) {
+							$(".idCheck_label_true").removeClass(
+									'active');
+							$(".idCheck_label_false").addClass(
+									'active');
+							ch1 = false;
+						} else {
+							$(".idCheck_label_true").addClass(
+									'active');
+							$(".idCheck_label_false").removeClass(
+									'active');
+							ch1 = true;
+						}
+					});
+
+				//Check valid Password
+				$("#u_password").on(
+						"propertychange change keyup paste input",
+						function() {
+							var pwd = $("#u_password").val();
+
+							if (pwd.length > 3
+									&& regPassword.test(pwd) == false) {
+								$(".valid_password").addClass('active');
+								ch2 = false;
+							} else {
+								$(".valid_password").removeClass('active');
+								ch2 = true;
+							}
+						});
+
+				//Check pass & passcheck match
+				$("#passCheck").on("propertychange change keyup paste input",
+						function() {
+							var pw = $("#u_password").val();
+							var pwc = $("#passCheck").val();
+							if (pwc != '' && pw != pwc) {
+								$(".match_password").addClass('false');
+								ch3 = false;
+							} else {
+								$(".match_password").removeClass('false');
+								ch3 = true;
+							}
+						});
+				
+				$("#u_name").on(
+						"propertychange change keyup paste input",
+						function() {
+							var name = $("#u_name").val();
+
+							if (name.length > 1
+									&& regName.test(name) == false) {
+								$(".regName_label").addClass('active');
+								ch4 = false;
+							} else {
+								$(".regName_label").removeClass('active');
+								ch4 = true;
+							}
+						});
+
+				$("#u_tel").on("propertychange change keyup paste input",
+						function() {
+							var tel = $("#u_tel").val();
+
+							if (tel.length > 7 && regPhone.test(tel) == false) {
+								$(".tel_form").addClass('active');
+								ch5 = false;
+							} else {
+								$(".tel_form").removeClass('active');
+								ch5 = true;
+							}
+						});
+
+				$("#u_email").on(
+						"propertychange change keyup paste input",
+						function() {
+							var email = $("#u_email").val();
+
+							if (email.length > 7
+									&& regEmail.test(email) == false) {
+								$(".email_form").addClass('active');
+								ch6 = false;
+							} else {
+								$(".email_form").removeClass('active');
+								ch6 = true;
+							}
+						});
+
+				$("#termsAccept").click(function() {
+					$('#termsCheckbox').prop('checked', true);
+					ch7 = true;
 				});
-			
-			//Check valid Password
-			$("#u_password").on("propertychange change keyup paste input",
-					function() {
-				var pwd = $("#u_password").val();
-				
-				if (pwd.length>3 && regPassword.test(pwd)==false) {
-					$(".valid_password").addClass('active');
-				}
-				else{
-					$(".valid_password").removeClass('active');
-				}
-			});
-			
-			//Check pass & passcheck match
-			$("#passCheck").on(
-				"propertychange change keyup paste input",
-				function() {
-					var pw = $("#u_password").val();
-					var pwc = $("#passCheck").val();
-					if (pwc != '' && pw != pwc) {
-						$(".match_password").addClass('false');
-						ch3 = false;
-					} else {
-						$(".match_password").removeClass('false');
-						ch3 = true;
-					}
+				$("#privacyAccept").click(function() {
+					$('#privacyCheckbox').prop('checked', true);
+					ch8 = true;
 				});
-			
-			$("#u_tel").on("propertychange change keyup paste input",
-					function() {
-				var tel = $("#u_tel").val();
-				
-				if (tel.length>7 && regPhone.test(tel)==false) {
-					$(".tel_form").addClass('active');
-				}
-				else{
-					$(".tel_form").removeClass('active');
-				}
 			});
-			
-			$("#u_email").on("propertychange change keyup paste input",
-					function() {
-				var email = $("#u_email").val();
-				
-				if (email.length>7 && regEmail.test(email)==false) {
-					$(".email_form").addClass('active');
-				}
-				else{
-					$(".email_form").removeClass('active');
-				}
+
+	function finalCheck() {
+		if (!ch7) {
+			Swal.fire({
+				icon:"error",
+				text:"이용약관 미동의"
 			});
-			
-			$("#termsAccept").click(function(){
-				$('#termsCheckbox').prop('checked',true);
+		} else if (!ch8) {
+			Swal.fire({
+				icon:"error",
+				text:"개인정보처리방침 미동의"
 			});
-			$("#privacyAccept").click(function(){
-				$('#privacyCheckbox').prop('checked',true);
+		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8) {
+			document.regForm.submit();
+		} else {
+			Swal.fire({
+				icon:"error",
+				text:"어딘가 잘못 작성"
 			});
-			
-			
-			
-			
-			
-		});
+			console.log("실패")
+			return false;
+		}
+	}
 </script>
 </head>
 <body>
@@ -204,7 +259,7 @@ input::-webkit-inner-spin-button {
 			<div class="row">
 				<div class="col-12">
 					<input type="text" name="u_id" id="u_id" placeholder="아이디 (필수)"
-						class="reg-form-control">
+						class="reg-form-control" autofocus>
 					<p class="idCheck_label_false">사용할 수 없는 아이디입니다</p>
 					<p class="idCheck_label_true">사용 가능한 아이디입니다</p>
 				</div>
@@ -225,14 +280,15 @@ input::-webkit-inner-spin-button {
 			</div>
 			<div class="row">
 				<div class="col-12 mt-10">
-					<input type="text" name="u_name" placeholder="이름 (필수)"
+					<input type="text" id="u_name" name="u_name" placeholder="이름 (필수)"
 						class="reg-form-control">
+					<p class="regName_label">이름 이상</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 mt-10">
-					<input type="number" id="u_tel" name="u_tel" placeholder="전화번호( - 제외)"
-						class="reg-form-control">
+					<input type="number" id="u_tel" name="u_tel"
+						placeholder="전화번호( - 제외)" class="reg-form-control">
 					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 				</div>
 				<div class="col-3 mt-10" style="padding-left: 0;">
@@ -241,9 +297,9 @@ input::-webkit-inner-spin-button {
 			</div>
 			<div class="row">
 				<div class="col-12 mt-10">
-					<input type="text" id="u_email" name="u_email" placeholder="E-mail (필수)"
-						class="reg-form-control">
-						
+					<input type="text" id="u_email" name="u_email"
+						placeholder="E-mail (필수)" class="reg-form-control">
+
 					<p class="email_form">이메일 형식을 맞춰주세요</p>
 				</div>
 			</div>
@@ -303,8 +359,9 @@ input::-webkit-inner-spin-button {
 			</div>
 			<br>
 			<div class="row">
-				<button type="submit" class="btn btn-outline-warning"
-					style="margin: auto; width: 60%;">회원가입 &nbsp;</button>
+				<button type="button" onclick="finalCheck()"
+					class="btn btn-outline-warning" style="margin: auto; width: 60%;">회원가입
+					&nbsp;</button>
 			</div>
 
 			<!-- 약관동의 Modal -->
@@ -413,7 +470,7 @@ input::-webkit-inner-spin-button {
 
 	<!-- footer import -->
 	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>
-
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

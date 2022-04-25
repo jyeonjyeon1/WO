@@ -7,7 +7,7 @@
 		INSERT INTO TEST_USER (U_ID, U_PASSWORD, U_NAME, U_EMAIL, U_SMS_USABLE,U_EMAIL_USABLE, U_TEL)
 		VALUES(#{u_id}, #{u_password}, #{u_name}, #{u_email}, #{u_sms_usable}, #{u_email_usable}, #{u_tel})
 	</insert>
-	<select id="idCheck" parameterType="UserVO" resultType="int">
+	<select id="idCheck" resultType="int">
 		SELECT COUNT(*) FROM TEST_USER WHERE U_ID = #{u_id}
 	</select>
 	<select id="telCheck" parameterType="UserVO" resultType="int">

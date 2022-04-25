@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int idCheck(String id) {
+	public int idCheck(UserVO id) {
 		return userDAO.idCheck(id);
 	}
 

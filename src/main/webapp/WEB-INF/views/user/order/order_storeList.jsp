@@ -17,8 +17,8 @@
     <script src="resources/assets/js/jquery-3.6.0.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            $('#headers').load("header.html");
-            $('#footers').load("footer.html");
+            $('#headers').load("header.user");
+            $('#footers').load("footer.user");
 
             $(".showdetail_btn").click(function () {
                 if ($('.option_select_form').hasClass('active') == false) {

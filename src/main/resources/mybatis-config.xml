@@ -9,7 +9,7 @@
 		<typeAlias alias="UserVO" type="three.aws.wo.user.vo.UserVO" />
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
-		<mapper resource="mappings/user-mapping.xml" /> 
+		<mapper resource="mappings/user/user-mapping.xml" /> 
 		<mapper resource="mappings/admin/admin-mapping.xml" /> 
 	</mappers>
 </configuration>

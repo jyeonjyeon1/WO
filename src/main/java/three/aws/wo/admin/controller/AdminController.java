@@ -1,15 +1,25 @@
 package three.aws.wo.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import three.aws.wo.admin.service.AUserService;
+
 @Controller
 public class AdminController {
+	
 //	==================== index ============================
 	@GetMapping("/index.admin")
 	public String toindex() {
 		System.out.println("index");
 		return "/index";
+	}
+	
+	@GetMapping("/smarteditor.admin")
+	public String naversmartEditor() {
+		System.out.println("smarteditor");
+		return "/SmartEditor2Skin";
 	}
 
 //	==================== board ============================
@@ -58,7 +68,7 @@ public class AdminController {
 	@GetMapping("/review_mng.admin")
 	public String toreview_mng() {
 		System.out.println("review_mng");
-		return "/board/review_mn/";
+		return "/board/review_mng";
 	}
 	
 //	==================== message ============================
@@ -93,7 +103,7 @@ public class AdminController {
 	}
 	
 //	==================== order ============================
-	@GetMapping("/store_orderv.admin")
+	@GetMapping("/store_order.admin")
 	public String tostore_order() {
 		System.out.println("store_order");
 		return "/order/store_order";
@@ -279,7 +289,7 @@ public class AdminController {
 		return "/store/store_pending";
 	}
 //	==================== user ============================
-	@GetMapping("/user_mng.admin")
+	@GetMapping("/user_mng_.admin")
 	public String touser_mng() {
 		System.out.println("user_mng");
 		return "/user/user_mng";

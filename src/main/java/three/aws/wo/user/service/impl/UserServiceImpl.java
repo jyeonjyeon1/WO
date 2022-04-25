@@ -19,9 +19,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void checkId(String id) {
-		// TODO Auto-generated method stub
-		
+	public int idCheck(String id) {
+		return userDAO.idCheck(id);
+	}
+
+	@Override
+	public int telCheck(String tel) {
+		return userDAO.telCheck(tel);
+	}
+
+	@Override
+	public int emailCheck(String email) {
+		return userDAO.emailCheck(email);
 	}
 
 	@Override
@@ -41,5 +50,6 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

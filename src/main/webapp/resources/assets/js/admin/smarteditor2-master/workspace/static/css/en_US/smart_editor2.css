@@ -16,30 +16,30 @@ body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_
 #smart_editor2 a:hover{color:#666;text-decoration:underline}
 /* LAYOUT */
 #smart_editor2 .se2_header{margin:10px 0 29px 0}
-#smart_editor2 .se2_bi{float:left;width:93px;height:20px;margin:0;padding:0;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") -343px -358px no-repeat;font-size:0;line-height:0;text-indent:-10000px;vertical-align:middle}
-#smart_editor2 .se2_allhelp{display:inline-block;width:18px;height:18px;padding:0;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") -437px -358px no-repeat;font-size:0;line-height:0;text-indent:-10000px;vertical-align:middle}
+#smart_editor2 .se2_bi{float:left;width:93px;height:20px;margin:0;padding:0;background:url("../../img/en_US/btn_set.png?160622") -343px -358px no-repeat;font-size:0;line-height:0;text-indent:-10000px;vertical-align:middle}
+#smart_editor2 .se2_allhelp{display:inline-block;width:18px;height:18px;padding:0;background:url("../../img/en_US/btn_set.png?160622") -437px -358px no-repeat;font-size:0;line-height:0;text-indent:-10000px;vertical-align:middle}
 #smart_editor2 #smart_editor2_content{position:relative;border:1px solid #b5b5b5}
 #smart_editor2 .se2_tool{overflow:visible;position:relative;z-index:25}
 /* EDITINGAREA */
 #smart_editor2 .se2_input_area{position:relative;z-index:22;height:400px;margin:0;padding:0;*zoom:1}
 #smart_editor2 .se2_input_wysiwyg,#smart_editor2 .se2_input_syntax{display:block;overflow:auto;width:100%;height:100%;margin:0;*margin:-1px 0 0 0;border:0}
 /* EDITINGMODE */
-#smart_editor2 .se2_conversion_mode{position:relative;height:15px;padding-top:1px;border-top:1px solid #b5b5b5;background:url("../resources/assets/images/admin/icon_set.gif?141007") 0 -896px repeat-x}
-#smart_editor2 .se2_inputarea_controller{display:block;clear:both;position:relative;width:100%;height:15px;background:url("../resources/assets/images/admin/icon_set.gif?141007") center -47px no-repeat;text-align:center;cursor:n-resize}
+#smart_editor2 .se2_conversion_mode{position:relative;height:15px;padding-top:1px;border-top:1px solid #b5b5b5;background:url("../../img/icon_set.gif?141007") 0 -896px repeat-x}
+#smart_editor2 .se2_inputarea_controller{display:block;clear:both;position:relative;width:100%;height:15px;background:url("../../img/icon_set.gif?141007") center -47px no-repeat;text-align:center;cursor:n-resize}
 #smart_editor2 .se2_inputarea_controller span{display:block;visibility:visible;height:15px;font-size:0;line-height:0;color:#fff;white-space:nowrap}
 #smart_editor2 .ly_controller{display:block;position:absolute;bottom:2px;left:50%;width:287px;margin-left:-148px;padding:8px 0 7px 9px;border:1px solid #827f7c;background:#fffdef}
 #smart_editor2 .ly_controller p{color:#666;font-size:11px;letter-spacing:-1px;line-height:11px}
-#smart_editor2 .ly_controller .bt_clse,#smart_editor2 .ly_controller .ic_arr{position:absolute;background:url("../resources/assets/images/admin/ico_extend.png") no-repeat}
+#smart_editor2 .ly_controller .bt_clse,#smart_editor2 .ly_controller .ic_arr{position:absolute;background:url("../../img/ico_extend.png") no-repeat}
 #smart_editor2 .ly_controller .bt_clse{top:5px;right:4px;width:14px;height:15px;background-position:1px -43px}
 #smart_editor2 .ly_controller .ic_arr{top:25px;left:50%;width:10px;height:6px;margin-left:-5px;background-position:0 -65px}
 #smart_editor2 .se2_converter{float:left;position:absolute;top:-1px;right:3px;z-index:20}
 #smart_editor2 .se2_converter li{float:left}
-#smart_editor2 .se2_converter .se2_to_editor{width:59px;height:15px;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") 0 -85px no-repeat;vertical-align:top}
-#smart_editor2 .se2_converter .se2_to_html{width:59px;height:15px;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") -59px -70px no-repeat;vertical-align:top}
-#smart_editor2 .se2_converter .se2_to_text{width:60px;height:15px;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") -417px -466px no-repeat;vertical-align:top}
-#smart_editor2 .se2_converter .active .se2_to_editor{width:59px;height:15px;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") 0 -70px no-repeat;vertical-align:top}
-#smart_editor2 .se2_converter .active .se2_to_html{width:59px;height:15px;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") -59px -85px no-repeat;vertical-align:top}
-#smart_editor2 .se2_converter .active .se2_to_text{width:60px;height:15px;background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") -417px -481px no-repeat;vertical-align:top}
+#smart_editor2 .se2_converter .se2_to_editor{width:59px;height:15px;background:url("../../img/en_US/btn_set.png?160622") 0 -85px no-repeat;vertical-align:top}
+#smart_editor2 .se2_converter .se2_to_html{width:59px;height:15px;background:url("../../img/en_US/btn_set.png?160622") -59px -70px no-repeat;vertical-align:top}
+#smart_editor2 .se2_converter .se2_to_text{width:60px;height:15px;background:url("../../img/en_US/btn_set.png?160622") -417px -466px no-repeat;vertical-align:top}
+#smart_editor2 .se2_converter .active .se2_to_editor{width:59px;height:15px;background:url("../../img/en_US/btn_set.png?160622") 0 -70px no-repeat;vertical-align:top}
+#smart_editor2 .se2_converter .active .se2_to_html{width:59px;height:15px;background:url("../../img/en_US/btn_set.png?160622") -59px -85px no-repeat;vertical-align:top}
+#smart_editor2 .se2_converter .active .se2_to_text{width:60px;height:15px;background:url("../../img/en_US/btn_set.png?160622") -417px -481px no-repeat;vertical-align:top}
 /* EDITINGAREA_HTMLSRC */
 #smart_editor2 .off .ico_btn,#smart_editor2 .off .se2_more,#smart_editor2 .off .se2_more2,#smart_editor2 .off .se2_font_family,#smart_editor2 .off .se2_font_size,#smart_editor2 .off .se2_bold,#smart_editor2 .off .se2_underline,#smart_editor2 .off .se2_italic,#smart_editor2 .off .se2_tdel,#smart_editor2 .off .se2_fcolor,#smart_editor2 .off .se2_fcolor_more,#smart_editor2 .off .se2_bgcolor,#smart_editor2 .off .se2_bgcolor_more,#smart_editor2 .off .se2_left,#smart_editor2 .off .se2_center,#smart_editor2 .off .se2_right,#smart_editor2 .off .se2_justify,#smart_editor2 .off .se2_ol,#smart_editor2 .off .se2_ul,#smart_editor2 .off .se2_indent,#smart_editor2 .off .se2_outdent,#smart_editor2 .off .se2_lineheight,#smart_editor2 .off .se2_del_style,#smart_editor2 .off .se2_blockquote,#smart_editor2 .off .se2_summary,#smart_editor2 .off .se2_footnote,#smart_editor2 .off .se2_url,#smart_editor2 .off .se2_emoticon,#smart_editor2 .off .se2_character,#smart_editor2 .off .se2_table,#smart_editor2 .off .se2_find,#smart_editor2 .off .se2_spelling,#smart_editor2 .off .se2_sup,#smart_editor2 .off .se2_sub,#smart_editor2 .off .se2_text_tool_more,#smart_editor2 .off .se2_new,#smart_editor2 .off .selected_color,#smart_editor2 .off .se2_lineSticker{-ms-filter:alpha(opacity=50);opacity:.5;cursor:default;filter:alpha(opacity=50)}
 /* LAYER */
@@ -60,7 +60,7 @@ body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_
 #smart_editor2 .se2_alert_wrap .se2_alert_content{margin-top:47px}
 #smart_editor2 .se2_alert_wrap .txt1{color:#333;line-height:18px}
 #smart_editor2 .se2_alert_wrap .txt2{margin-top:3px;color:#999}
-#smart_editor2 .se2_alert_wrap .btn_close,#smart_editor2 .se2_alert_btns button{background:url("../resources/assets/images/admin/en_US/btn_set.png?160622") no-repeat}
+#smart_editor2 .se2_alert_wrap .btn_close,#smart_editor2 .se2_alert_btns button{background:url("../../img/en_US/btn_set.png?160622") no-repeat}
 #smart_editor2 .se2_alert_wrap .btn_close{z-index:10;position:absolute;top:7px;right:7px;width:11px;height:11px;background-position:-122px -32px;text-indent:-5000px}
 #smart_editor2 .se2_alert_btns{margin-top:19px}
 #smart_editor2 .se2_alert_btns button{display:inline;float:none;width:48px;height:27px}
@@ -68,11 +68,11 @@ body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_
 #smart_editor2 .se2_alert_btns .se2_confirm{background-position:-369px -434px}
 #smart_editor2 .se2_alert_btns .se2_cancel{background-position:-419px -434px}
 /* TEXT_TOOLBAR */
-#smart_editor2 .se2_text_tool{position:relative;clear:both;z-index:30;padding:4px 0 4px 3px;background:#f4f4f4 url("../resources/assets/images/admin/bg_text_tool.gif") 0 0 repeat-x;border-bottom:1px solid #b5b5b5;*zoom:1}
+#smart_editor2 .se2_text_tool{position:relative;clear:both;z-index:30;padding:4px 0 4px 3px;background:#f4f4f4 url("../../img/bg_text_tool.gif") 0 0 repeat-x;border-bottom:1px solid #b5b5b5;*zoom:1}
 #smart_editor2 .se2_text_tool:after{content:"";display:block;clear:both}
 #smart_editor2 .se2_text_tool ul{float:left;display:inline;margin-right:3px;padding-left:1px;white-space:nowrap}
 #smart_editor2 .se2_text_tool li{_display:inline;float:left;position:relative;z-index:30}
-#smart_editor2 .se2_text_tool button,#smart_editor2 .se2_multy .se2_icon{width:21px;height:21px;background:url("../resources/assets/images/admin/en_US/text_tool_set.png?140317") no-repeat;vertical-align:top}
+#smart_editor2 .se2_text_tool button,#smart_editor2 .se2_multy .se2_icon{width:21px;height:21px;background:url("../../img/en_US/text_tool_set.png?140317") no-repeat;vertical-align:top}
 #smart_editor2 .se2_text_tool .se2_font_type{position:relative}
 #smart_editor2 .se2_text_tool .se2_font_type li{margin-left:3px}
 #smart_editor2 .se2_text_tool .se2_font_type button{text-align:left}
@@ -91,10 +91,10 @@ body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_
 #smart_editor2 .se2_text_tool .se2_multy .se2_mn.hover{background:#e0dedf}
 /* TEXT_TOOLBAR : ROUNDING */
 #smart_editor2 ul li.first_child button span.tool_bg, #smart_editor2 ul li.last_child button span.tool_bg, #smart_editor2 ul li.single_child button span.tool_bg{visibility:visible;height:21px}
-#smart_editor2 ul li.first_child button span.tool_bg{left:-1px;width:3px;background:url("../resources/assets/images/admin/bg_button_left.gif?20121228") no-repeat}
-#smart_editor2 ul li.last_child button span.tool_bg{right:0px;_right:-1px;width:2px;background:url("../resources/assets/images/admin/bg_button_right.gif") no-repeat}
+#smart_editor2 ul li.first_child button span.tool_bg{left:-1px;width:3px;background:url("../../img/bg_button_left.gif?20121228") no-repeat}
+#smart_editor2 ul li.last_child button span.tool_bg{right:0px;_right:-1px;width:2px;background:url("../../img/bg_button_right.gif") no-repeat}
 #smart_editor2 ul li.single_child{padding-right:1px}
-#smart_editor2 ul li.single_child button span.tool_bg{left:0;background:url("../resources/assets/images/admin/bg_button.gif?20121228") no-repeat;width:22px}
+#smart_editor2 ul li.single_child button span.tool_bg{left:0;background:url("../../img/bg_button.gif?20121228") no-repeat;width:22px}
 #smart_editor2 div.se2_text_tool ul li.hover button span.tool_bg{background-position:0 -21px}
 #smart_editor2 div.se2_text_tool ul li.active button span.tool_bg, #smart_editor2 div.se2_text_tool ul li.active li.active button span.tool_bg{background-position:0 -42px}
 #smart_editor2 div.se2_text_tool ul li.active li button span.tool_bg{background-position:0 0}

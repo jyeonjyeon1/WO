@@ -14,6 +14,7 @@ public class UserVO {
 	private String u_password;
 	private String u_name;
 	private String u_tel;
+	private String u_type;
 	private String u_email;
 	private String u_birthday;
 	private String c_code;				//보유 쿠폰코드

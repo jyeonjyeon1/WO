@@ -98,15 +98,21 @@ input::-webkit-inner-spin-button {
 	var regName = /^[가-힣]+$/;
 	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-
+	
+	
+	
 	jQuery(document).ready(
 			function() {
-				//Check Same ID
+				
+				
+				
+			
+				/*  //Check Same ID
 				$("#u_id").on("propertychange change keyup paste input",
 					function() {
 						var insert_id = $("#u_id").val();
-						
-				
+					
+				 		
 						if (insert_id == '') {
 							$(".idCheck_label_true").removeClass('active');
 							$(".idCheck_label_false").removeClass('active');
@@ -117,13 +123,21 @@ input::-webkit-inner-spin-button {
 							$(".idCheck_label_joongbok").removeClass('active');
 							$(".idCheck_label_false").addClass('active');
 							ch1 = false;
+						}else if (insert_id == 3333) {
+							$(".idCheck_label_true").removeClass('active');
+							$(".idCheck_label_joongbok").addClass('active');
+							$(".idCheck_label_false").removeClass('active');
+							ch1 = false;
+							
 						} else {
 							$(".idCheck_label_true").addClass('active');
 							$(".idCheck_label_joongbok").removeClass('active');
 							$(".idCheck_label_false").removeClass('active');
 							ch1 = true;
 						}
-					});
+					});  
+					 */
+
 
 				//Check valid Password
 				$("#u_password").on(
@@ -171,17 +185,20 @@ input::-webkit-inner-spin-button {
 						});
 
 				$("#u_tel").on("propertychange change keyup paste input",
-						function() {
-							var tel = $("#u_tel").val();
+		                  function() {
+		                     var tel = $("#u_tel").val();
+		                     if(tel.indexOf('-')!=-1){
+		                        $(".tel_form").addClass('active');
+		                        ch5 = false;
+		                     }else if (tel.length > 7 && regPhone.test(tel) == false) {
+		                        $(".tel_form").addClass('active');
+		                        ch5 = false;
+		                     } else {
+		                        $(".tel_form").removeClass('active');
+		                        ch5 = true;
+		                     }
+		                  });
 
-							if (tel.length > 7 && regPhone.test(tel) == false) {
-								$(".tel_form").addClass('active');
-								ch5 = false;
-							} else {
-								$(".tel_form").removeClass('active');
-								ch5 = true;
-							}
-						});
 
 				$("#u_email").on(
 						"propertychange change keyup paste input",
@@ -224,7 +241,6 @@ input::-webkit-inner-spin-button {
 		} else {
 			Swal.fire({
 				icon:"error",
-				title: "한규진 맵찔이",
 				text:"어딘가 잘못 작성"
 			});
 			console.log("실패")
@@ -232,27 +248,53 @@ input::-webkit-inner-spin-button {
 		}
 	}
 	
-// 	function idCheck(){
-// 		$.ajax({
-// 			url: "/idcheck.user",
-// 			type: "POST",
-// 			dataType: "JSON",
-// 			data: :{"u_id": insert_id},
-// 			success: function(data){
-// 				if(data==1){
-// 					$(".idCheck_label_joongbok").addClass('active');
-// 						$(".idCheck_label_false").removeClass('active');
-// 						$(".idCheck_label_true").removeClass('active');
-// 						ch1 = false;
-// 				}else if (data == 0){
-// 					$(".idCheck_label_joongbok").removeClass('active');
-// 						$(".idCheck_label_false").removeClass('active');
-// 						ch1=true;
-// 				}
-// 			}
-// 		})
-// 	}
 	
+
+ 	/* 
+  	function idCheck(){
+ 		$.ajax({
+ 			url:"/idcheck.user",
+ 			type: "POST",
+ 			dataType: "JSON",
+ 			data: :{"u_id": insert_id},
+ 			success: function(data){
+ 				if(data==1){
+ 					$(".idCheck_label_joongbok").addClass('active');
+ 						$(".idCheck_label_false").removeClass('active');
+ 						$(".idCheck_label_true").removeClass('active');
+ 						ch1 = false;
+ 				}else if (data == 0){
+ 					$(".idCheck_label_joongbok").removeClass('active');
+ 						$(".idCheck_label_false").removeClass('active');
+ 						ch1=true;
+ 				}
+ 			}
+ 		});
+ 	};   */
+ 	
+  	function checkId() {
+ 		var id = $('#u_id').val();
+ 		$.ajax({
+ 			url:'/idcheck.user',
+ 			type:'post',
+ 			dataType: "JSON",
+ 			data: {"u_id":id},
+ 			success:function(data){
+ 				if(data==0){
+ 					console.log("data=0");
+ 				}else{
+ 					console.log("data=1")
+ 				}
+ 			},
+ 			error:function(data){
+ 				console.log("아이디체크에러");
+ 			}
+ 			
+ 		});
+ 	};
+ 	
+ 	
+	 
 </script>
 </head>
 <body>
@@ -266,7 +308,7 @@ input::-webkit-inner-spin-button {
 			<div class="row">
 				<div class="col-12">
 					<input type="text" name="u_id" id="u_id" placeholder="아이디 (필수)"
-						class="reg-form-control" autofocus>
+						class="reg-form-control" required oninput="checkId()" autofocus />
 					<p class="idCheck_label_joongbok">이미 사용 중인 아이디입니다</p>
 					<p class="idCheck_label_false">사용할 수 없는 아이디입니다</p>
 					<p class="idCheck_label_true">사용 가능한 아이디입니다</p>
@@ -295,7 +337,7 @@ input::-webkit-inner-spin-button {
 			</div>
 			<div class="row">
 				<div class="col-9 mt-10">
-					<input type="number" id="u_tel" name="u_tel"
+					<input type="text" id="u_tel" name="u_tel"
 						placeholder="전화번호( - 제외)" class="reg-form-control">
 					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 				</div>

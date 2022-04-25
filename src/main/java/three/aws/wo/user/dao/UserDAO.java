@@ -16,9 +16,10 @@ public class UserDAO {
 	public void insertUser(UserVO vo) {
 		sqlSession.insert("UserDAO.insertUser", vo);
 	}
-
-	public int idCheck(String id) {
-		return sqlSession.selectOne("UserDAO.idCheck");
+	
+	
+	public int idCheck(UserVO id) {
+		return sqlSession.selectOne("UserDAO.idCheck", id);
 	}
 	
 	public int emailCheck(String email) {

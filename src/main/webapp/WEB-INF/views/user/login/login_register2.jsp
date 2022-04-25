@@ -21,12 +21,12 @@ input::-webkit-inner-spin-button {
 }
 
 .idCheck_label_false, .idCheck_label_true, .match_password, .email_form,
-	.tel_form, .valid_password, .regName_label {
+	.tel_form, .valid_password, .regName_label, .idCheck_label_joongbok {
 	display: none;
 }
 
-.idCheck_label_false.active, .email_form.active, .tel_form.active,
-	.valid_password.active, .regName_label.active {
+.idCheck_label_false.active, .email_form.active, .tel_form.active, .match_password.false,
+	.valid_password.active, .regName_label.active, .idCheck_label_joongbok.active {
 	display: block;
 	padding-left: 5px;
 	color: red;
@@ -36,12 +36,6 @@ input::-webkit-inner-spin-button {
 	display: block;
 	padding-left: 5px;
 	color: blue;
-}
-
-.match_password.false {
-	display: block;
-	padding-left: 5px;
-	color: red;
 }
 
 .reg-form-control {
@@ -111,34 +105,39 @@ input::-webkit-inner-spin-button {
 				$("#u_id").on("propertychange change keyup paste input",
 					function() {
 						var insert_id = $("#u_id").val();
+						
+						//일단 1111일때 사용중인거 컷
 						if (insert_id == "1111") {
-							$(".idCheck_label_false").addClass(
-									'active');
-							$(".idCheck_label_true").removeClass(
-									'active');
+							$(".idCheck_label_joongbok").addClass('active');
+							$(".idCheck_label_false").removeClass('active');
+							$(".idCheck_label_true").removeClass('active');
 							ch1 = false;
 							return;
-						}else{ch1=true;}
+						}else{
+							$(".idCheck_label_joongbok").removeClass('active');
+							$(".idCheck_label_false").removeClass('active');
+							ch1=true;
+						}
 						
 						if (insert_id == '') {
-							$(".idCheck_label_true").removeClass(
-									'active');
-							$(".idCheck_label_false").removeClass(
-									'active');
+							$(".idCheck_label_true").removeClass('active');
+							$(".idCheck_label_false").removeClass('active');
+							$(".idCheck_label_joongbok").removeClass('active');
 							ch1 = false;
 						} else if (regId.test(insert_id) == false) {
-							$(".idCheck_label_true").removeClass(
-									'active');
-							$(".idCheck_label_false").addClass(
-									'active');
+							$(".idCheck_label_true").removeClass('active');
+							$(".idCheck_label_joongbok").removeClass('active');
+							$(".idCheck_label_false").addClass('active');
 							ch1 = false;
 						} else {
-							$(".idCheck_label_true").addClass(
-									'active');
-							$(".idCheck_label_false").removeClass(
-									'active');
+							$(".idCheck_label_true").addClass('active');
+							$(".idCheck_label_joongbok").removeClass('active');
+							$(".idCheck_label_false").removeClass('active');
 							ch1 = true;
 						}
+						
+						
+						
 					});
 
 				//Check valid Password
@@ -246,6 +245,28 @@ input::-webkit-inner-spin-button {
 			return false;
 		}
 	}
+	
+// 	function idCheck(){
+// 		$.ajax({
+// 			url: "/idcheck.user",
+// 			type: "POST",
+// 			dataType: "JSON",
+// 			data: :{"u_id": insert_id},
+// 			success: function(data){
+// 				if(data==1){
+// 					$(".idCheck_label_joongbok").addClass('active');
+// 						$(".idCheck_label_false").removeClass('active');
+// 						$(".idCheck_label_true").removeClass('active');
+// 						ch1 = false;
+// 				}else if (data == 0){
+// 					$(".idCheck_label_joongbok").removeClass('active');
+// 						$(".idCheck_label_false").removeClass('active');
+// 						ch1=true;
+// 				}
+// 			}
+// 		});
+// 	}
+	
 </script>
 </head>
 <body>
@@ -260,6 +281,7 @@ input::-webkit-inner-spin-button {
 				<div class="col-12">
 					<input type="text" name="u_id" id="u_id" placeholder="아이디 (필수)"
 						class="reg-form-control" autofocus>
+					<p class="idCheck_label_joongbok">이미 사용 중인 아이디입니다</p>
 					<p class="idCheck_label_false">사용할 수 없는 아이디입니다</p>
 					<p class="idCheck_label_true">사용 가능한 아이디입니다</p>
 				</div>

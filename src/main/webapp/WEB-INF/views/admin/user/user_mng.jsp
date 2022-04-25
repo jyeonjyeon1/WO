@@ -38,7 +38,7 @@
 <body>
 	<section id="container">
 		<!-- 헤더 import -->
-		<%@ include file="../inc/admin_header.jsp" %>
+		<%@ include file="../inc/admin_header.jsp"%>
 		<!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
@@ -167,8 +167,8 @@
         *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
-			    <!-- allmenu import -->
-				<%@ include file="../inc/admin_allmenu.jsp" %>
+			<!-- allmenu import -->
+			<%@ include file="../inc/admin_allmenu.jsp"%>
 			<section class="wrapper">
 				<h3>
 					<i class="fa fa-angle-right"></i> 회원 관리
@@ -284,7 +284,7 @@
 										<th>이메일</th>
 										<th>수신설정</th>
 										<th>상태</th>
-										<th>최근로그인</th>
+										<th>가입일</th>
 										<th>상태변경</th>
 									</tr>
 								</thead>
@@ -298,7 +298,7 @@
 										<th>이메일</th>
 										<th>수신설정</th>
 										<th>상태</th>
-										<th>최근로그인</th>
+										<th>가입일</th>
 										<th>상태변경</th>
 									</tr>
 								</tfoot>
@@ -307,652 +307,672 @@
 										<tr>
 											<td>${userList.u_seq}</td>
 											<td>${userList.u_id}</td>
-											<td>Google</td>
+											<td><c:choose>
+													<c:when test="${userList.u_type eq 'normal'}">일반</c:when>
+													<c:when test="${userList.u_type eq 'Google'}">구글</c:when>
+													<c:when test="${userList.u_type eq 'Kakao'}">카카오</c:when>
+													<c:when test="${userList.u_type eq 'Naver'}">네이버</c:when>
+													<c:otherwise>부잉</c:otherwise>
+												</c:choose>
+											</td>
+											</td>
 											<td>${userList.u_name}</td>
 											<td>${userList.u_tel}</td>
 											<td>${userList.u_email}</td>
+
 											<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>${userList.u_status}</td>
-										<td>${userList.u_regdate}</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
+													type="checkbox"
+													<c:choose>
+												<c:when test="${userList.u_sms_usable eq 'true'}"> checked</c:when>
+												<c:otherwise></c:otherwise>
+											</c:choose>>
+													S
+											</label> <label class="checkbox-inline"> <input
+													type="checkbox"
+													<c:choose>
+												<c:when test="${userList.u_email_usable eq 'true'}"> checked</c:when>
+												<c:otherwise></c:otherwise>
+											</c:choose>>
+													E
+											</label></td>
+											<td><c:choose>
+													<c:when test="${userList.u_status eq 'true'}">활동</c:when>
+													<c:otherwise>정지</c:otherwise>
+												</c:choose></td>
+											<td>${userList.u_regdate}</td>
+											<td><button class="btn btn-success btn-xs">
+													<i class="fa fa-check"></i>
+												</button>
+												<button class="btn btn-primary btn-xs">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" onclick="javascript:deleteAlert();"
+													class="btn btn-danger btn-xs">
+													<i class="fa fa-trash-o "></i>
+												</button></td>
 										</tr>
 									</c:forEach>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>etgohome8</td>
-										<td>Naver</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2" checked>
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>etgohome8</td>
-										<td>일반</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1">
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>etgohome8</td>
-										<td>일반</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1">
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>etgohome8</td>
-										<td>일반</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1">
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>etgohome8</td>
-										<td>Google</td>
-										<td>홍민지</td>
-										<td>01091722555</td>
-										<td>etgohome8@gmail.com</td>
-										<td><label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox1" value="option1" checked>
-												S
-										</label> <label class="checkbox-inline"> <input
-												type="checkbox" id="inlineCheckbox2" value="option2">
-												E
-										</label></td>
-										<td>활동</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><button class="btn btn-success btn-xs">
-												<i class="fa fa-check"></i>
-											</button>
-											<button class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>2</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Naver</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2" checked> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>3</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>일반</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1"> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>4</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>일반</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1"> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>5</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>일반</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1"> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
+									<!-- 									<tr> -->
+									<!-- 										<td>1</td> -->
+									<!-- 										<td>etgohome8</td> -->
+									<!-- 										<td>Google</td> -->
+									<!-- 										<td>홍민지</td> -->
+									<!-- 										<td>01091722555</td> -->
+									<!-- 										<td>etgohome8@gmail.com</td> -->
+									<!-- 										<td><label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox1" value="option1" checked> -->
+									<!-- 												S -->
+									<!-- 										</label> <label class="checkbox-inline"> <input -->
+									<!-- 												type="checkbox" id="inlineCheckbox2" value="option2"> -->
+									<!-- 												E -->
+									<!-- 										</label></td> -->
+									<!-- 										<td>활동</td> -->
+									<!-- 										<td>2022.04.06 12:11:02</td> -->
+									<!-- 										<td><button class="btn btn-success btn-xs"> -->
+									<!-- 												<i class="fa fa-check"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button class="btn btn-primary btn-xs"> -->
+									<!-- 												<i class="fa fa-pencil"></i> -->
+									<!-- 											</button> -->
+									<!-- 											<button type="button" onclick="javascript:deleteAlert();" -->
+									<!-- 												class="btn btn-danger btn-xs"> -->
+									<!-- 												<i class="fa fa-trash-o "></i> -->
+									<!-- 											</button></td> -->
+									<!-- 									</tr> -->
 
 
 								</tbody>
@@ -975,7 +995,7 @@
 
 
 		<!-- 푸더 import -->
-		<%@ include file="../inc/admin_footer.jsp" %>
+		<%@ include file="../inc/admin_footer.jsp"%>
 	</section>
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script
@@ -993,8 +1013,10 @@
 	<!--script for this page-->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
-	<script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
+	<script
+		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 </body>
 
 </html>

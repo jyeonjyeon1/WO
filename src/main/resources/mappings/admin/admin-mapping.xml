@@ -21,6 +21,6 @@
 	</resultMap>
 	
 	<select id="userList" resultType="UserVO" resultMap="userVO">
-		SELECT * FROM test_USER
+		SELECT * FROM TEST_USER ORDER BY U_SEQ DESC
 	</select>
 </mapper>

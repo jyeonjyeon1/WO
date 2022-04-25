@@ -106,19 +106,7 @@ input::-webkit-inner-spin-button {
 					function() {
 						var insert_id = $("#u_id").val();
 						
-						//일단 1111일때 사용중인거 컷
-						if (insert_id == "1111") {
-							$(".idCheck_label_joongbok").addClass('active');
-							$(".idCheck_label_false").removeClass('active');
-							$(".idCheck_label_true").removeClass('active');
-							ch1 = false;
-							return;
-						}else{
-							$(".idCheck_label_joongbok").removeClass('active');
-							$(".idCheck_label_false").removeClass('active');
-							ch1=true;
-						}
-						
+				
 						if (insert_id == '') {
 							$(".idCheck_label_true").removeClass('active');
 							$(".idCheck_label_false").removeClass('active');
@@ -135,9 +123,6 @@ input::-webkit-inner-spin-button {
 							$(".idCheck_label_false").removeClass('active');
 							ch1 = true;
 						}
-						
-						
-						
 					});
 
 				//Check valid Password
@@ -239,6 +224,7 @@ input::-webkit-inner-spin-button {
 		} else {
 			Swal.fire({
 				icon:"error",
+				title: "한규진 맵찔이",
 				text:"어딘가 잘못 작성"
 			});
 			console.log("실패")
@@ -264,7 +250,7 @@ input::-webkit-inner-spin-button {
 // 						ch1=true;
 // 				}
 // 			}
-// 		});
+// 		})
 // 	}
 	
 </script>
@@ -314,7 +300,7 @@ input::-webkit-inner-spin-button {
 					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 				</div>
 				<div class="col-3 mt-10" style="padding-left: 0;">
-					<button type="button" class="reg-form-control">번호 인증</button>
+					<button type="button" onclick="idCheck()" class="reg-form-control">번호 인증</button>
 				</div>
 			</div>
 			<div class="row">

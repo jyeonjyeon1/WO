@@ -24,18 +24,18 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-4 col-4">
                             <li>
-                                <a href="w_comp_info.html">회사소개</a>
+                                <a href="aboutWO.user">회사소개</a>
                             </li>
                         </div>
                         <div class="col-lg-2 col-md-4 col-4">
                             <li>
-                                <a href="w_terms_of_service.html">이용약관</a>
+                                <a href="termOfService.user">이용약관</a>
                             </li>
                         </div>
 
                         <div class="col-lg-2 col-md-4 col-4">
                             <li>
-                                <a href="w_privacy_term.html">개인정보처리방침</a>
+                                <a href="privacyTerm.user">개인정보처리방침</a>
                             </li>
                         </div>
 
@@ -49,14 +49,14 @@
 
                         <div class="col-lg-2 col-md-4 col-4">
                             <li>
-                                <a href="w_guide.html">이용안내</a>
+                                <a href="howToUse.user">이용안내</a>
                             </li>
                         </div>
 
                         <div class="col-lg-2 col-md-4 col-4">
                             <div class="lastFooter">
                                 <li>
-                                    <a href="w_store_inquiry.html">입점문의</a>
+                                    <a href="storeInquiry.user">입점문의</a>
                                 </li>
                             </div>
                         </div>

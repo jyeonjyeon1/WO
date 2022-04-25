@@ -1459,8 +1459,8 @@
 	<script src="resources/assets/owlcarousel/owl.carousel.min.js"></script>
 	<script type="text/javascript">
         jQuery(document).ready(function () {
-            $('#headers').load("header.html");
-            $('#footers').load("footer.html");
+            $('#headers').load("header.user");
+            $('#footers').load("footer.user");
 
             $(".owl-carousel").owlCarousel({
                 items: 4,

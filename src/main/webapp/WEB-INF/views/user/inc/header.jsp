@@ -41,9 +41,9 @@
 					<div class="col-lg-4 col-md-4 col-12">
 						<div class="top-end">
 							<ul class="user-login">
-								<li><a href="w_login.html">로그인</a></li>
-								<li><a href="w_join.html">회원가입</a></li>
-								<li><a href="customer.html">고객센터</a></li>
+								<li><a href="login.user">로그인</a></li>
+								<li><a href="join.user">회원가입</a></li>
+								<li><a href="faq.user">고객센터</a></li>
 							</ul>
 						</div>
 					</div>
@@ -58,7 +58,7 @@
 					<div class="col-lg-3 col-md-3 col-7">
 						<div class="logo_menu">
 							<!-- Start Header Logo -->
-							<a class="navbar-brand" href="/index"> <img
+							<a class="navbar-brand" href="index.user"> <img
 								src="resources/assets/images/logo/logo_ruda.png" alt="Logo">
 							</a>
 							<!-- End Header Logo -->
@@ -85,7 +85,7 @@
 									<input type="text" placeholder="검색">
 								</div>
 								<div class="search-btn">
-									<button onclick="location.href='jw1.html'">
+									<button onclick="location.href='index.user'">
 										<i class="lni lni-search-alt"></i>
 									</button>
 								</div>
@@ -100,24 +100,24 @@
 							<div class="navbar-cart">
 
 								<div class="wishlist">
-									<a href="javascript:void(0)"> <i class="lni lni-heart"></i>
+									<a href="myWishList.user"> <i class="lni lni-heart"></i>
 										<span class="total-items">0</span>
 									</a>
 								</div>
 								<div class="cart-items">
-									<a href="javascript:void(0)" class="main-btn"> <i
+									<a href="cart.user" class="main-btn"> <i
 										class="lni lni-cart"></i> <span class="total-items">0</span>
 									</a>
 									<!-- Shopping Item -->
 									<div class="shopping-item">
 										<div class="dropdown-cart-header">
-											<span>0 개</span> <a href="cart.html">장바구니</a>
+											<span>0 개</span> <a href="cart.user">장바구니</a>
 										</div>
 									</div>
 									<!--/ End Shopping Item -->
 								</div>
 								<div class="mypage">
-									<a href="mypage_main.html"> <i class="lni lni-user"></i>
+									<a href="mypage.user"> <i class="lni lni-user"></i>
 									</a>
 								</div>
 							</div>
@@ -151,9 +151,9 @@
 							<div class="collapse navbar-collapse sub-menu-bar"
 								id="navbarSupportedContent">
 								<ul id="nav" class="navbar-nav ms-auto">
-									<li class="nav-item left"><a href="/list"
+									<li class="nav-item left"><a href="list.user"
 										aria-label="Toggle navigation">리스트로 주문</a></li>
-									<li class="nav-item right"><a href="/map"
+									<li class="nav-item right"><a href="map.user"
 										aria-label="Toggle navigation">지도로 주문</a>
 								</ul>
 							</div>
@@ -167,11 +167,11 @@
 					<!-- Start Nav Social -->
 					<div class="nav-social">
 						<ul>
-							<li><a href="javascript:void(0)">지난 주문내역</a></li>
+							<li><a href="myOrderList.user">지난 주문내역</a></li>
 							&nbsp;|&nbsp;&nbsp;
-							<li><a href="javascript:void(0)">즐겨찾는 매장</a></li>
+							<li><a href="myWishList.user">즐겨찾는 매장</a></li>
 							&nbsp;|&nbsp;&nbsp;
-							<li><a class="coupon" href="javascript:void(0)"><i
+							<li><a class="coupon" href="myCoupon.user"><i
 									class="lni lni-ticket"></i>쿠폰</a></li>
 						</ul>
 					</div>

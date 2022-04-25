@@ -17,4 +17,8 @@ public class UserDAO {
 		sqlSession.insert("UserDAO.insertUser", vo);
 	}
 
+	public void idCheck(UserVO vo) {
+		sqlSession.insert("UserDAO.idCheck");
+	}
+
 }

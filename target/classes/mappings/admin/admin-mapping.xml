@@ -2,7 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserDAO">
+<mapper namespace="AUserDAO">
+	<resultMap type="UserVO" id="userVO">
+		<id column="U_ID" property="u_id" jdbcType="VARCHAR"/>
+		<result column="U_PASSWORD" property="u_password" jdbcType="VARCHAR" />
+		<result column="U_NAME" property="u_name" jdbcType="VARCHAR" />
+		<result column="U_TEL" property="u_tel" jdbcType="VARCHAR"/>
+		<result column="U_EMAIL" property="u_email" jdbcType="VARCHAR"/>
+<!-- 		<result column="U_BIRTHDAY" property="u_birthday" jdbcType="VARCHAR" /> -->
+<!-- 		<result column="C_CODE" property="c_code" jdbcType="VARCHAR" /> -->
+<!-- 		<result column="U_LIKE_STORE" property="u_like_store" jdbcType="VARCHAR" /> -->
+		<result column="U_SEQ" property="u_seq" jdbcType="INTEGER" />
+		<result column="U_SMS_USABLE" property="u_sms_usable" jdbcType="BOOLEAN" />
+		<result column="U_EMAIL_USABLE" property="u_email_usable" jdbcType="BOOLEAN" />
+		<result column="U_STATUS" property="u_status" jdbcType="INTEGER" />
+<!-- 		<result column="u_regdate" property="u_regdate" jdbcType="TIMESTAMP" /> -->
+<!-- 		<collection property="UserVO" resultMap="UserVO"></collection> -->
+	</resultMap>
 	
+	<select id="userList" resultType="UserVO" resultMap="userVO">
+		SELECT * FROM test_USER
+	</select>
 </mapper>
- 

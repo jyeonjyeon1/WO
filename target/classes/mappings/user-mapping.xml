@@ -4,8 +4,8 @@
 
 <mapper namespace="UserDAO">
 	<insert id="insertUser" parameterType="UserVO">
-		INSERT INTO testuser (u_seq, u_id, u_password, u_name, u_email, u_sms_usable,u_email_usable, u_telnum)
-		VALUES(NEXTVAL('TEST_SEQ'), #{u_id}, #{u_password}, #{u_name}, #{u_email}, #{u_sms_usable}, #{u_email_usable}, #{u_tel})
+		INSERT INTO TEST_USER (U_ID, U_PASSWORD, U_NAME, U_EMAIL, U_SMS_USABLE,U_EMAIL_USABLE, U_TEL)
+		VALUES(#{u_id}, #{u_password}, #{u_name}, #{u_email}, #{u_sms_usable}, #{u_email_usable}, #{u_tel})
 	</insert>
 	
 	

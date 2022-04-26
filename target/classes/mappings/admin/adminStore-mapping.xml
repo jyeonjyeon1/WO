@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AStoreDAO">
+	<resultMap type="StoreVO" id="storeVO">
+		<id column="STR_CODE" property="str_code" jdbcType="VARCHAR"/>
+		<result column="STR_SEQ" property="str_seq" jdbcType="INTEGER" />
+		<result column="STR_NAME" property="str_name" jdbcType="VARCHAR" />
+		<result column="STR_REG_DATE" property="str_reg_date" jdbcType="TIMESTAMP"/>
+		<result column="STR_LOC" property="str_loc" jdbcType="VARCHAR"/>
+		<result column="STR_ZIPCODE" property="str_zipcode" jdbcType="VARCHAR" />
+		<result column="STR_ADDRESS" property="str_address" jdbcType="VARCHAR" />
+		<result column="STR_ADDR_ROAD" property="str_addr_road" jdbcType="VARCHAR" />
+		<result column="STR_ADDR_DETAIL" property="str_addr_detail" jdbcType="VARCHAR" />
+		<result column="STR_TEL" property="str_tel" jdbcType="VARCHAR" />
+		<result column="STR_PARKING" property="str_parking" jdbcType="BOOLEAN" />
+		<result column="STR_DUE_TIME" property="str_due_time" jdbcType="VARCHAR" />
+		<result column="STR_HOLIDAY_FIX" property="str_holiday_fix" jdbcType="VARCHAR" />
+		<result column="STR_HOLIDAY_IMSI" property="str_holiday_imsi" jdbcType="VARCHAR" />
+		<result column="STR_OPEN" property="str_open" jdbcType="VARCHAR" />
+		<result column="STR_CLOSE" property="str_close" jdbcType="VARCHAR" />
+		<result column="STR_REFERINFO" property="str_referinfo" jdbcType="VARCHAR" />
+		<result column="STR_MAP_IMAGE" property="str_map_image" jdbcType="VARCHAR" />
+		<result column="STR_DIRECTIONS" property="str_directions" jdbcType="VARCHAR" />
+		<result column="STR_IMAGE" property="str_image" jdbcType="VARCHAR" />
+		<result column="STR_STATUS" property="str_status" jdbcType="VARCHAR" />
+<!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
+	</resultMap>
+	
+	<select id="storeList" resultType="StoreVO" resultMap="storeVO">
+		SELECT * FROM STORE_INFO ORDER BY STR_SEQ DESC
+	</select>
+</mapper>

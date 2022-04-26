@@ -265,7 +265,7 @@ public class AdminController {
 		return "/store/store_menu_detail";
 	}
 	
-	@GetMapping("/store_mng.admin")
+	@GetMapping("/store_mng_.admin")
 	public String tostore_mng() {
 		System.out.println("store_mng");
 		return "/store/store_mng";

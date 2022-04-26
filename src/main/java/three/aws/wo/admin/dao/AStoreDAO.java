@@ -15,4 +15,8 @@ public class AStoreDAO {
 	public List<StoreVO> storeList(){
 		return sqlSession.selectList("AStoreDAO.storeList");
 	}
+
+	public void insertStore(StoreVO vo) {
+		sqlSession.insert("AStoreDAO.insertStore", vo);
+	}
 }

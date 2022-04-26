@@ -25,10 +25,18 @@
 		<result column="STR_DIRECTIONS" property="str_directions" jdbcType="VARCHAR" />
 		<result column="STR_IMAGE" property="str_image" jdbcType="VARCHAR" />
 		<result column="STR_STATUS" property="str_status" jdbcType="VARCHAR" />
+		<result column="STR_USESTORE" property="str_usestore" jdbcType="VARCHAR" />
 <!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
 	</resultMap>
 	
 	<select id="storeList" resultType="StoreVO" resultMap="storeVO">
 		SELECT * FROM STORE_INFO ORDER BY STR_SEQ DESC
 	</select>
+	
+	<insert id="insertStore" parameterType="StoreVO">
+		INSERT INTO STORE_INFO (STR_NAME, STR_CODE, STR_ZIPCODE, STR_ADDRESS, STR_ADDR_ROAD, STR_ADDR_DETAIL, STR_TEL, STR_EMAIL,
+		STR_OPEN, STR_CLOSE, STR_PARKING, STR_USESTORE, STR_REFERINFO)
+		VALUES(#{str_name}, #{str_code}, #{str_zipcode}, #{str_address}, #{str_addr_road}, #{str_addr_detail}, #{str_tel}, #{str_email}, 
+		#{str_open}, #{str_close}, #{str_parking}, #{str_usestore}, #{str_referinfo})
+	</insert>
 </mapper>

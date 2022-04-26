@@ -14,6 +14,7 @@ public class StoreVO {
 	private int str_seq;
 	private Date str_reg_date;
 	private String str_referinfo;
+	private String str_email;
 	private boolean str_parking;
 	private String str_zipcode;
 	private String str_open;
@@ -31,4 +32,5 @@ public class StoreVO {
 	private String str_addr_road;
 	private String str_addr_detail;
 	private boolean str_status;
+	private boolean str_usestore;
 }

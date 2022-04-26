@@ -19,45 +19,57 @@ import three.aws.wo.user.vo.UserVO;
 public class UserRegController {
 	@Autowired
 	private UserService userService;
-	
+
 	@Inject
-	public  UserRegController(UserService userService) {
+	public UserRegController(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@RequestMapping("/register.user")
 	public String insertUser(UserVO vo) {
 		userService.insertUser(vo);
 		System.out.println("회원가입 완료 DB확인");
 		return "/login/login_joined";
 	}
-	
-	//아이디 중복 체크
-	   @ResponseBody
-	   @RequestMapping("/idcheck.user")
-	   public Map<String, Object> idCheck(@RequestParam(value="id") String id)throws Exception {
-		   System.out.println(id);
-		   int count = 0;
-	        Map<String, Object> map = new HashMap<String, Object>();
-	 
-	        count = userService.idCheck(id);
-	        System.out.println("count:"+count);
-	        map.put("cnt", count);
-	        System.out.println(map.toString().replace("=", ":"));
-	        return map;
-	   }
-	
+
+	// 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping("/idcheck.user")
+	public Map<String, Object> idCheck(@RequestParam(value = "id") String id) throws Exception {
+		System.out.println(id);
+		int count = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		count = userService.idCheck(id);
+		System.out.println("count:" + count);
+		map.put("cnt", count);
+		System.out.println(map.toString().replace("=", ":"));
+		return map;
+	}
+
 	@ResponseBody
 	@RequestMapping("/emailcheck.user")
 	public int emailCheck(String email) {
 		System.out.println("email중복확인");
 		return userService.emailCheck(email);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/telcheck.user")
 	public int telCheck(String tel) {
-		System.out.println("tel占쌩븝옙확占쏙옙");
+		System.out.println("tel중복확인");
 		return userService.telCheck(tel);
+	}
+
+	@RequestMapping("/updateUser.user")
+	public String updateUser(UserVO vo) {
+		userService.updateUser(vo);
+		return "/index/index";
+	}
+
+	@RequestMapping("/deleteUser.user")
+	public String deleteUser(UserVO vo) {
+		userService.deleteUser(vo);
+		return "/index/index";
 	}
 }

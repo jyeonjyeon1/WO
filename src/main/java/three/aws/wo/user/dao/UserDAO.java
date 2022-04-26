@@ -17,8 +17,7 @@ public class UserDAO {
 		sqlSession.insert("UserDAO.insertUser", vo);
 	}
 	
-	
-	public int idCheck(UserVO id) {
+	public int idCheck(String id) {
 		return sqlSession.selectOne("UserDAO.idCheck", id);
 	}
 	
@@ -28,6 +27,14 @@ public class UserDAO {
 	
 	public int telCheck(String tel) {
 		return sqlSession.selectOne("UserDAO.telCheck");
+	}
+
+	public void deleteUser(UserVO vo) {
+		sqlSession.delete("UserDAO.deleteUser", vo);
+	}
+
+	public void updateUser(UserVO vo) {
+		sqlSession.update("UserDAO.updateUser", vo);
 	}
 
 }

@@ -4,7 +4,7 @@ import three.aws.wo.user.vo.UserVO;
 
 public interface UserService {
 	void insertUser(UserVO vo);
-	int idCheck(UserVO id);
+	int idCheck(String id);
 	int telCheck(String tel);
 	int emailCheck(String email);
 	void login(UserVO vo);

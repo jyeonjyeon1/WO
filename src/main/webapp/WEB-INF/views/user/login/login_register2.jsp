@@ -25,8 +25,9 @@ input::-webkit-inner-spin-button {
 	display: none;
 }
 
-.idCheck_label_false.active, .email_form.active, .tel_form.active, .match_password.false,
-	.valid_password.active, .regName_label.active, .idCheck_label_joongbok.active {
+.idCheck_label_false.active, .email_form.active, .tel_form.active,
+	.match_password.false, .valid_password.active, .regName_label.active,
+	.idCheck_label_joongbok.active {
 	display: block;
 	padding-left: 5px;
 	color: red;
@@ -98,15 +99,10 @@ input::-webkit-inner-spin-button {
 	var regName = /^[가-힣]+$/;
 	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-	
-	
-	
+
 	jQuery(document).ready(
 			function() {
-				
-				
-				
-			
+
 				/*  //Check Same ID
 				$("#u_id").on("propertychange change keyup paste input",
 					function() {
@@ -136,8 +132,7 @@ input::-webkit-inner-spin-button {
 							ch1 = true;
 						}
 					});  
-					 */
-
+				 */
 
 				//Check valid Password
 				$("#u_password").on(
@@ -168,37 +163,40 @@ input::-webkit-inner-spin-button {
 								ch3 = true;
 							}
 						});
-				
-				$("#u_name").on(
+
+				$("#u_name")
+						.on(
+								"propertychange change keyup paste input",
+								function() {
+									var name = $("#u_name").val();
+
+									if (name.length > 1
+											&& regName.test(name) == false) {
+										$(".regName_label").addClass('active');
+										ch4 = false;
+									} else {
+										$(".regName_label").removeClass(
+												'active');
+										ch4 = true;
+									}
+								});
+
+				$("#u_tel").on(
 						"propertychange change keyup paste input",
 						function() {
-							var name = $("#u_name").val();
-
-							if (name.length > 1
-									&& regName.test(name) == false) {
-								$(".regName_label").addClass('active');
-								ch4 = false;
+							var tel = $("#u_tel").val();
+							if (tel.indexOf('-') != -1) {
+								$(".tel_form").addClass('active');
+								ch5 = false;
+							} else if (tel.length > 7
+									&& regPhone.test(tel) == false) {
+								$(".tel_form").addClass('active');
+								ch5 = false;
 							} else {
-								$(".regName_label").removeClass('active');
-								ch4 = true;
+								$(".tel_form").removeClass('active');
+								ch5 = true;
 							}
 						});
-
-				$("#u_tel").on("propertychange change keyup paste input",
-		                  function() {
-		                     var tel = $("#u_tel").val();
-		                     if(tel.indexOf('-')!=-1){
-		                        $(".tel_form").addClass('active');
-		                        ch5 = false;
-		                     }else if (tel.length > 7 && regPhone.test(tel) == false) {
-		                        $(".tel_form").addClass('active');
-		                        ch5 = false;
-		                     } else {
-		                        $(".tel_form").removeClass('active');
-		                        ch5 = true;
-		                     }
-		                  });
-
 
 				$("#u_email").on(
 						"propertychange change keyup paste input",
@@ -228,73 +226,70 @@ input::-webkit-inner-spin-button {
 	function finalCheck() {
 		if (!ch7) {
 			Swal.fire({
-				icon:"error",
-				text:"이용약관 미동의"
+				icon : "error",
+				text : "이용약관 미동의"
 			});
 		} else if (!ch8) {
 			Swal.fire({
-				icon:"error",
-				text:"개인정보처리방침 미동의"
+				icon : "error",
+				text : "개인정보처리방침 미동의"
 			});
 		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8) {
 			document.regForm.submit();
 		} else {
 			Swal.fire({
-				icon:"error",
-				text:"어딘가 잘못 작성"
+				icon : "error",
+				text : "어딘가 잘못 작성"
 			});
 			console.log("실패")
 			return false;
 		}
 	}
-	
-	
 
- 	/* 
-  	function idCheck(){
- 		$.ajax({
- 			url:"/idcheck.user",
- 			type: "POST",
- 			dataType: "JSON",
- 			data: :{"u_id": insert_id},
- 			success: function(data){
- 				if(data==1){
- 					$(".idCheck_label_joongbok").addClass('active');
- 						$(".idCheck_label_false").removeClass('active');
- 						$(".idCheck_label_true").removeClass('active');
- 						ch1 = false;
- 				}else if (data == 0){
- 					$(".idCheck_label_joongbok").removeClass('active');
- 						$(".idCheck_label_false").removeClass('active');
- 						ch1=true;
- 				}
- 			}
- 		});
- 	};   */
- 	
-  	function checkId() {
- 		var id = $('#u_id').val();
- 		$.ajax({
- 			url:'/idcheck.user',
- 			type:'post',
- 			dataType: "JSON",
- 			data: {"u_id":id},
- 			success:function(data){
- 				if(data==0){
- 					console.log("data=0");
- 				}else{
- 					console.log("data=1")
- 				}
- 			},
- 			error:function(data){
- 				console.log("아이디체크에러");
- 			}
- 			
- 		});
- 	};
- 	
- 	
-	 
+	/* 
+	function idCheck(){
+		$.ajax({
+			url:"/idcheck.user",
+			type: "POST",
+			dataType: "JSON",
+			data: :{"u_id": insert_id},
+			success: function(data){
+				if(data==1){
+					$(".idCheck_label_joongbok").addClass('active');
+						$(".idCheck_label_false").removeClass('active');
+						$(".idCheck_label_true").removeClass('active');
+						ch1 = false;
+				}else if (data == 0){
+					$(".idCheck_label_joongbok").removeClass('active');
+						$(".idCheck_label_false").removeClass('active');
+						ch1=true;
+				}
+			}
+		});
+	};   */
+
+	function checkId() {
+	       var id = $('#u_id').val();
+	       var param = {"id" : id };
+	       console.log(param);
+	        $.ajax({
+	             type: "post",
+	             url: "/idcheck.user",
+	             dataType: "json",
+	             data: param,
+	             async: false, 
+	          success:function(data){
+	             if(data==0){
+	                console.log("data=0");
+	             }else{
+	                console.log("data=1")
+	             }
+	          },
+	          error:function(data){
+	             console.log("아이디체크에러");
+	          }
+	       });
+	    }
 </script>
 </head>
 <body>
@@ -342,7 +337,8 @@ input::-webkit-inner-spin-button {
 					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 				</div>
 				<div class="col-3 mt-10" style="padding-left: 0;">
-					<button type="button" onclick="idCheck()" class="reg-form-control">번호 인증</button>
+					<button type="button" onclick="idCheck()" class="reg-form-control">번호
+						인증</button>
 				</div>
 			</div>
 			<div class="row">
@@ -382,11 +378,11 @@ input::-webkit-inner-spin-button {
 				</div>
 				<div class="col-7" style="margin-top: 15px;">
 					<label class="radio-inline" style="font-size: 12px;"> <input
-						type="radio" name="u_sms_usable" id="inlineRadio1" value="true"
+						type="radio" name="u_sms_usable" value="true"
 						checked> 동의
 					</label> <label class="radio-inline"
 						style="font-size: 12px; padding-left: 20px"> <input
-						type="radio" name="u_sms_usable" id="inlineRadio2" value="false">
+						type="radio" name="u_sms_usable" value="false">
 						비동의
 					</label>
 				</div>
@@ -398,11 +394,11 @@ input::-webkit-inner-spin-button {
 				</div>
 				<div class="col-7" style="margin-top: 5px;">
 					<label class="radio-inline" style="font-size: 12px;"> <input
-						type="radio" name="u_email_usable" id="inlineRadio1" value="true"
+						type="radio" name="u_email_usable" value="true"
 						checked> 동의
 					</label> <label class="radio-inline"
 						style="font-size: 12px; padding-left: 20px"> <input
-						type="radio" name="u_email_usable" id="inlineRadio2" value="false">
+						type="radio" name="u_email_usable" value="false">
 						비동의
 					</label>
 				</div>

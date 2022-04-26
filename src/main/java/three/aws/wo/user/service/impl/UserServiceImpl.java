@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int idCheck(UserVO id) {
+	public int idCheck(String id) {
 		return userDAO.idCheck(id);
 	}
 
@@ -35,20 +35,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void login(UserVO vo) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void updateUser(UserVO vo) {
-		// TODO Auto-generated method stub
-		
+		userDAO.updateUser(vo);
 	}
 
 	@Override
 	public void deleteUser(UserVO vo) {
-		// TODO Auto-generated method stub
-		
+		userDAO.deleteUser(vo);
 	}
 
 

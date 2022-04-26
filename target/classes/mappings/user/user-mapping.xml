@@ -4,31 +4,32 @@
 
 <mapper namespace="UserDAO">
 	<insert id="insertUser" parameterType="UserVO">
-		INSERT INTO TEST_USER (U_ID, U_PASSWORD, U_NAME, U_EMAIL, U_SMS_USABLE,U_EMAIL_USABLE, U_TEL)
-		VALUES(#{u_id}, #{u_password}, #{u_name}, #{u_email}, #{u_sms_usable}, #{u_email_usable}, #{u_tel})
+		INSERT INTO TEST_USER
+		(U_ID, U_PASSWORD, U_NAME, U_EMAIL, U_SMS_USABLE,U_EMAIL_USABLE,
+		U_TEL)
+		VALUES(#{u_id}, #{u_password}, #{u_name}, #{u_email},
+		#{u_sms_usable}, #{u_email_usable}, #{u_tel})
 	</insert>
 	<select id="idCheck" resultType="int">
-		SELECT COUNT(*) FROM TEST_USER WHERE U_ID = #{u_id}
+		SELECT COUNT(*) FROM TEST_USER
+		WHERE U_ID = #{u_id}
 	</select>
 	<select id="telCheck" parameterType="UserVO" resultType="int">
-		SELECT COUNT(*) FROM TEST_USER WHERE U_TEL = #{u_tel}
+		SELECT
+		COUNT(*) FROM TEST_USER WHERE U_TEL = #{u_tel}
 	</select>
 	<select id="emailCheck" parameterType="UserVO" resultType="int">
 		SELECT COUNT(*) FROM TEST_USER WHERE U_EMAIL = #{u_email}
 	</select>
 	
-	
-	
-	
-	
-	
 	<update id="updateUser" parameterType="UserVO">
-		UPDATE myboard
-		SET title=#{title}, content=#{content}
-		WHERE seq = #{seq}
+		UPDATE test_user
+		SET u_password= #{u_password}, u_name = #{u_name}, u_email = #{u_email}
+		WHERE u_id = #{u_id}
 	</update>
-	<delete id="deleteBoard" parameterType="UserVO">
-		DELETE FROM myboard WHERE seq = #{seq}
+
+	<delete id="deleteUser" parameterType="UserVO">
+		DELETE FROM test_user WHERE u_id = #{u_id}`
 	</delete>
 </mapper>
  

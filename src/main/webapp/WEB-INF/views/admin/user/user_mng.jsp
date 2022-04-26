@@ -315,7 +315,6 @@
 													<c:otherwise>부잉</c:otherwise>
 												</c:choose>
 											</td>
-											</td>
 											<td>${userList.u_name}</td>
 											<td>${userList.u_tel}</td>
 											<td>${userList.u_email}</td>

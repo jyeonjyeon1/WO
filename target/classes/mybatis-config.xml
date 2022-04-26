@@ -7,9 +7,11 @@
 <configuration>
 	<typeAliases> <!-- 특정 클래스의 별칭(Alias)을 선언 -->
 		<typeAlias alias="UserVO" type="three.aws.wo.user.vo.UserVO" />
+		<typeAlias alias="StoreVO" type="three.aws.wo.store.vo.StoreVO" />
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
 		<mapper resource="mappings/user/user-mapping.xml" /> 
 		<mapper resource="mappings/admin/admin-mapping.xml" /> 
+		<mapper resource="mappings/admin/adminStore-mapping.xml" /> 
 	</mappers>
 </configuration>

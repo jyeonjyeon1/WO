@@ -47,6 +47,17 @@ public class UserRegController {
 		return map;
 	}
 
+	// 아이디 중복 체크
+//	@ResponseBody
+//	@RequestMapping(value = "/idcheck.user", method = RequestMethod.POST)
+//	public int idCheck(@RequestBody HashMap<String, String> param) throws Exception {
+//		System.out.println(123);
+//		System.out.println(param);
+//		int result = userService.idCheck(param.get("id"));
+//		System.out.println(result);
+//		return result;
+//	}
+
 	@ResponseBody
 	@RequestMapping("/emailcheck.user")
 	public int emailCheck(String email) {

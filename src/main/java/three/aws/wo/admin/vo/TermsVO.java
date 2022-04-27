@@ -11,4 +11,5 @@ public class TermsVO {
 	private String t_content;
 	private Date t_enfdate;
 	private Date t_regdate;
+
 }

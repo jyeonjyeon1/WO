@@ -113,13 +113,6 @@ function count(type)  {
         $("body").removeClass("over_hid");
     });
 
-    /*------------------
-		Navigation
-	--------------------*/
-    $(".mobile-menu").slicknav({
-        prependTo: '#mobile-menu-wrap',
-        allowParentLinks: true
-    });
 
     /*-----------------------
         Categories Slider

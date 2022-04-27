@@ -14,7 +14,7 @@
 <!-- ========================= CSS here ========================= -->
 <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css"
 	type="text/css">
-<link rel="stylesheet" href="resources/assets/css/bootstrap5.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="resources/assets/css/LineIcons.3.0.css" />
 <link rel="stylesheet" href="resources/assets/css/tiny-slider.css" />
 <link rel="stylesheet" href="resources/assets/css/glightbox.min.css" />
@@ -187,7 +187,7 @@
 
 	<!-- ========================= JS here ========================= -->
 	<script src="resources/assets/js/jquery-3.6.0.js"></script>
-	<script src="resources/assets/js/bootstrap5.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="resources/assets/js/tiny-slider.js"></script>
 	<script src="resources/assets/js/glightbox.min.js"></script>
 	<script src="resources/assets/js/main.js"></script>

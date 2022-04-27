@@ -8,6 +8,8 @@
 <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
 </head>
 <body>
-window.location.href="index.u"
+<script>
+window.location.href="index.user"
+</script>
 </body>
 </html>

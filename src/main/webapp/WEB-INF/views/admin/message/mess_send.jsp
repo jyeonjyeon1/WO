@@ -24,7 +24,13 @@
   <link href="resources/assets/css/admin/style-responsive.css" rel="stylesheet">
   <!-- 테이블용 css -->
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-
+<style>
+input::-webkit-inner-spin-button {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+</style>
 </head>
 
 <body>

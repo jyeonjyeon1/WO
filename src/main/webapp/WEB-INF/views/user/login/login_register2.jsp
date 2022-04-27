@@ -103,43 +103,54 @@ input::-webkit-inner-spin-button {
 	jQuery(document).ready(
 			function() {
 
-				/*  //Check Same ID
-				$("#u_id").on("propertychange change keyup paste input",
-					function() {
-						var insert_id = $("#u_id").val();
-					
-				 		
-						if (insert_id == '') {
-							$(".idCheck_label_true").removeClass('active');
-							$(".idCheck_label_false").removeClass('active');
-							$(".idCheck_label_joongbok").removeClass('active');
-							ch1 = false;
-						} else if (regId.test(insert_id) == false) {
-							$(".idCheck_label_true").removeClass('active');
-							$(".idCheck_label_joongbok").removeClass('active');
-							$(".idCheck_label_false").addClass('active');
-							ch1 = false;
-						}else if (insert_id == 3333) {
-							$(".idCheck_label_true").removeClass('active');
-							$(".idCheck_label_joongbok").addClass('active');
-							$(".idCheck_label_false").removeClass('active');
-							ch1 = false;
-							
-						} else {
-							$(".idCheck_label_true").addClass('active');
-							$(".idCheck_label_joongbok").removeClass('active');
-							$(".idCheck_label_false").removeClass('active');
-							ch1 = true;
-						}
-					});  
-				 */
+			//아이디중복확인
+			$("#u_id").on("propertychange change keyup paste input",
+				function() {
+					var insert_id = $("#u_id").val();
+					//idCheck()였던 것.
+			       var param = {"id" : insert_id };
+			       if(insert_id.length>2){
+					$.ajax({
+			             type: "POST",
+			             url: "/idcheck.user",
+			             data: JSON.stringify(param),
+			             dataType: "json",
+			             contentType: "application/json",
+			          success:function(data){
+			             if(data==0 && regId.test(insert_id) == true){
+			                console.log("가능");
+			                $(".idCheck_label_joongbok").removeClass('active');
+			                $(".idCheck_label_false").removeClass('active');
+			                $(".idCheck_label_true").addClass('active');
+			                ch1=true;
+			             }else if(data==0 && regId.test(insert_id) == false){
+			            	 console.log("노가능");
+			            	 $(".idCheck_label_joongbok").removeClass('active');
+				             $(".idCheck_label_false").addClass('active');
+				             $(".idCheck_label_true").removeClass('active');
+				             ch1=false;
+			             }else{
+			                console.log("노가능")
+			                $(".idCheck_label_joongbok").addClass('active');
+			                $(".idCheck_label_true").removeClass('active');
+			                $(".idCheck_label_false").removeClass('active');
+			                ch1=false;
+			             }
+			          },
+			          error:function(data){
+			             console.log("아이디체크에러");
+			          }
+			       }); //ajax 끝
+		        } // end if
+			});  //아이디중복확인 끝
+				 
 
 				//Check valid Password
 				$("#u_password").on(
 						"propertychange change keyup paste input",
 						function() {
 							var pwd = $("#u_password").val();
-
+							
 							if (pwd.length > 3
 									&& regPassword.test(pwd) == false) {
 								$(".valid_password").addClass('active');
@@ -203,7 +214,7 @@ input::-webkit-inner-spin-button {
 						function() {
 							var email = $("#u_email").val();
 
-							if (email.length > 7
+							if (email.length > 1
 									&& regEmail.test(email) == false) {
 								$(".email_form").addClass('active');
 								ch6 = false;
@@ -246,38 +257,16 @@ input::-webkit-inner-spin-button {
 		}
 	}
 
-	/* 
-	function idCheck(){
-		$.ajax({
-			url:"/idcheck.user",
-			type: "POST",
-			dataType: "JSON",
-			data: :{"u_id": insert_id},
-			success: function(data){
-				if(data==1){
-					$(".idCheck_label_joongbok").addClass('active');
-						$(".idCheck_label_false").removeClass('active');
-						$(".idCheck_label_true").removeClass('active');
-						ch1 = false;
-				}else if (data == 0){
-					$(".idCheck_label_joongbok").removeClass('active');
-						$(".idCheck_label_false").removeClass('active');
-						ch1=true;
-				}
-			}
-		});
-	};   */
-
-	function checkId() {
+/* 	function idCheck() {
 	       var id = $('#u_id').val();
 	       var param = {"id" : id };
 	       console.log(param);
 	        $.ajax({
-	             type: "post",
+	             type: "POST",
 	             url: "/idcheck.user",
+	             data: JSON.stringify(param),
 	             dataType: "json",
-	             data: param,
-	             async: false, 
+	             contentType: "application/json",
 	          success:function(data){
 	             if(data==0){
 	                console.log("data=0");
@@ -289,7 +278,7 @@ input::-webkit-inner-spin-button {
 	             console.log("아이디체크에러");
 	          }
 	       });
-	    }
+	    } */
 </script>
 </head>
 <body>
@@ -303,7 +292,7 @@ input::-webkit-inner-spin-button {
 			<div class="row">
 				<div class="col-12">
 					<input type="text" name="u_id" id="u_id" placeholder="아이디 (필수)"
-						class="reg-form-control" required oninput="checkId()" autofocus />
+						class="reg-form-control" autofocus />
 					<p class="idCheck_label_joongbok">이미 사용 중인 아이디입니다</p>
 					<p class="idCheck_label_false">사용할 수 없는 아이디입니다</p>
 					<p class="idCheck_label_true">사용 가능한 아이디입니다</p>

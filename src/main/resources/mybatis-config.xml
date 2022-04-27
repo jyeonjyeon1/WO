@@ -8,7 +8,7 @@
 	<typeAliases> <!-- 특정 클래스의 별칭(Alias)을 선언 -->
 		<typeAlias alias="UserVO" type="three.aws.wo.user.vo.UserVO" />
 		<typeAlias alias="OrdersVO" type="three.aws.wo.user.vo.OrdersVO" />
-		<typeAlias alias="ReviewsVO" type="three.aws.wo.user.vo.ReviewsVO" />
+		<typeAlias alias="ReviewVO" type="three.aws.wo.user.vo.ReviewVO" />
 		<typeAlias alias="StoreVO" type="three.aws.wo.store.vo.StoreVO" />
 		<typeAlias alias="StoreKioskVO" type="three.aws.wo.store.vo.StoreKioskVO" />
 		<typeAlias alias="StoreMenuVO" type="three.aws.wo.store.vo.StoreMenuVO" />

@@ -1,15 +1,14 @@
 package three.aws.wo.user.controller;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.user.service.UserService;
@@ -33,30 +32,28 @@ public class UserRegController {
 	}
 
 	// 아이디 중복 체크
-	@ResponseBody
-	@RequestMapping("/idcheck.user")
-	public Map<String, Object> idCheck(@RequestParam(value = "id") String id) throws Exception {
-		System.out.println(id);
-		int count = 0;
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		count = userService.idCheck(id);
-		System.out.println("count:" + count);
-		map.put("cnt", count);
-		System.out.println(map.toString().replace("=", ":"));
-		return map;
-	}
+//	@ResponseBody
+//	@RequestMapping("/idcheck.user")
+//	public Map<String, Object> idCheck(@RequestBody String id) throws Exception {
+//		System.out.println(id);
+//		int count = 0;
+//		Map<String, Object> map = new HashMap<String, Object>();
+//
+//		count = userService.idCheck(id);
+//		System.out.println("count:" + count);
+//		map.put("cnt", count);
+//		System.out.println(map.toString().replace("=", ":"));
+//		return map;
+//	}
 
 	// 아이디 중복 체크
-//	@ResponseBody
-//	@RequestMapping(value = "/idcheck.user", method = RequestMethod.POST)
-//	public int idCheck(@RequestBody HashMap<String, String> param) throws Exception {
-//		System.out.println(123);
-//		System.out.println(param);
-//		int result = userService.idCheck(param.get("id"));
-//		System.out.println(result);
-//		return result;
-//	}
+	@ResponseBody
+	@RequestMapping(value = "/idcheck.user", method = RequestMethod.POST)
+	public int idCheck(@RequestBody HashMap<String, String> param) throws Exception {
+		int result = userService.idCheck(param.get("id"));
+		System.out.println(result);
+		return result;
+	}
 
 	@ResponseBody
 	@RequestMapping("/emailcheck.user")

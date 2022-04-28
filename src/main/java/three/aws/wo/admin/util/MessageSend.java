@@ -8,7 +8,7 @@ import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class MessageSend {
-	private String api_key = "NCSIGXZPTDLXMH7U";
+	private String api_key = "NCSWE7PH3DUSTKYL";
 	private String api_secret = "NZKJLXJYUTDZIAC9KLTQB2GYZWZUMZAG";
 	private String fromNum ="01027764122";
 	
@@ -21,7 +21,7 @@ public class MessageSend {
 		params.put("from", fromNum);
 		params.put("type", "SMS");
 		params.put("text", content);
-//		params.put("app_version", "test app 1.2"); // application name and version
+		params.put("app_version", "test app 1.2"); // application name and version
 
 		try {
 			JSONObject obj = (JSONObject) coolsms.send(params);
@@ -40,7 +40,7 @@ public class MessageSend {
 	    params.put("from", fromNum);
 	    params.put("type", "LMS");
 	    params.put("text", content);
-//	    params.put("app_version", "test app 1.2"); // application name and version
+	    params.put("app_version", "test app 1.2"); // application name and version
 
 	    try {
 	      JSONObject obj = (JSONObject) coolsms.send(params);

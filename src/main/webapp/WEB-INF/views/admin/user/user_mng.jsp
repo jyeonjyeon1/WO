@@ -33,6 +33,17 @@
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	rel="stylesheet" />
 
+<!-- excel 다운로드 script -->
+<script>
+ function excelDownloadProcess() {
+   let frm = $("#searchUser");
+   frm.attr("action", "/UserExcelDownload.admin");
+   frm.submit();
+   console.log("dd");
+ }
+</script>
+
+
 </head>
 
 <body>
@@ -181,7 +192,7 @@
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px;">
-							<form class="form-horizontal style-form" method="get">
+							<form class="form-horizontal style-form" method="get" id="searchUser">
 
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">구분</label>
@@ -257,9 +268,9 @@
 										</label>
 									</div>
 								</div>
-								<button type="button" onclick="" class="btn btn-theme"
-									style="font-size: 12px; width: 80px; float: left;">
-									엑셀다운</button>
+								<button type="button" onclick="excelDownloadProcess()"
+									class="btn btn-theme"
+									style="font-size: 12px; width: 80px; float: left;" >엑셀다운</button>
 								<button type="submit" class="btn btn-theme"
 									style="width: 70px; float: right;">검색</button>
 							</form>
@@ -313,8 +324,7 @@
 													<c:when test="${userList.u_type eq 'Kakao'}">카카오</c:when>
 													<c:when test="${userList.u_type eq 'Naver'}">네이버</c:when>
 													<c:otherwise>부잉</c:otherwise>
-												</c:choose>
-											</td>
+												</c:choose></td>
 											<td>${userList.u_name}</td>
 											<td>${userList.u_tel}</td>
 											<td>${userList.u_email}</td>

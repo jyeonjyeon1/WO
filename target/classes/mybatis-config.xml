@@ -7,6 +7,7 @@
 <configuration>
 	<typeAliases> <!-- 특정 클래스의 별칭(Alias)을 선언 -->
 		<typeAlias alias="UserVO" type="three.aws.wo.user.vo.UserVO" />
+		<typeAlias alias="UserSMSListVO" type="three.aws.wo.user.vo.UserSMSListVO" />
 		<typeAlias alias="OrdersVO" type="three.aws.wo.user.vo.OrdersVO" />
 		<typeAlias alias="ReviewVO" type="three.aws.wo.user.vo.ReviewVO" />
 		<typeAlias alias="StoreVO" type="three.aws.wo.store.vo.StoreVO" />
@@ -23,10 +24,14 @@
 		<typeAlias alias="OptionGroupVO" type="three.aws.wo.admin.vo.OptionGroupVO" />
 		<typeAlias alias="QnAVO" type="three.aws.wo.admin.vo.QnAVO" />
 		<typeAlias alias="TermsVO" type="three.aws.wo.admin.vo.TermsVO" />
+		<typeAlias alias="MessageVO" type="three.aws.wo.admin.vo.MessageVO" />
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
 		<mapper resource="mappings/user/user-mapping.xml" /> 
 		<mapper resource="mappings/admin/adminUser-mapping.xml" /> 
 		<mapper resource="mappings/admin/adminStore-mapping.xml" /> 
+		
+		<!-- 문자 넣음 -->
+		<mapper resource="mappings/admin/adminSMS-mapping.xml" /> 
 	</mappers>
 </configuration>

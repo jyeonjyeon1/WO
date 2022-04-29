@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AMessageDAO">
+	<resultMap type="MessageVO" id="messageVO">
+		<result column="SMS_SEQ" property="sms_seq" jdbcType="INTEGER"/>
+		<result column="SMS_TONUM" property="sms_toNum" jdbcType="VARCHAR" />
+		<result column="SMS_TYPE" property="sms_type" jdbcType="VARCHAR" />
+		<result column="ISADVERTISE" property="sms_ad" jdbcType="BOOLEAN"/>
+		<result column="SMS_TEXT" property="sms_text" jdbcType="VARCHAR"/>
+		<result column="SMS_SIZE" property="sms_size" jdbcType="VARCHAR" />
+		<result column="SMS_SENDTIME" property="sms_sendTime" jdbcType="TIMESTAMP" />
+		<result column="SMS_RESULT" property="sms_result" jdbcType="BOOLEAN" />
+	</resultMap>
+	
+	<select id="messageList" resultType="MessageVO" resultMap="messageVO">
+		SELECT * FROM SMS_MESSAGE ORDER BY SMS_SEQ DESC
+	</select>
+	<select id="searchMessageList" resultType="MessageVO" resultMap="messageVO">
+		SELECT * FROM SMS_MESSAGE WHERE SMS_TYPE = #{sms_type_option} 
+		ORDER BY SMS_SEQ DESC
+	</select>
+	
+	<insert id="sendSMS" parameterType="MessageVO">
+		INSERT INTO SMS_MESSAGE(
+			SMS_TONUM, ISADVERTISE, SMS_TEXT, SMS_SIZE, SMS_RESULT, SMS_TYPE
+		)
+		VALUES(
+			#{sms_toNum}, #{sms_ad}, #{sms_text},
+			#{sms_size}, #{sms_result},#{sms_type}
+		)
+	</insert>
+	<select id="sms_usableList" resultType="UserSMSListVO">
+		SELECT U_TEL FROM TEST_USER WHERE U_SMS_USABLE = TRUE;
+	</select>
+</mapper>

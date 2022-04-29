@@ -184,7 +184,7 @@
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px;">
-							<form name="searchForm" action="searchMessageHist.admin" class="form-horizontal style-form" method="post">
+							<form name="searchForm" action="/searchMessageList.admin" class="form-horizontal style-form" method="get">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">전송일시</label>
 									<div class="col-sm-10">
@@ -242,11 +242,11 @@
 										<label class="checkbox-inline"> 
 											<input type="radio" name="sms_type_option" value="LMS">
 											LMS
-										</label>
+										</label> 
 									</div>
 								</div>
 
-								<button type="button" onclick="search()" class="btn btn-theme"
+								<button type="submit" class="btn btn-theme"
 									style="width: 70px; float: right;">검색</button>
 							</form>
 						</div>

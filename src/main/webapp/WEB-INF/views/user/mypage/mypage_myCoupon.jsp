@@ -2,42 +2,50 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
- 
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Walking Order</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="resources/assets/images/logo/logo_only.svg" rel="icon"/>
+  <meta charset="UTF-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Walking Order</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
 
-    <!-- ========================= CSS here ========================= -->
-    <!-- Css Styles 추가 -->
 
-     <!-- ========================= JS here ========================= -->
-     <script src="resources/assets/js/jquery-3.6.0.js"></script> 
-     <script src="resources/assets/js/main.js"></script>
-     <script type="text/javascript">
-          jQuery(document).ready(function () {
-             $('#headers').load("header.html");
-             $('#footers').load("footer.html");  
-         });
-         //========= Hero Slider 
-     </script>
-    
+  <!-- ========================= CSS here ========================= -->
+  <!-- Css Styles 추가 -->
+
+  <!--Css icon from mings-->
+
+
+
+
+  <!-- ========================= JS here ========================= -->
+  <script src="resources/assets/js/jquery-3.6.0.js"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function () {
+      $('#headers').load("header.html");
+      $('#footers').load("footer.html");
+    });
+         //========= Hero Slider
+
+
+  </script>
+
 </head>
 
 <body>
-<!-- header import -->
-<%@ include file="/WEB-INF/views/user/inc/header.jsp" %>
 
-<!--mypage_main_jihyeon body 시작-->
-<section class="product spad">
+
+  <!-- header import -->
+  <!-- <%@ include file="/WEB-INF/views/user/inc/header.jsp" %> -->
+      <div id="headers"></div>
+
+  <!--mypage_main_jihyeon body 시작-->
+  <section class="product spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-5">
-                     <div class="mypage_sidebar">
+      <div class="row">
+        <div class="col-lg-3 col-md-5">
+			 <div class="mypage_sidebar">
                         <h4>My Page</h4>
                         <ul>
                             
@@ -58,169 +66,112 @@
                             
                         </ul>
                     </div>
+
+        </div>
+
+        <div class="col-lg-9 col-md-7">
+          <div class="row">
+            <div class="col-lg-12 col-md-">
+              <div class="mypage_myCoupon">
+				<!-- <a href="#"><i class="lni lni-ticket"> 쿠폰등록하기</i></a>  -->
+				
+                <h1>쿠폰함을 확인해보세요.</h1>
+                <h2>Check your coupon box! <i class="lni lni-happy"></i></h2>
+
+              </div>
             </div>
-            
-            <div class="col-lg-9 col-md-7">
-                <div class="mypage_mypoint_top" role="alert">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-7">
-                        <h5>My 포인트</h5>
+
+
+            <div class="mypage_myCoupon_sort">
+
+              <ul class="nav coupon_tab" id="myTab" role="tablist">
+
+                <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
+                  <button class="coupon_link" id="tab_use" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                    role="tab" aria-controls="home" aria-selected="true">사용가능쿠폰
+                    <h5>2장</h5>
+                  </button>
+
+                </li>
+
+
+                <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
+                  <button class="coupon_link" id="tab_used" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false">사용불가쿠폰
+                    <h5>1장</h5>
+                  </button>
+                </li>
+
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="tab_use">
+                  <div class="coupon_card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4 col-sm-12">
+                        <img src="resources/assets/images/categories/cat-1.jpg" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="coupon_card-body">
+                          <a href="#" class="coupon_card-title">[친구초대] 공짜리카노쿠폰</a>
+                          <p class="coupon_card-text1">1500원 할인</p>
+                          <p class="coupon_card-text2"><small class="text-muted">~2022.05.08 까지</small></p>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-lg-6 col-md-7">
-                        <h2>
-                            
-                            <span class="point_icon">P</span> 1,430</h2>
+                  </div>
+                  <div class="coupon_card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="resources/assets/images/categories/cat-2.jpg" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="coupon_card-body">
+                          <a href="#" class="coupon_card-title">[첫주문할인] 100원 쿠폰</a>
+                          <p class="coupon_card-text1">아메리카노 100원</p>
+                          <p class="coupon_card-text2"><small class="text-muted">~2022.05.08 까지</small></p>
+                        </div>
+                      </div>
                     </div>
+                  </div>
 
                 </div>
-                  </div>
-                  <div class="mypage_mypoint_middle1">
-                  
-                    <div class="row">
-                        <div class="col-lg-2 col-md-7">
-                            
-                                <h5>날짜선택 :</h5>
-                        
-                        </div>
-                        <div class="col-lg-2 col-md-7">
-                            <select class="dateSelect" id="specificSizeSelect" >
-                                <!--오늘날짜로 selected 하기-->
-                                <option selected>2021년</option>
-                                <option value="2019">2010년</option>
-                                <option value="2020">2020년</option>
-                                <option value="2021">2021년</option>
-                              </select>
-                        </div>
-                        <div class="col-lg-2 col-md-7">
-                            <select class="dateSelect" id="specificSizeSelect">
-                                <option selected>4월</option>
-                                <option value="1">1월</option>
-                                <option value="2">2월</option>
-                                <option value="3">3월</option>
-                                <option value="4">4월</option>
-                                <option value="5">5월</option>
-                                <option value="6">6월</option>
-                                <option value="7">7월</option>
-                                <option value="8">8월</option>
-                                <option value="9">9월</option>
-                                <option value="10">10월</option>
-                                <option value="11">11월</option>
-                                <option value="12">12월</option>
-                              </select>
-                        </div>
-                        <div class="col-lg-2 col-md-7">
-                            <select class="dateSelect" id="specificSizeSelect">
-                                <option selected>7일</option>
-                                <option value="1">1일</option>
-                                <option value="2">2일</option>
-                                <option value="3">3일</option>
-                              </select>
-                        </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="tab_used">
 
+                  <div class="coupon_usedcard mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="resources/assets/images/categories/cat-3.jpg" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="coupon_card-body">
+                          <h5 class="coupon_card-title">[첫주문할인] 100원 쿠폰</h5>
+                          <p class="coupon_card-text">아메리카노 100원</p>
+                          <p class="coupon_card-text"><small class="text-muted">~2020.05.08 까지</small></p>
+                        </div>
+                      </div>
                     </div>
-
-                    
-        
-
-
-
                   </div>
-                  <div class="mypage_mypoint_middle2">
 
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            
-                            <td colspan="3"><h4>메머드커피(종로3가점)</h4>
-                                <p>2021.03.23 (2022.03.23 만료)</p>
-                            </td>   
-                            <td>
-                                <h3>+200</h3>
-                                <p class="plus">적립</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            
-                            <td colspan="3"><h4>커피온리(종각점)</h4>
-                                <p>2021.03.24 (2022.03.24 만료)</p>
-                            </td>   
-                            <td>
-                                <h3>+230</h3>
-                                <p class="plus">적립</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            
-                            <td colspan="3"><h4>컴포즈커피(강남점)</h4>
-                                <p>2021.03.26 (2022.03.26 만료)</p>
-                            </td>   
-                            <td>
-                                <h3>+120</h3>
-                                <p class="plus">적립</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            
-                            <td colspan="3"><h4>메머드커피(종로3가점)</h4>
-                                <p>2021.04.01 (2022.04.01 만료)</p>
-                            </td>   
-                            <td>
-                                <h2>-310</h2>
-                                <p class="minus">사용</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            
-                            <td colspan="3"><h4>더리터카페(위례점)</h4>
-                                <p>2021.03.29 (2022.03.29 만료)</p>
-                            </td>   
-                            <td>
-                                <h3>+310</h3>
-                                <p class="plus">적립</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            
-                            <td colspan="3"><h4>메머드커피(위례점)</h4>
-                                <p>2021.03.29 (2022.03.29 만료)</p>
-                            </td>   
-                            <td>
-                                <h3>+310</h3>
-                                <p class="plus">적립</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            
-                            <td colspan="3"><h4>메머드커피(종로3가점)</h4>
-                                <p>2021.03.29 (2022.03.29 만료)</p>
-                            </td>   
-                            <td>
-                                <h3>+310</h3>
-                                <p class="plus">적립</p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                </div>
 
+              </div>
 
-                  </div>
             </div>
+
+
+          </div>
         </div>
+
+      </div>
     </div>
-</section>
+  </section>
 
 
-<!--mypage_main body 끝-->
-<!-- footer import -->
-<%@ include file="/WEB-INF/views/user/inc/footer.jsp" %>
+  <!--mypage_main body 끝-->
+  <!-- footer import -->
+  <!-- <%@ include file="/WEB-INF/views/user/inc/footer.jsp" %> -->
+      <div id="footers"></div>
 
 </body>
+
 </html>

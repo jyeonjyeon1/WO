@@ -260,21 +260,21 @@
 							<table id="datatablesSimple">
 								<thead>
 									<tr>
-										<th data-sortable="" style="width: 7%;"><a href="#"
+										<th style="width: 7%;"><a href="#"
 											class="dataTable-sorter">번호</a></th>
-										<th data-sortable="" style="width: 15%;"><a href="#"
+										<th style="width: 15%;"><a href="#"
 											class="dataTable-sorter">수신번호</a></th>
-										<th data-sortable="" style="width: 9%;"><a href="#"
+										<th style="width: 9%;"><a href="#"
 											class="dataTable-sorter">유형</a></th>
-										<th data-sortable="" style="width: 9%;"><a href="#"
+										<th style="width: 9%;"><a href="#"
 											class="dataTable-sorter">구분</a></th>
-										<th data-sortable="" style="width: 25%;"><a href="#"
+										<th style="width: 25%;"><a href="#"
 											class="dataTable-sorter">내용</a></th>
-										<th data-sortable="" style="width: 9%;"><a href="#"
+										<th style="width: 9%;"><a href="#"
 											class="dataTable-sorter">길이</a></th>
-										<th data-sortable="" style="width: 15%;"><a href="#"
+										<th style="width: 15%;"><a href="#"
 											class="dataTable-sorter">전송일시</a></th>
-										<th data-sortable="" style="width: 9%;"><a href="#"
+										<th style="width: 9%;"><a href="#"
 											class="dataTable-sorter">응답결과</a></th>
 									</tr>
 								</thead>
@@ -354,14 +354,14 @@
 										<td>정상</td>
 									</tr>
 									<tr>
-										<td>2</td>
-										<td>01091234567</td>
-										<td>SMS</td>
-										<td>광고</td>
-										<td>(광고)워킹오더 오예~~</td>
-										<td>71 byte</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>정상</td>
+										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;&nbsp;&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									</tr>
 								</tbody>
 

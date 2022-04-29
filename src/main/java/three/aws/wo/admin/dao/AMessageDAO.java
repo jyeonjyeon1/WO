@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import three.aws.wo.admin.vo.MessageVO;
+import three.aws.wo.user.vo.UserSMSListVO;
 
 @Repository
 public class AMessageDAO {
@@ -20,5 +21,9 @@ public class AMessageDAO {
 
 	public void sendSMS(MessageVO vo) {
 		sqlSession.insert("AMessageDAO.sendSMS", vo);
+	}
+
+	public List<UserSMSListVO> sms_usableList() {
+		return sqlSession.selectList("AMessageDAO.sms_usableList");
 	}
 }

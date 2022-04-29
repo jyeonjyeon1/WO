@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import three.aws.wo.admin.dao.AMessageDAO;
 import three.aws.wo.admin.service.AMessageService;
 import three.aws.wo.admin.vo.MessageVO;
+import three.aws.wo.user.vo.UserSMSListVO;
 @Service
 public class AMessageServiceImpl implements AMessageService {
 	@Autowired
@@ -21,6 +22,11 @@ public class AMessageServiceImpl implements AMessageService {
 	@Override
 	public void sendSMS(MessageVO vo) {
 		aMessageDAO.sendSMS(vo);
+	}
+
+	@Override
+	public List<UserSMSListVO> sms_usableList() {
+		return aMessageDAO.sms_usableList();
 	}
 
 }

@@ -38,21 +38,27 @@ input::-webkit-inner-spin-button {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 }
-</style>
-<script>
-jQuery(document).ready(
-		function() {
-			$("#sms_text").on("propertychange change keyup paste input",
-					function(){
-				var sms_text = $("#sms_text").val().length;
-				
-			});
-			
-		});
 
-
+.sms, .lms {
+	display: none;
 }
-</script>
+
+.sms.active {
+	display: inline-block;
+}
+.lms.active{
+display: inline-block;
+color:red;
+}
+
+.sms_size{
+border:none;
+text-align:right;
+width:50px;
+margin-right:5px;
+}
+</style>
+
 </head>
 
 <body>
@@ -203,46 +209,49 @@ jQuery(document).ready(
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
-							<form action="sendSMS.admin" class="form-horizontal style-form"
-								method="post">
+							<form class="form-horizontal style-form" action="sendSMS.admin"
+								method="post" name="sendIndividualMessageForm">
 								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">발신번호</label> <label
+									<label class="col-sm-2 control-label">발신번호</label> <label
 										class="col-sm-5 col-sm-5 control-label">010-2776-4122</label>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">신규여부</label>
+									<label class="col-sm-2 control-label">문자종류</label>
 									<div class="col-sm-10">
 										<label class="radio-inline"> <input type="radio"
-											name="sms_ad" id="inlineRadio1" value="false" checked>
-											일반
+											name="sms_ad" id="sms_ad1" value="false" checked> 일반
 										</label> <label class="radio-inline"> <input type="radio"
-											name="sms_ad" id="inlineRadio2" value="true"> 광고 (광고용
-											메세지 발송시 어쩌구 정보통신망법)
+											name="sms_ad" id="sms_ad2" value="true"> 광고 (광고용 메세지
+											발송시 어쩌구 정보통신망법)
 										</label>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">수신번호</label>
+									<label class="col-sm-2 control-label">수신번호</label>
 									<div class="col-sm-6">
-										<input class="form-control" name="sms_toNum" type="number"
+										<input class="form-control" name="sms_toNum" id="sms_toNum" type="text"
 											placeholder="01012344567">
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">문의 내용</label>
+									<label class="col-sm-2 control-label"> 내용 <span
+										class="sms active">(SMS)</span> <span class="lms">(LMS)</span>
+									</label>
 									<div class="col-sm-10">
 										<textarea class="form-control" id="sms_text" name="sms_text"
-											rows="10" style="width: 98%;" placeholder="내용을 입력하세요"></textarea>
+											rows="5" style="width: 98%;font-size:14px;" placeholder="내용을 입력하세요"></textarea>
 									</div>
+									<label class="col-12" style="float:right;margin-right:25px;">
+									<input type="text" class="sms_size" id="sms_size" name="sms_size" value="0"> 
+									Bytes</label>
 								</div>
-								<input type="hidden" id="sms_size" name="sms_size" value="71">
+								<input type="hidden" id="sms_type" name="sms_type">
 								<button type="reset" class="btn grey__button"
 									style="width: 70px; float: right; margin-left: 10px;">초기화</button>
-								<button type="submit" class="btn btn-theme"
+								<button type="button" onclick="sendIndividualMessage()" class="btn btn-theme"
 									style="width: 70px; float: right; margin-left: 10px; height: 30px; font-size: 12px;">
-									전송
-								</button>
+									전송</button>
 							</form>
 						</div>
 
@@ -278,7 +287,72 @@ jQuery(document).ready(
 	<script src="resources/assets/js/admin/common-scripts.js"></script>
 	<!--script for this page-->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+var ch1,ch2;
+ch1=false;ch2=false;
+var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+function sendIndividualMessage(){
+	if(ch1&&ch2){
+		document.sendIndividualMessageForm.submit();
+	}else if(!ch1){
+		alert("번호이상함");
+	}else if(!ch2){
+		alert("내용문제");
+	}
+}
 
+
+jQuery(document).ready(
+		//LMS SMS 변환
+	function() {
+		$("textarea[name=sms_text]").on("propertychange change keyup paste input",
+				function(){
+			var text_length = $(this).val().getBytes();
+			$("#sms_size").val = text_length;
+			$("input[name='sms_size']").val(text_length);
+			if(text_length > 0){ch2=true;}else if(text_length == 0){ch2=false;}
+			if(text_length > 79){
+				$(".sms").removeClass("active");
+				$(".lms").addClass("active");
+				$("input[name='sms_type']").val("LMS");
+			}else{
+				$(".lms").removeClass("active");
+				$(".sms").addClass("active");
+				$("input[name='sms_type']").val("SMS");
+			}
+		});//end textarea 
+		
+		$("#sms_toNum").on(
+				"propertychange change keyup paste input",
+				function() {
+			var tel = $("#sms_toNum").val();
+			if (tel.indexOf('-') != -1) {
+				ch1 = false;
+			} else if (regPhone.test(tel) == true) {
+				ch1 = true;
+			} else {
+				ch1 = false;
+			}
+		});//end sms_toNumCheck
+});
+
+//바이트로
+String.prototype.getBytes = function() {
+    const content = this;
+    let str_char;
+    let int_char_count = 0;
+    let int_content_length = content.length;
+
+    for (k = 0; k < int_content_length; k++) {
+        str_char = content.charAt(k);
+        if (escape(str_char).length > 4)
+            int_char_count += 2;
+        else
+            int_char_count++;
+    }
+    return int_char_count;
+}
+</script>
 </body>
 
 </html>

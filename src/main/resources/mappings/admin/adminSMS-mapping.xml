@@ -20,11 +20,14 @@
 	
 	<insert id="sendSMS" parameterType="MessageVO">
 		INSERT INTO SMS_MESSAGE(
-			SMS_TONUM, ISADVERTISE, SMS_TEXT, SMS_SIZE
+			SMS_TONUM, ISADVERTISE, SMS_TEXT, SMS_SIZE, SMS_RESULT, SMS_TYPE
 		)
 		VALUES(
 			#{sms_toNum}, #{sms_ad}, #{sms_text},
-			#{sms_size}
+			#{sms_size}, #{sms_result},#{sms_type}
 		)
 	</insert>
+	<select id="sms_usableList" resultType="UserSMSListVO">
+		SELECT U_TEL FROM TEST_USER WHERE U_SMS_USABLE = TRUE;
+	</select>
 </mapper>

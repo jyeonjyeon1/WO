@@ -81,7 +81,7 @@ public class AdminController {
 		return "/message/ka_tmplt";
 	}
 	
-	@GetMapping("/mess_hist.admin")
+	@GetMapping("/mess_hist_.admin")
 	public String tomess_hist() {
 		System.out.println("mess_hist");
 		return "/message/mess_hist";

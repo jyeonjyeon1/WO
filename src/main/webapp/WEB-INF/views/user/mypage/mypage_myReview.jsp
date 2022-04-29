@@ -16,13 +16,6 @@
 
      <!-- ========================= JS here ========================= -->
      <script src="resources/assets/js/jquery-3.6.0.js"></script>
-     <script type="text/javascript">
-          jQuery(document).ready(function () {
-             $('#headers').load("header.html");
-             $('#footers').load("footer.html");  
-         });
-         //========= Hero Slider 
-     </script>
 
      <!--스크립트 by jyeon-->
      <!--파일업로드 script-->

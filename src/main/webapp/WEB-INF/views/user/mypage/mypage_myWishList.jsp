@@ -18,13 +18,6 @@
 
      <!-- ========================= JS here ========================= -->
      <script src="resources/assets/js/jquery-3.6.0.js"></script> 
-     <script type="text/javascript">
-          jQuery(document).ready(function () {
-             $('#headers').load("header.html");
-             $('#footers').load("footer.html");  
-         });
-         //========= Hero Slider 
-     </script>
     
 </head>
 
@@ -65,6 +58,22 @@
                 <h3>My Wish List <i class="lni lni-heart-filled"></i></h3>
             </div>
             <div class="row">
+                <div class="col-lg-6 col-md-7">
+                    가게list from 재우스
+                    
+                </div>
+                <div class="col-lg-6 col-md-7">
+                    가게list from 재우스
+                    
+                </div>
+                <div class="col-lg-6 col-md-7">
+                    가게list from 재우스
+                    
+                </div>
+                <div class="col-lg-6 col-md-7">
+                    가게list from 재우스
+                    
+                </div>
                 <div class="col-lg-6 col-md-7">
                     가게list from 재우스
                     

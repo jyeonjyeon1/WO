@@ -82,7 +82,7 @@
                         </button>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: center;">
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_mypoint.html'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myPoint.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myPoint.user">My포인트</a></h5>
                                 <p>100point</p>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: left;">
 
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_myreview.html'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myReview.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myReview.user">My리뷰</a></h5>
                                 <p>11개</p>
@@ -101,7 +101,7 @@
 
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: right;">
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_orderlist.html'"  style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='OrderList.user'"  style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myOrderList.user">주문내역</a></h5>
                                 <p>31개</p>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: center;">
 
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_myWishList.html'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myWishList.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myWishList.user">위시리스트</a></h5>
                                 <p>1개</p>
@@ -120,7 +120,7 @@
 
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: left;">
-                    <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_myBasket'" style="width: 100%;">
+                    <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='cart.user'" style="width: 100%;">
                         <div class="mypage_menubar_text" >
                             <h5><a href="cart.user">장바구니</a></h5>
                             <p>2개</p>

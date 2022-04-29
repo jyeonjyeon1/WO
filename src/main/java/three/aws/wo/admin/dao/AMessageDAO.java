@@ -26,4 +26,8 @@ public class AMessageDAO {
 	public List<UserSMSListVO> sms_usableList() {
 		return sqlSession.selectList("AMessageDAO.sms_usableList");
 	}
+
+	public List<MessageVO> searchMessageList() {
+		return sqlSession.selectList("AMessageDAO.searchMessageList");
+	}
 }

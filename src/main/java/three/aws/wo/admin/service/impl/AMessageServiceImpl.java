@@ -29,4 +29,9 @@ public class AMessageServiceImpl implements AMessageService {
 		return aMessageDAO.sms_usableList();
 	}
 
+	@Override
+	public List<MessageVO> searchMessageList() {
+		return aMessageDAO.searchMessageList();
+	}
+
 }

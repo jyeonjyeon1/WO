@@ -17,6 +17,10 @@
 	<select id="messageList" resultType="MessageVO" resultMap="messageVO">
 		SELECT * FROM SMS_MESSAGE ORDER BY SMS_SEQ DESC
 	</select>
+	<select id="searchMessageList" resultType="MessageVO" resultMap="messageVO">
+		SELECT * FROM SMS_MESSAGE WHERE SMS_TYPE = #{sms_type_option} 
+		ORDER BY SMS_SEQ DESC
+	</select>
 	
 	<insert id="sendSMS" parameterType="MessageVO">
 		INSERT INTO SMS_MESSAGE(

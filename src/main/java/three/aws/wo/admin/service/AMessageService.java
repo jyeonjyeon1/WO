@@ -9,4 +9,5 @@ public interface AMessageService {
 	List<MessageVO> messageList();
 	void sendSMS(MessageVO vo);
 	List<UserSMSListVO> sms_usableList();
+	List<MessageVO> searchMessageList();
 }

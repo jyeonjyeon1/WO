@@ -229,7 +229,7 @@ input::-webkit-inner-spin-button {
 									<label class="col-sm-2 control-label">수신</label>
 									<div class="col-sm-10">
 										<label class="radio-inline"> <input type="radio"
-											name="sms_who" id="sms_who1" value="all"> 전체
+											name="sms_who" id="sms_who1" value="all" disabled> 전체
 										</label> <label class="radio-inline"> <input type="radio"
 											name="sms_who" id="sms_who2" value="sms_usable" checked>
 											마케팅수신동의

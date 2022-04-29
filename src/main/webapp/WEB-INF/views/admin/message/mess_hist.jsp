@@ -184,7 +184,7 @@
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px;">
-							<form class="form-horizontal style-form" method="get">
+							<form name="searchForm" action="searchMessageHist.admin" class="form-horizontal style-form" method="post">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">전송일시</label>
 									<div class="col-sm-10">
@@ -199,16 +199,16 @@
 									<label class="col-sm-2 col-sm-2 control-label">검색어</label>
 									<div class="col-sm-2 dropthebeat">
 										<div class="dataTable-dropdown">
-											<select class="dataTable-selector">
-												<option value="id">전체</option>
-												<option value="name">수신번호</option>
-												<option value="nick">내용</option>
+											<select name="sms_search_option" class="dataTable-selector">
+												<option value="sms_search_all">전체</option>
+												<option value="sms_search_tel">수신번호</option>
+												<option value="sms_search_content">내용</option>
 											</select>
 										</div>
 									</div>
 
 									<div class="col-sm-6">
-										<input type="text" class="form-control round-form"
+										<input type="text" class="form-control round-form" name="sms_search_value"
 											placeholder="검색어" style="width: 35%;">
 									</div>
 								</div>
@@ -216,13 +216,14 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">응답결과</label>
 									<div class="col-sm-10">
-										<label class="checkbox-inline"> <input type="checkbox"
-											id="inlineCheckbox1" value="option1"> 전체
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2" checked>
+										<label class="checkbox-inline" style="padding-left:0;"> 
+											<input type="radio" name="sms_result_option" value="sms_result_all"> 
+											전체
+										</label> <label class="checkbox-inline"> 
+											<input type="radio" name="sms_result_option" value="sms_result_true" checked >
 											정상
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2">
+										</label> <label class="checkbox-inline"> 
+										<input type="radio" name="sms_result_option" value="sms_result_false">
 											오류
 										</label>
 									</div>
@@ -230,19 +231,22 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">문자유형</label>
 									<div class="col-sm-10">
-										<label class="checkbox-inline"> <input type="checkbox"
-											id="inlineCheckbox1" value="option1"> 전체
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2" checked>
+										<label class="checkbox-inline" style="padding-left:0;"> 
+											<input type="radio" name="sms_type_option" value="sms_type_all"> 
+											전체
+										</label> 
+										<label class="checkbox-inline"> 
+											<input type="radio" name="sms_type_option" value="SMS" checked>
 											SMS
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2">
+										</label> 
+										<label class="checkbox-inline"> 
+											<input type="radio" name="sms_type_option" value="LMS">
 											LMS
 										</label>
 									</div>
 								</div>
 
-								<button type="submit" class="btn btn-theme"
+								<button type="button" onclick="search()" class="btn btn-theme"
 									style="width: 70px; float: right;">검색</button>
 							</form>
 						</div>
@@ -297,72 +301,11 @@
 										<td>
 											<c:choose>
 												<c:when test="${messageList.sms_result eq 'true'}">정상</c:when>
-												<c:otherwise>실패</c:otherwise>
+												<c:otherwise>오류</c:otherwise>
 											</c:choose>
 										</td>
 									</tr>
 									</c:forEach>
-
-									<tr>
-										<td>1</td>
-										<td>01091234567</td>
-										<td>SMS</td>
-										<td>일반</td>
-										<td>고객님 요청하신 썸씽</td>
-										<td>71 byte</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>정상</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>01091234567</td>
-										<td>SMS</td>
-										<td>광고</td>
-										<td>(광고)워킹오더 오예~~</td>
-										<td>71 byte</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>정상</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>01091234567</td>
-										<td>SMS</td>
-										<td>일반</td>
-										<td>고객님 요청하신 썸씽</td>
-										<td>71 byte</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>정상</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>01091234567</td>
-										<td>SMS</td>
-										<td>광고</td>
-										<td>(광고)워킹오더 오예~~</td>
-										<td>71 byte</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>정상</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>01091234567</td>
-										<td>SMS</td>
-										<td>일반</td>
-										<td>고객님 요청하신 썸씽</td>
-										<td>71 byte</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>정상</td>
-									</tr>
-									<tr>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;&nbsp;&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									</tr>
 								</tbody>
 
 							</table>
@@ -405,6 +348,12 @@
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
 	<script
 		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+<script>
+function search(){
+	document.searchForm.submit();
+}
+
+</script>
 </body>
 
 </html>

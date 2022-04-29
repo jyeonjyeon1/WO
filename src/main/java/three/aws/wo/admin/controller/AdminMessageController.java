@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import three.aws.wo.admin.service.AMessageService;
@@ -25,6 +26,7 @@ public class AdminMessageController {
 		model.addAttribute("messageList" ,messageList);
 		return "/message/mess_hist";
 	}
+	
 	@RequestMapping("/sendSMS.admin")
 	public String sendSMS(MessageVO vo) {
 		MessageSend ms = new MessageSend();
@@ -71,5 +73,13 @@ public class AdminMessageController {
 			aMessageService.sendSMS(vo);
 		}
 		return "redirect:/mess_send_group.admin";
+	}
+	
+	@RequestMapping("/searchMessageHist.admin")
+	public String searchMessageList(MessageVO vo, Model model) {
+		List<MessageVO> searchMessageList =aMessageService.searchMessageList();
+		//System.out.println(searchMessageList);
+		model.addAttribute("messageList" , searchMessageList);
+		return "/message/mess_hist";
 	}
 }

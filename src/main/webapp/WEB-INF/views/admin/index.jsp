@@ -10,16 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
 
-
-<!-- ========================= CSS here ========================= -->
-  <!-- Bootstrap core CSS -->
-  <link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-  <link href="resources/assets/js/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <!-- Custom styles for this template -->
-  <link href="resources/assets/css/admin/style.css" rel="stylesheet">
-  <link href="resources/assets/css/admin/style-responsive.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -335,93 +325,7 @@
               <!-- /col-md-4 -->
             </div>
             <!-- /row -->
-            <div class="row">
-              <!-- WEATHER PANEL -->
-              <div class="col-md-4 mb">
-                <div class="weather pn">
-                  <i class="fa fa-cloud fa-4x"></i>
-                  <h2>11º C</h2>
-                  <h4>BUDAPEST</h4>
-                </div>
-              </div>
-              <!-- /col-md-4-->
-              <div class="col-md-4 mb">
-                <!-- WHITE PANEL - TOP USER -->
-                <div class="white-panel pn">
-                  <div class="white-header">
-                    <h5>TOP USER</h5>
-                  </div>
-                  <p><img src="resources/assets/images/admin/ui-zac.jpg" class="img-circle" width="50"></p>
-                  <p><b>Zac Snider</b></p>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <p class="small mt">MEMBER SINCE</p>
-                      <p>2012</p>
-                    </div>
-                    <div class="col-md-6">
-                      <p class="small mt">TOTAL SPEND</p>
-                      <p>$ 47,60</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- col-4 -->
-               <!-- TWITTER PANEL -->
-               <div class="col-md-4 mb">
-                <div class="twitter-panel pn">
-                  <i class="fa fa-twitter fa-4x"></i>
-                  <p>Dashio is here! Take a look and enjoy this new Bootstrap Dashboard theme.</p>
-                  <p class="user">@Alvrz_is</p>
-                </div>
-              </div>
-              <!-- /col-md-4 -->
-            </div>
-            <div class="row"><div class="col-md-4 col-sm-4 mb">
-              <div class="green-panel pn">
-                <div class="green-header">
-                  <h5>DISK SPACE</h5>
-                </div>
-                <canvas id="serverstatus03" height="120" width="120"></canvas>
-                <script>
-                  var doughnutData = [{
-                      value: 60,
-                      color: "#2b2b2b"
-                    },
-                    {
-                      value: 40,
-                      color: "#fffffd"
-                    }
-                  ];
-                  var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
-                </script>
-                <h3>60% USED</h3>
-              </div>
-            </div>
-            <!-- /col-md-4 -->
-             
-              
-              <div class="col-md-4 mb">
-                <!-- INSTAGRAM PANEL -->
-                <div class="instagram-panel pn">
-                  <i class="fa fa-instagram fa-4x"></i>
-                  <p>@THISISYOU<br/> 5 min. ago
-                  </p>
-                  <p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
-                </div>
-              </div>
-              <!-- /col-md-4 -->
-              <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                <div class="product-panel-2 pn">
-                  <div class="badge badge-hot">HOT</div>
-                  <img src="resources/assets/images/admin/product.jpg" width="200" alt="">
-                  <h5 class="mt">Flat Pack Heritage</h5>
-                  <h6>TOTAL SALES: 1388</h6>
-                  <button class="btn btn-small btn-theme04">FULL REPORT</button>
-                </div>
-              </div>
-              <!-- /col-md-4 -->
-            </div>
-            <!-- /row -->
+           
             
           </div>
           <!-- /col-lg-9 END SECTION MIDDLE -->
@@ -593,20 +497,6 @@
 	<!-- 푸더 import -->
 		<%@ include file="inc/admin_footer.jsp" %>
   </section>
-  <!-- js placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
-  <script src="resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
-  <script src="resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>
-  <script class="include" type="text/javascript" src="resources/assets/js/admin/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="resources/assets/js/admin/jquery.scrollTo.min.js"></script>
-  <script src="resources/assets/js/admin/jquery.nicescroll.js" type="text/javascript"></script>
-  <!--common script for all pages-->
-  <script src="resources/assets/js/admin/common-scripts.js"></script>
-  <!--script for this page-->
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
-  
   
 </body>
 </html>

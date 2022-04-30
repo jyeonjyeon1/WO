@@ -17,17 +17,16 @@
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
 <link href="resources/assets/images/admin/apple-touch-icon.png"
 	rel="apple-touch-icon">
+<style>
+.modal_password{
+	color: grey;
+	height: 40px;
+	padding: 10px;
+	border: none;
+	vertical-align: middle;
+}
+</style>
 
-<!-- Bootstrap core CSS -->
-<link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<!--external css-->
-<link href="resources/assets/js/admin/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-<!-- Custom styles for this template -->
-<link href="resources/assets/css/admin/style.css" rel="stylesheet">
-<link href="resources/assets/css/admin/style-responsive.css"
-	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	rel="stylesheet" />
@@ -307,21 +306,21 @@
 								<tbody>
 									<c:forEach var="storeList" items="${storeList}" varStatus="vs">
 										<tr>
-											<td>${storeList.str_seq}</td>
-											<td>${storeList.str_name}</td>
-											<td>${storeList.str_code}</td>
-											<td><i class="password_see fa fa-eye"></i></td>
-											<td>${storeList.str_address}${storeList.str_addr_road}
-												${storeList.str_addr_detail}</td>
-											<td>${storeList.str_tel}</td>
+											<td>${storeList.si_seq}</td>
+											<td>${storeList.si_name}</td>
+											<td>${storeList.si_code}</td>
+											<td><a data-toggle="modal" href="#passModal${vs.index}"><i class="password_see fa fa-eye"></i></a></td>
+											<td>${storeList.si_addr_road}
+												${storeList.si_addr_detail}</td>
+											<td>${storeList.si_tel}</td>
 											<td><c:choose>
-													<c:when test="${storeList.str_status eq 'true'}">영업중</c:when>
+													<c:when test="${storeList.si_status eq 'true'}">영업중</c:when>
 													<c:otherwise>영업준비중</c:otherwise>
 												</c:choose></td>
-											<td>${storeList.str_reg_date}</td>
+											<td>${storeList.si_reg_date}</td>
 											<td><a data-toggle="modal" href="#myModal${vs.index}"
 												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-												<button onclick="location.href='store_mng_update.admin'"
+												<button onclick="location.href='store_mng_update.admin?si_code=${storeList.si_code}'"
 													class="btn btn-primary btn-xs">
 													<i class="fa fa-pencil"></i>
 												</button>
@@ -330,543 +329,158 @@
 													<i class="fa fa-trash-o "></i>
 												</button></td>
 										</tr>
-										<div aria-hidden="true" aria-labelledby="myModalLabel"
-											role="dialog" tabindex="-1" id="myModal${vs.index}"
-											class="modal fade" style="margin: 20px auto 0;">
-											<div class="modal-dialog store">
-												<div class="modal-content">
-													<div class="modal-header_store">
-														<button type="button" class="close" data-dismiss="modal"
-															aria-hidden="true">&times;</button>
-														<h4 class="modal-title">${storeList.str_name}매장정보</h4>
-													</div>
-													<!-- 	정보시작 -->
-													<div class="modal_wrapbody">
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">매장명</p>
-															<input type="text" id="" value="${storeList.str_name}"
-																class="form-control">
-														</div>
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">매장코드</p>
-															<input type="text" id="" value="${storeList.str_code}"
-																class="form-control">
-														</div>
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">주소</p>
-															<input type="text" id=""
-																value="${storeList.str_address} ${storeList.str_addr_detail}"
-																class="form-control">
-														</div>
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">전화번호</p>
-															<input type="text" id="" value="${storeList.str_tel}"
-																class="form-control">
-														</div>
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">이메일</p>
-															<input type="text" id="" value="${storeList.str_email}"
-																class="form-control">
-														</div>
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">서류</p>
-															<input class="grey__button" type="button" onclick=""
-																value="사업자등록증" style="margin-right: 5px;"> <input
-																class="grey__button" type="button" onclick=""
-																value="통장사본">
-														</div>
+			<div aria-hidden="true" aria-labelledby="myModalLabel"
+				role="dialog" tabindex="-1" id="myModal${vs.index}"
+				class="modal fade" style="margin: 20px auto 0;">
+				<div class="modal-dialog store">
+					<div class="modal-content">
+						<div class="modal-header_store">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title">${storeList.si_name}매장정보</h4>
+						</div>
+						<!-- 	정보시작 -->
+						<div class="modal_wrapbody">
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">매장명</p>
+								<input type="text" id="" value="${storeList.si_name}"
+									class="form-control">
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">매장코드</p>
+								<input type="text" id="" value="${storeList.si_code}"
+									class="form-control">
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">주소</p>
+								<input type="text" id=""
+									value="${storeList.si_address} ${storeList.si_addr_detail}"
+									class="form-control">
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">전화번호</p>
+								<input type="text" id="" value="${storeList.si_tel}"
+									class="form-control">
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">이메일</p>
+								<input type="text" id="" value="${storeList.sa_email}"
+									class="form-control">
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">서류</p>
+								<a href="${storeList.sa_business_registration_image}" style="display:inline-block;">
+									<input class="img-responsive grey__button" type="button"
+									value="사업자등록증" style="margin-right: 5px;"></a> 
+								<a href="${storeList.sa_bankbook_image}" style="display:inline-block;">
+									<input class="img-responsive grey__button" type="button" 
+									value="통장사본">
+								</a>
+							</div>
 
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">영업시간</p>
-															<input class="form-control round-form" type="time"
-																value="${storeList.str_open}"
-																style="width: 20%; display: inline-block; margin-right: 10px;">
-															~ <input class="form-control round-form" type="time"
-																value="${storeList.str_close}"
-																style="width: 20%; display: inline-block; margin-left: 10px;">
-														</div>
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">주차여부</p>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">영업시간</p>
+								<input class="form-control round-form" type="time"
+									value="${storeList.si_open}"
+									style="width: 20%; display: inline-block; margin-right: 10px;">
+								~ <input class="form-control round-form" type="time"
+									value="${storeList.si_close}"
+									style="width: 20%; display: inline-block; margin-left: 10px;">
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">주차여부</p>
 
-															<c:choose>
-																<c:when test="${storeList.str_parking eq 'true'}">
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}1" id="inlineRadio1"
-																		value="option1" checked> 가능
-																	</label>
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}1" id="inlineRadio2"
-																		value="option2"> 불가
-																	</label>
-																</c:when>
-																<c:otherwise>
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}2" id="inlineRadio1"
-																		value="option1"> 가능
-																	</label>
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}2" id="inlineRadio2"
-																		value="option2" checked> 불가
-																	</label>
-																</c:otherwise>
-															</c:choose>
-														</div>
-														<div class="modal-body" style="padding-bottom: 0;">
-															<p style="margin-bottom: 2px;">매장이용</p>
-															<c:choose>
-																<c:when test="${storeList.str_usestore eq 'true'}">
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}3" id="inlineRadio3"
-																		value="option1" checked> 가능
-																	</label>
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}3" id="inlineRadio4"
-																		value="option2"> 불가
-																	</label>
-																</c:when>
-																<c:otherwise>
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}4" id="inlineRadio3"
-																		value="option1"> 가능
-																	</label>
-																	<label class="radio-inline"> <input
-																		type="radio" name="${vs.index}4" id="inlineRadio4"
-																		value="option2" checked> 불가
-																	</label>
-																</c:otherwise>
-															</c:choose>
-														</div>
-														<!-- 마지막 정보는 아래 패딩 유지 -->
-														<div class="modal-body">
-															<p style="margin-bottom: 2px;">특이사항</p>
-															<input type="text" name="email"
-																value="${storeList.str_referinfo} }"
-																class="form-control">
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button data-dismiss="modal" class="btn btn-default"
-															type="button">확인</button>
-														<button onclick="location.href='store_mng_update.admin'"
-															class="btn btn-theme" type="button">수정</button>
-													</div>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-									<!-- 
-									<tr>
-										<td>1</td>
-										<td>메가커피종로3가점</td>
-										<td>8868500662</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button
-												onclick="location.href='store_mng_update.admin?code=8868500662'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button onclick="" class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>맛있는커피</td>
-										<td>1234234234</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>맛있는커피</td>
-										<td>654745767</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>맛있는커피</td>
-										<td>456545775</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>맛있는커피</td>
-										<td>4567665567</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>메가커피종로3가점</td>
-										<td>8868500662</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button
-												onclick="location.href='store_mng_update.admin?code=8868500662'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button onclick="" class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>맛있는커피</td>
-										<td>1234234234</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>맛있는커피</td>
-										<td>654745767</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>맛있는커피</td>
-										<td>456545775</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>맛있는커피</td>
-										<td>4567665567</td>
-										<td><i class="password_see fa fa-eye"></td>
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>영업준비중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-								 -->
+								<c:choose>
+									<c:when test="${storeList.si_parking_able eq 'true'}">
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}1" id="inlineRadio1"
+											value="option1" checked> 가능
+										</label>
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}1" id="inlineRadio2"
+											value="option2"> 불가
+										</label>
+									</c:when>
+									<c:otherwise>
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}2" id="inlineRadio1"
+											value="option1"> 가능
+										</label>
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}2" id="inlineRadio2"
+											value="option2" checked> 불가
+										</label>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">매장이용</p>
+								<c:choose>
+									<c:when test="${storeList.si_usestore eq 'true'}">
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}3" id="inlineRadio3"
+											value="option1" checked> 가능
+										</label>
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}3" id="inlineRadio4"
+											value="option2"> 불가
+										</label>
+									</c:when>
+									<c:otherwise>
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}4" id="inlineRadio3"
+											value="option1"> 가능
+										</label>
+										<label class="radio-inline"> <input
+											type="radio" name="${vs.index}4" id="inlineRadio4"
+											value="option2" checked> 불가
+										</label>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<!-- 마지막 정보는 아래 패딩 유지 -->
+							<div class="modal-body">
+								<p style="margin-bottom: 2px;">특이사항</p>
+								<input type="text" name="email"
+									value="${storeList.si_referinfo}"
+									class="form-control">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button data-dismiss="modal" class="btn btn-default"
+								type="button">확인</button>
+							<button onclick="location.href='store_mng_update.admin'"
+								class="btn btn-theme" type="button">수정</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div aria-hidden="true" aria-labelledby="myModalLabel"
+				role="dialog" tabindex="-1" id="passModal${vs.index}"
+				class="modal fade" style="margin: 200px auto 0;">
+				<div class="modal-dialog store">
+					<div class="modal-content">
+						<div class="modal_password">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" style="color:gray;">${storeList.sa_password}</h4>
+						</div>
+						<!-- 	정보시작 -->
+						
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+									
 								</tbody>
 							</table>
 
 						</div>
 					</div>
 				</div>
-				</div>
 				<!-- /row -->
 
-				<!-- Modal -->
-				<!-- 				<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" -->
-				<%-- 					tabindex="-1" id="myModal${storeList.str_code}'" class="modal fade" --%>
-				<!-- 					style="margin: 20px auto 0;"> -->
-				<!-- 					<div class="modal-dialog store"> -->
-				<!-- 						<div class="modal-content"> -->
-				<!-- 							<div class="modal-header_store"> -->
-				<!-- 								<button type="button" class="close" data-dismiss="modal" -->
-				<!-- 									aria-hidden="true">&times;</button> -->
-				<%-- 								<h4 class="modal-title">${storeList.str_name} 매장 정보</h4> --%>
-				<!-- 							</div> -->
-				<!-- 							정보시작 -->
-				<!-- 							<div class="modal_wrapbody"> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">매장명</p> -->
-				<%-- 									<input type="text" id=""  value="${storeList.str_name}" --%>
-				<!-- 										class="form-control"> -->
-				<!-- 								</div> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">매장코드</p> -->
-				<%-- 									<input type="text" id=""  value="${storeList.str_code}" --%>
-				<!-- 										class="form-control"> -->
-				<!-- 								</div> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">주소</p> -->
-				<%-- 									<input type="text" id=""  value="${storeList.str_address} ${storeList.str_addr_detail}" --%>
-				<!-- 										class="form-control"> -->
-				<!-- 								</div> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">전화번호</p> -->
-				<%-- 									<input type="text" id=""  value="${storeList.str_tel}" --%>
-				<!-- 										class="form-control"> -->
-				<!-- 								</div> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">이메일</p> -->
-				<!-- 									<input type="text" id=""  -->
-				<%-- 										value="${storeList.str_email}" class="form-control"> --%>
-				<!-- 								</div> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">서류</p> -->
-				<!-- 									<input class="grey__button" type="button" onclick="" -->
-				<!-- 										value="사업자등록증" style="margin-right: 5px;"> <input -->
-				<!-- 										class="grey__button" type="button" onclick="" value="통장사본"> -->
-				<!-- 								</div> -->
 
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">영업시간</p> -->
-				<!-- 									<input class="form-control round-form" type="time" -->
-				<%-- 										value="${storeList.str_open}" --%>
-				<!-- 										style="width: 20%; display: inline-block; margin-right: 10px;"> -->
-				<!-- 									~ <input class="form-control round-form" type="time" -->
-				<%-- 										value="${storeList.str_close}" --%>
-				<!-- 										style="width: 20%; display: inline-block; margin-left: 10px;"> -->
-				<!-- 								</div> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">주차여부</p> -->
-				<%-- 									<c:choose> --%>
-				<%-- 										<c:when test="${storeList.str_parking eq 'true'}"> --%>
-				<!-- 										<label class="radio-inline"> <input type="radio" -->
-				<!-- 										name="inRad" value="option1" checked> 가능 -->
-				<!-- 										</label> <label class="radio-inline"> <input type="radio" -->
-				<!-- 											name="inRad" value="option2" > -->
-				<!-- 											불가 -->
-				<!-- 										</label> -->
-				<%-- 										</c:when> --%>
-				<%-- 										<c:otherwise> --%>
-				<!-- 										<label class="radio-inline"> <input type="radio" -->
-				<!-- 										name="inRad" value="option1"> 가능 -->
-				<!-- 										</label> <label class="radio-inline"> <input type="radio" -->
-				<!-- 											name="inRad" value="option2"checked> -->
-				<!-- 											불가 -->
-				<!-- 										</label> -->
-				<%-- 										</c:otherwise> --%>
-				<%-- 									</c:choose> --%>
-				<!-- 								</div> -->
-				<!-- 								<div class="modal-body" style="padding-bottom: 0;"> -->
-				<!-- 									<p style="margin-bottom: 2px;">매장이용</p> -->
-				<%-- 									<c:choose> --%>
-				<%-- 										<c:when test="${storeList.str_usestore eq 'true'}"> --%>
-				<!-- 										<label class="radio-inline"> <input type="radio" -->
-				<!-- 										name="inRad2" value="option1" checked> 가능 -->
-				<!-- 										</label> <label class="radio-inline"> <input type="radio" -->
-				<!-- 											name="inRad2" value="option2" > -->
-				<!-- 											불가 -->
-				<!-- 										</label> -->
-				<%-- 										</c:when> --%>
-				<%-- 										<c:otherwise> --%>
-				<!-- 										<label class="radio-inline"> <input type="radio" -->
-				<!-- 										name="inRad2" value="option1"> 가능 -->
-				<!-- 										</label> <label class="radio-inline"> <input type="radio" -->
-				<!-- 											name="inRad2" value="option2"checked> -->
-				<!-- 											불가 -->
-				<!-- 										</label> -->
-				<%-- 										</c:otherwise> --%>
-				<%-- 									</c:choose> --%>
-				<!-- 								</div> -->
-				<!-- 								마지막 정보는 아래 패딩 유지 -->
-				<!-- 								<div class="modal-body"> -->
-				<!-- 									<p style="margin-bottom: 2px;">특이사항</p> -->
-				<%-- 									<input type="text" name="email" value="${storeList.str_referinfo} }" --%>
-				<!-- 										class="form-control"> -->
-				<!-- 								</div> -->
-				<!-- 							</div> -->
-				<!-- 							<div class="modal-footer"> -->
-				<!-- 								<button data-dismiss="modal" class="btn btn-default" -->
-				<!-- 									type="button">확인</button> -->
-				<!-- 								<button onclick="location.href='store_mng_update.admin'" -->
-				<!-- 									class="btn btn-theme" type="button">수정</button> -->
-				<!-- 							</div> -->
-				<!-- 						</div> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
-				<!-- modal -->
-
-				<!-- Modal -->
-				<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-					tabindex="-1" id="myModal" class="modal fade"
-					style="margin: 20px auto 0;">
-					<div class="modal-dialog store">
-						<div class="modal-content">
-							<div class="modal-header_store">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-hidden="true">&times;</button>
-								<h4 class="modal-title">매장 정보</h4>
-							</div>
-							<!-- 정보시작 -->
-							<div class="modal_wrapbody">
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">매장명</p>
-									<input type="text" id="" value="워킹커피 종로점" class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">매장코드</p>
-									<input type="text" id="" value="8618501327"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">주소</p>
-									<input type="text" id="" value="서울시 종로구 삼일대로28길 14"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">전화번호</p>
-									<input type="text" id="" value="0212345678"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">이메일</p>
-									<input type="text" id="" value="walking@walking.com"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">서류</p>
-									<input class="grey__button" type="button" onclick=""
-										value="사업자등록증" style="margin-right: 5px;"> <input
-										class="grey__button" type="button" onclick="" value="통장사본">
-								</div>
-
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">영업시간</p>
-									<input class="form-control round-form" type="time"
-										value="10:00"
-										style="width: 20%; display: inline-block; margin-right: 10px;">
-									~ <input class="form-control round-form" type="time"
-										value="23:00"
-										style="width: 20%; display: inline-block; margin-left: 10px;">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">주차여부</p>
-									<label class="radio-inline"> <input type="radio"
-										name="inRad" id="inlineRadio1" value="option1"> 가능
-									</label> <label class="radio-inline"> <input type="radio"
-										name="inRad" id="inlineRadio2" value="option2" checked>
-										불가
-									</label>
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">매장이용</p>
-									<label class="radio-inline"> <input type="radio"
-										name="inRad2" id="inlineRadio3" value="option1"> 가능
-									</label> <label class="radio-inline"> <input type="radio"
-										name="inRad2" id="inlineRadio4" value="option2" checked>
-										불가
-									</label>
-								</div>
-								<!-- 마지막 정보는 아래 패딩 유지 -->
-								<div class="modal-body">
-									<p style="margin-bottom: 2px;">특이사항</p>
-									<input type="text" name="email" value="노키즈존"
-										class="form-control">
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button data-dismiss="modal" class="btn btn-default"
-									type="button">확인</button>
-								<button onclick="location.href='store_mng_update.admin'"
-									class="btn btn-theme" type="button">수정</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- modal -->
 				<!-- /row -->
 			</section>
 			<!-- /wrapper -->
@@ -881,20 +495,11 @@
 		<!--footer end-->
 	</section>
 	<!-- js placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>
-	<script class="include" type="text/javascript"
-		src="resources/assets/js/admin/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="resources/assets/js/admin/jquery.scrollTo.min.js"></script>
-	<script src="resources/assets/js/admin/jquery.nicescroll.js"
-		type="text/javascript"></script>
+	
 	<!--common script for all pages-->
-	<script src="resources/assets/js/admin/common-scripts.js"></script>
+	
 	<!--script for this page-->
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>

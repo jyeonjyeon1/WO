@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<!-- ========================= CSS here ========================= -->
+<!-- Bootstrap core CSS -->
+<link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!--external css-->
+<link href="resources/assets/js/admin/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="resources/assets/css/admin/style.css" rel="stylesheet">
+<link href="resources/assets/css/admin/style-responsive.css"
+	rel="stylesheet">    
 
     <!--header start-->
     <header class="header black-bg">

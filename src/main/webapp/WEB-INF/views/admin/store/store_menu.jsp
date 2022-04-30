@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -13,15 +14,6 @@
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
-  <link href="resources/assets/images/admin/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Bootstrap core CSS -->
-  <link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-  <link href="resources/assets/js/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <!-- Custom styles for this template -->
-  <link href="resources/assets/css/admin/style.css" rel="stylesheet">
-  <link href="resources/assets/css/admin/style-responsive.css" rel="stylesheet">
   <!-- 테이블용 css -->
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
@@ -251,6 +243,27 @@
                     </thead>
 
                     <tbody>
+                    <c:forEach var="storeList" items="${storeList}" varStatus="vs">
+										<tr>
+											<td>${storeList.si_seq}</td>
+											<td>${storeList.si_name}</td>
+											<td><a href="store_menu_detail.admin"><strong>${storeList.si_code}</strong></a></td>
+											<td>${storeList.si_addr_road}
+												${storeList.si_addr_detail}</td>
+											<td>${storeList.si_tel}</td>
+											<td><c:choose>
+													<c:when test="${storeList.si_status eq 'true'}">영업중</c:when>
+													<c:otherwise>영업준비중</c:otherwise>
+												</c:choose></td>
+											<td><a data-toggle="modal" href="#myModal${vs.index}"
+												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+												<button onclick="location.href='store_mng_update.admin?si_code=${storeList.si_code}'"
+													class="btn btn-primary btn-xs">
+													<i class="fa fa-pencil"></i>
+												</button>
+											</td>
+										</tr>
+										</c:forEach>
                       <tr>
                         <td>1</td>
                         <td>메가커피종로3가점</td>
@@ -260,8 +273,8 @@
                         <td>영업중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -273,8 +286,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -286,8 +299,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.adminml#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -299,8 +312,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -312,8 +325,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -325,8 +338,8 @@
                         <td>영업중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -338,8 +351,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -351,8 +364,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -364,8 +377,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                       <tr>
@@ -377,8 +390,8 @@
                         <td>영업준비중</td>
                         
                         <td>
-                          <a data-toggle="modal" href="store_menu.html#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.html'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                         </td>
                       </tr>
                     </tbody>
@@ -459,7 +472,7 @@
               </div>
               <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">확인</button>
-                <button onclick="location.href='store_menu_detail.html'" class="btn btn-theme" type="button">수정</button>
+                <button onclick="location.href='store_menu_detail.admin'" class="btn btn-theme" type="button">수정</button>
               </div>
             </div>
           </div>
@@ -479,18 +492,9 @@
 		<%@ include file="../inc/admin_footer.jsp" %>
     <!--footer end-->
   </section>
-  <!-- js placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
-  <script src="resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
-  <script src="resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>
-  <script class="include" type="text/javascript" src="resources/assets/js/admin/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="resources/assets/js/admin/jquery.scrollTo.min.js"></script>
-  <script src="resources/assets/js/admin/jquery.nicescroll.js" type="text/javascript"></script>
-  <!--common script for all pages-->
-  <script src="resources/assets/js/admin/common-scripts.js"></script>
+ 
   <!--script for this page-->
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
   <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>

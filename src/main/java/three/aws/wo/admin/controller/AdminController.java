@@ -250,7 +250,7 @@ public class AdminController {
 		return "/store/join_inq";
 	}
 	
-	@GetMapping("/store_menu.admin")
+	@GetMapping("/store_menu_.admin")
 	public String tostore_menu() {
 		System.out.println("store_menu");
 		return "/store/store_menu";
@@ -292,7 +292,7 @@ public class AdminController {
 		return "/user/user_mng";
 	}
 	
-	@GetMapping("/point_mng.admin")
+	@GetMapping("/point_mng_.admin")
 	public String topoint_mng() {
 		System.out.println("point_mng");
 		return "/user/point_mng";

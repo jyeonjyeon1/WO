@@ -11,17 +11,7 @@
 	</div>
 </footer>
 <!--footer end-->
-<!-- ========================= CSS here ========================= -->
-<!-- Bootstrap core CSS -->
-<link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<!--external css-->
-<link href="resources/assets/js/admin/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-<!-- Custom styles for this template -->
-<link href="resources/assets/css/admin/style.css" rel="stylesheet">
-<link href="resources/assets/css/admin/style-responsive.css"
-	rel="stylesheet">
+
 
 
 <!-- js placed at the end of the document so the pages load faster -->

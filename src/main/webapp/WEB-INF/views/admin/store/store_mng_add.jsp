@@ -18,15 +18,12 @@
 	rel="apple-touch-icon">
 
 <!-- Bootstrap core CSS -->
-<link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
+
 <!--external css-->
-<link href="resources/assets/js/admin/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
+
 <!-- Custom styles for this template -->
-<link href="resources/assets/css/admin/style.css" rel="stylesheet">
-<link href="resources/assets/css/admin/style-responsive.css"
-	rel="stylesheet">
+
+
 <!-- 테이블용 css -->
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
@@ -197,31 +194,31 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">매장명</label>
 									<div class="col-sm-6">
-										<input class="form-control" id="str_name" name="str_name" type="text" placeholder="매장명">
+										<input class="form-control" id="si_name" name="si_name" type="text" placeholder="매장명">
 										<p class="regName_label">이름 이상</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">코드</label>
 									<div class="col-sm-4">
-										<input class="form-control" id="str_code" name="str_code" type="text" placeholder="사업자번호">
+										<input class="form-control" id="si_code" name="si_code" type="text" placeholder="사업자번호">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">비밀번호</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="password" placeholder=""
-											value="">
+											value="" name="sa_password">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">주소</label>
 									<div class="col-sm-2">
-										<input class="form-control" name="str_zipcode" id="post__code" type="text"
+										<input class="form-control" name="si_zipcode" id="post__code" type="text"
 											placeholder="우편번호">
 									</div>
 									<div class="col-sm-6">
-										<input class="form-control" name="str_address" id="road__Address" type="text"
+										<input class="form-control" name="si_address" id="road__Address" type="text"
 											placeholder="서울시 종로구 삼일대로28길 14">
 									</div>
 									<div class="col-sm-2" style="margin-top: 2px;">
@@ -231,18 +228,18 @@
 									<div class="col-sm-2">&nbsp;</div>
 									<div class="col-sm-2">&nbsp;</div>
 									<div class="col-sm-3">
-										<input class="form-control" name="str_addr_road" id="extra__Address" type="text"
+										<input class="form-control" name="si_addr_road" id="extra__Address" type="text"
 											placeholder="동">
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control" name="str_addr_detail" id="detail__Address" type="text"
+										<input class="form-control" name="si_addr_detail" id="detail__Address" type="text"
 											placeholder="상세주소">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">전화번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text" name="str_tel" id="str_tel"
+										<input class="form-control" type="text" name="si_tel" id="si_tel"
 											placeholder="0212345678">
 										<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 									</div>
@@ -250,7 +247,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">이메일</label>
 									<div class="col-sm-5">
-										<input class="form-control" type="email" name="str_email" id="str_email"
+										<input class="form-control" type="email" name="sa_email" id="sa_email"
 											placeholder="walking@walking.com">
 										<p class="email_form">이메일 형식을 맞춰주세요</p>
 									</div>
@@ -282,10 +279,10 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">영업시간</label>
 									<div class="col-sm-10">
-										<input class="form-control round-form" name="str_open" type="time"
+										<input class="form-control round-form" name="si_open" type="time"
 											value="09:00"
 											style="width: 20%; display: inline-block; margin-right: 10px;">
-										~ <input class="form-control round-form" name="str_close" type="time"
+										~ <input class="form-control round-form" name="si_close" type="time"
 											value="21:00"
 											style="width: 20%; display: inline-block; margin-left: 10px;">
 									</div>
@@ -297,9 +294,9 @@
 									<div class="col-sm-10" style="padding: 0;">
 										<div class="col-sm-7">
 											<label class="radio-inline"> <input type="radio"
-												name="str_parking" id="inlineRadio1" value="true"> 가능
+												name="si_parking_able" id="inlineRadio1" value="true"> 가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="str_parking" id="inlineRadio2" value="false" checked>
+												name="si_parking_able" id="inlineRadio2" value="false" checked>
 												불가
 											</label>
 										</div>
@@ -310,9 +307,9 @@
 									<div class="col-sm-10" style="padding: 0;">
 										<div class="col-sm-7">
 											<label class="radio-inline"> <input type="radio"
-												name="str_usestore" id="inlineRadio3" value="true"> 가능
+												name=""si_usestore" id="inlineRadio3" value="true"> 가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="str_usestore" id="inlineRadio4" value="false" checked>
+												name="si_usestore" id="inlineRadio4" value="false" checked>
 												불가
 											</label>
 										</div>
@@ -321,7 +318,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">특이사항</label>
 									<div class="col-sm-8">
-										<input class="form-control" id="str_referinfo" name="str_referinfo" type="text" placeholder="">
+										<input class="form-control" id="si_referinfo" name="si_referinfo" type="text" placeholder="">
 									</div>
 								</div>
 
@@ -448,20 +445,11 @@
 		<!--footer end-->
 	</section>
 	<!-- js placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>
-	<script class="include" type="text/javascript"
-		src="resources/assets/js/admin/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="resources/assets/js/admin/jquery.scrollTo.min.js"></script>
-	<script src="resources/assets/js/admin/jquery.nicescroll.js"
-		type="text/javascript"></script>
+	
 	<!--common script for all pages-->
-	<script src="resources/assets/js/admin/common-scripts.js"></script>
+	
 	<!--script for this page-->
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
 	<!-- 다음 지도 api -->
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -520,17 +508,17 @@
 	
 	jQuery(document).ready(
 			function() {
-				$("#str_referinfo").on("propertychange change keyup paste input",
+				$("#si_referinfo").on("propertychange change keyup paste input",
 						function(){
-					var referinfo = $("#str_referinfo").val();
+					var referinfo = $("#si_referinfo").val();
 					if(referinfo == ""){ch1 = false;}
 					else {ch1=true;}
 				});
 				
-				$("#str_name").on(
+				$("#si_name").on(
 						"propertychange change keyup paste input",
 						function() {
-							var name = $("#str_name").val();
+							var name = $("#si_name").val();
 
 							if (regName.test(name) == false) {
 								$(".regName_label").addClass('active');
@@ -541,9 +529,9 @@
 							}
 						});
 
-				$("#str_tel").on("propertychange change keyup paste input",
+				$("#si_tel").on("propertychange change keyup paste input",
 		                  function() {
-		                     var tel = $("#str_tel").val();
+		                     var tel = $("#si_tel").val();
 		                     if(tel.indexOf('-')!=-1){
 		                        $(".tel_form").addClass('active');
 		                        ch5 = false;
@@ -557,10 +545,10 @@
 		                  });
 
 
-				$("#str_email").on(
+				$("#sa_email").on(
 						"propertychange change keyup paste input",
 						function() {
-							var email = $("#str_email").val();
+							var email = $("#sa_email").val();
 
 							if (email.length > 7
 									&& regEmail.test(email) == false) {

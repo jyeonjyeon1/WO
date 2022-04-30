@@ -16,7 +16,10 @@ public class AStoreDAO {
 		return sqlSession.selectList("AStoreDAO.storeList");
 	}
 
-	public void insertStore(StoreVO vo) {
-		sqlSession.insert("AStoreDAO.insertStore", vo);
+	public void insertStoreInfo(StoreVO vo) {
+		sqlSession.insert("AStoreDAO.insertStoreInfo", vo);
+	}
+	public void insertStoreAccount(StoreVO vo) {
+		sqlSession.insert("AStoreDAO.insertStoreAccount", vo);
 	}
 }

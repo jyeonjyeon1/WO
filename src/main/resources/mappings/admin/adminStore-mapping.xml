@@ -4,39 +4,50 @@
 
 <mapper namespace="AStoreDAO">
 	<resultMap type="StoreVO" id="storeVO">
-		<id column="STR_CODE" property="str_code" jdbcType="VARCHAR"/>
-		<result column="STR_SEQ" property="str_seq" jdbcType="INTEGER" />
-		<result column="STR_NAME" property="str_name" jdbcType="VARCHAR" />
-		<result column="STR_REG_DATE" property="str_reg_date" jdbcType="TIMESTAMP"/>
-		<result column="STR_LOC" property="str_loc" jdbcType="VARCHAR"/>
-		<result column="STR_ZIPCODE" property="str_zipcode" jdbcType="VARCHAR" />
-		<result column="STR_ADDRESS" property="str_address" jdbcType="VARCHAR" />
-		<result column="STR_ADDR_ROAD" property="str_addr_road" jdbcType="VARCHAR" />
-		<result column="STR_ADDR_DETAIL" property="str_addr_detail" jdbcType="VARCHAR" />
-		<result column="STR_TEL" property="str_tel" jdbcType="VARCHAR" />
-		<result column="STR_PARKING" property="str_parking" jdbcType="BOOLEAN" />
-		<result column="STR_DUE_TIME" property="str_due_time" jdbcType="VARCHAR" />
-		<result column="STR_HOLIDAY_FIX" property="str_holiday_fix" jdbcType="VARCHAR" />
-		<result column="STR_HOLIDAY_IMSI" property="str_holiday_imsi" jdbcType="VARCHAR" />
-		<result column="STR_OPEN" property="str_open" jdbcType="VARCHAR" />
-		<result column="STR_CLOSE" property="str_close" jdbcType="VARCHAR" />
-		<result column="STR_REFERINFO" property="str_referinfo" jdbcType="VARCHAR" />
-		<result column="STR_MAP_IMAGE" property="str_map_image" jdbcType="VARCHAR" />
-		<result column="STR_DIRECTIONS" property="str_directions" jdbcType="VARCHAR" />
-		<result column="STR_IMAGE" property="str_image" jdbcType="VARCHAR" />
-		<result column="STR_STATUS" property="str_status" jdbcType="VARCHAR" />
-		<result column="STR_USESTORE" property="str_usestore" jdbcType="VARCHAR" />
+		<id column="SI_CODE" property="si_code" jdbcType="VARCHAR"/>
+		<result column="SI_SEQ" property="si_seq" jdbcType="INTEGER" />
+		<result column="SI_NAME" property="si_name" jdbcType="VARCHAR" />
+		<result column="SI_REG_DATE" property="si_reg_date" jdbcType="TIMESTAMP"/>
+		<result column="SI_LOC" property="si_loc" jdbcType="VARCHAR"/>
+		<result column="SI_ZIPCODE" property="si_zipcode" jdbcType="VARCHAR" />
+		<result column="SI_ADDRESS" property="si_address" jdbcType="VARCHAR" />
+		<result column="SI_ADDR_ROAD" property="si_addr_road" jdbcType="VARCHAR" />
+		<result column="SI_ADDR_DETAIL" property="si_addr_detail" jdbcType="VARCHAR" />
+		<result column="SI_TEL" property="si_tel" jdbcType="VARCHAR" />
+		<result column="SI_PARKING_ABLE" property="si_parking_able" jdbcType="BOOLEAN" />
+		<result column="SI_DUE_TIME" property="si_due_time" jdbcType="VARCHAR" />
+		<result column="SI_HOLIDAY_FIX" property="si_holiday_fix" jdbcType="VARCHAR" />
+		<result column="SI_HOLIDAY_IMSI" property="si_holiday_imsi" jdbcType="VARCHAR" />
+		<result column="SI_OPEN" property="si_open" jdbcType="VARCHAR" />
+		<result column="SI_CLOSE" property="si_close" jdbcType="VARCHAR" />
+		<result column="SI_REFERINFO" property="si_referinfo" jdbcType="VARCHAR" />
+		<result column="SI_MAP_IMAGE" property="si_map_image" jdbcType="VARCHAR" />
+		<result column="SI_DIRECTIONS" property="si_directions" jdbcType="VARCHAR" />
+		<result column="SI_IMAGE" property="si_image" jdbcType="VARCHAR" />
+		<result column="SI_STATUS" property="si_status" jdbcType="VARCHAR" />
+		<result column="SI_USESTORE" property="si_usestore" jdbcType="VARCHAR" />
+		<result column="SA_EMAIL" property="sa_email" jdbcType="VARCHAR" />
+		<result column="SA_PASSWORD" property="sa_password" jdbcType="VARCHAR" />
 <!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
 	</resultMap>
 	
 	<select id="storeList" resultType="StoreVO" resultMap="storeVO">
-		SELECT * FROM STORE_INFO ORDER BY STR_SEQ DESC
+		SELECT * FROM 
+		STORE_INFO a 
+		INNER JOIN
+		STORE_ACCOUNT b 
+		ON (a.SI_CODE = b.SI_CODE)
+		ORDER BY SI_SEQ DESC
 	</select>
 	
-	<insert id="insertStore" parameterType="StoreVO">
-		INSERT INTO STORE_INFO (STR_NAME, STR_CODE, STR_ZIPCODE, STR_ADDRESS, STR_ADDR_ROAD, STR_ADDR_DETAIL, STR_TEL, STR_EMAIL,
-		STR_OPEN, STR_CLOSE, STR_PARKING, STR_USESTORE, STR_REFERINFO)
-		VALUES(#{str_name}, #{str_code}, #{str_zipcode}, #{str_address}, #{str_addr_road}, #{str_addr_detail}, #{str_tel}, #{str_email}, 
-		#{str_open}, #{str_close}, #{str_parking}, #{str_usestore}, #{str_referinfo})
+	<insert id="insertStoreInfo" parameterType="StoreVO">
+		INSERT INTO STORE_INFO (SI_NAME, SI_CODE, SI_ZIPCODE, SI_ADDRESS, SI_ADDR_ROAD, SI_ADDR_DETAIL, SI_TEL,
+		SI_OPEN, SI_CLOSE, SI_PARKING_ABLE, SI_USESTORE, SI_REFERINFO)
+		VALUES(#{si_name}, #{si_code}, #{si_zipcode}, #{si_address}, #{si_address} #{si_addr_road}, #{si_addr_detail}, #{si_tel},
+		#{si_open}, #{si_close}, #{si_parking_able}, #{si_usestore}, #{si_referinfo})
+	</insert>
+	<insert id="insertStoreAccount" parameterType="StoreVO">
+		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL)
+		VALUES(#{si_code}, #{sa_password}, #{si_code}, #{sa_email})
 	</insert>
 </mapper>

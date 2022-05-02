@@ -51,8 +51,9 @@
                             <li><a class="mypage_side_hover" href="myWishList.user"><i class="lni lni-heart"> 위시리스트</i></a></li>
                             <li><a class="mypage_side_hover" href="cart.user"><i class="lni lni-cart"> 장바구니</i></a></li>
                             <div class="sidebar_line">
-                            <li><a class="mypage_side_hover" href="#"><i class="lni lni-user"> 회원정보변경/탈퇴</i></a></li>
+                            <li><a class="mypage_side_hover" href="updateUser.user"><i class="lni lni-user"> 회원정보변경</i></a></li>
                             </div>
+                            <li><a class="mypage_side_hover" href="deleteUser.user"><i class="lni lni-user"> 회원정보탈퇴</i></a></li>
                             <li><a class="mypage_side_hover" href="faq.user"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
                             <li><a class="mypage_side_hover" href="#"><i class="lni lni-baloon"></i>이벤트 모아보기</i></a></li>
                             <li><a class="mypage_side_hover" href="myOrderList.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>

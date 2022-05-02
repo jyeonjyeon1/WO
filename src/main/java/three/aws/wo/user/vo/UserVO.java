@@ -12,6 +12,7 @@ import lombok.ToString;
 public class UserVO {
 	private String u_id;
 	private String u_password;
+	private int u_grade;
 	private String u_name;
 	private String u_tel;
 	private String u_type;
@@ -24,4 +25,10 @@ public class UserVO {
 	private boolean u_email_usable;		//이메일 수신 동의
 	private boolean u_status;			//활성 상태
 	private Date u_regdate;
+	
+	 //비밀번호 확인
+    public boolean matchPassword(String u_password) {
+        return this.u_password.equals(u_password);
+    }
+
 }

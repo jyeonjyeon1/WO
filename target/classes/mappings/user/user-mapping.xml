@@ -24,12 +24,16 @@
 	
 	<update id="updateUser" parameterType="UserVO">
 		UPDATE test_user
-		SET u_password= #{u_password}, u_name = #{u_name}, u_email = #{u_email}
+		SET U_PASSWORD= #{u_password}, U_EMAIL = #{u_email}, U_SMS_USABLE = #{u_sms_usable}, U_EMAIL_USABLE = #{u_email_usable}, U_TEL = #{u_tel}
 		WHERE u_id = #{u_id}
 	</update>
 
 	<delete id="deleteUser" parameterType="UserVO">
 		DELETE FROM test_user WHERE u_id = #{u_id}`
 	</delete>
+	
+	<select id="selectById" resultType="UserVO">
+        <![CDATA[ SELECT * FROM test_user WHERE u_id = #{u_id} ]]>
+    </select>
 </mapper>
  

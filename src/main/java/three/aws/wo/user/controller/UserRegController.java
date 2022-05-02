@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,9 +73,9 @@ public class UserRegController {
 	@RequestMapping("/updateUser.user")
 	public String updateUser(UserVO vo) {
 		userService.updateUser(vo);
-		return "/index/index";
+		return "/mypage/mypage_info";
 	}
-
+	
 	@RequestMapping("/deleteUser.user")
 	public String deleteUser(UserVO vo) {
 		userService.deleteUser(vo);

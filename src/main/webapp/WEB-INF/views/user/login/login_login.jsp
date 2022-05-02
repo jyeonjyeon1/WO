@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -23,13 +25,16 @@
 <body>
     <!-- header import -->
     <%@ include file="/WEB-INF/views/user/inc/header.jsp" %>
+
     <div class="container" style="margin: 30PX auto 50px; max-width: 400px;">
         <h3 class="text-center mt-60 mb-60" style="color:#6f6f6f">로그인</h3>
-        <form>
-            <input type="text" class="form-control" placeholder="아이디" autofocus><br>
-            <input type="password" class="form-control" placeholder="비밀번호">
+        <form:form role="form" commandName="loginCommand" action="login.user"  method="post">
+        
+	            <input type="text" class="form-control" path="u_id" placeholder="ID">
+	            <input type="password" class="form-control"  path="u_password" placeholder="Password" style="margin-top: 15px;">
+	            
             <label class="checkbox" style="margin-top: 5px;">
-                <input type="checkbox" value="remember-me" style="font-size: 12px; margin-top: 2px; margin-left: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디/비밀번호 저장<br><br>
+                <input type="checkbox" path="rememberId" style="font-size: 12px; margin-top: 2px; margin-left: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디 저장<br><br>
             </label>
             <button type="submit" class="btn btn-outline-warning" style="width: 100%;"><i class="fa fa-lock"></i> 로그인 &nbsp;</button>
             <h4 class="text-center mt-40 mb-30" style="color:#6f6f6f">소셜 로그인</h4>
@@ -40,10 +45,10 @@
             </div>
             <div class="col-sm-12" style="max-width: 170px;margin:30px auto;">
                 <input type="button" class="login_bottom_btn" value="아이디/비밀번호" style="width: 50px;">
-                /<input type="button" class="login_bottom_btn" value="회원가입" style="width: 70px;">
+                <input type="button" class="login_bottom_btn" value="회원가입" style="width: 70px;">
             </div>
             
-        </form>
+        </form:form>
     </div>
     <!-- footer import -->
     <%@ include file="/WEB-INF/views/user/inc/footer.jsp" %>

@@ -1,10 +1,30 @@
 package three.aws.wo.user.controller;
 
+import java.lang.annotation.Annotation;
+
+import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import three.aws.wo.user.dao.UserDAO;
+import three.aws.wo.user.service.UserService;
+import three.aws.wo.user.util.AuthInfo;
+import three.aws.wo.user.util.LoginCommand;
+import three.aws.wo.user.vo.UserVO;
 
 @Controller
-public class UserController {
+public class UserController  implements Controller {
 
 //	==================== customer ============================
 
@@ -80,11 +100,55 @@ public class UserController {
 
 //	==================== login ============================
 
-	@GetMapping("/login.user")
-	public String tologinPage() {
-		System.out.println("로그인화면");
-		return "/login/login_login";
-	}
+	@RequestMapping(value="/login.user", method= {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView loginForm(LoginCommand loginCommand,
+                    @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
+        
+        if(rememberCookie!=null) {
+            loginCommand.setU_id(rememberCookie.getValue());
+            loginCommand.setRememberId(true);
+        }
+        
+        ModelAndView mv = new ModelAndView("/login/login_login");
+        return mv;
+    }
+	
+	@Resource(name="userService")
+    private UserService userSer;
+ 
+    @RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView loginSuccess(@Valid LoginCommand loginCommand, BindingResult bindingResult,
+                                    HttpSession session, HttpServletResponse response) throws Exception {
+ 
+        if(bindingResult.hasErrors()) {
+            ModelAndView mv = new ModelAndView("/login/login_login");
+            return mv;
+        }
+        
+        try {
+            
+            AuthInfo authInfo = userSer.loginAuth(loginCommand);
+            session.setAttribute("authInfo", authInfo);
+            
+            Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getU_id());
+            rememberCookie.setPath("/");
+            if(loginCommand.isRememberId()) {
+                rememberCookie.setMaxAge(60*60*24*7);
+            } else {
+                rememberCookie.setMaxAge(0);
+            }
+            response.addCookie(rememberCookie);
+            
+        } catch (IdPasswordNotMatchingException e) {
+            bindingResult.rejectValue("pw", "notMatch", "아이디와 비밀번호가 맞지않습니다.");
+            ModelAndView mv = new ModelAndView("/login/login_login");
+            return mv;
+        }
+        
+        ModelAndView mv = new ModelAndView("index/index");
+        return mv;
+    }
+
 
 	@GetMapping("/joined.user")
 	public String toregisterComplete() {
@@ -96,6 +160,15 @@ public class UserController {
 	public String toregisterPage() {
 		System.out.println("회원가입화면2");
 		return "/login/login_register2";
+	}
+	
+	@RequestMapping("/logout.user")
+	public String logout(HttpSession session) {
+		System.out.println("로그아웃 처리");
+		
+		session.invalidate();
+		
+		return "index/index";
 	}
 	
 //	==================== mypage ============================
@@ -142,6 +215,8 @@ public class UserController {
 		return "/mypage/mypage_myWishList";
 	}
 	
+	
+	
 //	==================== mypage ============================
 
 	@GetMapping("/cart.user")
@@ -172,5 +247,17 @@ public class UserController {
 	public String tostoreListPage() {
 		System.out.println("storeList");
 		return "/order/order_storeList";
+	}
+
+	@Override
+	public Class<? extends Annotation> annotationType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String value() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

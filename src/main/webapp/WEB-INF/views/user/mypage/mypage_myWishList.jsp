@@ -36,18 +36,18 @@
                             
                             <li><a class="mypage_side_hover" href="myCoupon.user"><i class="lni lni-ticket"> My쿠폰</i></a></li>
                             <li><a class="mypage_side_hover" href="myPoint.user"><i class="lni lni-database"> My포인트</i></a></li>
-                            <li><a class="mypage_side_hover" href="myReview.user"><i class="lni lni-pencil-alt"> My리뷰</i></a></li>
+                            <li><a class="mypage_side_hover" href="myReviewList.user"><i class="lni lni-pencil-alt"> My리뷰</i></a></li>
                             <div class="sidebar_line">
                             <li><a class="mypage_side_hover" href="myOrderList.user"><i class="lni lni-radio-button"> 주문내역</i></a></li>
                             </div>
-                            <li><a class="mypage_side_hover" href="myWishList.user"><i class="lni lni-heart"> 위시리스트</i></a></li>
+                            <li class="active"><a class="mypage_side_hover" href="myWishList.user"><i class="lni lni-heart"> 위시리스트</i></a></li>
                             <li><a class="mypage_side_hover" href="cart.user"><i class="lni lni-cart"> 장바구니</i></a></li>
                             
                             <div class="sidebar_line">
                             <li><a class="mypage_side_hover" href="#"><i class="lni lni-user"> 회원정보변경/탈퇴</i></a></li>
                             </div>
                             <li><a class="mypage_side_hover" href="faq.user"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
-                            <li class="active"><a class="mypage_side_hover" href="myOrderList.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
+                            <li><a class="mypage_side_hover" href="currentOrder.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
                             
                         </ul>
                     </div>
@@ -70,18 +70,7 @@
                     가게list from 재우스
                     
                 </div>
-                <div class="col-lg-6 col-md-7">
-                    가게list from 재우스
-                    
-                </div>
-                <div class="col-lg-6 col-md-7">
-                    가게list from 재우스
-                    
-                </div>
-                <div class="col-lg-6 col-md-7">
-                    가게list from 재우스
-                    
-                </div>
+                
             </div>
             
             </div>

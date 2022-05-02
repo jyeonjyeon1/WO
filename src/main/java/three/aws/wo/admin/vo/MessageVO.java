@@ -19,4 +19,8 @@ public class MessageVO {
 	private String sms_size;
 	private Date sms_sendTime;
 	private boolean sms_result;
+	
+	private String sms_type_option;
+	private String sms_result_option;
+	private String sms_search_option;
 }

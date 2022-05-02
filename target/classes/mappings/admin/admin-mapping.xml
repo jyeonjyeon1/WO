@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminDAO">
+	
+	<select id="adminLogin" resultType="int">
+		SELECT COUNT(*) FROM ADMINS 
+		WHERE A_ID = #{a_id} 
+		AND
+		A_PASSWORD = #{a_password}
+	</select>
+	<select id="getAdminName" resultType="String">
+		SELECT A_NAME FROM ADMINS 
+		WHERE A_ID = #{a_id} 
+	</select>
+</mapper>

@@ -26,8 +26,17 @@ public class AdminStoreController {
 	
 	@RequestMapping("/regisStore.admin")
 	public String insertStore(StoreVO vo) {
-		aStoreService.insertStore(vo);
+		aStoreService.insertStoreInfo(vo);
+		aStoreService.insertStoreAccount(vo);
 		System.out.println("가게 등록 완료 DB확인");
 		return "redirect:/store_mng.admin";
+	}
+	
+	@RequestMapping("/store_menu.admin")
+	public String menuStoreList(StoreVO vo, Model model) {
+		List<StoreVO> storeList =aStoreService.storeList();
+		System.out.println("store_menu");
+		model.addAttribute("storeList" ,storeList);
+		return "/store/store_menu";
 	}
 }

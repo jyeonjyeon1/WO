@@ -6,5 +6,6 @@ import three.aws.wo.store.vo.StoreVO;
 
 public interface AStoreService {
 	List<StoreVO> storeList();
-	void insertStore(StoreVO vo);
+	void insertStoreInfo(StoreVO vo);
+	void insertStoreAccount(StoreVO vo);
 }

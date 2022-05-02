@@ -19,8 +19,13 @@ public class AStoreServiceImpl implements AStoreService {
 	}
 
 	@Override
-	public void insertStore(StoreVO vo) {
-		aStoreDAO.insertStore(vo);
+	public void insertStoreInfo(StoreVO vo) {
+		aStoreDAO.insertStoreInfo(vo);
+	}
+	
+	@Override
+	public void insertStoreAccount(StoreVO vo) {
+		aStoreDAO.insertStoreAccount(vo);
 	}
 
 }

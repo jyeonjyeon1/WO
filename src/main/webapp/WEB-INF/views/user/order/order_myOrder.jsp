@@ -424,7 +424,7 @@
 	    pay_method: "card",
 	    merchant_uid : 'our_ordernumbertlqkf',
 	    name : '결제테스트',
-	    amount : 100,
+	    amount : 6000,
 	    buyer_email : 'etgohome8@gmail.com',
 	    buyer_name : '홍길동',
 	    buyer_tel : '010-1234-5678',

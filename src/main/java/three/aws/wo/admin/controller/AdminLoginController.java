@@ -25,7 +25,6 @@ public class AdminLoginController {
 	public String a_loginPage(HttpServletRequest request) {
 		if (ses == false) {
 			System.out.println("login.admin");
-			HttpSession session = request.getSession();
 			return "/login";
 		}
 		else {

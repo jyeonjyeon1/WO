@@ -195,7 +195,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="shoping__cart__item" style="text-align: center; ">
-                                        <button style="border:none; background-color: transparent; height: 50px;">
+                                        <button style="border:none;  background-color: transparent; height: 50px;">
                                         <h5> <i class="lni lni-circle-plus"></i> 메뉴 더 추가하러가기</h5>
                                         </button>
                                     </td>

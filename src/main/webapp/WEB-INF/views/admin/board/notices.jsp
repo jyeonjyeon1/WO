@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -258,7 +259,6 @@
 							<i class="fa fa-table"></i> 검색 결과
 						</div>
 						<div class="card-body">
-
 							<table id="datatablesSimple">
 								<thead>
 									<tr>
@@ -280,6 +280,108 @@
 								</thead>
 
 								<tbody>
+								<c:forEach var="noticeList" items="${noticeList}" varStatus="vs">
+										<tr>
+											<td>${noticeList.n_seq}</td>
+											<td>${noticeList.n_type}</td>
+											<td>${noticeList.n_title}</td>
+											<td>관리자</td>
+											<td>
+												<c:choose>
+													<c:when test="${noticeList.n_status eq 'true'}">공개</c:when>
+													<c:otherwise>비공개</c:otherwise>
+												</c:choose>
+											</td>
+											<td>${noticeList.n_regdate}</td>
+											<td><a data-toggle="modal" href="#myModal${vs.index}"
+												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+												<button onclick="location.href='notices_update.admin?n_seq=${noticeList.n_seq}'"
+													class="btn btn-primary btn-xs">
+													<i class="fa fa-pencil"></i>
+												</button>
+												<button type="button" onclick="javascript:deleteAlert();"
+													class="btn btn-danger btn-xs">
+													<i class="fa fa-trash-o "></i>
+												</button></td>
+										</tr>
+			<div aria-hidden="true" aria-labelledby="myModalLabel"
+				role="dialog" tabindex="-1" id="myModal${vs.index}"
+				class="modal fade" style="margin: 20px auto 0;">
+				<div class="modal-dialog store">
+					<div class="modal-content">
+							<div class="modal-header_store">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title">공지사항 내용보기</h4>
+							</div>
+							<!-- 정보시작 -->
+							<div class="modal_wrapbody">
+								<div class="modal-body" style="padding-bottom: 0;">
+									<p style="margin-bottom: 2px;">글번호</p>
+									<input type="text" id="" name="name" value="12"
+										class="form-control">
+								</div>
+								<div class="modal-body" style="padding-bottom: 0;">
+									<p style="margin-bottom: 2px;">제목</p>
+									<input type="text" id="" name="name" value="워킹오더 5월 이벤트"
+										class="form-control">
+								</div>
+								<div class="modal-body" style="padding-bottom: 0;">
+									<p style="margin-bottom: 2px;">내용</p>
+									<textarea rows="8" id="" name="name" class="form-control">
+부잉부잉부잉~
+부부잉잉 부부부부~
+배고파
+                  </textarea>
+								</div>
+								<div class="modal-body" style="padding-bottom: 0;">
+									<input class="grey__button" type="file" onclick=""
+										style="margin-right: 5px;">
+								</div>
+
+								<div class="modal-body" style="padding-bottom: 0;">
+									<p style="margin-bottom: 2px;">공개 기간</p>
+
+									<input class="form-control round-form" type="datetime-local"
+										value="2022-04-16T10:00"
+										style="width: 40%; display: inline-block; margin-right: 10px;">
+									~ <input class="form-control round-form" type="datetime-local"
+										value="2022-04-30T23:59"
+										style="width: 40%; display: inline-block; margin-left: 10px;">
+								</div>
+								<!-- 마지막 정보는 아래 패딩 유지 -->
+								<div class="modal-body" style="padding-bottom: 0;">
+									<p style="margin-bottom: 2px;">노출상태</p>
+									<label class="radio-inline"> <input type="radio"
+										name="inRad4" id="inlineRadio1" value="option1"> 노출
+									</label> <label class="radio-inline"> <input type="radio"
+										name="inRad4" id="inlineRadio2" value="option2" checked>
+										비노출
+									</label> <label class="radio-inline"> <input type="radio"
+										name="inRad4" id="inlineRadio3" value="option3" checked>
+										예약
+									</label> <label class="radio-inline"> 2022.04.16 09:00:00 </label>
+								</div>
+								<div class="modal-body">
+									<p style="margin-bottom: 2px;">조회수</p>
+									<input class="form-control round-form" type="number"
+										value="234"
+										style="width: 22%; display: inline-block; margin-right: 5px;">
+								</div>
+
+							</div>
+							<div class="modal-footer">
+								<button data-dismiss="modal" class="btn btn-default"
+									type="button">확인</button>
+								<button onclick="location.href='notices_update.admin'"
+									class="btn btn-theme" type="button">수정</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /modal -->
+		</c:forEach>
+								
 									<tr>
 										<td>1</td>
 										<td>이벤트</td>

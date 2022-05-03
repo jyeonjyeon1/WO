@@ -44,19 +44,19 @@ public class AdminController {
 		return "/board/inquiry_answer";
 	}
 	
-	@GetMapping("/notices.admin")
+	@GetMapping("/notices_.admin")
 	public String tonotices() {
 		System.out.println("notices");
 		return "/board/notices";
 	}
 	
-	@GetMapping("/notices_add.admin")
+	@GetMapping("/notices_add_.admin")
 	public String tonotices_add() {
 		System.out.println("notices_add");
 		return "/board/notices_add";
 	}
 	
-	@GetMapping("/notices_update.admin")
+	@GetMapping("/notices_update_.admin")
 	public String tonotices_update() {
 		System.out.println("notices_update");
 		return "/board/notices_update";

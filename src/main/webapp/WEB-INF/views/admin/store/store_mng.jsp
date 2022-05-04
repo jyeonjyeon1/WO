@@ -310,7 +310,7 @@
 											<td>${storeList.si_name}</td>
 											<td>${storeList.si_code}</td>
 											<td><a data-toggle="modal" href="#passModal${vs.index}"><i class="password_see fa fa-eye"></i></a></td>
-											<td>${storeList.si_addr_road}
+											<td>${storeList.si_addr_road}, 
 												${storeList.si_addr_detail}</td>
 											<td>${storeList.si_tel}</td>
 											<td><c:choose>

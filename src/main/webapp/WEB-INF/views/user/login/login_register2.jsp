@@ -100,7 +100,7 @@ input::-webkit-inner-spin-button {
 	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
-	jQuery(document).ready(
+	$(document).ready(
 			function() {
 
 			//아이디중복확인

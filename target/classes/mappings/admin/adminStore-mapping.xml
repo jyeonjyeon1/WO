@@ -43,7 +43,7 @@
 	<insert id="insertStoreInfo" parameterType="StoreVO">
 		INSERT INTO STORE_INFO (SI_NAME, SI_CODE, SI_ZIPCODE, SI_ADDRESS, SI_ADDR_ROAD, SI_ADDR_DETAIL, SI_TEL,
 		SI_OPEN, SI_CLOSE, SI_PARKING_ABLE, SI_USESTORE, SI_REFERINFO)
-		VALUES(#{si_name}, #{si_code}, #{si_zipcode}, #{si_address}, #{si_address} #{si_addr_road}, #{si_addr_detail}, #{si_tel},
+		VALUES(#{si_name}, #{si_code}, #{si_zipcode}, #{si_address}, #{si_address} , #{si_addr_detail}, #{si_tel},
 		#{si_open}, #{si_close}, #{si_parking_able}, #{si_usestore}, #{si_referinfo})
 	</insert>
 	<insert id="insertStoreAccount" parameterType="StoreVO">

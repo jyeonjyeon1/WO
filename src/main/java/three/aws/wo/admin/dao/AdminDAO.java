@@ -1,10 +1,13 @@
 package three.aws.wo.admin.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import three.aws.wo.admin.vo.NoticeVO;
 
 @Repository
 public class AdminDAO {
@@ -16,5 +19,17 @@ public class AdminDAO {
 	}
 	public String getAdminName(String a_id) {
 		return sqlSession.selectOne("AdminDAO.getAdminName",a_id);
+	}
+	
+	public int getNextNoticeSeq() {
+		return sqlSession.selectOne("AdminDAO.getNextNoticeSeq");
+	}
+	
+	public void insertNotice(NoticeVO vo) {
+		sqlSession.insert("AdminDAO.insertNotice", vo);
+	}
+	
+	public List<NoticeVO> noticeList(){
+		return sqlSession.selectList("AdminDAO.noticeList");
 	}
 }

@@ -100,7 +100,7 @@ public class UserController  implements Controller {
 
 //	==================== login ============================
 
-	@RequestMapping(value="/login.user", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/login_.user", method= {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView loginForm(LoginCommand loginCommand,
                     @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
         
@@ -157,9 +157,13 @@ public class UserController  implements Controller {
 	}
 
 	@GetMapping("/join.user")
-	public String toregisterPage() {
-		System.out.println("회원가입화면2");
-		return "/login/login_register2";
+	public String toregisterPage(HttpSession session) {
+		if(session.getAttribute("userSession")==null) {
+			System.out.println("회원가입화면2");
+			return "/login/login_register2";
+		}else {
+			return "/index/index";
+		}
 	}
 	
 	@RequestMapping("/logout.user")

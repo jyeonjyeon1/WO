@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserLoginDAO">
+	<select id="userLoginCheck" resultType="int">
+		SELECT COUNT(*) FROM TEST_USER 
+		WHERE U_ID = #{u_id} 
+		AND
+		U_PASSWORD = #{u_password}
+	</select>
+	<select id="loggedin" resultType="UserVO" parameterType="UserVO">
+		SELECT * FROM TEST_USER 
+		WHERE U_ID = #{u_id} 
+	</select>
+	
+
+	
+</mapper>
+ 

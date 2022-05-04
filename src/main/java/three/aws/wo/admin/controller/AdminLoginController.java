@@ -17,7 +17,7 @@ import three.aws.wo.admin.util.RequestUtil;
 
 @Controller
 public class AdminLoginController {
-	private boolean ses = false;
+	public static boolean ses = false;
 	@Autowired
 	private AdminService adminService;
 

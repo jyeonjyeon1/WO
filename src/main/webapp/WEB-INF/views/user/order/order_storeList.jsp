@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -27,7 +29,64 @@
             });
         });
             //========= Hero Slider
+            
+     //paging 처리 (값보내기)
+            
+       $(document).ready(function(){
+        	$("div a").click(function(){
+        		console.log("ddd");
+        		var pageNum = $(this).html();
+        		console.log(pageNum);
+        		$.ajax({
+            		type: "POST",
+            		url: "/pagingProcess.user",
+            		data: {"pageNum" : pageNum},
+            		success:function(data){
+            			console.log("보내짐")
+            		},
+            		error:function(data){
+            			console.log("에러")
+            		}
+            		
+            	})
+        	});
+        	
+        });   
+            
+            
+		
+            
     </script>
+    
+    <style>
+    </*페이징처리 css*/
+*{box-sizing: border-box;}
+.pagination a{
+	color: black;
+	text-decoration: none;
+	text-align:center;
+	width: 30px; /* 12개니까 대충 계산하기 */
+	float: left; /* a는 인라인이라 안먹으니까 추가 */
+	text-align: center;
+	/* 하고보니 빨간색 벗어남 => 오버플로 오토주기, pagination 가서 */
+	
+}
+.pagination a:hover:not(.active){ /* .active 클래스를 가진 a태그는 제외시키자 (암기) */
+	background: #ddd;
+}
+.pagination a.active{
+	background: dodgerblue;
+	color:white;
+}
+.pagination {
+	/* border: 1px solid red; */ /* 기본적으로 보더는 부모꺼가 잡힌다 */
+	width: 50%; /* 누구의 반이란거야? 부모 (여기선 body) */
+	margin: 0 auto; /* border 가운데 정렬(항상 규칙마냥 씀) */
+	overflow: auto;
+}
+
+
+</style>
 
 </head>
 
@@ -91,56 +150,59 @@
 
             <!-- 크게 보기-->
             <div class="tapsection" id="content1">
-                <div class="product__details__tab__desc">
+					
+	                <div class="product__details__tab__desc">
                     <div class="row"></div>
                     <!-- 검색결과 -->
                     <!-- 재우스 -->
                     <section class="">
                         <div class="container-md ">
                             <div class="row" style="float: none; margin:100 auto;">
-
-                                <!-- 매장 한개 -->
-                                <!-- div -> a로 바꿨음, 한개만 적용했으니 나머지 바꿔줘야함 -->
-                                <a href="jw3.html" class="col-5 search_result_big_col">
+                      			
+								<!-- 매장list start -->
+									<c:forEach var="storeList" items="${storeList}" varStatus="vs">
+									
+						
+										<a href="#" class="col-5 search_result_big_col">
 
                                     <div class="d-lg-block">
                                         <div class="col-12 search_big_img_bg">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
+                                            <img src="${fn:toLowerCase(storeList.si_image) }" alt="cafe"
                                                 class="search_big_img">
                                         </div>
 
                                         <div class="padding__5">
-                                            <strong class="text-primary">종로3가점</strong>
-                                            <h3>스타벅스</h3>
+                                            <strong class="text-primary">${storeList.si_loc}</strong>
+                                            <h3>${storeList.si_name}</h3>
                                             <ul>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">전화번호
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">02-1234-1234
+                                                    <lable class="col-7 search_big_option_re ">${storeList.si_tel}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">주소
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">서울 송파구 백제고분로 358
+                                                    <lable class="col-7 search_big_option_re ">${storeList.si_address}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">영업시간
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">07:00 - 21:00
+                                                    <lable class="col-7 search_big_option_re ">${storeList.si_open}~${storeList.si_close}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">정기휴무
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">일요일/공휴일
+                                                    <lable class="col-7 search_big_option_re ">${storeList.si_holiday_fix}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">임시휴무
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">5월5일
+                                                    <lable class="col-7 search_big_option_re ">${storeList.si_holiday_imsi}
                                                     </lable>
                                                 </div>
                                             </ul>
@@ -148,8 +210,14 @@
                                     </div>
 
                                 </a>
-                                <!-- 매장 한개 -->
-                                <div class="col-5 search_result_big_col">
+										
+										
+									</c:forEach>
+									<!-- 매장 list 끝 -->
+			
+                                
+                               <!--   매장 한개 -->
+                               <a href="#" class="col-5 search_result_big_col">
 
                                     <div class="d-lg-block">
                                         <div class="col-12 search_big_img_bg">
@@ -182,7 +250,7 @@
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">정기휴무
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">일요일/공휴일
+                                                    <lable class="col-7 search_big_option_re ">토요일/공휴일
                                                     </lable>
                                                 </div>
                                                 <div class="row">
@@ -195,256 +263,35 @@
                                         </div>
                                     </div>
 
-                                </div>
-
-                                <!-- 매장 한개 -->
-                                <div class="col-5 search_result_big_col">
-
-                                    <div class="d-lg-block">
-                                        <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        <img src="resources/assets/images/jaewoo/spring_menu.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;">
-                                        <div class="col p-4 d-flex flex-column position-static">
-                                            <strong class="d-inline-block mb-2 text-primary">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                            <ul style="margin-top: 10px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
+                                </a>     
+                                
+                                
+                                <div class="pagination">
+	<a href="#" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>
+	<a href="#" id="pageNum" data-num="2" onclick="paging()">2</a>
+	<a href="#" id="pageNum" data-num="3" onclick="paging()">3</a>
+	<a href="#" id="pageNum" data-num="4" onclick="paging()">4</a>
+	<a href="#" id="pageNum" data-num="5" onclick="paging()">5</a>
+	<a href="#" id="pageNum" data-num="6" onclick="paging()">6</a>
+	<a href="#" id="pageNum" data-num="7" onclick="paging()">7</a>
+	<a href="#" id="pageNum" data-num="8" onclick="paging()">8</a>
+	<a href="#" id="pageNum" data-num="9" onclick="paging()">9</a>
+	<a href="#" id="pageNum" data-num="10" onclick="paging()">10</a>
+	<a href="#">&gt;</a>
+	<a href="#">&raquo;</a>
+</div>                  
                                         </div>
                                     </div>
+                                    </section>
 
                                 </div>
-                                <!-- 매장 한개 -->
-                                <div class="col-5 search_result_big_col">
-
-                                    <div class="d-lg-block">
-                                        <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        <img src="resources/assets/images/jaewoo/spring_menu.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;">
-                                        <div class="col p-4 d-flex flex-column position-static">
-                                            <strong class="d-inline-block mb-2 text-primary">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                            <ul style="margin-top: 10px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- 매장 한개 -->
-                                <div class="col-5 search_result_big_col">
-
-                                    <div class="d-lg-block">
-                                        <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        <img src="resources/assets/images/jaewoo/spring_menu.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;">
-                                        <div class="col p-4 d-flex flex-column position-static">
-                                            <strong class="d-inline-block mb-2 text-primary">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                            <ul style="margin-top: 10px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- 매장 한개 -->
-                                <div class="col-5 search_result_big_col">
-
-                                    <div class="d-lg-block">
-                                        <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        <img src="resources/assets/images/jaewoo/spring_menu.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;">
-                                        <div class="col p-4 d-flex flex-column position-static">
-                                            <strong class="d-inline-block mb-2 text-primary">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                            <ul style="margin-top: 10px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- 매장 한개 -->
-                                <div class="col-5 search_result_big_col">
-
-                                    <div class="d-lg-block">
-                                        <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        <img src="resources/assets/images/jaewoo/spring_menu.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;">
-                                        <div class="col p-4 d-flex flex-column position-static">
-                                            <strong class="d-inline-block mb-2 text-primary">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                            <ul style="margin-top: 10px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- 매장 한개 -->
-                                <div class="col-5 search_result_big_col">
-
-                                    <div class="d-lg-block">
-                                        <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        <img src="resources/assets/images/jaewoo/spring_menu.jpg" alt="cafe"
-                                            style="width:200px;height: 200px; margin: 10px 0 0 10px; border-radius: 10px;">
-                                        <div class="col p-4 d-flex flex-column position-static">
-                                            <strong class="d-inline-block mb-2 text-primary">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                            <ul style="margin-top: 10px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div style="text-align: center;">
-
-                                    <div style="display:inline-block ">
-                                        <div class="product__pagination" style="margin:auto;">
-                                            <a href="#">1</a>
-                                            <a href="#">2</a>
-                                            <a href="#">3</a>
-                                            <a href="#">
-                                                <i class="fa fa-long-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+							
+                                
                             </div>
-                    </section>
                     <!-- Blog Section End -->
 
-                </div>
-            </div>
+                
+          
 
             <!-- 리스트로 보기-->
             <div class="tapsection" id="content2">
@@ -456,7 +303,50 @@
                             <div class="row" style="float: none; margin:20px auto;">
 
                                 <!-- 매장 한개 -->
-                                <div>
+                                <c:forEach var="storeList" items="${storeList}" varStatus="vs">
+                                <a class="col-11 search_result_list_col" href="jw3.html">
+                                        <div class="row">
+                                            <div class="col-2 search_list_img_bg">
+                                                <img src="${fn:toLowerCase(storeList.si_image) }" alt="cafe"
+                                                    class="search_big_img">
+                                            </div>
+
+                                            <div class="col-2" style="float: left;padding:2.5vh 0;">
+                                                <strong class="text-primary">${storeList.si_loc}</strong>
+                                                <h3>${storeList.si_name}</h3>
+                                            </div>
+                                            <div class="col-5" style="padding-top:2.5vh;">
+                                                <div class="row">
+                                                    <lable class="col-4 search_list_option">전화번호
+                                                    </lable>
+                                                    <lable class="col-7 search_list_option_re ">${storeList.si_tel}
+                                                    </lable>
+                                                </div>
+                                                <div class="row">
+                                                    <lable class="col-4 search_list_option">주소
+                                                    </lable>
+                                                    <lable class="col-7 search_list_option_re ">${storeList.si_address}
+                                                    </lable>
+                                                </div>
+                                                <div class="row">
+                                                    <lable class="col-4 search_list_option">영업시간
+                                                    </lable>
+                                                    <lable class="col-7 search_list_option_re ">${storeList.si_open}~${storeList.si_close}
+                                                    </lable>
+                                                </div>
+                                                <div class="row">
+                                                    <lable class="col-4 search_list_option">정기휴무
+                                                    </lable>
+                                                    <lable class="col-7 search_list_option_re ">${storeList.si_holiday_fix}
+                                                    </lable>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </a>
+                                    </c:forEach>
+                                    <!-- 매장한개 끝 -->
+                                
                                     <a class="col-11 search_result_list_col" href="jw3.html">
                                         <div class="row">
                                             <div class="col-2 search_list_img_bg">
@@ -497,312 +387,9 @@
                                             </div>
                                         </div>
                                     </a>
-                                </div>
+                                
                                 <!-- 매장 한개끝 -->
 
-                                <!-- 매장 한개 -->
-                                <div>
-                                    <div class="col-11 search_result_list_col">
-                                        <div class="row">
-                                            <div class="col-2 search_list_img_bg">
-                                                <img src="resources/assets/images/cafe/no-image-cafe.png" alt="cafe"
-                                                    class="search_big_img">
-                                            </div>
-
-                                            <div class="col-2" style="float: left;padding:2.5vh 0;">
-                                                <strong class="text-primary">종로3가점</strong>
-                                                <h3>스타벅스</h3>
-                                            </div>
-                                            <div class="col-5" style="padding-top:2.5vh;">
-                                                <div class="row">
-                                                    <lable class="col-4 search_list_option">전화번호
-                                                    </lable>
-                                                    <lable class="col-7 search_list_option_re ">02-1234-1234
-                                                    </lable>
-                                                </div>
-                                                <div class="row">
-                                                    <lable class="col-4 search_list_option">주소
-                                                    </lable>
-                                                    <lable class="col-7 search_list_option_re ">서울 송파구 백제고분로 358
-                                                    </lable>
-                                                </div>
-                                                <div class="row">
-                                                    <lable class="col-4 search_list_option">영업시간
-                                                    </lable>
-                                                    <lable class="col-7 search_list_option_re ">07:00 - 21:00
-                                                    </lable>
-                                                </div>
-                                                <div class="row">
-                                                    <lable class="col-4 search_list_option">정기휴무
-                                                    </lable>
-                                                    <lable class="col-7 search_list_option_re ">일요일/공휴일
-                                                    </lable>
-                                                </div>
-                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 매장 한개끝 -->
-
-                                <!-- 매장 한개 -->
-                                <div style="text-align: center;">
-                                    <div class="col-lg-11 search_result_list_col">
-
-                                        <div style="width: 40%; height:150px; float: left; ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        </div>
-                                        <div style="width: 20%; height:100px; float: left;">
-                                            <strong class="d-inline-block mb-2 text-primary"
-                                                style="margin-top: 20px;">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                        </div>
-                                        <div style="width: 30%; height:100px; float: left;">
-                                            <ul style="margin-top: 20px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 매장 한개끝 -->
-                                <!-- 매장 한개 -->
-                                <div style="text-align: center;">
-                                    <div class="col-lg-11 search_result_list_col">
-
-                                        <div style="width: 40%; height:150px; float: left; ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        </div>
-                                        <div style="width: 20%; height:100px; float: left;">
-                                            <strong class="d-inline-block mb-2 text-primary"
-                                                style="margin-top: 20px;">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                        </div>
-                                        <div style="width: 30%; height:100px; float: left;">
-                                            <ul style="margin-top: 20px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 매장 한개끝 -->
-                                <!-- 매장 한개 -->
-                                <div style="text-align: center;">
-                                    <div class="col-lg-11 search_result_list_col">
-
-                                        <div style="width: 40%; height:150px; float: left; ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        </div>
-                                        <div style="width: 20%; height:100px; float: left;">
-                                            <strong class="d-inline-block mb-2 text-primary"
-                                                style="margin-top: 20px;">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                        </div>
-                                        <div style="width: 30%; height:100px; float: left;">
-                                            <ul style="margin-top: 20px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 매장 한개끝 -->
-                                <!-- 매장 한개 -->
-                                <div style="text-align: center;">
-                                    <div class="col-lg-11 search_result_list_col">
-
-                                        <div style="width: 40%; height:150px; float: left; ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        </div>
-                                        <div style="width: 20%; height:100px; float: left;">
-                                            <strong class="d-inline-block mb-2 text-primary"
-                                                style="margin-top: 20px;">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                        </div>
-                                        <div style="width: 30%; height:100px; float: left;">
-                                            <ul style="margin-top: 20px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 매장 한개끝 -->
-                                <!-- 매장 한개 -->
-                                <div style="text-align: center;">
-                                    <div class="col-lg-11 search_result_list_col">
-
-                                        <div style="width: 40%; height:150px; float: left; ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        </div>
-                                        <div style="width: 20%; height:100px; float: left;">
-                                            <strong class="d-inline-block mb-2 text-primary"
-                                                style="margin-top: 20px;">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                        </div>
-                                        <div style="width: 30%; height:100px; float: left;">
-                                            <ul style="margin-top: 20px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 매장 한개끝 -->
-                                <!-- 매장 한개 -->
-                                <div style="text-align: center;">
-                                    <div class="col-lg-11 search_result_list_col">
-
-                                        <div style="width: 40%; height:150px; float: left; ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                            <img src="resources/assets/images/jaewoo/starbucks_img.jpg" alt="cafe"
-                                                style="width:130px;height: 130px; margin: 10px 0 0 10px; border-radius: 10px;  ">
-                                        </div>
-                                        <div style="width: 20%; height:100px; float: left;">
-                                            <strong class="d-inline-block mb-2 text-primary"
-                                                style="margin-top: 20px;">종로3가점</strong>
-                                            <h3 class="mb-0">스타벅스</h3>
-                                        </div>
-                                        <div style="width: 30%; height:100px; float: left;">
-                                            <ul style="margin-top: 20px;">
-                                                <li>
-                                                    <b style="margin-right: 10px;">전화번호</b>
-                                                    <span>1522-3232</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">주소</b>
-                                                    <span>서울 송파구 백제고분로 358
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">영업시간</b>
-                                                    <span>07:00 - 21:00</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">정기휴무</b>
-                                                    <span>일요일/공휴일</span>
-                                                </li>
-                                                <li>
-                                                    <b style="margin-right: 10px;">임시휴무</b>
-                                                    <span>5월5일</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 매장 한개끝 -->
                                 <div style="text-align: center;">
 
                                     <div style="display:inline-block ">

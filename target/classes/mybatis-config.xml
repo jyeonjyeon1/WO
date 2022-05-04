@@ -29,6 +29,7 @@
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
 		<mapper resource="mappings/user/user-mapping.xml" /> 
+		<mapper resource="mappings/user/userStore-mapping.xml" /> 
 		<mapper resource="mappings/admin/adminUser-mapping.xml" /> 
 		<mapper resource="mappings/admin/adminStore-mapping.xml" /> 
 		

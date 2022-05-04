@@ -243,11 +243,11 @@ public class UserController  implements Controller {
 		return "/order/order_myOrderList";
 	}
 	
-	@GetMapping("/storeList.user")
-	public String tostoreListPage() {
-		System.out.println("storeList");
-		return "/order/order_storeList";
-	}
+//	@GetMapping("/storeList_.user")
+//	public String tostoreListPage() {
+//		System.out.println("storeList");
+//		return "/order/order_storeList";
+//	}
 
 	@Override
 	public Class<? extends Annotation> annotationType() {

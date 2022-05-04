@@ -23,9 +23,13 @@ public class UserLoginController {
 	@Autowired
 	private UserLoginService userLoginService;
 	
-	@RequestMapping(value="/login_.user",method=RequestMethod.GET)
-	public String u_loginPage() {
-		return "/login/login_login2";
+	@RequestMapping(value="/login.user",method=RequestMethod.GET)
+	public String u_loginPage(HttpSession session) {
+		if(session.getAttribute("userSession")==null) {
+			return "/login/login_login";
+		}else {
+			return "/index/index";
+		}
 	}
 	
 	//우선 일치하는지 확인 후 로그인 진행

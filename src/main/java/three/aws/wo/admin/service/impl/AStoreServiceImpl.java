@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import three.aws.wo.admin.dao.AStoreDAO;
 import three.aws.wo.admin.service.AStoreService;
+import three.aws.wo.store.vo.FranchiseVO;
 import three.aws.wo.store.vo.StoreVO;
 @Service
 public class AStoreServiceImpl implements AStoreService {
@@ -26,6 +27,17 @@ public class AStoreServiceImpl implements AStoreService {
 	@Override
 	public void insertStoreAccount(StoreVO vo) {
 		aStoreDAO.insertStoreAccount(vo);
+	}
+
+	@Override
+	public List<FranchiseVO> storeInquiryList() {
+		return aStoreDAO.storeInquiryList();
+	}
+
+	@Override
+	public void insertStoreInquiry(FranchiseVO vo) {
+		aStoreDAO.insertStoreInquiry(vo);
+		
 	}
 
 }

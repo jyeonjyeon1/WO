@@ -244,11 +244,11 @@ public class AdminController {
 		return "/statistics/user_sales";
 	}
 //	==================== store ============================
-	@GetMapping("/join_inq.admin")
-	public String tojoin_inq() {
-		System.out.println("join_inq");
-		return "/store/join_inq";
-	}
+//	@GetMapping("/join_inq.admin")
+//	public String tojoin_inq() {
+//		System.out.println("join_inq");
+//		return "/store/join_inq";
+//	}
 	
 	@GetMapping("/store_menu_.admin")
 	public String tostore_menu() {

@@ -80,11 +80,11 @@ public class UserController  implements Controller {
 		return "/info/info_howToUse";
 	}
 
-	@GetMapping("/privacyTerm.user")
-	public String toprivacyTermPage() {
-		System.out.println("privacyTerm");
-		return "/info/info_privacyTerm";
-	}
+//	@GetMapping("/privacyTerm.user")
+//	public String toprivacyTermPage() {
+//		System.out.println("privacyTerm");
+//		return "/info/info_privacyTerm";
+//	}
 
 //	@GetMapping("/storeInquiry.user")
 //	public String tostoreInquiryPage() {
@@ -92,11 +92,11 @@ public class UserController  implements Controller {
 //		return "/info/info_storeInquiry";
 //	}
 
-	@GetMapping("/termOfService.user")
-	public String totermOfServicePage() {
-		System.out.println("termOfService");
-		return "/info/info_termOfService";
-	}
+//	@GetMapping("/termOfService.user")
+//	public String totermOfServicePage() {
+//		System.out.println("termOfService");
+//		return "/info/info_termOfService";
+//	}
 
 //	==================== login ============================
 

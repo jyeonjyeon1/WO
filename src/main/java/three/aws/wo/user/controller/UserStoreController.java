@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.maven.shared.invoker.SystemOutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.user.service.UStoreService;
 import three.aws.wo.store.vo.StoreVO;
@@ -18,9 +21,20 @@ public class UserStoreController {
 	
 	@RequestMapping("/storeList.user")
 	public String storeList(StoreVO vo, Model model) {
-		List<StoreVO> storeList =uStoreService.storeList();
-		System.out.println("userø°º≠ storelist ø≠æ˙¥Ÿ!");
-		model.addAttribute("storeList" ,storeList);
+		List<StoreVO> storeListByPage =uStoreService.storeListByPage();
+		System.out.println("userÏóêÏÑú storelist Ïó¥ÏóàÎã§!");
+		model.addAttribute("storeListByPage" ,storeListByPage);
 		return "/order/order_storeList";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/pagingProecess.user", method = RequestMethod.POST)
+	public int UserPaging(int pageNum) {
+		System.out.println("dd");
+		int startPageNum = (pageNum*10) - 9;
+		System.out.println("PageNum:" + pageNum + ", startPageNum: " + startPageNum);
+
+		return startPageNum;
+	}
+	
 }

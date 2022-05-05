@@ -13,9 +13,16 @@ public class UStoreServiceImpl implements UStoreService {
 	@Autowired
 	private UStoreDAO uStoreDAO;
 	
+
+	
 	@Override
 	public List<StoreVO> storeList(){
 		return uStoreDAO.storeList();
+	}
+	
+	@Override
+	public List<StoreVO> storeListByPage(){
+		return uStoreDAO.storeListByPage();
 	}
 	
 	

@@ -28,13 +28,14 @@ public class UserStoreController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/pagingProecess.user", method = RequestMethod.POST)
-	public int UserPaging(int pageNum) {
-		System.out.println("dd");
+	@RequestMapping(value = "/pagingProcess.user", method = RequestMethod.POST)
+	public String UserPageChange(int pageNum, Model model) {
+		
 		int startPageNum = (pageNum*10) - 9;
 		System.out.println("PageNum:" + pageNum + ", startPageNum: " + startPageNum);
-
-		return startPageNum;
+		List<StoreVO> userPageChange =uStoreService.UserPageChange(startPageNum);
+		model.addAttribute("userPageChange",userPageChange);
+		return "/order/order_storeList";
 	}
 	
 }

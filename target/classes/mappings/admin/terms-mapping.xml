@@ -10,13 +10,16 @@
 		<result column="T_CONTENT" property="t_content" jdbcType="VARCHAR"/>
 	</resultMap>
 	
+	<resultMap type="TermsVO" id="terms_title_VO">
+		<result column="T_TITLE" property="t_title" jdbcType="VARCHAR" />
+	</resultMap>
 	
 	<select id="termsList" resultType="TermsVO" resultMap="termsVO">
-		SELECT * FROM TERMS WHERE T_TYPE ='term' order by t_code;
+		SELECT * FROM TERMS WHERE T_TYPE ='term'
 	</select>
 	
-	<select id="infoList" resultType="TermsVO" resultMap="termsVO">
-		SELECT * FROM TERMS WHERE T_TYPE ='privacy' order by t_code;
+	<select id="temrs_title_List" resultType="TermsVO" resultMap="terms_title_VO">
+		select distinct t_title from terms where t_type ='term' order by t_title;
 	</select>
 	
 </mapper>

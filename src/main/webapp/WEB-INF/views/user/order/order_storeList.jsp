@@ -56,6 +56,7 @@
         	
         });   
             
+                       
             
 		
             
@@ -162,7 +163,62 @@
                         <div class="container-md ">
                             <div class="row" style="float: none; margin:100 auto;">
                       			
-								<!-- 매장list start -->
+								<!-- 페이지 작동여부확인(열개데이터가나와야함) -->
+								<c:forEach var="userPageChange" items="${userPageChange}" varStatus="vs">
+									
+						
+										<a href="#" class="col-5 search_result_big_col">
+
+                                    <div class="d-lg-block">
+                                        <div class="col-12 search_big_img_bg">
+                                            <img src="${fn:toLowerCase(userPageChange.si_image) }" alt="cafe"
+                                                class="search_big_img">
+                                        </div>
+
+                                        <div class="padding__5">
+                                            <strong class="text-primary">${userPageChange.si_loc}</strong>
+                                            <h3>${userPageChange.si_name}</h3>
+                                            <ul>
+                                                <div class="row">
+                                                    <lable class="col-4 search_big_option">전화번호
+                                                    </lable>
+                                                    <lable class="col-7 search_big_option_re ">${userPageChange.si_tel}
+                                                    </lable>
+                                                </div>
+                                                <div class="row">
+                                                    <lable class="col-4 search_big_option">주소
+                                                    </lable>
+                                                    <lable class="col-7 search_big_option_re ">${userPageChange.si_address}
+                                                    </lable>
+                                                </div>
+                                                <div class="row">
+                                                    <lable class="col-4 search_big_option">영업시간
+                                                    </lable>
+                                                    <lable class="col-7 search_big_option_re ">${userPageChange.si_open}~${storeListByPage.si_close}
+                                                    </lable>
+                                                </div>
+                                                <div class="row">
+                                                    <lable class="col-4 search_big_option">정기휴무
+                                                    </lable>
+                                                    <lable class="col-7 search_big_option_re ">${userPageChange.si_holiday_fix}
+                                                    </lable>
+                                                </div>
+                                                <div class="row">
+                                                    <lable class="col-4 search_big_option">임시휴무
+                                                    </lable>
+                                                    <lable class="col-7 search_big_option_re ">${userPageChange.si_holiday_imsi}
+                                                    </lable>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </a>
+										
+										
+									</c:forEach>
+								
+								<!-- 매장list start(4개데이터가나와야함) -->
 									<c:forEach var="storeListByPage" items="${storeListByPage}" varStatus="vs">
 									
 						

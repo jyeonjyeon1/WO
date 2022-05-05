@@ -444,12 +444,6 @@
 		<%@ include file="../inc/admin_footer.jsp"%>
 		<!--footer end-->
 	</section>
-	<!-- js placed at the end of the document so the pages load faster -->
-	
-	<!--common script for all pages-->
-	
-	<!--script for this page-->
-	
 	<!-- 다음 지도 api -->
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TermsDAO">
+	<resultMap type="TermsVO" id="termsVO">
+		<id column="T_CODE" property="t_code" jdbcType="VARCHAR"/>
+		<result column="T_TYPE" property="t_type" jdbcType="VARCHAR" />
+		<result column="T_TITLE" property="t_title" jdbcType="VARCHAR" />
+		<result column="T_CONTENT" property="t_content" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	
+	<select id="termsList" resultType="TermsVO" resultMap="termsVO">
+		SELECT * FROM TERMS WHERE T_TYPE ='term' order by t_code;
+	</select>
+	
+	<select id="infoList" resultType="TermsVO" resultMap="termsVO">
+		SELECT * FROM TERMS WHERE T_TYPE ='privacy' order by t_code;
+	</select>
+	
+</mapper>

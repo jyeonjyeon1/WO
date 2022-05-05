@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import three.aws.wo.admin.service.AStoreService;
+import three.aws.wo.store.vo.FranchiseVO;
 import three.aws.wo.store.vo.StoreVO;
 
 @Controller
@@ -39,4 +40,20 @@ public class AdminStoreController {
 		model.addAttribute("storeList" ,storeList);
 		return "/store/store_menu";
 	}
+	
+	@RequestMapping("/join_inq.admin")
+	public String tojoin_inq(FranchiseVO vo, Model model) {
+		List<FranchiseVO> storeInquiryList = aStoreService.storeInquiryList();
+		System.out.println("join_inq");
+		model.addAttribute("storeInquiryList", storeInquiryList);
+		return "/store/join_inq";
+	}
+	
+	@RequestMapping("/storeInquiry.user")
+	public String insertStoreInquiry(FranchiseVO vo) {
+		aStoreService.insertStoreInquiry(vo);
+		System.out.println("입점문의등록 DB확인");
+		return "redirect:/index.user";
+	}
+	
 }

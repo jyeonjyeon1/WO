@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.store.vo.FranchiseVO;
 import three.aws.wo.store.vo.StoreVO;
 @Repository
 public class AStoreDAO {
@@ -21,5 +22,13 @@ public class AStoreDAO {
 	}
 	public void insertStoreAccount(StoreVO vo) {
 		sqlSession.insert("AStoreDAO.insertStoreAccount", vo);
+	}
+	
+	public List<FranchiseVO> storeInquiryList(){
+		return sqlSession.selectList("AStoreDAO.storeInquiryList");
+	}
+	
+	public void insertStoreInquiry(FranchiseVO vo) {
+		sqlSession.insert("AStoreDAO.insertStoreInquiry",vo);
 	}
 }

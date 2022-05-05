@@ -16,6 +16,10 @@ public class UStoreDAO {
 	public List<StoreVO> storeList(){
 		return sqlSession.selectList("UStoreDAO.storeList");
 	}
+	
+	public List<StoreVO> storeListByPage() {
+		return sqlSession.selectList("UStoreDAO.storeListByPage");
+	}
 
-
+	
 }

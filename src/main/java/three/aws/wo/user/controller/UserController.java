@@ -62,7 +62,7 @@ public class UserController  implements Controller {
 
 	@GetMapping("/index.user")
 	public String toIndexPage() {
-		System.out.println("À¯ÀúÄÁÆ®·Ñ·¯ ¿Ôµû");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ ï¿½Ôµï¿½");
 		return "/index/index";
 	}
 
@@ -80,23 +80,23 @@ public class UserController  implements Controller {
 		return "/info/info_howToUse";
 	}
 
-	@GetMapping("/privacyTerm.user")
-	public String toprivacyTermPage() {
-		System.out.println("privacyTerm");
-		return "/info/info_privacyTerm";
-	}
+//	@GetMapping("/privacyTerm.user")
+//	public String toprivacyTermPage() {
+//		System.out.println("privacyTerm");
+//		return "/info/info_privacyTerm";
+//	}
 
-	@GetMapping("/storeInquiry.user")
-	public String tostoreInquiryPage() {
-		System.out.println("storeInquiry");
-		return "/info/info_storeInquiry";
-	}
+//	@GetMapping("/storeInquiry.user")
+//	public String tostoreInquiryPage() {
+//		System.out.println("storeInquiry");
+//		return "/info/info_storeInquiry";
+//	}
 
-	@GetMapping("/termOfService.user")
-	public String totermOfServicePage() {
-		System.out.println("termOfService");
-		return "/info/info_termOfService";
-	}
+//	@GetMapping("/termOfService.user")
+//	public String totermOfServicePage() {
+//		System.out.println("termOfService");
+//		return "/info/info_termOfService";
+//	}
 
 //	==================== login ============================
 
@@ -140,7 +140,7 @@ public class UserController  implements Controller {
             response.addCookie(rememberCookie);
             
         } catch (IdPasswordNotMatchingException e) {
-            bindingResult.rejectValue("pw", "notMatch", "¾ÆÀÌµð¿Í ºñ¹Ð¹øÈ£°¡ ¸ÂÁö¾Ê½À´Ï´Ù.");
+            bindingResult.rejectValue("pw", "notMatch", "ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
             ModelAndView mv = new ModelAndView("/login/login_login");
             return mv;
         }
@@ -152,14 +152,14 @@ public class UserController  implements Controller {
 
 	@GetMapping("/joined.user")
 	public String toregisterComplete() {
-		System.out.println("È¸¿ø°¡ÀÔ¿Ï·á");
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿Ï·ï¿½");
 		return "/login/login_joined";
 	}
 
 	@GetMapping("/join.user")
 	public String toregisterPage(HttpSession session) {
 		if(session.getAttribute("userSession")==null) {
-			System.out.println("È¸¿ø°¡ÀÔÈ­¸é2");
+			System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½2");
 			return "/login/login_register2";
 		}else {
 			return "/index/index";
@@ -168,7 +168,7 @@ public class UserController  implements Controller {
 	
 	@RequestMapping("/logout.user")
 	public String logout(HttpSession session) {
-		System.out.println("·Î±×¾Æ¿ô Ã³¸®");
+		System.out.println("ï¿½Î±×¾Æ¿ï¿½ Ã³ï¿½ï¿½");
 		
 		session.invalidate();
 		
@@ -247,11 +247,7 @@ public class UserController  implements Controller {
 		return "/order/order_myOrderList";
 	}
 	
-	@GetMapping("/storeList.user")
-	public String tostoreListPage() {
-		System.out.println("storeList");
-		return "/order/order_storeList";
-	}
+	
 
 	@Override
 	public Class<? extends Annotation> annotationType() {

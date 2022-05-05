@@ -12,7 +12,7 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
-
+ 
     <!-- ========================= assets/css here ========================= -->
 
     <!-- ========================= JS here ========================= -->
@@ -34,9 +34,12 @@
             
        $(document).ready(function(){
         	$("div a").click(function(){
-        		console.log("ddd");
-        		var pageNum = $(this).html();
+        		
+        		var pageN = $(this).html();
+        		var pageNum = parseInt(pageN);
         		console.log(pageNum);
+        		
+        		
         		$.ajax({
             		type: "POST",
             		url: "/pagingProcess.user",
@@ -160,49 +163,49 @@
                             <div class="row" style="float: none; margin:100 auto;">
                       			
 								<!-- 매장list start -->
-									<c:forEach var="storeList" items="${storeList}" varStatus="vs">
+									<c:forEach var="storeListByPage" items="${storeListByPage}" varStatus="vs">
 									
 						
 										<a href="#" class="col-5 search_result_big_col">
 
                                     <div class="d-lg-block">
                                         <div class="col-12 search_big_img_bg">
-                                            <img src="${fn:toLowerCase(storeList.si_image) }" alt="cafe"
+                                            <img src="${fn:toLowerCase(storeListByPage.si_image) }" alt="cafe"
                                                 class="search_big_img">
                                         </div>
 
                                         <div class="padding__5">
-                                            <strong class="text-primary">${storeList.si_loc}</strong>
-                                            <h3>${storeList.si_name}</h3>
+                                            <strong class="text-primary">${storeListByPage.si_loc}</strong>
+                                            <h3>${storeListByPage.si_name}</h3>
                                             <ul>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">전화번호
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">${storeList.si_tel}
+                                                    <lable class="col-7 search_big_option_re ">${storeListByPage.si_tel}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">주소
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">${storeList.si_address}
+                                                    <lable class="col-7 search_big_option_re ">${storeListByPage.si_address}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">영업시간
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">${storeList.si_open}~${storeList.si_close}
+                                                    <lable class="col-7 search_big_option_re ">${storeListByPage.si_open}~${storeListByPage.si_close}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">정기휴무
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">${storeList.si_holiday_fix}
+                                                    <lable class="col-7 search_big_option_re ">${storeListByPage.si_holiday_fix}
                                                     </lable>
                                                 </div>
                                                 <div class="row">
                                                     <lable class="col-4 search_big_option">임시휴무
                                                     </lable>
-                                                    <lable class="col-7 search_big_option_re ">${storeList.si_holiday_imsi}
+                                                    <lable class="col-7 search_big_option_re ">${storeListByPage.si_holiday_imsi}
                                                     </lable>
                                                 </div>
                                             </ul>
@@ -216,7 +219,7 @@
 									<!-- 매장 list 끝 -->
 			
                                 
-                               <!--   매장 한개 -->
+                               <!--   매장 한개 
                                <a href="#" class="col-5 search_result_big_col">
 
                                     <div class="d-lg-block">
@@ -264,7 +267,7 @@
                                     </div>
 
                                 </a>     
-                                
+                                -->
                                 
                                 <div class="pagination">
 	<a href="#" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>

@@ -24,12 +24,12 @@
 	
 	<update id="updateUser" parameterType="UserVO">
 		UPDATE test_user
-		SET U_PASSWORD= #{u_password}, U_EMAIL = #{u_email}, U_SMS_USABLE = #{u_sms_usable}, U_EMAIL_USABLE = #{u_email_usable}, U_TEL = #{u_tel}
+		SET U_PASSWORD= #{u_password}, U_NAME = #{u_name}, U_TEL = #{u_tel}, U_EMAIL = #{u_email}, U_SMS_USABLE = #{u_sms_usable}, U_EMAIL_USABLE = #{u_email_usable}
 		WHERE u_id = #{u_id}
 	</update>
 
 	<delete id="deleteUser" parameterType="UserVO">
-		DELETE FROM test_user WHERE u_id = #{u_id}`
+		DELETE FROM test_user WHERE u_id = #{u_id} AND u_password= #{u_password} 
 	</delete>
 	
 	<select id="selectById" resultType="UserVO">

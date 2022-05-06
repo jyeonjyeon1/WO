@@ -267,28 +267,29 @@ input::-webkit-inner-spin-button {
 	<div class="container"
 		style="margin: 30PX auto 50px; max-width: 420px;">
 		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">회원수정</h4>
-		<form action="register.user" method="post" name="regForm">
+		<form action="updateUser.user" method="post">
 			<div class="row">
                 
-                <h5 class="col-12"><label style="color:#6f6f6f;  word-spacing: 5px; margin-bottom: 20px; ">test1 님의 정보수정</h5>
+                <h5 class="col-12"><input class="form-control" style="color:#6f6f6f" type="text" id="u_id" name="u_id" value="${userSession.u_id}" readonly="readonly"/></h5>
+            			
             </div>
 			<div class="row">
 				<div class="col-12 mt-10">
 					<input type="password" name="u_password" id="u_password"
-						placeholder="새 비밀번호" class="reg-form-control">
+						 class="reg-form-control" >
 					<p class="valid_password">특수기호 대소문자 어쩌구</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12 mt-10">
-					<input type="password" id="passCheck" placeholder="새 비밀번호 확인"
+					<input type="password" id="passCheck" 
 						class="reg-form-control">
 					<p class="match_password">비밀번호가 일치하지 않습니다.</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12 mt-10">
-					<input type="text" id="u_name" name="u_name" placeholder="김재우 "
+					<input type="text" id="u_name" name="u_name" value="${userSession.u_name}"
 						class="reg-form-control" readonly>
 					<p class="regName_label">이름 이상</p>
 				</div>
@@ -296,7 +297,7 @@ input::-webkit-inner-spin-button {
 			<div class="row">
 				<div class="col-9 mt-10">
 					<input type="text" id="u_tel" name="u_tel"
-						placeholder="전화번호( - 제외)" class="reg-form-control">
+						 class="reg-form-control" value="${userSession.u_tel}">
 					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 				</div>
 				<div class="col-3 mt-10" style="padding-left: 0;">
@@ -307,33 +308,13 @@ input::-webkit-inner-spin-button {
 			<div class="row">
 				<div class="col-12 mt-10">
 					<input type="text" id="u_email" name="u_email"
-						placeholder="E-mail (필수)" class="reg-form-control">
+						 class="reg-form-control" value="${userSession.u_email}">
 
 					<p class="email_form">이메일 형식을 맞춰주세요</p>
 				</div>
 			</div>
 			<br>
-			<!-- 약관동의 -->
-			<div class="row">
-				<div class="col-12 mt-10">
-					<button type="button" class="reg-accept-btn" data-bs-toggle="modal"
-						data-bs-target="#termsModal">
-						<input id="termsCheckbox" type="checkbox" disabled>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 이용약관 동의
-					</button>
-				</div>
-			</div>
-			<!-- 개인정보처리방침 동의 -->
-			<div class="row">
-				<div class="col-12 mt-10">
-					<button type="button" class="reg-accept-btn" data-bs-toggle="modal"
-						data-bs-target="#privacyModal">
-						<input id="privacyCheckbox" type="checkbox" disabled>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 개인정보처리방침 동의
-					</button>
-				</div>
-			</div>
-			<br>
+			
 			<div class="row">
 				<div class="col-4 mt-10">
 					<label class="regis_label" style="font-size: 12px;">SMS 수신
@@ -368,107 +349,12 @@ input::-webkit-inner-spin-button {
 			</div>
 			<br>
 			<div class="row">
-				<button type="button" onclick="finalCheck()"
+				<button type="submit" id="submit" onclick="finalCheck()"
 					class="btn btn-outline-warning" style="margin: auto; width: 60%;">회원수정
 					&nbsp;</button>
 			</div>
 
-			<!-- 약관동의 Modal -->
-			<div class="modal fade" id="termsModal" tabindex="-1"
-				aria-labelledby="termsModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-scrollable"
-					style="height: 70%;">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="termsModalLabel">이용약관</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<a style="font-size: 16px; font-weight: 600;">여러분을 환영합니다.</a>
-							<p>워킹오더 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 워킹오더
-								서비스의 이용과 관련하여 워킹오더 서비스를 제공하는 워킹오더 주식회사(이하 ‘워킹오더’)와 이를 이용하는 워킹오더
-								서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 워킹오더 서비스 이용에 도움이 될 수
-								있는 유익한 정보를 포함하고 있습니다.</p>
-							<p>워킹오더 서비스를 이용하시거나 워킹오더 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영
-								정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다</p>
-							<br> <br> <br> <a name="a3"
-								class=" mb-4 text-secondary"
-								style="font-size: 16px; font-weight: 600;">회원으로 가입하시면 워킹오더
-								서비스를 보다 편리하게 이용할 수 있습니다.</a>
-							<p>여러분은 본 약관을 읽고 동의하신 후 회원 가입을 신청하실 수 있으며, 워킹오더는 이에 대한 승낙을 통해
-								회원 가입 절차를 완료하고 여러분께 워킹오더 서비스 이용 계정(이하 ‘계정’)을 부여합니다. 계정이란 회원이
-								워킹오더 서비스에 로그인한 이후 이용하는 각종 서비스 이용 이력을 회원 별로 관리하기 위해 설정한 회원 식별 단위를
-								말합니다.</p>
-							<p>회원은 자신의 계정을 통해 좀더 다양한 워킹오더 서비스를 보다 편리하게 이용할 수 있습니다. 이와 관련한
-								상세한 내용은 계정 운영정책 및 고객센터 내 워킹오더 회원가입 방법 등에서 확인해 주세요.</p>
-							<p>워킹오더는 단체에 속한 여러 구성원들이 공동의 계정으로 워킹오더 서비스를 함께 이용할 수 있도록 단체회원
-								계정도 부여하고 있습니다. 단체회원 구성원들은 하나의 계정 및 아이디(ID)를 공유하되 각자 개별적으로 설정한
-								비밀번호를 입력하여 계정에 로그인하고 각종 서비스를 이용하게 됩니다. 단체회원은 관리자와 멤버로 구성되며, 관리자는
-								구성원 전부로부터 권한을 위임 받아 단체회원을 대표하고 단체회원 계정을 운용합니다. 따라서 관리자는 단체회원 계정을
-								통해 별도 약관 또는 기존 약관 개정에 대해 동의하거나 단체회원에서 탈퇴할 수 있고, 멤버들의 단체회원 계정 로그인
-								방법 및 이를 통한 게시물 게재 등 워킹오더 서비스 이용을 관리(게시물 삭제 포함)할 수 있습니다. 본 약관에서
-								규정한 사항은 원칙적으로 구성원 모두에게 적용되며, 각각의 구성원은 다른 구성원들의 단체회원 계정 및
-								아이디(ID)를 통한 서비스 이용에 관해 연대책임을 부담합니다.</p>
-							<p>단체회원 계정 사용에서의 관리자, 멤버 등의 권한 및 (공동)책임에 관한 사항 등은 계정 운영정책 및
-								고객센터 내 워킹오더 단체회원(단체 아이디) 소개 등에서 확인해 주시기 바랍니다.</p>
-							<br> <br> <br>
-						</div>
-						<div class="modal-footer">
-							<button id="termsAccept" type="button" class="btn btn-warning"
-								data-bs-dismiss="modal">동의</button>
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">닫기</button>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 약관동의 Modal 끝 -->
-
-			<!-- 개인정보처리방침 Modal -->
-			<div class="modal fade" id="privacyModal" tabindex="-1"
-				aria-labelledby="privacyModalLabel" aria-hidden="true">
-				<div class="modal-dialog  modal-dialog-scrollable"
-					style="height: 70%;">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="privacyModalLabel">개인정보처리방침 동의</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<a style="font-size: 16px; font-weight: 600;">제1조 (목적)</a><br>
-							① “개인정보”란 생존하는 개인에 관한 정보로서 당해 정보에 포함되어 있는 성명, 주민등록번호 등의 사항에 의하여
-							당해 개인을 식별할 수 있는 정보(당해 정보 만으로는 특정 개인을 식별할 수 없더라도 다른 정보와 용이하게 결합하여
-							식별할 수 있는 것을 포함합니다)를 말합니다.</br> <br>② 회사는 귀하의 개인정보보호를 매우 중요시하며,
-							『개인정보보호법』, 『정보통신망 이용촉진 및 정보보호에 관한 법률』 상의 개인정보보호규정 및 정보통신부가 제정한
-							『개인정보보호지침』을 준수하고 있습니다. 회사는 개인정보처리방침을 통하여 귀하께서 제공하시는 개인정보가 어떠한 용도와
-							방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</br> <br>③ 회사는
-							개인정보처리방침을 홈페이지 첫 화면에 공개함으로써 귀하께서 언제나 용이하게 보실 수 있도록 조치하고 있습니다.</br> <br>④
-							회사는 개인정보처리방침의 지속적인 개선을 위하여 개인정보처리방침을 개정하는데 필요한 절차를 정하고 있습니다. 그리고
-							개인정보처리방침을 개정하는 경우 버전번호 등을 부여하여 개정된 사항을 귀하께서 쉽게 알아볼 수 있도록 하고 있습니다.</br>
-							<br> <br> <a style="font-size: 16px; font-weight: 600;">제2조
-								(수집하는 개인정보의 항목)</a><br> 회사는 별도의 회원가입 절차 없이 대부분의 컨텐츠에 자유롭게 접근할 수
-							있습니다. 그러나 회사는 맞춤형 서비스를 제공하기 위하여 회원서비스 및 제휴사를 통해 이용자의 정보를 수집하고
-							있습니다. 회사의 회원제 서비스를 이용하시고자 할 경우 다음의 정보를 입력해주셔야 하며 선택항목을 입력하시지 않았다
-							하여 서비스 이용에 제한은 없습니다. 단, 회사는 다음 각 호의 어느 하나에 해당하는 경우에는 법령에 따라 이와 같은
-							동의 없이 이용자의 개인정보를 수집 및 이용할 수 있습니다.</br> <br>① 회원 가입 시 수집하는 개인정보의
-							범위</br> 1. 필수항목 : 이메일주소(로그인 ID), 닉네임, 비밀번호, 휴대폰번호</br> 2 선택항목 : OK캐쉬백 카드번호</br>
-							<br>③ 유료서비스 이용 시 수집하는 개인정보의 범위</br> 1. 회원 가입 시 수집한 정보와 동일</br> 2.
-							결제방법에 따라 결제창에 입력하는 개인정보는 결제대행사에 기록될 뿐 회사에 기록되지 않음</br> <br>④ 상품
-							또는 용역 결제대금 출금 시 수집하는 개인정보의 범위</br> 1. 은행명, 계좌번호</br>
-						</div>
-						<div class="modal-footer">
-							<button id="privacyAccept" type="button" class="btn btn-warning"
-								data-bs-dismiss="modal">동의</button>
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">닫기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 개인정보처리방침 Modal 끝 -->
+			
 
 		</form>
 	</div>

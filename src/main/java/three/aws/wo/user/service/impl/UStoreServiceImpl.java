@@ -13,8 +13,6 @@ public class UStoreServiceImpl implements UStoreService {
 	@Autowired
 	private UStoreDAO uStoreDAO;
 	
-
-	
 	@Override
 	public List<StoreVO> storeList(){
 		return uStoreDAO.storeList();
@@ -23,6 +21,12 @@ public class UStoreServiceImpl implements UStoreService {
 	@Override
 	public List<StoreVO> storeListByPage(){
 		return uStoreDAO.storeListByPage();
+	}
+	
+
+	@Override
+	public List<StoreVO> UserPageChange(int startPageNum) {
+		return uStoreDAO.UserPageChange(startPageNum);
 	}
 	
 	

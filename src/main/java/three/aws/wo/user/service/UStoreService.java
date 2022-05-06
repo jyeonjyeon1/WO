@@ -8,4 +8,5 @@ import three.aws.wo.store.vo.StoreVO;
 public interface UStoreService {
 	List<StoreVO> storeList();
 	List<StoreVO> storeListByPage();
+	List<StoreVO> UserPageChange(int startPageNum);
 }

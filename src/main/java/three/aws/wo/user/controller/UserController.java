@@ -28,11 +28,11 @@ public class UserController  implements Controller {
 
 //	==================== customer ============================
 
-	@GetMapping("/faq.user")
-	public String tofaqPage() {
-		System.out.println("faq");
-		return "/customer/customer_faq";
-	}
+//	@GetMapping("/faq.user")
+//	public String tofaqPage() {
+//		System.out.println("faq");
+//		return "/customer/customer_faq";
+//	}
 
 //	==================== inc ============================
 	@GetMapping("/footer.user")

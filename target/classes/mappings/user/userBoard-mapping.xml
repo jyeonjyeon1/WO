@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserBoardDAO">
+
+	<!-- 자주 묻는 질문 -->
+	<resultMap type="FAQVO" id="faqVO">
+		<id column="FAC_CODE" property="fac_code" jdbcType="VARCHAR"/>
+		<result column="FAC_SEQ" property="fac_seq" jdbcType="INTEGER" />
+		<result column="FAC_TYPE" property="fac_type" jdbcType="VARCHAR" />
+		<result column="FAC_TITLE" property="fac_title" jdbcType="VARCHAR" />
+		<result column="FAC_CONTENT" property="fac_content" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    
+    
+    <select id="toptenList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'topten' ORDER BY FAC_CODE DESC LIMIT 10
+	</select>
+	
+	<select id="orderfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'order' ORDER BY FAC_SEQ DESC
+	</select>
+	
+	<select id="cancelfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'cancel' ORDER BY FAC_SEQ DESC
+	</select>
+	
+	<select id="userfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'user' ORDER BY FAC_SEQ DESC
+	</select>
+	
+	<select id="pointfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'point' ORDER BY FAC_SEQ DESC
+	</select>
+	
+	<select id="etcfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'etc' ORDER BY FAC_SEQ DESC
+	</select>
+
+	<!-- 워킹오더 소식 -->
+	<resultMap type="NoticeVO" id="noticeVO">
+		<id column="N_seq" property="n_seq" jdbcType="INTEGER"/>
+		<result column="N_code" property="n_code" jdbcType="VARCHAR" />
+		<result column="N_title" property="n_title" jdbcType="VARCHAR" />
+		<result column="N_content" property="n_content" jdbcType="VARCHAR"/>
+		<result column="N_regdate" property="n_regdate" jdbcType="DATE"/>
+		<result column="N_fix" property="n_fix" jdbcType="BOOLEAN" />
+		<result column="N_status" property="n_status" jdbcType="BOOLEAN" />
+		<result column="N_type" property="n_type" jdbcType="VARCHAR" />
+		<result column="N_pic_url" property="n_pic_url" jdbcType="VARCHAR" />
+		<result column="N_file_url" property="n_file_url" jdbcType="VARCHAR" />
+		<result column="N_enddate" property="n_enddate" jdbcType="DATE" />
+
+<!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
+	
+	
+	</resultMap>
+	
+	<select id="newsList" resultType="NoticeVO" resultMap="noticeVO">
+		SELECT * FROM NOTICE_BOARD WHERE n_status = 'TRUE' ORDER BY n_seq DESC
+	</select>
+	
+	<select id="noticeList" resultType="NoticeVO" resultMap="noticeVO">
+		SELECT * FROM NOTICE_BOARD WHERE n_type = 'notice' AND n_status = 'TRUE' ORDER BY n_seq DESC
+	</select>
+	
+	<select id="eventList" resultType="NoticeVO" resultMap="noticeVO">
+		SELECT * FROM NOTICE_BOARD WHERE n_type = 'event' AND n_status = 'TRUE' ORDER BY n_seq DESC
+	</select> 
+	
+	
+	
+	
+    
+</mapper>
+ 

@@ -1,15 +1,14 @@
 package three.aws.wo.user.dao;
 
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import three.aws.wo.user.vo.UserVO;
 
-@Repository("userDAO")
-public class UserDAO extends AbstactDAO{
+@Repository
+public class UserDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
@@ -41,7 +40,7 @@ public class UserDAO extends AbstactDAO{
 
 
 	public UserVO selectById(String u_id) {
-		return (UserVO) selectOne("UserDAO.selectById", u_id);
+		return sqlSession.selectOne("UserDAO.selectById", u_id);
 
 	}
 

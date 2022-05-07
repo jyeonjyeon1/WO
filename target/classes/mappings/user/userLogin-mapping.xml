@@ -4,13 +4,13 @@
 
 <mapper namespace="UserLoginDAO">
 	<select id="userLoginCheck" resultType="int">
-		SELECT COUNT(*) FROM TEST_USER 
+		SELECT COUNT(*) FROM USERS 
 		WHERE U_ID = #{u_id} 
 		AND
 		U_PASSWORD = #{u_password}
 	</select>
 	<select id="loggedin" resultType="UserVO" parameterType="UserVO">
-		SELECT * FROM TEST_USER 
+		SELECT * FROM USERS 
 		WHERE U_ID = #{u_id} 
 	</select>
 	

@@ -60,15 +60,13 @@ public class UserLoginController {
 				cookie.setMaxAge(0); //쿠키 죽인 후 추가(바로 소멸)
 				response.addCookie(cookie);
 			}
-			//vo.setU_password("");
-			
 			//session에 vo 저장
 			session.setAttribute("userSession", vo);
 		}
 		return result;
 	}
 	
-	@RequestMapping("/logout_.user")
+	@RequestMapping("/logout.user")
 	public String userLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();

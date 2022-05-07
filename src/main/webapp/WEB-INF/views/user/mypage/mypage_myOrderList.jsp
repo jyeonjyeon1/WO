@@ -18,14 +18,6 @@
 
      <!-- ========================= JS here ========================= -->
      <script src="resources/assets/js/jquery-3.6.0.js"></script> 
-     <script type="text/javascript">
-          jQuery(document).ready(function () {
-             $('#headers').load("header.user");
-             $('#footers').load("footer.user");  
-         });
-         //========= Hero Slider 
-     </script>
-    
 </head>
 
 <body>
@@ -238,7 +230,6 @@
                                     </div>
                                     
                                     <div class="row">
-                                        
                                         <div class="col-lg-2 col-md-6 col-sm-6">
                                      <h1>메뉴</h1>
                                     </div>

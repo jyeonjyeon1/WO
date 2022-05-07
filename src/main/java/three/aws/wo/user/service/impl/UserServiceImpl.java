@@ -1,23 +1,20 @@
 package three.aws.wo.user.service.impl;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import three.aws.wo.user.controller.IdPasswordNotMatchingException;
 import three.aws.wo.user.dao.UserDAO;
-import three.aws.wo.user.util.AuthInfo;
 import three.aws.wo.user.service.UserService;
+import three.aws.wo.user.util.AuthInfo;
 import three.aws.wo.user.util.LoginCommand;
 import three.aws.wo.user.vo.UserVO;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
 	
 	
 	@Autowired
-	@Resource(name="userDAO")
 	private UserDAO userDAO;
 	
 	@Override

@@ -1,38 +1,14 @@
 package three.aws.wo.user.controller;
 
-import java.lang.annotation.Annotation;
-
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
-import three.aws.wo.user.dao.UserDAO;
-import three.aws.wo.user.service.UserService;
-import three.aws.wo.user.util.AuthInfo;
-import three.aws.wo.user.util.LoginCommand;
-import three.aws.wo.user.vo.UserVO;
 
 @Controller
-public class UserController  implements Controller {
+public class UserController {
 
-//	==================== customer ============================
-
-//	@GetMapping("/faq.user")
-//	public String tofaqPage() {
-//		System.out.println("faq");
-//		return "/customer/customer_faq";
-//	}
 
 //	==================== inc ============================
 	@GetMapping("/footer.user")
@@ -62,7 +38,7 @@ public class UserController  implements Controller {
 
 	@GetMapping("/index.user")
 	public String toIndexPage() {
-		System.out.println("������Ʈ�ѷ� �Ե�");
+		System.out.println("index");
 		return "/index/index";
 	}
 
@@ -80,99 +56,26 @@ public class UserController  implements Controller {
 		return "/info/info_howToUse";
 	}
 
-//	@GetMapping("/privacyTerm.user")
-//	public String toprivacyTermPage() {
-//		System.out.println("privacyTerm");
-//		return "/info/info_privacyTerm";
-//	}
-
-//	@GetMapping("/storeInquiry.user")
-//	public String tostoreInquiryPage() {
-//		System.out.println("storeInquiry");
-//		return "/info/info_storeInquiry";
-//	}
-
-//	@GetMapping("/termOfService.user")
-//	public String totermOfServicePage() {
-//		System.out.println("termOfService");
-//		return "/info/info_termOfService";
-//	}
+	@GetMapping("/storeInquiry.user")
+	public String tostoreInquiryPage() {
+		System.out.println("storeInquiry");
+		return "/info/info_storeInquiry";
+	}
 
 //	==================== login ============================
 
-	@RequestMapping(value="/login_.user", method= {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView loginForm(LoginCommand loginCommand,
-                    @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
-        
-        if(rememberCookie!=null) {
-            loginCommand.setU_id(rememberCookie.getValue());
-            loginCommand.setRememberId(true);
-        }
-        
-        ModelAndView mv = new ModelAndView("/login/login_login");
-        return mv;
-    }
-	
-	@Resource(name="userService")
-    private UserService userSer;
- 
-    @RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView loginSuccess(@Valid LoginCommand loginCommand, BindingResult bindingResult,
-                                    HttpSession session, HttpServletResponse response) throws Exception {
- 
-        if(bindingResult.hasErrors()) {
-            ModelAndView mv = new ModelAndView("/login/login_login");
-            return mv;
-        }
-        
-        try {
-            
-            AuthInfo authInfo = userSer.loginAuth(loginCommand);
-            session.setAttribute("authInfo", authInfo);
-            
-            Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getU_id());
-            rememberCookie.setPath("/");
-            if(loginCommand.isRememberId()) {
-                rememberCookie.setMaxAge(60*60*24*7);
-            } else {
-                rememberCookie.setMaxAge(0);
-            }
-            response.addCookie(rememberCookie);
-            
-        } catch (IdPasswordNotMatchingException e) {
-            bindingResult.rejectValue("pw", "notMatch", "���̵�� ��й�ȣ�� �����ʽ��ϴ�.");
-            ModelAndView mv = new ModelAndView("/login/login_login");
-            return mv;
-        }
-        
-        ModelAndView mv = new ModelAndView("index/index");
-        return mv;
-    }
-
-
 	@GetMapping("/joined.user")
 	public String toregisterComplete() {
-		System.out.println("ȸ�����ԿϷ�");
 		return "/login/login_joined";
 	}
 
 	@GetMapping("/join.user")
 	public String toregisterPage(HttpSession session) {
 		if(session.getAttribute("userSession")==null) {
-			System.out.println("ȸ������ȭ��2");
 			return "/login/login_register2";
 		}else {
 			return "/index/index";
 		}
-	}
-	
-	@RequestMapping("/logout.user")
-	public String logout(HttpSession session) {
-		System.out.println("�α׾ƿ� ó��");
-		
-		session.invalidate();
-		
-		return "index/index";
 	}
 	
 //	==================== mypage ============================
@@ -218,10 +121,13 @@ public class UserController  implements Controller {
 		System.out.println("myWishList");
 		return "/mypage/mypage_myWishList";
 	}
-	
-	
-	
-//	==================== mypage ============================
+
+	@GetMapping("/myOrderList.user")
+	public String tomyOrderListPage() {
+		System.out.println("myOrderList");
+		return "/mypage/mypage_myOrderList";
+	}
+//	==================== order ============================
 
 	@GetMapping("/cart.user")
 	public String tocartPage() {
@@ -239,25 +145,5 @@ public class UserController  implements Controller {
 	public String tomyOrderPage() {
 		System.out.println("myOrder");
 		return "/order/order_myOrder";
-	}
-	
-	@GetMapping("/myOrderList.user")
-	public String tomyOrderListPage() {
-		System.out.println("myOrderList");
-		return "/order/order_myOrderList";
-	}
-	
-	
-
-	@Override
-	public Class<? extends Annotation> annotationType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String value() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

@@ -16,11 +16,11 @@
 		<result column="U_SMS_USABLE" property="u_sms_usable" jdbcType="BOOLEAN" />
 		<result column="U_EMAIL_USABLE" property="u_email_usable" jdbcType="BOOLEAN" />
 		<result column="U_STATUS" property="u_status" jdbcType="INTEGER" />
-<!-- 		<result column="u_regdate" property="u_regdate" jdbcType="TIMESTAMP" /> -->
+		<result column="U_REGDATE" property="u_regdate" jdbcType="TIMESTAMP" />
 <!-- 		<collection property="UserVO" resultMap="UserVO"></collection> -->
 	</resultMap>
 	
 	<select id="userList" resultType="UserVO" resultMap="userVO">
-		SELECT * FROM TEST_USER ORDER BY U_SEQ DESC
+		SELECT * FROM USERS ORDER BY U_SEQ DESC
 	</select>
 </mapper>

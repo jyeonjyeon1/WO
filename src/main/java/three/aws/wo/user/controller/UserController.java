@@ -56,11 +56,11 @@ public class UserController {
 		return "/info/info_howToUse";
 	}
 
-	@GetMapping("/storeInquiry.user")
-	public String tostoreInquiryPage() {
-		System.out.println("storeInquiry");
-		return "/info/info_storeInquiry";
-	}
+//	@GetMapping("/storeInquiry.user")
+//	public String tostoreInquiryPage() {
+//		System.out.println("storeInquiry");
+//		return "/info/info_storeInquiry";
+//	}
 
 //	==================== login ============================
 
@@ -129,12 +129,6 @@ public class UserController {
 	}
 //	==================== order ============================
 
-	@GetMapping("/cart.user")
-	public String tocartPage() {
-		System.out.println("cart");
-		return "/order/order_cart";
-	}
-	
 	@GetMapping("/menuList.user")
 	public String tomenuListPage() {
 		System.out.println("menuList");

@@ -7,8 +7,8 @@
 		SELECT * FROM BASKET 
 		WHERE U_ID = #{u_id}
 	</select>
-	
 	<insert id="insertCartItem" parameterType="BasketVO">
+	
 	</insert>
 	
 	<update id="updateCartItem" parameterType="BasketVO">

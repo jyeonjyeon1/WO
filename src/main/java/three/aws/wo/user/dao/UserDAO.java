@@ -39,9 +39,6 @@ public class UserDAO {
 	}
 
 
-	public UserVO selectById(String u_id) {
-		return sqlSession.selectOne("UserDAO.selectById", u_id);
 
-	}
 
 }

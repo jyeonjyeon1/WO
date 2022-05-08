@@ -1,7 +1,5 @@
 package three.aws.wo.user.service;
 
-import three.aws.wo.user.util.AuthInfo;
-import three.aws.wo.user.util.LoginCommand;
 import three.aws.wo.user.vo.UserVO;
 
 public interface UserService {
@@ -13,6 +11,5 @@ public interface UserService {
 	void updateUser(UserVO vo);
 	void deleteUser(UserVO vo);
 	UserVO getUser(UserVO vo);
-	AuthInfo loginAuth(LoginCommand loginCommand) throws Exception;
 	
 }

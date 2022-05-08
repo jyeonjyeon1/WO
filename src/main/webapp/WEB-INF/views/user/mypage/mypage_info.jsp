@@ -84,15 +84,13 @@ input::-webkit-inner-spin-button {
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
-	var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8;
+	var ch1, ch2, ch3, ch4, ch5, ch6;
 	ch1 = false;//CheckId
 	ch2 = false;//regPassword
 	ch3 = false;//Passwork recheck match
 	ch4 = false;//regName
 	ch5 = false;//phone authentication
 	ch6 = false;//regEmail
-	ch7 = false;//Terms agreed
-	ch8 = false;//Pricacyterms agreed
 	// 정규식 친구들
 	var regId = /^[a-zA-Z0-9]{4,14}$/;
 	var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
@@ -224,28 +222,10 @@ input::-webkit-inner-spin-button {
 							}
 						});
 
-				$("#termsAccept").click(function() {
-					$('#termsCheckbox').prop('checked', true);
-					ch7 = true;
-				});
-				$("#privacyAccept").click(function() {
-					$('#privacyCheckbox').prop('checked', true);
-					ch8 = true;
-				});
 			});
 
 	function finalCheck() {
-		if (!ch7) {
-			Swal.fire({
-				icon : "error",
-				text : "이용약관 미동의"
-			});
-		} else if (!ch8) {
-			Swal.fire({
-				icon : "error",
-				text : "개인정보처리방침 미동의"
-			});
-		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8) {
+		if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6) {
 			document.regForm.submit();
 		} else {
 			Swal.fire({

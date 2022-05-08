@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import three.aws.wo.admin.service.AStoreService;
@@ -54,6 +55,12 @@ public class AdminStoreController {
 		aStoreService.insertStoreInquiry(vo);
 		System.out.println("입점문의등록 DB확인");
 		return "redirect:/index.user";
+	}
+	
+	@GetMapping("/storeInquiry.user")
+	public String tostoreInquiryPage() {
+		System.out.println("storeInquiry");
+		return "/info/info_storeInquiry";
 	}
 	
 }

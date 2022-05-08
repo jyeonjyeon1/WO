@@ -2,38 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserDAO">
-	<insert id="insertUser" parameterType="UserVO">
-		INSERT INTO USERS
-		(U_ID, U_PASSWORD, U_NAME, U_EMAIL, U_SMS_USABLE,U_EMAIL_USABLE,
-		U_TEL)
-		VALUES(#{u_id}, #{u_password}, #{u_name}, #{u_email},
-		#{u_sms_usable}, #{u_email_usable}, #{u_tel})
-	</insert>
-	<select id="idCheck" resultType="int">
-		SELECT COUNT(*) FROM USERS
+<mapper namespace="UserOrderDAO">
+	<select id="cartList" resultType="BasketVO" parameterType="BasketVO">
+		SELECT * FROM BASKET 
 		WHERE U_ID = #{u_id}
 	</select>
-	<select id="telCheck" parameterType="UserVO" resultType="int">
-		SELECT
-		COUNT(*) FROM USERS WHERE U_TEL = #{u_tel}
-	</select>
-	<select id="emailCheck" parameterType="UserVO" resultType="int">
-		SELECT COUNT(*) FROM USERS WHERE U_EMAIL = #{u_email}
-	</select>
+	<insert id="insertCartItem" parameterType="BasketVO">
 	
-	<update id="updateUser" parameterType="UserVO">
-		UPDATE USERS
-		SET U_PASSWORD= #{u_password}, U_NAME = #{u_name}, U_TEL = #{u_tel}, U_EMAIL = #{u_email}, U_SMS_USABLE = #{u_sms_usable}, U_EMAIL_USABLE = #{u_email_usable}
-		WHERE u_id = #{u_id}
+	</insert>
+	
+	<update id="updateCartItem" parameterType="BasketVO">
 	</update>
 
-	<delete id="deleteUser" parameterType="UserVO">
-		DELETE FROM USERS WHERE u_id = #{u_id} AND u_password= #{u_password} 
+	<delete id="deleteCartUser" parameterType="BasketVO">
 	</delete>
-	
-	<select id="selectById" resultType="UserVO">
-        <![CDATA[ SELECT * FROM USERS WHERE u_id = #{u_id} ]]>
-    </select>
 </mapper>
  

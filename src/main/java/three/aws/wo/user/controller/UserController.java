@@ -135,9 +135,4 @@ public class UserController {
 		return "/order/order_menuList";
 	}
 	
-	@GetMapping("/myOrder.user")
-	public String tomyOrderPage() {
-		System.out.println("myOrder");
-		return "/order/order_myOrder";
-	}
 }

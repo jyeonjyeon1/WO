@@ -4,17 +4,40 @@
 
 <mapper namespace="UserOrderDAO">
 	<select id="cartList" resultType="BasketVO" parameterType="BasketVO">
-		SELECT * FROM BASKET 
+		SELECT * FROM BASKET b
+		INNER JOIN
+		MENU m
+		ON (b.M_CODE = m.M_CODE)
+		INNER JOIN
+		STORE_INFO s
+		ON (b.SI_CODE = s.SI_CODE)
 		WHERE U_ID = #{u_id}
+		ORDER BY B_SEQ ASC
+	</select>
+	<select id="cartStore" resultType="StoreVO" parameterType="StoreVO">
+		SELECT * FROM STORE_INFO WHERE 
+		SI_CODE = 
+		(SELECT SI_CODE FROM BASKET
+		WHERE U_ID = #{u_id} LIMIT 1);
 	</select>
 	<insert id="insertCartItem" parameterType="BasketVO">
 	
 	</insert>
 	
-	<update id="updateCartItem" parameterType="BasketVO">
+	<update id="updateCart">
+		UPDATE BASKET 
+		SET 
+		B_QUANTITY = #{b_quantity}, 
+		B_TOTAL_PRICE = #{b_total_price} 
+		WHERE 
+		B_SEQ = #{b_seq}
 	</update>
 
-	<delete id="deleteCartUser" parameterType="BasketVO">
+	<select id="removeCartCheck" resultType="int">
+		SELECT COUNT(*) FROM BASKET WHERE B_SEQ = #{b_seq}
+	</select>
+	<delete id="removeCart" parameterType="BasketVO">
+		DELETE FROM BASKET WHERE B_SEQ = #{b_seq}
 	</delete>
 </mapper>
  

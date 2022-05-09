@@ -10,7 +10,7 @@
 		U_PASSWORD = #{u_password}
 	</select>
 	<select id="loggedin" resultType="UserVO" parameterType="UserVO">
-		SELECT * FROM USERS 
+		SELECT * FROM USERS
 		WHERE U_ID = #{u_id} 
 	</select>
 	

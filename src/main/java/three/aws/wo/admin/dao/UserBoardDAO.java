@@ -1,5 +1,6 @@
 package three.aws.wo.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -54,4 +55,10 @@ public class UserBoardDAO {
 		return sqlSession.selectList("UserBoardDAO.eventList");
 	}
 	
+	
+	////////////////////////////////////////////////////////
+	
+	public void updateVisits(HashMap<String, Integer> param) {
+		sqlSession.update("UserBoardDAO.updateVisits",param);		
+	}
 }

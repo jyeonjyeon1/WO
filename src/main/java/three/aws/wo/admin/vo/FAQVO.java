@@ -9,6 +9,7 @@ public class FAQVO {
 	private String fac_type;
 	private String fac_title;
 	private String fac_content;
+	private int fac_visits;
 
 }
 

@@ -18,8 +18,9 @@
 		SELECT * FROM TERMS WHERE T_TYPE ='term'
 	</select>
 	
-	<select id="temrs_title_List" resultType="TermsVO" resultMap="terms_title_VO">
-		select distinct t_title from terms where t_type ='term' order by t_title;
+	<select id="infoList" resultType="TermsVO" resultMap="termsVO">
+		SELECT * FROM TERMS WHERE T_TYPE ='privacy'
 	</select>
+	
 	
 </mapper>

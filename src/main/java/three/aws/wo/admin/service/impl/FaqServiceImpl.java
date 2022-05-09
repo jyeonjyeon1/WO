@@ -1,5 +1,6 @@
 package three.aws.wo.admin.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,12 @@ public class FaqServiceImpl implements FaqService {
 		return userBoardDAO.eventList();
 	}
 
+	
+	////////////////////////////////////
+	
+	@Override
+	public void updateVisits(HashMap<String, Integer> param) {
+		userBoardDAO.updateVisits(param);	
+	}
 	
 }

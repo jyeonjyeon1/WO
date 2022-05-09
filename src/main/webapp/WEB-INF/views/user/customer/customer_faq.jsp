@@ -124,8 +124,30 @@
       $('#footers').load("footer.html");
     });
          //========= Hero Slider
-  </script>
-
+         
+  
+	function count_num(visits, seq) {
+		visits++;
+		
+		var param = {
+				"fac_visits" : visits,
+				"fac_seq" : seq
+				};
+		  $.ajax({
+	             type: "POST",
+	             url: "/updateVisits.user",
+	             data: JSON.stringify(param),
+	             dataType: "json",
+	             contentType: "application/json",
+	          success:function(data){
+	        	  console.log("성공");
+	          },
+	          error:function(data){
+	        	  console.log("실패");
+	          }
+	       });
+	}
+	</script>
 
 </head>
 
@@ -183,7 +205,7 @@
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-11${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-11${vs.index}">
+                            aria-controls="panelsStayOpen-11${vs.index}" onclick="count_num(${toptenList.fac_visits}, ${toptenList.fac_seq});">
                             ${toptenList.fac_title}
                           </button>
                         </h2>
@@ -218,7 +240,7 @@
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-12${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-12${vs.index}">
+                            aria-controls="panelsStayOpen-12${vs.index}" onclick="count_num(${orderfaqList.fac_visits}, ${orderfaqList.fac_seq});">
                             ${orderfaqList.fac_title}
                           </button>
                         </h2>
@@ -253,7 +275,7 @@
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-13${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-13${vs.index}">
+                            aria-controls="panelsStayOpen-13${vs.index}" onclick="count_num(${cancelList.fac_visits}, ${cancelList.fac_seq});">
                             ${cancelList.fac_title}
                           </button>
                         </h2>
@@ -288,7 +310,7 @@
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-14${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-14${vs.index}">
+                            aria-controls="panelsStayOpen-14${vs.index}" onclick="count_num(${userfaqList.fac_visits}, ${userfaqList.fac_seq});">
                             ${userfaqList.fac_title}
                           </button>
                         </h2>
@@ -322,7 +344,7 @@
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-15${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-15${vs.index}">
+                            aria-controls="panelsStayOpen-15${vs.index}" onclick="count_num(${pointfaqList.fac_visits}, ${pointfaqList.fac_seq});">
                             ${pointfaqList.fac_title}
                           </button>
                         </h2>
@@ -350,20 +372,20 @@
                     <!-- top10의 1 -->
                     
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="pointfaqList" items="${pointfaqList}" varStatus="vs">
+                      <c:forEach var="etcfaqList" items="${etcfaqList}" varStatus="vs">
                       
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-15${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-15${vs.index}">
-                            ${pointfaqList.fac_title}
+                            aria-controls="panelsStayOpen-15${vs.index}" onclick="count_num(${etcfaqList.fac_visits}, ${etcfaqList.fac_seq});">
+                            ${etcfaqList.fac_title}
                           </button>
                         </h2>
                         <div id="panelsStayOpen-15${vs.index}" class="accordion-collapse collapse"
                           aria-labelledby="panelsStayOpen-headingOne">
                           <div class="accordion-body">
-                            ${pointfaqList.fac_content}
+                            ${etcfaqList.fac_content}
                           </div>
                         </div>
                       </div>

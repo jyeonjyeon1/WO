@@ -1,5 +1,6 @@
 package three.aws.wo.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import three.aws.wo.admin.vo.FAQVO;
@@ -21,4 +22,6 @@ public interface FaqService {
 	List<NoticeVO> newsList();
 	List<NoticeVO> noticeList();
 	List<NoticeVO> eventList();
+	
+	void updateVisits(HashMap<String, Integer> param);
 }

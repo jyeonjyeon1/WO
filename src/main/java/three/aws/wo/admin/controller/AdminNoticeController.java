@@ -1,12 +1,15 @@
 package three.aws.wo.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.service.FaqService;
 import three.aws.wo.admin.vo.FAQVO;
@@ -53,6 +56,14 @@ public class AdminNoticeController {
 		model.addAttribute("eventList" ,eventList);
 		
 		return "/customer/customer_faq";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateVisits.user")
+	public int updateVisits(@RequestBody HashMap<String, Integer> param) throws Exception {
+		System.out.println(param);
+		noticeService.updateVisits(param);
+		return 0;
 	}
 	
 }

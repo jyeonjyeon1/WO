@@ -28,6 +28,9 @@
 		<result column="SI_USESTORE" property="si_usestore" jdbcType="VARCHAR" />
 		<result column="SA_EMAIL" property="sa_email" jdbcType="VARCHAR" />
 		<result column="SA_PASSWORD" property="sa_password" jdbcType="VARCHAR" />
+		
+ 		<result column="SA_BUSINESS_REGISTRATION_IMAGE" property="sa_business_registration_image" jdbcType="VARCHAR" />
+		<result column="SA_BANKBOOK_IMAGE" property="sa_bankbook_image" jdbcType="VARCHAR" />
 <!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
 	</resultMap>
 	<resultMap type="FranchiseVO" id="franchiseVO">
@@ -66,8 +69,12 @@
 		VALUES(#{si_name}, #{si_code}, #{si_zipcode}, #{si_address}, #{si_address} , #{si_addr_detail}, #{si_tel},
 		#{si_open}, #{si_close}, #{si_parking_able}, #{si_usestore}, #{si_referinfo})
 	</insert>
-	<insert id="insertStoreAccount" parameterType="StoreVO">
+<!-- 	<insert id="insertStoreAccount" parameterType="StoreVO">
 		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL)
 		VALUES(#{si_code}, #{sa_password}, #{si_code}, #{sa_email})
-	</insert>
+	</insert> -->
+	<insert id="insertStoreAccount" parameterType="StoreVO">
+		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL, SA_BUSINESS_REGISTRATION_IMAGE, SA_BANKBOOK_IMAGE)
+		VALUES(#{si_code}, #{sa_password}, #{si_code}, #{sa_email}, #{sa_business_registration_image}, #{sa_bankbook_image})
+	</insert> 
 </mapper>

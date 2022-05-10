@@ -5,6 +5,7 @@
 
 <head>
 <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="Dashboard">
@@ -16,7 +17,7 @@
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
 <link href="resources/assets/images/admin/apple-touch-icon.png"
 	rel="apple-touch-icon">
-
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
 <!-- Bootstrap core CSS -->
 
 <!--external css-->
@@ -261,8 +262,11 @@
 											value="사업자등록증" style="margin-right: 5px;">
 									</div>
 									<div class="col-lg-4" style="padding: 0;">
-										<input id="" type="file" class="grey__button" value="수정"
-											name="">
+									
+<!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 -->
+										<input id="businessreg" type="file" class="grey__button" accept="image/*"
+											name="sa_business_registration_image">
+											
 									</div>
 									<div class="col-sm-4">&nbsp;</div>
 									<div class="col-sm-4">&nbsp;</div>
@@ -272,8 +276,11 @@
 											value="통장사본">
 									</div>
 									<div class="col-lg-4" style="padding: 0;">
-										<input id="" type="file" class="grey__button" value="수정"
-											name="">
+									
+<!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 --><!-- 수정해야될곳 -->
+										<input id="bankcopy" type="file" class="grey__button" accept="image/*"
+											name="sa_bankbook_image">
+											
 									</div>
 								</div>
 								<div class="form-group">
@@ -448,6 +455,68 @@
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	function fileUpload(){
+		var fileInput = document.getElementsByClassName("ex_file");
+
+		for( var i=0; i<fileInput.length; i++ ){
+			if( fileInput[i].files.length > 0 ){
+				for( var j = 0; j < fileInput[i].files.length; j++ ){
+					console.log(fileInput[i].files[j].name); // 파일명 출력
+				}
+			}
+		}
+
+	}
+	 // 사업자등록증 업로드 
+    uploadImgbusinessreg = () => {
+        AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: 'ap-northeast-2:52319aff-fb44-4474-a806-e15724f49133',
+            })
+        })
+
+        let files = document.getElementById('businessreg').files;
+        let file = files[0];
+        let fileNamebusinessreg = file.name;
+
+        let upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: 'walkingorder/businessreg',
+                Key: fileNamebusinessreg,
+                Body: file
+            }
+        })
+
+        const promise = upload.promise();
+        
+    }
+
+    // 통장사본 업로드 
+    uploadImgbankcopy = () => {
+        AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: 'ap-northeast-2:52319aff-fb44-4474-a806-e15724f49133',
+            })
+        })
+
+        let files = document.getElementById('bankcopy').files;
+        let file = files[0];
+        let fileNamebankcopy = file.name;
+
+        let upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: 'walkingorder/bankcopy',
+                Key: fileNamebankcopy,
+                Body: file
+            }
+        })
+
+        const promise = upload.promise();
+        
+    }
+    
     function getPostCode() {
       new daum.Postcode({
         oncomplete: function (data) {
@@ -559,6 +628,8 @@
 	
 	function finalCheck(){
 	if(ch1 && ch5 && ch6 && $("#post__code").val()!=''&& $("#road__Address").val()!=''	) {
+		uploadImgbusinessreg();
+		uploadImgbankcopy();
 		document.storeRegForm.submit();
 	}else{
 		Swal.fire({
@@ -570,6 +641,7 @@
     
     
   </script>
+  
 </body>
 
 </html>

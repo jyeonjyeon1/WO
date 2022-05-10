@@ -326,7 +326,7 @@
                                 -->
                                 
                                 <div class="pagination">
-	<a href="#" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>
+	<a href="pagingProcess.user" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>
 	<a href="#" id="pageNum" data-num="2" onclick="paging()">2</a>
 	<a href="#" id="pageNum" data-num="3" onclick="paging()">3</a>
 	<a href="#" id="pageNum" data-num="4" onclick="paging()">4</a>
@@ -453,7 +453,7 @@
 
                                     <div style="display:inline-block ">
                                         <div class="product__pagination" style="margin:auto;">
-                                            <a href="#">1</a>
+                                            <a href="">1</a>
                                             <a href="#">2</a>
                                             <a href="#">3</a>
                                             <a href="#">

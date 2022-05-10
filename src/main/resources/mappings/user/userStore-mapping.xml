@@ -51,17 +51,16 @@
       ORDER BY SI_SEQ DESC
       LIMIT 4
 
-	</select>
+	</select> 
 	
     <select id="UserPageChange" resultType="StoreVO">
-	SELECT *
-      FROM STORE_INFO a
+	SELECT * FROM
+      STORE_INFO a 
       JOIN
-      STORE_ACCOUNT b
+      STORE_ACCOUNT b 
       USING (SI_CODE)
+      WHERE SI_SEQ BETWEEN #{startNum} AND 10
       ORDER BY SI_SEQ DESC
-     LIMIT #{startPageNum}	
-
 	</select> 
 	
 	

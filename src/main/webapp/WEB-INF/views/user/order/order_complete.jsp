@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +35,7 @@
 					<label>주문일시</label>
 				</div>
 				<div class="col-6" style="padding-left: 10px;">
-					<label> el 태그써서 가져옴 </label>
+					<label> ${completeOrder.o_order_date} </label>
 				</div>
 			</div>
 			<div class="row">
@@ -41,7 +43,7 @@
 					<label>주문번호</label>
 				</div>
 				<div class="col-6" style="padding-left: 10px;">
-					<label> el 태그써서 가져옴 </label>
+					<label> ${completeOrder.o_code} </label>
 				</div>
 			</div>
 			<hr>
@@ -50,7 +52,7 @@
 					<label>주문목록</label>
 				</div>
 				<div class="col-6" style="padding-left: 10px;">
-					<label> el 태그써서 가져옴 </label>
+					<label> ${completeOrder.o_list} </label>
 				</div>
 			</div>
 			<div class="row">
@@ -58,7 +60,7 @@
 					<label>요청사항</label>
 				</div>
 				<div class="col-6" style="padding-left: 10px;">
-					<label> el 태그써서 가져옴 </label>
+					<label> ${completeOrder.o_request} </label>
 				</div>
 			</div>
 			<hr>
@@ -67,7 +69,8 @@
 					<label>결제금액</label>
 				</div>
 				<div class="col-6" style="padding-left: 10px;">
-					<label> 100원 </label>
+					<label> <fmt:formatNumber value="${completeOrder.o_total_price}"
+														pattern="###,###" />원 </label>
 				</div>
 			</div>
 		</div>

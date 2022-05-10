@@ -10,9 +10,10 @@ public class OrdersVO {
 	private String o_code;
 	private String u_id;	
 	private String si_code;
-	private Date o_order_date;
+	private String o_order_date;
 	private boolean o_coupon_status;
 	private String c_code;
+	private String o_list;
 	private boolean o_point_status;
 	private String o_point;
 	private String o_payment_list;
@@ -20,5 +21,7 @@ public class OrdersVO {
 	private int o_discount_price;
 	private int o_total_price;
 	private String o_order_state;
+	private int o_daily_seq;
+	private boolean o_payment_status;
 
 }

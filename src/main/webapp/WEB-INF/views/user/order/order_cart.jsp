@@ -79,7 +79,7 @@
 						<div class="order_store"
 							style="text-align: left; margin: 10px 0px;">
 							<h6 style="font-size: 20px;">${cartStore.si_name} ${cartStore.si_loc}</h6>
-							<h6 style="font-size: 13px; color: rgba(0, 0, 0, 0.575);">서울
+							<h6 style="font-size: 13px; color: rgba(0, 0, 0, 0.575);">
 								${cartStore.si_addr_road} ${cartStore.si_addr_detail}</h6>
 						</div>
 					</div>

@@ -39,5 +39,36 @@
 	<delete id="removeCart" parameterType="BasketVO">
 		DELETE FROM BASKET WHERE B_SEQ = #{b_seq}
 	</delete>
+	
+	<select id="dailySeq" resultType="int">
+<!-- 		SELECT MAX(LPAD(o_daily_seq::text,4,'0')) FROM ORDERS  -->
+		SELECT MAX(o_daily_seq) FROM ORDERS
+		WHERE 
+		SUBSTRING(CAST(o_order_date AS TEXT),1,10) = CAST(CURRENT_DATE AS TEXT)
+	</select>
+	<insert id="insertOrder">
+		INSERT INTO ORDERS VALUES(default, #{o_code},#{u_id},#{si_code},default,false,null,false,0,'카드',#{o_request},0,#{o_total_price},'전달완료',#{o_list},#{o_daily_seq})
+	</insert>
+	<update id="successOrder">
+		UPDATE ORDERS
+		SET
+		O_PAY_STATUS = true
+		WHERE
+		O_CODE = #{o_code}
+	</update>
+	<delete id="resetCart">
+		DELETE FROM BASKET WHERE
+		U_ID = #{u_id}
+	</delete>
+	<select id="orderComplete" resultType="OrdersVO">
+		SELECT
+		to_char(o_order_date, 'YYYY-MM-DD HH24:MI:SS') AS o_order_date,
+		O_CODE,
+		O_LIST,
+		O_REQUEST,
+		O_TOTAL_PRICE
+		FROM ORDERS WHERE O_CODE = #{o_code}
+	</select>
+	
 </mapper>
  

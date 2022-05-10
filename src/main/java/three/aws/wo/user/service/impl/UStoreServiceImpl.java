@@ -1,5 +1,6 @@
 package three.aws.wo.user.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +20,14 @@ public class UStoreServiceImpl implements UStoreService {
 	}
 	
 	@Override
-	public List<StoreVO> storeListByPage(){
-		return uStoreDAO.storeListByPage();
+	public List<StoreVO> storeListByPage(String SearchWord){
+		return uStoreDAO.storeListByPage(SearchWord);
 	}
 	
 
 	@Override
-	public List<StoreVO> UserPageChange(int startPageNum) {
-		return uStoreDAO.UserPageChange(startPageNum);
+	public List<StoreVO> UserPageChange(HashMap<String, Integer> param) {
+		return uStoreDAO.UserPageChange(param);
 	}
 	
 	

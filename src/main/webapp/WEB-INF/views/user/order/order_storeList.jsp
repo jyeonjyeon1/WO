@@ -46,6 +46,13 @@
             		data: {"pageNum" : pageNum},
             		success:function(data){
             			console.log("보내짐")
+            			console.log(data)
+            			/* $.each(data, function(index,item)) {
+            				$("#demo").append(index + "");
+            				$("#demo").append(item.si_name + "");
+            				
+            			} */
+            			
             		},
             		error:function(data){
             			console.log("에러")
@@ -54,7 +61,9 @@
             	})
         	});
         	
-        });   
+        });
+            
+            //paging처리 
             
                        
             
@@ -156,7 +165,11 @@
             <div class="tapsection" id="content1">
 					
 	                <div class="product__details__tab__desc">
-                    <div class="row"></div>
+                    <div class="row"><select id="dataPerPage" style="width: 100px; margin:20px;">
+        <option value="10">10개씩보기</option>
+        <option value="15">15개씩보기</option>
+        <option value="20">20개씩보기</option>
+</select></div>
                     <!-- 검색결과 -->
                     <!-- 재우스 -->
                     <section class="">
@@ -218,7 +231,7 @@
 										
 									</c:forEach>
 								
-								<!-- 매장list start(4개데이터가나와야함) -->
+								<!-- 매장list start(4개데이터가나와야함) 
 									<c:forEach var="storeListByPage" items="${storeListByPage}" varStatus="vs">
 									
 						
@@ -272,7 +285,7 @@
 										
 										
 									</c:forEach>
-									<!-- 매장 list 끝 -->
+									 매장 list 끝 -->
 			
                                 
                                <!--   매장 한개 
@@ -326,7 +339,7 @@
                                 -->
                                 
                                 <div class="pagination">
-	<a href="pagingProcess.user" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>
+	<a href="#" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>
 	<a href="#" id="pageNum" data-num="2" onclick="paging()">2</a>
 	<a href="#" id="pageNum" data-num="3" onclick="paging()">3</a>
 	<a href="#" id="pageNum" data-num="4" onclick="paging()">4</a>

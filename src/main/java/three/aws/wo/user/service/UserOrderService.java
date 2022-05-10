@@ -5,6 +5,7 @@ import java.util.List;
 
 import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.BasketVO;
+import three.aws.wo.user.vo.OrdersVO;
 
 public interface UserOrderService {
 	List<BasketVO> cartList(String u_id);
@@ -13,4 +14,14 @@ public interface UserOrderService {
 	void removeCart(int b_seq);
 	StoreVO cartStore(String u_id);
 	void updateCart(HashMap<String, Integer> param);
+
+	int dailySeq();
+
+	void insertOrder(HashMap<String, Object> insertInfo);
+
+	void successOrder(String o_code);
+
+	void resetCart(String u_id);
+
+	OrdersVO orderComplete(String o_code);
 }

@@ -10,6 +10,7 @@ import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.dao.UserOrderDAO;
 import three.aws.wo.user.service.UserOrderService;
 import three.aws.wo.user.vo.BasketVO;
+import three.aws.wo.user.vo.OrdersVO;
 @Service
 public class UserOrderServiceImpl implements UserOrderService {
 	@Autowired
@@ -38,6 +39,31 @@ public class UserOrderServiceImpl implements UserOrderService {
 	@Override
 	public void updateCart(HashMap<String, Integer> param) {
 		userOrderDAO.updateCart(param);
+	}
+
+	@Override
+	public int dailySeq() {
+		return userOrderDAO.dailySeq();
+	}
+
+	@Override
+	public void insertOrder(HashMap<String, Object> insertInfo) {
+		userOrderDAO.insertOrder(insertInfo);
+	}
+
+	@Override
+	public void successOrder(String o_code) {
+		userOrderDAO.successOrder(o_code);
+	}
+
+	@Override
+	public void resetCart(String u_id) {
+		userOrderDAO.resetCart(u_id);
+	}
+
+	@Override
+	public OrdersVO orderComplete(String o_code) {
+		return userOrderDAO.orderComplete(o_code);
 	}
 
 }

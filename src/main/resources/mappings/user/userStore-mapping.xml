@@ -48,8 +48,9 @@
       JOIN
       STORE_ACCOUNT b
       USING (SI_CODE)
+      WHERE SI_NAME LIKE '%' || #{SearchWord} || '%'
       ORDER BY SI_SEQ DESC
-      LIMIT 4
+     
 
 	</select> 
 	
@@ -59,7 +60,7 @@
       JOIN
       STORE_ACCOUNT b 
       USING (SI_CODE)
-      WHERE SI_SEQ BETWEEN #{startNum} AND 10
+      WHERE SI_SEQ BETWEEN #{startPageNum} AND #{endPageNum}
       ORDER BY SI_SEQ DESC
 	</select> 
 	

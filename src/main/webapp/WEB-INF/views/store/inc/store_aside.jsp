@@ -40,7 +40,7 @@
           <h5 class="centered">더리터 위례점</h5>
           <p class="sidebar-title" >주문 확인</p>
           <li class="sub-menu">
-            <a class="active" href="index.html">
+            <a class="active" href="index.store">
               <i class="fa fa-h-square"></i>
               <span>HOME</span>
               </a>

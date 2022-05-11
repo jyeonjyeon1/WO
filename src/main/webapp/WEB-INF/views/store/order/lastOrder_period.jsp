@@ -72,27 +72,12 @@
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
     <!--header start-->
-    <header class="header black-bg">
-      <div class="sidebar-toggle-box">
-        <div class="openup tooltips" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
-      </div>
-      <!--logo start-->
-      <a href="../index.html" class="logo"><b>walking<span>order</span></b></a>
-      <!--logo end-->
-      <div class="nav notify-row" id="top_menu">
-        
-      </div>
-      <div class="top-menu">
-        <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="../login.html">Logout</a></li>
-        </ul>
-      </div>
-    </header>    <!--header end-->
+    <%@ include file="../inc/store_header.jsp" %>
     <!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
-    <aside>
+<aside>
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
@@ -100,25 +85,25 @@
           <h5 class="centered">더리터 위례점</h5>
           <p class="sidebar-title" >주문 확인</p>
           <li class="sub-menu">
-            <a href="../index.html">
+            <a href="index.store">
               <i class="fa fa-h-square"></i>
               <span>HOME</span>
               </a>
           </li>
           <li class="sub-menu">
-            <a class="active dcjq-parent" href="javascript:void(0);">
-              <i class="fa fa-h-square"></i>
-              <span>지난주문</span>
+            <a id="store-manage" class="active dcjq-parent" href="javascript:;">
+              <i class="fa fa-group" style="font-size: 12px;"></i>
+              <span>지난 주문</span>
               </a>
-              <ul class="sub">
-                <li><a id="store-mng" href="/views_store/order/lastOrder_oneday.html">당일주문</a></li>
-                <li><a class="active" id="store-menu" href="/views_store/order/lastOrder_period.html">기간주문</a></li>
-              </ul>
+            <ul class="sub">
+              <li><a id="store-mng" href="Ooneday.store">당일주문</a></li>
+              <li><a class="active" id="store-menu" href="Operiod.store">기간주문</a></li>
+            </ul>
           </li>
           
           <p class="sidebar-title" >Self Service</p>
           <li class="sub-menu">
-            <a id="user-manage" href="/views_store/reviews/reviews.html">
+            <a id="user-manage" href="reviews.store">
               <i class="fa fa-user" style="font-size: 15px;"></i>
               <span>&nbsp;리뷰관리</span>
               </a>
@@ -129,8 +114,8 @@
               <span>메뉴 관리</span>
               </a>
             <ul class="sub">
-             <li><a id="store-mng" href="/views_store/menu/menu_crud.html">메뉴관리 (추가 / 수정)</a></li>
-              <li><a id="store-menu" href="/views_store/menu/menu_pumjeol.html">품절 관리</a></li>
+              <li><a id="store-mng" href="CRUD.store">메뉴관리 (추가 / 수정)</a></li>
+              <li><a id="store-menu" href="pumjeol.store">품절 관리</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -139,12 +124,12 @@
               <span>매장 정보 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="total-order" href="/views_store/info/info_basic.html">기본정보 변경</a></li>
-              <li><a id="store-order" href="/views_store/info/info_manage.html">운영 정보 변경</a></li>
-             
-            </ul>
+              <li><a id="total-order" href="basic.store">기본정보 변경</a></li>
+              <li><a id="store-order" href="manage.store">운영 정보 변경</a></li>
+             </ul>
           </li>
           
+
 
           <p class="sidebar-title" >정산</p>
           <li class="sub-menu">
@@ -153,8 +138,9 @@
               <span>정산</span>
               </a>
             <ul class="sub">
-             <li><a id="pg-comm" href="/views_store/calculate/calculate_today.html">오늘 매출</a></li>
-              <li><a id="pg-stlmt" href="/views_store/calculate/calculate_period.html">기간 매출 정산</a></li>
+              <li><a id="pg-comm" href="SOneday.store">오늘 매출</a></li>
+              <li><a id="pg-stlmt" href="SPeriod.store">기간 매출 정산</a></li>
+             
             </ul>
           </li>
           
@@ -397,7 +383,7 @@ $('#datepicker1').datepicker();
   <!--script for this page-->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
-  <script src="resources/assets/js/admin/datatable/datatable-modified.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
   <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 
 </body>

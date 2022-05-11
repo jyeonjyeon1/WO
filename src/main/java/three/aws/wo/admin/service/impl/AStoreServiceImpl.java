@@ -40,4 +40,9 @@ public class AStoreServiceImpl implements AStoreService {
 		
 	}
 
+	@Override
+	public void storeInqAccept(int f_seq) {
+		aStoreDAO.storeInqAccept(f_seq);
+	}
+
 }

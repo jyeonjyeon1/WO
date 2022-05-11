@@ -12,4 +12,5 @@ public interface AStoreService {
 	
 	List<FranchiseVO> storeInquiryList();
 	void insertStoreInquiry(FranchiseVO vo);
+	void storeInqAccept(int f_seq);
 }

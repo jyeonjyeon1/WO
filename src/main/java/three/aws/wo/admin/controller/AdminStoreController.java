@@ -99,7 +99,13 @@ public class AdminStoreController {
 	@GetMapping("/register.store")
 	public String storeReg() {
 		System.out.println("storeRegForm");
-		return "/storeRegForm";
+		return "/reg/storeRegForm";
+	}
+	//입점문의 2단계 완료폼
+	@GetMapping("/registed.store")
+	public String storeRegComp() {
+		System.out.println("storeRegComp");
+		return "/reg/storeRegComp";
 	}
 	//register.store 등록 매핑
 	@RequestMapping("/regisStoreForm.admin")
@@ -113,7 +119,7 @@ public class AdminStoreController {
 		vo.setSf_business_registration_image(bussUrl+sf_code+sf_buss);
 		aStoreService.insertStoreForm(vo);
 		System.out.println("승인목록 확인+ DB확인");
-		return "redirect:/index.user";
+		return "redirect:/registed.store";
 	}
 	
 	@GetMapping("/store_pending.admin")

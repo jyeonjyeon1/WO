@@ -42,7 +42,7 @@
 	<section id="container">
 	<header class="header black-bg">
       <div class="sidebar-toggle-box">
-        <div class="openup tooltips" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
+        <img src="resources/assets/images/admin/logo/logo_white.svg" width="25">
       </div>
       <!--logo start-->
       <a class="logo"><b>walking<span>order</span></b></a>

@@ -168,7 +168,7 @@
 													          }
 													       }); //ajax 끝
 													  }
-													})
+													});
 											}
 											function count${vs.index}(type) {
 												// 결과를 표시할 element

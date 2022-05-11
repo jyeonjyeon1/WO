@@ -27,4 +27,7 @@
 	<select id="noticeList" resultType="NoticeVO">
 		SELECT * FROM NOTICE_BOARD ORDER BY N_SEQ DESC
 	</select>
+	
+
+	
 </mapper>

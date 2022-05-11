@@ -77,4 +77,12 @@
 		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL, SA_BUSINESS_REGISTRATION_IMAGE, SA_BANKBOOK_IMAGE)
 		VALUES(#{si_code}, #{sa_password}, #{si_code}, #{sa_email}, #{sa_business_registration_image}, #{sa_bankbook_image})
 	</insert> 
+	<update id="storeInqAccept">
+        UPDATE FRANCHISE
+        SET
+        F_STATUS = TRUE
+        WHERE
+        F_SEQ = #{f_seq}
+    </update>
+	
 </mapper>

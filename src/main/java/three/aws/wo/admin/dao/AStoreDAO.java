@@ -31,4 +31,8 @@ public class AStoreDAO {
 	public void insertStoreInquiry(FranchiseVO vo) {
 		sqlSession.insert("AStoreDAO.insertStoreInquiry",vo);
 	}
+
+	public void storeInqAccept(int f_seq) {
+		sqlSession.update("AStoreDAO.storeInqAccept",f_seq);
+	}
 }

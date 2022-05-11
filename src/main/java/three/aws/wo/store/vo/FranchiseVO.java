@@ -12,7 +12,7 @@ public class FranchiseVO {
 	private String f_tel;
 	private String f_email;
 	private String f_title;
-	private Date f_regdate;
+	private String f_regdate;
 	private boolean f_status;
 
 }

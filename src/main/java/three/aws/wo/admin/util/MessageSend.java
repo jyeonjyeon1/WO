@@ -33,4 +33,27 @@ public class MessageSend {
 			return 0;
 		}
 	}
+	
+	public int sendLMS(String toNum, String subject, String content) {
+		Message coolsms = new Message(api_key, api_secret);
+
+		// 4 params(to, from, type, text) are mandatory. must be filled
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", toNum);
+		params.put("from", fromNum);
+		params.put("type", "LMS");
+		params.put("subject", subject);
+		params.put("text", content);
+		params.put("app_version", "test app 1.2"); // application name and version
+
+		try {
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.toString());
+			return 1;
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+			return 0;
+		}
+	}
 }

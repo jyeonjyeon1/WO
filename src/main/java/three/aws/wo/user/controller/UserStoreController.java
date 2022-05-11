@@ -23,11 +23,12 @@ public class UserStoreController {
 	@Resource
 	private UStoreService uStoreService;
 	private String SearchWord; //검색어 저장 할 아이
+	private List<StoreVO> storeListByPage; //페이징처리를위한 list공유
 	
 	//store 검색기능
 	@RequestMapping("/storeList.user")
 	public String storeList(StoreVO vo, Model model) { 
-		List<StoreVO> storeListByPage =uStoreService.storeListByPage(SearchWord);
+		storeListByPage =uStoreService.storeListByPage(SearchWord);
 		System.out.println("user에서 storelist 열었다!");
 		System.out.println(SearchWord);
 		model.addAttribute("userPageChange" ,storeListByPage);
@@ -61,9 +62,9 @@ public class UserStoreController {
 		map.put("startPageNum", startPageNum);
 		map.put("endPageNum", endPageNum);
 		
-		List<StoreVO> userPageChange =uStoreService.UserPageChange(map);
+		//List<StoreVO> userPageChange =uStoreService.UserPageChange(map);
 		//model.addAttribute("userPageChange" ,userPageChange);
-		return userPageChange;
+		return storeListByPage;
 	}
 	
 	

@@ -22,6 +22,47 @@
 <link rel="stylesheet" href="resources/assets/css/main.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
+<script>
+
+//검색버튼 누르면~
+function searchBtn(){
+	var Sname = $("#search_Sname").val();
+	var param = {"Sname":Sname};
+	
+	$.ajax({
+		type: "POST",
+        url: "/searchStore.user",
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "application/json",
+        success:function(data){
+        	console.log("search데이터전송 완료");
+        	console.log(data);
+        	location.href="/storeList.user";
+        	
+        },
+        error:function(data){
+        	console.log("search데이터전송 에러");
+        }
+		
+	})
+	
+	
+	
+}
+			
+				
+			
+			
+	
+
+
+
+
+
+
+</script>
+
 
 </head>
 
@@ -89,10 +130,10 @@
 									</div>
 								</div>
 								<div class="search-input">
-									<input type="text" placeholder="검색">
+									<input id="search_Sname" type="text" placeholder="검색">
 								</div>
 								<div class="search-btn">
-									<button onclick="location.href='index.user'">
+									<button onclick="searchBtn()">
 										<i class="lni lni-search-alt"></i>
 									</button>
 								</div>

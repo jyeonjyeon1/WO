@@ -33,6 +33,36 @@
      //paging 처리 (값보내기)
             
        $(document).ready(function(){
+    	   	
+    	   	var pageSize=10;
+    	   	var totalPages=0;
+    	   	//var totalCount =32;
+    	  	var totalCount = ${userPageChange.size()};
+    	  	//userPageChange가 검색결과의 데이터 list 임
+    	  	var curPage= 1;
+    	  	console.log(totalCount);
+    	  	//$("input[name='currentPage']").val(curPage); // 페이지 바꿔주기
+			
+    	  	if(totalCount != 0) {
+    	  		
+    	  		if(totalCount % pageSize == 0){
+    	  			totalPages = parseInt(totalCount/pageSize);
+    	  		}else{
+    	  			totalPages = parseInt(totalCount / pageSize) +1 ;
+    	  		}
+    	  		
+    	  		
+    	  		console.log(totalPages);
+    	  		var htmlStr = pageLink(curPage, totalPages, "getStore");
+    	  		$("#div_paginate").html(htmlStr);
+    	  		
+    	  	}else {
+    	  		console.log("totalCount=0");
+    	  		//검색결과 없을때 나타나는 화면ㄱㄱ!?
+    	  		//alert("검색결과없음");		
+    	  	}
+    	  	
+    	  	
         	$("div a").click(function(){
         		
         		var pageN = $(this).html();
@@ -46,6 +76,9 @@
             		data: {"pageNum" : pageNum},
             		success:function(data){
             			console.log("보내짐")
+            			console.log(data)
+            			
+            			
             		},
             		error:function(data){
             			console.log("에러")
@@ -54,8 +87,55 @@
             	})
         	});
         	
-        });   
+        });
             
+    //paging처리 
+    function pageLink(curPage, totalPages,funName ) {
+    	var pageUrl = ""; 
+    	var pageLimit = 5; 
+    	var startPage = parseInt((curPage - 1) / pageLimit) * pageLimit + 1; 
+    	var endPage = startPage + pageLimit - 1; 
+    	
+    	if (totalPages < endPage) { endPage = totalPages; } 
+    	
+    	var nextPage = endPage + 1; 
+    	//console.log(curPage,"curPage,",startPage,"startPage,",endPage,"endPage,",nextPage,"nextPage") 
+    	
+    	//맨 첫 페이지 
+    	if (curPage > 1 && pageLimit < curPage) { 
+    		pageUrl += "<a class='page first' href='javascript:" 
+    		+ funName + "(1);'><i class='fas fa-angle-double-left'></a>"; } 
+    	
+    	//이전 페이지 
+    	if (curPage > pageLimit) { 
+    		pageUrl += " <a class='page prev' href='javascript:" 
+    		+ funName + "(" + (startPage == 1 ? 1 : startPage - 1) 
+    				+ ");'><i class='fas fa-angle-left'></a>"; } 
+    	
+    	//~pageLimit 맞게 페이지 수 보여줌 
+    	for (var i = startPage; i <= endPage; i++) { 
+    		//현재페이지면 진하게 표시 
+    		if (i == curPage) { pageUrl += " <a href='#'><strong>" 
+    			+ i + "</strong></a>" } 
+    		
+    		else { pageUrl += " <a href='javascript:" 
+    			+ funName + "(" + i + ");'> " + i + " </a>"; } } 
+    	
+    	//다음 페이지 
+    	if (nextPage <= totalPages) { 
+    		pageUrl += "<a class='page next' href='javascript:" 
+    		+ funName + "(" + (nextPage < totalPages ? nextPage : totalPages) 
+    				+ ");'><i class='fas fa-angle-right'></a>"; } 
+    	
+    	//맨 마지막 페이지 
+    	if (curPage < totalPages && nextPage < totalPages) { 
+    		pageUrl += "<a class='page last' href='javascript:" 
+    		+ funName + "(" + totalPages + ");'><i class='fas fa-angle-double-right'></a>"; } 
+    	
+    	//console.log(pageUrl); 
+    	return pageUrl;
+
+    	}        
                        
             
 		
@@ -218,7 +298,7 @@
 										
 									</c:forEach>
 								
-								<!-- 매장list start(4개데이터가나와야함) -->
+								<!-- 매장list start(4개데이터가나와야함) 
 									<c:forEach var="storeListByPage" items="${storeListByPage}" varStatus="vs">
 									
 						
@@ -272,7 +352,7 @@
 										
 										
 									</c:forEach>
-									<!-- 매장 list 끝 -->
+									 매장 list 끝 -->
 			
                                 
                                <!--   매장 한개 
@@ -324,9 +404,10 @@
 
                                 </a>     
                                 -->
+                                <p id="div_paginate"></p>
                                 
-                                <div class="pagination">
-	<a href="pagingProcess.user" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>
+  <!--                               <div class="pagination">
+	<a href="#" class="active" id="pageNum" data-num="1" onclick="paging()">1</a>
 	<a href="#" id="pageNum" data-num="2" onclick="paging()">2</a>
 	<a href="#" id="pageNum" data-num="3" onclick="paging()">3</a>
 	<a href="#" id="pageNum" data-num="4" onclick="paging()">4</a>
@@ -338,7 +419,7 @@
 	<a href="#" id="pageNum" data-num="10" onclick="paging()">10</a>
 	<a href="#">&gt;</a>
 	<a href="#">&raquo;</a>
-</div>                  
+</div>    -->               
                                         </div>
                                     </div>
                                     </section>

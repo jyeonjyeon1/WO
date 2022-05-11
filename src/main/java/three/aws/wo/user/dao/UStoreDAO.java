@@ -1,5 +1,6 @@
 package three.aws.wo.user.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,12 +20,12 @@ public class UStoreDAO {
 		return sqlSession.selectList("UStoreDAO.storeList");
 	}
 	
-	public List<StoreVO> storeListByPage() {
-		return sqlSession.selectList("UStoreDAO.storeListByPage");
+	public List<StoreVO> storeListByPage(String SearchWord) {
+		return sqlSession.selectList("UStoreDAO.storeListByPage",SearchWord);
 	}
 	
-	public List<StoreVO> UserPageChange(int startPageNum) {
-		return sqlSession.selectList("UStoreDAO.UserPageChange",startPageNum);
+	public List<StoreVO> UserPageChange(HashMap<String, Integer> param) {
+		return sqlSession.selectList("UStoreDAO.UserPageChange", param);
 	}
 
 	

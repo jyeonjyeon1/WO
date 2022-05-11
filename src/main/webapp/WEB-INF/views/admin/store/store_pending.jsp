@@ -249,111 +249,192 @@
 								</thead>
 
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>메가커피종로3가점</td>
-										<td>8868500662</td>
+									<c:forEach var="storePendingList" items="${storePendingList}"
+										varStatus="vs">
+										<tr>
+											<td>${storePendingList.sf_seq}</td>
+											<td>${storePendingList.sf_name}</td>
+											<td id="sf_code${vs.index}">${storePendingList.sf_code}</td>
+											<td>${storePendingList.sf_addr_road},
+												${storePendingList.sf_addr_detail}</td>
+											<td>${storePendingList.sf_tel}</td>
+											<td>${storePendingList.sf_name}</td>
+											<td>${storePendingList.sf_status}</td>
+											<td>${storePendingList.sf_reg_date.substring(0,19)}</td>
+											<td><a data-toggle="modal" href="#myModal${vs.index}"
+												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+												<button type="button" onclick="javascript:deleteAlert();"
+													class="btn btn-danger btn-xs">
+													<i class="fa fa-trash-o "></i>
+												</button></td>
+										</tr>
+										<div aria-hidden="true" aria-labelledby="myModalLabel"
+											role="dialog" tabindex="-1" id="myModal${vs.index}"
+											class="modal fade" style="margin: 20px auto 0;">
+											<div class="modal-dialog store">
+												<div class="modal-content">
+													<div class="modal-header_store">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-hidden="true">&times;</button>
+														<h4 class="modal-title">${storePendingList.sf_name} 매장정보</h4>
+													</div>
+													<!-- 	정보시작 -->
+													<div class="modal_wrapbody">
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">매장명</p>
+															<input type="text" id=""
+																value="${storePendingList.sf_name}" class="form-control">
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">매장코드</p>
+															<input type="text" id=""
+																value="${storePendingList.sf_code}" class="form-control">
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">주소</p>
+															<input type="text" id=""
+																value="${storePendingList.sf_address} ${storePendingList.sf_addr_detail}"
+																class="form-control">
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">전화번호</p>
+															<input type="text" id=""
+																value="${storePendingList.sf_tel}" class="form-control">
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">이메일</p>
+															<input type="text" id=""
+																value="${storePendingList.sf_email}"
+																class="form-control">
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">서류</p>
+															<a
+																href="${storePendingList.sf_business_registration_image}"
+																style="display: inline-block;"> <input
+																class="img-responsive grey__button" type="button"
+																value="사업자등록증" style="margin-right: 5px;"></a> <a
+																href="${storePendingList.sf_bankbook_image}"
+																style="display: inline-block;"> <input
+																class="img-responsive grey__button" type="button"
+																value="통장사본">
+															</a>
+														</div>
 
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>홍오공</td>
-										<td>검토중</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button
-												onclick="location.href='store_mng_update.admin?code=8868500662'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button onclick="" class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>맛있는커피</td>
-										<td>1234234234</td>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">영업시간</p>
+															<input class="form-control round-form" type="time"
+																value="${storePendingList.sf_open}"
+																style="width: 20%; display: inline-block; margin-right: 10px;">
+															~ <input class="form-control round-form" type="time"
+																value="${storePendingList.sf_close}"
+																style="width: 20%; display: inline-block; margin-left: 10px;">
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">주차여부</p>
 
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>손길동</td>
-										<td>신청</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>맛있는커피</td>
-										<td>654745767</td>
-
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>손오반</td>
-										<td>입점완료</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>맛있는커피</td>
-										<td>456545775</td>
-
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>손길동</td>
-										<td>서류보안</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>맛있는커피</td>
-										<td>4567665567</td>
-
-										<td>서울특별시 중구 통일로 92, 12층</td>
-										<td>02-856-8565</td>
-										<td>홍오공</td>
-										<td>입점완료</td>
-										<td>2022.04.06 12:11:02</td>
-										<td><a data-toggle="modal" href="store_mng.html#myModal"
-											class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-											<button onclick="location.href='store_mng_update.admin'"
-												class="btn btn-primary btn-xs">
-												<i class="fa fa-pencil"></i>
-											</button>
-											<button type="button" onclick="javascript:deleteAlert();"
-												class="btn btn-danger btn-xs">
-												<i class="fa fa-trash-o "></i>
-											</button></td>
-									</tr>
+															<c:choose>
+																<c:when
+																	test="${storePendingList.sf_parking_able eq 'true'}">
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}1" id="inlineRadio1"
+																		value="option1" checked> 가능
+																	</label>
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}1" id="inlineRadio2"
+																		value="option2"> 불가
+																	</label>
+																</c:when>
+																<c:otherwise>
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}2" id="inlineRadio1"
+																		value="option1"> 가능
+																	</label>
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}2" id="inlineRadio2"
+																		value="option2" checked> 불가
+																	</label>
+																</c:otherwise>
+															</c:choose>
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">매장이용</p>
+															<c:choose>
+																<c:when test="${storePendingList.sf_usestore eq 'true'}">
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}3" id="inlineRadio3"
+																		value="option1" checked> 가능
+																	</label>
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}3" id="inlineRadio4"
+																		value="option2"> 불가
+																	</label>
+																</c:when>
+																<c:otherwise>
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}4" id="inlineRadio3"
+																		value="option1"> 가능
+																	</label>
+																	<label class="radio-inline"> <input
+																		type="radio" name="${vs.index}4" id="inlineRadio4"
+																		value="option2" checked> 불가
+																	</label>
+																</c:otherwise>
+															</c:choose>
+														</div>
+														<!-- 마지막 정보는 아래 패딩 유지 -->
+														<div class="modal-body">
+															<p style="margin-bottom: 2px;">특이사항</p>
+															<input type="text" name="email"
+																value="${storePendingList.sf_referinfo}"
+																class="form-control">
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button data-dismiss="modal" class="btn btn-default"
+															type="button" value="닫기">닫기</button>
+														<button class="changeStatus${vs.index} btn btn-theme" onclick="changeStatus${vs.index}()"
+															type="button" value="검토" name="${storePendingList.sf_code}">검토</button>
+														<button class="changeStatus${vs.index} btn btn-theme"
+															type="button" value="서류보안" name="${storePendingList.sf_code}">서류재요청</button>
+														<button class="changeStatus${vs.index} btn btn-theme"
+															type="button" value="승인" name="${storePendingList.sf_code}">승인</button>
+														<button value="수정"
+															class="changeStatus${vs.index} btn btn-theme" type="button" name="${storePendingList.sf_code}">수정</button>
+													</div>
+	<script>
+	function changeStatus${vs.index}(){
+		$('.changeStatus${vs.index}').click(function() {
+			var status = $(this).attr("value");
+			const sf_code = $(this).attr("name");
+		  	var param = {
+				"status" : status ,
+				"sf_code" : sf_code  
+		  	};
+			  $.ajax({
+		             type: "POST",
+		             url: "/storependingAlert.admin",
+		             data: JSON.stringify(param),
+		             dataType: "json",
+		             contentType: "application/json",
+		          success:function(data){
+		        	  console.log(data);
+		        	  if(data==1){
+		        	  }
+		        	  
+		          },
+		          error:function(data){
+		             console.log("장바구니 삭제 통신에러");
+		          }
+		       }); //ajax 끝
+		});
+	};
+	
+	</script>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
 								</tbody>
 							</table>
 
@@ -475,12 +556,10 @@
 				var aaa = $(this).attr("value");
 				$(".dataTable-input").val(aaa);
 				$(".dataTable-input").focus();
-				$(".dataTable-input").keydown(13);
 			});
 			$('#all_btn').click(function() {
 				$(".dataTable-input").val("");
 				$(".dataTable-input").focus();
-				$(".dataTable-input").keydown(13);
 			});
 		});
 	</script>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import three.aws.wo.admin.dao.AStoreDAO;
 import three.aws.wo.admin.service.AStoreService;
 import three.aws.wo.store.vo.FranchiseVO;
+import three.aws.wo.store.vo.StoreFormVO;
 import three.aws.wo.store.vo.StoreVO;
 @Service
 public class AStoreServiceImpl implements AStoreService {
@@ -43,6 +44,16 @@ public class AStoreServiceImpl implements AStoreService {
 	@Override
 	public void storeInqAccept(int f_seq) {
 		aStoreDAO.storeInqAccept(f_seq);
+	}
+
+	@Override
+	public void insertStoreForm(StoreFormVO vo) {
+		aStoreDAO.insertStoreForm(vo);
+	}
+
+	@Override
+	public List<StoreFormVO> storePendingList() {
+		return aStoreDAO.storePendingList();
 	}
 
 }

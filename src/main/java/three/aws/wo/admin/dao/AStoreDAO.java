@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import three.aws.wo.store.vo.FranchiseVO;
+import three.aws.wo.store.vo.StoreFormVO;
 import three.aws.wo.store.vo.StoreVO;
 @Repository
 public class AStoreDAO {
@@ -34,5 +35,13 @@ public class AStoreDAO {
 
 	public void storeInqAccept(int f_seq) {
 		sqlSession.update("AStoreDAO.storeInqAccept",f_seq);
+	}
+
+	public void insertStoreForm(StoreFormVO vo) {
+		sqlSession.insert("AStoreDAO.insertStoreForm",vo);
+	}
+
+	public List<StoreFormVO> storePendingList() {
+		return sqlSession.selectList("AStoreDAO.storePendingList");
 	}
 }

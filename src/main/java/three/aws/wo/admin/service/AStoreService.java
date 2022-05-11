@@ -3,6 +3,7 @@ package three.aws.wo.admin.service;
 import java.util.List;
 
 import three.aws.wo.store.vo.FranchiseVO;
+import three.aws.wo.store.vo.StoreFormVO;
 import three.aws.wo.store.vo.StoreVO;
 
 public interface AStoreService {
@@ -13,4 +14,6 @@ public interface AStoreService {
 	List<FranchiseVO> storeInquiryList();
 	void insertStoreInquiry(FranchiseVO vo);
 	void storeInqAccept(int f_seq);
+	void insertStoreForm(StoreFormVO vo);
+	List<StoreFormVO> storePendingList();
 }

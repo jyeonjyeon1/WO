@@ -294,11 +294,6 @@ public class AdminController {
 		return "/store/store_mng_update";
 	}
 	
-	@GetMapping("/store_pending.admin")
-	public String tostore_pending() {
-		System.out.println("store_pending");
-		return "/store/store_pending";
-	}
 //	==================== user ============================
 	@GetMapping("/user_mng_.admin")
 	public String touser_mng() {

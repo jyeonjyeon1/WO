@@ -62,12 +62,12 @@
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
-							<form name="storeRegForm" action="/regisStore.admin"
+							<form name="storeRegForm" action="/regisStoreForm.admin"
 								class="form-horizontal style-form" method="post">
 								<div class="form-group">
 									<label class="col-sm-2 control-label">매장명</label>
 									<div class="col-sm-6">
-										<input class="form-control" id="si_name" name="si_name"
+										<input class="form-control" id="si_name" name="sf_name"
 											type="text" placeholder="매장명">
 										<p class="regName_label">이름 이상</p>
 									</div>
@@ -75,14 +75,14 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label">지점</label>
 									<div class="col-sm-3">
-										<input class="form-control" id="si_loc" name="sa_password"
+										<input class="form-control" id="si_loc" name="sf_loc"
 											type="text" placeholder="지점">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">사업자번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" id="si_code" name="si_code"
+										<input class="form-control" id="si_code" name="sf_code"
 											type="text" placeholder="사업자번호 ( - 제외)">
 											<p class="regCode_label">사업자번호는 10자리입니다</p>
 									</div>
@@ -90,11 +90,11 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label">주소</label>
 									<div class="col-sm-2">
-										<input class="form-control" name="si_zipcode" id="post__code"
+										<input class="form-control" name="sf_zipcode" id="post__code"
 											type="text" placeholder="우편번호">
 									</div>
 									<div class="col-sm-6">
-										<input class="form-control" name="si_address"
+										<input class="form-control" name="sf_address"
 											id="road__Address" type="text"
 											placeholder="서울시 종로구 삼일대로28길 14">
 									</div>
@@ -105,18 +105,18 @@
 									<div class="col-sm-2">&nbsp;</div>
 									<div class="col-sm-2">&nbsp;</div>
 									<div class="col-sm-3">
-										<input class="form-control" name="si_addr_road"
+										<input class="form-control" name="sf_addr_road"
 											id="extra__Address" type="text" placeholder="동">
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control" name="si_addr_detail"
+										<input class="form-control" name="sf_addr_detail"
 											id="detail__Address" type="text" placeholder="상세주소">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">전화번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text" name="si_tel"
+										<input class="form-control" type="text" name="sf_tel"
 											id="si_tel" placeholder="0212345678">
 										<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 									</div>
@@ -124,7 +124,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label">이메일</label>
 									<div class="col-sm-5">
-										<input class="form-control" type="email" name="sa_email"
+										<input class="form-control" type="email" name="sf_email"
 											id="sa_email" placeholder="walking@walking.com">
 										<p class="email_form">이메일 형식을 맞춰주세요</p>
 									</div>
@@ -133,23 +133,23 @@
 									<label class="col-sm-2 control-label">사업자등록증</label>
 									<div class="col-sm-5">
 										<input id="businessreg" type="file" 
-											accept="image/*" name="sa_business_registration_image">
+											accept="image/*" name="sf_business_registration_image">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">통장사본</label>
 									<div class="col-sm-5">
 										<input id="bankcopy" type="file"
-											accept="image/*" name="sa_bankbook_image">
+											accept="image/*" name="sf_bankbook_image">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">영업시간</label>
 									<div class="col-sm-10">
-										<input class="form-control round-form" name="si_open"
+										<input class="form-control round-form" name="sf_open"
 											type="time" value="09:00"
 											style="width: 20%; display: inline-block; margin-right: 10px;">
-										~ <input class="form-control round-form" name="si_close"
+										~ <input class="form-control round-form" name="sf_close"
 											type="time" value="21:00"
 											style="width: 20%; display: inline-block; margin-left: 10px;">
 									</div>
@@ -161,10 +161,10 @@
 									<div class="col-sm-10" style="padding: 0;">
 										<div class="col-sm-7">
 											<label class="radio-inline"> <input type="radio"
-												name="si_parking_able" id="inlineRadio1" value="true">
+												name="sf_parking_able" id="inlineRadio1" value="true">
 												가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="si_parking_able" id="inlineRadio2" value="false"
+												name="sf_parking_able" id="inlineRadio2" value="false"
 												checked> 불가
 											</label>
 										</div>
@@ -175,10 +175,10 @@
 									<div class="col-sm-10" style="padding: 0;">
 										<div class="col-sm-7">
 											<label class="radio-inline"> <input type="radio"
-												name="si_usestore" id="inlineRadio3" value="true">
+												name="sf_usestore" id="inlineRadio3" value="true">
 												가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="si_usestore" id="inlineRadio4" value="false" checked>
+												name="sf_usestore" id="inlineRadio4" value="false" checked>
 												불가
 											</label>
 										</div>
@@ -188,7 +188,7 @@
 									<label class="col-sm-2 control-label">특이사항</label>
 									<div class="col-sm-8">
 										<input class="form-control" id="si_referinfo"
-											name="si_referinfo" type="text" placeholder="">
+											name="sf_referinfo" type="text" placeholder="">
 									</div>
 								</div>
 
@@ -233,6 +233,7 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 	<!-- js placed at the end of the document so the pages load faster -->
+	var code = "";
 	function fileUpload(){
 		var fileInput = document.getElementsByClassName("ex_file");
 
@@ -257,6 +258,7 @@
         let files = document.getElementById('businessreg').files;
         let file = files[0];
         let fileNamebusinessreg = file.name;
+        fileNamebusinessreg = code + fileNamebusinessreg;
 
         let upload = new AWS.S3.ManagedUpload({
             params: {
@@ -283,6 +285,7 @@
         let files = document.getElementById('bankcopy').files;
         let file = files[0];
         let fileNamebankcopy = file.name;
+        fileNamebankcopy = code + fileNamebankcopy;
 
         let upload = new AWS.S3.ManagedUpload({
             params: {
@@ -358,6 +361,11 @@
 					var referinfo = $("#si_referinfo").val();
 					if(referinfo == ""){ch1 = false;}
 					else {ch1=true;}
+				});
+				
+				$("#si_code").on("propertychange change keyup paste input",
+						function(){
+					code = $("#si_code").val();
 				});
 				
 				$("#si_name").on(

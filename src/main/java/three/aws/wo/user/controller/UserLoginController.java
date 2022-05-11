@@ -66,6 +66,20 @@ public class UserLoginController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/kakaoLogin.user", method = RequestMethod.POST)
+	public int kakaoLogin(@RequestBody HashMap<String, Object> param) throws Exception {
+		String id = Long.toString((long) param.get("id"));
+		System.out.println(param);
+//		ÀÛ¾÷Áß 
+
+		
+		
+		return 0;
+	}
+	
+	
+	
 	@RequestMapping("/logout.user")
 	public String userLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();

@@ -31,7 +31,7 @@
       *********************************************************************************************************************************************************** -->
   <div id="login-page">
     <div class="container">
-      <form class="form-login" action="index.store" >
+      <form class="form-login" action="index.html" >
         <h2 class="form-login-heading"><img src="resources/assets/images/admin/logo/logo_white.PNG" style="width:28px">&nbsp; walking order store</h2>
         <div class="login-wrap">
           <input type="text" class="form-control" placeholder="관리번호" style="font-size: 12px;" autofocus>
@@ -43,7 +43,7 @@
             <a data-toggle="modal" href="login.html#myModal" style="font-size: 12px;">비밀번호 찾기</a>
             </span>
             </label>
-          <button class="btn btn-theme btn-block" href="index.store" type="submit"><i class="fa fa-lock"></i> 로그인</button>
+          <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> 로그인</button>
           <hr>
           
           

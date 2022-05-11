@@ -27,8 +27,7 @@
 <link href="resources/assets/css/admin/style.css" rel="stylesheet">
 <link href="resources/assets/css/admin/style-responsive.css"
 	rel="stylesheet">
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <style>
 /*가로막대그래프 css*/
 .hGraph ul {
@@ -192,83 +191,92 @@ function count_length(){
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
 		<!--header start-->
-		<%@ include file="../inc/store_header.jsp" %>
+		<header class="header black-bg">
+			<div class="sidebar-toggle-box">
+				<div class="openup tooltips" data-placement="right"
+					data-original-title="메뉴 여/닫기"></div>
+			</div>
+			<!--logo start-->
+			<a href="../index.html" class="logo"><b>walking<span>order</span></b></a>
+			<!--logo end-->
+			<div class="nav notify-row" id="top_menu"></div>
+			<div class="top-menu">
+				<ul class="nav pull-right top-menu">
+					<li><a class="logout" href="../login.html">Logout</a></li>
+				</ul>
+			</div>
+		</header>
+		<!--header end-->
 		<!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
 		<aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">더리터 위례점</h5>
-          <p class="sidebar-title" >주문 확인</p>
-          <li class="sub-menu">
-            <a  href="index.store">
-              <i class="fa fa-h-square"></i>
-              <span>HOME</span>
-              </a>
-          </li>
-          <li class="sub-menu">
-            <a id="store-manage" href="javascript:;">
-              <i class="fa fa-group" style="font-size: 12px;"></i>
-              <span>지난 주문</span>
-              </a>
-            <ul class="sub">
-              <li><a id="store-mng" href="Ooneday.store">당일주문</a></li>
-              <li><a id="store-menu" href="Operiod.store">기간주문</a></li>
-            </ul>
-          </li>
-          
-          <p class="sidebar-title" >Self Service</p>
-          <li class="sub-menu">
-            <a class="active" id="user-manage" href="reviews.store">
-              <i class="fa fa-user" style="font-size: 15px;"></i>
-              <span>&nbsp;리뷰관리</span>
-              </a>
-          </li>
-          <li class="sub-menu">
-            <a id="store-manage" href="javascript:;">
-              <i class="fa fa-group" style="font-size: 12px;"></i>
-              <span>메뉴 관리</span>
-              </a>
-            <ul class="sub">
-              <li><a id="store-mng" href="CRUD.store">메뉴관리 (추가 / 수정)</a></li>
-              <li><a id="store-menu" href="pumjeol.store">품절 관리</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a id="order-manage" href="javascript:;">
-              <i class="fa fa-shopping-cart"></i>
-              <span>매장 정보 관리</span>
-              </a>
-            <ul class="sub">
-              <li><a id="total-order" href="basic.store">기본정보 변경</a></li>
-              <li><a id="store-order" href="manage.store">운영 정보 변경</a></li>
-             </ul>
-          </li>
-          
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu start-->
+				<ul class="sidebar-menu" id="nav-accordion">
+					<p class="centered">
+						<a><img src="resources/assets/images/admin/doggy.jpg"
+							class="img-circle" width="80"></a>
+					</p>
+					<h5 class="centered">더리터 위례점</h5>
+					<p class="sidebar-title">주문 확인</p>
+					<li class="sub-menu"><a href="../index.html"> <i
+							class="fa fa-h-square"></i> <span>HOME</span>
+					</a></li>
+					<li class="sub-menu"><a href="lastOrder.html"> <i
+							class="fa fa-h-square"></i> <span>지난주문</span>
+					</a>
+						<ul class="sub">
+							<li><a id="store-mng"
+								href="/views_store/order/lastOrder_oneday.html">당일주문</a></li>
+							<li><a id="store-menu"
+								href="/views_store/order/lastOrder_period.html">기간주문</a></li>
+						</ul></li>
+
+					<p class="sidebar-title">Self Service</p>
+					<li class="sub-menu"><a id="user-manage" class="active"
+						href="/views_store/reviews/reviews.html"> <i
+							class="fa fa-user" style="font-size: 15px;"></i> <span>&nbsp;리뷰관리</span>
+					</a></li>
+					<li class="sub-menu"><a id="store-manage" href="javascript:;">
+							<i class="fa fa-group" style="font-size: 12px;"></i> <span>메뉴
+								관리</span>
+					</a>
+						<ul class="sub">
+							<li><a id="store-mng"
+								href="/views_store/menu/menu_crud.html">메뉴관리 (추가 / 수정)</a></li>
+							<li><a id="store-menu"
+								href="/views_store/menu/menu_pumjeol.html">품절 관리</a></li>
+						</ul></li>
+					<li class="sub-menu"><a id="order-manage" href="javascript:;">
+							<i class="fa fa-shopping-cart"></i> <span>매장 정보 관리</span>
+					</a>
+						<ul class="sub">
+							<li><a id="total-order"
+								href="/views_store/info/info_basic.html">기본정보 변경</a></li>
+							<li><a id="store-order"
+								href="/views_store/info/info_manage.html">운영 정보 변경</a></li>
+
+						</ul></li>
 
 
-          <p class="sidebar-title" >정산</p>
-          <li class="sub-menu">
-            <a id="settlement" href="javascript:;">
-              <i class=" fa fa-krw"></i>
-              <span>정산</span>
-              </a>
-            <ul class="sub">
-              <li><a id="pg-comm" href="SOneday.store">오늘 매출</a></li>
-              <li><a id="pg-stlmt" href="SPeriod.store">기간 매출 정산</a></li>
-             
-            </ul>
-          </li>
-          
-          
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
+					<p class="sidebar-title">정산</p>
+					<li class="sub-menu"><a id="settlement" href="javascript:;">
+							<i class=" fa fa-krw"></i> <span>정산</span>
+					</a>
+						<ul class="sub">
+							<li><a id="pg-comm"
+								href="/views_store/calculate/calculate_today.html">오늘 매출</a></li>
+							<li><a id="pg-stlmt"
+								href="/views_store/calculate/calculate_period.html">기간 매출 정산</a></li>
+						</ul></li>
+
+
+				</ul>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
 		<!--sidebar end-->
 
 
@@ -353,6 +361,9 @@ function count_length(){
 
 													<!-- 메뉴편집 -->
 													<div id="faq__111" class="tab-pane active">
+
+
+
 														<!--리뷰1개-->
 														<div class="review_container"
 															style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
@@ -382,7 +393,7 @@ function count_length(){
 																		class="review_menu">바닐라라떼</span> <br>
 																	<div style="margin-top: 20px;">
 																		<span class="answerReview_click" id="toggle1"
-																			onclick="openCloseToc1()">사장님 댓글 등록하기</span>
+																			onclick="openCloseToc()">사장님 댓글 등록하기</span>
 																	</div>
 																	<div class="answer_review button"
 																		style="margin-top: 20px; margin-bottom: 10px;">
@@ -414,7 +425,7 @@ function count_length(){
 
 														<script>
 												//리뷰1개 js
-											  function openCloseToc1() {
+											  function openCloseToc() {
 											    if(document.getElementById('review_content1').style.display === 'block') {
 											      document.getElementById('content_ok1').style.display='none';
 											      document.getElementById('review_content1').style.display = 'none';
@@ -458,7 +469,7 @@ function count_length(){
 																		class="review_menu">바닐라라떼</span> <br>
 																	<div style="margin-top: 20px;">
 																		<span class="answerReview_click" id="toggle2"
-																			onclick="openCloseToc2()">사장님 댓글 등록하기</span>
+																			onclick="openCloseToc()">사장님 댓글 등록하기</span>
 																	</div>
 																	<div class="answer_review button"
 																		style="margin-top: 20px; margin-bottom: 10px;">
@@ -490,7 +501,7 @@ function count_length(){
 
 														<script>
 												//리뷰1개 js
-											  function openCloseToc2() {
+											  function openCloseToc() {
 											    if(document.getElementById('review_content2').style.display === 'block') {
 											      document.getElementById('content_ok2').style.display='none';
 											      document.getElementById('review_content2').style.display = 'none';
@@ -543,7 +554,7 @@ function count_length(){
 																		class="review_menu">바닐라라떼</span> <br>
 																	<div style="margin-top: 20px;">
 																		<span class="answerReview_click" id="toggle3"
-																			onclick="openCloseToc3()">사장님 댓글 등록하기</span>
+																			onclick="openCloseToc()">사장님 댓글 등록하기</span>
 																	</div>
 																	<div class="answer_review button"
 																		style="margin-top: 20px; margin-bottom: 10px;">
@@ -575,7 +586,7 @@ function count_length(){
 
 														<script>
 												//리뷰1개 js
-											  function openCloseToc3() {
+											  function openCloseToc() {
 											    if(document.getElementById('review_content3').style.display === 'block') {
 											      document.getElementById('content_ok3').style.display='none';
 											      document.getElementById('review_content3').style.display = 'none';
@@ -633,7 +644,8 @@ function count_length(){
 	</section>
 	<!-- js placed at the end of the document so the pages load faster -->
 
-
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
 	<script src="resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>

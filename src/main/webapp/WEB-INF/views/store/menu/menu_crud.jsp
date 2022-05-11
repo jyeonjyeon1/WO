@@ -72,13 +72,6 @@ li {
   text-align: center;
 }
 
-.menu_oneUpdate {
-  display: block; /* 중요 */
-  text-decoration: none;
-  color: #616161;
-  text-align: center;
-}
-
 .menuGroup {
   font-size: 20px;
   font-weight: bolder;
@@ -88,10 +81,6 @@ li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.288);
 }
 
-.menu_oneUpdate {
- border-bottom: 1px solid rgba(0, 0, 0, 0.288);
-}
-
 .snd_menu { background: #efefef; }
 .trd_menu { background: #ddd; }
 .sub_menu { display: none; } /* 서브메뉴들 숨김 */
@@ -99,7 +88,7 @@ li {
 .selec { background: rgba(226, 77, 94, 0.733); color: #efefef; }
 
 
-
+    /*모달*/
 .modalA{ 
 
 position:absolute; 
@@ -113,12 +102,12 @@ display:none;
 
 
 .modalA_content{
-width:400px; height: relative;
+width:400px; height:200px;
 background:rgba(255, 255, 255, 0.925); 
 border: 1px  solid rgba(0, 0, 0, 0.678);
 border-radius:5px;
 position:absolute; top:50%; left:50%;
-margin-top:-150px; 
+margin-top:100px; 
 margin-left:-200px;
 text-align:center;
 box-sizing:border-box; 
@@ -126,30 +115,6 @@ padding:24px 0;
 line-height:23px; 
 
 }
-
-    /*모달*/
-    
-.modal-title{
- font-size: 20px;
- text-align:center;
- font-weight: bolder;
-}
-.modal_table{
-  width:100%;
-}
-#modal_userImg{
-  width:50px;
-  height:50px;
-  border-radius: 75%;
-}
-#modal_userId{
-  width:200px;
-}
-#modal_userFollow{
-  margin:10px;
-  text-align: right;
-}
-
 
 .UpdateBtn{
   margin-top: 20px;
@@ -183,49 +148,6 @@ line-height:23px;
   color: aliceblue;
 }
 
-.add_priceOption {
-	border:0; 
-	text-align:center; 
-	width:relative; 
-	background-color:white;
-}
-
-.add_priceOption:hover {
-	text-weight:bolder;
-	color:blue;
-	
-}
-
-
-.add_priceOption {
-	border:0; 
-	float:center; 
-	width:relative; 
-	background-color:white;
-  font-size:20px
-}
-
-.add_priceOption:hover {
-	font-weight:bolder;
-	color:rgb(218, 60, 12);
-	
-}
-
-
-.save_Btn{
-  width:100%;
-  font-size: 18px;
-  color:black;
-  background-color: rgba(250, 235, 215, 0.884);
-  border:1px solid #616161dc;
-  border-radius: 2px;
-}
-
-.save_Btn:hover {
-  background-color: rgba(218, 60, 12, 0.637);
-  font-weight: bolder;
-}
-
 
 
 
@@ -233,18 +155,16 @@ line-height:23px;
 
 
 <script>
- 
-
-
+                              
 //메뉴그룹리스트 js
   $(document).ready(function(){
   
-  $("#main_menu > li > a").click(function(){
-	
+  $("#ffss").click(function(){
+	console.log("ddd");
     $(this).next($('.snd_menu')).slideToggle('fast');
   })
   $(".snd_menu > li > a").click(function(e){
-	
+	 console.log("ddd");
     e.stopPropagation();
     $(this).next($('.trd_menu')).slideToggle('fast');
   })
@@ -257,16 +177,9 @@ line-height:23px;
     $(this).removeClass('selec');
   })
   
-  /*팔로우 버튼 클릭*/
-  $('.menu_oneUpdate').click(function(){
-	  console.log("ddd");
-      $('#updateModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
-      //$('.modal-title').text("메뉴 정보 수정");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
-  });
-  
 })
 
-//모달a 메뉴그룹추가
+//모달1 메뉴그룸추가
 function modal_a() {
   $(".modalA").fadeIn();
    
@@ -275,8 +188,6 @@ function modal_a() {
 function close_modalA() {
   $(".modalA").fadeOut();
 }
-
-
 
 </script>
   
@@ -289,7 +200,22 @@ function close_modalA() {
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
     <!--header start-->
-    <%@ include file="../inc/store_header.jsp" %>
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="openup tooltips" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
+      </div>
+      <!--logo start-->
+      <a href="../index.html" class="logo"><b>walking<span>order</span></b></a>
+      <!--logo end-->
+      <div class="nav notify-row" id="top_menu">
+        
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <li><a class="logout" href="../login.html">Logout</a></li>
+        </ul>
+      </div>
+    </header>    <!--header end-->
     <!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
@@ -302,37 +228,37 @@ function close_modalA() {
           <h5 class="centered">더리터 위례점</h5>
           <p class="sidebar-title" >주문 확인</p>
           <li class="sub-menu">
-            <a href="index.store">
+            <a href="../index.html">
               <i class="fa fa-h-square"></i>
               <span>HOME</span>
               </a>
           </li>
           <li class="sub-menu">
-            <a id="store-manage" href="javascript:;">
-              <i class="fa fa-group" style="font-size: 12px;"></i>
-              <span>지난 주문</span>
+            <a href="lastOrder.html">
+              <i class="fa fa-h-square"></i>
+              <span>지난주문</span>
               </a>
-            <ul class="sub">
-              <li><a id="store-mng" href="Ooneday.store">당일주문</a></li>
-              <li><a id="store-menu" href="Operiod.store">기간주문</a></li>
-            </ul>
+              <ul class="sub">
+                <li><a id="store-mng" href="/views_store/order/lastOrder_oneday.html">당일주문</a></li>
+                <li><a id="store-menu" href="/views_store/order/lastOrder_period.html">기간주문</a></li>
+              </ul>
           </li>
           
           <p class="sidebar-title" >Self Service</p>
           <li class="sub-menu">
-            <a id="user-manage" href="reviews.store">
+           <a id="user-manage" href="/views_store/reviews/reviews.html">
               <i class="fa fa-user" style="font-size: 15px;"></i>
               <span>&nbsp;리뷰관리</span>
               </a>
           </li>
           <li class="sub-menu">
-            <a id="store-manage" class="active dcjq-parent" href="javascript:;">
+            <a id="store-manage" class="active dcjq-parent" href="javascript:void(0);">
               <i class="fa fa-group" style="font-size: 12px;"></i>
               <span>메뉴 관리</span>
               </a>
             <ul class="sub">
-              <li><a class="active"  id="store-mng" href="CRUD.store">메뉴관리 (추가 / 수정)</a></li>
-              <li><a id="store-menu" href="pumjeol.store">품절 관리</a></li>
+             <li><a id="store-mng" class="active" href="/views_store/menu/menu_crud.html">메뉴관리 (추가 / 수정)</a></li>
+              <li><a id="store-menu" href="/views_store/menu/menu_pumjeol.html">품절 관리</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -341,12 +267,12 @@ function close_modalA() {
               <span>매장 정보 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="total-order" href="basic.store">기본정보 변경</a></li>
-              <li><a id="store-order" href="manage.store">운영 정보 변경</a></li>
-             </ul>
+              <li><a id="total-order" href="/views_store/info/info_basic.html">기본정보 변경</a></li>
+              <li><a id="store-order" href="/views_store/info/info_manage.html">운영 정보 변경</a></li>
+             
+            </ul>
           </li>
           
-
 
           <p class="sidebar-title" >정산</p>
           <li class="sub-menu">
@@ -355,9 +281,9 @@ function close_modalA() {
               <span>정산</span>
               </a>
             <ul class="sub">
-              <li><a id="pg-comm" href="SOneday.store">오늘 매출</a></li>
-              <li><a id="pg-stlmt" href="SPeriod.store">기간 매출 정산</a></li>
-             
+              <li><a id="pg-comm"  href="/views_store/calculate/calculate_today.html">오늘 매출</a></li>
+              <li><a id="pg-stlmt" href="/views_store/calculate/calculate_period.html">기간 매출 정산</a></li>
+              
             </ul>
           </li>
           
@@ -414,7 +340,6 @@ function close_modalA() {
                             </ul>
                           </div>
                           
-                          
                           <div class="panel-body col-lg-12">
                             <div class="tab-content">
 
@@ -428,7 +353,7 @@ function close_modalA() {
                               <nav>
                                 <ul id="main_menu">
                                   <li>
-                                      <a class="menuGroup" href="javascript:" >Coffee
+                                      <a id="ffss" class="menuGroup" href="javascript:" >Coffee1
                                         <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs" style="float: right; margin-right: 10px;"><i class="fa fa-trash-o "></i></button>
                                         <button class="btn btn-primary btn-xs" style="float: right; margin-right: 10px;"><i class="fa fa-pencil"></i></button>
                                       </a>
@@ -437,16 +362,16 @@ function close_modalA() {
                                       <li>
                                         <a class="menu_one" href="#" >
                                           <div class="row">
-                                            <div class="col-lg-2" style="text-align: left; margin-left:20px;">
-                                              <img src="resources/assets/images/cart-1.jpg" style="width: 100px; 
+                                            <div class="col-lg-2" style="text-align: left;">
+                                              <img src="/views_store/cart-1.jpg" style="width: 100px; 
                                               height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
                                             </div>
                                             <div class="col-lg-8" style="text-align: left; margin-top: 5px;">
                                               
                                               <h4 style=" font-weight: bolder; margin-left: 0;">아메리카노</h4>
                                               <div class="menu_oneOption" >
-                                              <h6 style="margin-top:0; font-weight: bolder;">ICE : 2000 원</h6>
-                                              <h6 style="font-weight: bolder;">HOT : 1500 원</h6>
+                                              <h6 style="margin-top:0;">ICE : 2000 원</h6>
+                                              <h6>HOT : 1500 원</h6>
                                               </div>
                                             
                                             </div>
@@ -455,146 +380,24 @@ function close_modalA() {
                                         
                                         </a>
                                         <ul class="trd_menu sub_menu">
-                                          <li><a class="menu_oneUpdate" href="#">메뉴정보수정</a></li>
-                                          <li><a class="menu_oneUpdate" onclick="#">옵션설정</a></li>
-                                          <li><a class="menu_oneUpdate" onclick="#">이미지변경</a></li>
+                                          <li><a class="menu_one" href="#">Hue</a></li>
+                                          <li><a class="menu_one" href="#">Saturation</a></li>
+                                          <li><a class="menu_one" href="#">Value</a></li>
                                       </ul>
                                       </li>
-                                      
-                                      <!------------- Modal --------------->
-  <div class="modal fade" id="updateModal" role="dialog">   
-
-    <div class="modal-dialog">
-
-      <!-- Modal content-->   
-      <div class="modal-content">
-        <div class="modal-header">
-          <!-- header -->
-          <h4 class="modal-title">메뉴정보수정</h4>
-          <button type="button" class="close" data-dismiss="modal" style="font-size:20px; color:black;">취소</button>
-
-        </div>
-        <div class="modal-body">
-          <!-- body --> 
-          
-          
-          <table class="modal_table">
-          	<ul>
-          		<li style="border-bottom:1px solid black; margin:15px; padding-bottom:10px; ">
-          		<h5 style="font-size:15px; font-weight:bolder; color:black;">메뉴명</h5>
-          		<div class="row" >
-          		<div class="col-lg-12">
-          		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="아메리카노">
-          	    </div>	
-          	    </div>		
-          		</li>
-          		<li style="border-bottom:1px solid black; margin:15px; padding-bottom:10px; ">
-          		<h5 style="font-size:15px; font-weight:bolder; color:black; margin-top:20px ">가격</h5>
-          		
-          		
-          		<div class="row" style="margin-left:5px;" >
-          		<div class="col-lg-5" style="padding:5px;">
-          		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="ICE 리터">
-          	    </div>
-          	    <div class="col-lg-5" style="padding:5px;">
-          		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="2000">
-          	    </div>
-          	    <div class="col-lg-2" style="padding:5px;">
-          		<button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs" style="float: left; margin-top:7px;"><i class="fa fa-trash-o "></i></button>
-                  </div>                    
-          	    </div>	
-          	    
-          	    
-          	    <div class="row" style="margin-left:5px;" >
-          		<div class="col-lg-5" style="padding:5px;">
-          		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="ICE 리터">
-          	    </div>
-          	    <div class="col-lg-5" style="padding:5px;">
-          		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="2000">
-          	    </div>
-          	    <div class="col-lg-2" style="padding:5px;">
-          		<button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs" style="float: left; margin-top:7px;"><i class="fa fa-trash-o "></i></button>
-                  </div>                    
-          	    </div>	
-          	    
-          	    
-          	    <div class="row" style="margin-left:5px;" >
-          		<div class="col-lg-5" style="padding:5px;">
-          		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="ICE 리터">
-          	    </div>
-          	    <div class="col-lg-5" style="padding:5px;">
-          		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="2000">
-          	    </div>
-          	    <div class="col-lg-2" style="padding:5px;">
-          		<button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs" style="float: left; margin-top:7px;"><i class="fa fa-trash-o "></i></button>
-                  </div>                    
-          	    </div>	
-          	    
-          	     <div class="row" style="margin-left:5px;" >
-          	     <button class="add_priceOption"> + 가격옵션 추가하기</button>
-          	     </div>	
-          		</li>
-          		
-          		<li>
-          		
-          		</li>
-          		
-          		<li>
-          		<div class="row">
-                <div class="col-lg-12">
-            <button class="save_Btn" >적용하기</button>
-          </div>
-            </div>
-            </li>
-          	</ul>
-          	
-          </table>
-        </div>
-        <div id="count" value="1"></div>
-      </div>
-    </div>
-  </div>
-                                      
-                                      <!--modalB 메뉴정보수정 start-->
-   <!--                              	<div class="modalB">
-                                  <div class="modalB_content">
-                                  <ul>
-                                  <li style="border-bottom:1px solid black;"> <h2 style="font-size: 20px; color: black; font-weight:bolder;">메뉴 정보 변경</h2></li>
-                                   <li style="border-bottom:1px solid black; ">
-                                   	<div><h3 style="font-size: 15px; color: black; text-align:left; font-weight:bolder; margin-left:10px">가격</h3></div>
-                                   	<div class="row">
-                                   		<div class="col-lg-5" style="padding:5px;"><input class="form-control" style="width:relative; margin-left:5px; " type="text" value="ICE 리터"></div> 
-                                   		<div class="col-lg-5" style="padding:5px;"><input class="form-control" style="width:relative; margin-left:5px; " type="text" value="ICE 벤티"></div> 
-                                   		<div class="col-lg-2" style="padding:5px;"><input class="form-control" style="width:relative; margin-left:5px; " type="text" value="HOT 벤티"></div>
-                                   	</div>
-                                   	
-                                   </li>
-                                   
-                                   </ul>
-                                    
-                                    <div>
-                                    <button class="closeBtn" onclick="close_modalB()" >닫기</button>
-                                  </div>
-                                  </div>
-                                </div> -->
-                                <!--modalB end-->
-                                      
-                                      
-                                      
-                                      
                                       <li>
                                         <a class="menu_one" href="#" >
                                           <div class="row">
-                                            <div class="col-lg-2" style="text-align: left; margin-left:20px">
-                                              <img src="resources/assets/images/cart-1.jpg" style="width: 100px; 
+                                            <div class="col-lg-2" style="text-align: left;">
+                                              <img src="/views_store/cart-1.jpg" style="width: 100px; 
                                               height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
                                             </div>
-                                            <div class="col-lg-8" style="text-align: left; margin-top: 8px;">
+                                            <div class="col-lg-8" style="text-align: left; margin-top: 5px;">
                                               
-                                              <h4 style=" font-weight: bolder; margin-left: 0; ">카페라떼</h4>
+                                              <h4 style=" font-weight: bolder; margin-left: 0;">카페라떼</h4>
                                               <div class="menu_oneOption" >
-                                              <h6 style="margin-top:0; font-weight: bolder;">ICE : 2000 원</h6>
-                                              <h6 style="font-weight: bolder;">HOT : 1500 원</h6>
+                                              <h6 style="margin-top:0;">ICE : 2000 원</h6>
+                                              <h6>HOT : 1500 원</h6>
                                               </div>
                                             
                                             </div>
@@ -603,9 +406,9 @@ function close_modalA() {
                                         
                                         </a>
                                         <ul class="trd_menu sub_menu">
-                                          <li><a class="menu_one" href="#">메뉴정보수정</a></li>
-                                          <li><a class="menu_one" href="#">옵션설정</a></li>
-                                          <li><a class="menu_one" href="#">이미지변경</a></li>
+                                          <li><a class="menu_one" href="#">Hue</a></li>
+                                          <li><a class="menu_one" href="#">Saturation</a></li>
+                                          <li><a class="menu_one" href="#">Value</a></li>
                                       </ul>
                                       </li>
                                     </ul>
@@ -616,46 +419,46 @@ function close_modalA() {
                                         <button class="btn btn-primary btn-xs" style="float: right; margin-right: 10px;"><i class="fa fa-pencil"></i></button>
                                       </a>
                                     
-                                     <ul class="snd_menu sub_menu">
+                                      <ul class="snd_menu sub_menu">
                                       <li>
                                         <a class="menu_one" href="#" >
                                           <div class="row">
-                                            <div class="col-lg-2" style="text-align: left; margin-left:20px;">
-                                              <img src="resources/assets/images/cart-1.jpg" style="width: 100px; 
+                                            <div class="col-lg-2" style="text-align: left;">
+                                              <img src="/views_store/cart-1.jpg" style="width: 100px; 
                                               height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
                                             </div>
                                             <div class="col-lg-8" style="text-align: left; margin-top: 5px;">
                                               
                                               <h4 style=" font-weight: bolder; margin-left: 0;">고구마라떼</h4>
                                               <div class="menu_oneOption" >
-                                              <h6 style="margin-top:0; font-weight: bolder;">ICE : 2000 원</h6>
-                                              <h6 style="font-weight: bolder;">HOT : 1500 원</h6>
+                                              <h6 style="margin-top:0;">ICE : 2000 원</h6>
+                                              <h6>HOT : 1500 원</h6>
                                               </div>
                                             
                                             </div>
-                                            
+                                           
                                           </div> 
                                         
                                         </a>
                                         <ul class="trd_menu sub_menu">
-                                          <li><a class="menu_oneUpdate" href="#">메뉴정보수정</a></li>
-                                          <li><a class="menu_oneUpdate" href="#">옵션설정</a></li>
-                                          <li><a class="menu_oneUpdate" href="#">이미지변경</a></li>
+                                          <li><a class="menu_one" href="#">Hue</a></li>
+                                          <li><a class="menu_one" href="#">Saturation</a></li>
+                                          <li><a class="menu_one" href="#">Value</a></li>
                                       </ul>
                                       </li>
                                       <li>
                                         <a class="menu_one" href="#" >
                                           <div class="row">
-                                            <div class="col-lg-2" style="text-align: left; margin-left:20px">
-                                              <img src="resources/assets/images/cart-1.jpg" style="width: 100px; 
+                                            <div class="col-lg-2" style="text-align: left;">
+                                              <img src="/views_store/cart-1.jpg" style="width: 100px; 
                                               height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
                                             </div>
-                                            <div class="col-lg-8" style="text-align: left; margin-top: 8px;">
+                                            <div class="col-lg-8" style="text-align: left; margin-top: 5px;">
                                               
-                                              <h4 style=" font-weight: bolder; margin-left: 0; ">민트초코라떼</h4>
+                                              <h4 style=" font-weight: bolder; margin-left: 0;">민트초코라떼</h4>
                                               <div class="menu_oneOption" >
-                                              <h6 style="margin-top:0; font-weight: bolder;">ICE : 2000 원</h6>
-                                              <h6 style="font-weight: bolder;">HOT : 1500 원</h6>
+                                              <h6 style="margin-top:0;">ICE : 2000 원</h6>
+                                              <h6>HOT : 1500 원</h6>
                                               </div>
                                             
                                             </div>
@@ -664,12 +467,16 @@ function close_modalA() {
                                         
                                         </a>
                                         <ul class="trd_menu sub_menu">
-                                          <li><a class="menu_oneUpdate" href="#">메뉴정보수정</a></li>
-                                          <li><a class="menu_oneUpdate" href="#">옵션설정</a></li>
-                                          <li><a class="menu_oneUpdate" href="#">이미지변경</a></li>
+                                          <li><a class="menu_one" href="#">Hue</a></li>
+                                          <li><a class="menu_one" href="#">Saturation</a></li>
+                                          <li><a class="menu_one" href="#">Value</a></li>
                                       </ul>
                                       </li>
                                     </ul>
+                                    
+                                    
+                                    
+                                    
                                     
                                     </li>
 
@@ -698,7 +505,7 @@ function close_modalA() {
                               </nav>
 
                               <!--그룹 리스트 end-->
-							
+
 
                               <!--modalA start-->
                                 <div class="modalA">

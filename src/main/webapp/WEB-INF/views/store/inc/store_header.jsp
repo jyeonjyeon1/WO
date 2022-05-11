@@ -36,7 +36,7 @@
         <div class="openup tooltips" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
       </div>
       <!--logo start-->
-      <a href="index.store" class="logo"><b>walking<span>order</span></b></a>
+      <a href="../index.html" class="logo"><b>walking<span>order</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         

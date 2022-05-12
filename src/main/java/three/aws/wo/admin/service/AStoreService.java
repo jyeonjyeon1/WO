@@ -19,4 +19,7 @@ public interface AStoreService {
 	List<StoreFormVO> storePendingList();
 	void updateStore(HashMap<String, String> change);
 	int checkStore(String sf_code);
+	StoreVO storeOne(String si_code);
+	void replicateStoreInfo(String sf_code);
+	void replicateStoreAccount(String sf_code);
 }

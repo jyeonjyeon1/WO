@@ -195,8 +195,9 @@
 								<tbody>
 									<c:forEach var="storeInquiryList" items="${storeInquiryList}"
 										varStatus="vs">
+										<span id="f_seq${vs.index}" style="display:none;">${storeInquiryList.f_seq}</span>
 										<tr>
-											<td id="f_seq${vs.index}">${storeInquiryList.f_seq}</td>
+											<td>${vs.index +1 }</td>
 											<td>${storeInquiryList.f_code}</td>
 											<td id="f_tel${vs.index}">${storeInquiryList.f_tel}</td>
 											<td>${storeInquiryList.f_name}</td>

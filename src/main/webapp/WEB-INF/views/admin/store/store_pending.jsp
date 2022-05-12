@@ -185,24 +185,6 @@
 											type="button" id="ing_btn" class="searchClass" value="검토중">
 										<input type="button" id="complete_btn" class="searchClass"
 											value="입점완료">
-										<!-- <label class="checkbox-inline">
-                      <input type="checkbox" id="inlineCheckbox1" value="option1" checked> 전체
-                    </label>
-                    <label class="checkbox-inline">
-                      <input type="checkbox" id="inlineCheckbox2" value="option2" checked> 신청
-                    </label>
-                    <label class="checkbox-inline">
-                      <input type="checkbox" id="inlineCheckbox3" value="option2" checked> 서류보안
-                    </label>
-                    <label class="checkbox-inline">
-                      <input type="checkbox" id="inlineCheckbox4" value="option2" checked> 검토중
-                    </label>
-                    <label class="checkbox-inline">
-                      <input type="checkbox" id="inlineCheckbox5" value="option2" checked> 반려
-                    </label>
-                    <label class="checkbox-inline">
-                      <input type="checkbox" id="inlineCheckbox6" value="option2" checked> 입점완료
-                    </label> -->
 									</div>
 								</div>
 								<button type="button" onclick="" class="btn btn-theme"
@@ -237,7 +219,7 @@
 										<th data-sortable="" style="width: 11%;"><a href="#"
 											class="dataTable-sorter">전화번호</a></th>
 										<th data-sortable="" style="width: 10%;"><a href="#"
-											class="dataTable-sorter">담당자</a></th>
+											class="dataTable-sorter">대표자</a></th>
 										<th data-sortable="" style="width: 10%;"><a href="#"
 											class="dataTable-sorter">상태</a></th>
 										<th data-sortable="" style="width: 15%;"><a href="#"
@@ -255,13 +237,13 @@
 										</c:if>
 										<tr>
 											<td>${storePendingList.sf_seq}</td>
-											<td>${storePendingList.sf_name}</td>
-											<td id="sf_code${vs.index}">${storePendingList.sf_code}</td>
+											<td >${storePendingList.sf_name}</td>
+											<td>${storePendingList.sf_code}</td>
 											<td>${storePendingList.sf_addr_road},
 												${storePendingList.sf_addr_detail}</td>
 											<td>${storePendingList.sf_tel}</td>
-											<td>${storePendingList.sf_name}</td>
-											<td><span id="sf_status${vs.index}">${storePendingList.sf_status}</span></td>
+											<td>${storePendingList.sf_rep_name}</td>
+											<td id="sf_status${vs.index}">${storePendingList.sf_status}</td>
 											<td>${storePendingList.sf_reg_date.substring(0,19)}</td>
 											<td><a data-toggle="modal" href="#myModal${vs.index}"
 												onclick="changeConfirm${vs.index}()"
@@ -294,6 +276,11 @@
 															<input type="text" id=""
 																value="${storePendingList.sf_code}" class="form-control"
 																readonly>
+														</div>
+														<div class="modal-body" style="padding-bottom: 0;">
+															<p style="margin-bottom: 2px;">대표자 성함</p>
+															<input type="text" id=""
+																value="${storePendingList.sf_rep_name}" class="form-control">
 														</div>
 														<div class="modal-body" style="padding-bottom: 0;">
 															<p style="margin-bottom: 2px;">주소</p>
@@ -398,16 +385,17 @@
 													<div class="modal-footer">
 														<button data-dismiss="modal" class="btn btn-default"
 															type="button" value="닫기">닫기</button>
-														<button class="changeConfirm${vs.index} btn btn-theme"
+														<button class="changeConfirm${vs.index} btn btn-theme" id="kk${vs.index}"
 															type="button" value="검토"
-															name="${storePendingList.sf_code}" >검토</button>
+															name="${storePendingList.sf_code}" ${disabled}>검토</button>
 														<button class="changeConfirm${vs.index} btn btn-theme"
 															type="button" value="서류보안"
 															tel="${storePendingList.sf_tel}"
-															name="${storePendingList.sf_code}" >서류재요청</button>
+															name="${storePendingList.sf_code}" ${disabled}>서류재요청</button>
 														<button class="changeConfirm${vs.index} btn btn-theme"
 															type="button" value="입점완료"
-															name="${storePendingList.sf_code}" >승인</button>
+															tel="${storePendingList.sf_tel}"
+															name="${storePendingList.sf_code}" ${disabled}>승인</button>
 							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
 							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
 							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
@@ -424,8 +412,6 @@
 		  	//테이블에 있는 상태를 클릭 후 변경해줄거임.
 		  	const sf_statusElement${vs.index} = document
 			.getElementById("sf_status${vs.index}");
-		  	console.log(document.getElementById("sf_code${vs.index}").innerText);
-		  	console.log(document.getElementById("sf_status${vs.index}").innerText);
 		  	
 		  	if(status=="검토"){
 		  		Swal.fire({
@@ -491,7 +477,10 @@
 				    	$.ajax({
 				             type: "POST",
 				             url: "/checkStore.admin",
-				             data: JSON.stringify(param),
+				             data: JSON.stringify({
+									"sf_code" : sf_code,
+									"tel" : $(this).attr("tel")
+							  	}),
 				             dataType: "json",
 				             contentType: "application/json",
 				          success:function(data){
@@ -507,7 +496,6 @@
 				        		  changeStatus(param);
 							    	sf_statusElement${vs.index}.innerText = status;
 							    	//버튼들 비활성화
-		
 							    	Swal.fire({
 						 	    		  icon: "success",
 						 	    		  title: "생성 완료",

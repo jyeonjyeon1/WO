@@ -30,5 +30,7 @@ public class StoreFormVO {
 	private String sf_acc_no;
 	private String sf_bankbook_image;
 	private String sf_business_registration_image;
+	private String sf_rep_name;
+	private String sf_password;
 
 }

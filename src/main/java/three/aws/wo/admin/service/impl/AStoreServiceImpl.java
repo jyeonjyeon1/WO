@@ -67,4 +67,19 @@ public class AStoreServiceImpl implements AStoreService {
 		return aStoreDAO.checkStore(sf_code);
 	}
 
+	@Override
+	public StoreVO storeOne(String si_code) {
+		return aStoreDAO.storeOne(si_code);
+	}
+
+	@Override
+	public void replicateStoreInfo(String sf_code) {
+		aStoreDAO.replicateStoreInfo(sf_code);
+	}
+
+	@Override
+	public void replicateStoreAccount(String sf_code) {
+		aStoreDAO.replicateStoreAccount(sf_code);
+	}
+
 }

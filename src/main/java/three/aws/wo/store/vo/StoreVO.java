@@ -36,4 +36,5 @@ public class StoreVO {
 	private boolean si_usestore;
 	private String sa_business_registration_image;
 	private String sa_bankbook_image;
+	private String sa_rep_name;
 }

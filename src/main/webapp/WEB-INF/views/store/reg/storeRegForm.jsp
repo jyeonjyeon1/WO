@@ -26,11 +26,11 @@
 
 <!-- 테이블용 css -->
 <style>
-.tel_form, .email_form, .regName_label, .regCode_label{
+.tel_form, .email_form, .regName_label, .regCode_label, .regRepName_label{
 	display: none;
 }
 
-.tel_form.active, .email_form.active, .regName_label.active, .regCode_label.active {
+.tel_form.active, .email_form.active, .regName_label.active, .regCode_label.active, .regRepName_label.active {
 	display: block;
 	padding-left: 5px;
 	color: red;
@@ -85,6 +85,14 @@
 										<input class="form-control" id="si_code" name="sf_code"
 											type="text" placeholder="사업자번호 ( - 제외)">
 											<p class="regCode_label">사업자번호는 10자리입니다</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">대표자 성함</label>
+									<div class="col-sm-4">
+										<input class="form-control" id="rep_name" name="sf_rep_name"
+											type="text" placeholder="대표자 성함">
+											<p class="regRepName_label">이름 이상</p>
 									</div>
 								</div>
 								<div class="form-group">
@@ -343,13 +351,14 @@
     var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8;
 	ch1 = false;//특이사항
 // 	ch2 = false;//우편 
-// 	ch3 = false;//도로명
+ 	ch3 = false;//대표자이름
 	ch4 = false;//매장명
 	ch5 = false;//phone authentication
 	ch6 = false;//regEmail
 	ch7 = false;//regCode
 	
-	var regName = /^[a-zA-Z0-9가-힣\s]+$/;
+	var regRepName = /^[a-zA-Z가-힣\s]+$/;
+	var regName = /^[a-zA-Z0-9가-힣\s\'\"]+$/;
 	var regCode = /^[0-9]{10}$/;
 	var regPhone = /^0([0-9]{7,11})$/;
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
@@ -361,11 +370,6 @@
 					var referinfo = $("#si_referinfo").val();
 					if(referinfo == ""){ch1 = false;}
 					else {ch1=true;}
-				});
-				
-				$("#si_code").on("propertychange change keyup paste input",
-						function(){
-					code = $("#si_code").val();
 				});
 				
 				$("#si_name").on(
@@ -381,12 +385,24 @@
 								ch4 = true;
 							}
 						});
+				$("#rep_name").on(
+						"propertychange change keyup paste input",
+						function() {
+							var rep_name = $("#rep_name").val();
+
+							if (regRepName.test(rep_name) == false) {
+								$(".regRepName_label").addClass('active');
+								ch3 = false;
+							} else {
+								$(".regRepName_label").removeClass('active');
+								ch3 = true;
+							}
+						});
 				
 				$("#si_code").on(
 						"propertychange change keyup paste input",
 						function() {
-							var code = $("#si_code").val();
-
+							code = $("#si_code").val();
 							if (regCode.test(code) == false) {
 								$(".regCode_label").addClass('active');
 								ch7 = false;
@@ -430,7 +446,7 @@
 
 	
 	function finalCheck(){
-	if(ch7 && ch5 && ch6 && $("#post__code").val()!=''&& $("#road__Address").val()!=''	) {
+	if(ch7 &&ch3 && ch5 && ch6 && $("#post__code").val()!=''&& $("#road__Address").val()!=''	) {
 		uploadImgbusinessreg();
 		uploadImgbankcopy();
 		document.storeRegForm.submit();

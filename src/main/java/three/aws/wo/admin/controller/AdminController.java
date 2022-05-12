@@ -1,21 +1,9 @@
 package three.aws.wo.admin.controller;
 
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import three.aws.wo.admin.service.AMessageService;
-import three.aws.wo.admin.service.AStoreService;
-import three.aws.wo.admin.util.MessageSend;
-import three.aws.wo.admin.vo.MessageVO;
 
 @Controller
 public class AdminController {
@@ -286,12 +274,6 @@ public class AdminController {
 	public String tostore_mng_add() {
 		System.out.println("store_mng_add");
 		return "/store/store_mng_add";
-	}
-	
-	@GetMapping("/store_mng_update.admin")
-	public String tostore_mng_update() {
-		System.out.println("store_mng_update");
-		return "/store/store_mng_update";
 	}
 	
 //	==================== user ============================

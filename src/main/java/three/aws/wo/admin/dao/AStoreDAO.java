@@ -53,4 +53,24 @@ public class AStoreDAO {
 	public int checkStore(String sf_code) {
 		return sqlSession.selectOne("AStoreDAO.checkStore",sf_code);
 	}
+
+	public StoreVO storeOne(String si_code) {
+		return sqlSession.selectOne("AStoreDAO.storeOne",si_code);
+	}
+
+	public void replicateStoreInfo(String sf_code) {
+		sqlSession.insert("AStoreDAO.replicateStoreInfo",sf_code);
+	}
+
+	public void replicateStoreAccount(String sf_code) {
+		sqlSession.insert("AStoreDAO.replicateStoreAccount",sf_code);
+	}
+
+	public void deleteJoinInq(int f_seq) {
+		sqlSession.delete("AStoreDAO.deleteJoinInq",f_seq);
+	}
+
+	public void deletePending(int sf_seq) {
+		sqlSession.delete("AStoreDAO.deletePending",sf_seq);
+	}
 }

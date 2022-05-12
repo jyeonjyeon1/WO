@@ -24,11 +24,11 @@ public class UserController {
 	}
 
 //	==================== index ============================
-	@GetMapping("/list.user")
-	public String tolistPage() {
-		System.out.println("list");
-		return "/index/index_list";
-	}
+//	@GetMapping("/list.user")
+//	public String tolistPage() {
+//		System.out.println("list");
+//		return "/index/index_list";
+//	}
 
 	@GetMapping("/map.user")
 	public String tomapPage() {
@@ -36,11 +36,11 @@ public class UserController {
 		return "/index/index_map";
 	}
 
-	@GetMapping("/index.user")
-	public String toIndexPage() {
-		System.out.println("index");
-		return "/index/index";
-	}
+//	@GetMapping("/index.user")
+//	public String toIndexPage() {
+//		System.out.println("index");
+//		return "/index/index";
+//	}
 
 //	==================== info ============================
 

@@ -44,8 +44,7 @@
 
 <body>
 	<!-- header import -->
-	<!-- <%@ include file="/WEB-INF/views/user/inc/header.jsp" %> -->
-	<div id="headers"></div>
+	<%@ include file="/WEB-INF/views/user/inc/header.jsp" %> 
 	<!-- Shoping Cart Section Begin -->
 	<section class="shoping-cart spad" style="padding: 0;">
 		<div class="container" style="padding: 20px; background-color: white;">

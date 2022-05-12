@@ -306,7 +306,7 @@
 								<tbody>
 									<c:forEach var="storeList" items="${storeList}" varStatus="vs">
 										<tr>
-											<td>${storeList.si_seq}</td>
+											<td>${vs.index +1}</td>
 											<td>${storeList.si_name}</td>
 											<td>${storeList.si_code}</td>
 											<td><a data-toggle="modal" href="#passModal${vs.index}"><i class="password_see fa fa-eye"></i></a></td>
@@ -349,6 +349,11 @@
 							<div class="modal-body" style="padding-bottom: 0;">
 								<p style="margin-bottom: 2px;">매장코드</p>
 								<input type="text" id="" value="${storeList.si_code}"
+									class="form-control">
+							</div>
+							<div class="modal-body" style="padding-bottom: 0;">
+								<p style="margin-bottom: 2px;">대표자 이름</p>
+								<input type="text" id="" value="${storeList.sa_rep_name}"
 									class="form-control">
 							</div>
 							<div class="modal-body" style="padding-bottom: 0;">
@@ -449,7 +454,7 @@
 						<div class="modal-footer">
 							<button data-dismiss="modal" class="btn btn-default"
 								type="button">확인</button>
-							<button onclick="location.href='store_mng_update.admin'"
+							<button onclick="location.href='store_mng_update.admin?si_code=${storeList.si_code}'"
 								class="btn btn-theme" type="button">수정</button>
 						</div>
 					</div>

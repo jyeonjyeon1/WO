@@ -22,4 +22,6 @@ public interface AStoreService {
 	StoreVO storeOne(String si_code);
 	void replicateStoreInfo(String sf_code);
 	void replicateStoreAccount(String sf_code);
+	void deleteJoinInq(int f_seq);
+	void deletePending(int sf_seq);
 }

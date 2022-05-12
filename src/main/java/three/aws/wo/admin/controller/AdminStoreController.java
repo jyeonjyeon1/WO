@@ -208,4 +208,23 @@ public class AdminStoreController {
 			return "/store/store_mng_update";
 		}
 	}
+	
+/////////////------- DB에서 지우는 작업들---------///////////////////////////////////
+	@ResponseBody
+	@RequestMapping(value = "/deleteJoinInq.admin", method = RequestMethod.POST)
+	public int deleteJoinInq(@RequestBody HashMap<String, String> param) {
+		// 입점문의 DB에서 삭제
+		int f_seq = Integer.parseInt(param.get("f_seq"));
+		aStoreService.deleteJoinInq(f_seq);
+		return 1;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/deletePending.admin", method = RequestMethod.POST)
+	public int deletePending(@RequestBody HashMap<String, String> param) {
+		// 입점문의 DB에서 삭제
+		int sf_seq = Integer.parseInt(param.get("sf_seq"));
+		aStoreService.deletePending(sf_seq);
+		return 1;
+	}
 }

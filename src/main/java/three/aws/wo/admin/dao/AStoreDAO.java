@@ -65,4 +65,12 @@ public class AStoreDAO {
 	public void replicateStoreAccount(String sf_code) {
 		sqlSession.insert("AStoreDAO.replicateStoreAccount",sf_code);
 	}
+
+	public void deleteJoinInq(int f_seq) {
+		sqlSession.delete("AStoreDAO.deleteJoinInq",f_seq);
+	}
+
+	public void deletePending(int sf_seq) {
+		sqlSession.delete("AStoreDAO.deletePending",sf_seq);
+	}
 }

@@ -195,8 +195,8 @@
 								<tbody>
 									<c:forEach var="storeInquiryList" items="${storeInquiryList}"
 										varStatus="vs">
-										<span id="f_seq${vs.index}" style="display:none;">${storeInquiryList.f_seq}</span>
-										<tr>
+										<span id="f_seq${vs.index}" style="display: none;">${storeInquiryList.f_seq}</span>
+										<tr id="inqRow${vs.index}">
 											<td>${vs.index +1 }</td>
 											<td>${storeInquiryList.f_code}</td>
 											<td id="f_tel${vs.index}">${storeInquiryList.f_tel}</td>
@@ -219,7 +219,8 @@
 													</c:otherwise>
 												</c:choose>
 
-												<button onclick="" class="btn btn-danger btn-xs">
+												<button onclick="deleteRow${vs.index}()"
+													class="btn btn-danger btn-xs">
 													<i class="fa fa-trash-o "></i>
 												</button></td>
 										</tr>
@@ -264,8 +265,43 @@
 											       }); //ajax 끝 
 											    }
 											}); //alert 끝
-											
-											
+										}//status 바꾸기 끝
+										
+										function deleteRow${vs.index}(){
+											  Swal.fire({
+												    title: "정말 삭제하시겠습니까?",
+												    text: "삭제시 복구할 수 없습니다.",
+												    icon: "warning",
+												    showCancelButton: true,
+												    confirmButtonColor: "#3085d6",
+												    cancelButtonColor: "#d33",
+												    confirmButtonText: "네",
+												    cancelButtonText: "아니오"
+											  }).then((result) => {
+											    if (result.isConfirmed) {
+											    	//DB에서 삭제
+											    	let f_seq= document.getElementById("f_seq${vs.index}").innerText; 
+											    	$.ajax({
+											             type: "POST",
+											             url: "/deleteJoinInq.admin",
+											             data: JSON.stringify({"f_seq":f_seq}),
+											             dataType: "json",
+											             contentType: "application/json",
+											          success:function(data){
+											        	//화면에서 삭제
+											        	  document.getElementById("inqRow${vs.index}").style.display = "none"
+											          },
+											          error:function(data){
+											             console.log("확인");
+											          }
+											       }); //ajax 끝 
+											      Swal.fire(
+											        "삭제완료",
+											        "삭제되었습니다.",
+											        "success"
+											      );
+											    }
+											  });
 										}
 										
 										</script>

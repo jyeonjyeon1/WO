@@ -25,7 +25,7 @@
 		style="margin: 30PX auto 50px; max-width: 400px;">
 		<h3 class="text-center mt-60 mb-30">결제 완료</h3>
 		<label class="form-control text-center"
-			style="padding-top: 20px; padding-bottom: 20px;"> 주문이
+			style="padding-top: 20px; padding-bottom: 20px; background-color: white;"> 주문이
 			완료되었습니다.<br>부잉
 		</label><br>
 		<div class="container"

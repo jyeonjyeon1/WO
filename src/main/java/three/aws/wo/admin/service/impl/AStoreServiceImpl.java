@@ -82,4 +82,14 @@ public class AStoreServiceImpl implements AStoreService {
 		aStoreDAO.replicateStoreAccount(sf_code);
 	}
 
+	@Override
+	public void deleteJoinInq(int f_seq) {
+		aStoreDAO.deleteJoinInq(f_seq);
+	}
+
+	@Override
+	public void deletePending(int sf_seq) {
+		aStoreDAO.deletePending(sf_seq);
+	}
+
 }

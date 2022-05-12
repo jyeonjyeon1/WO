@@ -276,6 +276,9 @@
 									<c:set var= "totalPrice" value="${totalPrice + cartList.b_total_price}"/>
 									<c:set var= "totalNum" value="${totalNum + cartList.b_quantity}"/>
 								</c:forEach>
+								<c:if test="${totalNum eq 0 }">
+									<td colspan="4" align="center" style="height: 60px; padding:20px; font-size: 16px;">장바구니가 비어있습니다</td>
+								</c:if>
 								<tr>
 									<td colspan="4" class="shoping__cart__item"
 										style="text-align: center;">

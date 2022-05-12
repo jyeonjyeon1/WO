@@ -1,5 +1,6 @@
 package three.aws.wo.admin.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,16 @@ public class AStoreServiceImpl implements AStoreService {
 	@Override
 	public List<StoreFormVO> storePendingList() {
 		return aStoreDAO.storePendingList();
+	}
+
+	@Override
+	public void updateStore(HashMap<String, String> change) {
+		aStoreDAO.updateStore(change);
+	}
+
+	@Override
+	public int checkStore(String sf_code) {
+		return aStoreDAO.checkStore(sf_code);
 	}
 
 }

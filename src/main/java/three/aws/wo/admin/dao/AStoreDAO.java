@@ -1,5 +1,6 @@
 package three.aws.wo.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -43,5 +44,13 @@ public class AStoreDAO {
 
 	public List<StoreFormVO> storePendingList() {
 		return sqlSession.selectList("AStoreDAO.storePendingList");
+	}
+
+	public void updateStore(HashMap<String, String> change) {
+		sqlSession.update("AStoreDAO.updateStore",change);
+	}
+
+	public int checkStore(String sf_code) {
+		return sqlSession.selectOne("AStoreDAO.checkStore",sf_code);
 	}
 }

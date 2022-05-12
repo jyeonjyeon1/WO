@@ -14,6 +14,11 @@
 		WHERE U_ID = #{u_id} 
 	</select>
 	
+	<select id="kakaoLogin" resultType="UserVO">
+		SELECT * FROM USERS
+		WHERE U_ID = #{u_id}
+		<!-- 작업중  -->
+	</select>
 
 	
 </mapper>

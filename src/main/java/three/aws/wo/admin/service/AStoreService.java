@@ -1,5 +1,6 @@
 package three.aws.wo.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import three.aws.wo.store.vo.FranchiseVO;
@@ -16,4 +17,6 @@ public interface AStoreService {
 	void storeInqAccept(int f_seq);
 	void insertStoreForm(StoreFormVO vo);
 	List<StoreFormVO> storePendingList();
+	void updateStore(HashMap<String, String> change);
+	int checkStore(String sf_code);
 }

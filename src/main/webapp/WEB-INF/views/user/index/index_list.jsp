@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -33,877 +34,200 @@
     <!-- 헤더 import -->
     <%@ include file="../inc/header.jsp" %>
 
+    
     <!-- Start Trending Product Area -->
-    <section class="trending-product pt-4" style="margin-top: 12px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h4>자주 주문한 카페</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="owl-carousel owl-theme" >
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/1.jpg" alt="#">
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 서초구</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">고디바 상청점</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star"></i></li>
-                                    <li><span>4.39 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>5분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>1.2km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/2.jpg" alt="#">
-                                <span class="sale-tag">-5%</span>
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 종로구</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">컴포즈 종로3가점</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>4.89 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>9분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>2.0km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/3.jpg" alt="#">
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 용산구</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">서울서둘째로잘하는집</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>4.77 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>15분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>3.2km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/4.jpg" alt="#">
-                                <span class="new-tag">New</span>
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 구로구 </span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">삼청동우피</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>4.76 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>6분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>2.9km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/1.jpg" alt="#">
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 서초구</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">고디바 상청점</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star"></i></li>
-                                    <li><span>4.39 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>5분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>1.2km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/2.jpg" alt="#">
-                                <span class="sale-tag">-5%</span>
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 종로구</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">컴포즈 종로3가점</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>4.89 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>9분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>2.0km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/3.jpg" alt="#">
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 용산구</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">서울서둘째로잘하는집</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>4.77 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>15분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>3.2km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="resources/assets/images/cafe/4.jpg" alt="#">
-                                <span class="new-tag">New</span>
-                                <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">서울시 구로구 </span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">삼청동우피</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><span>4.76 리뷰</span></li>
-                                </ul>
-                                <ul class="location">
-                                    <li><span class="icon-clock"></span></li>
-                                    <li><a>6분</a></li>
-                                    <li><span class="icon-location-pin"></span></li>
-                                    <li><a>2.9km</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- End Single Product -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Trending Product Area -->
+	<section class="trending-product pt-4" style="margin-top: 12px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<h4>자주 주문한 카페</h4>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel owl-theme">
+			<c:forEach var="myStoreList" items="${myStoreList}" varStatus="vs">
+				<div class="ms-2 me-4">
+					<div class="card">
+						<div class="single-product">
+							<div class="product-image">
+								<img src=${myStoreList.si_image } alt="#">
+								<div class="button">
+									<a href="product-details.html" class="btn"><i
+										class="lni lni-cart"></i> 주문하기</a>
+								</div>
+							</div>
+							<div class="product-info">
+								<span class="category">${myStoreList.si_addr }</span>
+								<h4 class="title">
+									<a href="product-grids.html">${myStoreList.si_name } ${myStoreList.si_loc }</a>
+								</h4>
+								<ul class="review">
+									<c:forEach var="full_star" begin = "0" end = "${myStoreList.si_star}" step="10">
+										<c:if test="${ full_star gt 5 }">
+											<li><i class="lni lni-star-filled"></i></li>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="half_star" begin = "10" end = "${myStoreList.si_star}" step="10">
+										<c:if test="${ (myStoreList.si_star-half_star) eq 5 }">
+											<li><i class="fa fa-star-half">&nbsp&nbsp</i></li>
+										</c:if>
+									</c:forEach>
+									
+									<c:forEach var="no_star" begin = "${myStoreList.si_star}" end = "40" step="10">
+										<c:if test="${no_star lt 45 }">
+											<li><i class="lni lni-star"></i></li>
+										</c:if>
+									</c:forEach>
+									<li><span>${myStoreList.si_star /10 } 점 / 리뷰</span></li>
+								</ul>
+								<ul class="location">
+									<li><span class="icon-clock"></span></li>
+									<li><a>${myStoreList.si_due_time }분</a></li>
+									<li><span class="icon-location-pin"></span></li>
+									<li><a>1.2km</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+	<!-- End Trending Product Area -->
 
-    <!-- Start Trending Product Area -->
-    <section class="trending-product-2 pt-4" style="margin-top: 12px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h4>추천 카페</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="owl-carousel owl-theme" >
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/5.jpg" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 광양구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">온더그라운드</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.99 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>2.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/6.jpg" alt="#">
-                            <span class="sale-tag">-20%</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 목동</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">신일룡의 호두파이</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>4.87 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>16분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>2.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/7.jpg" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">경기도 용인시</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">스타벅스 기흥점</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>4.12 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>20.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/8.jpg" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">일본 도쿄</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">곤니찌와</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.00 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>543.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/5.jpg" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 광양구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">온더그라운드</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.99 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>2.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/6.jpg" alt="#">
-                            <span class="sale-tag">-20%</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 목동</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">신일룡의 호두파이</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>4.87 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>16분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>2.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/7.jpg" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">경기도 용인시</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">스타벅스 기흥점</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>4.12 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>20.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                        <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/8.jpg" alt="#">
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">일본 도쿄</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">곤니찌와</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.00 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>543.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Trending Product Area -->
+	<!-- Start Trending Product Area -->
+	<section class="trending-product-2 pt-4" style="margin-top: 12px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<h4>추천 카페</h4>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel owl-theme">
+			<c:forEach var="recStoreList" items="${recStoreList}" varStatus="vs">
+				<div class="ms-2 me-4">
+					<div class="card">
+						<!-- Start Single Product -->
+						<div class="single-product">
+							<div class="product-image">
+								<img src=${recStoreList.si_image } alt="#">
+								<div class="button">
+									<a href="product-details.html" class="btn"><i
+										class="lni lni-cart"></i> 주문하기</a>
+								</div>
+							</div>
+							<div class="product-info">
+								<span class="category">${recStoreList.si_addr }</span>
+								<h4 class="title">
+									<a href="product-grids.html">${recStoreList.si_name } ${recStoreList.si_loc }</a>
+								</h4>
+								<ul class="review">
+									<c:forEach var="full_star" begin = "0" end = "${recStoreList.si_star}" step="10">
+										<c:if test="${ full_star gt 5 }">
+											<li><i class="lni lni-star-filled"></i></li>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="half_star" begin = "10" end = "${recStoreList.si_star}" step="10">
+										<c:if test="${ (recStoreList.si_star-half_star) eq 5 }">
+											<li><i class="fa fa-star-half">&nbsp&nbsp</i></li>
+										</c:if>
+									</c:forEach>
+									
+									<c:forEach var="no_star" begin = "${recStoreList.si_star}" end = "40" step="10">
+										<c:if test="${no_star lt 45 }">
+											<li><i class="lni lni-star"></i></li>
+										</c:if>
+									</c:forEach>
+									<li><span>${recStoreList.si_star /10 } 점 / 리뷰</span></li>
+								</ul>
+								<ul class="location">
+									<li><span class="icon-clock"></span></li>
+									<li><a>${recStoreList.si_due_time }분</a></li>
+									<li><span class="icon-location-pin"></span></li>
+									<li><a>2.9km</a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- End Single Product -->
+					</div>
+				</div>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+	<!-- End Trending Product Area -->
 
-    <!-- Start Trending Product Area -->
-    <section class="trending-product pt-4" style="margin-top: 12px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h4>신규 카페</h4>
-                    </div>
-                </div>
-            </div>
+	<!-- Start Trending Product Area -->
+	<section class="trending-product pt-4" style="margin-top: 12px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<h4>신규 카페</h4>
+					</div>
+				</div>
+			</div>
 
-            <div class="owl-carousel owl-theme" >
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/9.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">쿄쿄쿄쿄 커피</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.1 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>3분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>0.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/10.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">존맛탱 커피</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>3.6 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>1.3km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/11.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">카페온리 종로점</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>1.0 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>2분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>0.3km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/12.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">메가커피 종로점</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>4.80 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>5분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>0.5km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/9.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">쿄쿄쿄쿄 커피</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.1 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>3분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>0.9km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/10.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">존맛탱 커피</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>3.6 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>6분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>1.3km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/11.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">카페온리 종로점</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>1.0 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>2분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>0.3km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                <div class="ms-2 me-4">
-                    <div class="card">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="resources/assets/images/cafe/12.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> 주문하기</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">서울시 종로구</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">메가커피 종로점</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>4.80 리뷰</span></li>
-                            </ul>
-                            <ul class="location">
-                                <li><span class="icon-clock"></span></li>
-                                <li><a>5분</a></li>
-                                <li><span class="icon-location-pin"></span></li>
-                                <li><a>0.5km</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    <!-- End Trending Product Area -->
+			<div class="owl-carousel owl-theme">
+			<c:forEach var="newStoreList" items="${newStoreList}" varStatus="vs">
+				<div class="ms-2 me-4">
+					<div class="card">
+						<!-- Start Single Product -->
+						<div class="single-product">
+							<div class="product-image">
+								<img src=${newStoreList.si_image } alt="#">
+								<span class="new-tag">New</span>
+								<div class="button">
+									<a href="product-details.html" class="btn"><i
+										class="lni lni-cart"></i> 주문하기</a>
+								</div>
+							</div>
+							<div class="product-info">
+								<span class="category">${newStoreList.si_addr }</span>
+								<h4 class="title">
+									<a href="product-grids.html">${newStoreList.si_name } ${newStoreList.si_loc }</a>
+								</h4>
+								<ul class="review">
+									<c:forEach var="full_star" begin = "0" end = "${newStoreList.si_star}" step="10">
+										<c:if test="${ full_star gt 5 }">
+											<li><i class="lni lni-star-filled"></i></li>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="half_star" begin = "10" end = "${newStoreList.si_star}" step="10">
+										<c:if test="${ (newStoreList.si_star-half_star) eq 5 }">
+											<li><i class="fa fa-star-half">&nbsp&nbsp</i></li>
+										</c:if>
+									</c:forEach>
+									
+									<c:forEach var="no_star" begin = "${newStoreList.si_star}" end = "40" step="10">
+										<c:if test="${no_star lt 45 }">
+											<li><i class="lni lni-star"></i></li>
+										</c:if>
+									</c:forEach>
+									<li><span>${newStoreList.si_star /10 } 점 / 리뷰</span></li>
+								</ul>
+								<ul class="location">
+									<li><span class="icon-clock"></span></li>
+									<li><a>${newStoreList.si_due_time }분</a></li>
+									<li><span class="icon-location-pin"></span></li>
+									<li><a>0.9km</a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- End Single Product -->
+					</div>
+				</div>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+	<!-- End Trending Product Area -->
+	
+	
 
     <!-- footer import -->
     <%@ include file="../inc/footer.jsp" %>

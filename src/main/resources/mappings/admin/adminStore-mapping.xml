@@ -94,4 +94,16 @@
 		SELECT * FROM STORE_FORM 
 		ORDER BY SF_SEQ DESC
 	</select>
+	<update id="updateStore">
+		UPDATE STORE_FORM
+        SET
+        SF_STATUS = #{sf_status}
+        WHERE
+        SF_CODE = #{sf_code}
+	</update>
+	<select id="checkStore" resultType="int">
+		SELECT COUNT(*) FROM STORE_INFO
+		WHERE
+		SI_CODE = #{sf_code}
+	</select>
 </mapper>

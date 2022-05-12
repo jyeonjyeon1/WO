@@ -183,9 +183,8 @@
 											value="신청"> <input type="button" id="modify_btn"
 											class="searchClass" value="서류보안"> <input
 											type="button" id="ing_btn" class="searchClass" value="검토중">
-										<input type="button" id="reject_btn" class="searchClass"
-											value="반려"> <input type="button" id="complete_btn"
-											class="searchClass" value="입점완료">
+										<input type="button" id="complete_btn" class="searchClass"
+											value="입점완료">
 										<!-- <label class="checkbox-inline">
                       <input type="checkbox" id="inlineCheckbox1" value="option1" checked> 전체
                     </label>
@@ -251,6 +250,9 @@
 								<tbody>
 									<c:forEach var="storePendingList" items="${storePendingList}"
 										varStatus="vs">
+										<c:if test="${storePendingList.sf_status eq '입점완료'}">
+											<c:set value="disabled" var="disabled" />
+										</c:if>
 										<tr>
 											<td>${storePendingList.sf_seq}</td>
 											<td>${storePendingList.sf_name}</td>
@@ -259,9 +261,10 @@
 												${storePendingList.sf_addr_detail}</td>
 											<td>${storePendingList.sf_tel}</td>
 											<td>${storePendingList.sf_name}</td>
-											<td>${storePendingList.sf_status}</td>
+											<td><span id="sf_status${vs.index}">${storePendingList.sf_status}</span></td>
 											<td>${storePendingList.sf_reg_date.substring(0,19)}</td>
 											<td><a data-toggle="modal" href="#myModal${vs.index}"
+												onclick="changeConfirm${vs.index}()"
 												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 												<button type="button" onclick="javascript:deleteAlert();"
 													class="btn btn-danger btn-xs">
@@ -269,14 +272,15 @@
 												</button></td>
 										</tr>
 										<div aria-hidden="true" aria-labelledby="myModalLabel"
-											role="dialog" tabindex="-1" id="myModal${vs.index}"
-											class="modal fade" style="margin: 20px auto 0;">
+											role="dialog" id="myModal${vs.index}" class="modal fade"
+											style="margin: 20px auto 0;">
 											<div class="modal-dialog store">
 												<div class="modal-content">
 													<div class="modal-header_store">
 														<button type="button" class="close" data-dismiss="modal"
 															aria-hidden="true">&times;</button>
-														<h4 class="modal-title">${storePendingList.sf_name} 매장정보</h4>
+														<h4 class="modal-title">${storePendingList.sf_name}
+															매장정보</h4>
 													</div>
 													<!-- 	정보시작 -->
 													<div class="modal_wrapbody">
@@ -288,7 +292,8 @@
 														<div class="modal-body" style="padding-bottom: 0;">
 															<p style="margin-bottom: 2px;">매장코드</p>
 															<input type="text" id=""
-																value="${storePendingList.sf_code}" class="form-control">
+																value="${storePendingList.sf_code}" class="form-control"
+																readonly>
 														</div>
 														<div class="modal-body" style="padding-bottom: 0;">
 															<p style="margin-bottom: 2px;">주소</p>
@@ -393,43 +398,133 @@
 													<div class="modal-footer">
 														<button data-dismiss="modal" class="btn btn-default"
 															type="button" value="닫기">닫기</button>
-														<button class="changeStatus${vs.index} btn btn-theme" onclick="changeStatus${vs.index}()"
-															type="button" value="검토" name="${storePendingList.sf_code}">검토</button>
-														<button class="changeStatus${vs.index} btn btn-theme"
-															type="button" value="서류보안" name="${storePendingList.sf_code}">서류재요청</button>
-														<button class="changeStatus${vs.index} btn btn-theme"
-															type="button" value="승인" name="${storePendingList.sf_code}">승인</button>
-														<button value="수정"
-															class="changeStatus${vs.index} btn btn-theme" type="button" name="${storePendingList.sf_code}">수정</button>
+														<button class="changeConfirm${vs.index} btn btn-theme"
+															type="button" value="검토"
+															name="${storePendingList.sf_code}" >검토</button>
+														<button class="changeConfirm${vs.index} btn btn-theme"
+															type="button" value="서류보안"
+															tel="${storePendingList.sf_tel}"
+															name="${storePendingList.sf_code}" >서류재요청</button>
+														<button class="changeConfirm${vs.index} btn btn-theme"
+															type="button" value="입점완료"
+															name="${storePendingList.sf_code}" >승인</button>
+							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
+							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
+							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
 													</div>
-	<script>
-	function changeStatus${vs.index}(){
-		$('.changeStatus${vs.index}').click(function() {
-			var status = $(this).attr("value");
+													<script>
+	function changeConfirm${vs.index}(){
+		$('.changeConfirm${vs.index}').click(function() {
+			var status = $(this).attr("value"); //검토 서류보안 승인 수정
 			const sf_code = $(this).attr("name");
 		  	var param = {
 				"status" : status ,
-				"sf_code" : sf_code  
+				"sf_code" : sf_code
 		  	};
-			  $.ajax({
-		             type: "POST",
-		             url: "/storependingAlert.admin",
-		             data: JSON.stringify(param),
-		             dataType: "json",
-		             contentType: "application/json",
-		          success:function(data){
-		        	  console.log(data);
-		        	  if(data==1){
-		        	  }
-		        	  
-		          },
-		          error:function(data){
-		             console.log("장바구니 삭제 통신에러");
-		          }
-		       }); //ajax 끝
+		  	//테이블에 있는 상태를 클릭 후 변경해줄거임.
+		  	const sf_statusElement${vs.index} = document
+			.getElementById("sf_status${vs.index}");
+		  	console.log(document.getElementById("sf_code${vs.index}").innerText);
+		  	console.log(document.getElementById("sf_status${vs.index}").innerText);
+		  	
+		  	if(status=="검토"){
+		  		Swal.fire({
+				    text: "검토 중으로 변경하시겠습니까?",
+				    showCancelButton: true,
+				    confirmButtonColor: "#3085d6",
+		  		    cancelButtonColor: "#d33",
+				    cancelButtonText: "취소",
+				    confirmButtonText: "검토"
+				}).then((result) => {
+				    if (result.isConfirmed) {
+				    	changeStatus(param);
+				    	sf_statusElement${vs.index}.innerText = status;
+				    	Swal.fire({
+			 	    		  icon: "success",
+			 	    		  title: "변경 완료",
+			 	    		  showConfirmButton: false,
+			 	    		  timer: 1500
+			 				});
+				    }else{return;}
+				});
+		  	}//검토 끝
+		  	else if(status=="서류보안"){
+		  		Swal.fire({
+				    text: "서류보안 요청하시겠습니까?",
+				    showCancelButton: true,
+				    input: "text",
+				    confirmButtonColor: "#3085d6",
+		  		    cancelButtonColor: "#d33",
+				    cancelButtonText: "취소",
+				    confirmButtonText: "검토"
+				}).then((result) => {
+		  		    if (result.value) {
+		  		        console.log("Result: " + result.value);
+		  		        sf_statusElement${vs.index}.innerText = status;
+			  		    changeStatus({
+				  			"status" : status ,
+							"sf_code" : sf_code,
+							"message" : result.value,
+							"tel" : $(this).attr("tel")
+					  	});
+			  		    Swal.fire({
+		 	    		  icon: "success",
+		 	    		  title: "요청 완료",
+		 	    		  showConfirmButton: false,
+		 	    		  timer: 1500
+		 				});
+		  		    }
+		  		}); 
+		  	}//서류보안 끝
+		  	else if(status=="입점완료"){
+		  		Swal.fire({
+				    title: "승인하시겠습니까?",
+				    html: "승인 시, 스토어 계정이 자동 생성되며<br>담당자에게 계정정보가 전달됩니다.",
+				    showCancelButton: true,
+				    confirmButtonColor: "#3085d6",
+		  		    cancelButtonColor: "#d33",
+				    cancelButtonText: "취소",
+				    confirmButtonText: "승인"
+				}).then((result) => {
+				    if (result.isConfirmed) {
+				    	//일치 계정 환인띠
+				    	$.ajax({
+				             type: "POST",
+				             url: "/checkStore.admin",
+				             data: JSON.stringify(param),
+				             dataType: "json",
+				             contentType: "application/json",
+				          success:function(data){
+				        	  console.log(data);
+				        	  if(data==1){//일치하는 계정이 이미 있음
+				        		  Swal.fire({
+					 	    		  icon: "error",
+					 	    		  text: "동일한 사업자로 등록된 매장이 존재합니다.",
+					 	    		  showConfirmButton: false,
+					 	    		  timer: 1500
+					 				});
+				        	  }else if(data == 0){//생성완료띠~
+				        		  changeStatus(param);
+							    	sf_statusElement${vs.index}.innerText = status;
+							    	//버튼들 비활성화
+		
+							    	Swal.fire({
+						 	    		  icon: "success",
+						 	    		  title: "생성 완료",
+						 	    		  showConfirmButton: false,
+						 	    		  timer: 1500
+						 				});
+				        	  }
+				          },
+				          error:function(data){
+				             console.log("스토어 계정생성에러");
+				          }
+				       }); //ajax 끝
+				    }
+				});
+		  	}//승인 끝
 		});
 	};
-	
 	</script>
 												</div>
 											</div>
@@ -441,100 +536,7 @@
 						</div>
 					</div>
 				</div>
-				</div>
-				<!-- /row -->
-				<!-- Modal -->
-				<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-					tabindex="-1" id="myModal" class="modal fade"
-					style="margin: 20px auto 0;">
-					<div class="modal-dialog store">
-						<div class="modal-content">
-							<div class="modal-header_store">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-hidden="true">&times;</button>
-								<h4 class="modal-title">매장 정보</h4>
-							</div>
-							<!-- 정보시작 -->
-							<div class="modal_wrapbody">
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">매장명</p>
-									<input type="text" id="" name="name" value="워킹커피 종로점"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">매장코드</p>
-									<input type="text" id="" name="name" value="8618501327"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">주소</p>
-									<input type="text" id="" name="name" value="서울시 종로구 삼일대로28길 14"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">전화번호</p>
-									<input type="text" id="" name="name" value="0212345678"
-										class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">이메일</p>
-									<input type="text" id="" name="name"
-										value="walking@walking.com" class="form-control">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">서류</p>
-									<input class="grey__button" type="button" onclick=""
-										value="사업자등록증" style="margin-right: 5px;"> <input
-										class="grey__button" type="button" onclick="" value="통장사본">
-								</div>
 
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">영업시간</p>
-									<input class="form-control round-form" type="time"
-										value="10:00"
-										style="width: 20%; display: inline-block; margin-right: 10px;">
-									~ <input class="form-control round-form" type="time"
-										value="23:00"
-										style="width: 20%; display: inline-block; margin-left: 10px;">
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">주차여부</p>
-									<label class="radio-inline"> <input type="radio"
-										name="inRad" id="inlineRadio1" value="option1"> 가능
-									</label> <label class="radio-inline"> <input type="radio"
-										name="inRad" id="inlineRadio2" value="option2" checked>
-										불가
-									</label>
-								</div>
-								<div class="modal-body" style="padding-bottom: 0;">
-									<p style="margin-bottom: 2px;">매장이용</p>
-									<label class="radio-inline"> <input type="radio"
-										name="inRad2" id="inlineRadio3" value="option1"> 가능
-									</label> <label class="radio-inline"> <input type="radio"
-										name="inRad2" id="inlineRadio4" value="option2" checked>
-										불가
-									</label>
-								</div>
-								<!-- 마지막 정보는 아래 패딩 유지 -->
-								<div class="modal-body">
-									<p style="margin-bottom: 2px;">특이사항</p>
-									<input type="text" name="email" value="노키즈존"
-										class="form-control">
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button data-dismiss="modal" class="btn btn-default"
-									type="button">닫기</button>
-								<button data-dismiss="modal" class="btn btn-theme" type="button">검토</button>
-								<button data-dismiss="modal" class="btn btn-theme" type="button">서류재요청</button>
-								<button data-dismiss="modal" class="btn btn-theme" type="button">승인</button>
-								<button onclick="location.href='store_mng_update.admin'"
-									class="btn btn-theme" type="button">수정</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- modal -->
 				<!-- /row -->
 			</section>
 			<!-- /wrapper -->
@@ -562,6 +564,24 @@
 				$(".dataTable-input").focus();
 			});
 		});
+		
+		function changeStatus(param){
+			  $.ajax({
+		             type: "POST",
+		             url: "/storependingAlert.admin",
+		             data: JSON.stringify(param),
+		             dataType: "json",
+		             contentType: "application/json",
+		          success:function(data){
+		        	  console.log(data);
+		        	  if(data==1){
+		        	  }
+		          },
+		          error:function(data){
+		             console.log("장바구니 삭제 통신에러");
+		          }
+		       }); //ajax 끝
+		}
 	</script>
 
 	<script

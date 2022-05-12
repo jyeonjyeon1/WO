@@ -134,18 +134,28 @@ public class AdminStoreController {
 		@ResponseBody
 		@RequestMapping(value="/storependingAlert.admin", method=RequestMethod.POST)
 		public int storependingAlert(@RequestBody HashMap<String,String> param) {
-			String status = param.get("status");
+			String sf_status = param.get("status");
 			String sf_code = param.get("sf_code");
-			HashMap<String,String> change = new HashMap();
+			HashMap<String,String> change = new HashMap<String, String>();
+			change.put("sf_status", sf_status);
+			change.put("sf_code", sf_code);
 			//승인일 경우 계정 만들어줌 (id,pw = 사업자번호)
-			if(status.equals("승인")) {
-				
-			} else if (status.equals("서류보안")) {
-				
-			} else if (status.equals("검토")) {
-				
-			} else if (status.equals("수정")) {
-				
+			if(sf_status.equals("승인")) {
+				aStoreService.updateStore(change);
+			} else if (sf_status.equals("서류보안")) {
+				String message = param.get("message");
+				aStoreService.updateStore(change);
+				String tel = param.get("tel");
+				//이부분은 문자가 가니까 일단 막았음
+				MessageSend ms = new MessageSend();
+//				String sms_title = "[워킹오더] 서류보안 요청";
+//				String sms_text = "요청내용:"+message+"\nhttp://localhost:8080/join_inq.admin";
+//				int result = ms.sendLMS(tel,sms_title, sms_text);
+				System.out.println(param);
+			} else if (sf_status.equals("검토")) {
+				aStoreService.updateStore(change);
+			} else if (sf_status.equals("입점완료")) {
+				aStoreService.updateStore(change);
 			}
 			
 			//이부분은 문자가 가니까 일단 막았음
@@ -154,6 +164,15 @@ public class AdminStoreController {
 //			String sms_text = "http://localhost:8080/join_inq.admin\n영업일 기준 1~3일 내로 연락드립니다.";
 //			int result = ms.sendLMS(f_tel,sms_title, sms_text);
 			return 1;
+		}
+		
+		//매장생성 전, 동일 사업자로 등록된 계정이 있는지 확인
+		@ResponseBody
+		@RequestMapping(value="/checkStore.admin", method=RequestMethod.POST)
+		public int checkStore(@RequestBody HashMap<String,String> param) {
+			String sf_code = param.get("sf_code");
+			int result = aStoreService.checkStore(sf_code);
+			return result;
 		}
 	
 }

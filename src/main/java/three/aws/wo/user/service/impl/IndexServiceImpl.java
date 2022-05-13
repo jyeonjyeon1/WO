@@ -14,8 +14,8 @@ public class IndexServiceImpl implements IndexService {
 	private IndexDAO indexDAO;
 	
 	@Override
-	public List<IndexVO> myStoreList(){
-		return indexDAO.myStoreList();
+	public List<IndexVO> myStoreList(String u_id){
+		return indexDAO.myStoreList(u_id);
 	}
 
 	@Override

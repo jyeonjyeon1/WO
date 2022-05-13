@@ -6,7 +6,7 @@ import three.aws.wo.store.vo.IndexVO;
 
 
 public interface IndexService {
-	List<IndexVO> myStoreList();
+	List<IndexVO> myStoreList(String u_id);
 	
 	List<IndexVO> newStoreList();
 	

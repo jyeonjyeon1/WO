@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -15,71 +16,38 @@
 <!-- ========================= CSS here ========================= -->
 <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css"
 	type="text/css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/assets/css/LineIcons.3.0.css" />
 <link rel="stylesheet" href="resources/assets/css/tiny-slider.css" />
 <link rel="stylesheet" href="resources/assets/css/glightbox.min.css" />
 <link rel="stylesheet" href="resources/assets/css/main.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
-	<script src="resources/assets/js/jquery-3.6.0.js"></script>
+<script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
 
-$(document).ready(function(){
-	
-	var keyCode = window.event.keyCode;	
-	
-    if (keyCode == 13) {
-   	 	console.log("dldld??");
-    	searchBtn();
-    };
-	
-})
+$(document).ready(
+        function() {
+           $("#search_Sname").on(
+                 "propertychange change keyup paste input", function() {
+                    onEnter();
+                 });
 
-
-
+        })
+  function onEnter() {
+     var keyCode = window.event.keyCode;
+     if (keyCode == 13) {
+        searchBtn();
+     }
+  }
 
 //검색버튼 누르면~
 function searchBtn(){
 	var Sname = $("#search_Sname").val();
-	var param = {"Sname":Sname};
-	
-	$.ajax({
-		type: "POST",
-        url: "/searchStore.user",
-        data: JSON.stringify(param),
-        dataType: "json",
-        contentType: "application/json",
-        success:function(data){
-        	console.log("search데이터전송 완료");
-        	console.log(data);
-        	location.href="/storeList.user";
-        	
-        },
-        error:function(data){
-        	console.log("search데이터전송 에러");
-        }
-		
-	})
-	
-	
-	
+	location.href="/storeList.user?search="+Sname;	
 }
-
-
-
-
-			
-				
-			
-			
-	
-
-
-
-
-
-
 </script>
 
 
@@ -102,15 +70,15 @@ function searchBtn(){
 					<div class="col-lg-4 col-md-4 col-12">
 						<div class="top-end">
 							<ul class="user-login">
-							<c:if test="${empty userSession}">
-								<li><a href="login.user">로그인</a></li>
-								<li><a href="join.user">회원가입</a></li>
-							</c:if>
-							<c:if test="${!empty userSession}">
-								<li style="color:black;">${userSession.u_name} 님</li>
-								<li><a href="logout.user">로그아웃</a></li>
-							</c:if>
-							<li><a href="faq.user">고객센터</a></li>
+								<c:if test="${empty userSession}">
+									<li><a href="login.user">로그인</a></li>
+									<li><a href="join.user">회원가입</a></li>
+								</c:if>
+								<c:if test="${!empty userSession}">
+									<li style="color: black;">${userSession.u_name}님</li>
+									<li><a href="logout.user">로그아웃</a></li>
+								</c:if>
+								<li><a href="faq.user">고객센터</a></li>
 							</ul>
 						</div>
 					</div>
@@ -167,18 +135,66 @@ function searchBtn(){
 							<div class="navbar-cart">
 
 								<div class="wishlist">
-									<a href="myWishList.user"> <i class="lni lni-heart"></i>
-										<span class="total-items">0</span>
+									<a href="myWishList.user"> <i class="lni lni-heart"></i> <span
+										class="total-items">0</span>
 									</a>
 								</div>
 								<div class="cart-items">
 									<a href="cart.user" class="main-btn"> <i
-										class="lni lni-cart"></i> <span class="total-items">0</span>
+										class="lni lni-cart"></i> <span id="totNum"
+										class="total-items">0</span>
 									</a>
 									<!-- Shopping Item -->
 									<div class="shopping-item">
 										<div class="dropdown-cart-header">
-											<span>0 개</span> <a href="cart.user">장바구니</a>
+											<span id="totNum2">0 개</span> <a href="cart.user">장바구니</a>
+										</div>
+										<h6 style="font-size: 16px;">${cartStoreSession.si_name}
+											${cartStoreSession.si_loc}</h6>
+										<hr>
+
+										<ul class="shopping-list">
+											<c:set var="totalPrice" value="0" />
+											<c:set var="totalNum" value="0" />
+											<c:forEach var="cartListSession" items="${cartListSession}"
+												varStatus="vs">
+												<li>
+													<div class="cart-img-head">
+														<a class="cart-img" href="product-details.html"><img
+															src="${cartListSession.m_img_file}" alt="#"></a>
+													</div>
+
+													<div class="content">
+														<h4>
+															<a href="#"> ${cartListSession.m_name}</a>
+														</h4>
+														<p class="quantity">${cartListSession.b_quantity}
+															x - <span class="amount">${cartListSession.b_total_price}</span>
+														</p>
+													</div></li>
+												<c:set var="totalPrice"
+													value="${totalPrice + cartListSession.b_total_price}" />
+												<c:set var="totalNum"
+													value="${totalNum + cartListSession.b_quantity}" />
+
+											</c:forEach>
+										</ul>
+										<script>
+									const resultElement = document
+									.getElementById("totNum");
+									const resultElement2 = document
+									.getElementById("totNum2");
+									resultElement.innerText = ${totalNum}
+									resultElement2.innerText = ${totalNum} + "   개"
+									</script>
+										<div class="bottom">
+											<div class="total">
+												<span>합계 </span> <span id="totalPricee" style="float: right;"><fmt:formatNumber
+														value="${totalPrice}" pattern="###,###" /></span>
+											</div>
+											<div class="button">
+												<a href="/myOrder.user" class="btn animate">주문하기</a>
+											</div>
 										</div>
 									</div>
 									<!--/ End Shopping Item -->
@@ -254,7 +270,8 @@ function searchBtn(){
 
 	<!-- ========================= JS here ========================= -->
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="resources/assets/js/tiny-slider.js"></script>
 	<script src="resources/assets/js/glightbox.min.js"></script>
 	<script src="resources/assets/js/main.js"></script>

@@ -424,7 +424,7 @@
 						<div class="shoping__discount" style="margin-top: 35px;">
 							<h5 style="margin-bottom: 5px;">포인트 사용</h5>
 							<label style="color: rgba(255, 64, 64, 0.781);">사용가능 금액 :
-								1000p</label>
+								${userSession.u_point } p</label>
 							<form action="#">
 
 								<input type="text" placeholder="금액을 입력해주세요.">
@@ -557,7 +557,7 @@
 			  "u_id": u_id,
 			  "si_code": document.getElementById("si_code").innerText,
 			  "o_request": o_request,
-			  "o_total_price":document.getElementById("totalPrice").innerText.replace(",","").replace(",",""),
+			  "o_total_price": document.getElementById("totalPrice").innerText.replace(",","").replace(",",""),
 			  "o_list":o_list
 			  };
 	  $.ajax({
@@ -604,7 +604,11 @@
 	    	  $.ajax({
 	              type: "POST",
 	              url: "/successOrder.user",
-	              data: JSON.stringify({"o_code":orderNum,"u_id":u_id}),
+	              data: JSON.stringify({
+	            	  "o_code":orderNum,
+	            	  "u_id":u_id, 
+	            	  "o_total_price":document.getElementById("totalPrice").innerText.replace(",","").replace(",","")
+	            	  }),
 	              dataType: "json",
 	              contentType: "application/json",
 	           success:function(data){

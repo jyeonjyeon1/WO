@@ -66,4 +66,14 @@ public class UserOrderServiceImpl implements UserOrderService {
 		return userOrderDAO.orderComplete(o_code);
 	}
 
+	@Override
+	public void orderPointUpdate(HashMap<String, Object> insertPoint) {
+		userOrderDAO.orderPointUpdate(insertPoint);
+	}
+
+	@Override
+	public void orderPointAdd(HashMap<String, Object> insertPoint) {
+		userOrderDAO.orderPointAdd(insertPoint);
+	}
+
 }

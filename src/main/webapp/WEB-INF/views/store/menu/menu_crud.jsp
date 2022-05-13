@@ -264,6 +264,21 @@ line-height:23px;
       //$('.modal-title').text("메뉴 정보 수정");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
   });
   
+  //메뉴 가격 추가버튼클릭시.
+  $('.add_priceOption').click(function(){
+	$('.price_list').append("<div class='row' style='margin-left:5px;' >" 
+      		+"<div class='col-lg-5' style='padding:5px;'>" 
+      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격명'>"
+      	    +"</div>"
+      	    +"<div class='col-lg-5' style='padding:5px;'>"
+      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격'>"
+      	    +"</div>"
+      	    +"<div class='col-lg-2' style='padding:5px;'>"
+      		+"<button type='button' onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top:7px;'><i class='fa fa-trash-o '></i></button>"
+            +  "</div>"                    
+      	    +"</div>");  
+  })
+  
 })
 
 //모달a 메뉴그룹추가
@@ -275,6 +290,45 @@ function modal_a() {
 function close_modalA() {
   $(".modalA").fadeOut();
 }
+
+//메뉴정보수정- 가격 삭제버튼 클릭시 이벤트
+/* function deleteRow${"#de"}(){
+        Swal.fire({
+             title: "정말 삭제하시겠습니까?",
+             text: "삭제시 복구할 수 없습니다.",
+             icon: "warning",
+             showCancelButton: true,
+             confirmButtonColor: "#3085d6",
+             cancelButtonColor: "#d33",
+             confirmButtonText: "네",
+             cancelButtonText: "아니오"
+        }).then((result) => {
+          if (result.isConfirmed) {
+             //DB에서 삭제
+             let sf_seq= document.getElementById("sf_seq${vs.index}").innerText; 
+             $.ajax({
+                   type: "POST",
+                   url: "/deletePending.admin",
+                   data: JSON.stringify({"sf_seq":sf_seq}),
+                   dataType: "json",
+                   contentType: "application/json",
+                success:function(data){
+                 //화면에서 삭제
+                   document.getElementById("inqRow${vs.index}").style.display = "none"
+                },
+                error:function(data){
+                   console.log("확인");
+                }
+             }); //ajax 끝 
+            Swal.fire(
+              "삭제완료",
+              "삭제되었습니다.",
+              "success"
+            );
+          }
+        });
+   } */
+
 
 
 
@@ -491,7 +545,7 @@ function close_modalA() {
           		<li style="border-bottom:1px solid black; margin:15px; padding-bottom:10px; ">
           		<h5 style="font-size:15px; font-weight:bolder; color:black; margin-top:20px ">가격</h5>
           		
-          		
+          		<div class="price_list">
           		<div class="row" style="margin-left:5px;" >
           		<div class="col-lg-5" style="padding:5px;">
           		<input class="form-control" style="width:relative; font-size:15px;" type="text" value="ICE 리터">
@@ -529,6 +583,7 @@ function close_modalA() {
           		<button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs" style="float: left; margin-top:7px;"><i class="fa fa-trash-o "></i></button>
                   </div>                    
           	    </div>	
+          	    </div>
           	    
           	     <div class="row" style="margin-left:5px;" >
           	     <button class="add_priceOption"> + 가격옵션 추가하기</button>

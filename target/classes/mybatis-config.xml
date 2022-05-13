@@ -34,7 +34,7 @@
  		<mapper resource="mappings/user/userStore-mapping.xml" />  
 		<mapper resource="mappings/user/userLogin-mapping.xml" />
 		<mapper resource="mappings/user/userBoard-mapping.xml" />  
-		<mapper resource="mappings/user/userOrder-mapping.xml" />  
+		<mapper resource="mappings/user/userOrder-mapping.xml" /> 
 		
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/adminPoint-mapping.xml" />

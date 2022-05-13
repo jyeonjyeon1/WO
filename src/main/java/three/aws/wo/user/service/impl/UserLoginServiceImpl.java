@@ -15,6 +15,7 @@ import three.aws.wo.user.vo.UserVO;
 public class UserLoginServiceImpl implements UserLoginService {
 	@Autowired
 	private UserLoginDAO userLoginDAO;
+	private HashMap<String, Object> String;
 	@Override
 	public int userLoginCheck(HashMap<String, String> param) throws Exception {
 		return userLoginDAO.userLoginCheck(param);
@@ -23,5 +24,9 @@ public class UserLoginServiceImpl implements UserLoginService {
 	public UserVO loggedin(String u_id, String rememberId, HttpSession session, HttpServletResponse response) throws Exception {
 		return userLoginDAO.loggedin(u_id,rememberId,session,response);
 	}
-
+	@Override
+	public int kakaoLogin(String u_id) throws Exception {
+		return userLoginDAO.kakaoLogin(String, u_id);
+	}
+	
 }

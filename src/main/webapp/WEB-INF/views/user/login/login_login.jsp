@@ -77,7 +77,22 @@
 											dataType : "json",
 											contentType : "application/json",
 											success : function(data) {
-											},
+												
+												if(data == 1){
+													location.href = "/index.user";
+												}
+												else if(data == 0) {
+													
+													
+													location.href = "/join.user";
+												}
+												else{
+													location.href = "/login.user";
+												}
+												
+												
+												
+												},
 											error : function(data) {
 												console.log("로그인 통신x")
 											}
@@ -88,6 +103,8 @@
 										console.log(error)
 									},
 								})
+								
+								
 							},
 							fail : function(error) {
 								console.log(error)

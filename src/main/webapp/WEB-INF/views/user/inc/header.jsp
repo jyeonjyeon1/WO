@@ -22,7 +22,22 @@
 <link rel="stylesheet" href="resources/assets/css/main.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
+	<script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
+
+$(document).ready(function(){
+	
+	var keyCode = window.event.keyCode;	
+	
+    if (keyCode == 13) {
+   	 	console.log("dldld??");
+    	searchBtn();
+    };
+	
+})
+
+
+
 
 //검색버튼 누르면~
 function searchBtn(){
@@ -50,6 +65,10 @@ function searchBtn(){
 	
 	
 }
+
+
+
+
 			
 				
 			
@@ -234,7 +253,7 @@ function searchBtn(){
 
 
 	<!-- ========================= JS here ========================= -->
-	<script src="resources/assets/js/jquery-3.6.0.js"></script>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="resources/assets/js/tiny-slider.js"></script>
 	<script src="resources/assets/js/glightbox.min.js"></script>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -35,8 +36,13 @@
     <%@ include file="../inc/header.jsp" %>
 
     
-    <!-- Start Trending Product Area -->
-	<section class="trending-product pt-4" style="margin-top: 12px;">
+    <%! String str = "none"; %>
+	<!-- Start Trending Product Area -->
+	<c:forEach var="myStoreList" items="${myStoreList}" varStatus="vs">
+		<% str = "block"; %>
+	</c:forEach>
+	
+	<section class="trending-product pt-4" style="margin-top: 12px; display: <%= str%>">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -45,13 +51,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="owl-carousel owl-theme">
 			<c:forEach var="myStoreList" items="${myStoreList}" varStatus="vs">
+			<div class="owl-carousel owl-theme">
 				<div class="ms-2 me-4">
 					<div class="card">
 						<div class="single-product">
 							<div class="product-image">
-								<img src=${myStoreList.si_image } alt="#">
+								<img src=${fn:toLowerCase(myStoreList.si_image) } alt="#">
 								<div class="button">
 									<a href="product-details.html" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
@@ -91,8 +97,9 @@
 						</div>
 					</div>
 				</div>
-				</c:forEach>
+				
 			</div>
+			</c:forEach>
 		</div>
 	</section>
 	<!-- End Trending Product Area -->
@@ -114,7 +121,7 @@
 						<!-- Start Single Product -->
 						<div class="single-product">
 							<div class="product-image">
-								<img src=${recStoreList.si_image } alt="#">
+								<img src=${fn:toLowerCase(recStoreList.si_image) } alt="#">
 								<div class="button">
 									<a href="product-details.html" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
@@ -179,7 +186,7 @@
 						<!-- Start Single Product -->
 						<div class="single-product">
 							<div class="product-image">
-								<img src=${newStoreList.si_image } alt="#">
+								<img src=${fn:toLowerCase(newStoreList.si_image) } alt="#">
 								<span class="new-tag">New</span>
 								<div class="button">
 									<a href="product-details.html" class="btn"><i

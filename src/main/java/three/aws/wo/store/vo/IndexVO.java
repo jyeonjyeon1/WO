@@ -49,4 +49,7 @@ public class IndexVO {
 	
 	private String e_thumbnail_image;
 	private String e_url;
+
+
+	private String u_id;
 }

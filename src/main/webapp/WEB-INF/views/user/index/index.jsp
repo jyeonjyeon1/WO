@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,16 +53,16 @@
 				</div>
 				<div class="col-lg-4 col-12">
 					<div class="row">
+					<c:forEach var="todayDrinkList" items="${todayDrinkList}" varStatus="vs">
 						<div class="col-lg-12 col-md-6 col-12 md-custom-padding">
 							<!-- Start Small Banner -->
 							<div class="hero-small-banner"
-								style="margin-top: 20px; background-image: url('resources/assets/images/hero/slider-bnr.jpg'); border-radius: 20px 20px 20px 20px;">
+								style="margin-top: 20px; background-image: url(${fn:toLowerCase(todayDrinkList.td_image) }); border-radius: 20px 20px 20px 20px;">
 							</div>
 							<!-- End Small Banner -->
 						</div>
 						<div class="col-lg-12 col-md-6 col-12">
 							<!-- Start Small Banner -->
-							<c:forEach var="todayDrinkList" items="${todayDrinkList}" varStatus="vs">
 							<div class="hero-small-banner style2">
 								<div class="content">
 									<h2>${todayDrinkList.td_name }</h2>
@@ -71,8 +72,8 @@
 									</div>
 								</div>
 							</div>
-							</c:forEach>
 							<!-- Start Small Banner -->
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -82,9 +83,13 @@
 	<!-- End Hero Area -->
 
 
-
+	<%! String str = "none"; %>
 	<!-- Start Trending Product Area -->
-	<section class="trending-product pt-4" style="margin-top: 12px;">
+	<c:forEach var="myStoreList" items="${myStoreList}" varStatus="vs">
+		<% str = "block"; %>
+	</c:forEach>
+	
+	<section class="trending-product pt-4" style="margin-top: 12px; display: <%= str%>">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -99,7 +104,7 @@
 					<div class="card">
 						<div class="single-product">
 							<div class="product-image">
-								<img src=${myStoreList.si_image } alt="#">
+								<img src=${fn:toLowerCase(myStoreList.si_image) } alt="#">
 								<div class="button">
 									<a href="product-details.html" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
@@ -142,7 +147,9 @@
 				</c:forEach>
 			</div>
 		</div>
+		
 	</section>
+	
 	<!-- End Trending Product Area -->
 
 	<!-- Start Trending Product Area -->
@@ -162,7 +169,7 @@
 						<!-- Start Single Product -->
 						<div class="single-product">
 							<div class="product-image">
-								<img src=${recStoreList.si_image } alt="#">
+								<img src=${fn:toLowerCase(recStoreList.si_image) } alt="#">
 								<div class="button">
 									<a href="product-details.html" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
@@ -227,7 +234,7 @@
 						<!-- Start Single Product -->
 						<div class="single-product">
 							<div class="product-image">
-								<img src=${newStoreList.si_image } alt="#">
+								<img src=${fn:toLowerCase(newStoreList.si_image) } alt="#">
 								<span class="new-tag">New</span>
 								<div class="button">
 									<a href="product-details.html" class="btn"><i

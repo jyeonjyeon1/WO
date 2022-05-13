@@ -24,4 +24,8 @@ public interface UserOrderService {
 	void resetCart(String u_id);
 
 	OrdersVO orderComplete(String o_code);
+
+	void orderPointUpdate(HashMap<String, Object> insertPoint);
+
+	void orderPointAdd(HashMap<String, Object> insertPoint);
 }

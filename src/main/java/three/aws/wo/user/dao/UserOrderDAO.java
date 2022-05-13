@@ -60,5 +60,13 @@ public class UserOrderDAO {
 	public OrdersVO orderComplete(String o_code) {
 		return sqlSession.selectOne("UserOrderDAO.orderComplete",o_code);
 	}
+
+	public void orderPointUpdate(HashMap<String, Object> insertPoint) {
+		sqlSession.update("UserOrderDAO.orderPointUpdate",insertPoint);
+	}
+
+	public void orderPointAdd(HashMap<String, Object> insertPoint) {
+		sqlSession.insert("UserOrderDAO.orderPointAdd",insertPoint);
+	}
 	
 }

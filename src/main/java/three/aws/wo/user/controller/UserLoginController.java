@@ -1,6 +1,7 @@
 package three.aws.wo.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.service.UserLoginService;
+import three.aws.wo.user.service.UserOrderService;
+import three.aws.wo.user.vo.BasketVO;
 import three.aws.wo.user.vo.UserVO;
 
 @Controller
 public class UserLoginController {
 	@Autowired
 	private UserLoginService userLoginService;
+	@Autowired
+	private UserOrderService userOrderService;
 	
 	@RequestMapping(value="/login.user",method=RequestMethod.GET)
 	public String u_loginPage(HttpSession session) {
@@ -44,9 +50,6 @@ public class UserLoginController {
 		//아이디저장하기 체크했는지 가져옴
 		String rememberId = param.get("rememberId"); 
 		System.out.println(rememberId);//true false
-//		System.out.println(param.get("u_id"));
-//		System.out.println(param.get("u_password"));
-//		System.out.println(result);
 		System.out.println("세션 : "+ session);
 		if(result==1) {//일치하는 경우 vo를 가져옴.
 			UserVO vo = userLoginService.loggedin(userID,rememberId,session,response);
@@ -60,6 +63,14 @@ public class UserLoginController {
 				cookie.setMaxAge(0); //쿠키 죽인 후 추가(바로 소멸)
 				response.addCookie(cookie);
 			}
+			// 유저 아이디 받아옴
+			// 유저 아이디로 장바구니 조회 함.
+			List<BasketVO> cartList = userOrderService.cartList(userID);
+			// 유저장바구니에 있는 가게 불러옴
+			StoreVO cartStore = userOrderService.cartStore(userID);
+			// 장바구니 출력함.
+			session.setAttribute("cartStoreSession", cartStore);
+			session.setAttribute("cartListSession", cartList);
 			//session에 vo 저장
 			session.setAttribute("userSession", vo);
 		}

@@ -13,4 +13,7 @@ public interface UserLoginService {
 
 	UserVO loggedin(String u_id, String rememberId, HttpSession session, HttpServletResponse response) throws Exception;
 	
+	// 카카오로그인
+	int kakaoLogin(String u_id) throws Exception;
+
 }

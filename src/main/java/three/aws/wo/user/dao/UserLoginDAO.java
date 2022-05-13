@@ -17,10 +17,18 @@ public class UserLoginDAO {
 	private SqlSessionTemplate sqlSession;
 
 	public int userLoginCheck(HashMap<String, String> param) {
-		return sqlSession.selectOne("UserLoginDAO.userLoginCheck",param);
-	} 
-	public UserVO loggedin(String u_id, String rememberId, HttpSession session, HttpServletResponse response) {
-		return sqlSession.selectOne("UserLoginDAO.loggedin",u_id);
+		return sqlSession.selectOne("UserLoginDAO.userLoginCheck", param);
 	}
+
+	public UserVO loggedin(String u_id, String rememberId, HttpSession session, HttpServletResponse response) {
+		return sqlSession.selectOne("UserLoginDAO.loggedin", u_id);
+	}
+
+	public int kakaoLogin(HashMap<String, Object> string, String u_id) {
+		
+		return sqlSession.selectOne("UserLoginDAO.userLoginCheck", u_id);
+	}
+
+	
 
 }

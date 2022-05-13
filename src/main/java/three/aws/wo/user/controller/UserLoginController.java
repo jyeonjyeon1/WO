@@ -71,11 +71,11 @@ public class UserLoginController {
 	public int kakaoLogin(@RequestBody HashMap<String, Object> param) throws Exception {
 		String id = Long.toString((long) param.get("id"));
 		System.out.println(param);
-//		ÀÛ¾÷Áß 
-
+		System.out.println("kakao"+id);
+		int result = userLoginService.kakaoLogin(id);
 		
 		
-		return 0;
+		return result;
 	}
 	
 	

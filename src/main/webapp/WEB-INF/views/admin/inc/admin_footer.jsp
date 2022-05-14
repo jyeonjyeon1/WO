@@ -3,7 +3,7 @@
 <!--footer start-->
 <footer class="site-footer">
 	<div class="text-center">
-		<p>
+		<p style="color:white;">
 			&copy; Copyrights <strong>WalkingOrder</strong>. All Rights Reserved
 		</p>
 		<a href="#" class="go-top"> <i class="fa fa-angle-up"></i>

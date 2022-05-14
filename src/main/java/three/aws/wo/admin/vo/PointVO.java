@@ -8,7 +8,7 @@ import lombok.Data;
 public class PointVO {
 	private int pt_seq;
 	private String u_id;
-	private Date pt_regdate;
+	private String pt_regdate;
 	private String pt_type;
 	private String pt_description;
 	private String pt_handler;

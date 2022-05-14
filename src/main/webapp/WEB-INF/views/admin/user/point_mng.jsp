@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -273,7 +274,7 @@
 									<table id="datatablesSimple">
 										<thead>
 											<tr>
-												<th data-sortable="" style="width: 5%;"><a href="#"
+												<th data-sortable="" style="width: 10%;"><a href="#"
 													class="dataTable-sorter">번호</a></th>
 												<th data-sortable="" style="width: 15%;"><a href="#"
 													class="dataTable-sorter">날짜</a></th>
@@ -283,26 +284,33 @@
 													class="dataTable-sorter">이름</a></th>
 												<th data-sortable="" style="width: 8%;"><a href="#"
 													class="dataTable-sorter">유형</a></th>
-												<th data-sortable="" style="width: 20%;"><a href="#"
+												<th data-sortable="" style="width: 10%;"><a href="#"
 													class="dataTable-sorter">내용</a></th>
 												<th data-sortable="" style="width: 8%;"><a href="#"
 													class="dataTable-sorter">처리자</a></th>
-												<th data-sortable="" style="width: 10%;"><a href="#"
+												<th data-sortable="" style="width: 7%;"><a href="#"
+													class="dataTable-sorter">사용/적립 포인트</a></th>
+												<th data-sortable="" style="width: 7%;"><a href="#"
 													class="dataTable-sorter">잔여포인트</a></th>
 											</tr>
 										</thead>
 
+
 										<tbody>
-											<c:forEach var="pointList" items="${pointList}">
+											<c:forEach var="pointList" items="${pointList}" varStatus="vs">
 												<tr>
-													<td>${pointList.pt_seq}</td>
-													<td>${pointList.pt_regdate}</td>
+													<td>${vs.index +1}</td>
+													<td>${(pointList.pt_regdate).substring(0,19)}</td>
 													<td>${pointList.u_id}</td>
 													<td>${pointList.u_name}</td>
+													
 													<td>${pointList.pt_type}</td>
 													<td>${pointList.pt_description}</td>
 													<td>${pointList.pt_handler}</td>
-													<td>${pointList.u_point}</td>
+													<td><fmt:formatNumber
+														value="${pointList.pt_amount}" pattern="###,###" /></td>
+													<td><fmt:formatNumber
+														value="${pointList.u_point}" pattern="###,###" /></td>
 												</tr>
 											</c:forEach>
 											<tr>

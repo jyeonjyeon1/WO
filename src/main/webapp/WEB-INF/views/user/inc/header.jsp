@@ -25,6 +25,10 @@
 <link rel="stylesheet" href="resources/assets/css/main.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
+	<style>
+	.display__none{
+	display:none;}
+	</style>
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
 
@@ -154,11 +158,15 @@ function searchBtn(){
 										<hr>
 
 										<ul class="shopping-list">
-											<c:set var="totalPrice" value="0" />
-											<c:set var="totalNum" value="0" />
+											<c:set var="totalPricee" value="0" />
+											<c:set var="totalNumm" value="0" />
 											<c:forEach var="cartListSession" items="${cartListSession}"
 												varStatus="vs">
-												<li>
+												<c:if test="${vs.index > 2}">
+													<c:set value="none" var="none" />
+												</c:if>
+												<!-- 3개까지만 출력되게하기위함. -->
+												<li style="display:${none};">
 													<div class="cart-img-head">
 														<a class="cart-img" href="product-details.html"><img
 															src="${cartListSession.m_img_file}" alt="#"></a>
@@ -168,12 +176,16 @@ function searchBtn(){
 														<h4>
 															<a href="#"> ${cartListSession.m_name}</a>
 														</h4>
-														<p class="quantity">${cartListSession.b_quantity}
-															x - <span class="amount">${cartListSession.b_total_price}</span>
+														<p class="quantity">
+															<span id="headb_quantity${vs.index}" class="amount">${cartListSession.b_quantity}</span>
+															<span> x </span>
+															<span> ${cartListSession.m_price} =  </span>
+															<span id="headb_tot_price${vs.index}" class="amount">${cartListSession.b_total_price}</span>
 														</p>
-													</div></li>
-												<c:set var="totalPrice"
-													value="${totalPrice + cartListSession.b_total_price}" />
+													</div>
+												</li>
+												<c:set var="totalPricee"
+													value="${totalPricee + cartListSession.b_total_price}" />
 												<c:set var="totalNum"
 													value="${totalNum + cartListSession.b_quantity}" />
 
@@ -185,12 +197,16 @@ function searchBtn(){
 									const resultElement2 = document
 									.getElementById("totNum2");
 									resultElement.innerText = ${totalNum}
-									resultElement2.innerText = ${totalNum} + "   개"
+									resultElement2.innerText = ${totalNum} + " 개"
+									if (resultElement.innerText=="NaN"){
+										resultElement.innerText = "0"
+										resultElement2.innerText = "0 개"
+									}
 									</script>
 										<div class="bottom">
 											<div class="total">
 												<span>합계 </span> <span id="totalPricee" style="float: right;"><fmt:formatNumber
-														value="${totalPrice}" pattern="###,###" /></span>
+														value="${totalPricee}" pattern="###,###" /></span>
 											</div>
 											<div class="button">
 												<a href="/myOrder.user" class="btn animate">주문하기</a>

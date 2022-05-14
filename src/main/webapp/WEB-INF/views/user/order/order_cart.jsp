@@ -196,6 +196,12 @@
 												.getElementById("totalItem");
 												let totalItem = parseInt(totalItemElement.innerText);
 												
+												//헤더쪽
+												const head_quan = document.getElementById("headb_quantity${vs.index}");
+												const head_price = document.getElementById("headb_tot_price${vs.index}");
+												const head_tot_quan = document.getElementById("totNum");
+												const head_tot_quan2 = document.getElementById("totNum2");
+												const head_tot_price = document.getElementById("totalPricee");
 												
 												// 더하기/빼기
 												if (type === "plus") {
@@ -234,6 +240,12 @@
 												totalElement.innerText = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 												totalItemElement.innerText = totalItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 												
+												//header
+												head_quan.innerText =number;
+												head_price.innerText=totnumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+												head_tot_price.innerText=totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+												head_tot_quan.innerText=totalItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+												head_tot_quan2.innerText=totalItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +  "   개";
 												var b_seq = $("#${cartList.b_seq}").val();
 												var param = {
 														"b_seq" : parseInt(b_seq) ,
@@ -324,7 +336,6 @@
 
 	<!-- footer import -->
 	<!-- <%@ include file="/WEB-INF/views/user/inc/footer.jsp" %> -->
-	<div id="footers"></div>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

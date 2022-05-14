@@ -32,9 +32,10 @@
 		INNER JOIN
 		STORE_INFO si
 		ON (o.SI_CODE = si.SI_CODE)
+		WHERE O_ORDER_STATE != '결제실패'
 		<if test="si_code !=null">
 		<!-- 이거는 매장 별 조회 용도 -->
-			WHERE o.SI_CODE = #{si_code}
+			AND o.SI_CODE = #{si_code}
 		</if>
 		ORDER BY O_SEQ DESC
 	</select>

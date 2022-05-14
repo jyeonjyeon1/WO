@@ -32,8 +32,5 @@
 		DELETE FROM USERS WHERE u_id = #{u_id} AND u_password= #{u_password} 
 	</delete>
 	
-	<select id="selectById" resultType="UserVO">
-        <![CDATA[ SELECT * FROM USERS WHERE u_id = #{u_id} ]]>
-    </select>
 </mapper>
  

@@ -61,10 +61,14 @@
             <br>
             
             <br>
-            <div class="row">
-                <button type="submit" class="btn btn-outline-warning col-sm-6" style="margin:auto; width: 60%; margin-bottom: 10px" id="submit"> 회원탈퇴확인
+        	<div class="row" >
+                <div style=" text-align: center;">
+                <button type="submit" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin-right: 20px; width: 35%; margin-bottom: 10px" id="submit"> 회원탈퇴
                     &nbsp;</button>
-                    <button class="cencle btn btn-danger col-sm-6" style="margin:auto; width: 60%;" type="button">취소</button>
+                <button type="button" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; width: 35%; margin-bottom: 10px" onclick=" location='/updateUser.user'"> 회원수정
+                    &nbsp;</button></div>
+                    <div style=" text-align: center;">
+                    <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 74%;" type="button">취소</button></div>
             </div>
 				
 				

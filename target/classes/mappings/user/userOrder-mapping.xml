@@ -47,12 +47,13 @@
 		SUBSTRING(CAST(o_order_date AS TEXT),1,10) = CAST(CURRENT_DATE AS TEXT)
 	</select>
 	<insert id="insertOrder">
-		INSERT INTO ORDERS VALUES(default, #{o_code},#{u_id},#{si_code},default,false,null,false,0,'카드',#{o_request},0,#{o_total_price},'전달완료',#{o_list},#{o_daily_seq})
+		INSERT INTO ORDERS VALUES(default, #{o_code},#{u_id},#{si_code},default,false,null,false,0,'카드',#{o_request},0,#{o_total_price},'결제실패',#{o_list},#{o_daily_seq})
 	</insert>
 	<update id="successOrder">
 		UPDATE ORDERS
 		SET
-		O_PAY_STATUS = true
+		O_PAY_STATUS = true,
+		O_ORDER_STATE = '결제완료'
 		WHERE
 		O_CODE = #{o_code}
 	</update>
@@ -69,6 +70,15 @@
 		O_TOTAL_PRICE
 		FROM ORDERS WHERE O_CODE = #{o_code}
 	</select>
-	
+	<insert id="orderPointAdd">
+		INSERT INTO POINT VALUES(default, #{u_id}, default, default, default,default,#{pt_amount})
+	</insert>
+	<update id="orderPointUpdate">
+		UPDATE USERS 
+		SET
+		U_POINT = U_POINT+ #{pt_amount}
+		WHERE
+		U_ID = #{u_id}
+	</update>
 </mapper>
  

@@ -302,194 +302,77 @@
                         <th data-sortable="" style="width: 8%;"><a href="#" class="dataTable-sorter">상태</a></th>
                         <th data-sortable="" style="width: 6%;"><a href="#" class="dataTable-sorter">결제</a></th>
                         <th data-sortable="" style="width: 12%;"><a href="#" class="dataTable-sorter">시간</a></th>
-                        <th data-sortable="" style="width: 6%;"><a href="#" class="dataTable-sorter">수정</a></th>
+<!--                         <th data-sortable="" style="width: 6%;"><a href="#" class="dataTable-sorter">수정</a></th> -->
                       </tr>
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>202204110001</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>010123456678</td>
-                        <td>요거트스무디 1</td>
-                        <td>얼음 다 갈아줘용</td>
-                        <td>5,600</td>
-                        <td><a href="store_order.admin">워킹커피</a></td>
-                        <td><div class="dropthebeat" style="margin: 0;padding:0;">
-                          <div class="dataTable-dropdown" ><select class="dataTable-selector" style="margin: 0;padding:0;font-size: 11px;height:20px;">
-                              <option value="all">주문접수</option>
-                              <option value="id" selected>준비중</option>
-                              <option value="name">준비완료</option>
-                              <option value="nick">전달완료</option>
-                              <option value="nick">취소</option>
-      
-                            </select>
-                          </div>
-                        </td>
-                        <td>카드</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>
-                          <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>202204110001</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>010123456678</td>
-                        <td>요거트스무디 1</td>
-                        <td></td>
-                        <td>5,600</td>
-                        <td><a href="store_order.admin">워킹커피</a></td>
-                        <td><div class="dropthebeat" style="margin: 0;padding:0;">
-                          <div class="dataTable-dropdown" ><select class="dataTable-selector" style="margin: 0;padding:0;font-size: 11px;height:20px;">
-                              <option value="all">주문접수</option>
-                              <option value="id" selected>준비중</option>
-                              <option value="name">준비완료</option>
-                              <option value="nick">전달완료</option>
-                              <option value="nick">취소</option>
-      
-                            </select>
-                          </div></td>
-                        <td>카드</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>
-                          <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>202204110001</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>010123456678</td>
-                        <td>요거트스무디 1</td>
-                        <td></td>
-                        <td>5,600</td>
-                        <td><a href="store_order.admin">워킹커피</a></td>
-                        <td><div class="dropthebeat" style="margin: 0;padding:0;">
-                          <div class="dataTable-dropdown" ><select class="dataTable-selector" style="margin: 0;padding:0;font-size: 11px;height:20px;">
-                              <option value="all">주문접수</option>
-                              <option value="id" selected>준비중</option>
-                              <option value="name">준비완료</option>
-                              <option value="nick">전달완료</option>
-                              <option value="nick">취소</option>
-      
-                            </select>
-                          </div></td>
-                        <td>카드</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>
-                          <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>202204110001</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>010123456678</td>
-                        <td>요거트스무디 1</td>
-                        <td></td>
-                        <td>5,600</td>
-                        <td><a href="store_order.admin">워킹커피</a></td>
-                        <td><div class="dropthebeat" style="margin: 0;padding:0;">
-                          <div class="dataTable-dropdown" ><select class="dataTable-selector" style="margin: 0;padding:0;font-size: 11px;height:20px;">
-                              <option value="all">주문접수</option>
-                              <option value="id" selected>준비중</option>
-                              <option value="name">준비완료</option>
-                              <option value="nick">전달완료</option>
-                              <option value="nick">취소</option>
-      
-                            </select>
-                          </div></td>
-                        <td>카드</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>
-                          <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>202204110001</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>010123456678</td>
-                        <td>요거트스무디 1</td>
-                        <td></td>
-                        <td>5,600</td>
-                        <td><a href="store_order.admin">워킹커피</a></td>
-                        <td><div class="dropthebeat" style="margin: 0;padding:0;">
-                          <div class="dataTable-dropdown" ><select class="dataTable-selector" style="margin: 0;padding:0;font-size: 11px;height:20px;">
-                              <option value="all">주문접수</option>
-                              <option value="id" selected>준비중</option>
-                              <option value="name">준비완료</option>
-                              <option value="nick">전달완료</option>
-                              <option value="nick">취소</option>
-      
-                            </select>
-                          </div></td>
-                        <td>카드</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>
-                          <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>202204110001</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>010123456678</td>
-                        <td>요거트스무디 1</td>
-                        <td></td>
-                        <td>5,600</td>
-                        <td><a href="store_order.admin">워킹커피</a></td>
-                        <td><div class="dropthebeat" style="margin: 0;padding:0;">
-                          <div class="dataTable-dropdown" ><select class="dataTable-selector" style="margin: 0;padding:0;font-size: 11px;height:20px;">
-                              <option value="all">주문접수</option>
-                              <option value="id" selected>준비중</option>
-                              <option value="name">준비완료</option>
-                              <option value="nick">전달완료</option>
-                              <option value="nick">취소</option>
-      
-                            </select>
-                          </div></td>
-                        <td>카드</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>
-                          <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>202204110001</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>010123456678</td>
-                        <td>요거트스무디 1</td>
-                        <td></td>
-                        <td>5,600</td>
-                        <td><a href="store_order.admin">워킹커피</a></td>
-                        <td><div class="dropthebeat" style="margin: 0;padding:0;">
-                          <div class="dataTable-dropdown" ><select class="dataTable-selector" style="margin: 0;padding:0;font-size: 11px;height:20px;">
-                              <option value="all">주문접수</option>
-                              <option value="id" selected>준비중</option>
-                              <option value="name">준비완료</option>
-                              <option value="nick">전달완료</option>
-                              <option value="nick">취소</option>
-      
-                            </select>
-                          </div></td>
-                        <td>카드</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>
-                          <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        </td>
-                      </tr>
+                    <c:forEach var="orderList" items="${orderList}" varStatus="vs">
+										<tr>
+											<td>${vs.index +1}</td>
+											<td>${orderList.o_code}</td>
+											<td>${orderList.u_id}</td>
+											<td>${orderList.u_name}</td>
+											<td>${orderList.u_tel}</td>
+											<td>${orderList.o_list}</td>
+											<td>${orderList.o_request}</td>
+											<td><fmt:formatNumber value="${orderList.o_total_price}"
+													pattern="###,###" /></td>
+											<td><a
+												href="store_order.admin?si_code=${orderList.si_code}">${orderList.si_name}</a></td>
+											<td>
+												<div class="dataTable-dropdown">
+													<select class="dataTable-selector"
+														style="margin: 0; padding: 0; font-size: 11px; height: 20px;">
+														<c:choose>
+															<c:when test="${orderList.o_order_state eq '주문접수'}">
+																<option value="주문접수" selected>주문접수</option>
+																<option value="준비중">준비중</option>
+																<option value="준비완료">준비완료</option>
+																<option value="전달완료">전달완료</option>
+																<option value="취소">취소</option>
+															</c:when>
+															<c:when test="${orderList.o_order_state eq '준비중'}">
+																<option value="주문접수">주문접수</option>
+																<option value="준비중" selected>준비중</option>
+																<option value="준비완료">준비완료</option>
+																<option value="전달완료">전달완료</option>
+																<option value="취소">취소</option>
+															</c:when>
+															<c:when test="${orderList.o_order_state eq '준비완료'}">
+																<option value="주문접수">주문접수</option>
+																<option value="준비중">준비중</option>
+																<option value="준비완료" selected>준비완료</option>
+																<option value="전달완료">전달완료</option>
+																<option value="취소">취소</option>
+															</c:when>
+															<c:when test="${orderList.o_order_state eq '전달완료'}">
+																<option value="주문접수">주문접수</option>
+																<option value="준비중">준비중</option>
+																<option value="준비완료">준비완료</option>
+																<option value="전달완료" selected>전달완료</option>
+																<option value="취소">취소</option>
+															</c:when>
+															<c:when test="${orderList.o_order_state eq '취소'}">
+																<option value="주문접수">주문접수</option>
+																<option value="준비중">준비중</option>
+																<option value="준비완료">준비완료</option>
+																<option value="전달완료">전달완료</option>
+																<option value="취소"selected>취소</option>
+															</c:when>
+															<c:otherwise>부잉</c:otherwise>
+														</c:choose>
+													</select>
+												</div>
+											</td>
+											<td>${orderList.o_payment_list}</td>
+											<td>${(orderList.o_order_date).substring(0,19)}</td>
+											<!-- <td><a data-toggle="modal" href="#myModal"
+												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+											</td> -->
+										</tr>
+									</c:forEach>
+                      
                       
                     </tbody>
                   </table>
@@ -497,7 +380,6 @@
               </div>
             </div>
           </div>
-        </div>
         <!-- /row -->
         <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="margin: 20px auto 0;">

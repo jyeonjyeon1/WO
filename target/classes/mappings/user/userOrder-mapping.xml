@@ -53,7 +53,7 @@
 		UPDATE ORDERS
 		SET
 		O_PAY_STATUS = true,
-		O_ORDER_STATE = '결제완료'
+		O_ORDER_STATE = '주문접수'
 		WHERE
 		O_CODE = #{o_code}
 	</update>

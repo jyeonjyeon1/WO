@@ -102,17 +102,17 @@ public class AdminController {
 	}
 	
 //	==================== order ============================
-	@GetMapping("/store_order.admin")
-	public String tostore_order() {
-		System.out.println("store_order");
-		return "/order/store_order";
-	}
+//	@GetMapping("/store_order.admin")
+//	public String tostore_order() {
+//		System.out.println("store_order");
+//		return "/order/store_order";
+//	}
 	
-	@GetMapping("/total_order.admin")
-	public String tototal_order() {
-		System.out.println("total_order");
-		return "/order/total_order";
-	}
+//	@GetMapping("/total_order.admin")
+//	public String tototal_order() {
+//		System.out.println("total_order");
+//		return "/order/total_order";
+//	}
 	
 	@GetMapping("/cancel_order.admin")
 	public String tocancel_order() {

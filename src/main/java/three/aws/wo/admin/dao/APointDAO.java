@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import three.aws.wo.admin.vo.PointVO;
+import three.aws.wo.user.vo.OrdersVO;
 @Repository
 public class APointDAO {
 	@Autowired

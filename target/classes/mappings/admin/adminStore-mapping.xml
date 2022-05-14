@@ -133,4 +133,10 @@
 		FROM STORE_FORM 
 		WHERE SF_CODE = #{sf_code}
     </insert>
+    <delete id="deleteJoinInq">
+    	DELETE FROM FRANCHISE WHERE F_SEQ = #{f_seq}
+    </delete>
+    <delete id="deletePending">
+    	DELETE FROM STORE_FORM WHERE SF_SEQ = #{sf_seq}
+    </delete>
 </mapper>

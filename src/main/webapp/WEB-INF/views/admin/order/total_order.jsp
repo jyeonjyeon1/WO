@@ -223,7 +223,7 @@
 											전달완료
 										</label> <label class="checkbox-inline"> <input
 											type="checkbox" id="inlineCheckbox5" value="option5" checked>
-											취소
+											주문취소
 										</label>
 
 									</div>
@@ -350,35 +350,35 @@
 																<option value="준비중">준비중</option>
 																<option value="준비완료">준비완료</option>
 																<option value="전달완료">전달완료</option>
-																<option value="취소">취소</option>
+																<option value="주문취소">주문취소</option>
 															</c:when>
 															<c:when test="${orderList.o_order_state eq '준비중'}">
 																<option value="주문접수">주문접수</option>
 																<option value="준비중" selected>준비중</option>
 																<option value="준비완료">준비완료</option>
 																<option value="전달완료">전달완료</option>
-																<option value="취소">취소</option>
+																<option value="주문취소">주문취소</option>
 															</c:when>
 															<c:when test="${orderList.o_order_state eq '준비완료'}">
 																<option value="주문접수">주문접수</option>
 																<option value="준비중">준비중</option>
 																<option value="준비완료" selected>준비완료</option>
 																<option value="전달완료">전달완료</option>
-																<option value="취소">취소</option>
+																<option value="주문취소">주문취소</option>
 															</c:when>
 															<c:when test="${orderList.o_order_state eq '전달완료'}">
 																<option value="주문접수">주문접수</option>
 																<option value="준비중">준비중</option>
 																<option value="준비완료">준비완료</option>
 																<option value="전달완료" selected>전달완료</option>
-																<option value="취소">취소</option>
+																<option value="주문취소">주문취소</option>
 															</c:when>
-															<c:when test="${orderList.o_order_state eq '취소'}">
+															<c:when test="${orderList.o_order_state eq '주문취소'}">
 																<option value="주문접수">주문접수</option>
 																<option value="준비중">준비중</option>
 																<option value="준비완료">준비완료</option>
 																<option value="전달완료">전달완료</option>
-																<option value="취소"selected>취소</option>
+																<option value="주문취소"selected>주문취소</option>
 															</c:when>
 															<c:otherwise>부잉</c:otherwise>
 														</c:choose>
@@ -411,7 +411,7 @@
 													<option value="id" selected>준비중</option>
 													<option value="name">준비완료</option>
 													<option value="nick">전달완료</option>
-													<option value="nick">취소</option>
+													<option value="nick">주문취소</option>
 
 												</select>
 											</div></td>
@@ -439,7 +439,7 @@
 													<option value="id" selected>준비중</option>
 													<option value="name">준비완료</option>
 													<option value="nick">전달완료</option>
-													<option value="nick">취소</option>
+													<option value="nick">주문취소</option>
 
 												</select>
 											</div></td>

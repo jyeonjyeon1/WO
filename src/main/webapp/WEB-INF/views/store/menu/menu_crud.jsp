@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -83,6 +84,7 @@ li {
 	text-decoration: none;
 	color: #616161;
 	text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
 }
 
 .menu_oneOptionUpdate {
@@ -90,6 +92,7 @@ li {
 	text-decoration: none;
 	color: #616161;
 	text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
 }
 
 .menu_oneImgUpdate {
@@ -97,6 +100,33 @@ li {
 	text-decoration: none;
 	color: #616161;
 	text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
+}
+
+.menu_oneDelete {
+	display: block; /* 중요 */
+	text-decoration: none;
+	color: #fd0000;
+	text-align: center;
+  font-weight: bolder;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
+}
+
+.option_oneUpdate {
+  display: block; /* 중요 */
+	text-decoration: none;
+	color: #616161;
+	text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
+}
+
+.option_oneDelete{
+	display: block; /* 중요 */
+	text-decoration: none;
+	color: #fd0000;
+	text-align: center;
+  font-weight: bolder;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
 }
 
 .menuGroup {
@@ -116,6 +146,10 @@ li {
 	background: #efefef;
 }
 
+.menu_one_plus {
+  background-color: rgba(226, 77, 94, 0.233);
+}
+
 .trd_menu {
 	background: #ddd;
 }
@@ -128,15 +162,6 @@ li {
 	color: #efefef;
 }
 
-.modalA {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.705);
-	top: 0;
-	left: 0;
-	display: none;
-}
 
 .modalA_content {
 	width: 400px;
@@ -218,22 +243,26 @@ li {
 	text-align: center;
 	width: relative;
 	background-color: white;
+  font-size: 20px;
 }
+
 
 .add_priceOption:hover {
 	font-weight: bolder;
-	color: blue;
+	color: rgb(218, 60, 12);
 }
 
-.add_priceOption {
+
+.add_Option {
 	border: 0;
-	float: center;
+	text-align: center;
 	width: relative;
 	background-color: white;
-	font-size: 20px
+  font-size: 20px;
 }
 
-.add_priceOption:hover {
+
+.add_Option:hover {
 	font-weight: bolder;
 	color: rgb(218, 60, 12);
 }
@@ -313,6 +342,7 @@ li {
       
   });
   
+
   //메뉴 가격 추가버튼클릭시.
   $('.add_priceOption').click(function(){
 	$('.price_list').append("<div class='row' style='margin-left:5px;' >" 
@@ -327,19 +357,31 @@ li {
             +  "</div>"                    
       	    +"</div>");  
   })
+
+
+  //옵션 추가버튼클릭시.
+  $('.add_Option').click(function(){
+	$('.option_list').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
+                        + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
+												+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
+												+"style='width: relative; font-size: 15px;'	type='text' placeholder='500'></div>"
+												+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
+												+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
+												+"</button>	</div></div>");  
+  })
+
   
 })
 
 //모달a 메뉴그룹추가
 function modal_a() {
-	$('#addMenuGroup').modal(); 
-	
-   
+	$('#addMenuGroup').modal();    
 }
 
-function close_modalA() {
-  $(".modalA").fadeOut();
-}
+//모달b 옵션그룹추가
+  function modal_b() {
+  	$('#addOptionGroup').modal();    
+  }
 
 //메뉴정보수정- 가격 삭제버튼 클릭시 이벤트
 /* function deleteRow${"#de"}(){
@@ -547,8 +589,61 @@ function readImage(input) {
 															<div class="row" style="text-align: right;">
 																<a class="change_info" onclick="modal_a()"> + 메뉴그룹추가</a>
 															</div>
+															
+															<!--메뉴그룹 추가 modal start-->
+															<div class="modal fade" id="addMenuGroup" role="dialog">
 
-															<!--그룹 리스트 start-->
+																<div class="modal-dialog">
+
+																	<!-- Modal content-->
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<!-- header -->
+																			<h4 class="modal-title">메뉴그룹 추가</h4>
+																			<button type="button" class="close"
+																				data-dismiss="modal"
+																				style="font-size: 20px; color: black;">취소</button>
+
+																		</div>
+																		<div class="modal-body">
+																			<!-- body -->
+
+
+																			<table class="modal_table">
+																				<ul>
+																					<li style="margin: 15px; padding-bottom: 10px;">
+																						<h5
+																							style="font-size: 15px; font-weight: bolder; color: black;">메뉴그룹명</h5>
+																						<div class="row">
+																							<div class="col-lg-12">
+																								<input class="form-control"
+																									style="width: relative; font-size: 15px;"
+																									type="text" placeholder="예)스무디">
+																							</div>
+																						</div>
+																					</li>
+
+
+
+																					<li>
+																						<div class="row">
+																							<div class="col-lg-12">
+																								<button class="save_Btn"
+																									style="margin-top: 50px;">추가하기</button>
+																							</div>
+																						</div>
+																					</li>
+																				</ul>
+
+																			</table>
+																		</div>
+																		<div id="count" value="1"></div>
+																	</div>
+																</div>
+															</div>
+															<!--메뉴그룹추가 modal end-->
+
+															<!--메뉴그룹 리스트 start-->
 															<nav>
 																<ul id="main_menu">
 																	<li><a class="menuGroup" href="javascript:">Coffee
@@ -591,6 +686,7 @@ function readImage(input) {
 																					<li><a class="menu_oneInfoUpdate" href="#">메뉴정보수정</a></li>
 																					<li><a class="menu_oneOptionUpdate" href="#">옵션설정</a></li>
 																					<li><a class="menu_oneImgUpdate" href="#">이미지변경</a></li>
+                                          <li><a class="menu_oneDelete" href="#">메뉴삭제</a></li>
 																				</ul></li>
 
 																			<!------------- 메뉴편집_메뉴정보수정 Modal start-------------->
@@ -892,9 +988,766 @@ function readImage(input) {
 																											-직접 업로드한 이미지는 승인되어야 앱에 보여요.
 																										</h6>
 
+																										<div class="image-show" id="image-show"></div>
+
+
+																										<div class="img_upload">
+																											<div class="image-container">
+																												<div
+																													style="border: 1px solid #6161618c; height: 300px;">
+
+																													<a class="img_uploadFile" href="#"
+																														style="text-align: center; width: auto; height: 300px;">
+																														<img
+																														style="width: 100%; height: 100%; display: none;"
+																														id="preview-image" src=""> <label
+																														for="input-image" id="addImgLabel"
+																														style="font-size: 15px; margin-top: 140px; line-height: 20px; margin-left: 220px; cursor: pointer;">+<br>이미지추가
+																													</label>
+																													</a> <input type="file" id="input-image"
+																														name="chooseFile" accept="image/*">
+																												</div>
+
+																											</div>
+																											<h6
+																												style="font-size: 13px; margin-bottom: 40px;">
+																												-접수 건이 폭증할 경우, 처리일이 다소 지연될 수 있습니다. <label
+																													for="input-image" id="fixImgLabel"
+																													style="float: right; color: blue; cursor: pointer; font-size: 15px; display: none;">이미지
+																													다시업로드</label>
+																											</h6>
+
+																											<div class="img_info"
+																												style="background-color: #6161613d; border-radius: 7px; padding: 10px; height: auto;">
+																												<h5
+																													style="font-weight: bolder; font-size: 15px; color: black;">직접
+																													업로드한 이미지가 바로 승인되는 방법</h5>
+																												<ul style="color: black; margin-left: 20px;">
+																													<li
+																														style="list-style-type: disc; line-height: 20px;">메뉴
+																														식별이 가능한 이미지여야 해요.</li>
+																													<li
+																														style="list-style-type: disc; line-height: 20px;">촬영된
+																														이미지를 재촬영한 이미지는 등록할 수 없어요.</li>
+																													<li
+																														style="list-style-type: disc; line-height: 20px;">임의로
+																														어색하게 합성된 이미지는 등록이 어려워요.</li>
+																												</ul>
+																												<a href="#"
+																													style="text-decoration: underline; color: blue;">자세히
+																													알아보기</a>
+																											</div>
+
+
+																										</div>
+
+
+																									</li>
+
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">승인 신청하기</button>
+																											</div>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+																			</div>
+
+	
+
+																			<li><a class="menu_one" href="#">
+																					<div class="row">
+																						<div class="col-lg-2"
+																							style="text-align: left; margin-left: 20px">
+																							<img src="resources/assets/images/cart-1.jpg"
+																								style="width: 100px; height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
+																						</div>
+																						<div class="col-lg-8"
+																							style="text-align: left; margin-top: 8px;">
+
+																							<h4 style="font-weight: bolder; margin-left: 0;">카페라떼</h4>
+																							<div class="menu_oneOption">
+																								<h6 style="margin-top: 0; font-weight: bolder;">ICE
+																									: 2000 원</h6>
+																								<h6 style="font-weight: bolder;">HOT : 1500
+																									원</h6>
+																							</div>
+
+																						</div>
+
+																					</div>
+
+																			</a>
+																				<ul class="trd_menu sub_menu">
+                                          <li><a class="menu_oneInfoUpdate" href="#">메뉴정보수정</a></li>
+																					<li><a class="menu_oneOptionUpdate" href="#">옵션설정</a></li>
+																					<li><a class="menu_oneImgUpdate" href="#">이미지변경</a></li>
+                                          <li><a class="menu_oneDelete" href="#">메뉴삭제</a></li>
+																				</ul></li>
+																		</ul> <!--서브메뉴끝--></li>
+																	<li><a class="menuGroup" href="#">Latte (non
+																			Coffee)
+																			<button type="button"
+																				onclick="javascript:deleteAlert();"
+																				class="btn btn-danger btn-xs"
+																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button class="btn btn-primary btn-xs"
+																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+																	</a>
+
+																		<ul class="snd_menu sub_menu">
+																			<li><a class="menu_one" href="#">
+																					<div class="row">
+																						<div class="col-lg-2"
+																							style="text-align: left; margin-left: 20px;">
+																							<img src="resources/assets/images/cart-1.jpg"
+																								style="width: 100px; height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
+																						</div>
+																						<div class="col-lg-8"
+																							style="text-align: left; margin-top: 5px;">
+
+																							<h4 style="font-weight: bolder; margin-left: 0;">고구마라떼</h4>
+																							<div class="menu_oneOption">
+																								<h6 style="margin-top: 0; font-weight: bolder;">ICE
+																									: 2000 원</h6>
+																								<h6 style="font-weight: bolder;">HOT : 1500
+																									원</h6>
+																							</div>
+
+																						</div>
+
+																					</div>
+
+																			</a>
+																				<ul class="trd_menu sub_menu">
+                                          <li><a class="menu_oneInfoUpdate" href="#">메뉴정보수정</a></li>
+																					<li><a class="menu_oneOptionUpdate" href="#">옵션설정</a></li>
+																					<li><a class="menu_oneImgUpdate" href="#">이미지변경</a></li>
+                                          <li><a class="menu_oneDelete" href="#">메뉴삭제</a></li>
+																				</ul></li>
+																			<li><a class="menu_one" href="#">
+																					<div class="row">
+																						<div class="col-lg-2"
+																							style="text-align: left; margin-left: 20px">
+																							<img src="resources/assets/images/cart-1.jpg"
+																								style="width: 100px; height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
+																						</div>
+																						<div class="col-lg-8"
+																							style="text-align: left; margin-top: 8px;">
+
+																							<h4 style="font-weight: bolder; margin-left: 0;">민트초코라떼</h4>
+																							<div class="menu_oneOption">
+																								<h6 style="margin-top: 0; font-weight: bolder;">ICE
+																									: 2000 원</h6>
+																								<h6 style="font-weight: bolder;">HOT : 1500
+																									원</h6>
+																							</div>
+
+																						</div>
+
+																					</div>
+
+																			</a>
+																				<ul class="trd_menu sub_menu">
+                                          <li><a class="menu_oneInfoUpdate" href="#">메뉴정보수정</a></li>
+																					<li><a class="menu_oneOptionUpdate" href="#">옵션설정</a></li>
+																					<li><a class="menu_oneImgUpdate" href="#">이미지변경</a></li>
+                                          <li><a class="menu_oneDelete" href="#">메뉴삭제</a></li>
+																				</ul></li>
+																		</ul></li>
 
 
 
+
+
+
+																	<li><a class="menuGroup" href="#">Tea & Fruit
+																			Juice
+																			<button type="button"
+																				onclick="javascript:deleteAlert();"
+																				class="btn btn-danger btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button class="btn btn-primary btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+																	</a></li>
+																	<li><a class="menuGroup" href="#">Ade
+																			<button type="button"
+																				onclick="javascript:deleteAlert();"
+																				class="btn btn-danger btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button class="btn btn-primary btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+																	</a></li>
+																	<li><a class="menuGroup" href="#">Shake
+																			<button type="button"
+																				onclick="javascript:deleteAlert();"
+																				class="btn btn-danger btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button class="btn btn-primary btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+																	</a></li>
+																	<li><a class="menuGroup" href="#">Desert
+																			<button type="button"
+																				onclick="javascript:deleteAlert();"
+																				class="btn btn-danger btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button class="btn btn-primary btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+																	</a></li>
+																</ul>
+															</nav>
+															<!--메뉴그룹 리스트 end-->
+														</div>
+														<!--메뉴편집 end-->
+
+														<!--옵션편집 start-->
+														<div id="faq__222" class="tab-pane">
+															
+															<div class="row" style="text-align: right;">
+																<a class="change_info" onclick="modal_b()"> + 옵션그룹추가</a>
+															</div>
+															
+															<!--옵션그룹 추가 modal start-->
+															<div class="modal fade" id="addOptionGroup" role="dialog">
+
+																<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">옵션그룹 추가</h4>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+
+																							<table class="modal_table">
+																								<ul>
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black;">옵션그룹명</h5>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<input class="form-control"
+																													style="width: relative; font-size: 15px;"
+																													type="text" placeholder="예)샷추가">
+																											</div>
+																										</div>
+																									</li>
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">옵션</h5>
+
+																										<div class="option_list">
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" placeholder="예) 1샷 추가">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" placeholder="500">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+																										</div>
+																										<div class="row" style="margin-left: 5px;">
+																											<button class="add_Option">+
+																												가격옵션 추가하기</button>
+																										</div>
+																									</li>
+
+
+
+                                                  <li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h4
+																											style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px; margin-left: 0;">[선택 가능한 옵션 수]</h4>
+
+                                                    <h5 style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px;">
+                                                        필수여부
+                                                    </h5>
+                                                    <div class="row" style="line-height:20px; margin-left: 10px;">
+                                                    <input type="radio" name="radio1" id="radio1" value="1"  checked>
+                                                    <label for="radio1" style="font-size: 15px;"> [필수] 옵션을 반드시 선택해야 주문이 가능해요</label>
+                                                  </div>
+                                                  <div class="row" style="line-height:20px;  margin-left: 10px;">
+                                                    <input type="radio" name="radio1" id="radio2" value="2" >
+                                                    <label for="radio2" style="font-size: 15px;"> [선택] 옵션을 선택하지 않아도 주문이 가능해요</label>
+                                                  </div>
+																									</li>
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">추가하기</button>
+																											</div>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+															</div>
+															<!--옵션그룹추가 modal end-->
+
+															<!--옵션그룹 리스트 start-->
+															<nav>
+																<ul id="main_menu">
+																	<li><a class="menuGroup" href="javascript:">샷추가
+																			<button type="button"
+																				onclick="javascript:deleteAlert();"
+																				class="btn btn-danger btn-xs"
+																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button class="btn btn-primary btn-xs"
+																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+																	</a> <!--서브메뉴시작-->
+																		<ul class="snd_menu sub_menu">
+
+                                      <li class="menu_one_plus"><a href="#">
+                                        <div class="row" style="padding: 10px;">
+                                            <div class="col-lg-8" style="text-align:left; line-height: 20px;">
+                                            <div class="menu_oneOption">
+                                              <h4 style="color:black;"><span style="background-color: rgba(226, 77, 94, 0.267); border-radius: 5px; padding: 3px; font-size: smaller;">연결메뉴</span> 수정사항이 다음 메뉴에 동시에 적용됩니다. </h4>
+                                              <h5 style="margin-left: 15px; color:rgba(0, 0, 0, 0.801)">아메리카노, 카페라떼, 바닐라라떼, 카푸치노, 카라멜 마끼야또, 카페모카, 커피쉐이크</h5>
+                                              
+                                              <h4 style="color:black;"><span style="background-color: rgba(226, 77, 94, 0.267); border-radius: 5px; padding: 3px; font-size: smaller;">필수여부</span> [선택] 
+                                              <span>
+                                                <button class="btn btn-primary btn-xs"
+																				style="margin-left: 10px; margin-top: 5px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+                                              </span> </h4>
+                                      
+                                            </div>
+                                          </div>
+
+                                        </div>
+
+                                    </a>
+                                      
+                                    
+                                    </li>
+                                    
+
+                                             
+
+
+																			<li><a class="menu_one" href="#">
+																					<div class="row" style="padding: 10px;">
+                                              <div class="col-lg-8" style="text-align:left; line-height: 20px;">
+																							<div class="menu_oneOption">
+                                                <h4 style="color:black;">1샷추가</h4>
+                                                <ul>
+                                                  <li style="list-style-type: disc; line-height: 10px; margin-left: 25px;">
+                                                <h5 >500원</h5>
+                                                </li>
+                                              </ul>
+																							</div>
+																						</div>
+
+																					</div>
+
+																			</a>
+																				<ul class="trd_menu sub_menu">
+																					<li><a class="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
+                                          <li><a class="option_oneDelete" href="#">옵션삭제</a></li>
+																				</ul>
+                                      
+                                      </li>
+
+                                      <li><a class="menu_one" href="#">
+                                        <div class="row" style="padding: 10px;">
+                                            <div class="col-lg-8" style="text-align:left; line-height: 20px;">
+                                            <div class="menu_oneOption">
+                                              <h4 style="color:black;">2샷추가</h4>
+                                              <ul>
+                                                <li style="list-style-type: disc; line-height: 10px; margin-left: 25px;">
+                                              <h5 >500원</h5>
+                                              </li>
+                                            </ul>
+                                            </div>
+                                          </div>
+
+                                        </div>
+
+                                    </a>
+                                      <ul class="trd_menu sub_menu">
+                                        <li><a class="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
+                                        <li><a class="option_oneDelete" href="#">옵션삭제</a></li>
+                                      </ul>
+                                    
+                                    </li>
+
+                                    <li><a class="menu_one" href="#">
+                                        <div class="row" style="padding: 10px;">
+                                            <div class="col-lg-8" style="text-align:left; line-height: 20px;">
+                                            <div class="menu_oneOption">
+                                              <h4 style="color:black;">3샷추가</h4>
+                                              <ul>
+                                                <li style="list-style-type: disc; line-height: 10px; margin-left: 25px;">
+                                              <h5 >500원</h5>
+                                              </li>
+                                            </ul>
+                                            </div>
+                                          </div>
+
+                                        </div>
+
+                                    </a>
+                                      <ul class="trd_menu sub_menu">
+                                        <li><a class="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
+                                        <li><a class="option_oneDelete" href="#">옵션삭제</a></li>
+                                      </ul>
+                                    
+                                    </li>
+
+																			<!------------- 메뉴편집_메뉴정보수정 Modal start-------------->
+																			<div class="modal fade" id="menu_updateMenuInfo"
+																				role="dialog">
+
+																				<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">메뉴정보수정</h4>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+
+																							<table class="modal_table">
+																								<ul>
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black;">메뉴명</h5>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<input class="form-control"
+																													style="width: relative; font-size: 15px;"
+																													type="text" value="아메리카노">
+																											</div>
+																										</div>
+																									</li>
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
+
+																										<div class="price_list">
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="ICE 리터">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="2000">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+
+
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="ICE 리터">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="2000">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+
+
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="ICE 리터">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="2000">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+																										</div>
+
+																										<div class="row" style="margin-left: 5px;">
+																											<button class="add_priceOption">+
+																												가격옵션 추가하기</button>
+																										</div>
+																									</li>
+
+																									<li></li>
+
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">적용하기</button>
+																											</div>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+																			</div>
+
+																			<!-------------메뉴편집_메뉴정보수정 Modal end--------------->
+
+																			<!-------------메뉴편집_메뉴옵션수정 Modal start-------------->
+																			<div class="modal fade" id="menu_updateOption"
+																				role="dialog">
+
+																				<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">메뉴옵션수정</h4>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+
+																							<table class="modal_table">
+																								<ul>
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black;">메뉴명</h5>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<input class="form-control"
+																													style="width: relative; font-size: 15px;"
+																													type="text" value="아메리카노">
+																											</div>
+																										</div>
+																									</li>
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
+
+																										<div class="price_list">
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="ICE 리터">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="2000">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+
+
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="ICE 리터">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="2000">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+
+
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="ICE 리터">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="2000">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+																										</div>
+
+																										<div class="row" style="margin-left: 5px;">
+																											<button class="add_priceOption">+
+																												가격옵션 추가하기</button>
+																										</div>
+																									</li>
+
+																									<li></li>
+
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">적용하기</button>
+																											</div>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+																			</div>
+
+																			<!-------------메뉴편집_메뉴옵션수정 Modal end--------------->
+
+
+																			<!------------- 메뉴편집_이미지변경 Modal start-------------->
+																			<div class="modal fade" id="menu_updateImg"
+																				role="dialog">
+
+																				<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">이미지변경</h4>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+
+																							<table class="modal_table">
+																								<ul>
+
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px">
+																											멋진 메뉴 이미지로<br>메뉴판을 돋보이게 해주세요!
+																										</h5>
+																										<h6 style="font-size: 13px;">
+																											-이미지를 올리지 않으면 메뉴의 이미지는 자동으로 보여지지 않습니다. <br>
+																											-직접 업로드한 이미지는 승인되어야 앱에 보여요.
+																										</h6>
 
 																										<div class="image-show" id="image-show"></div>
 
@@ -955,7 +1808,7 @@ function readImage(input) {
 																									<li>
 																										<div class="row">
 																											<div class="col-lg-12">
-																												<button class="save_Btn">적용하기</button>
+																												<button class="save_Btn">승인 신청하기</button>
 																											</div>
 																										</div>
 																									</li>
@@ -967,40 +1820,11 @@ function readImage(input) {
 																					</div>
 																				</div>
 																			</div>
-
-	
-
-																			<li><a class="menu_one" href="#">
-																					<div class="row">
-																						<div class="col-lg-2"
-																							style="text-align: left; margin-left: 20px">
-																							<img src="resources/assets/images/cart-1.jpg"
-																								style="width: 100px; height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
-																						</div>
-																						<div class="col-lg-8"
-																							style="text-align: left; margin-top: 8px;">
-
-																							<h4 style="font-weight: bolder; margin-left: 0;">카페라떼</h4>
-																							<div class="menu_oneOption">
-																								<h6 style="margin-top: 0; font-weight: bolder;">ICE
-																									: 2000 원</h6>
-																								<h6 style="font-weight: bolder;">HOT : 1500
-																									원</h6>
-																							</div>
-
-																						</div>
-
-																					</div>
-
-																			</a>
-																				<ul class="trd_menu sub_menu">
-																					<li><a class="menu_one" href="#">메뉴정보수정</a></li>
-																					<li><a class="menu_one" href="#">옵션설정</a></li>
-																					<li><a class="menu_one" href="#">이미지변경</a></li>
-																				</ul></li>
 																		</ul> <!--서브메뉴끝--></li>
-																	<li><a class="menuGroup" href="#">Latte (non
-																			Coffee)
+
+
+
+																	<li><a class="menuGroup" href="#">휘핑추가
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -1077,8 +1901,19 @@ function readImage(input) {
 
 
 
-																	<li><a class="menuGroup" href="#">Tea & Fruit
-																			Juice
+																	<li><a class="menuGroup" href="#">연하게 or 진하게 추가요청
+ 																			<button type="button"
+																				onclick="javascript:deleteAlert();"
+																				class="btn btn-danger btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button class="btn btn-primary btn-xs"
+																				style="margin-top: 5px; float: right; margin-right: 10px;">
+																				<i class="fa fa-pencil"></i>
+																			</button>
+																	</a></li>
+																	<li><a class="menuGroup" href="#">시럽추가(설탕시럽-무료)
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -1090,7 +1925,7 @@ function readImage(input) {
 																				<i class="fa fa-pencil"></i>
 																			</button>
 																	</a></li>
-																	<li><a class="menuGroup" href="#">Ade
+																	<li><a class="menuGroup" href="#">시럽추가(유료)
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -1102,7 +1937,7 @@ function readImage(input) {
 																				<i class="fa fa-pencil"></i>
 																			</button>
 																	</a></li>
-																	<li><a class="menuGroup" href="#">Shake
+																	<li><a class="menuGroup" href="#">맛선택(주스)
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -1114,82 +1949,38 @@ function readImage(input) {
 																				<i class="fa fa-pencil"></i>
 																			</button>
 																	</a></li>
-																	<li><a class="menuGroup" href="#">Desert
-																			<button type="button"
-																				onclick="javascript:deleteAlert();"
-																				class="btn btn-danger btn-xs"
-																				style="margin-top: 5px; float: right; margin-right: 10px;">
-																				<i class="fa fa-trash-o "></i>
-																			</button>
-																			<button class="btn btn-primary btn-xs"
-																				style="margin-top: 5px; float: right; margin-right: 10px;">
-																				<i class="fa fa-pencil"></i>
-																			</button>
-																	</a></li>
+                                  <li><a class="menuGroup" href="#">맛선택(티)
+                                    <button type="button"
+                                      onclick="javascript:deleteAlert();"
+                                      class="btn btn-danger btn-xs"
+                                      style="margin-top: 5px; float: right; margin-right: 10px;">
+                                      <i class="fa fa-trash-o "></i>
+                                    </button>
+                                    <button class="btn btn-primary btn-xs"
+                                      style="margin-top: 5px; float: right; margin-right: 10px;">
+                                      <i class="fa fa-pencil"></i>
+                                    </button>
+                                </a></li>
+                                <li><a class="menuGroup" href="#">맛선택(마카롱)
+                                  <button type="button"
+                                    onclick="javascript:deleteAlert();"
+                                    class="btn btn-danger btn-xs"
+                                    style="margin-top: 5px; float: right; margin-right: 10px;">
+                                    <i class="fa fa-trash-o "></i>
+                                  </button>
+                                  <button class="btn btn-primary btn-xs"
+                                    style="margin-top: 5px; float: right; margin-right: 10px;">
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+                              </a></li>
 																</ul>
 															</nav>
-
-															<!--그룹 리스트 end-->
-
-
-															<!--메뉴그룹 추가 modal start-->
-															<div class="modal fade" id="addMenuGroup" role="dialog">
-
-																<div class="modal-dialog">
-
-																	<!-- Modal content-->
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<!-- header -->
-																			<h4 class="modal-title">메뉴그룹 추가</h4>
-																			<button type="button" class="close"
-																				data-dismiss="modal"
-																				style="font-size: 20px; color: black;">취소</button>
-
-																		</div>
-																		<div class="modal-body">
-																			<!-- body -->
-
-
-																			<table class="modal_table">
-																				<ul>
-																					<li style="margin: 15px; padding-bottom: 10px;">
-																						<h5
-																							style="font-size: 15px; font-weight: bolder; color: black;">메뉴그룹명</h5>
-																						<div class="row">
-																							<div class="col-lg-12">
-																								<input class="form-control"
-																									style="width: relative; font-size: 15px;"
-																									type="text" placeholder="예)스무디">
-																							</div>
-																						</div>
-																					</li>
-
-
-
-																					<li>
-																						<div class="row">
-																							<div class="col-lg-12">
-																								<button class="save_Btn"
-																									style="margin-top: 50px;">추가하기</button>
-																							</div>
-																						</div>
-																					</li>
-																				</ul>
-
-																			</table>
-																		</div>
-																		<div id="count" value="1"></div>
-																	</div>
-																</div>
-															</div>
-															<!--메뉴그룹추가 modal end-->
-
+															<!--메뉴그룹 리스트 end-->
+														
+														
+														
+														
 														</div>
-														<!--메뉴편집 end-->
-
-														<!--옵션편집 start-->
-														<div id="faq__222" class="tab-pane"></div>
 														<!--옵션편집 end-->
 
 														<!--주문안내/원산지 편집 start-->
@@ -1258,3 +2049,4 @@ function readImage(input) {
 </body>
 
 </html>
+

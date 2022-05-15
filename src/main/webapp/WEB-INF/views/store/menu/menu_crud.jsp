@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -79,6 +81,45 @@ li {
 	text-align: center;
 }
 
+
+.menu_addOne {
+	display: block; /* 중요 */
+	text-decoration: none;
+	color: #616161;
+	text-align: center;
+
+}
+
+
+.menu_addOne h4:hover {
+  font-weight: bolder;
+}
+
+.menu_addOption {
+	display: block; /* 중요 */
+	text-decoration: none;
+	color: #616161;
+	text-align: center;
+}
+
+.menu_addOption h4:hover{
+	font-weight: bolder;
+}
+
+.option_addOne {
+	display: block; /* 중요 */
+	text-decoration: none;
+	color: #616161;
+	text-align: center;
+
+}
+
+
+.option_addOne h4:hover {
+  font-weight: bolder;
+}
+
+
 .menu_oneInfoUpdate {
 	display: block; /* 중요 */
 	text-decoration: none;
@@ -112,6 +153,21 @@ li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.288);
 }
 
+
+.menu_option_undo {
+	margin-top: 5px; 
+	border: 1px solid red;
+	font-weight: bolder;
+	color: red;
+	background-color: white;
+	border-radius: 5px;
+	width: 80px;
+}
+
+.menu_option_undo:hover {
+	background-color: #f56c4d25;
+}
+
 .option_oneUpdate {
   display: block; /* 중요 */
 	text-decoration: none;
@@ -140,6 +196,10 @@ li {
 
 .menu_oneUpdate {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.288);
+}
+
+.menu_addOne {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
 }
 
 .snd_menu {
@@ -267,6 +327,19 @@ li {
 	color: rgb(218, 60, 12);
 }
 
+.groupAdd_Option {
+	border: 0;
+	text-align: center;
+	width: relative;
+	background-color: white;
+  font-size: 20px;
+}
+
+.groupAdd_Option:hover {
+	font-weight: bolder;
+	color: rgb(218, 60, 12);
+}
+
 .save_Btn {
 	width: 100%;
 	font-size: 18px;
@@ -277,6 +350,20 @@ li {
 }
 
 .save_Btn:hover {
+	background-color: rgba(218, 60, 12, 0.637);
+	font-weight: bolder;
+}
+
+.nextBtn {
+	width: 100%;
+	font-size: 18px;
+	color: black;
+	background-color: rgba(250, 235, 215, 0.884);
+	border: 1px solid #616161dc;
+	border-radius: 2px;
+}
+
+.nextBtn:hover {
 	background-color: rgba(218, 60, 12, 0.637);
 	font-weight: bolder;
 }
@@ -341,7 +428,17 @@ li {
       $('#menu_updateImg').modal();   //id가 "menu_updateOption"인 모달창을 열어준다. 
       
   });
+
+  //+메뉴추가버튼 클릭시
+  $('.menu_addOne').click(function(){
+      $('#menu_addOne').modal();   //id가 "menu_updateOption"인 모달창을 열어준다. 
+      
+  });
   
+  //옵션설정 - 옵션추가버튼 클릭시
+  $('.menu_addOption').click(function(){
+	$('#menu_addOption').modal();
+  })
 
   //메뉴 가격 추가버튼클릭시.
   $('.add_priceOption').click(function(){
@@ -359,7 +456,18 @@ li {
   })
 
 
-  //옵션 추가버튼클릭시.
+  //옵션그룹- 옵션 추가버튼클릭시.
+  $('.groupAdd_Option').click(function(){
+	$('.groupAdd_OptionList').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
+                        + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
+												+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
+												+"style='width: relative; font-size: 15px;'	type='text' placeholder='500'></div>"
+												+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
+												+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
+												+"</button>	</div></div>");  
+  })
+
+  //옵션 - 옵션추가버튼 클릭시
   $('.add_Option').click(function(){
 	$('.option_list').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
                         + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
@@ -370,18 +478,64 @@ li {
 												+"</button>	</div></div>");  
   })
 
+  //옵션하나 - 옵션명 및 가격변경 버튼 클릭시
+$('#option_oneUpdate').click(function(){
+ $('#option_oneUpdate_modal').modal();
+})
+
+  //+옵션추가버튼 클릭시
+  $('.option_addOne').click(function(){
+      $('#option_addOne').modal();  
+      
+  });
+
+  //메뉴추가 - 다음버튼 클릭시 
+  $('#nextBtn').click(function(){
+	  console.log("dff");
+	  var md111 =  document.getElementById("modal111");	 
+	  var md222 = document.getElementById("modal222");
+	  var md333 = document.getElementById("modal333");
+	  var nextBtn = document.getElementById("nextBtn");
+	  
+
+	  if(md111.style.display=="block") {	  
+		  console.log("1꺼2켜");
+		  md111.style.display="none";
+		  md222.style.display="block";
+		  document.getElementById("1of3").style.display="none";
+		  document.getElementById("2of3").style.display="block";
+	  }
+
+	  else if(md222.style.display=="block") {
+		console.log("2꺼3켜");
+		  md222.style.display="none";
+		  md333.style.display="block";
+		  nextBtn.style.display="none";
+		  document.getElementById("2of3").style.display="none";
+		  document.getElementById("3of3").style.display="block";
+	  }
+
+
+  });
+
   
 })
 
 //모달a 메뉴그룹추가
 function modal_a() {
-	$('#addMenuGroup').modal();    
+	$('#addMenuGroup').modal();   
+	console.log("fsfs"); 
 }
 
 //모달b 옵션그룹추가
   function modal_b() {
   	$('#addOptionGroup').modal();    
   }
+
+function update_ros_modal() {
+	$('#update_ros_modal').modal();
+}
+
 
 //메뉴정보수정- 가격 삭제버튼 클릭시 이벤트
 /* function deleteRow${"#de"}(){
@@ -450,6 +604,7 @@ function readImage(input) {
 
    
 }
+
 
 
 
@@ -845,96 +1000,53 @@ function readImage(input) {
 																								<ul>
 																									<li
 																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																										<h5
-																											style="font-size: 15px; font-weight: bolder; color: black;">메뉴명</h5>
-																										<div class="row">
-																											<div class="col-lg-12">
-																												<input class="form-control"
-																													style="width: relative; font-size: 15px;"
-																													type="text" value="아메리카노">
-																											</div>
-																										</div>
+																										
+																												<div class="option_1" style="border:1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; ">
+																													<div class="row">
+																														<div class="col-lg-8">
+																															<h4 style="font-weight: bolder; color: black;">샷추가(선택)</h4>
+																															<h5 style="margin-left:10px;">+1샷,+2샷,+3샷</h5>
+																														</div>
+																														<div class="col-lg-4">
+																															<input type="button" class="menu_option_undo" value="해제">
+																														</div>
+																													</div>
+																												</div>
+
+																												
+																												<div class="option_2" style="border:1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; ">
+																													<div class="row">
+																														<div class="col-lg-8">
+																															<h4 style="font-weight: bolder; color: black;">샷추가(선택)</h4>
+																															<h5 style="margin-left:10px;">+1샷,+2샷,+3샷</h5>
+																														</div>
+																														<div class="col-lg-4">
+																															<input type="button" class="menu_option_undo" value="해제">
+																														</div>
+																													</div>
+																												</div>
+
+																												
+																												<div class="option_3" style="border:1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; ">
+																													<div class="row">
+																														<div class="col-lg-8">
+																															<h4 style="font-weight: bolder; color: black;">샷추가(선택)</h4>
+																															<h5 style="margin-left:10px;">+1샷,+2샷,+3샷</h5>
+																														</div>
+																														<div class="col-lg-4">
+																															<input type="button" class="menu_option_undo" value="해제">
+																														</div>
+																													</div>
+																												</div>	
+
+																												<div class="row">
+																													<a class="menu_addOption" href="#">
+																														<h4 style="color:blue; padding: 10px; margin-right:65px;">+ 옵션그룹 추가</h4></a>
+																												</div>
+
+
 																									</li>
-																									<li
-																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																										<h5
-																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
-
-																										<div class="price_list">
-																											<div class="row" style="margin-left: 5px;">
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="ICE 리터">
-																												</div>
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="2000">
-																												</div>
-																												<div class="col-lg-2" style="padding: 5px;">
-																													<button type="button"
-																														onclick="javascript:deleteAlert();"
-																														class="btn btn-danger btn-xs"
-																														style="float: left; margin-top: 7px;">
-																														<i class="fa fa-trash-o "></i>
-																													</button>
-																												</div>
-																											</div>
-
-
-																											<div class="row" style="margin-left: 5px;">
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="ICE 리터">
-																												</div>
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="2000">
-																												</div>
-																												<div class="col-lg-2" style="padding: 5px;">
-																													<button type="button"
-																														onclick="javascript:deleteAlert();"
-																														class="btn btn-danger btn-xs"
-																														style="float: left; margin-top: 7px;">
-																														<i class="fa fa-trash-o "></i>
-																													</button>
-																												</div>
-																											</div>
-
-
-																											<div class="row" style="margin-left: 5px;">
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="ICE 리터">
-																												</div>
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="2000">
-																												</div>
-																												<div class="col-lg-2" style="padding: 5px;">
-																													<button type="button"
-																														onclick="javascript:deleteAlert();"
-																														class="btn btn-danger btn-xs"
-																														style="float: left; margin-top: 7px;">
-																														<i class="fa fa-trash-o "></i>
-																													</button>
-																												</div>
-																											</div>
-																										</div>
-
-																										<div class="row" style="margin-left: 5px;">
-																											<button class="add_priceOption">+
-																												가격옵션 추가하기</button>
-																										</div>
-																									</li>
-
-																									<li></li>
-
+																									
 																									<li>
 																										<div class="row">
 																											<div class="col-lg-12">
@@ -953,7 +1065,43 @@ function readImage(input) {
 
 																			<!-------------메뉴편집_메뉴옵션수정 Modal end--------------->
 
+																			<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal start--------------->
+																			<div class="modal fade" id="menu_addOption"
+																			role="dialog">
 
+																			<div class="modal-dialog">
+
+																				<!-- Modal content-->
+																				<div class="modal-content">
+																					<div class="modal-header">
+																						<!-- header -->
+																						<h4 class="modal-title">옵션그룹추가</h4>
+																						<button type="button" class="close"
+																							data-dismiss="modal"
+																							style="font-size: 20px; color: black;">취소</button>
+
+																					</div>
+																					<div class="modal-body">
+																						<!-- body -->
+
+																						<div class="row">
+																							<h5 style="background-color: #61616128; padding: 15px; margin: 10px; border-radius: 4px;">새로운 옵션 그룹이 필요하신 경우 <span style="color: blue; font-weight:bolder;">옵션편집-옵션추가</span>를 이용해주세요.</h5>
+																						</div>
+
+																						<div class="menu_addOptionGroup1" style="border:1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; ">
+																							<input type="checkbox" style="width: 20px; height:20px; margin-top: 10px; "> <h3 style="font-size: 15px; color: black;">샷추가</h3>
+																							<h6 style="line-height: 10px; padding-bottom: 20;">+1샷, +2샷, +3샷</h6>
+																							<div class="option_linkMenu" style="background-color: #2e279627; padding: 10px;">
+																								<h5 style="color: black;"><span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된 메뉴를 확인하세요.</h5>
+																							</div>
+																						</div>
+																						
+																					</div>
+																					<div id="count" value="1"></div>
+																				</div>
+																			</div>
+																		</div>							
+																		<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal end--------------->
 																			<!------------- 메뉴편집_이미지변경 Modal start-------------->
 																			<div class="modal fade" id="menu_updateImg"
 																				role="dialog">
@@ -1091,7 +1239,124 @@ function readImage(input) {
 																					<li><a class="menu_oneImgUpdate" href="#">이미지변경</a></li>
                                           <li><a class="menu_oneDelete" href="#">메뉴삭제</a></li>
 																				</ul></li>
+
+                                        <li><a class="menu_addOne" href="#">
+																					
+                                              <h4 style="color:blue; padding: 10px; margin-right:65px;">+ 메뉴추가</h4>
+																					
+
+																			  </a>
+																				</li>
+
+
+																				<!--메뉴추가 모달창-->
+
+																				<div class="modal fade" id="menu_addOne"
+																				role="dialog">
+
+																				<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">메뉴추가</h4>
+																							<h3 style="color: black; font-weight: bolder; text-align: center;">그룹명 : [Coffee]</h3>
+																							<h3 style="font-size: 20px;color: black; font-weight: bolder; display: block; text-align: center;" id="1of3">1/3</h3>
+																							<h3 style="font-size: 20px;color: black; font-weight: bolder; display: none; text-align: center;" id="2of3">2/3</h3>
+																							<h3 style="font-size: 20px;color: black; font-weight: bolder; display: none; text-align: center;" id="3of3">3/3</h3>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+																							<div id="modal111" style="display:block;">
+																								<table class="modal_table">
+																								<ul>
+																									<li
+																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																									<h5
+																										style="font-size: 15px; font-weight: bolder; color: black;">메뉴명</h5>
+																									<div class="row">
+																										<div class="col-lg-12">
+																											<input class="form-control"
+																												style="width: relative; font-size: 15px;"
+																												type="text" value="아메리카노">
+																										</div>
+																									</div>
+																								</li>
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
+
+																										<div class="price_list">
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" placeholder="가격명">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" placeholder="가격">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+																										</div>
+
+																										<div class="row" style="margin-left: 5px;">
+																											<button class="add_priceOption">+
+																												가격옵션 추가하기</button>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+																								
+																								
+																							</div>
+																							<div id="modal222" style="display: none;">
+																								옵션추가부분
+																							</div>
+																							<div id="modal333" style="display: none;">
+																								3/3
+																								메뉴확인부분(저장한데이터확인)
+																								<button>저장하기</button>
+																							</div>
+
+																							<li>
+																								<div class="row">
+																									<div class="col-lg-12">
+																										<button class="save_Btn" id="nextBtn">다음</button>
+																									</div>
+																								</div>
+																							</li>
+																							
+																							
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+																				</div>
+
+
+
+
+																				
+
 																		</ul> <!--서브메뉴끝--></li>
+																		
 																	<li><a class="menuGroup" href="#">Latte (non
 																			Coffee)
 																			<button type="button"
@@ -1234,7 +1499,7 @@ function readImage(input) {
 																<a class="change_info" onclick="modal_b()"> + 옵션그룹추가</a>
 															</div>
 															
-															<!--옵션그룹 추가 modal start-->
+															<!--------옵션그룹 추가 modal start-------->
 															<div class="modal fade" id="addOptionGroup" role="dialog">
 
 																<div class="modal-dialog">
@@ -1272,7 +1537,7 @@ function readImage(input) {
 																										<h5
 																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">옵션</h5>
 
-																										<div class="option_list">
+																										<div class="groupAdd_OptionList">
 																											<div class="row" style="margin-left: 5px;">
 																												<div class="col-lg-5" style="padding: 5px;">
 																													<input class="form-control"
@@ -1295,7 +1560,7 @@ function readImage(input) {
 																											</div>
 																										</div>
 																										<div class="row" style="margin-left: 5px;">
-																											<button class="add_Option">+
+																											<button class="groupAdd_Option">+
 																												가격옵션 추가하기</button>
 																										</div>
 																									</li>
@@ -1333,7 +1598,7 @@ function readImage(input) {
 																					</div>
 																				</div>
 															</div>
-															<!--옵션그룹추가 modal end-->
+															<!--------옵션그룹 추가 modal end-------->
 
 															<!--옵션그룹 리스트 start-->
 															<nav>
@@ -1361,7 +1626,7 @@ function readImage(input) {
                                               
                                               <h4 style="color:black;"><span style="background-color: rgba(226, 77, 94, 0.267); border-radius: 5px; padding: 3px; font-size: smaller;">필수여부</span> [선택] 
                                               <span>
-                                                <button class="btn btn-primary btn-xs"
+                                                <button class="btn btn-primary btn-xs" id="update_ros" onclick="update_ros_modal()"
 																				style="margin-left: 10px; margin-top: 5px;">
 																				<i class="fa fa-pencil"></i>
 																			</button>
@@ -1376,6 +1641,63 @@ function readImage(input) {
                                       
                                     
                                     </li>
+
+									<!--------필수여부 수정 모달 start--------->
+									<div class="modal fade" id="update_ros_modal" 
+																				role="dialog">
+
+																				<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">옵션 필수여부 설정</h4>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+																							<li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h4
+																											style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px; margin-left: 0;">[선택 가능한 옵션 수]</h4>
+
+                                                    <h5 style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px;">
+                                                        필수여부
+                                                    </h5>
+                                                    <div class="row" style="line-height:20px; margin-left: 10px;">
+                                                    <input type="radio" name="radio2" id="radio3" value="1"  checked>
+                                                    <label for="radio3" style="font-size: 15px;"> [필수] 옵션을 반드시 선택해야 주문이 가능해요</label>
+                                                  </div>
+                                                  <div class="row" style="line-height:20px;  margin-left: 10px;">
+                                                    <input type="radio" name="radio2" id="radio4" value="2" >
+                                                    <label for="radio4" style="font-size: 15px;"> [선택] 옵션을 선택하지 않아도 주문이 가능해요</label>
+                                                  </div>
+																									</li>
+
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">적용하기</button>
+																											</div>
+																										</div>
+																									</li>
+																							
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+																			</div>
+
+
+
+									<!--------필수여부 수정 모달 end--------->
+
+
+
                                     
 
                                              
@@ -1398,11 +1720,82 @@ function readImage(input) {
 
 																			</a>
 																				<ul class="trd_menu sub_menu">
-																					<li><a class="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
+																					<li><a class="option_oneUpdate" id="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
                                           <li><a class="option_oneDelete" href="#">옵션삭제</a></li>
 																				</ul>
                                       
                                       </li>
+
+
+
+									  <!------------옵션명 및 가격변경 modal start-------------->
+
+
+									  <div class="modal fade" id="option_oneUpdate_modal" 
+																				role="dialog">
+
+																				<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">옵션명 및 가격 수정</h4>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+																							<table class="modal_table">
+																								<ul>
+																									
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">옵션</h5>
+
+																										<div class="option_list">
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="1샷 추가">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" value="500">
+																												</div>
+																												
+																											</div>
+																										</div>
+																										
+																									</li>
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">수정하기</button>
+																											</div>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+
+																									
+																							
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+																			</div>
+
+
+
+									   <!------------옵션명 및 가격변경 modal end-------------->
 
                                       <li><a class="menu_one" href="#">
                                         <div class="row" style="padding: 10px;">
@@ -1450,8 +1843,18 @@ function readImage(input) {
                                     
                                     </li>
 
+									<li><a class="option_addOne" href="#">
+																					
+										<h4 style="color:blue; padding: 10px; margin-right:65px;">+ 옵션추가</h4>
+																			  
+
+																		</a>
+																		  </li>
+
+
+
 																			<!------------- 메뉴편집_메뉴정보수정 Modal start-------------->
-																			<div class="modal fade" id="menu_updateMenuInfo"
+																			<div class="modal fade" id="option_addOne"
 																				role="dialog">
 
 																				<div class="modal-dialog">
@@ -1460,7 +1863,8 @@ function readImage(input) {
 																					<div class="modal-content">
 																						<div class="modal-header">
 																							<!-- header -->
-																							<h4 class="modal-title">메뉴정보수정</h4>
+																							<h4 class="modal-title">옵션추가</h4>
+																							<h3 style="color: black; font-weight: bolder; text-align: center;">그룹명 : [샷추가]</h3>
 																							<button type="button" class="close"
 																								data-dismiss="modal"
 																								style="font-size: 20px; color: black;">취소</button>
@@ -1468,82 +1872,25 @@ function readImage(input) {
 																						</div>
 																						<div class="modal-body">
 																							<!-- body -->
-
-
 																							<table class="modal_table">
 																								<ul>
+																									
 																									<li
 																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
 																										<h5
-																											style="font-size: 15px; font-weight: bolder; color: black;">메뉴명</h5>
-																										<div class="row">
-																											<div class="col-lg-12">
-																												<input class="form-control"
-																													style="width: relative; font-size: 15px;"
-																													type="text" value="아메리카노">
-																											</div>
-																										</div>
-																									</li>
-																									<li
-																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																										<h5
-																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
+																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">옵션</h5>
 
-																										<div class="price_list">
+																										<div class="option_list">
 																											<div class="row" style="margin-left: 5px;">
 																												<div class="col-lg-5" style="padding: 5px;">
 																													<input class="form-control"
 																														style="width: relative; font-size: 15px;"
-																														type="text" value="ICE 리터">
+																														type="text" placeholder="예) 1샷 추가">
 																												</div>
 																												<div class="col-lg-5" style="padding: 5px;">
 																													<input class="form-control"
 																														style="width: relative; font-size: 15px;"
-																														type="text" value="2000">
-																												</div>
-																												<div class="col-lg-2" style="padding: 5px;">
-																													<button type="button"
-																														onclick="javascript:deleteAlert();"
-																														class="btn btn-danger btn-xs"
-																														style="float: left; margin-top: 7px;">
-																														<i class="fa fa-trash-o "></i>
-																													</button>
-																												</div>
-																											</div>
-
-
-																											<div class="row" style="margin-left: 5px;">
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="ICE 리터">
-																												</div>
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="2000">
-																												</div>
-																												<div class="col-lg-2" style="padding: 5px;">
-																													<button type="button"
-																														onclick="javascript:deleteAlert();"
-																														class="btn btn-danger btn-xs"
-																														style="float: left; margin-top: 7px;">
-																														<i class="fa fa-trash-o "></i>
-																													</button>
-																												</div>
-																											</div>
-
-
-																											<div class="row" style="margin-left: 5px;">
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="ICE 리터">
-																												</div>
-																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
-																														style="width: relative; font-size: 15px;"
-																														type="text" value="2000">
+																														type="text" placeholder="500">
 																												</div>
 																												<div class="col-lg-2" style="padding: 5px;">
 																													<button type="button"
@@ -1555,25 +1902,23 @@ function readImage(input) {
 																												</div>
 																											</div>
 																										</div>
-
 																										<div class="row" style="margin-left: 5px;">
-																											<button class="add_priceOption">+
+																											<button class="add_Option">+
 																												가격옵션 추가하기</button>
 																										</div>
 																									</li>
-
-																									<li></li>
-
 																									<li>
 																										<div class="row">
 																											<div class="col-lg-12">
-																												<button class="save_Btn">적용하기</button>
+																												<button class="save_Btn">추가하기</button>
 																											</div>
 																										</div>
 																									</li>
 																								</ul>
 
 																							</table>
+
+																							
 																						</div>
 																						<div id="count" value="1"></div>
 																					</div>
@@ -2049,4 +2394,6 @@ function readImage(input) {
 </body>
 
 </html>
+
+
 

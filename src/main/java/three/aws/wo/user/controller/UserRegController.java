@@ -76,19 +76,6 @@ public class UserRegController {
 	public String registerUpdateView(UserVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		
 		System.out.println("updateUser-get");
-		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
-		UserVO userSession = (UserVO) session.getAttribute("userSession");
-		System.out.println("세션 얻음");
-		// 세션에있는 비밀번호
-		String sessionPass = userSession.getU_password();
-		System.out.println("세션 비밀번호");
-		// vo로 들어오는 비밀번호
-		String voPass = vo.getU_password();
-		
-		if(!(sessionPass.equals(voPass))) {
-			rttr.addFlashAttribute("msg", false);
-			return "redirect:/mypage/mypage_withdraw";
-		}
 		
 		return "/mypage/mypage_info";
 	}
@@ -97,8 +84,6 @@ public class UserRegController {
 	public String registerUpdate(UserVO vo, HttpSession session) throws Exception{
 		
 		userService.updateUser(vo);
-		
-		session.invalidate();
 		
 		return "redirect:/index.user";
 	}

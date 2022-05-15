@@ -32,5 +32,9 @@
 		DELETE FROM USERS WHERE u_id = #{u_id} AND u_password= #{u_password} 
 	</delete>
 	
+	<select id="infoUser" resultType="UserVO">
+		SELECT U_ID, U_PASSWORD FROM USERS 
+		WHERE U_ID = #{u_id} AND U_PASSWORD = #{u_password}
+	</select>
 </mapper>
  

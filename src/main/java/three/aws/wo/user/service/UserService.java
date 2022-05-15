@@ -10,6 +10,7 @@ public interface UserService {
 	void login(UserVO vo);
 	void updateUser(UserVO vo);
 	void deleteUser(UserVO vo);
+	UserVO infoUser(UserVO vo);
 	UserVO getUser(UserVO vo);
 	
 }

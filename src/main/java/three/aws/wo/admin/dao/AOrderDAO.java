@@ -1,5 +1,6 @@
 package three.aws.wo.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -23,5 +24,9 @@ public class AOrderDAO {
 	
 	public List<OrdersVO> orderList() {
 		return sqlSession.selectList("AOrderDAO.orderList");
+	}
+
+	public void changePoint(HashMap<String, String> paramMapping) {
+		sqlSession.update("AOrderDAO.changePoint",paramMapping);
 	}
 }

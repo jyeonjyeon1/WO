@@ -20,6 +20,11 @@
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 
 <style>
+input::-webkit-inner-spin-button {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
 .shoping__cart__table table tbody tr td.shoping__cart__item img {
 	align-items: center;
 	margin-bottom: 15px;
@@ -36,6 +41,15 @@
 
 .btn__hover:hover {
 	cursor: pointer;
+}
+
+.left_point_label{
+	display:none;
+}
+.left_point_label.active{
+	display:block;
+	color: blue; 
+	min-width:200px;
 }
 </style>
 
@@ -89,7 +103,7 @@
 										<td class="shoping__cart__item"><img
 											class="d-lg-inline-block d-md-inline-block d-none"
 											src="${cartList.m_img_file}" alt=""> <label
-											id="name${vs.index}">${cartList.m_name}&nbsp;
+											id="name${vs.index}">${cartList.m_name} <span style="opacity:0;">ㅋㅋㅋㅋㅋ</span>
 												<h3>HOT ML / 1샷추가 / 헤이즐럿시럽추가</h3>
 										</label></td>
 
@@ -97,7 +111,7 @@
 											<div class="qtyqty">
 												<div id="rowprice${vs.index}" style="display: inline;">
 													<fmt:formatNumber value="${cartList.m_price}"
-														pattern="###,###" />
+														pattern="###,###"/>
 												</div>
 											</div>
 										</td>
@@ -173,6 +187,7 @@
 													number = parseInt(number) + 1;
 													totnumber = parseInt(number)*price;
 													totalPrice = totalPrice + price;
+													no_point_total =totalPrice;
 													totalItem++;
 												} else if (type === "minus") {
 													number = parseInt(number) - 1;
@@ -182,6 +197,7 @@
 													}else{
 														totalItem--;
 														totalPrice = totalPrice - price;
+														no_point_total =totalPrice;
 													}
 												} else if (type === "none") {
 													
@@ -190,6 +206,7 @@
 													}else{
 														totalItem-=parseInt(number);
 														totalPrice = totalPrice - parseInt(number)*price;
+														no_point_total =totalPrice;
 													}
 													number = 0;
 													totnumber = parseInt(number)*price;
@@ -440,27 +457,30 @@
 														pattern="###,###" /> p</label>
 							<form action="#">
 
-								<input type="text" placeholder="금액을 입력해주세요.">
+								<input type="number" id="o_point" placeholder="금액을 입력해주세요." max="${userSession.u_point}" oninput="maxLengthCheck(this)">
 								<!-- <button type="submit" class="site-btn">쿠폰검색</button> -->
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-primary"
-									data-bs-toggle="modal" data-bs-target="#PintUse">사용하기</button>
-
+									data-bs-toggle="modal" data-bs-target="#PointUse">사용하기</button>
+								<label class="left_point_label">남는 금액 :
+								<span id="left_point"></span> p</label>
 								<!-- Modal -->
-								<div class="modal" id="PintUse" tabindex="-1">
+								<div class="modal" id="PointUse" tabindex="-1">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title">사용 가능한 포인트</h5>
+												<h5 class="modal-title">사용가능 금액 :
+								<fmt:formatNumber value="${userSession.u_point }"
+														pattern="###,###" /> p</h5>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-												<p>1000 포인트를 사용합니다.</p>
+												<p><span id="o_point_modal">0</span> 포인트를 사용합니다.</p>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">확인</button>
+													data-bs-dismiss="modal" onclick="usePoint()">확인</button>
 											</div>
 										</div>
 									</div>
@@ -520,6 +540,7 @@
 						<ul>
 							<li>주문 수량 <span id="totalItem"><fmt:formatNumber
 										value="${totalNum}" pattern="###,###" /></span></li>
+							<li>포인트 사용 <span id="totalPoint">0</span></li>
 							<li>합계 금액 <span id="totalPrice"><fmt:formatNumber
 										value="${totalPrice}" pattern="###,###" /></span></li>
 						</ul>
@@ -537,6 +558,7 @@
 		<label id="u_tel">${userSession.u_tel}</label> 
 		<label id="u_email">${userSession.u_email}</label>
 		<label id="si_code">${cartStore.si_code}</label>
+		<label id="u_point">${userSession.u_point}</label>
 	</div>
 	<!-- footer import -->
 	<!-- <%@ include file="/WEB-INF/views/user/inc/footer.jsp" %> -->
@@ -549,6 +571,33 @@
 	let u_name = document.getElementById("u_name").innerText;  
 	let u_id = document.getElementById("u_id").innerText;  
 	let o_list = "";
+	let o_point = 0;
+	let u_point = document.getElementById("u_point").innerText;
+	$("#o_point").on("propertychange change keyup paste input",
+			function() {
+		o_point = $("#o_point").val();
+		
+		if(o_point.length==0){
+			o_point = 0;
+			$(".left_point_label").removeClass("active");
+		}else{
+			$(".left_point_label").addClass("active");
+			document.getElementById("left_point").innerText = u_point - o_point;
+		}
+		document.getElementById("o_point_modal").innerText = o_point;
+	});
+	
+	let no_point_total = parseInt(document.getElementById("totalPrice").innerText.replace(",","").replace(",",""));
+	
+function usePoint(){
+	// 사용할 포인트
+	const totalPoint = document.getElementById("totalPoint");
+	totalPoint.innerText = (o_point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	// 장바구니 합산 금액
+	const totalElement = document.getElementById("totalPrice");
+	totalElement.innerText = (no_point_total - o_point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+	
 	
   function paymentO(){
 	  currentDate = new Date().toLocaleString().replace("20","").replace(". ","").replace(". ","");
@@ -560,17 +609,19 @@
 	  var o_request = $("#o_request").val();
 	  let isZero = (parseInt(document.getElementById("totalItem").innerText)-1).toString();
 	  if(isZero=="0"){
-		  o_list = document.getElementById("name0").innerText.split(" ")[0]
+		  o_list = document.getElementById("name0").innerText.split("ㅋㅋㅋㅋㅋ")[0]
 	  }else{
-		  o_list = document.getElementById("name0").innerText.split(" ")[0] +" 외 " + isZero
+		  o_list = document.getElementById("name0").innerText.split("ㅋㅋㅋㅋㅋ")[0] +" 외 " + isZero
 	  }
+	 
 	  var param = {
 			  "o_code": currentDate,
 			  "u_id": u_id,
 			  "si_code": document.getElementById("si_code").innerText,
 			  "o_request": o_request,
 			  "o_total_price": document.getElementById("totalPrice").innerText.replace(",","").replace(",",""),
-			  "o_list":o_list
+			  "o_list":o_list.replace("ㅋㅋㅋㅋㅋ",""),
+			  "o_point":o_point
 			  };
 	  $.ajax({
              type: "POST",
@@ -619,6 +670,7 @@
 	              data: JSON.stringify({
 	            	  "o_code":orderNum,
 	            	  "u_id":u_id, 
+	            	  "o_point":(o_point).toString(),
 	            	  "o_total_price":document.getElementById("totalPrice").innerText.replace(",","").replace(",","")
 	            	  }),
 	              dataType: "json",
@@ -635,6 +687,11 @@
 	      }
 	  });  
   }
+  function maxLengthCheck(object){
+	    if (object.value > parseInt(object.max)){
+	        object.value = parseInt(object.max);
+	    }    
+	}
   </script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

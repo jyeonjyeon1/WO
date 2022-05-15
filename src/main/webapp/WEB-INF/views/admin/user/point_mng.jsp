@@ -228,7 +228,10 @@
 									style="width: 70px; float: right;">검색</button>
 							</form>
 						</div>
-						<form>
+						<form action="/point_mng.admin" method="post">
+						<c:if test="${point_use eq 'false'}">
+		<c:set value="checked" var="checked" />
+	</c:if>
 							<div class="form-panel point_select_form">
 								<div
 									style="border-bottom: 1px dotted grey; padding-bottom: 3px; margin-bottom: 6px;">포인트
@@ -237,11 +240,14 @@
 									<div class="form-group">
 										<label class="col-sm-4 col-sm-4 control-label">사용여부</label>
 										<div class="col-sm-8">
-											<label class="radio-inline"> <input type="radio"
-												name="inRad2" id="inlineRadio1" value="option1" checked>
+											<label class="radio-inline"> 
+											<input type="radio"
+												name="point_use" id="point_use1" value="true" checked>
 												사용
-											</label> <label class="radio-inline"> <input type="radio"
-												name="inRad2" id="inlineRadio2" value="option2"> 미사용
+											</label> 
+											<label class="radio-inline"> 
+												<input type="radio"
+												name="point_use" id="point_use2" value="false" ${checked}> 미사용
 											</label>
 										</div>
 									</div>
@@ -250,13 +256,15 @@
 									<div class="form-group">
 										<label class="col-sm-4 col-sm-4 control-label">적립(%)</label>
 										<div class="col-sm-8">
-											<input class="form-control round-form" type="text" value="10"
+											<input id="point_percentage" name="point_percentage" 
+											class="form-control round-form" type="number" value="${point_percentage}"
+											max="30" oninput="maxLengthCheck(this)"
 												style="height: 24px; width: 50%;">
 										</div>
 									</div>
 								</div>
 								<div class="row" style="text-align: center;">
-									<button type="submit" class="btn btn-theme"
+									<button type="submit" class="btn btn-theme" onclick="changePointOption()"
 										style="margin-top: 10px; width: 50px; height: 28px; padding: 0; font-size: 12px;">저장</button>
 								</div>
 
@@ -442,6 +450,40 @@
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
 	<script
 		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+	<script>
+	function changePointOption(){
+		//***********false 면 포인트 사용 true면 포인트 미사용*********
+		var point_use = $('input:radio[id=point_use2]').is(':checked').toString(); //false 면 포인트 사용 //true면 포인트 미사용
+		var point_percentage = $("#point_percentage").val();
+		var param = {"point_use":point_use,"point_percentage":point_percentage};
+		$.ajax({
+            type: "POST",
+            url: "/changePoint.admin",
+            data: JSON.stringify(param),
+            dataType: "json",
+            contentType: "application/json",
+         success:function(data){
+        	 
+         },
+         error:function(data){
+            console.log("포인트 설정 에러");
+         }
+      }); //ajax 끝
+	}
+	
+	function maxLengthCheck(object){
+		//30까지만
+	    if (object.value > parseInt(object.max)){
+	        object.value = parseInt(object.max);
+	    }
+		//음수 차단
+	    if(object.value < 0){
+	        object.value = 0;
+	    }
+	    
+	}
+	
+	</script>
 </body>
 
 </html>

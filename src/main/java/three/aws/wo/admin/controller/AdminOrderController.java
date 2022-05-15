@@ -20,14 +20,6 @@ public class AdminOrderController {
 	@Resource
 	private AOrderService aOrderService;
 	
-	@RequestMapping("/point_mng.admin")
-	public String pointList(PointVO vo, Model model) {
-		List<PointVO> pointList =aOrderService.pointList();
-		System.out.println(pointList);
-		model.addAttribute("pointList" ,pointList);
-		return "/user/point_mng";
-	}
-	
 	@RequestMapping("/total_order.admin")
 	public String orderList(OrdersVO vo, Model model, HttpServletRequest request) {
 		String si_code = request.getParameter("si_code");

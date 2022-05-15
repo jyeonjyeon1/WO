@@ -28,4 +28,10 @@ public interface UserOrderService {
 	void orderPointUpdate(HashMap<String, Object> insertPoint);
 
 	void orderPointAdd(HashMap<String, Object> insertPoint);
+
+	String getPointPercentage();
+
+	String isPointUse();
+
+	void orderPointUse(HashMap<String, Object> insertPoint);
 }

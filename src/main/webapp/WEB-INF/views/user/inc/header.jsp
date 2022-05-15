@@ -179,8 +179,12 @@ function searchBtn(){
 														<p class="quantity">
 															<span id="headb_quantity${vs.index}" class="amount">${cartListSession.b_quantity}</span>
 															<span> x </span>
-															<span> ${cartListSession.m_price} =  </span>
-															<span id="headb_tot_price${vs.index}" class="amount">${cartListSession.b_total_price}</span>
+															<span> <fmt:formatNumber
+														value="${cartListSession.m_price}" pattern="###,###" /> =  </span>
+															<span id="headb_tot_price${vs.index}" class="amount" style="float:right;">
+															<fmt:formatNumber
+														value="${cartListSession.b_total_price}" pattern="###,###" />
+															</span>
 														</p>
 													</div>
 												</li>

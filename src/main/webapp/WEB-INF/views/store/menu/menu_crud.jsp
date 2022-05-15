@@ -1918,10 +1918,7 @@ function readImage(input) {
 
 
                                                   <li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																										<h4
-																											style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px; margin-left: 0;">[선택 가능한 옵션 수]</h4>
-
-                                                    <h5 style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px;">
+																										 <h5 style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px;">
                                                         필수여부
                                                     </h5>
                                                     <div class="row" style="line-height:20px; margin-left: 10px;">
@@ -2012,10 +2009,7 @@ function readImage(input) {
 																							<!-- body -->
 
 																							<li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																										<h4
-																											style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px; margin-left: 0;">[선택 가능한 옵션 수]</h4>
-
-                                                    <h5 style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px;">
+																										<h5 style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px;">
                                                         필수여부
                                                     </h5>
                                                     <div class="row" style="line-height:20px; margin-left: 10px;">
@@ -2202,6 +2196,83 @@ function readImage(input) {
 																		  </li>
 
 																		</ul> <!--서브메뉴끝--></li>
+
+
+																		<!--------+옵션 추가버튼 클릭시 modal start-------->
+															<div class="modal fade" id="option_addOne" role="dialog">
+
+																<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">옵션그룹 추가</h4>
+																							<h3 style="color: black; font-weight: bolder; text-align: center;"> 옵션명 : [샷추가]</h3>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+
+																							<table class="modal_table">
+																								<ul>
+																									
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">옵션</h5>
+
+																										<div class="groupAdd_OptionList">
+																											<div class="row" style="margin-left: 5px;">
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" placeholder="예) 1샷 추가">
+																												</div>
+																												<div class="col-lg-5" style="padding: 5px;">
+																													<input class="form-control"
+																														style="width: relative; font-size: 15px;"
+																														type="text" placeholder="500">
+																												</div>
+																												<div class="col-lg-2" style="padding: 5px;">
+																													<button type="button"
+																														onclick="javascript:deleteAlert();"
+																														class="btn btn-danger btn-xs"
+																														style="float: left; margin-top: 7px;">
+																														<i class="fa fa-trash-o "></i>
+																													</button>
+																												</div>
+																											</div>
+																										</div>
+																										<div class="row" style="margin-left: 5px;">
+																											<button class="groupAdd_Option">+
+																												가격옵션 추가하기</button>
+																										</div>
+																									</li>
+
+
+
+                                                  
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">옵션 추가하기</button>
+																											</div>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+															</div>
+															<!--------+옵션 추가 버튼 클릭시 modal end-------->
 
 
 
@@ -2473,5 +2544,4 @@ function readImage(input) {
 </body>
 
 </html>
-
 

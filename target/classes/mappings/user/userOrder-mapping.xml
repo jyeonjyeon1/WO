@@ -47,7 +47,7 @@
 		SUBSTRING(CAST(o_order_date AS TEXT),1,10) = CAST(CURRENT_DATE AS TEXT)
 	</select>
 	<insert id="insertOrder">
-		INSERT INTO ORDERS VALUES(default, #{o_code},#{u_id},#{si_code},default,false,null,false,0,'카드',#{o_request},0,#{o_total_price},'결제실패',#{o_list},#{o_daily_seq})
+		INSERT INTO ORDERS VALUES(default, #{o_code},#{u_id},#{si_code},default,false,null,#{o_point_status},#{o_point},'카드',#{o_request},0,#{o_total_price},'결제실패',#{o_list},#{o_daily_seq})
 	</insert>
 	<update id="successOrder">
 		UPDATE ORDERS
@@ -73,6 +73,9 @@
 	<insert id="orderPointAdd">
 		INSERT INTO POINT VALUES(default, #{u_id}, default, default, default,default,#{pt_amount})
 	</insert>
+	<insert id="orderPointUse">
+		INSERT INTO POINT VALUES(default, #{u_id}, default, '사용', '주문 시 이용',default,#{pt_amount})
+	</insert>
 	<update id="orderPointUpdate">
 		UPDATE USERS 
 		SET
@@ -80,5 +83,15 @@
 		WHERE
 		U_ID = #{u_id}
 	</update>
+	<select id="isPointUse" resultType="String">
+		SELECT VALUE FROM SYSTEM_SETTING
+		WHERE
+		KEY = 'point_use' 
+	</select>
+	<select id="getPointPercentage" resultType="String">
+		SELECT VALUE FROM SYSTEM_SETTING
+		WHERE
+		KEY = 'point_percentage' 
+	</select>
 </mapper>
  

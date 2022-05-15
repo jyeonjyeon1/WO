@@ -39,6 +39,13 @@
 		</if>
 		ORDER BY O_SEQ DESC
 	</select>
+	<update id="changePoint">
+		UPDATE SYSTEM_SETTING
+		SET
+		VALUE = CASE WHEN KEY= 'point_use' THEN #{point_use} ELSE #{point_percentage} END
+		WHERE
+		KEY IN ('point_use','point_percentage')
+	</update>
 	
 	
 	

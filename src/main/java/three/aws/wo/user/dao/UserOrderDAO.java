@@ -68,5 +68,17 @@ public class UserOrderDAO {
 	public void orderPointAdd(HashMap<String, Object> insertPoint) {
 		sqlSession.insert("UserOrderDAO.orderPointAdd",insertPoint);
 	}
+
+	public String getPointPercentage() {
+		return sqlSession.selectOne("UserOrderDAO.getPointPercentage");
+	}
+
+	public String isPointUse() {
+		return sqlSession.selectOne("UserOrderDAO.isPointUse");
+	}
+
+	public void orderPointUse(HashMap<String, Object> insertPoint) {
+		sqlSession.insert("UserOrderDAO.orderPointUse",insertPoint);
+	}
 	
 }

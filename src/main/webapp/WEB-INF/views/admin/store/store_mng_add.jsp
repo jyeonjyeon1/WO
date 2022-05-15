@@ -18,12 +18,6 @@
 <link href="resources/assets/images/admin/apple-touch-icon.png"
 	rel="apple-touch-icon">
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
-<!-- Bootstrap core CSS -->
-
-<!--external css-->
-
-<!-- Custom styles for this template -->
-
 
 <!-- 테이블용 css -->
 <link

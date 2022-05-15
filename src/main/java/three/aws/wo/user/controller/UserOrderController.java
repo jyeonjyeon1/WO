@@ -126,6 +126,7 @@ public class UserOrderController {
 		}
 		System.out.println(param);
 		HashMap<String, Object> insertInfo = new HashMap<String, Object>();
+		int o_point = Integer.parseInt(param.get("o_point"));
 		insertInfo.put("u_id", param.get("u_id"));
 		insertInfo.put("si_code", param.get("si_code"));
 		insertInfo.put("o_request", param.get("o_request"));
@@ -133,7 +134,15 @@ public class UserOrderController {
 		insertInfo.put("o_total_price", Integer.parseInt(param.get("o_total_price")));
 		insertInfo.put("o_list", param.get("o_list"));
 		insertInfo.put("o_daily_seq", dailySeq);
+		insertInfo.put("o_point", o_point);
+		if(o_point==0) {
+			insertInfo.put("o_point_status", false);
+		}else {
+			insertInfo.put("o_point_status", true);
+		}
+		
 		userOrderService.insertOrder(insertInfo);
+		System.out.println(insertInfo);
 
 		// 주문번호 뒷자리
 		return orderBack;
@@ -146,6 +155,7 @@ public class UserOrderController {
 		System.out.println(param);
 		String o_code = param.get("o_code");
 		String u_id = param.get("u_id");
+		int o_point = Integer.parseInt(param.get("o_point"));
 		// 결제 성공하면 o_pay_status true로 바꿈
 		userOrderService.successOrder(o_code);
 
@@ -154,12 +164,27 @@ public class UserOrderController {
 
 		// 결제 성공하면 포인트 주입
 		HashMap<String, Object> insertPoint = new HashMap<String, Object>();
-		int point = Integer.parseInt(param.get("o_total_price")) / 20;
+		//시스템에 적립금 설정이 true인지 확인
+		String point_use = userOrderService.isPointUse();
+		int point_percentage = 0;
+		if(point_use.equals("true")) {
+			// 시스템에 설정된 point_percentage 불러옴
+			point_percentage = Integer.parseInt(userOrderService.getPointPercentage());
+		}
+		
+		int point = Integer.parseInt(param.get("o_total_price")) * point_percentage / 100; 
 		System.out.println(point);
 		insertPoint.put("u_id", u_id);
 		insertPoint.put("pt_amount", point);
 		userOrderService.orderPointUpdate(insertPoint);
 		userOrderService.orderPointAdd(insertPoint);
+		
+		//포인트 사용한 경우 차감
+		if(o_point!=0) {
+			insertPoint.replace("pt_amount", -(o_point));
+			userOrderService.orderPointUse(insertPoint);
+			userOrderService.orderPointUpdate(insertPoint);
+		}
 
 		List<BasketVO> cartList = userOrderService.cartList(u_id);
 		// 유저장바구니에 있는 가게 불러옴

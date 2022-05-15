@@ -364,7 +364,7 @@
 																<option value="준비중">준비중</option>
 																<option value="준비완료" selected>준비완료</option>
 																<option value="전달완료">전달완료</option>
-																<option value="주문취소">주문취소</option>
+																<option value="주문취소">주문취소</option> 
 															</c:when>
 															<c:when test="${orderList.o_order_state eq '전달완료'}">
 																<option value="주문접수">주문접수</option>

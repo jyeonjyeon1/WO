@@ -106,7 +106,7 @@ public class AdminController {
 //	public String tostore_order() {
 //		System.out.println("store_order");
 //		return "/order/store_order";
-//	}
+//	} 
 	
 //	@GetMapping("/total_order.admin")
 //	public String tototal_order() {

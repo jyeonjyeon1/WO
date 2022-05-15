@@ -76,4 +76,19 @@ public class UserOrderServiceImpl implements UserOrderService {
 		userOrderDAO.orderPointAdd(insertPoint);
 	}
 
+	@Override
+	public String getPointPercentage() {
+		return userOrderDAO.getPointPercentage();
+	}
+
+	@Override
+	public String isPointUse() {
+		return userOrderDAO.isPointUse();
+	}
+
+	@Override
+	public void orderPointUse(HashMap<String, Object> insertPoint) {
+		userOrderDAO.orderPointUse(insertPoint);
+	}
+
 }

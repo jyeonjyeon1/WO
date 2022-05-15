@@ -1,5 +1,6 @@
 package three.aws.wo.admin.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class AOrderServiceImpl implements AOrderService {
 	@Override
 	public List<OrdersVO> orderList() {
 		return aOrderDAO.orderList();
+	}
+
+	@Override
+	public void changePoint(HashMap<String, String> paramMapping) {
+		aOrderDAO.changePoint(paramMapping);
 	}
 
 }

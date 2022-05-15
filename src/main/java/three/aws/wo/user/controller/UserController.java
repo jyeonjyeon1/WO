@@ -2,12 +2,20 @@ package three.aws.wo.user.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import three.aws.wo.user.service.UserService;
+import three.aws.wo.user.vo.UserVO;
 
 @Controller
 public class UserController {
+	@Autowired
+	private UserService userService;
 
 
 //	==================== inc ============================
@@ -127,6 +135,35 @@ public class UserController {
 		System.out.println("myOrderList");
 		return "/mypage/mypage_myOrderList";
 	}
+	
+	@RequestMapping(value="/myChoice.user", method = RequestMethod.GET)
+	public String tomyInfoPage() throws Exception{
+		System.out.println("tomyInfoPage_get");
+		return "/mypage/mypage_choice";
+	}
+	
+	// 회원 탈퇴 post
+	@RequestMapping(value="/myChoice.user", method = RequestMethod.POST)
+	public String tomyInfoPage(UserVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
+		System.out.println("tomyInfoPage_post");
+		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
+		UserVO userSession = (UserVO) session.getAttribute("userSession");
+		System.out.println("세션 얻음");
+		// 세션에있는 비밀번호
+		String sessionPass = userSession.getU_password();
+		System.out.println("세션 비밀번호");
+		// vo로 들어오는 비밀번호
+		String voPass = vo.getU_password();
+		
+		if(!(sessionPass.equals(voPass))) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/mypage/mypage_choice";
+		}
+		userService.infoUser(vo);
+		return "/mypage/mypage_choice2";
+	}
+	
+
 //	==================== order ============================
 
 	@GetMapping("/menuList.user")

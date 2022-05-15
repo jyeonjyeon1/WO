@@ -37,6 +37,10 @@ public class UserDAO {
 	public void updateUser(UserVO vo) {
 		sqlSession.update("UserDAO.updateUser", vo);
 	}
+	
+	public UserVO infoUser(UserVO vo) {
+		return sqlSession.selectOne("UserDAO.infoUser", vo);
+	}
 
 
 

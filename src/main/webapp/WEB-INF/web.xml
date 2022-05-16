@@ -37,7 +37,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/servlet/user-servlet.xml
-				/WEB-INF/spring/spring-security.xml
+<!-- 				/WEB-INF/spring/spring-security.xml -->
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

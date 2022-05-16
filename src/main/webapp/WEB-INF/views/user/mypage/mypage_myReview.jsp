@@ -36,6 +36,29 @@
 				reader.readAsDataURL(image);
 			}
 		}
+		
+		function Completed(){
+			document.reviewForm.submit();
+		}
+		
+		
+		$('#insert').click(function(){
+			console.log(JSON.serialize(reviewData));
+			$.ajax({
+				type: "POST",
+		        url: "/insertReview.user",
+		        dataType: "json",
+		        contentType: "application/json",
+		        data: $('#reviewForm').serialize(),
+		        success:function(result){
+		        	console.log("성공");
+		        },
+		        error:function(result){
+		        	console.log("실패");
+		        }
+		    });
+		});
+		
      </script>
 
 </head>
@@ -43,64 +66,45 @@
 <body>
 	<!-- header import -->
 	<%@ include file="/WEB-INF/views/user/inc/header.jsp"%>
-
 	<div class="container" style="max-width: 1000px;">
 
-		<div class="row" style="margin: 40px 0px 20px; text-align: center;">
-			<h3>리뷰를 작성해 주세요 :)</h3>
-		</div>
-
-		<div class="row">
-			<div class="writingReview_image"
-				style="text-align: center; margin-top: 15px;">
-				<img src="resources/assets/images/categories/cat-1.jpg"
-					class="img-fluid rounded-start"
-					style="width: 300px; height: 300px;" alt="...">
-			</div>
-		</div>
 		<div class="row">
 			<div class="review_title">
 				<h1>컴포즈커피 종로3가점</h1>
 			</div>
 			<div class="review_star">
-				<form name="myform" id="myform" method="post" action="./save">
-					<form name="myform" id="myform" method="post" action="./save">
-						<fieldset>
-							<input type="radio" name="rating" value="5" id="rate1" checked><label
-								for="rate1">⭐</label> <input type="radio" name="rating"
-								value="4" id="rate2"><label for="rate2">⭐</label> <input
-								type="radio" name="rating" value="3" id="rate3"><label
-								for="rate3">⭐</label> <input type="radio" name="rating"
-								value="2" id="rate4"><label for="rate4">⭐</label> <input
-								type="radio" name="rating" value="1" id="rate5"><label
-								for="rate5">⭐</label>
-						</fieldset>
-					</form>
-				</form>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="review_context">
-				<textarea name="Writing_review" placeholder="  리뷰를 입력해주세요 :)"></textarea>
-			</div>
-		</div>
-		<div class="col-lg-12">
-
-
-			<div class="row">
-				<input class="form-control" type="file" multiple="multiple"
-					name="product_detail_image" id="product_detail_image"
-					onchange="setDetailImage(event);"
-					style="width: 97%; margin-left: 25px;">
-			</div>
-			<div id="images_container"></div>
-
-		</div>
-
-		<div class="col-lg-12" style="text-align: right;">
-			<button class="review_submitBtn" data-bs-toggle="modal"
-				data-bs-target="#review">작성완료</button>
+				<form name="reviewForm" id="reviewForm">
+					<fieldset>
+						<input type="radio" name="rating" value="50" id="rate1" checked>
+							<label for="rate1">⭐</label> 
+						<input type="radio" name="rating" value="40" id="rate2">
+							<label for="rate2">⭐</label> 
+						<input type="radio" name="rating" value="30" id="rate3">
+							<label for="rate3">⭐</label> 
+						<input type="radio" name="rating" value="20" id="rate4">
+							<label for="rate4">⭐</label>
+						<input type="radio" name="rating" value="10" id="rate5">
+							<label for="rate5">⭐</label>
+					</fieldset>
+				<div class="row">
+					<div class="review_context">
+						<textarea name="Writing_review" placeholder="  리뷰를 입력해주세요 :)"></textarea>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="row">
+						<input class="form-control" type="file" multiple="multiple"
+							name="product_detail_image" id="product_detail_image"
+							onchange="setDetailImage(event);"
+							style="width: 97%; margin-left: 25px;">
+					</div>
+					<div id="images_container"></div>
+				</div>
+				<div class="col-lg-12" style="text-align: right;">
+					<button class="review_submitBtn" data-bs-toggle="modal"
+					data-bs-target="#review" id="insert">작성완료</button>
+				</div>
+			</form>
 
 			<!-- Modal -->
 			<div class="modal fade" id="review" tabindex="-1"
@@ -121,9 +125,7 @@
 				</div>
 			</div>
 		</div>
-
-
-
+		</div>
 
 	</div>
 	<!-- footer import -->

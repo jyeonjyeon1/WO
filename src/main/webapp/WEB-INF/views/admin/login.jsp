@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <title>워킹오더 관리자 페이지</title>
-
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <!-- Favicons -->
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
 
@@ -51,10 +51,11 @@
 					<button type="button" class="btn btn-theme btn-block" onclick="finalCheck()">
 						<i class="fa fa-lock"></i> 로그인
 					</button>
-					<!-- <hr>
+					 <hr>
 					<div class="login-social-link centered">
+					
 						<p>소셜 로그인</p>
-
+						<div id="naverIdLogin"></div>
 						<button class="btn btn-naver" type="submit">
 							<b>N</b> Naver
 						</button>
@@ -64,7 +65,10 @@
 						<button class="btn btn-facebook" type="submit">
 							<i class="fa fa-facebook"></i> Facebook
 						</button>
-					</div> -->
+					</div> 
+					<div id="message">
+        로그인 버튼을 눌러 로그인 해주세요.
+      </div>
 
 				</div>
 			</form>
@@ -75,7 +79,48 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
 <script>
+const naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "dwpamdF6gebSRveqzw1K",
+			callbackUrl: "/index.admin",
+			loginButton: {color: "green", type: 2, height: 40}
+		}
+	);
+naverLogin.init(); // 로그인 설정
+
+naverLogin.getLoginStatus(function (status) {
+    if (status) {
+    	console.log(status);
+        const nickName=naverLogin.user.getNickName();
+        const age=naverLogin.user.getAge();
+        const birthday=naverLogin.user.getBirthday();
+
+      //닉네임을 선택하지 않으면 선택창으로 돌아갑니다.
+        setLoginStatus(); //모든 필수 정보 제공 동의하면 실행하는 함수
+    }
+  });
+function setLoginStatus(){
+    
+    const message_area=document.getElementById('message');
+    message_area.innerHTML=`
+    <h3> Login 성공 </h3>
+    <div>user Nickname : ${naverLogin.user.nickname}</div>
+    <div>user Age(범위) : ${naverLogin.user.age}</div>
+    <div>user Birthday : ${naverLogin.user.birthday}</div>
+    `;
+   
+    const button_area=document.getElementById('button_area');
+    button_area.innerHTML="<button id='btn_logout'>로그아웃</button>";
+
+    const logout=document.getElementById('btn_logout');
+    logout.addEventListener('click',(e)=>{
+      naverLogin.logout();
+	location.replace("http://127.0.0.1:5500");
+    })
+  }
+
 ch1 = false;
 var a_id_input = "";
 var a_pw_input = "";

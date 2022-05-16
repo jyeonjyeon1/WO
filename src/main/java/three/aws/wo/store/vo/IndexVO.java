@@ -38,8 +38,8 @@ public class IndexVO {
 	private String sa_bankbook_image;
 	
 	private String si_addr;
-	private float si_star;
-	
+	private int si_star;
+	private float si_stars;
 	
 	private int td_seq;
 	private String td_name;

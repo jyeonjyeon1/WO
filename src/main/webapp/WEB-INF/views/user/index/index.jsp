@@ -127,12 +127,12 @@
 										</c:if>
 									</c:forEach>
 									
-									<c:forEach var="no_star" begin = "${myStoreList.si_star}" end = "40" step="10">
+									<c:forEach var="no_star" begin = "${myStoreList.si_star}" end = "45" step="10">
 										<c:if test="${no_star lt 45 }">
 											<li><i class="lni lni-star"></i></li>
 										</c:if>
 									</c:forEach>
-									<li><span>${myStoreList.si_star /10 } 점 / 리뷰</span></li>
+									<li><span>${myStoreList.si_stars } 점 / 리뷰</span></li>
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
@@ -197,7 +197,7 @@
 											<li><i class="lni lni-star"></i></li>
 										</c:if>
 									</c:forEach>
-									<li><span>${recStoreList.si_star /10 } 점 / 리뷰</span></li>
+									<li><span>${recStoreList.si_stars } 점 / 리뷰</span></li>
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
@@ -263,7 +263,7 @@
 											<li><i class="lni lni-star"></i></li>
 										</c:if>
 									</c:forEach>
-									<li><span>${newStoreList.si_star /10 } 점 / 리뷰</span></li>
+									<li><span>${newStoreList.si_stars } 점 / 리뷰</span></li>
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>

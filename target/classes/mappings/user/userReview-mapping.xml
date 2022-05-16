@@ -26,14 +26,16 @@
 	<select id="reviewList" resultType="ReviewVO" resultMap="reviewVO">
 		SELECT UR.*, O.O_LIST, SI.SI_NAME, SI.SI_LOC, SPLIT_PART((CURRENT_TIMESTAMP - UR.UR_REGDATE::DATE)::VARCHAR,' ', 1) AS DIF_DATE
 		FROM USER_REVIEW UR JOIN ORDERS O ON UR.O_CODE = O.O_CODE JOIN STORE_INFO SI ON SI.SI_CODE = O.SI_CODE 
-		WHERE UR.U_ID = #{u_id} ORDER BY UR_REGDATE ASC;
+		WHERE UR.U_ID = #{u_id} ORDER BY UR_REGDATE DESC;
 	</select>
+	
+	
 	
 	<insert id="insertReview" parameterType="reviewVO">
 		INSERT INTO USER_REVIEW
-			VALUES('220430003', #{u_id}, 
-				(SELECT SI_CODE FROM ORDERS WHERE O_CODE = '220430003'), 
-				DEFAULT, #{ur_star}, #{ur_pic_url}, #{ur_content}, '220430003', DEFAULT, DEFAULT)
+			VALUES(#{o_code}, #{u_id}, 
+				(SELECT SI_CODE FROM ORDERS WHERE O_CODE = #{o_code}), 
+				DEFAULT, #{ur_star}, #{ur_pic_url}, #{ur_content}, #{o_code}, DEFAULT, DEFAULT)
 
 	</insert>
 </mapper>

@@ -2,14 +2,13 @@ package three.aws.wo.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.user.service.UserReviewService;
 import three.aws.wo.user.vo.ReviewVO;
@@ -38,46 +37,20 @@ public class UserReviewController {
 	}
 	
 	
-	
-	
-	@ResponseBody
-	@RequestMapping(value = "/insertReview.user", method=RequestMethod.POST)
-	public String insertReview(ReviewVO vo) { 
-		System.out.println(vo);
-		userReviewService.insertReview(vo);
-		return "/mypage/mypage_myReviewList"; 
-	}
 	@RequestMapping("/myReview.user")
-	public String tomyReviewPage() {
-		System.out.println("myReview");
+	public String insertReview(Model model,HttpServletRequest request) throws Exception {
+		String o_code = request.getParameter("order");
+		System.out.println("mypage_myReview");
+		model.addAttribute("getOrderCode", o_code);
 		return "/mypage/mypage_myReview";
 	}
-
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping("/insertReview.user", method=RequestMethod.POST) public
-	 * String insertReview(HttpServletRequest request, ReviewVO vo) {
-	 * 
-	 * vo.setUr_star(Integer.parseInt(request.getParameter("rating")));
-	 * vo.setUr_pic_url(request.getParameter("ur_pic_url"));
-	 * vo.setUr_content(request.getParameter("ur_content"));
-	 * userReviewService.insertReview(vo); return "/mypage_myReview"; }
-	 */
-
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping("/insertReview.user") public String insertReview( ReviewVO
-	 * vo) { userReviewService.insertReview(vo); return "/mypage_myReview"; }
-	 */
-
-	/*
-	 * @RequestMapping(value = "/insertReview.user", method = { RequestMethod.POST
-	 * })
-	 * 
-	 * @ResponseBody public int m6(HttpServletRequest req, HttpServletResponse resp,
-	 * HttpSession session, ReviewVO vo) { int result =
-	 * userReviewService.insertReview(vo); return result; }
-	 */
+	
+	
+	@RequestMapping("/insertReview.user")
+	public String insertNotice(ReviewVO vo) throws Exception {
+		userReviewService.insertReview(vo);
+		System.out.println("¸®ºä µî·Ï");
+		return "redirect:/myReviewList.user";
+	}
+	
 }

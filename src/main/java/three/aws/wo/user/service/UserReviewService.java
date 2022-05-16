@@ -6,6 +6,7 @@ import three.aws.wo.user.vo.ReviewVO;
 
 public interface UserReviewService {
 	List<ReviewVO> reviewList(String u_id);
-	void insertReview(ReviewVO vo);
+	void insertReview(ReviewVO vo) throws Exception;
+	String getOrderCode() throws Exception;
 
 }

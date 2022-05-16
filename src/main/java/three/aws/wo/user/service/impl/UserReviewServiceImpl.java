@@ -23,6 +23,11 @@ public class UserReviewServiceImpl implements UserReviewService {
 		userReviewDAO.insertReview(vo);
 	}
 
+	@Override
+	public String getOrderCode() throws Exception {
+		return userReviewDAO.getOrderCode();
+	}
+
 	
 	
 	

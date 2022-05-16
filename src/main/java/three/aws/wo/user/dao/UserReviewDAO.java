@@ -15,20 +15,13 @@ public class UserReviewDAO {
 	public List<ReviewVO> reviewList(String u_id){
 		return sqlSession.selectList("UserReviewDAO.reviewList", u_id);
 	}
-
-	/*
-	 * public void insertReview(ReviewVO vo) {
-	 * sqlSession.insert("UserReviewDAO.insertReview", vo); }
-	 */
 	
-	/*
-	 * public void insertReview(HashMap<String, Object> parameterMap) {
-	 * sqlSession.insert("UserReviewDAO.insertReview", parameterMap); }
-	 */
-
 	 public void insertReview(ReviewVO vo) {
 		 sqlSession.insert("UserReviewDAO.insertReview", vo); 
 	 }
 	 
 
+	 public String getOrderCode() {
+			return sqlSession.selectOne("UserReviewDAO.getOrderCode");
+		}
 }

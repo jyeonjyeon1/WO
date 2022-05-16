@@ -7,47 +7,62 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import three.aws.wo.user.service.UserService;
 import three.aws.wo.user.vo.UserVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class UserRegController {
 	@Autowired
 	private UserService userService;
+	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserRegController.class);
 
 	@Inject
 	public UserRegController(UserService userService) {
 		this.userService = userService;
 	}
-
-	@RequestMapping("/register.user")
-	public String insertUser(UserVO vo) {
-		userService.insertUser(vo);
+	// 회원가입 get
+	@RequestMapping(value = "/register.user", method = RequestMethod.GET)
+	public void getinsertUser() throws Exception {
+		logger.info("get register");
+	}
+		
+	@RequestMapping(value = "/register.user", method = RequestMethod.POST)
+	public String insertUser(UserVO vo) throws Exception {
+		
+		logger.info("post register");
+		int result = userService.idChk(vo);
+		
+			if(result == 1) {
+				return "/login/login_register2";
+			}else if(result == 0) {
+				String inputPass = vo.getU_password();
+				String pwd = pwdEncoder.encode(inputPass);
+				System.out.println("비밀번호" + pwd);
+				vo.setU_password(pwd);
+				
+				userService.insertUser(vo);
+			}
+			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
+			// 존재하지 않는다면 -> register
+		
+		
 		System.out.println("회원가입 완료 DB확인");
 		return "/login/login_joined";
 	}
 
-	// 아이디 중복 체크
-//	@ResponseBody
-//	@RequestMapping("/idcheck.user")
-//	public Map<String, Object> idCheck(@RequestBody String id) throws Exception {
-//		System.out.println(id);
-//		int count = 0;
-//		Map<String, Object> map = new HashMap<String, Object>();
-//
-//		count = userService.idCheck(id);
-//		System.out.println("count:" + count);
-//		map.put("cnt", count);
-//		System.out.println(map.toString().replace("=", ":"));
-//		return map;
-//	}
+
 
 	// 아이디 중복 체크
 	@ResponseBody
@@ -104,11 +119,12 @@ public class UserRegController {
 		System.out.println("세션 얻음");
 		// 세션에있는 비밀번호
 		String sessionPass = userSession.getU_password();
-		System.out.println("세션 비밀번호");
-		// vo로 들어오는 비밀번호
-		String voPass = vo.getU_password();
 		
-		if(!(sessionPass.equals(voPass))) {
+		// vo로 들어오는 비밀번호
+		String voPass = vo.getU_password();	
+		boolean pwdMatch = pwdEncoder.matches(voPass, sessionPass);
+		
+		if(pwdMatch == false) {
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/mypage/mypage_withdraw";
 		}

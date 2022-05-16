@@ -1,8 +1,10 @@
 package three.aws.wo.user.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,9 @@ import three.aws.wo.user.vo.UserVO;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
+	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 
 //	==================== inc ============================
 	@GetMapping("/footer.user")
@@ -142,7 +146,7 @@ public class UserController {
 		return "/mypage/mypage_choice";
 	}
 	
-	// 회원 탈퇴 post
+	
 	@RequestMapping(value="/myChoice.user", method = RequestMethod.POST)
 	public String tomyInfoPage(UserVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		System.out.println("tomyInfoPage_post");
@@ -151,15 +155,16 @@ public class UserController {
 		System.out.println("세션 얻음");
 		// 세션에있는 비밀번호
 		String sessionPass = userSession.getU_password();
-		System.out.println("세션 비밀번호");
-		// vo로 들어오는 비밀번호
-		String voPass = vo.getU_password();
 		
-		if(!(sessionPass.equals(voPass))) {
+		// vo로 들어오는 비밀번호
+		String voPass = vo.getU_password();	
+		boolean pwdMatch = pwdEncoder.matches(voPass, sessionPass);
+		
+		if(pwdMatch == false) {
 			rttr.addFlashAttribute("msg", false);
-			return "redirect:/mypage/mypage_choice";
+			return "redirect:/myChoice.user";
 		}
-		userService.infoUser(vo);
+		
 		return "/mypage/mypage_choice2";
 	}
 	

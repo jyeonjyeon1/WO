@@ -16,4 +16,5 @@ public interface UserLoginService {
 	// 카카오로그인
 	int kakaoLogin(String u_id) throws Exception;
 
+   	public UserVO encryption(String u_id) throws Exception;
 }

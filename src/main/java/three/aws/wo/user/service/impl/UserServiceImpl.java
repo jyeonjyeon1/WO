@@ -14,8 +14,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
-	
-	
 	@Override
 	public void insertUser(UserVO vo) {
 		userDAO.insertUser(vo);
@@ -54,6 +52,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO infoUser(UserVO vo) {
 		return userDAO.infoUser(vo);
+	}
+	
+	@Override
+	public int idChk(UserVO vo) throws Exception {
+		return userDAO.idChk(vo);
 	}
 	@Override
 	public UserVO getUser(UserVO vo) {

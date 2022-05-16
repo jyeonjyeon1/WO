@@ -17,11 +17,13 @@
 	<select id="kakaoLogin" resultType="UserVO" parameterType="UserVO">
 		SELECT COUNT(*) FROM USERS 
 		WHERE U_ID = #{id} 
-		
-	
-		
 	</select>
 
+	<select id="encryption" resultType="UserVO">
+		SELECT *
+		  FROM USERS
+		 WHERE U_ID = #{u_id}
+	</select>
 	
 </mapper>
  

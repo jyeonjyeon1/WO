@@ -42,6 +42,10 @@ public class UserDAO {
 		return sqlSession.selectOne("UserDAO.infoUser", vo);
 	}
 
+	// 아이디 중복 체크
+	public int idChk(UserVO vo) throws Exception {
+		return sqlSession.selectOne("UserDAO.idChk", vo);
+	}
 
 
 

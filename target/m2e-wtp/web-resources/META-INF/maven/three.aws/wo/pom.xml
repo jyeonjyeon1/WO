@@ -225,6 +225,37 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
+
+
+	
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		
+	
+		<!-- 암호화 기능-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>5.6.2</version>
+		</dependency>
+	
+		<!-- 암호화 기능-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.6.2</version>
+		</dependency>
+	
+		<!-- 암호화 기능-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>5.6.2</version>
+		</dependency>
+		
 	</dependencies>
 	<repositories>
 		<repository>

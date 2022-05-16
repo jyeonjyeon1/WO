@@ -29,6 +29,8 @@ public class UserLoginDAO {
 		return sqlSession.selectOne("UserLoginDAO.userLoginCheck", u_id);
 	}
 
-	
+	public UserVO encryption(String u_id) throws Exception {
+		return sqlSession.selectOne("UserLoginDAO.encryption", u_id);
+	}
 
 }

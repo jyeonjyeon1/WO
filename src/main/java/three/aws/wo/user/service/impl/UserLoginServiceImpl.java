@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import three.aws.wo.user.dao.UserDAO;
 import three.aws.wo.user.dao.UserLoginDAO;
 import three.aws.wo.user.service.UserLoginService;
 import three.aws.wo.user.vo.UserVO;
@@ -27,6 +28,10 @@ public class UserLoginServiceImpl implements UserLoginService {
 	@Override
 	public int kakaoLogin(String u_id) throws Exception {
 		return userLoginDAO.kakaoLogin(String, u_id);
+	}
+	@Override
+	public UserVO encryption(String u_id) throws Exception {
+		return userLoginDAO.encryption(u_id);
 	}
 	
 }

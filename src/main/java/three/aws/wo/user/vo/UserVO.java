@@ -24,12 +24,5 @@ public class UserVO {
 	private int u_point;				//보유 포인트
 	private boolean u_status;			//활성 상태
 	private Date u_regdate;
-	
-	private int u_grade;			//뭐하는 친구인지 설명 좀
-	
-	 //비밀번호 확인 어디에 쓰이는지? 이런건 VO 에서 하는거 아님!!
-    public boolean matchPassword(String u_password) {
-        return this.u_password.equals(u_password);
-    }
 
 }

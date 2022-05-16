@@ -55,7 +55,7 @@
             
             <div class="row">
                 <div class="col-sm-4"><label class="regis_label" for="u_password">비밀번호</label></div>
-                <div class="col-sm-6"><input class="form-control" type="password" id="u_password" name="u_password" value="${userSession.u_password}"/></div>
+                <div class="col-sm-6"><input class="form-control" type="password" id="u_password" name="u_password"/></div>
 
             </div>
             <br>

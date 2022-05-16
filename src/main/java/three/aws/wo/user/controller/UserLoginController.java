@@ -3,12 +3,14 @@ package three.aws.wo.user.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +30,8 @@ public class UserLoginController {
 	private UserLoginService userLoginService;
 	@Autowired
 	private UserOrderService userOrderService;
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 	
 	@RequestMapping(value="/login.user",method=RequestMethod.GET)
 	public String u_loginPage(HttpSession session) {
@@ -44,8 +48,15 @@ public class UserLoginController {
 	public int userLoginCheck(@RequestBody HashMap<String, String> param,HttpSession session, 
 			HttpServletRequest request, HttpServletResponse response, Model model)
 			throws Exception {
+		
+		UserVO encryption = userLoginService.encryption(param.get("u_id"));
+		boolean pwdMatch = pwdEncoder.matches(param.get("u_password"), encryption.getU_password());
+		
+		int result = 0;
+		if(encryption != null && pwdMatch == true) {
+			result = 1;
+		}
 		//우선 아이디 비번번호가 일치하는지 확인
-		int result = userLoginService.userLoginCheck(param);
 		String userID = param.get("u_id");
 		//아이디저장하기 체크했는지 가져옴
 		String rememberId = param.get("rememberId"); 
@@ -76,7 +87,7 @@ public class UserLoginController {
 		}
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/kakaoLogin.user", method = RequestMethod.POST)
 	public int kakaoLogin(@RequestBody HashMap<String, Object> param) throws Exception {
@@ -89,9 +100,7 @@ public class UserLoginController {
 		return result;
 	}
 	
-	
-	
-	@RequestMapping("/logout.user")
+@RequestMapping("/logout.user")
 	public String userLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();

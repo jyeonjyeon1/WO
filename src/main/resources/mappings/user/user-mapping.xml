@@ -36,5 +36,10 @@
 		SELECT U_ID, U_PASSWORD FROM USERS 
 		WHERE U_ID = #{u_id} AND U_PASSWORD = #{u_password}
 	</select>
+	
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM USERS
+		WHERE U_ID = #{u_id}
+</select>
 </mapper>
  

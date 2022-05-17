@@ -17,4 +17,9 @@ public class PointVO {
 	//시스템 세팅
 	private String point_use;
 	private String point_percentage;
+	
+	//store_info 쪼인
+	private String si_code;
+	private String si_name;
+	private String si_loc;
 }

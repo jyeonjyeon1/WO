@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserReviewDAO">
-	<resultMap type="ReviewVO" id="reviewVO">
+<mapper namespace="UserMypageDAO">
+<resultMap type="ReviewVO" id="reviewVO">
 		<id column="UR_CODE" property="ur_code" jdbcType="VARCHAR"/>
 		<result column="U_ID" property="u_id" jdbcType="INTEGER" />
 		<result column="STR_CODE" property="str_code" jdbcType="VARCHAR" />
@@ -38,4 +38,15 @@
 				DEFAULT, #{ur_star}, #{ur_pic_url}, #{ur_content}, #{o_code}, DEFAULT, DEFAULT)
 
 	</insert>
+	<select id="userPointList" resultType="PointVO">
+		SELECT * FROM 
+		POINT a 
+		INNER JOIN 
+		USERS b ON (a.U_ID = b.U_ID)
+		INNER JOIN 
+		STORE_INFO c ON (a.SI_CODE = c.SI_CODE)
+		WHERE a.U_ID = #{u_id}
+		ORDER BY PT_SEQ DESC
+	</select>
 </mapper>
+ 

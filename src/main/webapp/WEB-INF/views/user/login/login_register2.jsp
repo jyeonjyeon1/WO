@@ -80,19 +80,52 @@ input::-webkit-inner-spin-button {
 	box-shadow: 0 1px 3px rgba(0, 12, 173, 0.4);
 	background-color: rgb(249, 248, 255);
 }
+.phoneVerif_btn:hover {
+	background: #f2f2f2;
+}
+.phoneVerif_btn:disabled ,.u_tel:disabled {
+	background: #f2f2f2;
+}
+
+.verif_num{
+	display:none;
+}
+.verif_num.active{
+	margin-left:10px;display:inline-block; width: 35%;
+}
+
+.phone_reset_btn.active{
+	display:none;
+}
+
+.phone_reset_btn {
+	float:right;
+	font-size: 10px;
+	width:20px;
+	height:20px;
+	padding:auto;
+	margin-top:5px;
+	border-radius:3px;
+	border:none;
+	background: #faf4f2;
+	box-shadow: 1px 1px 1px rgba(0, 12, 173, 0.4);
+	margin-right:130px;
+}
+
 </style>
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
-	var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8;
+	var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9;
 	ch1 = false;//CheckId
 	ch2 = false;//regPassword
 	ch3 = false;//Passwork recheck match
 	ch4 = false;//regName
-	ch5 = false;//phone authentication
+	ch5 = false;//regPhone
 	ch6 = false;//regEmail
 	ch7 = false;//Terms agreed
 	ch8 = false;//Pricacyterms agreed
+	ch8 = false;//phone authentication
 	// 정규식 친구들
 	var regId = /^[a-zA-Z0-9]{4,14}$/;
 	var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
@@ -245,7 +278,7 @@ input::-webkit-inner-spin-button {
 				icon : "error",
 				text : "개인정보처리방침 미동의"
 			});
-		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8) {
+		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8 && ch9) {
 			document.regForm.submit();
 		} else {
 			Swal.fire({
@@ -256,29 +289,118 @@ input::-webkit-inner-spin-button {
 			return false;
 		}
 	}
-
-/* 	function idCheck() {
-	       var id = $('#u_id').val();
-	       var param = {"id" : id };
-	       console.log(param);
-	        $.ajax({
+	var verifNum = []; //인증번호
+	var verifTime = 180;// 180초=3분
+	function phoneVerif(){
+		if(ch5){//번호 제대로 입력했을 경우만
+			//$("#phoneVerif_btn").attr("disabled", true); //비활성화
+			$("#u_tel").attr("disabled", true);
+			document.getElementById("phoneVerif_btn").innerHTML = "인증 확인";
+			$("#phoneVerif_btn").removeAttr("onclick");//phoneverif 삭제
+			$("#phoneVerif_btn").attr("onclick","checkVerif()");//checkVerif 추가
+			$(".verif_num").addClass('active');
+			$(".phone_reset_btn").removeClass('active');
+			$("#u_tel").removeClass('col-12');
+			$("#u_tel").addClass('col-7');
+			
+			
+			verifTime = 179;//또 인증할 경우
+			setClock();
+		    tid = setInterval(setClock,1000); //1초마다 setClock 함수 실행
+		    //인정번호 생성 6자리
+		    var dateInfo = new Date(); //현재시간으로 암호 생성할것
+		    var sec = dateInfo.getSeconds();
+		    var verifNumMade= Math.floor((sec+11)*(sec+11) * parseInt($("#u_tel").val().substring(8))+sec).toString();
+		    if (verifNumMade.length >6){
+		    	verifNumMade = verifNumMade.substring(0,6);
+		    }else if (verifNumMade.length <6){
+		    	verifNumMade = Math.floor(Math.random() * 10).toString() + verifNumMade;
+		    }
+		    verifNum.push(verifNumMade);
+		    var param = {
+	    		"u_tel":$("#u_tel").val(),
+		    	"verifNumMade": verifNumMade
+		    }
+		    $.ajax({
 	             type: "POST",
-	             url: "/idcheck.user",
+	             url: "/phoneVerif.admin",
 	             data: JSON.stringify(param),
 	             dataType: "json",
 	             contentType: "application/json",
 	          success:function(data){
-	             if(data==0){
-	                console.log("data=0");
-	             }else{
-	                console.log("data=1")
-	             }
+				if(data ==1){
+	        	  alert(verifNum);
+				}
 	          },
 	          error:function(data){
-	             console.log("아이디체크에러");
+	             console.log("핸드폰인증 실패");
 	          }
-	       });
-	    } */
+	       }); //ajax 끝
+		}
+	}
+	
+	function checkVerif(){
+		if($("#verif_num").val()==verifNum){
+			alert("성공");
+			verifNum = [];
+			document.getElementById("phoneVerif_btn").innerHTML = "번호 인증";
+			$("#phoneVerif_btn").removeAttr("onclick");//checkVerif 삭제
+			$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
+			$("#u_tel").attr("disabled", true);
+			clearInterval(tid);
+		}else{
+			alert("실패"+$("#verif_num").val()+":"+verifNum);
+		}
+		
+	}
+	
+	function setClock(){
+		var time = Math.floor(verifTime / 60) + " : " + modifyNumber(verifTime % 60); // 남은 시간 계산    
+		document.getElementById("phoneVerifTime").innerHTML = "남은 시간 :  0" +time;
+		document.getElementById("phoneVerifTime").style.color = "blue";
+		document.getElementById("phoneVerifTime").style.display = "inline-block";
+		verifTime--; 
+		if(verifTime < 60){
+			document.getElementById("phoneVerifTime").style.color = "red";
+		}
+		if (verifTime < 0) {          // 시간이 종료 되었으면..        
+            clearInterval(tid);     // 타이머 해제
+            verifNum=[];			//인증번호 삭제
+            
+            //다시 처음 상태로
+            $(".verif_num").removeClass('active');
+            $(".phone_reset_btn").addClass('active');
+            $("#u_tel").removeClass('col-7');
+			$("#u_tel").addClass('col-12');
+			document.getElementById("phoneVerif_btn").innerHTML = "번호 인증";
+			$("#phoneVerif_btn").removeAttr("onclick");//checkVerif 삭제
+			$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
+			$("#u_tel").attr("disabled", false);
+        } 
+	}
+	
+	function reset_Phone(){
+		clearInterval(tid);
+		verifNum=[];
+		//다시 처음 상태로
+        $(".verif_num").removeClass('active');
+        $(".phone_reset_btn").addClass('active');
+        $("#u_tel").removeClass('col-7');
+		$("#u_tel").addClass('col-12');
+		document.getElementById("phoneVerifTime").style.display = "none";
+		$("#u_tel").attr("disabled", false);
+		document.getElementById("phoneVerif_btn").innerHTML = "번호 인증";
+		$("#phoneVerif_btn").removeAttr("onclick");//checkVerif 삭제
+		$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
+	}
+	
+	function modifyNumber(time){
+	    if(parseInt(time)<10){
+	        return "0"+ time;
+	    }
+	    else
+	        return time;
+	}
 </script>
 </head>
 <body>
@@ -322,11 +444,18 @@ input::-webkit-inner-spin-button {
 			<div class="row">
 				<div class="col-9 mt-10">
 					<input type="text" id="u_tel" name="u_tel"
-						placeholder="전화번호( - 제외)" class="reg-form-control">
+						placeholder="전화번호( - 제외)" class="reg-form-control col-12 u_tel" style="display:inline-block;">
+						<input type="text" id="verif_num" 
+						placeholder="인증번호" class="reg-form-control col-5 verif_num">
 					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
+					<div id="phoneVerifTime" class="phoneVerifTime">
+					</div>
+					<button class="phone_reset_btn active" type="button" onclick="reset_Phone()">
+						<i class="fa fa-rotate-left"></i>
+					</button>
 				</div>
 				<div class="col-3 mt-10" style="padding-left: 0;">
-					<button type="button" onclick="idCheck()" class="reg-form-control">번호
+					<button type="button" onclick="phoneVerif()" id="phoneVerif_btn" class="reg-form-control phoneVerif_btn">번호
 						인증</button>
 				</div>
 			</div>

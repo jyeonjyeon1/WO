@@ -12,6 +12,7 @@
 <link href="resources/assets/css/admin/style.css" rel="stylesheet">
 <link href="resources/assets/css/admin/style-responsive.css"
 	rel="stylesheet">
+	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <style>
 .admin__name {
 	margin: 23px;
@@ -34,8 +35,22 @@
 	<div class="top-menu">
 		<ul class="nav pull-right top-menu">
 			<li class="admin__name">${a_name}</li>
-			<li><a class="logout" href="/logout.admin">Logout</a></li>
+			<li><a class="logout" onclick="logout()" href="/logout.admin">Logout</a></li>
 		</ul>
 	</div>
 </header>
+<script>
+const naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "dwpamdF6gebSRveqzw1K",
+			callbackUrl: "http://localhost:8080/login.admin",
+			loginButton: {color: "green", type: 1, height: 40}
+		}
+	);
+naverLogin.init(); // 로그인 설정z
+
+function logout(){
+	naverLogin.logout();
+}
+</script>
 <!--header end-->

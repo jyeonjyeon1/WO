@@ -372,7 +372,9 @@ input::-webkit-inner-spin-button {
             $(".phone_reset_btn").addClass('active');
             $("#u_tel").removeClass('col-7');
 			$("#u_tel").addClass('col-12');
-			
+			document.getElementById("phoneVerif_btn").innerHTML = "번호 인증";
+			$("#phoneVerif_btn").removeAttr("onclick");//checkVerif 삭제
+			$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
 			$("#u_tel").attr("disabled", false);
         } 
 	}

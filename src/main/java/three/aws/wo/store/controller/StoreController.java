@@ -54,11 +54,11 @@ public class StoreController {
 	}
 	
 //====================menu  ============================
-	@GetMapping("/CRUD.store")
-	public String toCRUDPage() {
-		System.out.println("store menu_crud");
-		return "/menu/menu_crud";
-	}
+//	@GetMapping("/CRUD.store")
+//	public String toCRUDPage() {
+//		System.out.println("store menu_crud");
+//		return "/menu/menu_crud";
+//	}
 	
 	@GetMapping("/pumjeol.store")
 	public String toPumjeolPage() {

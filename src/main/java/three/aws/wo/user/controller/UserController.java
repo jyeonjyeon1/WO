@@ -110,23 +110,23 @@ public class UserController {
 		return "/mypage/mypage_myCoupon";
 	}
 	
-	@GetMapping("/myPoint.user")
-	public String tomyPointPage() {
-		System.out.println("myPoint");
-		return "/mypage/mypage_myPoint";
-	}
+//	@GetMapping("/myPoint.user")
+//	public String tomyPointPage() {
+//		System.out.println("myPoint");
+//		return "/mypage/mypage_myPoint";
+//	}
 	
-	@GetMapping("/myReview.user")
-	public String tomyReviewPage() {
-		System.out.println("myReview");
-		return "/mypage/mypage_myReview";
-	}
+//	@GetMapping("/myReview.user")
+//	public String tomyReviewPage() {
+//		System.out.println("myReview");
+//		return "/mypage/mypage_myReview";
+//	}
 	
-	@GetMapping("/myReviewList.user")
-	public String tomyReviewListPage() {
-		System.out.println("myReviewList");
-		return "/mypage/mypage_myReviewList";
-	}
+//	@GetMapping("/myReviewList.user")
+//	public String tomyReviewListPage() {
+//		System.out.println("myReviewList");
+//		return "/mypage/mypage_myReviewList";
+//	}
 
 	@GetMapping("/myWishList.user")
 	public String tomyWishListPage() {

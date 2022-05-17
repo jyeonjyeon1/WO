@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMypageDAO">
+	<select id="userPointList" resultType="PointVO">
+		SELECT * FROM 
+		POINT a 
+		INNER JOIN 
+		USERS b ON (a.U_ID = b.U_ID)
+		INNER JOIN 
+		STORE_INFO c ON (a.SI_CODE = c.SI_CODE)
+		WHERE a.U_ID = #{u_id}
+		ORDER BY PT_SEQ DESC
+	</select>
+</mapper>
+ 

@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.service.AdminService;
@@ -30,7 +32,6 @@ public class AdminLoginController {
 		else {
 			return "/index";
 		}
-		
 	}
 
 	@ResponseBody
@@ -57,5 +58,15 @@ public class AdminLoginController {
 		ses=false;
 		return "redirect:login.admin";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/naverLogin.admin")
+	public String authNaver(@RequestBody HashMap<String,Object> param) {
+		System.out.println(param);
+		System.out.println(param.getClass().getName());
+		System.out.println(param.get("callbackHandler"));
+		return "zz";
+	}
+	
 
 }

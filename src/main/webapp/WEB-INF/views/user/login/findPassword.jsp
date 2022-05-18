@@ -87,45 +87,6 @@ input::-webkit-inner-spin-button {
 
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
-	var ch3;
-	ch3 = true;//Passwork recheck match
-    var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
-	// 정규식 친구들
-
-	jQuery(document).ready(
-			function() {
-				 
-                $("#u_tel").on(
-						"propertychange change keyup paste input",
-						function() {
-							var tel = $("#u_tel").val();
-							if (tel.indexOf('-') != -1) {
-								$(".tel_form").addClass('active');
-								ch5 = false;
-							} else if (tel.length > 7
-									&& regPhone.test(tel) == false) {
-								$(".tel_form").addClass('active');
-								ch5 = false;
-							} else {
-								$(".tel_form").removeClass('active');
-								ch5 = true;
-							}
-						});				
-
-			});
-
-	function finalCheck() {
-		if (ch3) {
-			document.regForm.submit();
-		} else {
-			Swal.fire({
-				icon : "error",
-				text : "어딘가 잘못 작성"
-			});
-			console.log("실패")
-			return false;
-		}
-	}
 	
 </script>
 </head>
@@ -135,10 +96,13 @@ input::-webkit-inner-spin-button {
 
 	<div class="container"
 		style="margin: 30PX auto 50px; max-width: 420px;">
-		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">아이디 찾기</h4>
-		<form action="updateUser.user" method="post">
+		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">비밀번호 찾기</h4>
+		<form action="findPassword.user" method="post" name="findform">
 			             
-               
+            <div class="col-12 mt-10">
+					<input type="text" name="u_id" id="u_id" placeholder="아이디"
+						class="reg-form-control" autofocus />
+				</div> 
 			<div class="row">
 				<div class="col-9 mt-10">
 					<input type="text" id="u_tel" name="u_tel"
@@ -155,16 +119,61 @@ input::-webkit-inner-spin-button {
 			<br>
 			<div class="row">
                 <div style=" text-align: center;">
-				<button type="submit" id="submit" onclick="finalCheck()"
-					class="btn btn-outline-warning" style="display: inline-block; margin-bottom: 10px; width: 60%;">아이디 찾기
+				<button type="submit" id="submit" 
+					class="btn btn-outline-warning" style="display: inline-block; margin-bottom: 10px; width: 60%;" value="check">비밀번호 찾기
 					&nbsp;</button>
                 <div style=" text-align: center;">
                         <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 60%;" type="button">취소</button></div>
                 </div>
             </div>
 			</div>
+		<!-- 정보가 일치하지 않을 때-->
+		<c:if test="${check == 1}">
+			<script>
+				opener.document.findform.u_id.value = "";
+				opener.document.findform.u_tel.value = "";
+			</script>
+			<label>일치하는 정보가 존재하지 않습니다.</label>
+		</c:if>
 
+		<!-- 아이디 비밀번호가 일치 할 때 -->
+		<c:if test="${check == 0 }">
+		<div>
+			<label>비밀번호를 변경해주세요.</label>
+		</div>
+		<div class="form-label-group">
+			<input type="hidden" id="id" name="updateid" value="${updateid}">		
+			<input type="password" id="password" name="pwd" class="form-control"/>
+			<label for="password">password</label>
+		</div>
+		
+		<div class="form-label-group">
+			<input type="password" id="confirmpassword" name="confirmpwd" class="form-control"/>
+			<label for="confirmpassword">confirm password</label>
+		</div>
+		
+		<div class="form-label-group">
+				<input class="btn btn-lg btn-secondary btn-block text-uppercase"
+					type="button" value="update password" onclick="updatePassword()">
+			</div>
+		</c:if>
 		</form>
+		
+		<script type="text/javascript">
+		function updatePassword(){
+			if(document.findform.pwd.value==""){
+				alert("비밀번호를 입력해주세요.");
+				document.findform.pwd.focus();
+			} else if(document.findform.pwd.value != document.findform.confirmpwd.value){
+				alert("비밀번호가 일치하지 않습니다.");
+				document.findform.confirmpwd.focus();
+			} else {
+				console.log('비밀번호일치');
+				document.findform.action="updatePassword.user";
+				document.findform.submit();
+			}
+		}
+	</script>
 	</div>
 
 

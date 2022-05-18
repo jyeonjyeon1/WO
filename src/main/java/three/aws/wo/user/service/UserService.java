@@ -12,8 +12,9 @@ public interface UserService {
 	void deleteUser(UserVO vo);
 	UserVO infoUser(UserVO vo);
 	UserVO getUser(UserVO vo);
-	UserVO findId(UserVO vo);
+	UserVO findId(String vo);
 	UserVO findPassword(UserVO vo);
+	void updatePassword(UserVO vo);
 	// ¾ÏÈ£È­
 	int idChk(UserVO vo) throws Exception;
 	

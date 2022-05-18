@@ -35,9 +35,9 @@
         <br>
         <div class="row" >
             <div style=" text-align: center;">
-            <button type="button" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin:auto; margin-right: 20px; height:200px; width: 40%; margin-bottom: 10px"; onclick="location.href='updateUser.user'"> 아이디 찾기
+            <button type="button" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin:auto; margin-right: 20px; height:200px; width: 40%; margin-bottom: 10px"; onclick="location.href='findId.user'"> 아이디 찾기
                 &nbsp;</button>
-                <button type="button" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin:auto; height: 200px; width: 40%; margin-bottom: 10px"; onclick="location.href='deleteUser.user'"> 비밀번호 찾기
+                <button type="button" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin:auto; height: 200px; width: 40%; margin-bottom: 10px"; onclick="location.href='findPassword.user'"> 비밀번호 찾기
                     &nbsp;</button>
             </div>
                 

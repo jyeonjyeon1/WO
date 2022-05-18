@@ -12,6 +12,8 @@ public interface UserService {
 	void deleteUser(UserVO vo);
 	UserVO infoUser(UserVO vo);
 	UserVO getUser(UserVO vo);
+	UserVO findId(UserVO vo);
+	UserVO findPassword(UserVO vo);
 	// ¾ÏÈ£È­
 	int idChk(UserVO vo) throws Exception;
 	

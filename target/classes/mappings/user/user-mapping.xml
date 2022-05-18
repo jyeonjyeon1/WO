@@ -29,7 +29,7 @@
 	</update>
 
 	<delete id="deleteUser" parameterType="UserVO">
-		DELETE FROM USERS WHERE u_id = #{u_id} AND u_password= #{u_password} 
+		DELETE FROM USERS WHERE u_id = #{u_id}  
 	</delete>
 	
 	<select id="infoUser" resultType="UserVO">
@@ -40,6 +40,14 @@
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*) FROM USERS
 		WHERE U_ID = #{u_id}
-</select>
+	</select>
+	
+	<select id="findId" resultType="UserVO">
+		SELECT * FROM USERS WHERE U_TEL = #{u_tel}
+	</select>
+	
+	<select id="findPassword" resultType="UserVO">
+		SELECT * FROM USERS WHERE U_ID = #{u_id} and U_TEL = #{u_tel}
+	</select>
 </mapper>
  

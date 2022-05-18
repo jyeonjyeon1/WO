@@ -63,11 +63,11 @@
             <br>
         	<div class="row" >
                 <div style=" text-align: center;">
-                <button type="submit" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin:auto; width: 74%; margin-bottom: 10px" id="submit"> 회원변경/탈퇴로 가기
+                <button type="submit" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin:auto; width: 50%; margin-bottom: 10px" id="submit"> 회원변경/탈퇴로 가기
                     &nbsp;</button>
                 </div>
                     <div style=" text-align: center;">
-                    <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 74%;" type="button">취소</button></div>
+                    <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 50%;" type="button">취소</button></div>
             </div>
 				
 				

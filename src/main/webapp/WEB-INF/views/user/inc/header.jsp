@@ -30,6 +30,9 @@
 	display:none;}
 	</style>
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<!-- ========================= kakao login ========================= -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 
 $(document).ready(
@@ -51,6 +54,57 @@ $(document).ready(
 function searchBtn(){
 	var Sname = $("#search_Sname").val();
 	location.href="/storeList.user?search="+Sname;	
+}
+//---------------- NAVER ------------------------
+const naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "22RAYixMi5pHSV4f5s4t",
+			callbackUrl: "http://localhost:8080/login.user",
+			loginButton: {color: "green", type: 1, height: 40}
+		}
+	);
+naverLogin.init();
+
+//--------------카카오--------------------
+Kakao.init('afa33a5b39df9de72171ff16aabcb982');
+//카카오로그인
+function kakaoLogin() {
+	Kakao.Auth.login({
+			success : function(response) {
+			Kakao.API.request({
+				url : '/v2/user/me',
+				success : function(response) {
+				console.log(response);
+			},
+				fail : function(error) {
+					console.log(error)
+				},
+			})
+		},
+		fail : function(error) {
+			console.log(error)
+		},
+	})
+}
+//카카오로그아웃  
+function kakaoLogout() {
+	if (Kakao.Auth.getAccessToken()) {
+		Kakao.API.request({
+			url : '/v1/user/unlink',
+			success : function(response) {
+				console.log(response)
+			},
+			fail : function(error) {
+				console.log(error)
+			},
+		})
+		Kakao.Auth.setAccessToken(undefined)
+	}
+}
+
+//--------------로그아웃 ---------------------
+function logout(){
+	naverLogin.logout();
 }
 </script>
 
@@ -80,7 +134,7 @@ function searchBtn(){
 								</c:if>
 								<c:if test="${!empty userSession}">
 									<li style="color: black;">${userSession.u_name}님</li>
-									<li><a href="logout.user">로그아웃</a></li>
+									<li><a href="logout.user" onclick="logout()">로그아웃</a></li>
 								</c:if>
 								<li><a href="faq.user">고객센터</a></li>
 							</ul>

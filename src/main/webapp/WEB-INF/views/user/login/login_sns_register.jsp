@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -116,97 +117,20 @@ input::-webkit-inner-spin-button {
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
-	var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9;
-	ch1 = false;//CheckId
-	ch2 = false;//regPassword
-	ch3 = false;//Passwork recheck match
+	var ch4, ch5, ch6, ch7, ch8, ch9;
 	ch4 = false;//regName
 	ch5 = false;//regPhone
 	ch6 = false;//regEmail
 	ch7 = false;//Terms agreed
 	ch8 = false;//Pricacyterms agreed
-	ch8 = false;//phone authentication
+	ch9 = false;//phone authentication
 	// 정규식 친구들
-	var regId = /^[a-zA-Z0-9]{4,14}$/;
-	var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
 	var regName = /^[가-힣]+$/;
 	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
 	$(document).ready(
 			function() {
-
-			//아이디중복확인
-			$("#u_id").on("propertychange change keyup paste input",
-				function() {
-					var insert_id = $("#u_id").val();
-					//idCheck()였던 것.
-			       var param = {"id" : insert_id };
-			       if(insert_id.length>2){
-					$.ajax({
-			             type: "POST",
-			             url: "/idcheck.user",
-			             data: JSON.stringify(param),
-			             dataType: "json",
-			             contentType: "application/json",
-			          success:function(data){
-			             if(data==0 && regId.test(insert_id) == true){
-			                console.log("가능");
-			                $(".idCheck_label_joongbok").removeClass('active');
-			                $(".idCheck_label_false").removeClass('active');
-			                $(".idCheck_label_true").addClass('active');
-			                ch1=true;
-			             }else if(data==0 && regId.test(insert_id) == false){
-			            	 console.log("노가능");
-			            	 $(".idCheck_label_joongbok").removeClass('active');
-				             $(".idCheck_label_false").addClass('active');
-				             $(".idCheck_label_true").removeClass('active');
-				             ch1=false;
-			             }else{
-			                console.log("노가능")
-			                $(".idCheck_label_joongbok").addClass('active');
-			                $(".idCheck_label_true").removeClass('active');
-			                $(".idCheck_label_false").removeClass('active');
-			                ch1=false;
-			             }
-			          },
-			          error:function(data){
-			             console.log("아이디체크에러");
-			          }
-			       }); //ajax 끝
-		        } // end if
-			});  //아이디중복확인 끝
-				 
-
-				//Check valid Password
-				$("#u_password").on(
-						"propertychange change keyup paste input",
-						function() {
-							var pwd = $("#u_password").val();
-							
-							if (pwd.length > 3
-									&& regPassword.test(pwd) == false) {
-								$(".valid_password").addClass('active');
-								ch2 = false;
-							} else {
-								$(".valid_password").removeClass('active');
-								ch2 = true;
-							}
-						});
-
-				//Check pass & passcheck match
-				$("#passCheck").on("propertychange change keyup paste input",
-						function() {
-							var pw = $("#u_password").val();
-							var pwc = $("#passCheck").val();
-							if (pwc != '' && pw != pwc) {
-								$(".match_password").addClass('false');
-								ch3 = false;
-							} else {
-								$(".match_password").removeClass('false');
-								ch3 = true;
-							}
-						});
 
 				$("#u_name")
 						.on(
@@ -278,7 +202,28 @@ input::-webkit-inner-spin-button {
 				icon : "error",
 				text : "개인정보처리방침 미동의"
 			});
-		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8 && ch9) {
+		} else if (!ch4) {
+			Swal.fire({
+				icon : "error",
+				text : "4 이름"
+			});
+		}else if (!ch5) {
+			Swal.fire({
+				icon : "error",
+				text : "5 전화"
+			});
+		}else if (!ch6) {
+			Swal.fire({
+				icon : "error",
+				text : "6이메일"
+			});
+		}else if (!ch9) {
+			Swal.fire({
+				icon : "error",
+				text : "9 인증"
+			});
+		}
+		else if (ch4 && ch5 && ch6 && ch7 && ch8 && ch9) {
 			document.regForm.submit();
 		} else {
 			Swal.fire({
@@ -412,31 +357,11 @@ input::-webkit-inner-spin-button {
 
 	<div class="container"
 		style="margin: 30PX auto 50px; max-width: 420px;">
-		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">회원가입</h4>
-		<form action="register.user" method="post" name="regForm">
-			<div class="row">
-				<div class="col-12">
-					<input type="text" name="u_id" id="u_id" placeholder="아이디 (필수)"
-						class="reg-form-control" autofocus />
-					<p class="idCheck_label_joongbok">이미 사용 중인 아이디입니다</p>
-					<p class="idCheck_label_false">사용할 수 없는 아이디입니다</p>
-					<p class="idCheck_label_true">사용 가능한 아이디입니다</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 mt-10">
-					<input type="password" name="u_password" id="u_password"
-						placeholder="비밀번호 (필수)" class="reg-form-control">
-					<p class="valid_password">특수기호 대소문자 어쩌구</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 mt-10">
-					<input type="password" id="passCheck" placeholder="비밀번호 확인 (필수)"
-						class="reg-form-control">
-					<p class="match_password">비밀번호가 일치하지 않습니다.</p>
-				</div>
-			</div>
+		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">회원 정보</h4>
+		<form action="/sns_register.user" method="post" name="regForm">
+			<input type="hidden" name="u_id" value="${u_id }"/>
+			<input type="hidden" name="u_password" value="${u_id}"/>
+			<input type="hidden" name="u_type" value="${u_type}"/>
 			<div class="row">
 				<div class="col-12 mt-10">
 					<input type="text" id="u_name" name="u_name" placeholder="이름 (필수)"

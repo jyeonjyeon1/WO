@@ -14,7 +14,12 @@ public interface UserLoginService {
 	UserVO loggedin(String u_id, String rememberId, HttpSession session, HttpServletResponse response) throws Exception;
 	
 	// 카카오로그인
-	int kakaoLogin(String u_id) throws Exception;
+	int snsLogin(String sns_id) throws Exception;
 
    	public UserVO encryption(String u_id) throws Exception;
+
+	void insertSNSUser(String kakaoId);
+
+	int checkSNSUser(int sns_seq);
+
 }

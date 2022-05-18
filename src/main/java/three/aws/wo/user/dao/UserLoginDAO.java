@@ -24,13 +24,23 @@ public class UserLoginDAO {
 		return sqlSession.selectOne("UserLoginDAO.loggedin", u_id);
 	}
 
-	public int kakaoLogin(HashMap<String, Object> string, String u_id) {
-		
-		return sqlSession.selectOne("UserLoginDAO.userLoginCheck", u_id);
+	public int snsLogin(String sns_id) {
+		if(sqlSession.selectOne("UserLoginDAO.snsLogin", sns_id)==null) {
+			return 0;
+		}
+		return sqlSession.selectOne("UserLoginDAO.snsLogin", sns_id);
 	}
 
 	public UserVO encryption(String u_id) throws Exception {
 		return sqlSession.selectOne("UserLoginDAO.encryption", u_id);
+	}
+
+	public void insertSNSUser(String kakaoId) {
+		sqlSession.insert("UserLoginDAO.insertSNSUser", kakaoId);
+	}
+
+	public int checkSNSUser(int sns_seq) {
+		return sqlSession.selectOne("UserLoginDAO.checkSNSUser", sns_seq);
 	}
 
 }

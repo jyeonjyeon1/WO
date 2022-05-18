@@ -16,10 +16,9 @@
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 
-<!-- ========================= kakao login ========================= -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<!-- ========================= Google login ========================= -->
-<meta name="google-signin-client_id" content="518574864384-7pkb8phtl91cs1p1et47ifnq1el975o6.apps.googleusercontent.com">
+<!-- <!-- ========================= kakao login ========================= -->
+<!-- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> -->
+
 
 <script type="text/javascript">
 	
@@ -57,133 +56,35 @@
 			<div class="row" style="max-width: 400px; margin: auto;">
 				<!-- 카카오 로그인-->
 				<button class="kaka_login" type="button" onclick="kakaoLogin();">
-					<a href="javascript:void(0)"></a>
 				</button>
-				<!-- 카카오 스크립트 -->
-				<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-				<script>
-					Kakao.init('afa33a5b39df9de72171ff16aabcb982'); //javascript키
-					console.log(Kakao.isInitialized()); // sdk초기화여부판단
-					//카카오로그인
-					function kakaoLogin() {
-						Kakao.Auth.login({
-								success : function(response) {
-								Kakao.API.request({
-									url : '/v2/user/me',
-									success : function(response) {
-									console.log(response);
-								//AJAX 카카오로그인
-									$.ajax({
-										type : "post",
-										url : "/kakaoLogin.user",
-										data : JSON.stringify(response),
-											dataType : "json",
-											contentType : "application/json",
-											success : function(data) {
-												if (data == 1) {
-													location.href = "/index.user";
-												} else if (data == 0) {
-													location.href = "/join.user";
-												} else {
-													location.href = "/login.user";
-												}
-											},
-											error : function(data) {
-												console.log("로그인 통신x")
-											}
-										});
-								//ajax 끝
-									},
-									fail : function(error) {
-										console.log(error)
-									},
-								})
-							},
-							fail : function(error) {
-								console.log(error)
-							},
-						})
-					}
-					//카카오로그아웃  
-					function kakaoLogout() {
-						if (Kakao.Auth.getAccessToken()) {
-							Kakao.API.request({
-								url : '/v1/user/unlink',
-								success : function(response) {
-									console.log(response)
-								},
-								fail : function(error) {
-									console.log(error)
-								},
-							})
-							Kakao.Auth.setAccessToken(undefined)
-						}
-					}
-				</script>
 
-
-				<button id="naverIdLogin_loginButton" class="naver_login" type="button">
-				<a href="javascript:void(0)"></a></button>
-				
-			<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-
-				<script>
-				
-					var naverLogin = new naver.LoginWithNaverId(
-						{
-						clientId: "22RAYixMi5pHSV4f5s4t", 
-						callbackUrl: "http://localhost:8080/index.user",
-						isPopup: false,
-						callbackHandle: true
-						}
-					);	
-
-				naverLogin.init();
-
-				window.addEventListener('load', function () {
-					Login.getLoginStatus(function (status) {
-						if (status) {
-							var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
-    						console.log(naverLogin.user); 
-							
-    		
-           				 if( email == undefined || email == null) {
-							alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
-							naverLogin.reprompt();
-							return;
-							}
-						} else {
-							console.log("callback 처리에 실패하였습니다.");
-						}
-						});
-				});
-
-
-				var testPopUp;
-				function openPopUp() {
-				    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-				}
-				function closePopUp(){
-				    testPopUp.close();
-				}
-				
-				function naverLogout() {
-					openPopUp();
-					setTimeout(function() {
-						closePopUp();
-						}, 1000);
-					
-				}
-</script>	
-				
-				
+				<div id="naverIdLogin" style="display:none;"></div>
+				<button id="naverLogin" class="naver_login" type="button">
+				</button>
 
 				<button id="GgCustomLogin" class="google_login" type="button" onclick="onSignIn(googleUser)">
-					<a href="javascript:void(0)"></a>
 				</button>
-				
-				
-				<script>
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			</div>
+			 <div class="col-sm-12" style="max-width: 500px; margin:20px auto 100px;">
+                <input type="button" class="login_bottom_btn" value="아이디/비밀번호 찾기" style="width: 200px;" onclick="location.href='findUser.user'">
+                <input type="button" class="login_bottom_btn" value="회원가입" style="width: 100px;" onclick="location.href='join.user'">
+            </div>
+
+		</form>
+	</div>
+	<!-- footer import -->
+	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- 				구글 api 사용을 위한 스크립트 -->
+<!-- 구글 라이브러리 -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+
+<!-- <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
+				<!-- <script>
 					
 					//처음 실행하는 함수
 					function init() {
@@ -221,24 +122,7 @@
 						console.log(t);
 					}
 			</script>
-						
-				
-<!-- 				구글 api 사용을 위한 스크립트 -->
-				<!-- 구글 라이브러리 -->
-				<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-				
-
-			</div>
-			 <div class="col-sm-12" style="max-width: 500px; margin:20px auto 100px;">
-                <input type="button" class="login_bottom_btn" value="아이디/비밀번호 찾기" style="width: 200px;" onclick="location.href='findUser.user'">
-                <input type="button" class="login_bottom_btn" value="회원가입" style="width: 100px;" onclick="location.href='join.user'">
-            </div>
-
-		</form>
-	</div>
-	<!-- footer import -->
-	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+						 -->
 	<script>
 		ch1 = false;
 		var u_id_input = "";
@@ -322,5 +206,110 @@
 			}
 		}
 	</script>
+	<!-- 카카오 스크립트 -->
+				<script>
+					Kakao.init('afa33a5b39df9de72171ff16aabcb982'); //javascript키
+					console.log(Kakao.isInitialized()); // sdk초기화여부판단
+					//카카오로그인
+					function kakaoLogin() {
+						Kakao.Auth.login({
+								success : function(response) {
+								Kakao.API.request({
+									url : '/v2/user/me',
+									success : function(response) {
+									console.log(response);
+								//AJAX 카카오로그인
+									$.ajax({
+										type : "post",
+										url : "/kakaoLogin.user",
+										data : JSON.stringify(response),
+										dataType : "json",
+										contentType : "application/json",
+										async: false,
+										success : function(data) {
+											if (data == 0) {
+												location.href = "/index.user";
+											} else {
+												location.href = "/sns_join.user?s="+data.toString();
+											}
+										},
+										error : function(data) {
+											console.log("로그인 통신x")
+										}
+									});
+								//ajax 끝
+								},
+									fail : function(error) {
+										console.log(error)
+									},
+								})
+							},
+							fail : function(error) {
+								console.log(error)
+							},
+						})
+					}
+					//카카오로그아웃  
+					function kakaoLogout() {
+						if (Kakao.Auth.getAccessToken()) {
+							Kakao.API.request({
+								url : '/v1/user/unlink',
+								success : function(response) {
+									console.log(response)
+								},
+								fail : function(error) {
+									console.log(error)
+								},
+							})
+							Kakao.Auth.setAccessToken(undefined)
+						}
+					}
+					
+					
+					
+					naverLogin.init(); //initialize Naver Login Button
+					naverLogin.getLoginStatus(function (status) {
+					    if (status == true) {
+					    	naverLoginAjax();
+					    }
+					  });
+					$(document).on("click", "#naverLogin", function(){ 
+						var btnNaverLogin = document.getElementById("naverIdLogin").firstChild;
+						btnNaverLogin.click();
+					});
+					
+					function naverLoginAjax(){
+						$.ajax({
+							type : "post",
+							url : "/naverLogin.user",
+							data : JSON.stringify({"id": naverLogin.user.id}),
+							dataType : "json",
+							contentType : "application/json",
+							success : function(data) {
+								if (data == 0) {
+									location.href = "/index.user";
+								} else {
+									location.href = "/sns_join.user?s="+data.toString();
+								}
+							},
+							error : function(data) {
+								console.log("로그인 통신x")
+							}
+						});
+					//ajax 끝
+					}
+					
+					
+					function onSignIn(googleUser) {
+						  var profile = googleUser.getBasicProfile();
+						  alert(profile.getId());
+						  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+						  console.log('Name: ' + profile.getName());
+						  console.log('Image URL: ' + profile.getImageUrl());
+						  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+						}
+					
+					
+				</script>
 </body>
 </html>

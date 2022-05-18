@@ -42,7 +42,7 @@
 <script>
 const naverLogin = new naver.LoginWithNaverId(
 		{
-			clientId: "dwpamdF6gebSRveqzw1K",
+			clientId: "22RAYixMi5pHSV4f5s4t",
 			callbackUrl: "http://localhost:8080/login.admin",
 			loginButton: {color: "green", type: 1, height: 40}
 		}

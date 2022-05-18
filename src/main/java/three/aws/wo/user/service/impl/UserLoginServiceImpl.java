@@ -16,7 +16,6 @@ import three.aws.wo.user.vo.UserVO;
 public class UserLoginServiceImpl implements UserLoginService {
 	@Autowired
 	private UserLoginDAO userLoginDAO;
-	private HashMap<String, Object> String;
 	@Override
 	public int userLoginCheck(HashMap<String, String> param) throws Exception {
 		return userLoginDAO.userLoginCheck(param);
@@ -26,12 +25,20 @@ public class UserLoginServiceImpl implements UserLoginService {
 		return userLoginDAO.loggedin(u_id,rememberId,session,response);
 	}
 	@Override
-	public int kakaoLogin(String u_id) throws Exception {
-		return userLoginDAO.kakaoLogin(String, u_id);
+	public int snsLogin(String sns_id) throws Exception {
+		return userLoginDAO.snsLogin(sns_id);
 	}
 	@Override
 	public UserVO encryption(String u_id) throws Exception {
 		return userLoginDAO.encryption(u_id);
+	}
+	@Override
+	public void insertSNSUser(String kakaoId) {
+		userLoginDAO.insertSNSUser(kakaoId);
+	}
+	@Override
+	public int checkSNSUser(int sns_seq) {
+		return userLoginDAO.checkSNSUser(sns_seq);
 	}
 	
 }

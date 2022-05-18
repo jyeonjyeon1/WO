@@ -22,15 +22,22 @@
 <!-- Bootstrap core CSS -->
 <link href="resources/assets/js/admin/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
+	
 <!--external css-->
 <link href="resources/assets/js/admin/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
+	
 <!-- Custom styles for this template -->
 <link href="resources/assets/css/admin/style.css" rel="stylesheet">
 <link href="resources/assets/css/admin/style-responsive.css"
 	rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+<!-- 경고/확인/정보전달 모달 사용을위한 js 추가 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <style>
 /*메뉴그룹추가버튼*/
 /*옵션그룹추가버튼*/
@@ -355,13 +362,14 @@ li {
 
 //메뉴그룹리스트 js
   $(document).ready(function(){
+	 
 	  
 	// input file에 change 이벤트 부여
-	   const inputImage = document.getElementById("input-image")
-	   inputImage.addEventListener("change", e => {
-	       readImage(e.target)
-	   })
-
+   const inputImage = document.getElementById("input-image")
+   inputImage.addEventListener("change", e => {
+       readImage(e.target)
+   }) 
+  
   $("#main_menu > li > a").click(function(){
 	
     $(this).next($('.snd_menu')).slideToggle('fast');
@@ -378,8 +386,9 @@ li {
   })
   $("li > a").blur(function(){
     $(this).removeClass('selec');
-  })
-  
+  }) 
+
+
  //메뉴편집-메뉴정보수정 클릭시
   $('.menu_oneInfoUpdate').click(function(){
       $('#menu_updateMenuInfo').modal();   
@@ -397,9 +406,9 @@ li {
   });
   
   //메뉴편집 - 메뉴추가 클릭시
-  $('.menu_addOne').click(function(){
+/*   $('.menu_addOne').click(function(){
       $('#menu_addOne').modal();
-  });
+  }); */
   
   //메뉴편집 - 옵션설정 - 옵션그룹추가 클릭시
   $('.menu_addOptionGroup').click(function(){
@@ -522,12 +531,45 @@ $('#option_oneUpdate').click(function(){
   
 })
 
-//메뉴편집 - 메뉴그룹추가버튼 클릭시 모달
-function menu_addMenuGroup() {
-	$('#addMenuGroup').modal();   
-	console.log("fsfs"); 
-}
 
+  //메뉴편집-메뉴그룹추가-추가하기버튼 클릭시
+ function addMgName(){
+	 var mg_name = $('#mg_name').val();
+	 //현재 가게의 storeMgList 사이즈임
+	 var totalCount =${storeMgList.size()} +10;
+	 totalCount++;
+	 
+	 
+	  console.log(mg_name);
+	  console.log(totalCount);
+	   var param ={"mg_name" : mg_name,
+			  	"totalCount" : totalCount
+			  	}; 
+	  
+	  $.ajax({
+ 		  type: "POST",
+           url: "/addMgName.store",
+          data: JSON.stringify(param),
+           dataType: "json",
+          contentType: "application/json",
+          success:function(){
+         	  console.log("성공");
+           }
+ 	  })  
+	   
+	  
+	  if(mg_name) {
+		  console.log("있음");
+		  alert("ddd");
+		  
+	  }else {
+		  console.log("없음");
+	  }
+	  
+
+  }
+	  
+	
 //옵션편집 - 옵션그룹추가버튼 클릭시 모달 
   function option_addOptionGroup() {
   	$('#addOptionGroup').modal();    
@@ -538,48 +580,13 @@ function update_ros_modal() {
 }
 
 
-//메뉴정보수정- 가격 삭제버튼 클릭시 이벤트
-/* function deleteRow${"#de"}(){
-        Swal.fire({
-             title: "정말 삭제하시겠습니까?",
-             text: "삭제시 복구할 수 없습니다.",
-             icon: "warning",
-             showCancelButton: true,
-             confirmButtonColor: "#3085d6",
-             cancelButtonColor: "#d33",
-             confirmButtonText: "네",
-             cancelButtonText: "아니오"
-        }).then((result) => {
-          if (result.isConfirmed) {
-             //DB에서 삭제
-             let sf_seq= document.getElementById("sf_seq${vs.index}").innerText; 
-             $.ajax({
-                   type: "POST",
-                   url: "/deletePending.admin",
-                   data: JSON.stringify({"sf_seq":sf_seq}),
-                   dataType: "json",
-                   contentType: "application/json",
-                success:function(data){
-                 //화면에서 삭제
-                   document.getElementById("inqRow${vs.index}").style.display = "none"
-                },
-                error:function(data){
-                   console.log("확인");
-                }
-             }); //ajax 끝 
-            Swal.fire(
-              "삭제완료",
-              "삭제되었습니다.",
-              "success"
-            );
-          }
-        });
-   } */
 
    
    
 //이미지수정 이미지파일 추가
 function readImage(input) {
+
+	   
     // 인풋 태그에 파일이 있는 경우
     if(input.files && input.files[0]) {
     	console.log("gggg");
@@ -605,11 +612,6 @@ function readImage(input) {
 
    
 }
-
-
-
-
-
 </script>
 
 
@@ -743,15 +745,19 @@ function readImage(input) {
 														<!--메뉴편집 start-->
 														<div id="faq__111" class="tab-pane active">
 															<div class="row" style="text-align: right;">
-																<a class="menu_addMenuGroup" onclick="menu_addMenuGroup()"> + 메뉴그룹추가</a>
+															
+															 
+																<a data-toggle="modal" href="#addMenuGroup1" class="menu_addMenuGroup" > + 메뉴그룹추가</a>
 															</div>
 															
 															<!--메뉴그룹 추가 modal start-->
+															
 															<div class="modal fade" id="addMenuGroup" role="dialog">
 
 																<div class="modal-dialog">
 
 																	<!-- Modal content-->
+																	
 																	<div class="modal-content">
 																		<div class="modal-header">
 																			<!-- header -->
@@ -772,7 +778,7 @@ function readImage(input) {
 																							style="font-size: 15px; font-weight: bolder; color: black;">메뉴그룹명</h5>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<input class="form-control"
+																								<input class="form-control" id="mg_name"
 																									style="width: relative; font-size: 15px;"
 																									type="text" placeholder="예)스무디">
 																							</div>
@@ -784,7 +790,7 @@ function readImage(input) {
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<button class="save_Btn"
+																								<button class="save_Btn" id="add_menuGroupName" onclick="addMgName()"
 																									style="margin-top: 50px;">추가하기</button>
 																							</div>
 																						</div>
@@ -797,6 +803,7 @@ function readImage(input) {
 																	</div>
 																</div>
 															</div>
+															
 															<!--메뉴그룹추가 modal end-->
 
 															<!--메뉴그룹 리스트 start-->
@@ -820,7 +827,7 @@ function readImage(input) {
 																	
 																		<c:forEach var="menu" items="${storeMenuList}" varStatus="vs">
 																		<c:if test="${menu.mg_name eq mg.mg_name }">
-																			<li><a class="menu_one" href="#">
+																			<li><a class="menu_one" >
 																					<div class="row">
 																						<div class="col-lg-2"
 																							style="text-align: left; margin-left: 20px;">
@@ -850,10 +857,10 @@ function readImage(input) {
 
 																			</a>
 																				<ul class="trd_menu sub_menu">
-																					<li><a class="menu_oneInfoUpdate" href="#">메뉴정보수정</a></li>
-																					<li><a class="menu_oneOptionUpdate" href="#">옵션설정</a></li>
-																					<li><a class="menu_oneImgUpdate" href="#">이미지변경</a></li>
-                                          <li><a class="menu_oneDelete" href="#">메뉴삭제</a></li>
+																					<li><a class="menu_oneInfoUpdate" >메뉴정보수정</a></li>
+																					<li><a class="menu_oneOptionUpdate" >옵션설정</a></li>
+																					<li><a class="menu_oneImgUpdate" >이미지변경</a></li>
+                                          <li><a class="menu_oneDelete" >메뉴삭제</a></li>
 																				</ul></li>
 																				</c:if>
 																				</c:forEach>
@@ -862,22 +869,26 @@ function readImage(input) {
 																				
 																			
 
-                                        <li><a class="menu_addOne" href="#">
+                                        <li><a class="menu_addOne" onclick="mmm()">
 																					
                                               <h4 style="color:blue; padding: 10px; margin-right:65px;">+ 메뉴추가</h4>
-																					
+                                              
+                                              <script>
+                                              	function mmm(){
+                                              		console.log("fffff");
+                                              		$("#menu_addOne${mg.mg_code}").modal();
+                                              	}
+                                              </script>			
 
 																			  </a>
+																			  
 																				</li>
 																		</ul> <!--서브메뉴끝-->
 																		</li>
-																		</c:forEach>
-																		
 																		
 																		<!--메뉴추가 모달창-->
 
-																				<div class="modal fade" id="menu_addOne"
-																				role="dialog">
+																				<div class="modal fade" id="menu_addOne${mg.mg_code}" role="dialog">
 
 																				<div class="modal-dialog">
 
@@ -1005,7 +1016,7 @@ function readImage(input) {
 																												</div>	
 
 																												<div class="row">
-																													<a class="option_addOptionGroup" href="#">
+																													<a class="option_addOptionGroup" >
 																														<h4 style="color:blue; padding: 10px; margin-right:65px;">+ 옵션그룹 추가</h4></a>
 																												</div>
 
@@ -1126,10 +1137,18 @@ function readImage(input) {
 																								</table>
 																							</div>
 																						</div>
-																						<div id="count" value="1"></div>
+																						
 																					</div>
 																				</div>
 																				</div>
+																				
+																				<!-- 메뉴추가 모달창 end -->
+																		
+																		
+																		</c:forEach>
+																		
+																		
+																		
 																				
 																				
 																		<!------------- 메뉴편집_메뉴정보수정 Modal start-------------->
@@ -1328,7 +1347,7 @@ function readImage(input) {
 																												</div>	
 
 																												<div class="row">
-																													<a class="menu_addOptionGroup" href="#">
+																													<a class="menu_addOptionGroup" >
 																														<h4 style="color:blue; padding: 10px; margin-right:65px;">+ 옵션그룹 추가</h4></a>
 																												</div>
 
@@ -1508,7 +1527,7 @@ function readImage(input) {
 																												<div
 																													style="border: 1px solid #6161618c; height: 300px;">
 
-																													<a class="img_uploadFile" href="#"
+																													<a class="img_uploadFile" 
 																														style="text-align: center; width: auto; height: 300px;">
 																														<img
 																														style="width: 100%; height: 100%; display: none;"
@@ -1545,7 +1564,7 @@ function readImage(input) {
 																														style="list-style-type: disc; line-height: 20px;">임의로
 																														어색하게 합성된 이미지는 등록이 어려워요.</li>
 																												</ul>
-																												<a href="#"
+																												<a 
 																													style="text-decoration: underline; color: blue;">자세히
 																													알아보기</a>
 																											</div>
@@ -1810,7 +1829,7 @@ function readImage(input) {
 																	</a> <!--서브메뉴시작-->
 																		<ul class="snd_menu sub_menu">
 
-                                      <li class="menu_one_plus"><a href="#">
+                                      <li class="menu_one_plus"><a >
                                         <div class="row" style="padding: 10px;">
                                             <div class="col-lg-8" style="text-align:left; line-height: 20px;">
                                             <div class="menu_oneOption">
@@ -1818,12 +1837,12 @@ function readImage(input) {
                                               <h5 style="margin-left: 15px; color:rgba(0, 0, 0, 0.801)">아메리카노, 카페라떼, 바닐라라떼, 카푸치노, 카라멜 마끼야또, 카페모카, 커피쉐이크</h5>
                                               
                                               <h4 style="color:black;"><span style="background-color: rgba(226, 77, 94, 0.267); border-radius: 5px; padding: 3px; font-size: smaller;">필수여부</span> [선택] 
-                                              <span>
-                                                <button class="btn btn-primary btn-xs" id="update_ros" onclick="update_ros_modal()"
+                                              
+                                                <a data-toggle="modal" href="#update_ros_modal" class="btn btn-primary btn-xs"
 																				style="margin-left: 10px; margin-top: 5px;">
 																				<i class="fa fa-pencil"></i>
-																			</button>
-                                              </span> </h4>
+																			</a>
+                                               </h4>
                                       
                                             </div>
                                           </div>
@@ -1893,7 +1912,7 @@ function readImage(input) {
                                              
 
 
-																			<li><a class="menu_one" href="#">
+																			<li><a class="menu_one" >
 																					<div class="row" style="padding: 10px;">
                                               <div class="col-lg-8" style="text-align:left; line-height: 20px;">
 																							<div class="menu_oneOption">
@@ -1910,8 +1929,8 @@ function readImage(input) {
 
 																			</a>
 																				<ul class="trd_menu sub_menu">
-																					<li><a class="option_oneUpdate" id="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
-                                          <li><a class="option_oneDelete" href="#">옵션삭제</a></li>
+																					<li><a class="option_oneUpdate" id="option_oneUpdate" >옵션명 및 가격 변경</a></li>
+                                          <li><a class="option_oneDelete" >옵션삭제</a></li>
 																				</ul>
                                       
                                       </li>
@@ -1987,7 +2006,7 @@ function readImage(input) {
 
 									   <!------------옵션명 및 가격변경 modal end-------------->
 
-                                      <li><a class="menu_one" href="#">
+                                      <li><a class="menu_one" >
                                         <div class="row" style="padding: 10px;">
                                             <div class="col-lg-8" style="text-align:left; line-height: 20px;">
                                             <div class="menu_oneOption">
@@ -2004,13 +2023,13 @@ function readImage(input) {
 
                                     </a>
                                       <ul class="trd_menu sub_menu">
-                                        <li><a class="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
-                                        <li><a class="option_oneDelete" href="#">옵션삭제</a></li>
+                                        <li><a class="option_oneUpdate" >옵션명 및 가격 변경</a></li>
+                                        <li><a class="option_oneDelete" >옵션삭제</a></li>
                                       </ul>
                                     
                                     </li>
 
-                                    <li><a class="menu_one" href="#">
+                                    <li><a class="menu_one" >
                                         <div class="row" style="padding: 10px;">
                                             <div class="col-lg-8" style="text-align:left; line-height: 20px;">
                                             <div class="menu_oneOption">
@@ -2027,13 +2046,13 @@ function readImage(input) {
 
                                     </a>
                                       <ul class="trd_menu sub_menu">
-                                        <li><a class="option_oneUpdate" href="#">옵션명 및 가격 변경</a></li>
-                                        <li><a class="option_oneDelete" href="#">옵션삭제</a></li>
+                                        <li><a class="option_oneUpdate" >옵션명 및 가격 변경</a></li>
+                                        <li><a class="option_oneDelete" >옵션삭제</a></li>
                                       </ul>
                                     
                                     </li>
 
-									<li><a class="option_addOne" href="#">
+									<li><a class="option_addOne" >
 																					
 										<h4 style="color:blue; padding: 10px; margin-right:65px;">+ 옵션추가</h4>
 																			  
@@ -2122,7 +2141,7 @@ function readImage(input) {
 
 
 
-																	<li><a class="menuGroup" href="#">휘핑추가
+																	<li><a class="menuGroup" >휘핑추가
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -2136,7 +2155,7 @@ function readImage(input) {
 																	</a>
 
 																		<ul class="snd_menu sub_menu">
-																			<li><a class="menu_one" href="#">
+																			<li><a class="menu_one" >
 																					<div class="row">
 																						<div class="col-lg-2"
 																							style="text-align: left; margin-left: 20px;">
@@ -2160,11 +2179,11 @@ function readImage(input) {
 
 																			</a>
 																				<ul class="trd_menu sub_menu">
-																					<li><a class="menu_oneUpdate" href="#">메뉴정보수정</a></li>
-																					<li><a class="menu_oneUpdate" href="#">옵션설정</a></li>
-																					<li><a class="menu_oneUpdate" href="#">이미지변경</a></li>
+																					<li><a class="menu_oneUpdate" >메뉴정보수정</a></li>
+																					<li><a class="menu_oneUpdate" >옵션설정</a></li>
+																					<li><a class="menu_oneUpdate" >이미지변경</a></li>
 																				</ul></li>
-																			<li><a class="menu_one" href="#">
+																			<li><a class="menu_one" >
 																					<div class="row">
 																						<div class="col-lg-2"
 																							style="text-align: left; margin-left: 20px">
@@ -2188,9 +2207,9 @@ function readImage(input) {
 
 																			</a>
 																				<ul class="trd_menu sub_menu">
-																					<li><a class="menu_oneUpdate" href="#">메뉴정보수정</a></li>
-																					<li><a class="menu_oneUpdate" href="#">옵션설정</a></li>
-																					<li><a class="menu_oneUpdate" href="#">이미지변경</a></li>
+																					<li><a class="menu_oneUpdate" >메뉴정보수정</a></li>
+																					<li><a class="menu_oneUpdate" >옵션설정</a></li>
+																					<li><a class="menu_oneUpdate" >이미지변경</a></li>
 																				</ul></li>
 																		</ul></li>
 
@@ -2199,7 +2218,7 @@ function readImage(input) {
 
 
 
-																	<li><a class="menuGroup" href="#">연하게 or 진하게 추가요청
+																	<li><a class="menuGroup" >연하게 or 진하게 추가요청
  																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -2211,7 +2230,7 @@ function readImage(input) {
 																				<i class="fa fa-pencil"></i>
 																			</button>
 																	</a></li>
-																	<li><a class="menuGroup" href="#">시럽추가(설탕시럽-무료)
+																	<li><a class="menuGroup" >시럽추가(설탕시럽-무료)
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -2223,7 +2242,7 @@ function readImage(input) {
 																				<i class="fa fa-pencil"></i>
 																			</button>
 																	</a></li>
-																	<li><a class="menuGroup" href="#">시럽추가(유료)
+																	<li><a class="menuGroup" >시럽추가(유료)
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -2235,7 +2254,7 @@ function readImage(input) {
 																				<i class="fa fa-pencil"></i>
 																			</button>
 																	</a></li>
-																	<li><a class="menuGroup" href="#">맛선택(주스)
+																	<li><a class="menuGroup" >맛선택(주스)
 																			<button type="button"
 																				onclick="javascript:deleteAlert();"
 																				class="btn btn-danger btn-xs"
@@ -2247,7 +2266,7 @@ function readImage(input) {
 																				<i class="fa fa-pencil"></i>
 																			</button>
 																	</a></li>
-                                  <li><a class="menuGroup" href="#">맛선택(티)
+                                  <li><a class="menuGroup" >맛선택(티)
                                     <button type="button"
                                       onclick="javascript:deleteAlert();"
                                       class="btn btn-danger btn-xs"
@@ -2259,7 +2278,7 @@ function readImage(input) {
                                       <i class="fa fa-pencil"></i>
                                     </button>
                                 </a></li>
-                                <li><a class="menuGroup" href="#">맛선택(마카롱)
+                                <li><a class="menuGroup" >맛선택(마카롱)
                                   <button type="button"
                                     onclick="javascript:deleteAlert();"
                                     class="btn btn-danger btn-xs"
@@ -2385,7 +2404,6 @@ function readImage(input) {
 	<!--common script for all pages-->
 	<script src="resources/assets/js/admin/common-scripts.js"></script>
 	<!--script for this page-->
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

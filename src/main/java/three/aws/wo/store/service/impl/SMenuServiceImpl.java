@@ -1,5 +1,6 @@
 package three.aws.wo.store.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class SMenuServiceImpl implements SMenuService {
 	@Override
 	public List<StoreMenuGroupVO> storeMgList(String storeName) {
 		return sMenuDAO.storeMgList(storeName);
+	}
+	
+	@Override
+	public void insertMgName(HashMap<String, String> param) {
+		sMenuDAO.insertMgName(param);
 	}
 }

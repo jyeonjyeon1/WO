@@ -1,5 +1,6 @@
 package three.aws.wo.store.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import three.aws.wo.store.vo.StoreMenuGroupVO;
@@ -9,4 +10,6 @@ public interface SMenuService {
 	
 	List<StoreMenuVO> storeMenuList(String storeName);
 	List<StoreMenuGroupVO> storeMgList(String storeName);
+	void insertMgName(HashMap<String , String> param);
+	
 }

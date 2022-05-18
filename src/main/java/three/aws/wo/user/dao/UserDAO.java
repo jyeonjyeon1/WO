@@ -47,6 +47,12 @@ public class UserDAO {
 		return sqlSession.selectOne("UserDAO.idChk", vo);
 	}
 
+	public UserVO findId(UserVO vo) {
+		return sqlSession.selectOne("UserDAO.findId", vo);
+	}
 
+	public UserVO findPassword(UserVO vo) {
+		return sqlSession.selectOne("UserDAO.findPassword", vo);
+	}
 
 }

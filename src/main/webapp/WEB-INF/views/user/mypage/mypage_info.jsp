@@ -84,69 +84,26 @@ input::-webkit-inner-spin-button {
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
-	var ch1, ch2, ch3, ch4, ch5, ch6;
-	ch1 = false;//CheckId
-	ch2 = false;//regPassword
-	ch3 = false;//Passwork recheck match
-	ch4 = false;//regName
-	ch5 = false;//phone authentication
-	ch6 = false;//regEmail
+	var ch2, ch3,ch6;
+	ch2 = true;//regPassword
+	ch3 = true;//Passwork recheck match
+	ch6 = true;//regEmail
 	// 정규식 친구들
 	var regId = /^[a-zA-Z0-9]{4,14}$/;
 	var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
 	var regName = /^[가-힣]+$/;
-	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
+	
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
 	jQuery(document).ready(
 			function() {
-
-			//아이디중복확인
-			$("#u_id").on("propertychange change keyup paste input",
-				function() {
-					var insert_id = $("#u_id").val();
-					//idCheck()였던 것.
-			       var param = {"id" : insert_id };
-			       if(insert_id.length>2){
-					$.ajax({
-			             type: "POST",
-			             url: "/idcheck.user",
-			             data: JSON.stringify(param),
-			             dataType: "json",
-			             contentType: "application/json",
-			          success:function(data){
-			             if(data==0 && regId.test(insert_id) == true){
-			                console.log("가능");
-			                $(".idCheck_label_joongbok").removeClass('active');
-			                $(".idCheck_label_false").removeClass('active');
-			                $(".idCheck_label_true").addClass('active');
-			                ch1=true;
-			             }else if(data==0 && regId.test(insert_id) == false){
-			            	 console.log("노가능");
-			            	 $(".idCheck_label_joongbok").removeClass('active');
-				             $(".idCheck_label_false").addClass('active');
-				             $(".idCheck_label_true").removeClass('active');
-				             ch1=false;
-			             }else{
-			                console.log("노가능")
-			                $(".idCheck_label_joongbok").addClass('active');
-			                $(".idCheck_label_true").removeClass('active');
-			                $(".idCheck_label_false").removeClass('active');
-			                ch1=false;
-			             }
-			          },
-			          error:function(data){
-			             console.log("아이디체크에러");
-			          }
-			       }); //ajax 끝
-		        } // end if
-			});  //아이디중복확인 끝
 				 
 
 				//Check valid Password
 				$("#u_password").on(
 						"propertychange change keyup paste input",
 						function() {
+							ch2 = false;
 							var pwd = $("#u_password").val();
 							
 							if (pwd.length > 3
@@ -162,6 +119,7 @@ input::-webkit-inner-spin-button {
 				//Check pass & passcheck match
 				$("#passCheck").on("propertychange change keyup paste input",
 						function() {
+					ch3 = false;
 							var pw = $("#u_password").val();
 							var pwc = $("#passCheck").val();
 							if (pwc != '' && pw != pwc) {
@@ -173,43 +131,12 @@ input::-webkit-inner-spin-button {
 							}
 						});
 
-				$("#u_name")
-						.on(
-								"propertychange change keyup paste input",
-								function() {
-									var name = $("#u_name").val();
-
-									if (name.length > 1
-											&& regName.test(name) == false) {
-										$(".regName_label").addClass('active');
-										ch4 = false;
-									} else {
-										$(".regName_label").removeClass(
-												'active');
-										ch4 = true;
-									}
-								});
-
-				$("#u_tel").on(
-						"propertychange change keyup paste input",
-						function() {
-							var tel = $("#u_tel").val();
-							if (tel.indexOf('-') != -1) {
-								$(".tel_form").addClass('active');
-								ch5 = false;
-							} else if (tel.length > 7
-									&& regPhone.test(tel) == false) {
-								$(".tel_form").addClass('active');
-								ch5 = false;
-							} else {
-								$(".tel_form").removeClass('active');
-								ch5 = true;
-							}
-						});
+			
 
 				$("#u_email").on(
 						"propertychange change keyup paste input",
 						function() {
+							ch6 = false;
 							var email = $("#u_email").val();
 
 							if (email.length > 1
@@ -225,7 +152,7 @@ input::-webkit-inner-spin-button {
 			});
 
 	function finalCheck() {
-		if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6) {
+		if (ch2 && ch3 && ch6) {
 			document.regForm.submit();
 		} else {
 			Swal.fire({
@@ -236,6 +163,8 @@ input::-webkit-inner-spin-button {
 			return false;
 		}
 	}
+	
+	
 
 
 </script>
@@ -250,7 +179,8 @@ input::-webkit-inner-spin-button {
 		<form action="updateUser.user" method="post">
 			<div class="row">
                 
-                <h5 class="col-12"><input class="form-control" style="color:#6f6f6f" type="text" id="u_id" name="u_id" value="${userSession.u_id}" readonly="readonly"/></h5>
+                <h5 class="col-12 mt-10">
+                <input class="reg-form-control" style="color:#6f6f6f" type="text" id="u_id" name="u_id" value="${userSession.u_id}" readonly="readonly"/></h5>
             			
             </div>
 			<div class="row">
@@ -269,9 +199,8 @@ input::-webkit-inner-spin-button {
 			</div>
 			<div class="row">
 				<div class="col-12 mt-10">
-					<input type="text" id="u_name" name="u_name" value="${userSession.u_name}"
-						class="reg-form-control" readonly>
-					<p class="regName_label">이름 이상</p>
+					<input type="text" style="color:#6f6f6f" id="u_name" name="u_name" value="${userSession.u_name}"
+						class="reg-form-control" readonly="readonly">
 				</div>
 			</div>
 			<div class="row">
@@ -280,8 +209,8 @@ input::-webkit-inner-spin-button {
 						 class="reg-form-control" value="${userSession.u_tel}">
 					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 				</div>
-				<div class="col-3 mt-10" style="padding-left: 0;">
-					<button type="button" onclick="idCheck()" class="reg-form-control">번호
+				<div class="col-3 mt-10" style="padding-left: 0; color:#6f6f6f">
+					<button type="button" onclick="idCheck()" class="reg-form-control" readonly="readonly">번호
 						인증</button>
 				</div>
 			</div>

@@ -229,11 +229,10 @@
 				
 
 			</div>
-			<div class="col-sm-12" style="max-width: 170px; margin: 30px auto;">
-				<input type="button" class="login_bottom_btn" value="아이디/비밀번호"
-					style="width: 50px;"> <input type="button"
-					class="login_bottom_btn" value="회원가입" style="width: 70px;">
-			</div>
+			 <div class="col-sm-12" style="max-width: 500px; margin:20px auto 100px;">
+                <input type="button" class="login_bottom_btn" value="아이디/비밀번호 찾기" style="width: 200px;" onclick="location.href='findUser.user'">
+                <input type="button" class="login_bottom_btn" value="회원가입" style="width: 100px;" onclick="location.href='join.user'">
+            </div>
 
 		</form>
 	</div>

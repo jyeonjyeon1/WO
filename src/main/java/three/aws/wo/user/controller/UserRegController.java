@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import three.aws.wo.user.service.UserService;
 import three.aws.wo.user.vo.UserVO;
+
+import org.apache.maven.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -97,6 +100,11 @@ public class UserRegController {
 
 	@RequestMapping(value="/updateUser.user", method = RequestMethod.POST)
 	public String registerUpdate(UserVO vo, HttpSession session) throws Exception{
+	
+		String inputPass = vo.getU_password();
+		String pwd = pwdEncoder.encode(inputPass);
+		System.out.println("비밀번호 = " + pwd);
+		vo.setU_password(pwd);
 		
 		userService.updateUser(vo);
 		
@@ -124,13 +132,59 @@ public class UserRegController {
 		String voPass = vo.getU_password();	
 		boolean pwdMatch = pwdEncoder.matches(voPass, sessionPass);
 		
+		System.out.println("pwdMatch" + pwdMatch);
 		if(pwdMatch == false) {
 			rttr.addFlashAttribute("msg", false);
-			return "redirect:/mypage/mypage_withdraw";
+			return "redirect:/deleteUser.user";
 		}
 		userService.deleteUser(vo);
 		session.invalidate();
 		return "redirect:/index.user";
 	}
+
+	@GetMapping("/findUser.user")
+	public String findUserView() {
+		System.out.println("findUserView");
+		return "/login/login_choice";
+	}
+	
+	// 아이디 찾기 페이지 이동
+	@RequestMapping(value="findId.user", method=RequestMethod.GET)
+	public String findIdView() {
+		return "login/findId";
+	}
+	
+    // 아이디 찾기 실행
+	@RequestMapping(value="findId.user", method=RequestMethod.POST)
+	public String findId(UserVO vo) {
+		UserVO user = userService.findId(vo);
+		
+		if(user == null) { 
+			return "redirect:/findId.user";
+		} 
+		
+		return "member/findId";
+	}
+	
+//    // 비밀번호 찾기 페이지로 이동
+//	@RequestMapping(value="find_password_form")
+//	public String findPasswordView() {
+//		return "member/findPassword";
+//	}
+//	
+//    // 비밀번호 찾기 실행
+//	@RequestMapping(value="find_password", method=RequestMethod.POST)
+//	public String findPasswordAction(UserVO vo, Model model) {
+//		UserVO user = userService.findPassword(vo);
+//		
+//		if(user == null) { 
+//			model.addAttribute("check", 1);
+//		} else { 
+//			model.addAttribute("check", 0);
+//			model.addAttribute("updateid", user.getId());
+//		}
+//		
+//		return "member/findPassword";
+//	}
 	
 }

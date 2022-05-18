@@ -63,5 +63,15 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public UserVO findId(UserVO vo) {
+		return userDAO.findId(vo);
+	}
+
+	@Override
+	public UserVO findPassword(UserVO vo) {
+		return userDAO.findPassword(vo);
+	}
 
 }

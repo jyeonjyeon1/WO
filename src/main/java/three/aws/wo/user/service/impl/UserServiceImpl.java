@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserVO findId(UserVO vo) {
+	public UserVO findId(String vo) {
 		return userDAO.findId(vo);
 	}
 
@@ -74,4 +74,8 @@ public class UserServiceImpl implements UserService {
 		return userDAO.findPassword(vo);
 	}
 
+	@Override
+	public void updatePassword(UserVO vo) {
+		userDAO.updatePassword(vo);
+	}
 }

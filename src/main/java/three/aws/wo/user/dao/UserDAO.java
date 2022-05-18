@@ -47,12 +47,16 @@ public class UserDAO {
 		return sqlSession.selectOne("UserDAO.idChk", vo);
 	}
 
-	public UserVO findId(UserVO vo) {
+	public UserVO findId(String vo) {
 		return sqlSession.selectOne("UserDAO.findId", vo);
+		
 	}
 
 	public UserVO findPassword(UserVO vo) {
 		return sqlSession.selectOne("UserDAO.findPassword", vo);
 	}
 
+	public void updatePassword(UserVO vo) {
+		sqlSession.update("UserDAO.updatePassword", vo);
+	}
 }

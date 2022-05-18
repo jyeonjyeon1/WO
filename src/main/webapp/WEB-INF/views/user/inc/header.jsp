@@ -11,7 +11,8 @@
 <title>Walking Order</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+<!-- ========================= Google login ========================= -->
+<meta name="google-signin-client_id" content="518574864384-mrq7fn4g15jj6in0kjuacjj4lctn4cf5.apps.googleusercontent.com">
 
 <!-- ========================= CSS here ========================= -->
 <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css"

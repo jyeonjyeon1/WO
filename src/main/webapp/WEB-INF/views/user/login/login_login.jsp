@@ -16,10 +16,9 @@
 <!-- ========================= JS here ========================= -->
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 
-<!-- <!-- ========================= kakao login ========================= --> -->
+<!-- <!-- ========================= kakao login ========================= -->
 <!-- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> -->
-<!-- ========================= Google login ========================= -->
-<meta name="google-signin-client_id" content="518574864384-7pkb8phtl91cs1p1et47ifnq1el975o6.apps.googleusercontent.com">
+
 
 <script type="text/javascript">
 	
@@ -65,8 +64,26 @@
 
 				<button id="GgCustomLogin" class="google_login" type="button" onclick="onSignIn(googleUser)">
 				</button>
-				
-				
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			</div>
+			 <div class="col-sm-12" style="max-width: 500px; margin:20px auto 100px;">
+                <input type="button" class="login_bottom_btn" value="아이디/비밀번호 찾기" style="width: 200px;" onclick="location.href='findUser.user'">
+                <input type="button" class="login_bottom_btn" value="회원가입" style="width: 100px;" onclick="location.href='join.user'">
+            </div>
+
+		</form>
+	</div>
+	<!-- footer import -->
+	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- 				구글 api 사용을 위한 스크립트 -->
+<!-- 구글 라이브러리 -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+
+<!-- <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> -->
 				<!-- <script>
 					
 					//처음 실행하는 함수
@@ -106,23 +123,6 @@
 					}
 			</script>
 						 -->
-				
-<!-- 				구글 api 사용을 위한 스크립트 -->
-				<!-- 구글 라이브러리 -->
-				<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-				
-
-			</div>
-			 <div class="col-sm-12" style="max-width: 500px; margin:20px auto 100px;">
-                <input type="button" class="login_bottom_btn" value="아이디/비밀번호 찾기" style="width: 200px;" onclick="location.href='findUser.user'">
-                <input type="button" class="login_bottom_btn" value="회원가입" style="width: 100px;" onclick="location.href='join.user'">
-            </div>
-
-		</form>
-	</div>
-	<!-- footer import -->
-	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 		ch1 = false;
 		var u_id_input = "";
@@ -300,7 +300,14 @@
 					}
 					
 					
-					
+					function onSignIn(googleUser) {
+						  var profile = googleUser.getBasicProfile();
+						  alert(profile.getId());
+						  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+						  console.log('Name: ' + profile.getName());
+						  console.log('Image URL: ' + profile.getImageUrl());
+						  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+						}
 					
 					
 				</script>

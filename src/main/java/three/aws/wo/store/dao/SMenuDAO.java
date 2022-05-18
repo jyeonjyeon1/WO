@@ -1,5 +1,6 @@
 package three.aws.wo.store.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,5 +22,9 @@ public class SMenuDAO {
 	
 	public List<StoreMenuGroupVO> storeMgList(String storeName) {
 		return sqlSession.selectList("SMenuDAO.storeMgList",storeName);
+	}
+	
+	public void insertMgName(HashMap<String, String> param) {
+		sqlSession.insert("SMenuDAO.insertMgName", param);
 	}
 }

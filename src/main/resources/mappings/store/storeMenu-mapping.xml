@@ -15,5 +15,11 @@
 		SELECT * FROM menu_group
 		WHERE SI_CODE = #{storeName}
 	</select>
+	
+	<insert id="insertMgName" >
+		INSERT INTO
+    	menu_group(SI_CODE, MG_CODE, MG_NAME) VALUES (#{si_code},#{mg_code} ,#{mg_name})
+	</insert>
+	
 </mapper>
  

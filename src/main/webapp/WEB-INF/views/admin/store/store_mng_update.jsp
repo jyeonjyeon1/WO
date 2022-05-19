@@ -234,9 +234,12 @@
 									<label class="col-sm-2 col-sm-2 control-label">서류</label>
 									<div class="col-sm-6"
 										style="margin-top: 2px; padding: 0 0 0 15px;">
-										<input class="grey__button" type="button" onclick=""
-											value="사업자등록증" style="margin-right: 5px;"> <input
-											class="grey__button" type="button" onclick="" value="통장사본">
+										<a href="${storeList.sa_business_registration_image}" style="display:inline-block;">
+									<input class="img-responsive grey__button" type="button"
+									value="사업자등록증" style="margin-right: 5px;"></a><a href="${storeList.sa_bankbook_image}" style="display:inline-block;">
+									<input class="img-responsive grey__button" type="button" 
+									value="통장사본">
+								</a> 
 									</div>
 								</div>
 								<div class="form-group">
@@ -336,11 +339,10 @@
 					<!-- 오른쪽 사진 영역 시작 -->
 					<div class="col-lg-3" style="min-width: 450px; padding: 0;">
 						<div class="card-header" style="font-size: 16px;">
-							<i class="fa fa-plus-circle" style="font-size: 14px;"></i> 매장 정보
+							<i class="fa fa-plus-circle" style="font-size: 14px;"></i> 매장 이미지
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
-							<form class="form-horizontal style-form" method="get">
 								<div class="row mt">
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 										<div class="project-wrapper">
@@ -348,14 +350,15 @@
 												<div class="photo-wrapper">
 													<div class="photo store_image_small">
 														<a class="fancybox"
-															href="resources/assets/images/admin/doggy_1.jpg"><img
+															href="${storeOne.si_image}"><img
 															class="img-responsive"
-															src="resources/assets/images/admin/doggy.jpg" alt=""></a>
+															src="${storeOne.si_image}" alt=""></a>
 													</div>
 													<div class="overlay"></div>
 												</div>
 											</div>
 										</div>
+										
 										<div class="row" style="padding: 0 15px">
 											<div class="col-lg-7" style="padding: 0;">
 												<input id="" type="file" class="cut__side" value="수정"
@@ -369,15 +372,16 @@
 										</div>
 									</div>
 									<!-- col-lg-4 -->
+									<c:if test = "${not empty storeOne.si_image2}">
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 										<div class="project-wrapper">
 											<div class="project">
 												<div class="photo-wrapper">
 													<div class="photo store_image_small">
 														<a class="fancybox"
-															href="resources/assets/images/admin/portfolio/port04.jpg"><img
+															href="${storeOne.si_image2}"><img
 															class="img-responsive"
-															src="resources/assets/images/admin/portfolio/port04.jpg"
+															src="${storeOne.si_image2}"
 															alt=""></a>
 													</div>
 													<div class="overlay"></div>
@@ -397,42 +401,39 @@
 										</div>
 
 									</div>
+									</c:if>
 									<!-- col-lg-4 -->
+									<c:if test = "${not empty storeOne.si_image3}">
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 										<div class="project-wrapper">
 											<div class="project">
 												<div class="photo-wrapper">
 													<div class="photo store_image_small">
 														<a class="fancybox"
-															href="resources/assets/images/admin/portfolio/port06.jpg"><img
-															class="img-responsive center-block"
-															src="resources/assets/images/admin/portfolio/port06.jpg"
+															href="${storeOne.si_image3}"><img
+															class="img-responsive"
+															src="${storeOne.si_image3}"
 															alt=""></a>
 													</div>
 													<div class="overlay"></div>
 												</div>
 											</div>
-										</div>
-										<div class="row" style="padding: 0 15px">
-											<div class="col-lg-7" style="padding: 0;">
-												<input id="" type="file" class="cut__side" value="수정"
-													name="">
+											<div class="row" style="padding: 0 15px">
+												<div class="col-lg-7" style="padding: 0;">
+													<input id="" type="file" class="cut__side" value="수정"
+														name="">
 
-											</div>
-											<div class="col-lg-5">
-												<input id="" type="button" class="cut__side" value="제거">
+												</div>
+												<div class="col-lg-5">
+													<input id="" type="button" class="cut__side" value="제거">
 
+												</div>
 											</div>
 										</div>
+
 									</div>
-									<!-- col-lg-4 -->
-								</div>
-
-
-
-								<button type="button" onclick="" class="btn btn-theme"
-									style="float: right;">수정</button>
-							</form>
+									</c:if>
+							</div>
 						</div>
 					</div>
 				</div>

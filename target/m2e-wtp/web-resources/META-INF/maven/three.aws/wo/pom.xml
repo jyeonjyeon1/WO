@@ -47,7 +47,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-
 		<!-- MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

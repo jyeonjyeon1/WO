@@ -14,15 +14,25 @@
 		WHERE U_ID = #{u_id} 
 	</select>
 	
-	<select id="kakaoLogin" resultType="UserVO" parameterType="UserVO">
-		SELECT COUNT(*) FROM USERS 
-		WHERE U_ID = #{id} 
+	<select id="snsLogin" resultType="int">
+		SELECT SNS_SEQ FROM SNS_USERS 
+		WHERE SNS_ID = #{id} 
 	</select>
 
 	<select id="encryption" resultType="UserVO">
 		SELECT *
 		  FROM USERS
 		 WHERE U_ID = #{u_id}
+	</select>
+	<insert id="insertSNSUser">
+		INSERT INTO SNS_USERS 
+		VALUES (default, #{kakaoId}, null)
+	</insert>
+	<select id="checkSNSUser" resultType="int">
+		SELECT COUNT(*) FROM SNS_USERS
+		WHERE SNS_SEQ = #{sns_seq}
+		AND
+		U_ID IS NULL
 	</select>
 	
 </mapper>

@@ -62,7 +62,6 @@
 			VALUES(#{o_code}, #{u_id}, 
 				(SELECT SI_CODE FROM ORDERS WHERE O_CODE = #{o_code}), 
 				DEFAULT, #{ur_star}, #{ur_pic_url}, #{ur_content}, #{o_code}, DEFAULT, DEFAULT)
-
 	</insert>
 	<select id="userPointList" resultType="PointVO">
 		SELECT * FROM 
@@ -75,19 +74,12 @@
 		ORDER BY PT_SEQ DESC
 	</select>
 	
-	
-	
-	<select id="usableCouponList" resultType="CouponVO" resultMap="couponVO">
-		SELECT * 
-			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 
-			WHERE U_ID = #{u_id} AND C_USED='FALSE' AND CURRENT_DATE <![CDATA[<=]]> C_ENDDATE
-	</select>
-	
-	<select id="usedCouponList" resultType="CouponVO" resultMap="couponVO">
-		SELECT * 
-			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 
-			WHERE U_ID = #{u_id} AND C_USED='TRUE' OR CURRENT_DATE <![CDATA[>=]]> C_ENDDATE
-	</select>
-	
+
+	<insert id="myWish" parameterType="UserWishVO">
+		INSERT INTO LIKE_STORE
+			(U_ID, SI_CODE)
+			VALUES(#{u_id}, #{si_code})
+	</insert>
+
 </mapper>
  

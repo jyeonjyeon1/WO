@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import three.aws.wo.user.service.UserService;
 import three.aws.wo.user.vo.UserVO;
-
-import org.apache.maven.model.Model;
+import org.springframework.ui.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -151,40 +151,58 @@ public class UserRegController {
 	// 아이디 찾기 페이지 이동
 	@RequestMapping(value="findId.user", method=RequestMethod.GET)
 	public String findIdView() {
+		System.out.println("findIdView");
 		return "login/findId";
 	}
 	
-    // 아이디 찾기 실행
+    // 아이디 찾기 실행 
+	@ResponseBody
 	@RequestMapping(value="findId.user", method=RequestMethod.POST)
-	public String findId(UserVO vo) {
-		UserVO user = userService.findId(vo);
+	public String findId(@RequestBody HashMap<String, String> param) {
+		String u_tel = param.get("u_tel");
+		UserVO user = userService.findId(u_tel);
+		String result = user.getU_id();
 		
-		if(user == null) { 
-			return "redirect:/findId.user";
-		} 
-		
-		return "member/findId";
+		return result;
 	}
 	
-//    // 비밀번호 찾기 페이지로 이동
-//	@RequestMapping(value="find_password_form")
-//	public String findPasswordView() {
-//		return "member/findPassword";
-//	}
-//	
-//    // 비밀번호 찾기 실행
-//	@RequestMapping(value="find_password", method=RequestMethod.POST)
-//	public String findPasswordAction(UserVO vo, Model model) {
-//		UserVO user = userService.findPassword(vo);
-//		
-//		if(user == null) { 
-//			model.addAttribute("check", 1);
-//		} else { 
-//			model.addAttribute("check", 0);
-//			model.addAttribute("updateid", user.getId());
-//		}
-//		
-//		return "member/findPassword";
-//	}
+    // 비밀번호 찾기 페이지로 이동
+	@RequestMapping(value="findPassword.user", method=RequestMethod.GET)
+	public String findPasswordView() {
+		return "login/findPassword";
+	}
+	
+    // 비밀번호 찾기 실행
+	@ResponseBody
+	@RequestMapping(value="findPassword.user", method=RequestMethod.POST)
+	public String findPassword(@RequestBody HashMap<String, String> param) {
+		HashMap<String, String> idtel = new HashMap<String, String>();
+		
+		String u_id = param.get("u_id");
+		String u_tel = param.get("u_tel");
+		idtel.put("u_id", u_id);
+		idtel.put("u_tel", u_tel);
+		UserVO user = userService.findPassword(idtel);
+		String result = user.getU_id();
+		
+		return result;
+	}
+	
+	// 비밀번호 바꾸기 실행
+	@ResponseBody
+	@RequestMapping(value="updatePassword.user", method=RequestMethod.POST)
+	public void updatePassword(@RequestBody HashMap<String, String> param) {
+		
+		HashMap<String, String> idpw = new HashMap<String, String>();
+		System.out.println(param);
+		
+		String u_id = param.get("u_id");
+		String u_password =  pwdEncoder.encode(param.get("u_password"));
+		
+		idpw.put("u_id", u_id);
+		idpw.put("u_password", u_password);
+		userService.updatePassword(idpw);
+		
+	}
 	
 }

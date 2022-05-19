@@ -1,5 +1,6 @@
 package three.aws.wo.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
@@ -51,14 +55,14 @@ public class UserMypageController {
 	@RequestMapping("/insertReview.user")
 	public String insertNotice(ReviewVO vo) throws Exception {
 		userMypageService.insertReview(vo);
-		System.out.println("∏Æ∫‰ µÓ∑œ");
+		System.out.println("Î¶¨Î∑∞ Îì±Î°ù");
 		return "redirect:/myReviewList.user";
 	}
 	
 	@RequestMapping("/myPoint.user")
 	public String userPointList(Model model, HttpSession session) {
 		UserVO vo = (UserVO) session.getAttribute("userSession");
-		if (vo == null) { // ¿Ã∞≈¥¬ ≥™¡ﬂø° interceptorø°º≠ √≥∏Æ«“ ∞Õ
+		if (vo == null) { // Ïù¥Í±∞Îäî ÎÇòÏ§ëÏóê interceptorÏóêÏÑú Ï≤òÎ¶¨Ìï† Í≤É
 			return "/login/login_login";
 		}
 		String u_id = vo.getU_id();
@@ -68,19 +72,24 @@ public class UserMypageController {
 		return "/mypage/mypage_myPoint";
 	}
 	
-	
-	@RequestMapping("/myCoupon.user")
-	public String userCouponList(Model model, HttpSession session) {
-		UserVO vo = (UserVO) session.getAttribute("userSession");
-		if (vo == null) { // ¿Ã∞≈¥¬ ≥™¡ﬂø° interceptorø°º≠ √≥∏Æ«“ ∞Õ
-			return "/login/login_login";
-		}
-		String u_id = vo.getU_id();
-		List<CouponVO> usableCouponList = userMypageService.usableCouponList(u_id);
-		model.addAttribute("usableCouponList", usableCouponList);
-		List<CouponVO> usedCouponList = userMypageService.usedCouponList(u_id);
-		model.addAttribute("usedCouponList", usedCouponList);
-		return "/mypage/mypage_myCoupon";
+
+	// ÎπÑÎ∞ÄÎ≤àÌò∏ Î∞îÍæ∏Í∏∞ Ïã§Ìñâ
+	@ResponseBody
+	@RequestMapping(value="myWish.user", method=RequestMethod.POST)
+	public void myWish(@RequestBody HashMap<String, String> param, HttpSession session) {
+		
+		HashMap<String, String> wish = new HashMap<String, String>();
+		
+		UserVO userSession = (UserVO) session.getAttribute("userSession");
+		String u_id = userSession.getU_id();
+		String si_code = param.get("storecode");
+		
+		System.out.println(u_id);
+		System.out.println(si_code);
+		
+		wish.put("u_id", u_id);
+		wish.put("si_code", si_code);
+
 	}
 	
 }

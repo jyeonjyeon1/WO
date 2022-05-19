@@ -388,15 +388,15 @@
 															type="button" value="닫기">닫기</button>
 														<button class="changeConfirm${vs.index} btn btn-theme" id="kk${vs.index}"
 															type="button" value="검토"
-															name="${storePendingList.sf_code}" ${disabled}>검토</button>
+															name="${storePendingList.sf_code}" >검토</button>
 														<button class="changeConfirm${vs.index} btn btn-theme"
 															type="button" value="서류보안"
 															tel="${storePendingList.sf_tel}"
-															name="${storePendingList.sf_code}" ${disabled}>서류재요청</button>
+															name="${storePendingList.sf_code}" >서류재요청</button>
 														<button class="changeConfirm${vs.index} btn btn-theme"
 															type="button" value="입점완료"
 															tel="${storePendingList.sf_tel}"
-															name="${storePendingList.sf_code}" ${disabled}>승인</button>
+															name="${storePendingList.sf_code}" >승인</button>
 							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
 							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->
 							<!-- -------------------------테스트 끝내고 ${disabled} 버튼에 넣자. -------------------------------->

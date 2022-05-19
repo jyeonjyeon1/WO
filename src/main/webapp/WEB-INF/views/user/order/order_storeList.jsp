@@ -62,8 +62,8 @@
     	  		//alert("검색결과없음");		
     	  	}
     	  	
-    	  	
-        	$("div a").click(function(){
+  // 일단 위시리스트를 하기 위해서 주석처리  	  	
+/*         	$("div a").click(function(){
         		
         		var pageN = $(this).html();
         		var pageNum = parseInt(pageN);
@@ -87,7 +87,28 @@
             	})
         	});
         	
-        });
+        }); */
+        
+       function myWish() {
+		var storecode = $("#storecode").val();
+		var param = {"storecode": storecode }
+		$.ajax({
+			type: "POST",
+            url: "/myWish.user",
+            data: JSON.stringify(param),
+            dataType: "text",
+            contentType: "application/json",
+			success : function(data) {
+				alert("성공적으로 변경되었습니다.")
+				location.href = "/login.user";
+			},
+			error : function(data) {
+				console.log("로그인 통신x")
+			}
+
+		});//ajax 끝
+	}  
+        
             
     //paging처리 
     function pageLink(curPage, totalPages,funName ) {
@@ -249,7 +270,8 @@
 								<c:forEach var="userPageChange" items="${userPageChange}" varStatus="vs">
 									
 						
-										<a href="#" class="col-5 search_result_big_col">
+									<a href="#" class="col-5 search_result_big_col" onclick="myWish()">
+									<input type="hidden" value="${userPageChange.si_code }" id="storecode">
 
                                     <div class="d-lg-block">
                                         <div class="col-12 search_big_img_bg">

@@ -1,5 +1,7 @@
 package three.aws.wo.user.service.impl;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,13 +67,17 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserVO findId(UserVO vo) {
+	public UserVO findId(String vo) {
 		return userDAO.findId(vo);
 	}
 
 	@Override
-	public UserVO findPassword(UserVO vo) {
-		return userDAO.findPassword(vo);
+	public UserVO findPassword(HashMap<String, String> idtel) {
+		return userDAO.findPassword(idtel);
 	}
 
+	@Override
+	public void updatePassword(HashMap<String, String> idpw) {
+		userDAO.updatePassword(idpw);
+	}
 }

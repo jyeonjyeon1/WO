@@ -15,5 +15,37 @@
 		SELECT * FROM menu_group
 		WHERE SI_CODE = #{storeName}
 	</select>
+	
+	<insert id="insertMgName" >
+		INSERT INTO
+    	menu_group(SI_CODE, MG_CODE, MG_NAME) VALUES (#{si_code},#{mg_code} ,#{mg_name})
+	</insert>
+	
+	<select id="ogList" resultType="StoreOptionGroupVO" parameterType="StoreOptionGroupVO">
+		SELECT * FROM option_group 
+		WHERE SI_CODE = #{storeName}
+	</select>
+	
+	
+	<select id="storeName" resultType="StoreOptionVO" parameterType="StoreOptionVO">
+		SELECT * FROM options 
+		WHERE SI_CODE = #{storeName}
+	</select>
+	
+	
+	<select id="MAOList" resultType="MenuAndOptionVO" parameterType="MenuAndOptionVO">
+		SELECT * FROM menuandoption 
+		WHERE SI_CODE = #{storeName}
+	</select>
+	
+	<select id="basicOpList" resultType="MenuBasicOptionVO" parameterType="MenuBasicOptionVO">
+		SELECT * FROM og_basic ogb
+		INNER JOIN
+		op_basic opb
+		ON (ogb.OGB_SEQ = opb.OGB_SEQ )
+		WHERE ogb.SI_CODE = #{storeName}
+	</select>
+	
+	
 </mapper>
  

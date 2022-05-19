@@ -1,6 +1,8 @@
 package three.aws.wo.user.dao;
 
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,11 +54,11 @@ public class UserDAO {
 		
 	}
 
-	public UserVO findPassword(UserVO vo) {
-		return sqlSession.selectOne("UserDAO.findPassword", vo);
+	public UserVO findPassword(HashMap<String, String> idtel) {
+		return sqlSession.selectOne("UserDAO.findPassword", idtel);
 	}
 
-	public void updatePassword(UserVO vo) {
-		sqlSession.update("UserDAO.updatePassword", vo);
+	public void updatePassword(HashMap<String, String> idpw) {
+		sqlSession.update("UserDAO.updatePassword", idpw);
 	}
 }

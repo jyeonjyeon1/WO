@@ -1,5 +1,6 @@
 package three.aws.wo.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.service.UserMypageService;
@@ -65,6 +69,26 @@ public class UserMypageController {
 		System.out.println(userPointList);
 		model.addAttribute("userPointList", userPointList);
 		return "/mypage/mypage_myPoint";
+	}
+	
+	// 비밀번호 바꾸기 실행
+	@ResponseBody
+	@RequestMapping(value="myWish.user", method=RequestMethod.POST)
+	public void myWish(@RequestBody HashMap<String, String> param, HttpSession session) {
+		
+		HashMap<String, String> wish = new HashMap<String, String>();
+		
+		UserVO userSession = (UserVO) session.getAttribute("userSession");
+		String u_id = userSession.getU_id();
+		String si_code = param.get("storecode");
+		
+		System.out.println(u_id);
+		System.out.println(si_code);
+		
+		wish.put("u_id", u_id);
+		wish.put("si_code", si_code);
+		
+		
 	}
 	
 }

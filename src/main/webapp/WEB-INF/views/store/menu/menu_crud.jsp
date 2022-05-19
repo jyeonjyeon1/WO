@@ -409,9 +409,9 @@ li {
   }); */
   
   //메뉴편집 - 옵션설정 - 옵션그룹추가 클릭시
-  $('.menu_addOptionGroup').click(function(){
+/*   $('.menu_addOptionGroup').click(function(){
 	$('#menu_addOptionGroup').modal();
-  })
+  }) */
 
     //옵션편집 - + 옵션그룹 추가버튼 클릭시
 	$('.option_addOptionGroup').click(function(){
@@ -457,9 +457,9 @@ li {
   })
 
   //옵션편집 - 옵션명 및 가격변경 클릭시
-$('#option_oneUpdate').click(function(){
+/* $('#option_oneUpdate').click(function(){
  $('#option_oneUpdate_modal').modal();
-})
+}) */
 
   //옵션편집 - 옵션추가버튼 클릭시
   $('.option_addOne').click(function(){
@@ -791,7 +791,7 @@ function readImage(input) {
 																									data-toggle="modal"
 																									href="#menu_oneInfoUpdate${vs.index}${vss.index}">메뉴정보수정</a></li>
 																								<li><a class="menu_oneOptionUpdate" data-toggle="modal" href="#menu_updateOption${vs.index}${vss.index}">옵션설정</a></li>
-																								<li><a class="menu_oneImgUpdate">이미지변경</a></li>
+																								<li><a class="menu_oneImgUpdate" data-toggle="modal" href="#menu_updateImg${vs.index}${vss.index}">이미지변경</a></li>
 																								<li><a class="menu_oneDelete">메뉴삭제</a></li>
 																							</ul></li>
 																					</c:if>
@@ -839,7 +839,7 @@ function readImage(input) {
 																													style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
 
 																												<div
-																													class="price_list${vs.index}${vss.index}">
+																													class="price_list2${vs.index}${vss.index}">
 																													<div class="row" style="margin-left: 5px;">
 																														<div class="col-lg-5"
 																															style="padding: 5px;">
@@ -867,7 +867,7 @@ function readImage(input) {
 
 
 																												<div
-																													class="price_list1${vs.index}${vss.index}">
+																													class="price_list2${vs.index}${vss.index}">
 																													<div class="row" style="margin-left: 5px;">
 																														<div class="col-lg-5"
 																															style="padding: 5px;">
@@ -901,8 +901,6 @@ function readImage(input) {
 																												</div>
 																											</li>
 
-																											<li></li>
-
 																											<li>
 																												<div class="row">
 																													<div class="col-lg-12">
@@ -918,6 +916,27 @@ function readImage(input) {
 																							</div>
 																						</div>
 																					</div>
+																					
+																					<script>
+																				//메뉴정보수정-가격옵션추가하기 눌렀을때
+																				 function menu_priceOption1${vs.index}${vss.index}() {
+									                                            	  $('.price_list2${vs.index}${vss.index}').append("<div class='price_list2${vs.index}${vss.index}'>"
+									                                            			  +"<div class='row' style='margin-left:5px;' >" 
+									                                            	      		+"<div class='col-lg-5' style='padding:5px;'>" 
+									                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격명'>"
+									                                            	      	    +"</div>"
+									                                            	      	    +"<div class='col-lg-5' style='padding:5px;'>"
+									                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격'>"
+									                                            	      	    +"</div>"
+									                                            	      	    +"<div class='col-lg-2' style='padding:5px;'>"
+									                                            	      		+"<button type='button' onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top:7px;'><i class='fa fa-trash-o '></i></button>"
+									                                            	            +  "</div>"                    
+									                                            	      	    +"</div></div>");  
+									                                              };
+									                                              
+									                                        
+									                                              
+																				</script>
 
 																					<!-------------메뉴편집_메뉴정보수정 Modal end--------------->
 																					<!-------------메뉴편집_메뉴옵션수정 Modal start-------------->
@@ -994,9 +1013,8 @@ function readImage(input) {
 																								</div>
 
 																								<div class="row">
-																									<a class="menu_addOptionGroup">
-																										<h4
-																											style="color: blue; padding: 10px; margin-right: 65px;">+
+																									<a class="menu_addOptionGroup" data-toggle="modal" href="#menu_addOptionGroup${vs.index}${vss.index}" >
+																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">+
 																											옵션그룹 추가</h4>
 																									</a>
 																								</div>
@@ -1021,9 +1039,116 @@ function readImage(input) {
 																	</div>
 
 																	<!-------------메뉴편집_메뉴옵션수정 Modal end--------------->
+																	<!------------ 메뉴편집_이미지변경 Modal start --------------->
+																	<div class="modal fade" id="menu_updateImg${vs.index}${vss.index}"
+																				role="dialog">
+
+																				<div class="modal-dialog">
+
+																					<!-- Modal content-->
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<!-- header -->
+																							<h4 class="modal-title">이미지변경</h4>
+																							<h3 style="color: black; font-weight: bolder; text-align: center;">[${menu.m_name}]</h3>
+																							<button type="button" class="close"
+																								data-dismiss="modal"
+																								style="font-size: 20px; color: black;">취소</button>
+
+																						</div>
+																						<div class="modal-body">
+																							<!-- body -->
+
+
+																							<table class="modal_table">
+																								<ul>
+
+																									<li
+																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																										<h5
+																											style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px">
+																											멋진 메뉴 이미지로<br>메뉴판을 돋보이게 해주세요!
+																										</h5>
+																										<h6 style="font-size: 13px;">
+																											-이미지를 올리지 않으면 메뉴의 이미지는 자동으로 보여지지 않습니다. <br>
+																											-직접 업로드한 이미지는 승인되어야 앱에 보여요.
+																										</h6>
+
+																										<div class="image-show" id="image-show"></div>
+
+
+																										<div class="img_upload">
+																											<div class="image-container">
+																												<div
+																													style="border: 1px solid #6161618c; height: 300px;">
+
+																													<a class="img_uploadFile" href="#"
+																														style="text-align: center; width: auto; height: 300px;">
+																														<img
+																														style="width: 100%; height: 100%; display: none;"
+																														id="preview-image" src=""> <label
+																														for="input-image" id="addImgLabel"
+																														style="font-size: 15px; margin-top: 140px; line-height: 20px; margin-left: 220px; cursor: pointer;">+<br>이미지추가
+																													</label>
+																													</a> <input type="file" id="input-image"
+																														name="chooseFile" accept="image/*">
+																												</div>
+
+																											</div>
+																											<h6
+																												style="font-size: 13px; margin-bottom: 40px;">
+																												-접수 건이 폭증할 경우, 처리일이 다소 지연될 수 있습니다. <label
+																													for="input-image" id="fixImgLabel"
+																													style="float: right; color: blue; cursor: pointer; font-size: 15px; display: none;">이미지
+																													다시업로드</label>
+																											</h6>
+
+																											<div class="img_info"
+																												style="background-color: #6161613d; border-radius: 7px; padding: 10px; height: auto;">
+																												<h5
+																													style="font-weight: bolder; font-size: 15px; color: black;">직접
+																													업로드한 이미지가 바로 승인되는 방법</h5>
+																												<ul style="color: black; margin-left: 20px;">
+																													<li
+																														style="list-style-type: disc; line-height: 20px;">메뉴
+																														식별이 가능한 이미지여야 해요.</li>
+																													<li
+																														style="list-style-type: disc; line-height: 20px;">촬영된
+																														이미지를 재촬영한 이미지는 등록할 수 없어요.</li>
+																													<li
+																														style="list-style-type: disc; line-height: 20px;">임의로
+																														어색하게 합성된 이미지는 등록이 어려워요.</li>
+																												</ul>
+																												<a href="#"
+																													style="text-decoration: underline; color: blue;">자세히
+																													알아보기</a>
+																											</div>
+
+
+																										</div>
+
+
+																									</li>
+
+																									<li>
+																										<div class="row">
+																											<div class="col-lg-12">
+																												<button class="save_Btn">승인 신청하기</button>
+																											</div>
+																										</div>
+																									</li>
+																								</ul>
+
+																							</table>
+																						</div>
+																						<div id="count" value="1"></div>
+																					</div>
+																				</div>
+																			</div>
+																	<!------------ 메뉴편집_이미지변경 Modal end --------------->
 
 																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal start--------------->
-																	<div class="modal fade" id="menu_addOptionGroup"
+																	<div class="modal fade" id="menu_addOptionGroup${vs.index}${vss.index}"
 																		role="dialog"
 																		style="max-height: 850px; overflow-y: initial;">
 
@@ -1033,7 +1158,8 @@ function readImage(input) {
 																			<div class="modal-content">
 																				<div class="modal-header">
 																					<!-- header -->
-																					<h4 class="modal-title">옵션그룹추가11</h4>
+																					<h4 class="modal-title">옵션그룹추가</h4>
+																					
 																					<button type="button" class="close"
 																						data-dismiss="modal"
 																						style="font-size: 20px; color: black;">취소</button>
@@ -1204,32 +1330,7 @@ function readImage(input) {
 																	</div>
 																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal end--------------->
 																					
-
-																					<script>
-																				//메뉴정보수정-가격옵션추가하기 눌렀을때
-																				 function menu_priceOption1${vs.index}${vss.index}() {
-									                                            	  $('.price_list1${vss.index}').append("<div class='row' style='margin-left:5px;' >" 
-									                                            	      		+"<div class='col-lg-5' style='padding:5px;'>" 
-									                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격명'>"
-									                                            	      	    +"</div>"
-									                                            	      	    +"<div class='col-lg-5' style='padding:5px;'>"
-									                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격'>"
-									                                            	      	    +"</div>"
-									                                            	      	    +"<div class='col-lg-2' style='padding:5px;'>"
-									                                            	      		+"<button type='button' onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top:7px;'><i class='fa fa-trash-o '></i></button>"
-									                                            	            +  "</div>"                    
-									                                            	      	    +"</div>");  
-									                                              };
-									                                              
-									                                        
-									                                              
-																				</script>
 																				</c:forEach>
-
-
-
-
-
 																				<li><a class="menu_addOne"
 																					onclick="menu_addOne${vs.index}()">
 
@@ -1270,11 +1371,6 @@ function readImage(input) {
                                             	      	    +"</div>");  
                                               };
                                               </script>
-
-
-
-
-
 
 																		<!--메뉴추가 모달창-->
 
@@ -1771,36 +1867,11 @@ function readImage(input) {
 
 																			</a>
 																				<ul class="trd_menu sub_menu">
-																					<li><a class="option_oneUpdate"
-																						id="option_oneUpdate">옵션명 및 가격 변경</a></li>
+																					<li><a class="option_oneUpdate" data-toggle="modal" href="#option_oneUpdate_modal${ogVs.index}${optionVs.index}">옵션명 및 가격 변경</a></li>
 																					<li><a class="option_oneDelete">옵션삭제</a></li>
 																				</ul></li>
-																				
-																				</c:if>	
-																				</c:forEach>
-																			<li><a class="option_addOne">
-
-																					<h4
-																						style="color: blue; padding: 10px; margin-right: 65px;">+
-																						옵션추가</h4>
-
-																			</a></li>
-
-																		</ul> <!--서브메뉴끝--></li>
-																</ul>
-															</nav>
-																
-															</c:forEach>
-															<!--메뉴그룹 리스트 end-->
-
-														</div>
-														<!--옵션편집 end-->
-														
-														<!------------옵션명 및 가격변경 modal start-------------->
-
-
-																			<div class="modal fade" id="option_oneUpdate_modal"
-																				role="dialog">
+																				<!------------옵션명 및 가격변경 modal start-------------->
+																			<div class="modal fade" id="option_oneUpdate_modal${ogVs.index}${optionVs.index}" role="dialog">
 
 																				<div class="modal-dialog">
 
@@ -1830,12 +1901,12 @@ function readImage(input) {
 																												<div class="col-lg-5" style="padding: 5px;">
 																													<input class="form-control"
 																														style="width: relative; font-size: 15px;"
-																														type="text" value="1샷 추가">
+																														type="text" value="${optionList.op_name}">
 																												</div>
 																												<div class="col-lg-5" style="padding: 5px;">
 																													<input class="form-control"
 																														style="width: relative; font-size: 15px;"
-																														type="text" value="500">
+																														type="text" value="${optionList.op_price}">
 																												</div>
 
 																											</div>
@@ -1852,18 +1923,36 @@ function readImage(input) {
 																								</ul>
 
 																							</table>
-
-
-
 																						</div>
 																						<div id="count" value="1"></div>
 																					</div>
 																				</div>
 																			</div>
-
-
-
 																			<!------------옵션명 및 가격변경 modal end-------------->
+																				
+																				
+																				</c:if>	
+																				</c:forEach>
+																			<li><a class="option_addOne">
+
+																					<h4
+																						style="color: blue; padding: 10px; margin-right: 65px;">+
+																						옵션추가</h4>
+
+																			</a></li>
+
+																		</ul> <!--서브메뉴끝--></li>
+																</ul>
+															</nav>
+																
+																
+															</c:forEach>
+															<!--메뉴그룹 리스트 end-->
+
+														</div>
+														<!--옵션편집 end-->
+														
+														
 														
 														<!--------필수여부 수정 모달 start--------->
 																			<div class="modal fade" id="update_ros_modal"

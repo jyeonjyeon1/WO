@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserMypageDAO">
-	<resultMap type="ReviewVO" id="reviewVO">
+<resultMap type="ReviewVO" id="reviewVO">
 		<id column="UR_CODE" property="ur_code" jdbcType="VARCHAR"/>
 		<result column="U_ID" property="u_id" jdbcType="INTEGER" />
 		<result column="STR_CODE" property="str_code" jdbcType="VARCHAR" />
@@ -20,10 +20,8 @@
 		<result column="SI_LOC" property="si_loc" jdbcType="VARCHAR" />
 		
 		<result column="DIF_DATE" property="dif_date" jdbcType="VARCHAR" />
-		
-		
+
 	</resultMap>
-	
 	<resultMap type="CouponVO" id="couponVO">
 		<id column="C_CODE" property="c_code" jdbcType="VARCHAR"/>
 		<result column="C_CODE" property="ct_code" jdbcType="VARCHAR" />
@@ -47,13 +45,11 @@
 		<result column="CT_DAY" property="ct_day" jdbcType="INTEGER" />
 		
 	</resultMap>
-	
 	<select id="reviewList" resultType="ReviewVO" resultMap="reviewVO">
 		SELECT UR.*, O.O_LIST, SI.SI_NAME, SI.SI_LOC, SPLIT_PART((CURRENT_TIMESTAMP - UR.UR_REGDATE::DATE)::VARCHAR,' ', 1) AS DIF_DATE
 		FROM USER_REVIEW UR JOIN ORDERS O ON UR.O_CODE = O.O_CODE JOIN STORE_INFO SI ON SI.SI_CODE = O.SI_CODE 
 		WHERE UR.U_ID = #{u_id} ORDER BY UR_REGDATE DESC;
-   </select>
-
+	</select>
 	
 	
 	
@@ -74,12 +70,24 @@
 		ORDER BY PT_SEQ DESC
 	</select>
 	
-
 	<insert id="myWish" parameterType="UserWishVO">
 		INSERT INTO LIKE_STORE
 			(U_ID, SI_CODE)
 			VALUES(#{u_id}, #{si_code})
 	</insert>
-
+	
+	<select id="usableCouponList" resultType="CouponVO" resultMap="couponVO">
+		SELECT * 
+			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 
+			WHERE U_ID = #{u_id} AND C_USED='FALSE' AND CURRENT_DATE <![CDATA[<=]]> C_ENDDATE
+	</select>
+	
+	<select id="usedCouponList" resultType="CouponVO" resultMap="couponVO">
+		SELECT * 
+			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 
+			WHERE U_ID = #{u_id} AND C_USED='TRUE' OR CURRENT_DATE <![CDATA[>=]]> C_ENDDATE
+	</select>
+	
+	
 </mapper>
  

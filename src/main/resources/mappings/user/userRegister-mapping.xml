@@ -19,7 +19,7 @@
 		SET
 		U_ID = #{u_id}
 		WHERE 
-		SNS_ID =#{u_id}
+		SNS_ID =#{sns_id}
 	</update>
 </mapper>
  

@@ -204,4 +204,11 @@ public class UserOrderController {
 		model.addAttribute("completeOrder", vo);
 		return "/order/order_complete";
 	}
+	
+	@RequestMapping(value = "/paytest.user", method = RequestMethod.GET)
+	public String payTest(HttpServletRequest request, Model model) {
+		// 주문번호 불러옴
+		return "/paytest";
+	}
+	
 }

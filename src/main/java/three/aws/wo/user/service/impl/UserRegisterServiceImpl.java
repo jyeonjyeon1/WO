@@ -1,5 +1,7 @@
 package three.aws.wo.user.service.impl;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,8 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 	}
 
 	@Override
-	public void updateSNSUser(String u_id) {
-		userRegisterDAO.updateSNSUser(u_id);
+	public void updateSNSUser(HashMap<String, String> update) {
+		userRegisterDAO.updateSNSUser(update);
 	}
 
 }

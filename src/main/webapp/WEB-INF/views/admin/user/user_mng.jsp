@@ -310,9 +310,9 @@
 											<td>${userList.u_id}</td>
 											<td><c:choose>
 													<c:when test="${userList.u_type eq 'normal'}">일반</c:when>
-													<c:when test="${userList.u_type eq 'Google'}">구글</c:when>
-													<c:when test="${userList.u_type eq 'Kakao'}">카카오</c:when>
-													<c:when test="${userList.u_type eq 'Naver'}">네이버</c:when>
+													<c:when test="${userList.u_type eq 'google'}">구글</c:when>
+													<c:when test="${userList.u_type eq 'kakao'}">카카오</c:when>
+													<c:when test="${userList.u_type eq 'naver'}">네이버</c:when>
 													<c:otherwise>부잉</c:otherwise>
 												</c:choose></td>
 											<td>${userList.u_name}</td>

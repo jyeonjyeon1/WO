@@ -1,5 +1,7 @@
 package three.aws.wo.user.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +21,7 @@ public class UserRegisterDAO {
 		sqlSession.insert("UserRegisterDAO.insertSNSUser",vo);
 	}
 
-	public void updateSNSUser(String u_id) {
-		sqlSession.update("UserRegisterDAO.updateSNSUser",u_id);
+	public void updateSNSUser(HashMap<String, String> update) {
+		sqlSession.update("UserRegisterDAO.updateSNSUser",update);
 	}
 }

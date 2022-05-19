@@ -55,14 +55,14 @@ public class UserMypageController {
 	@RequestMapping("/insertReview.user")
 	public String insertNotice(ReviewVO vo) throws Exception {
 		userMypageService.insertReview(vo);
-		System.out.println("리뷰 등록");
+		System.out.println("insertNotice");
 		return "redirect:/myReviewList.user";
 	}
 	
 	@RequestMapping("/myPoint.user")
 	public String userPointList(Model model, HttpSession session) {
 		UserVO vo = (UserVO) session.getAttribute("userSession");
-		if (vo == null) { // 이거는 나중에 interceptor에서 처리할 것
+		if (vo == null) { // ���߿� interceptor
 			return "/login/login_login";
 		}
 		String u_id = vo.getU_id();
@@ -73,7 +73,7 @@ public class UserMypageController {
 	}
 	
 
-	// 비밀번호 바꾸기 실행
+	// ���ø���Ʈ 
 	@ResponseBody
 	@RequestMapping(value="myWish.user", method=RequestMethod.POST)
 	public void myWish(@RequestBody HashMap<String, String> param, HttpSession session) {
@@ -90,6 +90,20 @@ public class UserMypageController {
 		wish.put("u_id", u_id);
 		wish.put("si_code", si_code);
 
+	}
+	
+	@RequestMapping("/myCoupon.user")
+	public String userCouponList(Model model, HttpSession session) {
+		UserVO vo = (UserVO) session.getAttribute("userSession");
+		if (vo == null) { // ���߿� interceptor
+			return "/login/login_login";
+		}
+		String u_id = vo.getU_id();
+		List<CouponVO> usableCouponList = userMypageService.usableCouponList(u_id);
+		model.addAttribute("usableCouponList", usableCouponList);
+		List<CouponVO> usedCouponList = userMypageService.usedCouponList(u_id);
+		model.addAttribute("usedCouponList", usedCouponList);
+		return "/mypage/mypage_myCoupon";
 	}
 	
 }

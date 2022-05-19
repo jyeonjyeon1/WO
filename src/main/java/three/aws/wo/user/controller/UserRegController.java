@@ -157,17 +157,11 @@ public class UserRegController {
 	
     // 아이디 찾기 실행 
 	@ResponseBody
-	@RequestMapping(value="findIdd.user", method=RequestMethod.POST)
-	public int findId(@RequestBody HashMap<String, String> param,  Model model) {
-		System.out.println(param);
+	@RequestMapping(value="findId.user", method=RequestMethod.POST)
+	public String findId(@RequestBody HashMap<String, String> param) {
 		String u_tel = param.get("u_tel");
 		UserVO user = userService.findId(u_tel);
-		int result = 0;
-		if (user == null) {
-			result = 0;
-		} else {
-			result = 1;
-		}
+		String result = user.getU_id();
 		
 		return result;
 	}
@@ -179,43 +173,36 @@ public class UserRegController {
 	}
 	
     // 비밀번호 찾기 실행
+	@ResponseBody
 	@RequestMapping(value="findPassword.user", method=RequestMethod.POST)
-	public String findPassword(UserVO vo, Model model) {
-		UserVO user = userService.findPassword(vo);
-		System.out.println(user);
-		if(user == null) { 
-			model.addAttribute("check", 1);
-		} else { 
-			model.addAttribute("check", 0);
-			model.addAttribute("updateid", user.getU_id());
-			System.out.println(user.getU_id());
-		}
+	public String findPassword(@RequestBody HashMap<String, String> param) {
+		HashMap<String, String> idtel = new HashMap<String, String>();
 		
-		return "login/findPassword";
+		String u_id = param.get("u_id");
+		String u_tel = param.get("u_tel");
+		idtel.put("u_id", u_id);
+		idtel.put("u_tel", u_tel);
+		UserVO user = userService.findPassword(idtel);
+		String result = user.getU_id();
+		
+		return result;
 	}
 	
 	// 비밀번호 바꾸기 실행
+	@ResponseBody
 	@RequestMapping(value="updatePassword.user", method=RequestMethod.POST)
-	public String updatePasswordAction(@RequestParam(value="updateid", defaultValue="", required=false) String id,
-										UserVO vo) {
-		vo.setU_id(id);
-		System.out.println(vo);
-		userService.updatePassword(vo);
-		return "login/findPasswordConfirm";
-	}
+	public void updatePassword(@RequestBody HashMap<String, String> param) {
 		
-    // 비밀번호 바꾸기할 경우 성공 페이지 이동
-	@RequestMapping(value="succesPassword.user")
-	public String checkPasswordForModify(HttpSession session, Model model) {
-		UserVO User = (UserVO) session.getAttribute("User");
+		HashMap<String, String> idpw = new HashMap<String, String>();
+		System.out.println(param);
 		
-		if(User == null) {
-			System.out.println("User == null");
-			return "login/login_login";
-		} else {
-			System.out.println("User == OK");
-			return "login/login_login";
-		}
+		String u_id = param.get("u_id");
+		String u_password =  pwdEncoder.encode(param.get("u_password"));
+		
+		idpw.put("u_id", u_id);
+		idpw.put("u_password", u_password);
+		userService.updatePassword(idpw);
+		
 	}
 	
 }

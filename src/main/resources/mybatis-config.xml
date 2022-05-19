@@ -33,6 +33,7 @@
 		<typeAlias alias="TermsVO" type="three.aws.wo.admin.vo.TermsVO" />
 		<typeAlias alias="MessageVO" type="three.aws.wo.admin.vo.MessageVO" />
 		<typeAlias alias="PointVO" type="three.aws.wo.admin.vo.PointVO" />
+		<typeAlias alias="UserWishVO" type="three.aws.wo.user.vo.UserWishVO" />
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
 		<mapper resource="mappings/user/user-mapping.xml" /> 

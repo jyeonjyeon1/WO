@@ -36,7 +36,6 @@
 			VALUES(#{o_code}, #{u_id}, 
 				(SELECT SI_CODE FROM ORDERS WHERE O_CODE = #{o_code}), 
 				DEFAULT, #{ur_star}, #{ur_pic_url}, #{ur_content}, #{o_code}, DEFAULT, DEFAULT)
-
 	</insert>
 	<select id="userPointList" resultType="PointVO">
 		SELECT * FROM 
@@ -48,5 +47,11 @@
 		WHERE a.U_ID = #{u_id}
 		ORDER BY PT_SEQ DESC
 	</select>
+	
+	<insert id="myWish" parameterType="UserWishVO">
+		INSERT INTO LIKE_STORE
+			(U_ID, SI_CODE)
+			VALUES(#{u_id}, #{si_code})
+	</insert>
 </mapper>
  

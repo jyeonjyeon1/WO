@@ -50,7 +50,7 @@
 		SELECT * FROM USERS WHERE U_ID = #{u_id} and U_TEL = #{u_tel}
 	</select>
 	
-	<update id="updatePassword">
+	<update id="updatePassword" parameterType="UserVO" >
 		UPDATE USERS SET U_PASSWORD = #{u_password} where U_ID = #{u_id}
 	</update>
 </mapper>

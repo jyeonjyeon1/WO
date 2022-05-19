@@ -277,14 +277,16 @@ input::-webkit-inner-spin-button {
 		var param = {"u_tel": u_tel }
 		$.ajax({
 			type: "POST",
-            url: "/findIdd.user",
+            url: "/findId.user",
             data: JSON.stringify(param),
-            dataType: "json",
+            dataType: "text",
             contentType: "application/json",
 			success : function(data) {
-				console.log("오키")
-				if(data == 1){
-					alert("null!!!")
+				if(data != null){
+					$(".dis1").show();
+					$(".dis2").hide();
+					var id = data;
+					$("#id").text(id);
 				}else{
 					alert("찾으시는 아이디가 없습니다.")
 				}
@@ -304,44 +306,64 @@ input::-webkit-inner-spin-button {
 	<div class="container"
 		style="margin: 30PX auto 50px; max-width: 420px;">
 		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">아이디 찾기</h4>
-		<form>
-			             
-               
-			<div class="row">
-				<div class="col-9 mt-10">
-					<input type="text" id="u_tel" name="u_tel"
-						placeholder="전화번호( - 제외)" class="reg-form-control col-12 u_tel" style="display:inline-block;">
-						<input type="text" id="verif_num" 
-						placeholder="인증번호" class="reg-form-control col-5 verif_num">
-					<p class="tel_form">전화번호 형식을 맞춰주세요</p>
-					<div id="phoneVerifTime" class="phoneVerifTime">
-					</div>
-					<button class="phone_reset_btn active" type="button" onclick="reset_Phone()">
-						<i class="fa fa-rotate-left"></i>
-					</button>
-				</div>
-				<div class="col-3 mt-10" style="padding-left: 0;">
-					<button type="button" onclick="phoneVerif()" id="phoneVerif_btn" class="reg-form-control phoneVerif_btn">번호
-						인증</button>
-				</div>
-			</div>
-			
-			
-			<br>
-			<div class="row">
-                <div style=" text-align: center;">
-				<button type="button" id="submit"
-					class="btn btn-outline-warning" style="display: inline-block; margin-bottom: 10px; width: 60%;" value="check" onclick="telCheck()">아이디 찾기
-					&nbsp;</button>
-                <div style=" text-align: center;">
-                        <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 60%;" type="button">취소</button></div>
-                </div>
-            </div>
-			</div>
-			
 		
+		<div class="dis2">
+
+			
+				<form>     
+				<div class="row">
+					<div class="col-9 mt-10">
+						<input type="text" id="u_tel" name="u_tel"
+							placeholder="전화번호( - 제외)" class="reg-form-control col-12 u_tel" style="display:inline-block;">
+							<input type="text" id="verif_num" 
+							placeholder="인증번호" class="reg-form-control col-5 verif_num">
+						<p class="tel_form">전화번호 형식을 맞춰주세요</p>
+						<div id="phoneVerifTime" class="phoneVerifTime">
+						</div>
+						<button class="phone_reset_btn active" type="button" onclick="reset_Phone()">
+							<i class="fa fa-rotate-left"></i>
+						</button>
+					</div>
+					<div class="col-3 mt-10" style="padding-left: 0;">
+						<button type="button" onclick="phoneVerif()" id="phoneVerif_btn" class="reg-form-control phoneVerif_btn">번호
+							인증</button>
+					</div>
+				</div>
 				
-		</form>
+				
+				<br>
+				<div class="row">
+	                <div style=" text-align: center;">
+					<button type="button" id="submit"
+						class="btn btn-outline-warning" style="display: inline-block; margin-bottom: 10px; width: 60%;" value="check" onclick="telCheck()">아이디 찾기
+						&nbsp;</button>
+	                <div style=" text-align: center;">
+	                        <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 60%;" type="button">취소</button></div>
+	                </div>
+	            
+				</div>
+				
+			
+					
+			</form>
+				
+
+
+		</div>
+		
+		<!-- 이름과 비밀번호가 일치하지 않을 때 -->
+		<div class="dis1" style="display: none;">
+
+			<label>찾으시는 아이디는  
+				<span id="id"></span>
+			입니다.</label>
+			
+			<button type="button" class="btn btn-outline-warning col-sm-6" style=" display: inline-block; margin:auto; width: 50%; margin-bottom: 10px" onclick="location.href='login.user'"> 확인
+                    &nbsp;</button></div>
+		
+
+		</div>
+		
 
 	</div>
 

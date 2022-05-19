@@ -1,5 +1,7 @@
 package three.aws.wo.user.service;
 
+import java.util.HashMap;
+
 import three.aws.wo.user.vo.UserVO;
 
 public interface UserRegisterService {
@@ -8,6 +10,6 @@ public interface UserRegisterService {
 
 	void insertSNSUser(UserVO vo);
 
-	void updateSNSUser(String u_id);
+	void updateSNSUser(HashMap<String, String> update);
 
 }

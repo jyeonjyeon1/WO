@@ -515,16 +515,16 @@ input::-webkit-inner-spin-button {
 							<li>
 								<div class="form-check">
 									<input class="form-check-input" type="radio"
-										name="flexRadioDefault" id="flexRadioDefault2" checked>
-									<label class="form-check-label" for="flexRadioDefault2">
+										name="flexRadioDefault" id="flexRadioDefault3" checked>
+									<label class="form-check-label" for="flexRadioDefault3">
 										신용카드 </label>
 								</div>
 							</li>
 							<li>
 								<div class="form-check">
 									<input class="form-check-input" type="radio"
-										name="flexRadioDefault" id="flexRadioDefault2" checked>
-									<label class="form-check-label" for="flexRadioDefault2">
+										name="flexRadioDefault" id="flexRadioDefault4ㄴ" checked>
+									<label class="form-check-label" for="flexRadioDefault4">
 										휴대폰결제 </label>
 								</div>
 							</li>

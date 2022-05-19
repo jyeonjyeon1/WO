@@ -142,7 +142,8 @@ public class UserLoginController {
 		//result = 1이면 회원가입 미진행, 0일경우에는 회원가입 진행했으니 ㄱㅊ
 		System.out.println(result);
 		if(result == 0) {
-			setLogin(naverId, "false", session, response);
+			String u_id = id.toString().substring(0,10) +"@n";
+			setLogin(u_id, "false", session, response);
 			return result;
 		}else{
 			return sns_seq;

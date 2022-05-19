@@ -23,6 +23,8 @@ public class StoreVO {
 	private String si_map_image;
 	private String si_loc;
 	private String si_image;
+	private String si_image2;
+	private String si_image3;
 	private String si_holiday_imsi;
 	private String si_holiday_fix;
 	private String si_due_time;

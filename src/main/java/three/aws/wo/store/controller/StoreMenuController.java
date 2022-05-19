@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.store.service.SMenuService;
+import three.aws.wo.store.vo.MenuAndOptionVO;
+import three.aws.wo.store.vo.MenuBasicOptionVO;
 import three.aws.wo.store.vo.StoreMenuGroupVO;
 import three.aws.wo.store.vo.StoreMenuVO;
+import three.aws.wo.store.vo.StoreOptionGroupVO;
+import three.aws.wo.store.vo.StoreOptionVO;
 
 @Controller
 public class StoreMenuController {
@@ -28,9 +32,17 @@ public class StoreMenuController {
 		System.out.println("storemenuCRUD페이지");
 		List<StoreMenuVO> storeMenuList = sMenuService.storeMenuList(storeName);
 		List<StoreMenuGroupVO> storeMgList = sMenuService.storeMgList(storeName);
+		List<StoreOptionGroupVO> ogList = sMenuService.ogList(storeName);
+		List<StoreOptionVO> optionList = sMenuService.optionList(storeName);
+		List<MenuAndOptionVO> MAOList = sMenuService.MAOList(storeName);
+		List<MenuBasicOptionVO> basicOpList = sMenuService.basicOpList(storeName);
+		
 		model.addAttribute("storeMenuList",storeMenuList);
 		model.addAttribute("storeMgList",storeMgList);
-		//coffee model
+		model.addAttribute("ogList",ogList);
+		model.addAttribute("optionList",optionList);
+		model.addAttribute("MAOList", MAOList);
+		model.addAttribute("basicOpList",basicOpList);
 		//
 		//
 		
@@ -56,4 +68,7 @@ public class StoreMenuController {
 		
 		return "ok";
 	}
+	
+	
+	
 }

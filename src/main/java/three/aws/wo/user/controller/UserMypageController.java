@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.service.UserMypageService;
 import three.aws.wo.user.vo.ReviewVO;
@@ -54,14 +55,14 @@ public class UserMypageController {
 	@RequestMapping("/insertReview.user")
 	public String insertNotice(ReviewVO vo) throws Exception {
 		userMypageService.insertReview(vo);
-		System.out.println("¸®ºä µî·Ï");
+		System.out.println("ë¦¬ë·° ë“±ë¡");
 		return "redirect:/myReviewList.user";
 	}
 	
 	@RequestMapping("/myPoint.user")
 	public String userPointList(Model model, HttpSession session) {
 		UserVO vo = (UserVO) session.getAttribute("userSession");
-		if (vo == null) { // ÀÌ°Å´Â ³ªÁß¿¡ interceptor¿¡¼­ Ã³¸®ÇÒ °Í
+		if (vo == null) { // ì´ê±°ëŠ” ë‚˜ì¤‘ì— interceptorì—ì„œ ì²˜ë¦¬í•  ê²ƒ
 			return "/login/login_login";
 		}
 		String u_id = vo.getU_id();
@@ -71,7 +72,8 @@ public class UserMypageController {
 		return "/mypage/mypage_myPoint";
 	}
 	
-	// ºñ¹Ğ¹øÈ£ ¹Ù²Ù±â ½ÇÇà
+
+	// ë¹„ë°€ë²ˆí˜¸ ë°”ê¾¸ê¸° ì‹¤í–‰
 	@ResponseBody
 	@RequestMapping(value="myWish.user", method=RequestMethod.POST)
 	public void myWish(@RequestBody HashMap<String, String> param, HttpSession session) {
@@ -87,8 +89,7 @@ public class UserMypageController {
 		
 		wish.put("u_id", u_id);
 		wish.put("si_code", si_code);
-		
-		
+
 	}
 	
 }

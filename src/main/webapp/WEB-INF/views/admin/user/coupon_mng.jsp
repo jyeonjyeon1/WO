@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -263,8 +264,6 @@
                       <tr>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">쿠폰코드</a></th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">쿠폰이름</a></th>
-                        <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">사용여부</a></th>
-                        <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">사용자</a></th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">할인유형</a></th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">할인수치</a></th>
                         <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">등록일</a></th>
@@ -272,170 +271,45 @@
                         <th data-sortable="" style="width: 13%;"><a href="#" class="dataTable-sorter">상태변경</a></th>
                       </tr>
                     </thead>
-
+					<c:forEach var="couponList" items="${couponList}" varStatus="vs">
                     <tbody>
                       <tr>
-                        <td>EV0203023</td>
-                        <td>신규가입</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
-                          </label>
-                        </td>
-                        <td>10</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
+                        <td>${couponList.ct_nansu}</td>
+                        <td>${couponList.ct_name}</td>
+                        <c:if test="${couponList.ct_discount_type eq true }">
+	                        <td><label class="checkbox-inline">
+	                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
+	                          </label>
+	                          <label class="checkbox-inline">
+	                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
+	                          </label>
+	                        </td>
+	                    </c:if>
+	                    <c:if test="${couponList.ct_discount_type eq false }">
+	                        <td><label class="checkbox-inline">
+	                            <input type="checkbox" id="inlineCheckbox1" value="option1"> %
+	                          </label>
+	                          <label class="checkbox-inline">
+	                            <input type="checkbox" id="inlineCheckbox2" value="option2" checked> ￦
+	                          </label>
+	                        </td>
+	                    </c:if>
+                        <td>${couponList.ct_discount }</td>
+                        <td>${couponList.ct_regdate }</td>
+                        <c:if test="${couponList.ct_day eq 0 }">
+                        	<td>${couponList.ct_startdate } ~ ${couponList.ct_enddate }</td>
+                        </c:if>
+                        <c:if test="${couponList.ct_day ne 0 }">
+                        	<td>${couponList.ct_day }일</td>
+                        </c:if>
                         <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                           <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                           <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
                         </td>
                       </tr>
-                      <tr>
-                        <td>EV0203023</td>
-                        <td>신규가입</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1"> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"checked> ￦
-                          </label>
-                        </td>
-                        <td>900</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
-                        <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>FI0203023</td>
-                        <td>친구추천</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
-                          </label>
-                        </td>
-                        <td>10</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
-                        <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>EV0203023</td>
-                        <td>신규가입</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
-                          </label>
-                        </td>
-                        <td>10</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
-                        <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>EV0203023</td>
-                        <td>신규가입</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
-                          </label>
-                        </td>
-                        <td>10</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
-                        <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>EV0203023</td>
-                        <td>신규가입</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
-                          </label>
-                        </td>
-                        <td>10</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
-                        <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>EV0203023</td>
-                        <td>신규가입</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
-                          </label>
-                        </td>
-                        <td>10</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
-                        <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>EV0203023</td>
-                        <td>신규가입</td>
-                        <td>N</td>
-                        <td>etgohome8</td>
-                        <td><label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> %
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2"> ￦
-                          </label>
-                        </td>
-                        <td>10</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.16 00:00:00</td>
-                        <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
-                      </tr>
-
+                      
                     </tbody>
+                    </c:forEach>
                   </table>
                 
               </div>

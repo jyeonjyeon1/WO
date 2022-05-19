@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.service.UserMypageService;
 import three.aws.wo.user.vo.ReviewVO;
@@ -65,6 +66,21 @@ public class UserMypageController {
 		System.out.println(userPointList);
 		model.addAttribute("userPointList", userPointList);
 		return "/mypage/mypage_myPoint";
+	}
+	
+	
+	@RequestMapping("/myCoupon.user")
+	public String userCouponList(Model model, HttpSession session) {
+		UserVO vo = (UserVO) session.getAttribute("userSession");
+		if (vo == null) { // 이거는 나중에 interceptor에서 처리할 것
+			return "/login/login_login";
+		}
+		String u_id = vo.getU_id();
+		List<CouponVO> usableCouponList = userMypageService.usableCouponList(u_id);
+		model.addAttribute("usableCouponList", usableCouponList);
+		List<CouponVO> usedCouponList = userMypageService.usedCouponList(u_id);
+		model.addAttribute("usedCouponList", usedCouponList);
+		return "/mypage/mypage_myCoupon";
 	}
 	
 }

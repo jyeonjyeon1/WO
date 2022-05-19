@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.vo.ReviewVO;
 
@@ -28,5 +29,13 @@ public class UserMypageDAO {
 
 	public List<PointVO> userPointList(String u_id) {
 		return sqlSession.selectList("UserMypageDAO.userPointList", u_id);
+	}
+
+	public List<CouponVO> usableCouponList(String u_id) {
+		return sqlSession.selectList("UserMypageDAO.usableCouponList", u_id);
+	}
+	
+	public List<CouponVO> usedCouponList(String u_id) {
+		return sqlSession.selectList("UserMypageDAO.usedCouponList", u_id);
 	}
 }

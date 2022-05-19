@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.dao.UserMypageDAO;
 import three.aws.wo.user.service.UserMypageService;
@@ -34,8 +35,16 @@ public class UserMypageServiceImpl implements UserMypageService {
 		return userMypageDAO.userPointList(u_id);
 	}
 
-	
-	
+
+	@Override
+	public List<CouponVO> usableCouponList(String u_id) {
+		return userMypageDAO.usableCouponList(u_id);
+	}
 	
 
+	@Override
+	public List<CouponVO> usedCouponList(String u_id) {
+		return userMypageDAO.usedCouponList(u_id);
+	}
+	
 }

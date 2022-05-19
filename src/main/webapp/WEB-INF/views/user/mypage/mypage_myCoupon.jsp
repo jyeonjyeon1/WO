@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -80,12 +81,13 @@
 
               </div>
             </div>
-
-
+			
             <div class="mypage_myCoupon_sort">
 
               <ul class="nav coupon_tab" id="myTab" role="tablist">
-
+				<c:forEach var="usableCouponList" items="${usableCouponList}" varStatus="vs">
+					
+				</c:forEach>
                 <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
                   <button class="coupon_link" id="tab_use" data-bs-toggle="tab" data-bs-target="#home" type="button"
                     role="tab" aria-controls="home" aria-selected="true">사용가능쿠폰
@@ -94,7 +96,9 @@
 
                 </li>
 
-
+				<c:forEach var="usedCouponList" items="${usedCouponList}" varStatus="vs">
+					
+				</c:forEach>
                 <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
                   <button class="coupon_link" id="tab_used" data-bs-toggle="tab" data-bs-target="#profile" type="button"
                     role="tab" aria-controls="profile" aria-selected="false">사용불가쿠폰
@@ -105,6 +109,7 @@
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="tab_use">
+                <c:forEach var="usableCouponList" items="${usableCouponList}" varStatus="vs">
                   <div class="coupon_card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                       <div class="col-md-4 col-sm-12">
@@ -112,31 +117,23 @@
                       </div>
                       <div class="col-md-8">
                         <div class="coupon_card-body">
-                          <a href="#" class="coupon_card-title">[친구초대] 공짜리카노쿠폰</a>
-                          <p class="coupon_card-text1">1500원 할인</p>
-                          <p class="coupon_card-text2"><small class="text-muted">~2022.05.08 까지</small></p>
+                          <a href="#" class="coupon_card-title">${usableCouponList.ct_name }</a>
+                          <c:if test="${usableCouponList.ct_discount_type eq false }">
+                          	<p class="coupon_card-text1">${usableCouponList.ct_discount }원 할인</p>
+                          </c:if>
+                          <c:if test="${usableCouponList.ct_discount_type eq true }">
+                          	<p class="coupon_card-text1">${usableCouponList.ct_discount }% 할인</p>
+                          </c:if>
+                          
+                          <p class="coupon_card-text2"><small class="text-muted">유효기간 : ${usableCouponList.c_startdate } ~ ${usableCouponList.c_enddate }</small></p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="coupon_card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="resources/assets/images/categories/cat-2.jpg" class="img-fluid rounded-start" alt="...">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="coupon_card-body">
-                          <a href="#" class="coupon_card-title">[첫주문할인] 100원 쿠폰</a>
-                          <p class="coupon_card-text1">아메리카노 100원</p>
-                          <p class="coupon_card-text2"><small class="text-muted">~2022.05.08 까지</small></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+				</c:forEach>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="tab_used">
-
+				<c:forEach var="usedCouponList" items="${usedCouponList}" varStatus="vs">
                   <div class="coupon_usedcard mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                       <div class="col-md-4">
@@ -144,14 +141,19 @@
                       </div>
                       <div class="col-md-8">
                         <div class="coupon_card-body">
-                          <h5 class="coupon_card-title">[첫주문할인] 100원 쿠폰</h5>
-                          <p class="coupon_card-text">아메리카노 100원</p>
-                          <p class="coupon_card-text"><small class="text-muted">~2020.05.08 까지</small></p>
+                          <h5 class="coupon_card-title">${usedCouponList.ct_name }</h5>
+                           <c:if test="${usedCouponList.ct_discount_type eq false }">
+                          	<p class="coupon_card-text1">${usedCouponList.ct_discount }원 할인</p>
+                          </c:if>
+                          <c:if test="${usedCouponList.ct_discount_type eq true }">
+                          	<p class="coupon_card-text1">${usedCouponList.ct_discount }% 할인</p>
+                          </c:if>
+                          <p class="coupon_card-text"><small class="text-muted">유효기간 : ${usedCouponList.c_startdate } ~ ${usedCouponList.c_enddate }</small></p>
                         </div>
                       </div>
                     </div>
                   </div>
-
+				</c:forEach>
                 </div>
 
               </div>

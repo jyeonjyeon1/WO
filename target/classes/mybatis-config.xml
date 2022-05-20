@@ -12,12 +12,16 @@
 		<typeAlias alias="UserSMSListVO" type="three.aws.wo.user.vo.UserSMSListVO" />
 		<typeAlias alias="OrdersVO" type="three.aws.wo.user.vo.OrdersVO" />
 		<typeAlias alias="ReviewVO" type="three.aws.wo.user.vo.ReviewVO" />
+		<typeAlias alias="UserWishVO" type="three.aws.wo.user.vo.UserWishVO" />
 		<typeAlias alias="StoreVO" type="three.aws.wo.store.vo.StoreVO" />
 		<typeAlias alias="StoreFormVO" type="three.aws.wo.store.vo.StoreFormVO" />
 		<typeAlias alias="StoreKioskVO" type="three.aws.wo.store.vo.StoreKioskVO" />
 		<typeAlias alias="StoreMenuVO" type="three.aws.wo.store.vo.StoreMenuVO" />
 		<typeAlias alias="StoreMenuGroupVO" type="three.aws.wo.store.vo.StoreMenuGroupVO" />
-		<typeAlias alias="StoreMenuOptionVO" type="three.aws.wo.store.vo.StoreMenuOptionVO" />
+		<typeAlias alias="StoreOptionGroupVO" type="three.aws.wo.store.vo.StoreOptionGroupVO" />
+		<typeAlias alias="StoreOptionVO" type="three.aws.wo.store.vo.StoreOptionVO" />
+		<typeAlias alias="MenuBasicOptionVO" type="three.aws.wo.store.vo.MenuBasicOptionVO" />
+		<typeAlias alias="MenuAndOptionVO" type="three.aws.wo.store.vo.MenuAndOptionVO" />
 		<typeAlias alias="FranchiseVO" type="three.aws.wo.store.vo.FranchiseVO" />
 		<typeAlias alias="AdminVO" type="three.aws.wo.admin.vo.AdminVO" />
 		<typeAlias alias="CouponVO" type="three.aws.wo.admin.vo.CouponVO" />
@@ -29,6 +33,7 @@
 		<typeAlias alias="TermsVO" type="three.aws.wo.admin.vo.TermsVO" />
 		<typeAlias alias="MessageVO" type="three.aws.wo.admin.vo.MessageVO" />
 		<typeAlias alias="PointVO" type="three.aws.wo.admin.vo.PointVO" />
+		<typeAlias alias="UserWishVO" type="three.aws.wo.user.vo.UserWishVO" />
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
 		<mapper resource="mappings/user/user-mapping.xml" /> 

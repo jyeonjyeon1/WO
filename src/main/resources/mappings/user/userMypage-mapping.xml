@@ -70,11 +70,17 @@
 		ORDER BY PT_SEQ DESC
 	</select>
 	
-	<insert id="myWish" parameterType="UserWishVO">
-		INSERT INTO LIKE_STORE
-			(U_ID, SI_CODE)
-			VALUES(#{u_id}, #{si_code})
+	<insert id="myWish">
+		INSERT INTO LIKE_STORE VALUES(#{u_id}, #{si_code}, default)
 	</insert>
+	
+	<select id="myWishList" resultType="UserWishVO" parameterType="UserWishVO">
+		SELECT * FROM LIKE_STORE store
+		INNER JOIN 
+		STORE_INFO info
+		ON (store.SI_CODE = info.SI_CODE )
+		WHERE store.U_ID = #{u_id}
+	</select>
 	
 	<select id="usableCouponList" resultType="CouponVO" resultMap="couponVO">
 		SELECT * 
@@ -87,6 +93,7 @@
 			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 
 			WHERE U_ID = #{u_id} AND C_USED='TRUE' OR CURRENT_DATE <![CDATA[>=]]> C_ENDDATE
 	</select>
+	
 	
 	
 </mapper>

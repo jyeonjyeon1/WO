@@ -1,5 +1,6 @@
 package three.aws.wo.user.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.dao.UserMypageDAO;
 import three.aws.wo.user.service.UserMypageService;
 import three.aws.wo.user.vo.ReviewVO;
+import three.aws.wo.user.vo.UserWishVO;
 @Service
 public class UserMypageServiceImpl implements UserMypageService {
 	@Autowired
@@ -29,6 +31,17 @@ public class UserMypageServiceImpl implements UserMypageService {
 	public String getOrderCode() throws Exception {
 		return userMypageDAO.getOrderCode();
 	}
+	
+	@Override
+	public void myWish(HashMap<String, String> wish) {
+		userMypageDAO.myWish(wish);
+	}
+	
+	@Override
+	public List<UserWishVO> myWishList(String storeName) {
+		return userMypageDAO.myWishList(storeName);
+	}
+
 
 	@Override
 	public List<PointVO> userPointList(String u_id) {

@@ -14,5 +14,13 @@ public class UserWishVO {
 	// ¿Ü·¡Å°
 	private String u_id;
 	private String si_code;
+	private String si_name;
+	private String si_loc;
+	private String si_addr_road;
+	private String si_tel;
+	private String si_open;
+	private String si_close;
+	private String si_image;
+	
 	
 }

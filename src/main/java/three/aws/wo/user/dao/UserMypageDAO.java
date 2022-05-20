@@ -1,5 +1,6 @@
 package three.aws.wo.user.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.vo.ReviewVO;
+import three.aws.wo.user.vo.UserWishVO;
 
 @Repository
 public class UserMypageDAO {
@@ -26,7 +28,15 @@ public class UserMypageDAO {
 	public String getOrderCode() {
 		return sqlSession.selectOne("UserMypageDAO.getOrderCode");
 	}
+	
+	public void myWish(HashMap<String, String> wish) {
+		sqlSession.insert("UserMypageDAO.myWish", wish);
+	}
 
+	public List<UserWishVO> myWishList(String storeName) {
+		return sqlSession.selectList("UserMypageDAO.myWishList",storeName);
+	}
+	
 	public List<PointVO> userPointList(String u_id) {
 		return sqlSession.selectList("UserMypageDAO.userPointList", u_id);
 	}

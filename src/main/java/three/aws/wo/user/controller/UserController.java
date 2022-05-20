@@ -128,11 +128,11 @@ public class UserController {
 //		return "/mypage/mypage_myReviewList";
 //	}
 
-	@GetMapping("/myWishList.user")
-	public String tomyWishListPage() {
-		System.out.println("myWishList");
-		return "/mypage/mypage_myWishList";
-	}
+//	@GetMapping("/myWishList.user")
+//	public String tomyWishListPage() {
+//		System.out.println("myWishList");
+//		return "/mypage/mypage_myWishList";
+//	}
 
 	@GetMapping("/myOrderList.user")
 	public String tomyOrderListPage() {

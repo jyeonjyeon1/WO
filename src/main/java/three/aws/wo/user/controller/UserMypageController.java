@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
+import three.aws.wo.store.vo.MenuBasicOptionVO;
 import three.aws.wo.user.service.UserMypageService;
 import three.aws.wo.user.vo.ReviewVO;
 import three.aws.wo.user.vo.UserVO;
+import three.aws.wo.user.vo.UserWishVO;
 
 @Controller
 public class UserMypageController {
@@ -75,7 +77,7 @@ public class UserMypageController {
 
 	// 위시리스트 
 	@ResponseBody
-	@RequestMapping(value="myWish.user", method=RequestMethod.POST)
+	@RequestMapping(value="/myWish.user", method=RequestMethod.POST)
 	public void myWish(@RequestBody HashMap<String, String> param, HttpSession session) {
 		
 		HashMap<String, String> wish = new HashMap<String, String>();
@@ -89,7 +91,28 @@ public class UserMypageController {
 		
 		wish.put("u_id", u_id);
 		wish.put("si_code", si_code);
+		
+		userMypageService.myWish(wish);
 
+	}
+	
+//	@RequestMapping(value="/myWishList.user", method=RequestMethod.GET)
+//	public String myWishListPage() {
+//		System.out.println("myWishList");
+//		return "/mypage/mypage_myWishList";
+//	}
+	
+	// 위시리스트 
+	@RequestMapping(value="/myWishList.user")
+	public String myWishList(HttpSession session, Model model) {
+		
+		UserVO userSession = (UserVO) session.getAttribute("userSession");
+		String u_id = userSession.getU_id();
+		List<UserWishVO> wish = userMypageService.myWishList(u_id);
+		
+		model.addAttribute("myWishList", wish);
+		
+		return "/mypage/mypage_myWishList";
 	}
 	
 	@RequestMapping("/myCoupon.user")

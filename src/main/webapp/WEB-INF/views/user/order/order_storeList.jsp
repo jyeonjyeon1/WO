@@ -85,13 +85,14 @@
             		}
             		
             	})
-        	});
+        	});*/
         	
-        }); */
+        }); 
         
-       function myWish() {
+   function myWish() {
 		var storecode = $("#storecode").val();
-		var param = {"storecode": storecode }
+		//alert(storecode);
+		 var param = {"storecode": storecode };
 		$.ajax({
 			type: "POST",
             url: "/myWish.user",
@@ -100,13 +101,12 @@
             contentType: "application/json",
 			success : function(data) {
 				alert("성공적으로 변경되었습니다.")
-				location.href = "/login.user";
 			},
 			error : function(data) {
 				console.log("로그인 통신x")
 			}
 
-		});//ajax 끝
+		});//ajax 끝 
 	}  
         
             

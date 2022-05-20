@@ -11,5 +11,5 @@ public class StoreOptionVO {
 	private String op_name;
 	private int op_price;
 	private boolean op_oos;
-
+	private String og_code;
 }

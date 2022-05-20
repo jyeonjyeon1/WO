@@ -27,9 +27,9 @@ public class StoreMenuController {
 	
 	@RequestMapping("/CRUD.store")
 	public String storeMenuList(HttpSession session, Model model) {
-		//일단은 그냥 임시로 storeCode를 정해봄
+		//storeCode for IMSI test... (if session -> storeName = session)
 		String storeName = "2222111212";
-		System.out.println("storemenuCRUD페이지");
+		System.out.println("Welcome storemenuCRUD Page");
 		List<StoreMenuVO> storeMenuList = sMenuService.storeMenuList(storeName);
 		List<StoreMenuGroupVO> storeMgList = sMenuService.storeMgList(storeName);
 		List<StoreOptionGroupVO> ogList = sMenuService.ogList(storeName);
@@ -43,8 +43,6 @@ public class StoreMenuController {
 		model.addAttribute("optionList",optionList);
 		model.addAttribute("MAOList", MAOList);
 		model.addAttribute("basicOpList",basicOpList);
-		//
-		//
 		
 		return "/menu/menu_crud";
 		

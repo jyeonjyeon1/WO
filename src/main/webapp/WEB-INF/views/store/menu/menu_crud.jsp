@@ -391,84 +391,6 @@ li {
   }) 
 
 
- 
-  
-  //메뉴편집-옵션설정 클릭시
- /*  $('.menu_oneOptionUpdate').click(function(){
-      $('#menu_updateOption').modal();  
-  });
-   */
-  //메뉴편집-이미지변경 클릭시
-/*   $('.menu_oneImgUpdate').click(function(){
-      $('#menu_updateImg').modal();  
-  }); */
-  
-  //메뉴편집 - 메뉴추가 클릭시
-/*   $('.menu_addOne').click(function(){
-      $('#menu_addOne').modal();
-  }); */
-  
-  //메뉴편집 - 옵션설정 - 옵션그룹추가 클릭시
-/*   $('.menu_addOptionGroup').click(function(){
-	$('#menu_addOptionGroup').modal();
-  }) */
-
-    //옵션편집 - + 옵션그룹 추가버튼 클릭시
-/* 	$('.option_addOptionGroup').click(function(){
-	$('#option_addOptionGroup').modal();
-  }) */
-
-  //메뉴 가격 추가버튼클릭시.
- /*  $('.menu_priceOption').click(function(){
-	$('.price_list').append("<div class='row' style='margin-left:5px;' >" 
-      		+"<div class='col-lg-5' style='padding:5px;'>" 
-      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격명'>"
-      	    +"</div>"
-      	    +"<div class='col-lg-5' style='padding:5px;'>"
-      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격'>"
-      	    +"</div>"
-      	    +"<div class='col-lg-2' style='padding:5px;'>"
-      		+"<button type='button' onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top:7px;'><i class='fa fa-trash-o '></i></button>"
-            +  "</div>"                    
-      	    +"</div>");  
-  }) */
-
-
-  //옵션그룹- 옵션 추가버튼클릭시.
- /*  $('.groupAdd_Option').click(function(){
-	$('.groupAdd_OptionList').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
-                        + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
-												+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
-												+"style='width: relative; font-size: 15px;'	type='text' placeholder='500'></div>"
-												+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
-												+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
-												+"</button>	</div></div>");  
-  }) */
-
-  //옵션 - 옵션추가버튼 클릭시
- /*  $('.add_Option').click(function(){
-	$('.option_list').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
-                        + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
-												+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
-												+"style='width: relative; font-size: 15px;'	type='text' placeholder='500'></div>"
-												+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
-												+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
-												+"</button>	</div></div>");  
-  }) */
-
-  //옵션편집 - 옵션명 및 가격변경 클릭시
-/* $('#option_oneUpdate').click(function(){
- $('#option_oneUpdate_modal').modal();
-}) */
-
-  //옵션편집 - 옵션추가버튼 클릭시
-  $('.option_addOne').click(function(){
-      $('#option_addOne').modal();  
-  });
-
-
-
-  
 })
 
 
@@ -505,20 +427,6 @@ li {
 	  }
   }
 	  
-	
-//옵션편집 - 옵션그룹추가버튼 클릭시 모달 
- /*  function option_addOptionGroup() {
-  	$('#addOptionGroup').modal();    
-  } */
-/* 
-function update_ros_modal() {
-	$('#update_ros_modal').modal();
-}
- */
-
-
-   
-   
 //이미지수정 이미지파일 추가
  function readImage(input) {
 
@@ -665,39 +573,31 @@ function update_ros_modal() {
 												<div class="panel-body col-lg-12">
 													<div class="tab-content">
 
-														<!--메뉴편집 start-->
+<!-- ***********************************************************메뉴편집 Tab start************************************************************* -->
 														<div id="faq__111" class="tab-pane active">
 															<div class="row" style="text-align: right;">
 																<a data-toggle="modal" href="#addMenuGroup"
 																	class="menu_addMenuGroup"> + 메뉴그룹추가</a>
 															</div>
-
-															<!--메뉴그룹 추가 modal start-->
+															
+															
+									<!--#################### +메뉴그룹 추가 modal start#######################-->
 
 															<div class="modal fade" id="addMenuGroup" role="dialog">
-
-																<div class="modal-dialog">
-
-																	<!-- Modal content-->
-
-																	<div class="modal-content">
+																<div class="modal-dialog"><div class="modal-content">
 																		<div class="modal-header">
 																			<!-- header -->
 																			<h4 class="modal-title">메뉴그룹 추가</h4>
 																			<button type="button" class="close"
 																				data-dismiss="modal"
 																				style="font-size: 20px; color: black;">취소</button>
-
-																		</div>
+																			</div>
 																		<div class="modal-body">
 																			<!-- body -->
-
-
 																			<table class="modal_table">
 																				<ul>
 																					<li style="margin: 15px; padding-bottom: 10px;">
-																						<h5
-																							style="font-size: 15px; font-weight: bolder; color: black;">메뉴그룹명</h5>
+																						<h5 style="font-size: 15px; font-weight: bolder; color: black;">메뉴그룹명</h5>
 																						<div class="row">
 																							<div class="col-lg-12">
 																								<input class="form-control" id="mg_name"
@@ -706,9 +606,6 @@ function update_ros_modal() {
 																							</div>
 																						</div>
 																					</li>
-
-
-
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
@@ -726,9 +623,9 @@ function update_ros_modal() {
 																</div>
 															</div>
 
-															<!--메뉴그룹추가 modal end-->
+									<!--####################메뉴그룹 추가 modal end#######################-->
 
-															<!--메뉴그룹 리스트 start-->
+									<!--************************메뉴(그룹) List start********************-->
 															<nav>
 																<ul id="main_menu">
 																	<c:forEach var="mg" items="${storeMgList}"
@@ -744,14 +641,12 @@ function update_ros_modal() {
 																					style="float: right; margin-right: 10px; margin-top: 5px;">
 																					<i class="fa fa-pencil"></i>
 																				</button>
-																		</a> <!--서브메뉴시작-->
+																		</a> 
+																		<!--*******메뉴 start*******-->
 																			<ul class="snd_menu sub_menu">
-
-
-																				<c:forEach var="menu" items="${storeMenuList}"
+																			<c:forEach var="menu" items="${storeMenuList}"
 																					varStatus="vss">
 																					<c:if test="${menu.mg_name eq mg.mg_name }">
-																						
 																						<li><a class="menu_one">
 																								<div class="row">
 																									<div class="col-lg-2"
@@ -765,17 +660,17 @@ function update_ros_modal() {
 																										<h4
 																											style="font-weight: bolder; margin-left: 0;">${menu.m_name }
 																										</h4>
+																										<!-- 메뉴 basic 옵션 start -->
 																										<div class="menu_oneOption">
 																										<c:forEach var="basicOpList" items="${basicOpList}" varStatus="basicOpVs">
-																							<c:if test="${basicOpList.m_code eq menu.m_code }">
-						
-																											<h6 style="margin-top: 0; font-weight: bolder;">${basicOpList.opb_name}
-																												: <fmt:formatNumber	value="${basicOpList.opb_price}" pattern="###,###" /> </h6>
-																											
-																												
-																																													</c:if>
-																						</c:forEach>
+																											<c:if test="${basicOpList.m_code eq menu.m_code }">
+																												<h6 style="margin-top: 0; font-weight: bolder;">${basicOpList.opb_name}
+																												: <fmt:formatNumber	value="${basicOpList.opb_price}" pattern="###,###" /> 
+																												</h6>
+																												</c:if>
+																										</c:forEach>
 																										</div>
+																										<!-- 메뉴 basic 옵션 end -->
 																									</div>
 																								</div>
 
@@ -794,11 +689,8 @@ function update_ros_modal() {
 																					<div class="modal fade"
 																						id="menu_oneInfoUpdate${vs.index}${vss.index}"
 																						role="dialog">
-
 																						<div class="modal-dialog">
-
-																							<!-- Modal content-->
-																							<div class="modal-content">
+																						<div class="modal-content">
 																								<div class="modal-header">
 																									<!-- header -->
 																									<h4 class="modal-title">메뉴정보수정</h4>
@@ -806,13 +698,9 @@ function update_ros_modal() {
 																										style="color: black; font-weight: bolder; text-align: center;">[${menu.m_name}]</h3>
 																									<button type="button" class="close"
 																										data-dismiss="modal"
-																										style="font-size: 20px; color: black;">취소</button>
-
-																								</div>
+																										style="font-size: 20px; color: black;">취소</button></div>
 																								<div class="modal-body">
 																									<!-- body -->
-
-
 																									<table class="modal_table">
 																										<ul>
 																											<li
@@ -861,7 +749,6 @@ function update_ros_modal() {
 																													</div>
 																													</c:if>
 																													</c:forEach>
-																													
 																													<div class="row" id="addPriceOptionBtn${vs.index}${vss.index}">
 																									<a class="menu_addOptionGroup" onclick="addPO${vs.index}${vss.index}()" >
 																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">
@@ -871,6 +758,7 @@ function update_ros_modal() {
 																											</li>
 																											
 																											<script>
+																											//가격옵션추가 눌렀을때 input 나오게하기.
 																											function addPO${vs.index}${vss.index}(){
 																											$('#addPriceOptionBtn${vs.index}${vss.index}').prepend("<div class='add_priceoption' style='margin:0 15px 0 15px;'> <div class='row' style='margin-left: 5px;'>"
 																																		+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
@@ -881,13 +769,12 @@ function update_ros_modal() {
 																																		+"onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs'"
 																																		+"style='float: left; margin-top: 7px;'> <i class='fa fa-trash-o '></i> </button>"
 																																		+"</div></div></div>");  
-																								  
 																														}
 																											</script>
 																											<li>
 																												<div class="row">
 																													<div class="col-lg-12">
-																														<button class="save_Btn">적용하기</button>
+																														<button type="button" class="save_Btn">적용하기</button>
 																													</div>
 																												</div>
 																											</li>
@@ -895,7 +782,6 @@ function update_ros_modal() {
 
 																									</table>
 																								</div>
-																								<div id="count" value="1"></div>
 																							</div>
 																						</div>
 																					</div>
@@ -905,10 +791,7 @@ function update_ros_modal() {
 																					<!-------------메뉴편집_메뉴옵션수정 Modal start-------------->
 																	<div class="modal fade" id="menu_updateOption${vs.index}${vss.index}"
 																		role="dialog">
-
 																		<div class="modal-dialog">
-
-																			<!-- Modal content-->
 																			<div class="modal-content">
 																				<div class="modal-header">
 																					<!-- header -->
@@ -917,14 +800,12 @@ function update_ros_modal() {
 																					<button type="button" class="close"
 																						data-dismiss="modal"
 																						style="font-size: 20px; color: black;">취소</button>
-
 																				</div>
 																				<div class="modal-body">
 																					<!-- body -->
 																					<table class="modal_table">
 																						<ul>
-																						
-																							<li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																						<li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
 																								<c:set var="ogog" value="dd"></c:set>
 																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVss">
 																								<c:if test="${ MAOList.m_code eq menu.m_code}">
@@ -933,8 +814,6 @@ function update_ros_modal() {
 																									<div class="row">
 																										<div class="col-lg-8">
 																											<h4 style="font-weight: bolder; color: black;">${MAOList.og_name}</h4>
-																											
-																											
 																											<h5 style="margin-left: 10px;">
 																											<c:forEach var="optionList" items="${optionList }">
 																												<c:if test="${optionList.og_code eq MAOList.og_code}">
@@ -953,16 +832,12 @@ function update_ros_modal() {
 																								</c:if>
 																								</c:if>
 																								</c:forEach>
-																								
 																								<div class="row">
 																									<a class="menu_addOptionGroup" data-toggle="modal" href="#menu_addOptionGroup${vs.index}${vss.index}" >
 																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">+
 																											옵션그룹 추가</h4>
 																									</a>
 																								</div>
-																							</li>
-
-																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
 																										<button class="save_Btn">적용하기</button>
@@ -970,18 +845,105 @@ function update_ros_modal() {
 																								</div>
 																							</li>
 																						</ul>
-
 																					</table>
 																				</div>
-																				<div id="count" value="1"></div>
 																			</div>
 																		</div>
 																	</div>
 
 																	<!-------------메뉴편집_메뉴옵션수정 Modal end--------------->
+																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal start--------------->
+																	<div class="modal fade" id="menu_addOptionGroup${vs.index}${vss.index}"
+																		role="dialog"
+																		style="max-height: 850px; overflow-y: initial;">
+																		<div class="modal-dialog">
+																		<div class="modal-content">
+																				<div class="modal-header">
+																					<!-- header -->
+																					<h4 class="modal-title">옵션그룹추가</h4>
+																					<h3 style="color: black; font-weight: bolder; text-align: center;">[${menu.m_name}]</h3>
+																					<button type="button" class="close"
+																						data-dismiss="modal"
+																						style="font-size: 20px; color: black;">취소</button>
+																						</div>
+																				<div class="modal-body"
+																					style="height: 800px; overflow-y: scroll;">
+																					<!-- body -->
+
+																					<div class="row">
+																						<h5
+																							style="background-color: #61616128; padding: 15px; margin: 10px; border-radius: 4px;">
+																							새로운 옵션 그룹이 필요하신 경우 <span
+																								style="color: blue; font-weight: bolder;">옵션편집-옵션추가</span>를
+																							이용해주세요.
+																						</h5>
+																					</div>
+																					 
+																					 <c:forEach var="ogList" items="${ogList}">
+																					<label for="chbox1" class="menu_addOptionGroup1"
+																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
+																						<div class="row">
+																						
+																						<%-- 상품에 옵션그룹이 포함되면 checkde / 상품에 옵션그룹이 포함되지않으면 unchecked 해야되는데 안되는중.. ㅜㅜ
+																						 <c:forEach var="MAOList" items="${MAOList}">
+																						<c:if test="${MAOList.m_code eq menu.m_code}">
+																						<c:if test="${MAOList.og_code eq ogList.og_code}">
+																						<input id="chbox1${vs.index}${vss.index}" type="checkbox"
+																									style="width: 30px; height: 30px;" checked>
+																						</c:if>
+																						</c:if>
+																						</c:forEach> --%>
+																						
+																						<input id="chbox1${vs.index}${vss.index}" type="checkbox"
+																									style="width: 30px; height: 30px;" checked>
+																							
+																							<div class="col-lg-1">
+																							</div>
+																							<div class="col-lg-11">
+																								<h3
+																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">${ogList.og_name}</h3>
+																								<h6 style="line-height: 10px; padding-bottom: 20;">
+																									<c:forEach var="optionList" items="${optionList}">
+																									<c:if test="${optionList.og_code =ogList.og_code }">
+																										${optionList.op_name},
+																									</c:if>
+																									</c:forEach>
+																									</h6>
+																							</div>
+																						</div>
+																						<div class="row">
+																							<div class="option_linkMenu"
+																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
+																								<h5 style="color: black;">
+																									<span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
+																									메뉴를 확인하세요.
+																								</h5>
+																								<h6>
+																								<c:set var="ogcode" value="ff"></c:set>
+																								<c:forEach var="MAOList" items="${MAOList}">
+																									<c:if test="${MAOList.og_code eq ogList.og_code}">
+																									<c:if test="${ogcode ne MAOList.og_code}">
+																											${MAOList.m_name}, 
+																									<c:set var="ogcode" value="${MAOList.og_code}" />		
+																									</c:if>
+																									</c:if>
+																								</c:forEach></h6>
+																							</div>
+																						</div>
+																					</label>
+																					</c:forEach>
+																					<div class="row" style="overflow-y: auto;">
+																						<div class="col-lg-12">
+																							<button class="save_Btn">옵션그룹 수정하기</button>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal end--------------->
 																	<!------------ 메뉴편집_이미지변경 Modal start --------------->
-                                                   <div class="modal fade" id="menu_updateImg${vs.index}${vss.index}"
-                                                            role="dialog">
+                                                   				<div class="modal fade" id="menu_updateImg${vs.index}${vss.index}" role="dialog">
 
                                                             <div class="modal-dialog">
 
@@ -1063,14 +1025,9 @@ function update_ros_modal() {
                                                                                        style="text-decoration: underline; color: blue;">자세히
                                                                                        알아보기</a>
                                                                                  </div>
-
-
-                                                                              </div>
-
-
-                                                                           </li>
-
-                                                                           <li>
+                                                                                 </div>
+                                                                              </li>
+                                                                              <li>
                                                                               <div class="row">
                                                                                  <div class="col-lg-12">
                                                                                     <button type="button" class="save_Btn">승인 신청하기</button>
@@ -1078,106 +1035,19 @@ function update_ros_modal() {
                                                                               </div>
                                                                            </li>
                                                                         </ul>
-
-                                                                     </table>
+                                                                         </table>
                                                                   </div>
-                                                                  <div id="count" value="1"></div>
                                                                </div>
                                                             </div>
                                                          </div>
                                                    <!------------ 메뉴편집_이미지변경 Modal end --------------->
-                                                   
-																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal start--------------->
-																	<div class="modal fade" id="menu_addOptionGroup${vs.index}${vss.index}"
-																		role="dialog"
-																		style="max-height: 850px; overflow-y: initial;">
-
-																		<div class="modal-dialog">
-
-																			<!-- Modal content-->
-																			<div class="modal-content">
-																				<div class="modal-header">
-																					<!-- header -->
-																					<h4 class="modal-title">옵션그룹추가</h4>
-																					<h3 style="color: black; font-weight: bolder; text-align: center;">[${menu.m_name}]</h3>
-																					<button type="button" class="close"
-																						data-dismiss="modal"
-																						style="font-size: 20px; color: black;">취소</button>
-
-																				</div>
-																				<div class="modal-body"
-																					style="height: 800px; overflow-y: scroll;">
-																					<!-- body -->
-
-																					<div class="row">
-																						<h5
-																							style="background-color: #61616128; padding: 15px; margin: 10px; border-radius: 4px;">
-																							새로운 옵션 그룹이 필요하신 경우 <span
-																								style="color: blue; font-weight: bolder;">옵션편집-옵션추가</span>를
-																							이용해주세요.
-																						</h5>
-																					</div>
-																					 
-																					 <c:forEach var="ogList" items="${ogList}">
-																					<label for="chbox1" class="menu_addOptionGroup1"
-																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
-																						<div class="row">
-																							<input id="chbox1" type="checkbox"
-																									style="width: 30px; height: 30px;" checked>
-																							<div class="col-lg-1">
-																							</div>
-																							<div class="col-lg-11">
-																								<h3
-																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">${ogList.og_name}</h3>
-																								<h6 style="line-height: 10px; padding-bottom: 20;">
-																									<c:forEach var="optionList" items="${optionList}">
-																									<c:if test="${optionList.og_code =ogList.og_code }">
-																										${optionList.op_name},
-																									</c:if>
-																									</c:forEach>
-																									</h6>
-																							</div>
-																						</div>
-																						<div class="row">
-																							<div class="option_linkMenu"
-																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
-																								<h5 style="color: black;">
-																									<span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
-																									메뉴를 확인하세요.
-																								</h5>
-																								<h6>
-																								<c:set var="ogcode" value="ff"></c:set>
-																								<c:forEach var="MAOList" items="${MAOList}">
-																									<c:if test="${MAOList.og_code eq ogList.og_code}">
-																									<c:if test="${ogcode ne MAOList.og_code}">
-																											${MAOList.m_name}, 
-																									<c:set var="ogcode" value="${MAOList.og_code}" />		
-																									</c:if>
-																									</c:if>
-																								</c:forEach></h6>
-																							</div>
-																						</div>
-																					</label>
-																					</c:forEach>
-																					<div class="row" style="overflow-y: auto;">
-																						<div class="col-lg-12">
-																							<button class="save_Btn">옵션그룹 수정하기</button>
-																						</div>
-																					</div>
-
-																				</div>
-																				<div id="count" value="1"></div>
-																			</div>
-																		</div>
-																	</div>
-																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal end--------------->
-																					
-																				</c:forEach>
+                                                   						</c:forEach>
 																				<li><a class="menu_addOne" onclick="menu_addOne${vs.index}()">
-
-																						<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ 메뉴추가</h4>
-																				</a></li>
-																			</ul></li>
+																				<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ 메뉴추가</h4></a>
+																				</li>
+																			</ul>
+																	<!--*******메뉴 end*******-->
+																			</li>
 																			
 																		<script>
 												function menu_addOne${vs.index}() {
@@ -1192,13 +1062,7 @@ function update_ros_modal() {
                                               	function addMenuCheck${vs.index}() {
                                               		alert("${vs.index}번 등록중");
                                               	};
-                                              	
-                                             
-                                              
-                                              	
-                                              	
-                                                                    
-                                              </script>
+                                              	</script>
 
 																		<!--메뉴추가 모달창-->
 
@@ -1291,8 +1155,6 @@ function update_ros_modal() {
 											                       
 																					}
 																						</script>
-																						
-
 																						<table class="modal_table">
 																							<ul>
 																								<li
@@ -1305,22 +1167,15 @@ function update_ros_modal() {
 																										
 																									</div>
 																								</li>
-																								
-																								
 																								<li>
 																									<div class="col-lg-12">
-																										<button type="button" class="save_Btn" data-toggle="modal" href="#finalCh${vs.index}">메뉴
-																											추가하기</button>
+																										<button type="button" class="save_Btn" data-toggle="modal" href="#finalCh${vs.index}">확인하기</button>
 																									</div>
 																								</li>
-
-																							</ul>
-
-																						</table>
-
-																					</div>
-
-																				</div>
+																								</ul>
+																							</table>
+																							</div>
+																							</div>
 																			</div>
 																		</div>
 																		<!-- 메뉴추가 모달창 end -->
@@ -1400,16 +1255,14 @@ function update_ros_modal() {
 																							<button class="save_Btn">옵션그룹 수정하기</button>
 																						</div>
 																					</div>
-
-																				</div>
-																				<div id="count" value="1"></div>
+																					</div>
 																			</div>
 																		</div>
 																	</div>
 																	<!-------------메뉴추가_옵션그룹추가 Modal end--------------->
 																		
 																		
-																		<!--------------------final check----------------------------->
+																	<!--------------------final check----------------------------->
 
 																		<div class="modal fade" id="finalCh${vs.index}" role="dialog">
 																			<div class="modal-dialog">
@@ -1525,6 +1378,13 @@ function update_ros_modal() {
 																										</ul>
 																									</div>
 																								</li>
+																								
+																								<li>
+																								<div class="col-lg-12">
+																										<button type="button" class="save_Btn" onclick="">메뉴
+																											추가하기</button>
+																									</div>
+																								</li>
 																							</ul>
 
 																						</table>
@@ -1535,49 +1395,34 @@ function update_ros_modal() {
 																				</div>
 																			</div>
 																		</div>
-																		
-																		
-
-
-																	</c:forEach>
-
-																	
-
-																</ul>
-															</nav>
+																		</c:forEach>
+																		</ul>
+																</nav>
 															<!--메뉴그룹 리스트 end-->
 														</div>
-														<!--메뉴편집 end-->
+<!-- ***********************************************************메뉴편집 Tab end************************************************************* -->
 
-														<!--옵션편집 start-->
+<!-- ***********************************************************옵션편집 Tab start************************************************************* -->
 														<div id="faq__222" class="tab-pane">
 
 															<div class="row" style="text-align: right;">
 																<a class="menu_addMenuGroup" data-toggle="modal"
 																	href="#addOptionGroup"> + 옵션그룹추가</a>
 															</div>
-															
-															
-
 															<!--------옵션그룹 추가 modal start-------->
 															<div class="modal fade" id="addOptionGroup" role="dialog">
 
 																<div class="modal-dialog">
-
-																	<!-- Modal content-->
-																	<div class="modal-content">
+																<div class="modal-content">
 																		<div class="modal-header">
 																			<!-- header -->
 																			<h4 class="modal-title">옵션그룹 추가</h4>
 																			<button type="button" class="close"
 																				data-dismiss="modal"
 																				style="font-size: 20px; color: black;">취소</button>
-
-																		</div>
+																				</div>
 																		<div class="modal-body">
 																			<!-- body -->
-
-
 																			<table class="modal_table">
 																				<ul>
 																					<li
@@ -1661,7 +1506,7 @@ function update_ros_modal() {
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<button class="save_Btn">추가하기</button>
+																								<button type="button" class="save_Btn">추가하기</button>
 																							</div>
 																						</div>
 																					</li>
@@ -1669,14 +1514,12 @@ function update_ros_modal() {
 
 																			</table>
 																		</div>
-																		<div id="count" value="1"></div>
 																	</div>
 																</div>
 															</div>
 															<!--------옵션그룹 추가 modal end-------->
 
 															<!--옵션그룹 리스트 start-->
-															
 															<c:forEach var="ogList" items="${ogList}" varStatus="ogVs">
 															
 															<nav>
@@ -1727,7 +1570,7 @@ function update_ros_modal() {
 																										</c:otherwise>
 																										</c:choose>
 																									<a data-toggle="modal"
-																										href="#update_ros_modal"
+																										href="#update_ros_modal${ogVs.index}"
 																										class="btn btn-primary btn-xs"
 																										style="margin-left: 10px; margin-top: 5px;">
 																										<i class="fa fa-pencil"></i>
@@ -1740,6 +1583,7 @@ function update_ros_modal() {
 																					</div>
 
 																			</a></li>
+																		
 																			
 																			<c:forEach var="optionList" items="${optionList}" varStatus="optionVs">
 																			<c:if test="${ogList.og_seq eq optionList.og_seq }">
@@ -1767,6 +1611,8 @@ function update_ros_modal() {
 																					<li><a class="option_oneUpdate" data-toggle="modal" href="#option_oneUpdate_modal${ogVs.index}${optionVs.index}">옵션명 및 가격 변경</a></li>
 																					<li><a class="option_oneDelete">옵션삭제</a></li>
 																				</ul></li>
+																				
+																				
 																				<!------------옵션명 및 가격변경 modal start-------------->
 																			<div class="modal fade" id="option_oneUpdate_modal${ogVs.index}${optionVs.index}" role="dialog">
 
@@ -1821,7 +1667,7 @@ function update_ros_modal() {
 
 																							</table>
 																						</div>
-																						<div id="count" value="1"></div>
+																						
 																					</div>
 																				</div>
 																			</div>
@@ -1830,29 +1676,27 @@ function update_ros_modal() {
 																				
 																				</c:if>	
 																				</c:forEach>
-																			<li><a class="option_addOne">
-
+																				
+																			<li><a class="option_addOne" onclick="option_addOne${ogVs.index}()">
+				
 																					<h4
 																						style="color: blue; padding: 10px; margin-right: 65px;">+
 																						옵션추가</h4>
 
 																			</a></li>
+																			
 
 																		</ul> <!--서브메뉴끝--></li>
+																		<script>
+																				function option_addOne${ogVs.index}() {
+																					
+																					$('#option_addOne${ogVs.index}').modal();
+																				};
+																			</script>
 																</ul>
 															</nav>
-																
-																
-															</c:forEach>
-															<!--메뉴그룹 리스트 end-->
-
-														</div>
-														<!--옵션편집 end-->
-														
-														
-														
-														<!--------필수여부 수정 모달 start--------->
-																			<div class="modal fade" id="update_ros_modal"
+															<!--------필수여부 수정 모달 start--------->
+																			<div class="modal fade" id="update_ros_modal${ogVs.index}"
 																				role="dialog">
 
 																				<div class="modal-dialog">
@@ -1862,6 +1706,9 @@ function update_ros_modal() {
 																						<div class="modal-header">
 																							<!-- header -->
 																							<h4 class="modal-title">옵션 필수여부 설정</h4>
+																							<h3
+																							style="color: black; font-weight: bolder; text-align: center;">그룹명
+																							: ${ogList.og_name}</h3>
 																							<button type="button" class="close"
 																								data-dismiss="modal"
 																								style="font-size: 20px; color: black;">취소</button>
@@ -1875,26 +1722,46 @@ function update_ros_modal() {
 																								<h5
 																									style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px;">
 																									필수여부</h5>
+																									<c:choose>
+																										<c:when test="${ogList.og_ros==false}">
 																								<div class="row"
 																									style="line-height: 20px; margin-left: 10px;">
-																									<input type="radio" name="radio2" id="radio3"
-																										value="1" checked> <label for="radio3"
+																									<input type="radio" name="radio2${ogVs.index}" id="radio3${ogVs.index}"
+																										value="1" > <label for="radio3${ogVs.index}"
 																										style="font-size: 15px;"> [필수] 옵션을 반드시
 																										선택해야 주문이 가능해요</label>
 																								</div>
 																								<div class="row"
 																									style="line-height: 20px; margin-left: 10px;">
-																									<input type="radio" name="radio2" id="radio4"
-																										value="2"> <label for="radio4"
+																									<input type="radio" name="radio2${ogVs.index}" id="radio4${ogVs.index}"
+																										value="2" checked> <label for="radio4${ogVs.index}"
 																										style="font-size: 15px;"> [선택] 옵션을
 																										선택하지 않아도 주문이 가능해요</label>
 																								</div>
+																										</c:when>
+																										<c:otherwise>
+																										<div class="row"
+																									style="line-height: 20px; margin-left: 10px;">
+																									<input type="radio" name="radio3${ogVs.index}" id="radio4${ogVs.index}"
+																										value="1" checked> <label for="radio4${ogVs.index}"
+																										style="font-size: 15px;"> [필수] 옵션을 반드시
+																										선택해야 주문이 가능해요</label>
+																								</div>
+																								<div class="row"
+																									style="line-height: 20px; margin-left: 10px;">
+																									<input type="radio" name="radio3${ogVs.index}" id="radio5${ogVs.index}"
+																										value="2"> <label for="radio5${ogVs.index}"
+																										style="font-size: 15px;" > [선택] 옵션을
+																										선택하지 않아도 주문이 가능해요</label>
+																								</div>
+																										</c:otherwise>
+																										</c:choose>
 																							</li>
 
 																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button class="save_Btn">적용하기</button>
+																										<button type="button" class="save_Btn">적용하기</button>
 																									</div>
 																								</div>
 																							</li>
@@ -1905,21 +1772,19 @@ function update_ros_modal() {
 																				</div>
 																			</div>
 																			<!--------필수여부 수정 모달 end--------->
-														
-														<!--------+옵션 추가버튼 클릭시 modal start-------->
-																	<div class="modal fade" id="option_addOne"
+																			
+																				<!--------+옵션 추가버튼 클릭시 modal start-------->
+																	<div class="modal fade" id="option_addOne${ogVs.index}"
 																		role="dialog">
 
 																		<div class="modal-dialog">
-
-																			<!-- Modal content-->
-																			<div class="modal-content">
+																		<div class="modal-content">
 																				<div class="modal-header">
 																					<!-- header -->
 																					<h4 class="modal-title">옵션그룹 추가</h4>
 																					<h3
 																						style="color: black; font-weight: bolder; text-align: center;">
-																						옵션명 : [샷추가]</h3>
+																						옵션명 : ${ogList.og_name }</h3>
 																					<button type="button" class="close"
 																						data-dismiss="modal"
 																						style="font-size: 20px; color: black;">취소</button>
@@ -1960,18 +1825,14 @@ function update_ros_modal() {
 																									</div>
 																								</div>
 																								<div class="row" style="margin-left: 5px;">
-																									<button class="groupAdd_Option">+ 가격옵션
+																									<button type="button" class="groupAdd_Option">+ 가격옵션
 																										추가하기</button>
 																								</div>
 																							</li>
-
-
-
-
 																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button class="save_Btn">옵션 추가하기</button>
+																										<button type="button" class="save_Btn">옵션 추가하기</button>
 																									</div>
 																								</div>
 																							</li>
@@ -1979,11 +1840,23 @@ function update_ros_modal() {
 
 																					</table>
 																				</div>
-																				<div id="count" value="1"></div>
 																			</div>
 																		</div>
 																	</div>
 																	<!--------+옵션 추가 버튼 클릭시 modal end-------->
+																
+																
+															</c:forEach>
+															<!--메뉴그룹 리스트 end-->
+
+														</div>
+<!-- ***********************************************************옵션편집 Tab end************************************************************* -->
+														
+														
+														
+														
+														
+													
 
 														<!--주문안내/원산지 편집 start-->
 														<div id="faq__333" class="tab-pane">

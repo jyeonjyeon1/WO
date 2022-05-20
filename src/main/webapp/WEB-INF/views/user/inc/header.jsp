@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -12,7 +13,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- ========================= Google login ========================= -->
-<meta name="google-signin-client_id" content="518574864384-mrq7fn4g15jj6in0kjuacjj4lctn4cf5.apps.googleusercontent.com">
+<meta name="google-signin-client_id" content="<spring:eval expression='@config.getProperty("GOOGLE_API_KEY")'/>">
 
 <!-- ========================= CSS here ========================= -->
 <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css"
@@ -59,7 +60,7 @@ function searchBtn(){
 //---------------- NAVER ------------------------
 const naverLogin = new naver.LoginWithNaverId(
 		{
-			clientId: "22RAYixMi5pHSV4f5s4t",
+			clientId: "<spring:eval expression='@config.getProperty("NAVER_API_KEY")'/>",
 			callbackUrl: "http://localhost:8080/login.user",
 			loginButton: {color: "green", type: 1, height: 40}
 		}
@@ -67,7 +68,7 @@ const naverLogin = new naver.LoginWithNaverId(
 naverLogin.init();
 
 //--------------카카오--------------------
-Kakao.init('afa33a5b39df9de72171ff16aabcb982');
+Kakao.init("<spring:eval expression='@config.getProperty("KAKAO_API_KEY")'/>");
 //카카오로그인
 function kakaoLogin() {
 	Kakao.Auth.login({
@@ -235,7 +236,7 @@ function logout(){
 															<span id="headb_quantity${vs.index}" class="amount">${cartListSession.b_quantity}</span>
 															<span> x </span>
 															<span> <fmt:formatNumber
-														value="${cartListSession.m_price}" pattern="###,###" /> =  </span>
+														value="${cartListSession.b_single_price}" pattern="###,###" /> =  </span>
 															<span id="headb_tot_price${vs.index}" class="amount" style="float:right;">
 															<fmt:formatNumber
 														value="${cartListSession.b_total_price}" pattern="###,###" />

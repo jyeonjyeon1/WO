@@ -1,17 +1,26 @@
 package three.aws.wo.admin.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import three.aws.wo.admin.service.AdminService;
+import three.aws.wo.admin.vo.NoticeVO;
 
 @Controller
 public class AdminController {
+	@Autowired
+	private AdminService adminService;
 	
 //	==================== index ============================
-	@GetMapping("/index.admin")
-	public String toindex() {
-		System.out.println("index");
+	@RequestMapping("/index.admin")
+	public String toindex(NoticeVO vo, Model model) throws Exception {
+		List<NoticeVO> noticeList =adminService.noticeList();
+		model.addAttribute("noticeList" ,noticeList);
 		return "/index";
 	}
 	

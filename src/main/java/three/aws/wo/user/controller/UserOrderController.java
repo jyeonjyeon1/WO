@@ -133,8 +133,10 @@ public class UserOrderController {
 		insertInfo.put("o_code", param.get("o_code") + orderBack);
 		insertInfo.put("o_total_price", Integer.parseInt(param.get("o_total_price")));
 		insertInfo.put("o_list", param.get("o_list"));
+		insertInfo.put("o_list_detail", param.get("o_list_detail"));
 		insertInfo.put("o_daily_seq", dailySeq);
 		insertInfo.put("o_point", o_point);
+		insertInfo.put("o_payment_list", param.get("o_payment_list"));
 		if(o_point==0) {
 			insertInfo.put("o_point_status", false);
 		}else {

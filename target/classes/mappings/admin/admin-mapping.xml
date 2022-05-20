@@ -28,6 +28,12 @@
 		SELECT * FROM NOTICE_BOARD ORDER BY N_SEQ DESC
 	</select>
 	
+	<select id="oneNotice" resultType="NoticeVO">
+		SELECT * FROM NOTICE_BOARD
+		WHERE
+		N_SEQ = #{n_seq}
+	</select>
+	
 
 	
 </mapper>

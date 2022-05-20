@@ -34,6 +34,12 @@
 .shoping__cart__table table tbody tr td.shoping__cart__item h3 {
 	font-size: 15px;
 	color: rgba(0, 0, 0, 0.575);
+	margin-bottom:10px;
+}
+.shoping__cart__table table tbody tr td.shoping__cart__item h4 {
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.375);
+	margin:2px 0px;
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item button h5:hover
@@ -108,9 +114,8 @@
 						<table>
 							<thead>
 								<tr>
-									<th class="shoping__product" style="font-size: 20px;">상품
-										주문정보</th>
-
+									<th>상품 주문정보</th>
+									<th > </th>
 									<th>가격</th>
 									<th>수량</th>
 									<th>합계</th>
@@ -121,19 +126,38 @@
 							<c:set var = "totalPrice" value = "0" />
 							<c:set var = "totalNum" value = "0" />
 								<c:forEach var="cartList" items="${cartList}" varStatus="vs">
-								<input id="${cartList.b_seq}" type="hidden" value="${cartList.b_seq}"/>
+									<input id="${cartList.b_seq}" type="hidden"
+										value="${cartList.b_seq}" />
 									<tr id="cartRow${vs.index}">
-										<td class="shoping__cart__item"><img
-											class="d-lg-inline-block d-md-inline-block d-none"
-											src="${cartList.m_img_file}" alt=""> <label>${cartList.m_name}
-												<h3>HOT ML / 1샷추가 / 헤이즐럿시럽추가</h3>
+										<td class="shoping__cart__price"><img
+											class="d-lg-inline-block d-md-inline-block"
+											src="${cartList.m_img_file}" alt=""> </td>
+											<td class="shoping__cart__item"><label
+											id="name${vs.index}">${cartList.m_name} 
+												<h3>${cartList.opb_name}<span style="opacity:0;">splitting</span>
+												</h3>
+											<c:if test="${cartList.op_code1 ne ' '}">
+												<h4>└ ${cartList.op_name1} (<fmt:formatNumber value="${cartList.op_price1}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code2 ne ' '}">
+												<h4>└ ${cartList.op_name2} (<fmt:formatNumber value="${cartList.op_price2}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code3 ne ' '}">	
+												<h4>└ ${cartList.op_name3} (<fmt:formatNumber value="${cartList.op_price3}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code4 ne ' '}">	
+												<h4>└ ${cartList.op_name4} (<fmt:formatNumber value="${cartList.op_price4}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code5 ne ' '}">	
+												<h4>└ ${cartList.op_name5} (<fmt:formatNumber value="${cartList.op_price5}" pattern="###,###"/>원)</h4>
+											</c:if>
 										</label></td>
 
 										<td class="shoping__cart__price">
 											<div class="qtyqty">
 												<div id="rowprice${vs.index}" style="display: inline;">
 												<fmt:formatNumber
-												value="${cartList.m_price}" pattern="###,###" /></div>
+												value="${cartList.b_single_price}" pattern="###,###" /></div>
 											</div>
 										</td>
 										<script>

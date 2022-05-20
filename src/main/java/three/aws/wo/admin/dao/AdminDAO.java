@@ -32,4 +32,7 @@ public class AdminDAO {
 	public List<NoticeVO> noticeList(){
 		return sqlSession.selectList("AdminDAO.noticeList");
 	}
+	public NoticeVO oneNotice(int n_seq) {
+		return sqlSession.selectOne("AdminDAO.oneNotice",n_seq);
+	}
 }

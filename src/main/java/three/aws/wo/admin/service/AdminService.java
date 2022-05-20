@@ -11,4 +11,5 @@ public interface AdminService {
 	int getNextNoticeSeq() throws Exception;
 	void insertNotice(NoticeVO vo) throws Exception;
 	List<NoticeVO> noticeList();
+	NoticeVO oneNotice(int n_seq);
 }

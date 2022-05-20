@@ -276,12 +276,11 @@
                   <div class="row">
                     <div class="goleft dash-list">
                       <ul>
-                        <a href="notices.admin"><li>[공지] 어떤 글 1</li></a>
-                        <a href="notices.admin"><li>[공지] 어떤 글 2</li></a>
-                        <a href="notices.admin"><li>[공지] 어떤 글 3</li></a>
-                        <a href="notices.admin"><li>[공지] 어떤 글 4</li></a>
-                        <a href="notices.admin"><li>[공지] 어떤 글 5</li></a>
-                        <a href="notices.admin"><li>[공지] 어떤 글 6</li></a>
+                      <c:forEach var="noticeList" items="${noticeList}" varStatus="vs">
+                      	<c:if test="${vs.index lt 8 }">
+                      		<a href="notices_update.admin?s=${noticeList.n_seq}"><li>${noticeList.n_title}</li></a>
+                      	</c:if>
+                      </c:forEach>
                       </ul>
                     </div>
                   </div>

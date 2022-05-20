@@ -211,7 +211,7 @@
 								<div class="form-group">
 									<div class="col-lg-12">
 											<textarea name="n_content" id="smarteditor" rows="20" cols="10"
-												placeholder="내용을 입력해주세요" style="width: 100%;">여기</textarea>
+												placeholder="내용을 입력해주세요" style="width: 100%;"></textarea>
 									</div>
 
 									<!--

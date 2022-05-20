@@ -208,7 +208,7 @@
 	</script>
 	<!-- 카카오 스크립트 -->
 				<script>
-					Kakao.init('afa33a5b39df9de72171ff16aabcb982'); //javascript키
+					Kakao.init("<spring:eval expression='@config.getProperty("KAKAO_API_KEY")'/>"); //javascript키
 					console.log(Kakao.isInitialized()); // sdk초기화여부판단
 					//카카오로그인
 					function kakaoLogin() {

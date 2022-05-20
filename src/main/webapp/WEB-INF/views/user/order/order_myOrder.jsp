@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -37,6 +35,12 @@ input::-webkit-inner-spin-button {
 .shoping__cart__table table tbody tr td.shoping__cart__item h3 {
 	font-size: 15px;
 	color: rgba(0, 0, 0, 0.575);
+	margin-bottom:10px;
+}
+.shoping__cart__table table tbody tr td.shoping__cart__item h4 {
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.375);
+	margin:2px 0px;
 }
 
 .btn__hover:hover {
@@ -85,8 +89,8 @@ input::-webkit-inner-spin-button {
 						<table>
 							<thead>
 								<tr>
-									<th class="shoping__product" style="font-size: 20px;">상품
-										주문정보</th>
+									<th>상품 주문정보</th>
+									<th > </th>
 									<th>가격</th>
 									<th>수량</th>
 									<th>합계</th>
@@ -94,23 +98,43 @@ input::-webkit-inner-spin-button {
 								</tr>
 							</thead>
 							<tbody>
-								<c:set var="totalPrice" value="0" />
-								<c:set var="totalNum" value="0" />
+								<c:set var="totalPrice" value="0" /><!-- 총 금액 -->
+								<c:set var="totalNum" value="0" /><!-- 총 수량 -->
+								<c:set var="totalList" value="0" /><!-- 중복제거 총 아이템 수 -->
+								<c:set var="list_detail"></c:set><!-- 주문목록 전체 -->
 								<c:forEach var="cartList" items="${cartList}" varStatus="vs">
 									<input id="${cartList.b_seq}" type="hidden"
 										value="${cartList.b_seq}" />
 									<tr id="cartRow${vs.index}">
-										<td class="shoping__cart__item"><img
-											class="d-lg-inline-block d-md-inline-block d-none"
-											src="${cartList.m_img_file}" alt=""> <label
-											id="name${vs.index}">${cartList.m_name} <span style="opacity:0;">ㅋㅋㅋㅋㅋ</span>
-												<h3>HOT ML / 1샷추가 / 헤이즐럿시럽추가</h3>
+										<td class="shoping__cart__price"><img
+											class="d-lg-inline-block d-md-inline-block"
+											src="${cartList.m_img_file}" alt=""> </td>
+											<td class="shoping__cart__item"><label
+											>${cartList.m_name} 
+												<h3>${cartList.opb_name}<span style="opacity:0;">splitting</span>
+												</h3>
+											<span id="name${vs.index}" style="display:none;">${cartList.m_name} ${cartList.opb_name}</span>
+											<c:if test="${cartList.op_code1 ne ' '}">
+												<h4>└ ${cartList.op_name1} (<fmt:formatNumber value="${cartList.op_price1}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code2 ne ' '}">
+												<h4>└ ${cartList.op_name2} (<fmt:formatNumber value="${cartList.op_price2}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code3 ne ' '}">	
+												<h4>└ ${cartList.op_name3} (<fmt:formatNumber value="${cartList.op_price3}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code4 ne ' '}">	
+												<h4>└ ${cartList.op_name4} (<fmt:formatNumber value="${cartList.op_price4}" pattern="###,###"/>원)</h4>
+											</c:if>	
+											<c:if test="${cartList.op_code5 ne ' '}">	
+												<h4>└ ${cartList.op_name5} (<fmt:formatNumber value="${cartList.op_price5}" pattern="###,###"/>원)</h4>
+											</c:if>
 										</label></td>
 
 										<td class="shoping__cart__price">
 											<div class="qtyqty">
 												<div id="rowprice${vs.index}" style="display: inline;">
-													<fmt:formatNumber value="${cartList.m_price}"
+													<fmt:formatNumber value="${cartList.b_single_price}"
 														pattern="###,###"/>
 												</div>
 											</div>
@@ -275,9 +299,13 @@ input::-webkit-inner-spin-button {
 									<c:set var="totalPrice"
 										value="${totalPrice + cartList.b_total_price}" />
 									<c:set var="totalNum" value="${totalNum + cartList.b_quantity}" />
+									<c:set var="totalList" value="${totalList + 1}" />
+									<c:set var="list_detail" value="${list_detail},,,${cartList.m_name} ${cartList.opb_name}" />
 								</c:forEach>
 							</tbody>
 						</table>
+						<span id="totalList" style="display:none;">${totalList}</span>
+						<span id="list_detail" style="display:none;">${list_detail}</span>
 					</div>
 				</div>
 			</div>
@@ -499,33 +527,34 @@ input::-webkit-inner-spin-button {
 							<li>
 								<div class="form-check">
 									<input class="form-check-input" type="radio"
-										name="flexRadioDefault" id="flexRadioDefault1"> <label
+										name="o_payment_list" id="flexRadioDefault1" value="카카오페이"> <label
 										class="form-check-label" for="flexRadioDefault1">
+										<b style="font-weight:800;color:#351b1c; background:#f1d900;padding:0px 5px;">K</b>&nbsp;&nbsp;
 										카카오페이 </label>
 								</div>
 							</li>
 							<li>
 								<div class="form-check">
 									<input class="form-check-input" type="radio"
-										name="flexRadioDefault" id="flexRadioDefault2" checked>
+										name="o_payment_list" id="flexRadioDefault2" value="카드" checked>
 									<label class="form-check-label" for="flexRadioDefault2">
-										네이버페이 </label>
+										&nbsp;<i class="fa fa-credit-card"></i>&nbsp;&nbsp; 신용카드 </label>
 								</div>
 							</li>
 							<li>
 								<div class="form-check">
 									<input class="form-check-input" type="radio"
-										name="flexRadioDefault" id="flexRadioDefault3" checked>
+										name="o_payment_list" id="flexRadioDefault3" value="네이버페이">
 									<label class="form-check-label" for="flexRadioDefault3">
-										신용카드 </label>
+										<b style="color:white; background:#1ec800;padding:0px 5px;">N</b>&nbsp;&nbsp; 네이버페이(아직) </label>
 								</div>
 							</li>
 							<li>
 								<div class="form-check">
 									<input class="form-check-input" type="radio"
-										name="flexRadioDefault" id="flexRadioDefault4ㄴ" checked>
+										name="o_payment_list" id="flexRadioDefault4" value="페이코">
 									<label class="form-check-label" for="flexRadioDefault4">
-										휴대폰결제 </label>
+										<b style="color:white; background:#f22728;padding:0px 5px;">P</b>&nbsp;&nbsp; 페이코 </label>
 								</div>
 							</li>
 						</ul>
@@ -597,7 +626,7 @@ function usePoint(){
 	const totalElement = document.getElementById("totalPrice");
 	totalElement.innerText = (no_point_total - o_point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-	
+	var paymethod = "kcp"
 	
   function paymentO(){
 	  currentDate = new Date().toLocaleString().replace("20","").replace(". ","").replace(". ","");
@@ -606,22 +635,35 @@ function usePoint(){
 		currentDate = currentDate.substring(0,2) + "0" +currentDate.substring(2,currentDate.length);
 	}
 	  //결제 시도했을 때 우선 db에 넣음
-	  var o_request = $("#o_request").val();
-	  let isZero = (parseInt(document.getElementById("totalItem").innerText)-1).toString();
-	  if(isZero=="0"){
-		  o_list = document.getElementById("name0").innerText.split("ㅋㅋㅋㅋㅋ")[0]
-	  }else{
-		  o_list = document.getElementById("name0").innerText.split("ㅋㅋㅋㅋㅋ")[0] +" 외 " + isZero
+	  var o_payment_list = $("input[type=radio][name=o_payment_list]:checked").val();
+	  alert(o_payment_list);
+	  if(o_payment_list=="카드"){
+		  paymethod = "kcp";
+	  } else if(o_payment_list=="카카오페이"){
+		  paymethod = "kakaopay";
+	  } else if(o_payment_list=="페이코"){
+		  paymethod = "payco";
 	  }
-	 
+	  
+	  o_request = $("#o_request").val();
+	  let isZero = (parseInt(document.getElementById("totalList").innerText)-1).toString();
+	  if(isZero=="0"){
+		  o_list = document.getElementById("name0").innerText.split("splitting")[0]
+	  }else{
+		  o_list = document.getElementById("name0").innerText.split("splitting")[0] +" 외 " + isZero
+	  }
+	  let o_list_detaill = document.getElementById("list_detail").innerText.replace(",,,","");
+	 alert("o_list_detaill:"+o_list_detaill);
 	  var param = {
 			  "o_code": currentDate,
 			  "u_id": u_id,
 			  "si_code": document.getElementById("si_code").innerText,
 			  "o_request": o_request,
 			  "o_total_price": document.getElementById("totalPrice").innerText.replace(",","").replace(",",""),
-			  "o_list":o_list.replace("ㅋㅋㅋㅋㅋ",""),
-			  "o_point":o_point
+			  "o_list":o_list.replace("splitting",""),
+			  "o_list_detail":o_list_detaill,
+			  "o_point":o_point,
+			  "o_payment_list":o_payment_list
 			  };
 	  $.ajax({
              type: "POST",
@@ -640,11 +682,10 @@ function usePoint(){
           }
        }); //ajax 끝
   }
-  
-  function realPay(){
-	  IMP.init('imp24090998'); //"가맹점 식별코드"를 사용
+  function realPay (){
+	  IMP.init('<spring:eval expression="@config.getProperty('IAMPORT_API_KEY')"/>'); //"가맹점 식별코드"를 사용
 	  IMP.request_pay({
-	    pg: "kcp",
+	    pg: paymethod,
 	    pay_method: "card",
 	    merchant_uid : orderNum,
 	    name : o_list,

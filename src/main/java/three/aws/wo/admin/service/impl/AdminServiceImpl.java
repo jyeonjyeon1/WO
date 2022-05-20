@@ -39,6 +39,11 @@ public class AdminServiceImpl implements AdminService {
 	public List<NoticeVO> noticeList() {
 		return adminDAO.noticeList();
 	}
+
+	@Override
+	public NoticeVO oneNotice(int n_seq) {
+		return adminDAO.oneNotice(n_seq);
+	}
 	
 
 }

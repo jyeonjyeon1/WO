@@ -295,7 +295,7 @@
 											<td>${noticeList.n_regdate}</td>
 											<td><a data-toggle="modal" href="#myModal${vs.index}"
 												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-												<button onclick="location.href='notices_update.admin?n_seq=${noticeList.n_seq}'"
+												<button onclick="location.href='notices_update.admin?s=${noticeList.n_seq}'"
 													class="btn btn-primary btn-xs">
 													<i class="fa fa-pencil"></i>
 												</button>

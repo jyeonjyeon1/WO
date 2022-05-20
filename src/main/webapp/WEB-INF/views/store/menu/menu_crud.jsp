@@ -367,10 +367,10 @@ li {
 	 
 	  
 	// input file에 change 이벤트 부여
-/*    const inputImage = document.getElementById("input-image")
+    const inputImage = document.getElementById("input-image")
    inputImage.addEventListener("change", e => {
        readImage(e.target)
-   })  */
+   })  
   
   $("#main_menu > li > a").click(function(){
 	
@@ -399,9 +399,9 @@ li {
   });
    */
   //메뉴편집-이미지변경 클릭시
-  $('.menu_oneImgUpdate').click(function(){
+/*   $('.menu_oneImgUpdate').click(function(){
       $('#menu_updateImg').modal();  
-  });
+  }); */
   
   //메뉴편집 - 메뉴추가 클릭시
 /*   $('.menu_addOne').click(function(){
@@ -414,9 +414,9 @@ li {
   }) */
 
     //옵션편집 - + 옵션그룹 추가버튼 클릭시
-	$('.option_addOptionGroup').click(function(){
+/* 	$('.option_addOptionGroup').click(function(){
 	$('#option_addOptionGroup').modal();
-  })
+  }) */
 
   //메뉴 가격 추가버튼클릭시.
  /*  $('.menu_priceOption').click(function(){
@@ -435,7 +435,7 @@ li {
 
 
   //옵션그룹- 옵션 추가버튼클릭시.
-  $('.groupAdd_Option').click(function(){
+ /*  $('.groupAdd_Option').click(function(){
 	$('.groupAdd_OptionList').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
                         + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
 												+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
@@ -443,10 +443,10 @@ li {
 												+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
 												+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
 												+"</button>	</div></div>");  
-  })
+  }) */
 
   //옵션 - 옵션추가버튼 클릭시
-  $('.add_Option').click(function(){
+ /*  $('.add_Option').click(function(){
 	$('.option_list').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
                         + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
 												+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
@@ -454,7 +454,7 @@ li {
 												+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
 												+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
 												+"</button>	</div></div>");  
-  })
+  }) */
 
   //옵션편집 - 옵션명 및 가격변경 클릭시
 /* $('#option_oneUpdate').click(function(){
@@ -496,8 +496,6 @@ li {
          	  console.log("성공");
            }
  	  })  
-	   
-	  
 	  if(mg_name) {
 		  console.log("있음");
 		  alert("ddd");
@@ -505,26 +503,24 @@ li {
 	  }else {
 		  console.log("없음");
 	  }
-	  
-
   }
 	  
 	
 //옵션편집 - 옵션그룹추가버튼 클릭시 모달 
-  function option_addOptionGroup() {
+ /*  function option_addOptionGroup() {
   	$('#addOptionGroup').modal();    
-  }
-
+  } */
+/* 
 function update_ros_modal() {
 	$('#update_ros_modal').modal();
 }
-
+ */
 
 
    
    
 //이미지수정 이미지파일 추가
-function readImage(input) {
+ function readImage(input) {
 
 	   
     // 인풋 태그에 파일이 있는 경우
@@ -551,7 +547,7 @@ function readImage(input) {
     }
 
    
-}
+} 
 </script>
 
 
@@ -633,7 +629,7 @@ function readImage(input) {
 		<!--main content start-->
 		<section id="main-content">
 
-			<section class="wrapper" style="height: 1500px;">
+			<section class="wrapper" style="height: 3500px;">
 				<div class="col-lg-11" style="min-width: 500px;">
 					<div class="card-header" style="font-size: 16px; margin-top: 40px;">
 						<div class="calculate_title" style="margin-bottom: 20px;">
@@ -773,10 +769,8 @@ function readImage(input) {
 																										<c:forEach var="basicOpList" items="${basicOpList}" varStatus="basicOpVs">
 																							<c:if test="${basicOpList.m_code eq menu.m_code }">
 						
-																											<h6
-																												style="margin-top: 0; font-weight: bolder;">${basicOpList.opb_name}
-																												: <fmt:formatNumber
-												value="${basicOpList.opb_price}" pattern="###,###" /> </h6>
+																											<h6 style="margin-top: 0; font-weight: bolder;">${basicOpList.opb_name}
+																												: <fmt:formatNumber	value="${basicOpList.opb_price}" pattern="###,###" /> </h6>
 																											
 																												
 																																													</c:if>
@@ -838,20 +832,21 @@ function readImage(input) {
 																												<h5
 																													style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
 
-																												<div
-																													class="price_list2${vs.index}${vss.index}">
+																												<c:forEach var="basicOpList" items="${basicOpList}" varStatus="basicOpVs">
+																														<c:if test="${basicOpList.m_code eq menu.m_code }">
+																														<div class="add_priceoption">
 																													<div class="row" style="margin-left: 5px;">
 																														<div class="col-lg-5"
 																															style="padding: 5px;">
 																															<input class="form-control"
 																																style="width: relative; font-size: 15px;"
-																																type="text" value="ICE 리터">
+																																type="text" value="${basicOpList.opb_name}">
 																														</div>
 																														<div class="col-lg-5"
 																															style="padding: 5px;">
 																															<input class="form-control"
 																																style="width: relative; font-size: 15px;"
-																																type="text" value="2000">
+																																type="text" value="${basicOpList.opb_price}">
 																														</div>
 																														<div class="col-lg-2"
 																															style="padding: 5px;">
@@ -863,44 +858,32 @@ function readImage(input) {
 																															</button>
 																														</div>
 																													</div>
-																												</div>
-
-
-																												<div
-																													class="price_list2${vs.index}${vss.index}">
-																													<div class="row" style="margin-left: 5px;">
-																														<div class="col-lg-5"
-																															style="padding: 5px;">
-																															<input class="form-control"
-																																style="width: relative; font-size: 15px;"
-																																type="text" value="ICE 리터">
-																														</div>
-																														<div class="col-lg-5"
-																															style="padding: 5px;">
-																															<input class="form-control"
-																																style="width: relative; font-size: 15px;"
-																																type="text" value="2000">
-																														</div>
-																														<div class="col-lg-2"
-																															style="padding: 5px;">
-																															<button type="button"
-																																onclick="javascript:deleteAlert();"
-																																class="btn btn-danger btn-xs"
-																																style="float: left; margin-top: 7px;">
-																																<i class="fa fa-trash-o "></i>
-																															</button>
-																														</div>
 																													</div>
-																												</div>
-
-
-																												<div class="row" style="margin-left: 5px;">
-																													<button class="menu_priceOption"
-																														onclick="menu_priceOption1${vs.index}${vss.index}()">+
-																														가격옵션 추가하기</button>
-																												</div>
+																													</c:if>
+																													</c:forEach>
+																													
+																													<div class="row" id="addPriceOptionBtn${vs.index}${vss.index}">
+																									<a class="menu_addOptionGroup" onclick="addPO${vs.index}${vss.index}()" >
+																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">
+																											+가격옵션 추가</h4>
+																									</a>
+																								</div>	
 																											</li>
-
+																											
+																											<script>
+																											function addPO${vs.index}${vss.index}(){
+																											$('#addPriceOptionBtn${vs.index}${vss.index}').prepend("<div class='add_priceoption' style='margin:0 15px 0 15px;'> <div class='row' style='margin-left: 5px;'>"
+																																		+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
+																																		+"style='width: relative; font-size: 15px;' type='text' placeholder='ex) ice'>"
+																																		+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
+																																		+"style='width: relative; font-size: 15px;' type='text'placeholder='ex) 1500'>"
+																																		+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
+																																		+"onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs'"
+																																		+"style='float: left; margin-top: 7px;'> <i class='fa fa-trash-o '></i> </button>"
+																																		+"</div></div></div>");  
+																								  
+																														}
+																											</script>
 																											<li>
 																												<div class="row">
 																													<div class="col-lg-12">
@@ -917,28 +900,8 @@ function readImage(input) {
 																						</div>
 																					</div>
 																					
-																					<script>
-																				//메뉴정보수정-가격옵션추가하기 눌렀을때
-																				 function menu_priceOption1${vs.index}${vss.index}() {
-									                                            	  $('.price_list2${vs.index}${vss.index}').append("<div class='price_list2${vs.index}${vss.index}'>"
-									                                            			  +"<div class='row' style='margin-left:5px;' >" 
-									                                            	      		+"<div class='col-lg-5' style='padding:5px;'>" 
-									                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격명'>"
-									                                            	      	    +"</div>"
-									                                            	      	    +"<div class='col-lg-5' style='padding:5px;'>"
-									                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격'>"
-									                                            	      	    +"</div>"
-									                                            	      	    +"<div class='col-lg-2' style='padding:5px;'>"
-									                                            	      		+"<button type='button' onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top:7px;'><i class='fa fa-trash-o '></i></button>"
-									                                            	            +  "</div>"                    
-									                                            	      	    +"</div></div>");  
-									                                              };
-									                                              
-									                                        
-									                                              
-																				</script>
-
 																					<!-------------메뉴편집_메뉴정보수정 Modal end--------------->
+																					
 																					<!-------------메뉴편집_메뉴옵션수정 Modal start-------------->
 																	<div class="modal fade" id="menu_updateOption${vs.index}${vss.index}"
 																		role="dialog">
@@ -958,68 +921,45 @@ function readImage(input) {
 																				</div>
 																				<div class="modal-body">
 																					<!-- body -->
-
-
 																					<table class="modal_table">
 																						<ul>
-																							<li
-																								style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-
-																								<div class="option_1"
-																									style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
+																						
+																							<li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																								<c:set var="ogog" value="dd"></c:set>
+																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVss">
+																								<c:if test="${ MAOList.m_code eq menu.m_code}">
+																								<c:if test="${ogog ne MAOList.og_code}">
+																								<div class="option_1" style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
 																									<div class="row">
 																										<div class="col-lg-8">
-																											<h4
-																												style="font-weight: bolder; color: black;">샷추가(선택)</h4>
-																											<h5 style="margin-left: 10px;">+1샷,+2샷,+3샷</h5>
-																										</div>
+																											<h4 style="font-weight: bolder; color: black;">${MAOList.og_name}</h4>
+																											
+																											
+																											<h5 style="margin-left: 10px;">
+																											<c:forEach var="optionList" items="${optionList }">
+																												<c:if test="${optionList.og_code eq MAOList.og_code}">
+																													${optionList.op_name},
+																												</c:if>
+																											</c:forEach>
+																											</h5>
+																									</div>
 																										<div class="col-lg-4">
 																											<input type="button" class="menu_option_undo"
 																												value="해제">
 																										</div>
 																									</div>
 																								</div>
-
-
-																								<div class="option_2"
-																									style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
-																									<div class="row">
-																										<div class="col-lg-8">
-																											<h4
-																												style="font-weight: bolder; color: black;">샷추가(선택)</h4>
-																											<h5 style="margin-left: 10px;">+1샷,+2샷,+3샷</h5>
-																										</div>
-																										<div class="col-lg-4">
-																											<input type="button" class="menu_option_undo"
-																												value="해제">
-																										</div>
-																									</div>
-																								</div>
-
-
-																								<div class="option_3"
-																									style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
-																									<div class="row">
-																										<div class="col-lg-8">
-																											<h4
-																												style="font-weight: bolder; color: black;">샷추가(선택)</h4>
-																											<h5 style="margin-left: 10px;">+1샷,+2샷,+3샷</h5>
-																										</div>
-																										<div class="col-lg-4">
-																											<input type="button" class="menu_option_undo"
-																												value="해제">
-																										</div>
-																									</div>
-																								</div>
-
+																								<c:set var="ogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								</c:if>
+																								</c:forEach>
+																								
 																								<div class="row">
 																									<a class="menu_addOptionGroup" data-toggle="modal" href="#menu_addOptionGroup${vs.index}${vss.index}" >
 																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">+
 																											옵션그룹 추가</h4>
 																									</a>
 																								</div>
-
-
 																							</li>
 
 																							<li>
@@ -1040,113 +980,113 @@ function readImage(input) {
 
 																	<!-------------메뉴편집_메뉴옵션수정 Modal end--------------->
 																	<!------------ 메뉴편집_이미지변경 Modal start --------------->
-																	<div class="modal fade" id="menu_updateImg${vs.index}${vss.index}"
-																				role="dialog">
+                                                   <div class="modal fade" id="menu_updateImg${vs.index}${vss.index}"
+                                                            role="dialog">
 
-																				<div class="modal-dialog">
+                                                            <div class="modal-dialog">
 
-																					<!-- Modal content-->
-																					<div class="modal-content">
-																						<div class="modal-header">
-																							<!-- header -->
-																							<h4 class="modal-title">이미지변경</h4>
-																							<h3 style="color: black; font-weight: bolder; text-align: center;">[${menu.m_name}]</h3>
-																							<button type="button" class="close"
-																								data-dismiss="modal"
-																								style="font-size: 20px; color: black;">취소</button>
+                                                               <!-- Modal content-->
+                                                               <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                     <!-- header -->
+                                                                     <h4 class="modal-title">이미지변경</h4>
+                                                                     <h3 style="color: black; font-weight: bolder; text-align: center;">[${menu.m_name}]</h3>
+                                                                     <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        style="font-size: 20px; color: black;">취소</button>
 
-																						</div>
-																						<div class="modal-body">
-																							<!-- body -->
-
-
-																							<table class="modal_table">
-																								<ul>
-
-																									<li
-																										style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																										<h5
-																											style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px">
-																											멋진 메뉴 이미지로<br>메뉴판을 돋보이게 해주세요!
-																										</h5>
-																										<h6 style="font-size: 13px;">
-																											-이미지를 올리지 않으면 메뉴의 이미지는 자동으로 보여지지 않습니다. <br>
-																											-직접 업로드한 이미지는 승인되어야 앱에 보여요.
-																										</h6>
-
-																										<div class="image-show" id="image-show"></div>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                     <!-- body -->
 
 
-																										<div class="img_upload">
-																											<div class="image-container">
-																												<div
-																													style="border: 1px solid #6161618c; height: 300px;">
+                                                                     <table class="modal_table">
+                                                                        <ul>
 
-																													<a class="img_uploadFile" href="#"
-																														style="text-align: center; width: auto; height: 300px;">
-																														<img
-																														style="width: 100%; height: 100%; display: none;"
-																														id="preview-image" src=""> <label
-																														for="input-image" id="addImgLabel"
-																														style="font-size: 15px; margin-top: 140px; line-height: 20px; margin-left: 220px; cursor: pointer;">+<br>이미지추가
-																													</label>
-																													</a> <input type="file" id="input-image"
-																														name="chooseFile" accept="image/*">
-																												</div>
+                                                                           <li
+                                                                              style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+                                                                              <h5
+                                                                                 style="font-size: 20px; font-weight: bolder; color: black; margin-top: 20px">
+                                                                                 멋진 메뉴 이미지로<br>메뉴판을 돋보이게 해주세요!
+                                                                              </h5>
+                                                                              <h6 style="font-size: 13px;">
+                                                                                 -이미지를 올리지 않으면 메뉴의 이미지는 자동으로 보여지지 않습니다. <br>
+                                                                                 -직접 업로드한 이미지는 승인되어야 앱에 보여요.
+                                                                              </h6>
 
-																											</div>
-																											<h6
-																												style="font-size: 13px; margin-bottom: 40px;">
-																												-접수 건이 폭증할 경우, 처리일이 다소 지연될 수 있습니다. <label
-																													for="input-image" id="fixImgLabel"
-																													style="float: right; color: blue; cursor: pointer; font-size: 15px; display: none;">이미지
-																													다시업로드</label>
-																											</h6>
-
-																											<div class="img_info"
-																												style="background-color: #6161613d; border-radius: 7px; padding: 10px; height: auto;">
-																												<h5
-																													style="font-weight: bolder; font-size: 15px; color: black;">직접
-																													업로드한 이미지가 바로 승인되는 방법</h5>
-																												<ul style="color: black; margin-left: 20px;">
-																													<li
-																														style="list-style-type: disc; line-height: 20px;">메뉴
-																														식별이 가능한 이미지여야 해요.</li>
-																													<li
-																														style="list-style-type: disc; line-height: 20px;">촬영된
-																														이미지를 재촬영한 이미지는 등록할 수 없어요.</li>
-																													<li
-																														style="list-style-type: disc; line-height: 20px;">임의로
-																														어색하게 합성된 이미지는 등록이 어려워요.</li>
-																												</ul>
-																												<a href="#"
-																													style="text-decoration: underline; color: blue;">자세히
-																													알아보기</a>
-																											</div>
+                                                                              <div class="image-show" id="image-show"></div>
 
 
-																										</div>
+                                                                              <div class="img_upload">
+                                                                                 <div class="image-container">
+                                                                                    <div
+                                                                                       style="border: 1px solid #6161618c; height: 300px;">
+
+                                                                                       <a class="img_uploadFile" href="#"
+                                                                                          style="text-align: center; width: auto; height: 300px;">
+                                                                                          <img
+                                                                                          style="width: 100%; height: 100%; display: none;"
+                                                                                          id="preview-image" src=""> <label
+                                                                                          for="input-image" id="addImgLabel"
+                                                                                          style="font-size: 15px; margin-top: 140px; line-height: 20px; margin-left: 220px; cursor: pointer;">+<br>이미지추가
+                                                                                       </label>
+                                                                                       </a> <input type="file" id="input-image"
+                                                                                          name="chooseFile" accept="image/*">
+                                                                                    </div>
+
+                                                                                 </div>
+                                                                                 <h6
+                                                                                    style="font-size: 13px; margin-bottom: 40px;">
+                                                                                    -접수 건이 폭증할 경우, 처리일이 다소 지연될 수 있습니다. <label
+                                                                                       for="input-image" id="fixImgLabel"
+                                                                                       style="float: right; color: blue; cursor: pointer; font-size: 15px; display: none;">이미지
+                                                                                       다시업로드</label>
+                                                                                 </h6>
+
+                                                                                 <div class="img_info"
+                                                                                    style="background-color: #6161613d; border-radius: 7px; padding: 10px; height: auto;">
+                                                                                    <h5
+                                                                                       style="font-weight: bolder; font-size: 15px; color: black;">직접
+                                                                                       업로드한 이미지가 바로 승인되는 방법</h5>
+                                                                                    <ul style="color: black; margin-left: 20px;">
+                                                                                       <li
+                                                                                          style="list-style-type: disc; line-height: 20px;">메뉴
+                                                                                          식별이 가능한 이미지여야 해요.</li>
+                                                                                       <li
+                                                                                          style="list-style-type: disc; line-height: 20px;">촬영된
+                                                                                          이미지를 재촬영한 이미지는 등록할 수 없어요.</li>
+                                                                                       <li
+                                                                                          style="list-style-type: disc; line-height: 20px;">임의로
+                                                                                          어색하게 합성된 이미지는 등록이 어려워요.</li>
+                                                                                    </ul>
+                                                                                    <a href="#"
+                                                                                       style="text-decoration: underline; color: blue;">자세히
+                                                                                       알아보기</a>
+                                                                                 </div>
 
 
-																									</li>
+                                                                              </div>
 
-																									<li>
-																										<div class="row">
-																											<div class="col-lg-12">
-																												<button class="save_Btn">승인 신청하기</button>
-																											</div>
-																										</div>
-																									</li>
-																								</ul>
 
-																							</table>
-																						</div>
-																						<div id="count" value="1"></div>
-																					</div>
-																				</div>
-																			</div>
-																	<!------------ 메뉴편집_이미지변경 Modal end --------------->
+                                                                           </li>
 
+                                                                           <li>
+                                                                              <div class="row">
+                                                                                 <div class="col-lg-12">
+                                                                                    <button type="button" class="save_Btn">승인 신청하기</button>
+                                                                                 </div>
+                                                                              </div>
+                                                                           </li>
+                                                                        </ul>
+
+                                                                     </table>
+                                                                  </div>
+                                                                  <div id="count" value="1"></div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                   <!------------ 메뉴편집_이미지변경 Modal end --------------->
+                                                   
 																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal start--------------->
 																	<div class="modal fade" id="menu_addOptionGroup${vs.index}${vss.index}"
 																		role="dialog"
@@ -1159,7 +1099,7 @@ function readImage(input) {
 																				<div class="modal-header">
 																					<!-- header -->
 																					<h4 class="modal-title">옵션그룹추가</h4>
-																					
+																					<h3 style="color: black; font-weight: bolder; text-align: center;">[${menu.m_name}]</h3>
 																					<button type="button" class="close"
 																						data-dismiss="modal"
 																						style="font-size: 20px; color: black;">취소</button>
@@ -1177,151 +1117,53 @@ function readImage(input) {
 																							이용해주세요.
 																						</h5>
 																					</div>
-
+																					 
+																					 <c:forEach var="ogList" items="${ogList}">
 																					<label for="chbox1" class="menu_addOptionGroup1"
 																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
 																						<div class="row">
-																							<div class="col-lg-1">
-																								<input id="chbox1" type="checkbox"
+																							<input id="chbox1" type="checkbox"
 																									style="width: 30px; height: 30px;" checked>
-																							</div>
-																							<div class="col-lg-11">
-																								<h3
-																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">샷추가</h3>
-																								<h6
-																									style="line-height: 10px; padding-bottom: 20;">+1샷,
-																									+2샷, +3샷</h6>
-																							</div>
-																						</div>
-																						<div class="row">
-																							<div class="option_linkMenu"
-																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
-																								<h5 style="color: black;">
-																									<span
-																										style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
-																									메뉴를 확인하세요.
-																								</h5>
-																								<h6>아메리카노, 카페라떼, 바닐라라떼, 카푸치노, 카라멜 마끼야또,
-																									카페모카, 커피쉐이크</h6>
-																							</div>
-																						</div>
-																					</label> <label for="chbox2" class="menu_addOptionGroup1"
-																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
-																						<div class="row">
 																							<div class="col-lg-1">
-																								<input id="chbox2" type="checkbox"
-																									style="width: 30px; height: 30px;">
 																							</div>
 																							<div class="col-lg-11">
 																								<h3
-																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">샷추가</h3>
-																								<h6
-																									style="line-height: 10px; padding-bottom: 20;">+1샷,
-																									+2샷, +3샷</h6>
+																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">${ogList.og_name}</h3>
+																								<h6 style="line-height: 10px; padding-bottom: 20;">
+																									<c:forEach var="optionList" items="${optionList}">
+																									<c:if test="${optionList.og_code =ogList.og_code }">
+																										${optionList.op_name},
+																									</c:if>
+																									</c:forEach>
+																									</h6>
 																							</div>
 																						</div>
 																						<div class="row">
 																							<div class="option_linkMenu"
 																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
 																								<h5 style="color: black;">
-																									<span
-																										style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
+																									<span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
 																									메뉴를 확인하세요.
 																								</h5>
-																								<h6>아메리카노, 카페라떼, 바닐라라떼, 카푸치노, 카라멜 마끼야또,
-																									카페모카, 커피쉐이크</h6>
-																							</div>
-																						</div>
-																					</label> <label for="chbox3" class="menu_addOptionGroup1"
-																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
-																						<div class="row">
-																							<div class="col-lg-1">
-																								<input id="chbox3" type="checkbox"
-																									style="width: 30px; height: 30px;">
-																							</div>
-																							<div class="col-lg-11">
-																								<h3
-																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">샷추가</h3>
-																								<h6
-																									style="line-height: 10px; padding-bottom: 20;">+1샷,
-																									+2샷, +3샷</h6>
-																							</div>
-																						</div>
-																						<div class="row">
-																							<div class="option_linkMenu"
-																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
-																								<h5 style="color: black;">
-																									<span
-																										style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
-																									메뉴를 확인하세요.
-																								</h5>
-																								<h6>아메리카노, 카페라떼, 바닐라라떼, 카푸치노, 카라멜 마끼야또,
-																									카페모카, 커피쉐이크</h6>
-																							</div>
-																						</div>
-																					</label> <label for="chbox4" class="menu_addOptionGroup1"
-																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
-																						<div class="row">
-																							<div class="col-lg-1">
-																								<input id="chbox4" type="checkbox"
-																									style="width: 30px; height: 30px;">
-																							</div>
-																							<div class="col-lg-11">
-																								<h3
-																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">샷추가</h3>
-																								<h6
-																									style="line-height: 10px; padding-bottom: 20;">+1샷,
-																									+2샷, +3샷</h6>
-																							</div>
-																						</div>
-																						<div class="row">
-																							<div class="option_linkMenu"
-																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
-																								<h5 style="color: black;">
-																									<span
-																										style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
-																									메뉴를 확인하세요.
-																								</h5>
-																								<h6>아메리카노, 카페라떼, 바닐라라떼, 카푸치노, 카라멜 마끼야또,
-																									카페모카, 커피쉐이크</h6>
-																							</div>
-																						</div>
-																					</label> <label for="chbox5" class="menu_addOptionGroup1"
-																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
-																						<div class="row">
-																							<div class="col-lg-1">
-																								<input id="chbox5" type="checkbox"
-																									style="width: 30px; height: 30px;">
-																							</div>
-																							<div class="col-lg-11">
-																								<h3
-																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">샷추가</h3>
-																								<h6
-																									style="line-height: 10px; padding-bottom: 20;">+1샷,
-																									+2샷, +3샷</h6>
-																							</div>
-																						</div>
-																						<div class="row">
-																							<div class="option_linkMenu"
-																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
-																								<h5 style="color: black;">
-																									<span
-																										style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
-																									메뉴를 확인하세요.
-																								</h5>
-																								<h6>아메리카노, 카페라떼, 바닐라라떼, 카푸치노, 카라멜 마끼야또,
-																									카페모카, 커피쉐이크</h6>
+																								<h6>
+																								<c:set var="ogcode" value="ff"></c:set>
+																								<c:forEach var="MAOList" items="${MAOList}">
+																									<c:if test="${MAOList.og_code eq ogList.og_code}">
+																									<c:if test="${ogcode ne MAOList.og_code}">
+																											${MAOList.m_name}, 
+																									<c:set var="ogcode" value="${MAOList.og_code}" />		
+																									</c:if>
+																									</c:if>
+																								</c:forEach></h6>
 																							</div>
 																						</div>
 																					</label>
-
+																					</c:forEach>
 																					<div class="row" style="overflow-y: auto;">
 																						<div class="col-lg-12">
 																							<button class="save_Btn">옵션그룹 수정하기</button>
 																						</div>
 																					</div>
-
-
 
 																				</div>
 																				<div id="count" value="1"></div>
@@ -1331,25 +1173,21 @@ function readImage(input) {
 																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal end--------------->
 																					
 																				</c:forEach>
-																				<li><a class="menu_addOne"
-																					onclick="menu_addOne${vs.index}()">
+																				<li><a class="menu_addOne" onclick="menu_addOne${vs.index}()">
 
-																						<h4
-																							style="color: blue; padding: 10px; margin-right: 65px;">+
-																							메뉴추가</h4>
+																						<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ 메뉴추가</h4>
 																				</a></li>
-
 																			</ul></li>
+																			
 																		<script>
+												function menu_addOne${vs.index}() {
+													$('#menu_addOne${vs.index}').modal();
+												}
+																		
 												//메뉴편집-메뉴정보수정 클릭시					 
 												function menu_oneInfoUpdate${vs.index}() {
 													$('#menu_updateMenuInfo${vs.index}').modal(); 
 												}
-																	 
-																		 
-                                              	function menu_addOne${vs.index}() {
-                                              		$("#menu_addOne${vs.index}").modal();
-                                              	};
                                               	
                                               	function addMenuCheck${vs.index}() {
                                               		alert("${vs.index}번 등록중");
@@ -1357,25 +1195,15 @@ function readImage(input) {
                                               	
                                              
                                               
-                                              function menu_priceOption2${vs.index}() {
-                                            	  $('#price_list${vs.index}').append("<div class='row' style='margin-left:5px;' >" 
-                                            	      		+"<div class='col-lg-5' style='padding:5px;'>" 
-                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격명'>"
-                                            	      	    +"</div>"
-                                            	      	    +"<div class='col-lg-5' style='padding:5px;'>"
-                                            	      		+"<input class='form-control' style='width:relative; font-size:15px;' type='text' placeholder='가격'>"
-                                            	      	    +"</div>"
-                                            	      	    +"<div class='col-lg-2' style='padding:5px;'>"
-                                            	      		+"<button type='button' onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top:7px;'><i class='fa fa-trash-o '></i></button>"
-                                            	            +  "</div>"                    
-                                            	      	    +"</div>");  
-                                              };
+                                              	
+                                              	
+                                                                    
                                               </script>
 
 																		<!--메뉴추가 모달창-->
 
 																		<div class="modal fade" id="menu_addOne${vs.index}"
-																			role="dialog">
+																			role="dialog" tabindex="-1">
 
 																			<div class="modal-dialog">
 
@@ -1394,7 +1222,7 @@ function readImage(input) {
 
 																					</div>
 																					<div class="modal-body"
-																						style="max-height: 750px; overflow-y: scroll;">
+																						style="max-height: 850px; overflow-y: scroll;">
 																						<!-- body -->
 
 																						<table class="modal_table">
@@ -1416,8 +1244,7 @@ function readImage(input) {
 																									<h5
 																										style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
 
-																									<div class="price_list"
-																										id="price_list${vs.index}">
+																								
 																										<div class="row" style="margin-left: 5px;">
 																											<div class="col-lg-5" style="padding: 5px;">
 																												<input class="form-control"
@@ -1438,83 +1265,51 @@ function readImage(input) {
 																												</button>
 																											</div>
 																										</div>
-																									</div>
-
-																									<div class="row" style="margin-left: 5px;">
-																										<button class="menu_priceOption"
-																											onclick="menu_priceOption${vs.index}()">+
+																									
+																									
+																									
+																									<div class="row" style="margin-left: 5px;" id="price_list2${vs.index}">
+																										<button type="button" class="menu_priceOption" onclick="menu_priceOption2${vs.index}()">+
 																											가격옵션 추가하기</button>
 																									</div>
 																								</li>
-
 																							</ul>
 
 																						</table>
+																						
+																						<script>
+																						function menu_priceOption2${vs.index}(){
+																							console.log("dd");
+											                                            	  $('#price_list2${vs.index}').prepend("<div class='row' style='margin-left: 0; margin-right:3px'>"
+																											+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
+																											+"style='width: relative; font-size: 15px;' type='text' placeholder='가격명'>"
+																											+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
+																											+"style='width: relative; font-size: 15px;' type='text' placeholder='가격'>"
+																											+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
+																											+"onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top: 7px;'>"
+																											+"<i class='fa fa-trash-o '></i></button></div></div>");  
+											                       
+																					}
+																						</script>
+																						
 
 																						<table class="modal_table">
 																							<ul>
 																								<li
 																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-
-																									<div class="option_1"
-																										style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
-																										<div class="row">
-																											<div class="col-lg-8">
-																												<h4
-																													style="font-weight: bolder; color: black;">샷추가(선택)</h4>
-																												<h5 style="margin-left: 10px;">+1샷,+2샷,+3샷</h5>
-																											</div>
-																											<div class="col-lg-4">
-																												<input type="button"
-																													class="menu_option_undo" value="해제">
-																											</div>
-																										</div>
-																									</div>
-
-
-																									<div class="option_2"
-																										style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
-																										<div class="row">
-																											<div class="col-lg-8">
-																												<h4
-																													style="font-weight: bolder; color: black;">샷추가(선택)</h4>
-																												<h5 style="margin-left: 10px;">+1샷,+2샷,+3샷</h5>
-																											</div>
-																											<div class="col-lg-4">
-																												<input type="button"
-																													class="menu_option_undo" value="해제">
-																											</div>
-																										</div>
-																									</div>
-
-
-																									<div class="option_3"
-																										style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
-																										<div class="row">
-																											<div class="col-lg-8">
-																												<h4
-																													style="font-weight: bolder; color: black;">샷추가(선택)</h4>
-																												<h5 style="margin-left: 10px;">+1샷,+2샷,+3샷</h5>
-																											</div>
-																											<div class="col-lg-4">
-																												<input type="button"
-																													class="menu_option_undo" value="해제">
-																											</div>
-																										</div>
-																									</div>
-
 																									<div class="row">
-																										<a class="option_addOptionGroup">
-																											<h4
-																												style="color: blue; padding: 10px; margin-right: 65px;">+
-																												옵션그룹 추가</h4>
-																										</a>
+																									<a class="menu_addOptionGroup" data-toggle="modal" href="#menu_addOptionGroup2${vs.index}" >
+																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">+
+																											옵션그룹 추가</h4>
+																									</a>
+																										
 																									</div>
 																								</li>
+																								
+																								
 																								<li>
 																									<div class="col-lg-12">
-																										<button class="save_Btn"
-																											onclick="addMenuCheck${vs.index}()">메뉴
+																										<button type="button" class="save_Btn" data-toggle="modal" href="#finalCh${vs.index}">메뉴
 																											추가하기</button>
 																									</div>
 																								</li>
@@ -1529,10 +1324,94 @@ function readImage(input) {
 																			</div>
 																		</div>
 																		<!-- 메뉴추가 모달창 end -->
+																		
+																		<!-------------메뉴추가_옵션그룹추가 Modal start--------------->
+																	<div class="modal fade" id="menu_addOptionGroup2${vs.index}" role="dialog" style="max-height: 850px; overflow-y: initial; ">
 
+																		<div class="modal-dialog">
 
-																		<div class="modal fade" id="finalCheck${vs.current}"
-																			role="dialog">
+																			<!-- Modal content-->
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<!-- header -->
+																					<h4 class="modal-title">옵션그룹추가</h4>
+																					<h3 style="color: black; font-weight: bolder; text-align: center;">[${mg.mg_name}]</h3>
+																					<button type="button" class="close"
+																						data-dismiss="modal"
+																						style="font-size: 20px; color: black;">취소</button>
+
+																				</div>
+																				<div class="modal-body"
+																					style="height: 800px; overflow-y: scroll;">
+																					<!-- body -->
+
+																					<div class="row">
+																						<h5
+																							style="background-color: #61616128; padding: 15px; margin: 10px; border-radius: 4px;">
+																							새로운 옵션 그룹이 필요하신 경우 <span
+																								style="color: blue; font-weight: bolder;">옵션편집-옵션추가</span>를
+																							이용해주세요.
+																						</h5>
+																					</div>
+																					 
+																					 <c:forEach var="ogList" items="${ogList}">
+																					<label for="chbox1" class="menu_addOptionGroup1"
+																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
+																						<div class="row">
+																							<input id="chbox1" type="checkbox"
+																									style="width: 30px; height: 30px;" checked>
+																							<div class="col-lg-1">
+																							</div>
+																							<div class="col-lg-11">
+																								<h3
+																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">${ogList.og_name}</h3>
+																								<h6 style="line-height: 10px; padding-bottom: 20;">
+																									<c:forEach var="optionList" items="${optionList}">
+																									<c:if test="${optionList.og_code =ogList.og_code }">
+																										${optionList.op_name},
+																									</c:if>
+																									</c:forEach>
+																									</h6>
+																							</div>
+																						</div>
+																						<div class="row">
+																							<div class="option_linkMenu"
+																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
+																								<h5 style="color: black;">
+																									<span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
+																									메뉴를 확인하세요.
+																								</h5>
+																								<h6>
+																								<c:set var="ogcode" value="ff"></c:set>
+																								<c:forEach var="MAOList" items="${MAOList}">
+																									<c:if test="${MAOList.og_code eq ogList.og_code}">
+																									<c:if test="${ogcode ne MAOList.og_code}">
+																											${MAOList.m_name}, 
+																									<c:set var="ogcode" value="${MAOList.og_code}" />		
+																									</c:if>
+																									</c:if>
+																								</c:forEach></h6>
+																							</div>
+																						</div>
+																					</label>
+																					</c:forEach>
+																					<div class="row" style="overflow-y: auto;">
+																						<div class="col-lg-12">
+																							<button class="save_Btn">옵션그룹 수정하기</button>
+																						</div>
+																					</div>
+
+																				</div>
+																				<div id="count" value="1"></div>
+																			</div>
+																		</div>
+																	</div>
+																	<!-------------메뉴추가_옵션그룹추가 Modal end--------------->
+																		
+																		
+																		<!--------------------final check----------------------------->
+
+																		<div class="modal fade" id="finalCh${vs.index}" role="dialog">
 																			<div class="modal-dialog">
 
 																				<!-- Modal content-->
@@ -1646,19 +1525,18 @@ function readImage(input) {
 																										</ul>
 																									</div>
 																								</li>
-
-
-																								</li>
-
-
 																							</ul>
 
 																						</table>
+																						
+																						
 																					</div>
 
 																				</div>
 																			</div>
 																		</div>
+																		
+																		
 
 
 																	</c:forEach>
@@ -1675,8 +1553,8 @@ function readImage(input) {
 														<div id="faq__222" class="tab-pane">
 
 															<div class="row" style="text-align: right;">
-																<a class="menu_addMenuGroup"
-																	onclick="option_addOptionGroup()"> + 옵션그룹추가</a>
+																<a class="menu_addMenuGroup" data-toggle="modal"
+																	href="#addOptionGroup"> + 옵션그룹추가</a>
 															</div>
 															
 															
@@ -1742,11 +1620,22 @@ function readImage(input) {
 																							</div>
 																						</div>
 																						<div class="row" style="margin-left: 5px;">
-																							<button class="groupAdd_Option">+ 가격옵션
-																								추가하기</button>
+																							<a class="groupAdd_Option" onclick="groupAdd_Option()">+ 가격옵션
+																								추가하기</a>
 																						</div>
 																					</li>
-
+																					<script>
+																					function groupAdd_Option() {
+																					$('.groupAdd_OptionList').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
+																	                        + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
+																													+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
+																													+"style='width: relative; font-size: 15px;'	type='text' placeholder='500'></div>"
+																													+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
+																													+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
+																													+"</button>	</div></div>");  
+																					}
+																					</script>
+	
 
 
 																					<li
@@ -1821,7 +1710,7 @@ function readImage(input) {
 																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVs">
 																								<c:if test="${ MAOList.og_code eq ogList.og_code}">
 																								<c:if test="${item ne MAOList.m_name}">
-																								${MAOList.m_name}, 
+																								${MAOList.m_name}  
 																								<c:set var="item" value="${MAOList.m_name}" />
 																								</c:if>
 																								</c:if>
@@ -1829,7 +1718,15 @@ function readImage(input) {
 																								<h4 style="color: black;">
 																									<span
 																										style="background-color: rgba(226, 77, 94, 0.267); border-radius: 5px; padding: 3px; font-size: smaller;">필수여부</span>
-																									[선택] <a data-toggle="modal"
+																										<c:choose>
+																										<c:when test="${ogList.og_ros==false}">
+																										[선택]
+																										</c:when>
+																										<c:otherwise>
+																										[필수]
+																										</c:otherwise>
+																										</c:choose>
+																									<a data-toggle="modal"
 																										href="#update_ros_modal"
 																										class="btn btn-primary btn-xs"
 																										style="margin-left: 10px; margin-top: 5px;">

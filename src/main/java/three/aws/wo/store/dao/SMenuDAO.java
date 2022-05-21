@@ -37,7 +37,7 @@ public class SMenuDAO {
 	}
 	
 	public List<StoreOptionVO> optionList(String storeName) {
-		return sqlSession.selectList("SMenuDAO.storeName",storeName);
+		return sqlSession.selectList("SMenuDAO.optionList",storeName);
 	}
 	
 	public List<MenuAndOptionVO> MAOList(String storeName) {
@@ -46,5 +46,21 @@ public class SMenuDAO {
 	
 	public List<MenuBasicOptionVO> basicOpList(String storeName) {
 		return sqlSession.selectList("SMenuDAO.basicOpList",storeName);
+	}
+
+	public void deleteMenuGroup(HashMap<String, String> map) {
+		sqlSession.delete("SMenuDAO.deleteMenuGroup",map);
+	}
+	
+	public void deleteMenuGroup_MAO(HashMap<String, String> map) {
+		sqlSession.delete("SMenuDAO.deleteMenuGroup_MAO",map);
+	}
+
+	public void updateMenuGroup(HashMap<String, String> map) {
+		sqlSession.update("SMenuDAO.updateMenuGroup",map);
+	}
+	
+	public void updateMenuGroup_MAO(HashMap<String, String> map) {
+		sqlSession.update("SMenuDAO.updateMenuGroup_MAO",map);
 	}
 }

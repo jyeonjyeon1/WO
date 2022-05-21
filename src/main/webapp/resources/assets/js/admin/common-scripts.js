@@ -296,9 +296,102 @@ $(document).ready(function () {
     });
 
 
-
+//메뉴그룹 수정
+	$(".updateMenuGroup").click(function() {
+		var mg_codeforUpdate = $(this).attr("value");
+		var forupdate = $(this).attr("forupdate"); //a 의 id
+		
+		//이름 수정 시작
+		Swal.fire({
+			//변경할 메뉴그룹명 입력받음
+		    text: "변경할 메뉴그룹명 : ",
+		    showCancelButton: true,
+		    input: "text",
+		    confirmButtonColor: "#3085d6",
+  		    cancelButtonColor: "#d33",
+		    cancelButtonText: "취소",
+		    confirmButtonText: "변경"
+		}).then((result) => {
+			//입력값이 있을 경우
+  		    if (result.value) {
+  		    	$.ajax({
+  		    	    type: "POST",
+  		    	    url: "/updateMenuGroup.store",
+  		    	    data: JSON.stringify({ "mg_code": mg_codeforUpdate , "mg_name": result.value}), //{md_code랑 변경할 이름으로 가져옴}
+  		    	    dataType: "json",
+  		    	    contentType: "application/json",
+  		    	    success: function (data) {
+  		    	        if (data == 1) {
+  		    	            console.log("변경 성공");
+  		    	            //바꿔버리는거 
+  		    	            document.getElementById(forupdate).innerText = result.value;
+	  		    	        Swal.fire({
+	  		    	            icon: "success",
+	  		    	            title: "변경 완료",
+	  		    	            showConfirmButton: false,
+	  		    	            timer: 1500
+	  		    	        });
+  		    	        }
+  		    	    },
+  		    	    error: function (data) {
+  		    	        console.log("변경오류");
+  		    	    }
+  		    	});//ajax  
+  		    }
+  		}); 
+		//이름 수정 끝
+		  
+	});//메뉴그룹 수정 끝
   
-
+  //메뉴그룹 삭제
+	$(".deleteMenuGroup").click(function() {
+		var mg_codeforDelete = $(this).attr("value");
+		var fordelete = $(this).attr("fordelete"); //a 의 id
+		var fordelete2 = $(this).attr("fordelete2"); //ul 의 id
+		var fordelete3 = $(this).attr("fordelete3"); //button의 id
+		//삭제 확인
+		Swal.fire({
+			  title: "진짜삭제되니까 테스트용 메뉴만 삭제하세요",
+// 			  title: "삭제하시겠습니까??",
+			  html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
+			  icon: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			 		$.ajax({
+	 	 		  type: "POST",
+	 	           url: "/deleteMenuGroup.store",
+	 	          data: JSON.stringify({"mg_code":mg_codeforDelete}),
+	 	           dataType: "json",
+	 	          contentType: "application/json",
+	 	          success:function(data){
+	 	        	  if(data==1){
+	 	         	 	console.log("삭제 성공");
+	 	         	 	//숨겨버릴거임 
+	 	         	 	 $("#"+fordelete).remove();
+	 	         	 	 $("#"+fordelete2).remove();
+	 	         	 	 $("#"+fordelete3).remove();
+		 	         	 Swal.fire({
+					  		  icon: "success",
+					  		  title: "삭제 완료",
+					  		  showConfirmButton: false,
+					  		  timer: 1500
+						 });
+	 	        	  }
+	 	           },
+		           error:function(data){
+			          console.log("삭제");
+		          }
+	 	 	  	});//ajax  
+			  }//if (result.isConfirmed)
+			})//then((result)
+		  
+	});//메뉴그룹 삭제 끝
+	 
 });
 
 function deleteAlert(){

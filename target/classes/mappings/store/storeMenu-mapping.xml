@@ -9,11 +9,13 @@
 		MENU m
 		ON (m.MG_CODE = g.MG_CODE )
 		WHERE m.SI_CODE = #{storeName}
+		ORDER BY g.MG_SEQ
 	</select>
 	
 	<select id="storeMgList" resultType="StoreMenuGroupVO" parameterType="StoreMenuGroupVO">
 		SELECT * FROM menu_group
 		WHERE SI_CODE = #{storeName}
+		ORDER BY MG_SEQ
 	</select>
 	
 	<insert id="insertMgName" >
@@ -24,12 +26,17 @@
 	<select id="ogList" resultType="StoreOptionGroupVO" parameterType="StoreOptionGroupVO">
 		SELECT * FROM option_group 
 		WHERE SI_CODE = #{storeName}
+		ORDER BY OG_SEQ
 	</select>
 	
 	
-	<select id="storeName" resultType="StoreOptionVO" parameterType="StoreOptionVO">
-		SELECT * FROM options 
-		WHERE SI_CODE = #{storeName}
+	<select id="optionList" resultType="StoreOptionVO" parameterType="StoreOptionVO">
+		SELECT * FROM options op
+		INNER JOIN
+		option_group og
+		ON (op.OG_SEQ = og.OG_SEQ )
+		WHERE og.SI_CODE = #{storeName}
+		ORDER BY OP_SEQ
 	</select>
 	
 	
@@ -45,6 +52,37 @@
 		ON (ogb.OGB_SEQ = opb.OGB_SEQ )
 		WHERE ogb.SI_CODE = #{storeName}
 	</select>
+	
+	<delete id="deleteMenuGroup">
+		DELETE FROM MENU_GROUP 
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</delete>
+	<delete id="deleteMenuGroup_MAO">
+		DELETE FROM MENUANDOPTION
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</delete>
+	<update id="updateMenuGroup">
+		UPDATE MENU_GROUP
+		SET MG_NAME = #{mg_name}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</update>
+	<update id="updateMenuGroup_MAO">
+		UPDATE MENUANDOPTION
+		SET MG_NAME = #{mg_name}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</update>
 	
 	
 </mapper>

@@ -19,4 +19,8 @@ public interface SMenuService {
 	List<StoreOptionVO> optionList(String storeName);
 	List<MenuAndOptionVO> MAOList(String storeName);
 	List<MenuBasicOptionVO> basicOpList(String storeName);
+	void deleteMenuGroup(HashMap<String, String> map);
+	void deleteMenuGroup_MAO(HashMap<String, String> map);
+	void updateMenuGroup(HashMap<String, String> map);
+	void updateMenuGroup_MAO(HashMap<String, String> map);
 }

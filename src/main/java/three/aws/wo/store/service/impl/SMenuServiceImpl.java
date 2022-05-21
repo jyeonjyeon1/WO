@@ -54,4 +54,24 @@ public class SMenuServiceImpl implements SMenuService {
 	public List<MenuBasicOptionVO> basicOpList(String storeName) {
 		return sMenuDAO.basicOpList(storeName);
 	}
+
+	@Override
+	public void deleteMenuGroup(HashMap<String, String> map) {
+		sMenuDAO.deleteMenuGroup(map);
+	}
+
+	@Override
+	public void deleteMenuGroup_MAO(HashMap<String, String> map) {
+		sMenuDAO.deleteMenuGroup_MAO(map);
+	}
+
+	@Override
+	public void updateMenuGroup(HashMap<String, String> map) {
+		sMenuDAO.updateMenuGroup(map);
+	}
+
+	@Override
+	public void updateMenuGroup_MAO(HashMap<String, String> map) {
+		sMenuDAO.updateMenuGroup_MAO(map);
+	}
 }

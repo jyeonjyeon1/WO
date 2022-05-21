@@ -82,6 +82,7 @@
 		WHERE store.U_ID = #{u_id}
 	</select>
 	
+	
 	<select id="usableCouponList" resultType="CouponVO" resultMap="couponVO">
 		SELECT * 
 			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 

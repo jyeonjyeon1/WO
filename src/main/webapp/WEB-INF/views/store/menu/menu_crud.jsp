@@ -40,6 +40,11 @@
 
 
 <style>
+input::-webkit-inner-spin-button {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
 /*메뉴그룹추가버튼*/
 /*옵션그룹추가버튼*/
 .menu_addMenuGroup {
@@ -359,14 +364,11 @@ li {
 
 
 <script>
- 
-
 
 //메뉴그룹리스트 js
   $(document).ready(function(){
-	 
-	  
-	// input file에 change 이벤트 부여
+
+	  // input file에 change 이벤트 부여
     const inputImage = document.getElementById("input-image")
    inputImage.addEventListener("change", e => {
        readImage(e.target)
@@ -387,50 +389,55 @@ li {
     $(this).addClass('selec');
   })
   $("li > a").blur(function(){
-    $(this).removeClass('selec');
+    $(this).removeClass("selec");
   }) 
 
+})//doc ready 끝
 
-})
-
-
+let indexnum = 1;
+let indexstring = "";
+let indexFinal = "";
   //메뉴편집-메뉴그룹추가-추가하기버튼 클릭시
- function addMgName(){
-	 var mg_name = $('#mg_name').val();
+function addMgName(){
+	 var mg_name = $("#mg_name").val();
 	 //현재 가게의 storeMgList 사이즈임
 	 var totalCount =${storeMgList.size()} +10;
 	 totalCount++;
-	 
 	 
 	  console.log(mg_name);
 	  console.log(totalCount);
 	   var param ={"mg_name" : mg_name,
 			  	"totalCount" : totalCount
 			  	}; 
-	  
-	  $.ajax({
- 		  type: "POST",
-           url: "/addMgName.store",
-          data: JSON.stringify(param),
-           dataType: "json",
-          contentType: "application/json",
-          success:function(){
-         	  console.log("성공");
-           }
- 	  })  
-	  if(mg_name) {
-		  console.log("있음");
-		  alert("ddd");
-		  
-	  }else {
-		  console.log("없음");
-	  }
-  }
+	   if(mg_name) {
+		   $.ajax({
+		 		  type: "POST",
+		           url: "/addMgName.store",
+		          data: JSON.stringify(param),
+		           dataType: "json",
+		          contentType: "application/json",
+		          success:function(){
+		         	  console.log("성공");
+		           }
+		 	  })  
+			  console.log("있음");
+			  Swal.fire({
+	    		  icon: "success",
+	    		  title: "추가 완료",
+	    		  showConfirmButton: false,
+	    		  timer: 1500
+			});
+			  document.getElementById("mg_name").value = null;
+			  
+		  }else {
+			  console.log("없음");
+		  }
+	 
+}
 	  
 //이미지수정 이미지파일 추가
  function readImage(input) {
 
-	   
     // 인풋 태그에 파일이 있는 경우
     if(input.files && input.files[0]) {
     	console.log("gggg");
@@ -456,6 +463,8 @@ li {
 
    
 } 
+
+
 </script>
 
 
@@ -537,7 +546,7 @@ li {
 		<!--main content start-->
 		<section id="main-content">
 
-			<section class="wrapper" style="height: 3500px;">
+			<section class="wrapper" style="height: 1000px;">
 				<div class="col-lg-11" style="min-width: 500px;">
 					<div class="card-header" style="font-size: 16px; margin-top: 40px;">
 						<div class="calculate_title" style="margin-bottom: 20px;">
@@ -609,7 +618,7 @@ li {
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<button class="save_Btn" id="add_menuGroupName"
+																								<button type="button" class="save_Btn" id="add_menuGroupName"
 																									onclick="addMgName()" style="margin-top: 50px;">추가하기</button>
 																							</div>
 																						</div>
@@ -630,20 +639,27 @@ li {
 																<ul id="main_menu">
 																	<c:forEach var="mg" items="${storeMgList}"
 																		varStatus="vs">
-																		<li><a class="menuGroup" href="javascript:">${mg.mg_name }
-																				<button type="button"
-																					onclick="javascript:deleteAlert();"
-																					class="btn btn-danger btn-xs"
-																					style="float: right; margin-right: 10px; margin-top: 5px;">
-																					<i class="fa fa-trash-o "></i>
-																				</button>
-																				<button class="btn btn-primary btn-xs"
-																					style="float: right; margin-right: 10px; margin-top: 5px;">
-																					<i class="fa fa-pencil"></i>
-																				</button>
+																		<li><div id="menugroupBtns${vs.index}"><button type="button"
+																				class="btn btn-danger btn-xs deleteMenuGroup" value="${mg.mg_code}" 
+																				fordelete="menuGroup${vs.index}"
+																				fordelete2 = "menuGroupUl${vs.index}"
+																				fordelete3 = "menugroupBtns${vs.index}"
+																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				<i class="fa fa-trash-o "></i>
+																			</button>
+																			<button type="button" class="btn btn-primary btn-xs updateMenuGroup"
+																				forupdate="menuGroup${vs.index}"
+																				value="${mg.mg_code}" 
+																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				<i class="fa fa-pencil"></i>
+																			</button></div>
+																			
+																			<a class="menuGroup" href="javascript:" id="menuGroup${vs.index}">${mg.mg_name }
+																			
 																		</a> 
+																		
 																		<!--*******메뉴 start*******-->
-																			<ul class="snd_menu sub_menu">
+																			<ul class="snd_menu sub_menu" id="menuGroupUl${vs.index}">
 																			<c:forEach var="menu" items="${storeMenuList}"
 																					varStatus="vss">
 																					<c:if test="${menu.mg_name eq mg.mg_name }">
@@ -663,10 +679,10 @@ li {
 																										<!-- 메뉴 basic 옵션 start -->
 																										<div class="menu_oneOption">
 																										<c:forEach var="basicOpList" items="${basicOpList}" varStatus="basicOpVs">
-																											<c:if test="${basicOpList.m_code eq menu.m_code }">
+																		<c:if test="${basicOpList.m_code eq menu.m_code }">
 																												<h6 style="margin-top: 0; font-weight: bolder;">${basicOpList.opb_name}
 																												: <fmt:formatNumber	value="${basicOpList.opb_price}" pattern="###,###" /> 
-																												</h6>
+																																					</h6>
 																												</c:if>
 																										</c:forEach>
 																										</div>
@@ -684,7 +700,7 @@ li {
 																								<li><a class="menu_oneDelete">메뉴삭제</a></li>
 																							</ul></li>
 																					</c:if>
-
+																					
 																					<!------------- 메뉴편집_메뉴정보수정 Modal start-------------->
 																					<div class="modal fade"
 																						id="menu_oneInfoUpdate${vs.index}${vss.index}"
@@ -840,7 +856,7 @@ li {
 																								</div>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button class="save_Btn">적용하기</button>
+																										<button type="button" class="save_Btn">적용하기</button>
 																									</div>
 																								</div>
 																							</li>
@@ -880,6 +896,8 @@ li {
 																					</div>
 																					 
 																					 <c:forEach var="ogList" items="${ogList}">
+																					 <!-- 장바구니 빈칸 용 기본 옵션 ' '은 제외하고 출력   -->
+																					 <c:if test="${ogList.og_code ne ' '}"> 
 																					<label for="chbox1" class="menu_addOptionGroup1"
 																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
 																						<div class="row">
@@ -893,18 +911,26 @@ li {
 																						</c:if>
 																						</c:if>
 																						</c:forEach> --%>
-																						
+																						<div class="col-lg-1">
 																						<input id="chbox1${vs.index}${vss.index}" type="checkbox"
-																									style="width: 30px; height: 30px;" checked>
+																									style="width: 30px; height: 30px;"
+																									 <c:forEach var="MAOList" items="${MAOList}">
+																						<c:if test="${MAOList.m_code eq menu.m_code}">
+																						<c:if test="${MAOList.og_code eq ogList.og_code}">
+																						checked
+																						</c:if>
+																						</c:if>
+																						</c:forEach>
+																									 
+																									 >
 																							
-																							<div class="col-lg-1">
 																							</div>
-																							<div class="col-lg-11">
+																							<div class="col-lg-10">
 																								<h3
 																									style="font-size: 20px; color: black; margin: 0; font-weight: bolder;">${ogList.og_name}</h3>
 																								<h6 style="line-height: 10px; padding-bottom: 20;">
 																									<c:forEach var="optionList" items="${optionList}">
-																									<c:if test="${optionList.og_code =ogList.og_code }">
+																									<c:if test="${ogList.og_seq eq optionList.og_seq }">
 																										${optionList.op_name},
 																									</c:if>
 																									</c:forEach>
@@ -915,7 +941,7 @@ li {
 																							<div class="option_linkMenu"
 																								style="background-color: #2e279627; padding: 10px; margin: 15px;">
 																								<h5 style="color: black;">
-																									<span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span>연결된
+																									<span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span> 연결된
 																									메뉴를 확인하세요.
 																								</h5>
 																								<h6>
@@ -931,10 +957,12 @@ li {
 																							</div>
 																						</div>
 																					</label>
+																					</c:if>
 																					</c:forEach>
+																					<!-- ogList forEach END -->
 																					<div class="row" style="overflow-y: auto;">
 																						<div class="col-lg-12">
-																							<button class="save_Btn">옵션그룹 수정하기</button>
+																							<button type="button" class="save_Btn">옵션그룹 수정하기</button>
 																						</div>
 																					</div>
 																				</div>
@@ -1030,7 +1058,7 @@ li {
                                                                               <li>
                                                                               <div class="row">
                                                                                  <div class="col-lg-12">
-                                                                                    <button type="button" class="save_Btn">승인 신청하기</button>
+                                                                                    <button type="button" type="button" class="save_Btn">승인 신청하기</button>
                                                                                  </div>
                                                                               </div>
                                                                            </li>
@@ -1097,7 +1125,7 @@ li {
 																										style="font-size: 15px; font-weight: bolder; color: black;">메뉴명</h5>
 																									<div class="row">
 																										<div class="col-lg-12">
-																											<input class="form-control"
+																											<input class="form-control" id="newmenu_name_input${vs.index}"
 																												style="width: relative; font-size: 15px;"
 																												type="text" placeholder="ex) 아메리카노">
 																										</div>
@@ -1107,26 +1135,26 @@ li {
 																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
 																									<h5
 																										style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">가격</h5>
-
-																								
-																										<div class="row" style="margin-left: 5px;">
+																										<!-- 개별 인덱스를 줄 것임. -->
+																										<div id="menuOne_${vs.index}" class="row" style="margin-left: 5px;" >
 																											<div class="col-lg-5" style="padding: 5px;">
 																												<input class="form-control"
-																													style="width: relative; font-size: 15px;"
-																													type="text" placeholder="가격명">
+																													style="margin-left:3px; width: relative; font-size: 15px;"
+																													type="text" placeholder="가격명" id="newmenu_basic_name_input${vs.index}">
 																											</div>
 																											<div class="col-lg-5" style="padding: 5px;">
 																												<input class="form-control"
-																													style="width: relative; font-size: 15px;"
-																													type="text" placeholder="가격">
+																													style="margin-left:3px; width: relative; font-size: 15px;"
+																													type="number" placeholder="가격" id="newmenu_basic_price_input${vs.index}">
 																											</div>
 																											<div class="col-lg-2" style="padding: 5px;">
-																												<button type="button"
-																													onclick="javascript:deleteAlert();"
-																													class="btn btn-danger btn-xs"
+																											<!-- 맨위 친구는 삭제할 수 없게할거임. -->
+																												<%-- <button type="button"
+																													class="btn btn-danger btn-xs deleteOpBasicChuga"
+																													fordelete="menuOne_${vs.index}"
 																													style="float: left; margin-top: 7px;">
 																													<i class="fa fa-trash-o "></i>
-																												</button>
+																												</button> --%>
 																											</div>
 																										</div>
 																									
@@ -1141,20 +1169,95 @@ li {
 
 																						</table>
 																						
-																						<script>
-																						function menu_priceOption2${vs.index}(){
-																							console.log("dd");
-											                                            	  $('#price_list2${vs.index}').prepend("<div class='row' style='margin-left: 0; margin-right:3px'>"
-																											+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
-																											+"style='width: relative; font-size: 15px;' type='text' placeholder='가격명'>"
-																											+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
-																											+"style='width: relative; font-size: 15px;' type='text' placeholder='가격'>"
-																											+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
-																											+"onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs' style='float: left; margin-top: 7px;'>"
-																											+"<i class='fa fa-trash-o '></i></button></div></div>");  
-											                       
-																					}
-																						</script>
+				<script>
+				function menu_priceOption2${vs.index}(){
+					//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+					//ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+					//이거는 각자 자른 번호를 부여하기 위함.
+					indexstring = indexnum.toString();
+					indexFinal = ${vs.index}+indexstring;
+					console.log("dd");
+					//가격 밑으로 오게 바꿨어용 #price_list2${vs.index} -->>menuOne_${vs.index}
+	                    $('#menuOne_${vs.index}').append("<div id='menuOne_${vs.index}"+indexstring+"' class='row' style='margin-left: 2px;'>"
+						+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control NAMENAMENAME' "
+						+"forCheck='"+indexFinal+"' "
+						+"style='width: relative; font-size: 15px;' type='text' placeholder='가격명' id='menu_basic_name${vs.index}"+indexstring+"'>"
+						+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control PRICEPRICEPRICE'"
+						+" forCheck='"+indexFinal+"' "
+						+"style='width: relative; font-size: 15px;' type='number' placeholder='가격' value='${vs.index}"+indexstring+"' id='menu_basic_name${vs.index}"+indexstring+"'>"
+						+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
+						+" fordelete='menuOne_${vs.index}"+indexstring+"' "
+						+" fordelete2='menutwo_${vs.index}"+indexstring+"' "
+						+"value='"+indexFinal+"'"
+						+"class='btn btn-danger btn-xs deleteOpBasicChuga' style='float: left; margin-top: 7px;'>"
+						+"<i class='fa fa-trash-o '></i></button></div></div>");
+                 	  indexnum++;
+                 	//메뉴추가에서 가격 row 삭제
+                	  $(".deleteOpBasicChuga").click(function() {
+                			var fordelete = $(this).attr("fordelete"); //div 의 id
+                			$("#"+fordelete).remove();
+                			//확인창에서도 삭제
+                			var fordelete2 = $(this).attr("fordelete2"); //div 의 id
+                			$("#"+fordelete2).remove();
+               		  });//메뉴추가에서 가격 row 삭제 끝
+               		  
+               		  //확인창에도 옵션 누적시켜줄거임
+                   	$('#priceOne_${vs.index}').append('<h4 id="menutwo_${vs.index}'+indexstring+'" style="margin-left: 0px;">'
+                   	+'<span id="menutwo_name${vs.index}'+indexstring+'"></span> : '
+                   	+'<span id="menutwo_price${vs.index}'+indexstring+'"></span> 원</h4>');
+                    
+                   	$(".NAMENAMENAME").on("propertychange change keyup paste input",
+							function() {
+                   		var indexFinall = $(this).attr("forCheck");
+                   		console.log(indexFinall);
+					  var newmenu_basic_price_input = $(this).val();
+					  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+					  var newMenu_option = document.getElementById("menutwo_name"+indexFinall);
+					  newMenu_option.innerText = newmenu_basic_price_input;
+				  });
+                   	
+                   	$(".PRICEPRICEPRICE").on("propertychange change keyup paste input",
+							function() {
+                   		var indexFinall = $(this).attr("forCheck");
+                   		console.log(indexFinall);
+					  var newmenu_basic_price_input = $(this).val();
+					  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+					  var newMenu_option = document.getElementById("menutwo_price"+indexFinall);
+					  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				  });
+				}
+				
+				  $(document).ready(function(){
+					  var newMenu_name_input = "";
+					  $("#newmenu_name_input${vs.index}").on("propertychange change keyup paste input",
+								function() {
+						  newMenu_name_input = $("#newmenu_name_input${vs.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_name = document.getElementById("newMenu_name${vs.index}");
+						  newMenu_name.innerText = newMenu_name_input;
+					  });
+					  
+					  $("#newmenu_basic_name_input${vs.index}").on("propertychange change keyup paste input",
+								function() {
+						  var newmenu_basic_name_input = $("#newmenu_basic_name_input${vs.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_option = document.getElementById("newMenu_basic${vs.index}");
+						  newMenu_option.innerText = newmenu_basic_name_input;
+					  });
+					  
+					  $("#newmenu_basic_price_input${vs.index}").on("propertychange change keyup paste input",
+								function() {
+						  var newmenu_basic_price_input = $("#newmenu_basic_price_input${vs.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_option = document.getElementById("newMenu_basic_price${vs.index}");
+						  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					  });
+					  
+					  
+					})//doc ready 끝
+					
+					
+				</script>
 																						<table class="modal_table">
 																							<ul>
 																								<li
@@ -1169,7 +1272,7 @@ li {
 																								</li>
 																								<li>
 																									<div class="col-lg-12">
-																										<button type="button" class="save_Btn" data-toggle="modal" href="#finalCh${vs.index}">확인하기</button>
+																										<button type="button" id="#finalBtn${vs.index}" class="save_Btn" data-toggle="modal" href="#finalCh${vs.index}">확인하기</button>
 																									</div>
 																								</li>
 																								</ul>
@@ -1252,7 +1355,7 @@ li {
 																					</c:forEach>
 																					<div class="row" style="overflow-y: auto;">
 																						<div class="col-lg-12">
-																							<button class="save_Btn">옵션그룹 수정하기</button>
+																							<button type="button" class="save_Btn">옵션그룹 수정하기</button>
 																						</div>
 																					</div>
 																					</div>
@@ -1304,7 +1407,7 @@ li {
 																									<div class="row">
 
 																										<h4 style="font-weight: bolder; color: black;">메뉴명</h4>
-																										<h4 style="margin-left: 10px;">바닐라라떼</h4>
+																										<h4 id="newMenu_name${vs.index}" style="margin-left: 10px;"> </h4>
 																									</div>
 
 
@@ -1315,12 +1418,10 @@ li {
 																									<div class="row">
 
 																										<h4 style="font-weight: bolder; color: black;">가격</h4>
-																										<h4 style="margin-left: 10px;">ICE(L) :
-																											2500원</h4>
-																										<h4 style="margin-left: 10px;">ICE(ML) :
-																											2000원</h4>
-																										<h4 style="margin-left: 10px;">HOT(ML) :
-																											2000원</h4>
+																										<h4 id="priceOne_${vs.index}" style="margin-left: 10px;">
+																										<span id="newMenu_basic${vs.index}"></span> : <span id="newMenu_basic_price${vs.index}"></span> 원</h4>
+																										<h4 style="margin-left: 10px;">ICE(ML) : 2000원</h4>
+																										<h4 style="margin-left: 10px;">HOT(ML) : 2000원</h4>
 																									</div>
 
 
@@ -1531,7 +1632,7 @@ li {
 																				style="float: right; margin-right: 10px; margin-top: 5px;">
 																				<i class="fa fa-trash-o "></i>
 																			</button>
-																			<button class="btn btn-primary btn-xs"
+																			<button type="button" class="btn btn-primary btn-xs"
 																				style="float: right; margin-right: 10px; margin-top: 5px;">
 																				<i class="fa fa-pencil"></i>
 																			</button>
@@ -1659,7 +1760,7 @@ li {
 																									<li>
 																										<div class="row">
 																											<div class="col-lg-12">
-																												<button class="save_Btn">수정하기</button>
+																												<button type="button" class="save_Btn">수정하기</button>
 																											</div>
 																										</div>
 																									</li>

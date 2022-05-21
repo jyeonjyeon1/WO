@@ -48,6 +48,7 @@ public class StoreMenuController {
 		
 	}
 	
+	//Adding MenuGroup 
 	@ResponseBody
 	@RequestMapping("/addMgName.store")
 	public String addMgName(@RequestBody HashMap<String, String> param ,HttpSession session, Model model) {
@@ -66,7 +67,50 @@ public class StoreMenuController {
 		
 		return "ok";
 	}
+	//Deleting MenuGroup
+	@ResponseBody
+	@RequestMapping("/deleteMenuGroup.store")
+	public int deleteMenuGroup(@RequestBody HashMap<String, String> param ,HttpSession session) {
+		int result = 0;
+		String si_code="2222111212";
+		String mg_code = param.get("mg_code");
+		System.out.println("deleting menugroup");
+		
+		HashMap<String,String> map = new HashMap<String, String>();
+		map.put("si_code",si_code );
+		map.put("mg_code", mg_code);
+		try {
+			sMenuService.deleteMenuGroup(map);
+			sMenuService.deleteMenuGroup_MAO(map);
+			result = 1;
+		} catch (Exception e) {
+			System.err.println("mggroup delete FAIL");
+		}
+		return result;
+	}
 	
-	
+	//Deleting MenuGroup
+		@ResponseBody
+		@RequestMapping("/updateMenuGroup.store")
+		public int updateMenuGroup(@RequestBody HashMap<String, String> param ,HttpSession session) {
+			int result = 0;
+			String si_code="2222111212";
+			String mg_code = param.get("mg_code");
+			String mg_name = param.get("mg_name");
+			System.out.println("updating menugroup");
+			
+			HashMap<String,String> map = new HashMap<String, String>();
+			map.put("si_code",si_code );
+			map.put("mg_code", mg_code);
+			map.put("mg_name", mg_name);
+			try {
+				sMenuService.updateMenuGroup(map);
+				sMenuService.updateMenuGroup_MAO(map);
+				result = 1;
+			} catch (Exception e) {
+				System.err.println("mggroup update FAIL");
+			}
+			return result;
+		}
 	
 }

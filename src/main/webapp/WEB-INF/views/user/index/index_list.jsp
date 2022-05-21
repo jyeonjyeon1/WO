@@ -51,8 +51,8 @@
 					</div>
 				</div>
 			</div>
-			<c:forEach var="myStoreList" items="${myStoreList}" varStatus="vs">
 			<div class="owl-carousel owl-theme">
+			<c:forEach var="myStoreList" items="${myStoreList}" varStatus="vs">
 				<div class="ms-2 me-4">
 					<div class="card">
 						<div class="single-product">
@@ -97,9 +97,9 @@
 						</div>
 					</div>
 				</div>
-				
+				</c:forEach>
 			</div>
-			</c:forEach>
+			
 		</div>
 	</section>
 	<!-- End Trending Product Area -->

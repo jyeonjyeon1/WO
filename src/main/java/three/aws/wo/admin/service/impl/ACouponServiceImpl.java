@@ -17,7 +17,17 @@ public class ACouponServiceImpl implements ACouponService {
 	public List<CouponVO> couponList() {
 		return aCouponDAO.couponList();
 	}
+	
+	@Override
+	public List<CouponVO> couponTemplateList() {
+		return aCouponDAO.couponTemplateList();
+	}
 
+	@Override
+	public List<CouponVO> couponUserList() {
+		return aCouponDAO.couponUserList();
+	}
+	
 	@Override
 	public void insertToAllCoupon(CouponVO vo) {
 		aCouponDAO.insertToAllCoupon(vo);
@@ -26,5 +36,10 @@ public class ACouponServiceImpl implements ACouponService {
 	@Override
 	public void insertToOneCoupon(CouponVO vo) {
 		aCouponDAO.insertToOneCoupon(vo);
+	}
+
+	@Override
+	public void insertToUserCoupon(CouponVO vo) {
+		aCouponDAO.insertToUserCoupon(vo);
 	}
 }

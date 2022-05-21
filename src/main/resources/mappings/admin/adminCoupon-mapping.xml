@@ -6,7 +6,7 @@
 	<resultMap type="CouponVO" id="couponVO">
 		<id column="C_CODE" property="c_code" jdbcType="VARCHAR"/>
 		<result column="C_CODE" property="ct_code" jdbcType="VARCHAR" />
-		<result column="C_NUMBER" property="c_number" jdbcType="VARCHAR" />
+		<result column="C_NUMBER" property="c_nansu" jdbcType="VARCHAR" />
 		<result column="C_STARTDATE" property="c_startdate" jdbcType="VARCHAR"/>
 		<result column="C_ENDDATE" property="c_enddate" jdbcType="VARCHAR"/>
 		<result column="C_USED" property="c_used" jdbcType="BOOLEAN" />
@@ -15,6 +15,7 @@
 		<result column="U_ID" property="u_id" jdbcType="VARCHAR" />
 		
 		<result column="SI_CODE" property="si_code" jdbcType="BOOLEAN" />
+		<result column="CT_SEQ" property="ct_seq" jdbcType="INTEGER" />
 		<result column="CT_NAME" property="ct_name" jdbcType="VARCHAR" />
 		<result column="CT_CONTENT" property="ct_content" jdbcType="VARCHAR"/>
 		<result column="CT_TYPE" property="ct_type" jdbcType="BOOLEAN" />
@@ -34,6 +35,16 @@
 	</select>
 	
 	
+	<select id="couponTemplateList" resultType="CouponVO">
+		SELECT *
+		FROM COUPON_TEMPLATE
+		WHERE CT_TYPE='TRUE' ORDER BY CT_SEQ DESC
+	</select>
+	
+	<select id="couponUserList" resultType="CouponVO">
+		SELECT *
+		FROM USERS
+	</select>
 	
 	
 	<insert id="insertToAllCoupon" parameterType="CouponVO">
@@ -50,6 +61,12 @@
 				  #{ct_startdate }, #{ct_enddate }, #{ct_discount_type }, #{ct_discount })
 	</insert>
 	
+	<insert id="insertToUserCoupon" parameterType="CouponVO">
+		INSERT INTO COUPON
+			(C_SEQ, CT_SEQ, C_NANSU, C_STARTDATE, C_ENDDATE, C_USED, U_ID)
+			VALUES(DEFAULT, ${ct_seq }, '${ct_nansu }', '${ct_startdate }', 
+			DATE '${ct_startdate }' + (SELECT CT_DAY FROM COUPON_TEMPLATE WHERE CT_SEQ=${ct_seq }), DEFAULT, '${u_id }' );
+	</insert>
 	
 	
 	

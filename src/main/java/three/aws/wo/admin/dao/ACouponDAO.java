@@ -16,6 +16,14 @@ public class ACouponDAO {
 	public List<CouponVO> couponList() {
 		return sqlSession.selectList("ACouponDAO.couponList");
 	}
+	
+	public List<CouponVO> couponTemplateList() {
+		return sqlSession.selectList("ACouponDAO.couponTemplateList");
+	}
+	
+	public List<CouponVO> couponUserList() {
+		return sqlSession.selectList("ACouponDAO.couponUserList");
+	}
 
 	public void insertToAllCoupon(CouponVO vo) {
 		sqlSession.insert("ACouponDAO.insertToAllCoupon", vo);
@@ -23,5 +31,9 @@ public class ACouponDAO {
 	
 	public void insertToOneCoupon(CouponVO vo) {
 		sqlSession.insert("ACouponDAO.insertToOneCoupon", vo);
+	}
+
+	public void insertToUserCoupon(CouponVO vo) {
+		sqlSession.insert("ACouponDAO.insertToUserCoupon", vo);
 	}
 }

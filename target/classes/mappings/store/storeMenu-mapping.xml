@@ -28,8 +28,11 @@
 	
 	
 	<select id="storeName" resultType="StoreOptionVO" parameterType="StoreOptionVO">
-		SELECT * FROM options 
-		WHERE SI_CODE = #{storeName}
+		SELECT * FROM options op
+		INNER JOIN
+		option_group og
+		ON (op.OG_SEQ = og.OG_SEQ )
+		WHERE og.SI_CODE = #{storeName}
 	</select>
 	
 	

@@ -15,6 +15,7 @@ public class CouponVO {
 	private Date c_useddate;
 	private String u_id;
 	
+	private String ct_seq;
 	private String si_code;
 	private String ct_name;
 	private String ct_content;

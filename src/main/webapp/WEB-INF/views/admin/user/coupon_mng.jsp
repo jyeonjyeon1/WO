@@ -239,8 +239,11 @@
                 </div>
                 
                 
-                <button type="button" onclick="location.href='coupon_add.admin'" class="btn btn-theme" style="font-size: 12px; width:80px;float: left;">
+                <button type="button" onclick="location.href='coupon_add.admin'" class="btn btn-theme" style="font-size: 12px; width:80px;float: left; margin-right:10px;">
                   쿠폰등록
+                </button>
+                <button type="button" onclick="location.href='coupon_user_add.admin'" class="btn btn-theme" style="font-size: 12px; width:80px;float: left;">
+                  유저등록
                 </button>
                 <button type="submit" class="btn btn-theme" style="width:70px;float: right;">검색</button>
               </form>

@@ -716,7 +716,7 @@ function readImage(input) {
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<button class="save_Btn" id="add_menuGroupName"
+																								<button type="button" class="save_Btn" id="add_menuGroupName"
 																									onclick="addMgName()" style="margin-top: 50px;">추가하기</button>
 																							</div>
 																						</div>
@@ -744,7 +744,7 @@ function readImage(input) {
 																					style="float: right; margin-right: 10px; margin-top: 5px;">
 																					<i class="fa fa-trash-o "></i>
 																				</button>
-																				<button class="btn btn-primary btn-xs"
+																				<button type="button" class="btn btn-primary btn-xs"
 																					style="float: right; margin-right: 10px; margin-top: 5px;">
 																					<i class="fa fa-pencil"></i>
 																				</button>
@@ -895,7 +895,7 @@ function readImage(input) {
 
 
 																												<div class="row" style="margin-left: 5px;">
-																													<button class="menu_priceOption"
+																													<button type="button" class="menu_priceOption"
 																														onclick="menu_priceOption1${vs.index}${vss.index}()">+
 																														가격옵션 추가하기</button>
 																												</div>
@@ -904,7 +904,7 @@ function readImage(input) {
 																											<li>
 																												<div class="row">
 																													<div class="col-lg-12">
-																														<button class="save_Btn">적용하기</button>
+																														<button type="button" class="save_Btn">적용하기</button>
 																													</div>
 																												</div>
 																											</li>
@@ -1025,7 +1025,7 @@ function readImage(input) {
 																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button class="save_Btn">적용하기</button>
+																										<button type="button" class="save_Btn">적용하기</button>
 																									</div>
 																								</div>
 																							</li>
@@ -1133,7 +1133,7 @@ function readImage(input) {
 																									<li>
 																										<div class="row">
 																											<div class="col-lg-12">
-																												<button class="save_Btn">승인 신청하기</button>
+																												<button type="button" class="save_Btn">승인 신청하기</button>
 																											</div>
 																										</div>
 																									</li>
@@ -1317,7 +1317,7 @@ function readImage(input) {
 
 																					<div class="row" style="overflow-y: auto;">
 																						<div class="col-lg-12">
-																							<button class="save_Btn">옵션그룹 수정하기</button>
+																							<button type="button" class="save_Btn">옵션그룹 수정하기</button>
 																						</div>
 																					</div>
 
@@ -1441,7 +1441,7 @@ function readImage(input) {
 																									</div>
 
 																									<div class="row" style="margin-left: 5px;">
-																										<button class="menu_priceOption"
+																										<button type="button" class="menu_priceOption"
 																											onclick="menu_priceOption${vs.index}()">+
 																											가격옵션 추가하기</button>
 																									</div>
@@ -1513,7 +1513,7 @@ function readImage(input) {
 																								</li>
 																								<li>
 																									<div class="col-lg-12">
-																										<button class="save_Btn"
+																										<button type="button" class="save_Btn"
 																											onclick="addMenuCheck${vs.index}()">메뉴
 																											추가하기</button>
 																									</div>
@@ -1742,7 +1742,7 @@ function readImage(input) {
 																							</div>
 																						</div>
 																						<div class="row" style="margin-left: 5px;">
-																							<button class="groupAdd_Option">+ 가격옵션
+																							<button type="button" class="groupAdd_Option">+ 가격옵션
 																								추가하기</button>
 																						</div>
 																					</li>
@@ -1772,7 +1772,7 @@ function readImage(input) {
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<button class="save_Btn">추가하기</button>
+																								<button type="button" class="save_Btn">추가하기</button>
 																							</div>
 																						</div>
 																					</li>
@@ -1799,7 +1799,7 @@ function readImage(input) {
 																				style="float: right; margin-right: 10px; margin-top: 5px;">
 																				<i class="fa fa-trash-o "></i>
 																			</button>
-																			<button class="btn btn-primary btn-xs"
+																			<button type="button" class="btn btn-primary btn-xs"
 																				style="float: right; margin-right: 10px; margin-top: 5px;">
 																				<i class="fa fa-pencil"></i>
 																			</button>
@@ -1916,7 +1916,7 @@ function readImage(input) {
 																									<li>
 																										<div class="row">
 																											<div class="col-lg-12">
-																												<button class="save_Btn">수정하기</button>
+																												<button type="button" class="save_Btn">수정하기</button>
 																											</div>
 																										</div>
 																									</li>
@@ -1997,7 +1997,7 @@ function readImage(input) {
 																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button class="save_Btn">적용하기</button>
+																										 <button type="button" class="save_Btn">적용하기</button>
 																									</div>
 																								</div>
 																							</li>
@@ -2063,7 +2063,7 @@ function readImage(input) {
 																									</div>
 																								</div>
 																								<div class="row" style="margin-left: 5px;">
-																									<button class="groupAdd_Option">+ 가격옵션
+																									 <button type="button" class="groupAdd_Option">+ 가격옵션
 																										추가하기</button>
 																								</div>
 																							</li>
@@ -2074,7 +2074,7 @@ function readImage(input) {
 																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button class="save_Btn">옵션 추가하기</button>
+																										 <button type="button" class="save_Btn">옵션 추가하기</button>
 																									</div>
 																								</div>
 																							</li>

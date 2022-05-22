@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -377,7 +381,7 @@ function toggle_gong(){
                       <span class="title">영업시간 <a class="change_info" onclick="modal_a()" >변경하기</a></span>
                       <ul> 
                           <li>월~금</li>
-                         <div>오전 09:50 ~ 오후 09:50</div>
+                         <div>${storeSession.si_open} ~ ${storeSession.si_close}</div>
                           <li>토요일</li>
                             <div>오전 10:50 ~ 오후 10:50</div>
                           <li>일요일</li>
@@ -412,11 +416,11 @@ function toggle_gong(){
                       <span class="title" style="margin-top: 30px;">휴무일 <a class="change_info" onclick="modal_b()" >변경하기</a></span> 
                       <ul> 
                           <li>공휴일</li> 
-                          <div>설정안함</div>
+                          <div>??</div>
                           <li>정기휴무</li> 
-                          <div>설정안함</div>
+                          <div>${storeSession.si_holiday_fix}</div>
                           <li>임시휴무</li> 
-                          <div>설정안함</div>
+                          <div>${storeSession.si_holiday_imsi}</div>
                           
                       </ul>
                   </div>

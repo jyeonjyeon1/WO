@@ -55,5 +55,6 @@
 		
 		
 		<mapper resource="mappings/store/storeMenu-mapping.xml" /> 
+		<mapper resource="mappings/store/storeLogin-mapping.xml" />
 	</mappers>
 </configuration>

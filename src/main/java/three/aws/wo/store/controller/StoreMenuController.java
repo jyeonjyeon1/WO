@@ -134,8 +134,10 @@ public class StoreMenuController {
 		String m_name = param.get("m_name");
 		String opb_name = param.get("opb_name");
 		int opb_price = Integer.parseInt(param.get("opb_price"));
-		System.out.println(param);
-		System.out.println(param.get("opb_total"));
+		// 모든 메뉴
+		String basic_menu_options = param.get("opb_total");
+		String[] basic_menu_split = basic_menu_options.split("\\n");
+		int basic_num = basic_menu_split.length; // 총 기본옵션 +1
 
 		System.out.println("inserting menu");
 		// getting m_code of max m_seq from menu
@@ -159,48 +161,87 @@ public class StoreMenuController {
 		} else {
 			ogb_code = String.valueOf(Integer.parseInt(current_max_OGB_code) + 1);
 		}
-		
+
 		// getting opb_code of max opb_seq from menu_group
 		String current_max_OPB_code = sMenuService.maxOpbSeq(map);
 		map.put("ogb_code", ogb_code);
 		String opb_code = "";
 		if (current_max_OPB_code == null) {
-			opb_code = ogb_code+"001";
+			opb_code = ogb_code + "001";
 		} else {
 			opb_code = String.valueOf(Integer.parseInt(current_max_OPB_code) + 1);
 		}
-		
-		System.out.println("m_code : "+m_code);
-		System.out.println("ogb_code : "+ogb_code);
-		System.out.println("opb_code : "+opb_code);
-		
+
+		System.out.println("m_code : " + m_code);
+		System.out.println("ogb_code : " + ogb_code);
+		System.out.println("opb_code : " + opb_code);
+
 		map.put("m_name", m_name);
 		map.put("m_code", m_code);
 		map.put("opb_name", opb_name);
 		map.put("opb_price", opb_price);
 		map.put("opb_code", opb_code);
-		//map에 si_code m_name ogb_code m_code
-		
-		
+		// map에 si_code m_name ogb_code m_code
+
 		try {
 			sMenuService.insertMenu(map);
-			//menu 먼저 등록하고 seq 받아옴
+			// menu 먼저 등록하고 seq 받아옴
 			int m_seq = sMenuService.getm_seq(map);
-			
-			map.put("m_seq",m_seq);
+
+			map.put("m_seq", m_seq);
 			sMenuService.insertOGB(map);
-			
+
 //			//OGB 먼저 등록하고 seq 받아옴
 			int ogb_seq = sMenuService.getogb_seq(map);
-			
-			// ogb_seq 받아온 후에 입력
+
+			// ogb_seq 받아온 후에 입력 (첫번째것만)
 			map.put("ogb_seq", ogb_seq);
 			sMenuService.insertOPB(map);
+			// (#{si_code},#{ogb_seq} ,#{opb_code},#{opb_name} ,#{opb_price})
+			if (basic_num > 2) {
+				for (int i = 2; i < basic_num; i++) {
+					String code = ogb_code + "00" + String.valueOf(i);
+					String[] split = basic_menu_split[i].split(" : ");
+					String name = split[0];
+					int price = Integer.parseInt(split[1].replace(" 원", "").replaceAll(",", ""));
+					HashMap<String, Object> mapp = new HashMap<String, Object>();
+					mapp.put("si_code", si_code);
+					mapp.put("ogb_seq", ogb_seq);
+					mapp.put("opb_code", code);
+					mapp.put("opb_name", name);
+					mapp.put("opb_price", price);
+					sMenuService.insertOPB(mapp);
+				}
+			}
+
 			result = 1;
 		} catch (Exception e) {
-			System.err.println("mggroup update FAIL");
+			System.err.println("음료 등록 FAIL");
+			e.printStackTrace();
 		}
-		
+
+		return result;
+	}
+
+	// Deleting MenuGroup
+	@ResponseBody
+	@RequestMapping("/updateMenu.store")
+	public int updateMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
+		int result = 0;
+		String si_code = "2222111212";
+		String mg_code = param.get("mg_code");
+		System.out.println("deleting menugroup");
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("si_code", si_code);
+		map.put("mg_code", mg_code);
+//		try {
+//			sMenuService.deleteMenuGroup(map);
+//			sMenuService.deleteMenuGroup_MAO(map);
+//			result = 1;
+//		} catch (Exception e) {
+//			System.err.println("mggroup delete FAIL");
+//		}
 		return result;
 	}
 

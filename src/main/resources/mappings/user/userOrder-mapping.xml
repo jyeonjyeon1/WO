@@ -7,7 +7,7 @@
 		SELECT b.b_seq,
 		b.u_id,
 		b.si_code,
-		b.m_code,
+		b.m_seq,
 		b.b_quantity,
 		b.b_single_price,
 		b.b_total_price,
@@ -34,7 +34,7 @@
 		FROM BASKET b
 		INNER JOIN
 		MENU m
-		ON (b.M_CODE = m.M_CODE)
+		ON (b.M_SEQ = m.M_SEQ)
 		INNER JOIN
 		option_basic ob 
 		ON (ob.opb_code = b.opb_code and ob.SI_CODE = b.SI_CODE)

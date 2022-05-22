@@ -17,6 +17,35 @@
 		WHERE SI_CODE = #{storeName}
 		ORDER BY MG_SEQ
 	</select>
+	<select id="maxMgSeq" resultType="String">
+		SELECT MG_CODE FROM MENU_GROUP 
+		WHERE 
+		MG_SEQ = (SELECT MAX(MG_SEQ) FROM MENU_GROUP 
+		WHERE 
+		SI_CODE = #{si_code})
+	</select>
+	<select id="maxMenuSeq" resultType="String">
+		SELECT M_CODE FROM MENU 
+		WHERE 
+		M_SEQ = (SELECT MAX(M_SEQ) FROM MENU 
+		WHERE 
+		SI_CODE = #{si_code} and MG_CODE = #{mg_code})
+	</select>
+	<select id="maxOgbSeq" resultType="String">
+		SELECT OGB_CODE FROM OPTIONGROUP_BASIC 
+		WHERE 
+		OGB_SEQ = (SELECT MAX(OGB_SEQ) FROM OPTIONGROUP_BASIC 
+		WHERE 
+		SI_CODE = #{si_code})
+	</select>
+	<select id="maxOpbSeq" resultType="String">
+		SELECT OPB_CODE FROM OPTION_BASIC 
+		WHERE 
+		OPB_SEQ = (SELECT MAX(OPB_SEQ) FROM OPTION_BASIC 
+		WHERE 
+		SI_CODE = #{si_code} and 
+		OGB_SEQ = (SELECT OGB_SEQ FROM OPTIONGROUP_BASIC WHERE OGB_CODE = #{ogb_code}))
+	</select>
 	
 	<insert id="insertMgName" >
 		INSERT INTO
@@ -83,7 +112,39 @@
 		AND
 		MG_CODE = #{mg_code}
 	</update>
+	<insert id="insertMenu">
+		INSERT INTO
+    	MENU(SI_CODE, M_CODE, M_NAME,MG_CODE,MG_SEQ) 
+    	VALUES 
+    	(#{si_code},#{m_code} ,#{m_name},#{mg_code} ,#{mg_seq})
+	</insert>
 	
+	<insert id="insertOGB">
+		INSERT INTO
+    	OPTIONGROUP_BASIC(SI_CODE, M_CODE, M_NAME,OGB_CODE,M_SEQ) 
+    	VALUES 
+    	(#{si_code},#{m_code} ,#{m_name},#{ogb_code} ,#{m_seq})
+	</insert>
+	
+	<insert id="insertOPB">
+		INSERT INTO
+    	OPTION_BASIC(SI_CODE, OGB_SEQ, OPB_CODE,OPB_NAME,OPB_PRICE) 
+    	VALUES 
+    	(#{si_code},#{ogb_seq} ,#{opb_code},#{opb_name} ,#{opb_price})
+	</insert>
+	
+	<select id="getm_seq" resultType="int">
+		SELECT M_SEQ FROM MENU
+		WHERE SI_CODE = #{si_code}
+		AND
+		M_CODE =#{m_code}
+	</select>
+	<select id="getogb_seq" resultType="int">
+		SELECT OGB_SEQ FROM OPTIONGROUP_BASIC
+		WHERE SI_CODE = #{si_code}
+		AND
+		OGB_CODE =#{ogb_code}
+	</select>
 	
 </mapper>
  

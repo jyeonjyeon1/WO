@@ -263,6 +263,7 @@ public class StoreMenuController {
 		int ogb_seq = sMenuService.ogbSeqfromMSeq(map);
 		String ogb_code = sMenuService.ogbCodefromMSeq(map);
 		
+		
 		System.out.println(ogb_seq);
 		System.out.println(ogb_code);
 		map.put("ogb_seq", ogb_seq);

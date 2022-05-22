@@ -109,6 +109,8 @@ public class SMenuDAO {
 	}
 
 	public int ogbSeqfromMSeq(HashMap<String, Object> map) {
+		Object seq = sqlSession.selectOne("SMenuDAO.ogbSeqfromMSeq",map);
+		if(seq==null) {return 0;}
 		return sqlSession.selectOne("SMenuDAO.ogbSeqfromMSeq",map);
 	}
 

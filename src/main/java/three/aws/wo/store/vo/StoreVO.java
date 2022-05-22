@@ -39,4 +39,5 @@ public class StoreVO {
 	private String sa_business_registration_image;
 	private String sa_bankbook_image;
 	private String sa_rep_name;
+	private String sa_acc_no;
 }

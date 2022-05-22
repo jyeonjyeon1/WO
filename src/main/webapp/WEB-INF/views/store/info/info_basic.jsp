@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -22,6 +25,8 @@
   <!-- Custom styles for this template -->
   <link href="resources/assets/css/admin/style.css" rel="stylesheet">
   <link href="resources/assets/css/admin/style-responsive.css" rel="stylesheet">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
     /*기본정보변경 전체 css 추가*/
 .wrapper {
@@ -343,7 +348,23 @@ function toggle_facility() {
     }
 
 }
-
+	function update_tel(){
+		var param = {"si_tel" : $("#si_tel").val()};
+		
+		$.ajax({
+			type:"POST",
+			url: "/updateTel.store",
+	        data: JSON.stringify(param),
+	        dataType: "json",
+	        contentType: "application/json",
+	        success:function(data){
+	        	alert("가게 전화번호 변경완료.. swal 왜 안되냐?..");
+	        },error: function(data) {
+	        	console.log("추가오류");
+	        }
+		});
+		
+	}
 
 
   </script>
@@ -366,7 +387,7 @@ function toggle_facility() {
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><a><img src=${fn:toLowerCase(storeSession.si_image) } class="img-circle" width="80"></a></p>
           <h5 class="centered">더리터 위례점</h5>
           <p class="sidebar-title" >주문 확인</p>
           <li class="sub-menu">
@@ -465,13 +486,13 @@ function toggle_facility() {
                       <span class="title">가게정보 <a class="service_info" style="font-size: 13px; margin-left: 30px;" onclick="modal_a()" >변경요청은 고객센터로 문의해주세요</a></span>
                       <ul> 
                           <li>로고</li>
-                          <img src="/views_store/no-image-cafe.png" style="width: 100px; height: 100px;">s
+                          <img src=${fn:toLowerCase(storeSession.si_image) } style="width: 100px; height: 100px;">s
                           <li>가게 이름</li>
-                            <div>더리터 위례점</div>
+                            <div>${storeSession.si_name }</div>
                           <li>가게 코드(사업자등록번호)</li>
-                            <div>3922101126</div>
+                            <div>${storeSession.si_code }</div>
                           <li>가게 위치</li>
-                            <div>(13647)경기도 성남시 수정구 창곡동 559-6 라크리음 1층 117호</div>
+                            <div>${storeSession.si_addr_road }</div>
                          
                       </ul>
                   </div>
@@ -492,7 +513,7 @@ function toggle_facility() {
                   <div class="box orange">
                       <span class="title" style="margin-top: 30px;">가게 전화번호 <a class="change_info" onclick="modal_b()" >변경하기</a></span> 
                       <ul> 
-                          <li>031-777-7777</li> 
+                          <li>${storeSession.si_tel }</li> 
                           
                       </ul>
                   </div>
@@ -501,16 +522,16 @@ function toggle_facility() {
                     <div class="modalB_content">
                       <h2 style="font-size: 20px; color: black; border-bottom: 1px solid rgba(0, 0, 0, 0.575); padding-bottom: 20px;">가게 전화번호</h2>
                       <div style="font-size: 15px; font-weight: bolder; margin-top: 60px; color: black; text-align: left; margin-left: 44px;">대표번호</div>
-                      <input class="form-control" type="text" placeholder="031-7777-7777" value="" style="width: 50%; margin-left: 40px; margin-top: 5px;">
+                      <input class="form-control" id="si_tel" type="text" value="${storeSession.si_tel }" style="width: 50%; margin-left: 40px; margin-top: 5px;">
                       
                       <div>
                        <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-6"></div>
                          <div class="col-lg-3" style="text-align: right;">
-                          <button class="UpdateBtn" onclick="" >수정</button>
+                          <button type="button" class="UpdateBtn" onclick="update_tel()" >수정</button>
                          </div>
                         <div class="col-lg-3" style="text-align: left;">
-                          <button class="closeBtn" onclick="close_modalB()" >닫기</button>
+                          <button type="button" class="closeBtn" onclick="close_modalB()" >닫기</button>
                         </div>
                        </div> 
                       
@@ -523,9 +544,17 @@ function toggle_facility() {
                       <span class="title" style="margin-top: 30px;">가게 편의정보 <a class="change_info" onclick="modal_c()">변경하기</a></span> 
                       <ul> 
                           <li>주차</li>
-                            <div>무료</div> 
+                          <c:choose>
+                          	<c:when test="${storeSession.si_parking_able eq false}">
+                          	<div>[불가능]</div>
+                          	</c:when>
+                          	<c:otherwise>
+                          	[가능] 유료? 무료? 컬럼하나더만들까?
+                          	</c:otherwise>
+                          </c:choose>
+                           
                           <li>기타시설</li>
-                            <div>룸 / 좌석 / 단체석 / 무선인터넷 / 반려동물 동반</div> 
+                            <div>${storeSession.si_referinfo }</div> 
                       </ul>
                   </div>
                   
@@ -663,7 +692,7 @@ function toggle_facility() {
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <script src="resources/assets/js/admin/bootstrap/js/bootstrap.min.js"></script>
   <script src="resources/assets/js/admin/jquery-ui-1.9.2.custom.min.js"></script>
   <script src="resources/assets/js/admin/jquery.ui.touch-punch.min.js"></script>

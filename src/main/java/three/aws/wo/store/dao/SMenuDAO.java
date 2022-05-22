@@ -63,4 +63,40 @@ public class SMenuDAO {
 	public void updateMenuGroup_MAO(HashMap<String, String> map) {
 		sqlSession.update("SMenuDAO.updateMenuGroup_MAO",map);
 	}
+
+	public String maxMgSeq(String si_code) {
+		return sqlSession.selectOne("SMenuDAO.maxMgSeq",si_code);
+	}
+
+	public String maxMenuSeq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.maxMenuSeq",map);
+	}
+
+	public String maxOgbSeq(String si_code) {
+		return sqlSession.selectOne("SMenuDAO.maxOgbSeq",si_code);
+	}
+	
+	public String maxOpbSeq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.maxOpbSeq",map);
+	}
+
+	public void insertMenu(HashMap<String, Object> map) {
+		sqlSession.insert("SMenuDAO.insertMenu", map);
+	}
+
+	public void insertOGB(HashMap<String, Object> map) {
+		sqlSession.insert("SMenuDAO.insertOGB", map);
+	}
+
+	public int getm_seq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.getm_seq",map);
+	}
+
+	public int getogb_seq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.getogb_seq",map);
+	}
+
+	public void insertOPB(HashMap<String, Object> map) {
+		sqlSession.insert("SMenuDAO.insertOPB", map);
+	}
 }

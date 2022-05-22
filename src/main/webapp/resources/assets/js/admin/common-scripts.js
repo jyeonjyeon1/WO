@@ -391,6 +391,30 @@ $(document).ready(function () {
 			})//then((result)
 		  
 	});//메뉴그룹 삭제 끝
+	
+	//원래 있던 메뉴 삭제
+	$(".deleteMenuOriginal").click(function() {
+		var m_codeforDelete = $(this).attr("value"); //m_code
+		var fordelete = $(this).attr("fordelete"); // ${vs.index}${vss.index}
+		var fordelete2 = "zzz" + fordelete;
+		//삭제 확인
+		Swal.fire({
+			title: "진짜삭제되니까 테스트용 메뉴만 삭제하세요",
+			// 	 			  title: "삭제하시겠습니까??",
+			html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "삭제",
+			cancelButtonText: "아니오"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$("#" + fordelete2).remove();
+			}//if (result.isConfirmed)
+		})//then((result)
+
+	});//메뉴 삭제 끝
 	 
 });
 

@@ -62,6 +62,7 @@ input::-webkit-inner-spin-button {
 .menu_addMenuGroup:hover {
 	background-color: #0a5c96;
 	color: aliceblue;
+	cursor: pointer;
 }
 
 /*메뉴그룹 리스트 css*/
@@ -126,6 +127,7 @@ li {
 
 .menu_addOne h4:hover {
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 /* 메뉴편집 - 옵션수정- 옵션그룹 추가 버튼 */
@@ -138,6 +140,7 @@ li {
 
 .menu_addOptionGroup h4:hover {
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 /*옵션편집 - + 옵션그룹 추가버튼 클릭시*/
@@ -150,6 +153,7 @@ li {
 
 .option_addOptionGroup h4:hover {
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 /*옵션편집 - 옵션추가버튼 */
@@ -162,6 +166,7 @@ li {
 
 .option_addOne h4:hover {
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 /*메뉴편집 - 메뉴정보수정 */
@@ -281,6 +286,7 @@ li {
 
 .menu_priceOption:hover {
 	font-weight: bolder;
+	cursor: pointer;
 	color: rgb(218, 60, 12);
 }
 
@@ -293,6 +299,7 @@ li {
 }
 
 .add_Option:hover {
+	cursor: pointer;
 	font-weight: bolder;
 	color: rgb(218, 60, 12);
 }
@@ -306,6 +313,7 @@ li {
 }
 
 .groupAdd_Option:hover {
+	cursor: pointer;
 	font-weight: bolder;
 	color: rgb(218, 60, 12);
 }
@@ -322,6 +330,7 @@ li {
 .save_Btn:hover {
 	background-color: rgba(218, 60, 12, 0.637);
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 .nextBtn {
@@ -336,6 +345,7 @@ li {
 .nextBtn:hover {
 	background-color: rgba(218, 60, 12, 0.637);
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 .beforeBtn {
@@ -350,10 +360,12 @@ li {
 .beforeBtn:hover {
 	background-color: rgba(218, 60, 12, 0.637);
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 .img_upload a:hover {
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 /*이미지 수정 파일업로드*/
@@ -397,6 +409,9 @@ li {
 let indexnum = 1;
 let indexstring = "";
 let indexFinal = "";
+let indexnummm = 1;
+let indexstringgg = "";
+let indexFinalll = "";
   //메뉴편집-메뉴그룹추가-추가하기버튼 클릭시
 function addMgName(){
 	 var mg_name = $("#mg_name").val();
@@ -418,16 +433,21 @@ function addMgName(){
 		          contentType: "application/json",
 		          success:function(){
 		         	  console.log("성공");
+		         	 Swal.fire({
+			    		  icon: "success",
+			    		  title: "추가 완료",
+			    		  showConfirmButton: true,
+			    		  confirmButtonText: "확인",
+// 			    		  timer : 1500,
+						//totalCount를 jsp에서 수량으로 하면 한번에 두개 이상 추가할 수 없음 (mg_code 중복돼서)
+					}).then((result) => {
+						  if (result.isConfirmed) {
+							  //일단 바로바로 화면 반영은 당장 힘들어서 새로고침부터했음
+							  location.href="/CRUD.store";
+						  }//if (result.isConfirmed)
+						});//then((result)
 		           }
 		 	  })  
-			  console.log("있음");
-			  Swal.fire({
-	    		  icon: "success",
-	    		  title: "추가 완료",
-	    		  showConfirmButton: false,
-	    		  timer: 1500
-			});
-			  document.getElementById("mg_name").value = null;
 			  
 		  }else {
 			  console.log("없음");
@@ -701,6 +721,132 @@ function addMgName(){
 																							</ul></li>
 																					</c:if>
 																					
+	<script>
+	//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+	//ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+	var m_name = $("#m_name${vs.index}${vss.index}").val
+	var m_code = $("#m_code${vs.index}${vss.index}").val
+	//가격옵션추가 눌렀을때 input 나오게하기.
+	function addPO${vs.index}${vss.index}(){
+		indexstringgg = indexnummm.toString();
+		indexFinalll = ${vs.index}+${vss.index}+indexstringgg;
+		$('#addPriceOptionBtn${vs.index}${vss.index}').append("<div id='menuOne__"+indexFinalll+"' class='add_priceoption' style='margin:0;'> <div class='row' style='margin-left: 5px;'>"
+			+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control NAMENAMENAMENAME'"
+			+"id='menu_basic_name"+indexFinalll+"' forCheck='"+indexFinalll+"' style='width: relative; font-size: 15px;' type='text' placeholder='ex) ice'>"
+			+"</div> <div class='col-lg-5' style='padding: 5px;'> "
+			+"<input class='form-control PRICEPRICEPRICEPRICE' forCheck='"+indexFinalll+"'"
+			+"style='width: relative; font-size: 15px;' type='number' placeholder='ex) 1500' id='menu_basic_name"+indexFinalll+"'>"
+			+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
+			+" class='btn btn-danger btn-xs deleteMenu' value='${menu.m_code}' "
+			+"fordelete='"+indexFinalll+"' style='float: left; margin-top: 7px;'> <i class='fa fa-trash-o '></i> </button>"
+			+"</div></div></div>");  
+		
+ 	  indexnummm++;
+	
+ 	 //메뉴 삭제
+ 		$(".deleteMenu").click(function() {
+ 			var m_codeforDelete = $(this).attr("value"); //m_code
+ 			var fordelete = $(this).attr("fordelete"); // ${vs.index}${vss.index}
+ 			var fordelete2 = "menutwo__"+fordelete;
+ 			//삭제 확인
+//  			Swal.fire({
+// 	 			  title: "삭제하시겠습니까??",
+//  				  icon: "warning",
+//  				  showCancelButton: true,
+//  				  confirmButtonColor: "#3085d6",
+//  				  cancelButtonColor: "#d33",
+//  				  confirmButtonText: "삭제",
+//  				  cancelButtonText: "아니오"
+//  				}).then((result) => {
+//  				  if (result.isConfirmed) {
+ 					 $("#"+"menuOne__"+fordelete).remove();
+ 		 			//확인창에서도 삭제
+ 		 			$("#"+fordelete2).remove();
+//  				  }//if (result.isConfirmed)
+//  				})//then((result)
+ 			  
+ 		});//메뉴 삭제 끝
+		  
+		  //확인창에도 옵션 누적시켜줄거임
+   	$('#priceOne__${vs.index}${vss.index}').append('<h4 id="menutwo__'+indexFinalll+'" style="margin-left: 0px;">'
+   	+'<span id="menutwo_name_'+indexFinalll+'">미입력</span> : '
+   	+'<span id="menutwo_price_'+indexFinalll+'">미입력</span> 원</h4>');
+    
+   	$(".NAMENAMENAMENAME").on("propertychange change keyup paste input",
+			function() {
+   		var indexFinall = $(this).attr("forCheck");
+   		console.log(indexFinall);
+	  var newmenu_basic_price_input = $(this).val();
+	  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+	  var newMenu_option = document.getElementById("menutwo_name_"+indexFinall);
+	  newMenu_option.innerText = newmenu_basic_price_input;
+  });
+   	
+   	$(".PRICEPRICEPRICEPRICE").on("propertychange change keyup paste input",
+			function() {
+   		var indexFinall = $(this).attr("forCheck");
+   		console.log(indexFinall);
+	  var newmenu_basic_price_input = $(this).val();
+	  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+	  var newMenu_option = document.getElementById("menutwo_price_"+indexFinall);
+	  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  });
+} 	
+	
+   	function menuupdateBtn${vs.index}${vss.index}(){
+   		var zzzz = document.getElementById("hwakin_chang__${vs.index}${vss.index}").innerText;
+   		alert(zzzz);
+   	}
+	
+	</script>
+	<!-- 확인용 -->
+	<div class="row" id="hwakin_chang__${vs.index}${vss.index}" style="display:none;">
+		<h4>메뉴이름:<span id="menu_name${vs.index}${vss.index}"></span></h4>
+		<h4 id="priceOne__${vs.index}${vss.index}" style="margin-left: 10px;">
+		<c:forEach var="bbb" items="${basicOpList}" varStatus="basicOpVs">
+			<c:if test="${bbb.m_code eq menu.m_code }">
+			
+				<span id="newMenu_basic_${vs.index}${vss.index}${basicOpVs.index}">${bbb.opb_name}</span> : 
+				<span id="newMenu_basic_price_${vs.index}${vss.index}${basicOpVs.index}"></span>${bbb.opb_price} 원
+				<script>
+				//asdasdasdasd
+				$(document).ready(function(){
+					//이름들
+					var newMenu_name = document.getElementById("menu_name${vs.index}${vss.index}");
+					newMenu_name.innerText = $("#newmenu_name_input_${vs.index}${vss.index}").val();
+					
+					  $("#newmenu_name_input_${vs.index}${vss.index}").on("propertychange change keyup paste input",
+								function() {
+						  var newmenu_basic_name_inputnewMenu_name_input = $("#newmenu_name_input_${vs.index}${vss.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_name = document.getElementById("menu_name${vs.index}${vss.index}");
+						  newMenu_name.innerText = newmenu_basic_name_inputnewMenu_name_input;
+					  });
+					  
+					  $("#newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}").on("propertychange change keyup paste input",
+								function() {
+						  var newmenu_basic_name_input = $("#newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_option = document.getElementById("newMenu_basic_${vs.index}${vss.index}${basicOpVs.index}");
+						  newMenu_option.innerText = newmenu_basic_name_input;
+					  });
+					  
+					  $("#newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}").on("propertychange change keyup paste input",
+								function() {
+						  var newmenu_basic_price_input = $("#newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_option = document.getElementById("newMenu_basic_price_${vs.index}${vss.index}${basicOpVs.index}");
+						  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					  });
+					  
+					  
+					})//doc ready 끝
+					</script>
+					
+			</c:if>
+		</c:forEach>
+		</h4>
+	</div>	 
 																					<!------------- 메뉴편집_메뉴정보수정 Modal start-------------->
 																					<div class="modal fade"
 																						id="menu_oneInfoUpdate${vs.index}${vss.index}"
@@ -725,9 +871,11 @@ function addMgName(){
 																													style="font-size: 15px; font-weight: bolder; color: black;">메뉴명</h5>
 																												<div class="row">
 																													<div class="col-lg-12">
-																														<input class="form-control"
+																														<input class="form-control" id="newmenu_name_input_${vs.index}${vss.index}"
 																															style="width: relative; font-size: 15px;"
 																															type="text" value="${menu.m_name }">
+																														<input type="hidden" id="m_name${vs.index}${vss.index}" value="${menu.m_name }"/>
+																														<input type="hidden" id="m_code${vs.index}${vss.index}" value="${menu.m_code }"/>
 																													</div>
 																												</div>
 																											</li>
@@ -739,24 +887,24 @@ function addMgName(){
 																												<c:forEach var="basicOpList" items="${basicOpList}" varStatus="basicOpVs">
 																														<c:if test="${basicOpList.m_code eq menu.m_code }">
 																														<div class="add_priceoption">
-																													<div class="row" style="margin-left: 5px;">
+																													<div  class="row" id="zzz${vs.index}${vss.index}${basicOpVs.index}" style="margin-left: 5px;">
 																														<div class="col-lg-5"
 																															style="padding: 5px;">
-																															<input class="form-control"
+																															<input class="form-control" id="newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}" 
 																																style="width: relative; font-size: 15px;"
 																																type="text" value="${basicOpList.opb_name}">
 																														</div>
 																														<div class="col-lg-5"
 																															style="padding: 5px;">
-																															<input class="form-control"
+																															<input class="form-control" id="newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}"
 																																style="width: relative; font-size: 15px;"
-																																type="text" value="${basicOpList.opb_price}">
+																																type="number" value="${basicOpList.opb_price}">
 																														</div>
 																														<div class="col-lg-2"
 																															style="padding: 5px;">
 																															<button type="button"
-																																onclick="javascript:deleteAlert();"
-																																class="btn btn-danger btn-xs"
+																																class="btn btn-danger btn-xs deleteMenuOriginal" value="${menu.m_code}" 
+																																fordelete="${vs.index}${vss.index}${basicOpVs.index}"
 																																style="float: left; margin-top: 7px;">
 																																<i class="fa fa-trash-o "></i>
 																															</button>
@@ -765,7 +913,8 @@ function addMgName(){
 																													</div>
 																													</c:if>
 																													</c:forEach>
-																													<div class="row" id="addPriceOptionBtn${vs.index}${vss.index}">
+																													<div id="addPriceOptionBtn${vs.index}${vss.index}"></div>
+																													<div class="row">
 																									<a class="menu_addOptionGroup" onclick="addPO${vs.index}${vss.index}()" >
 																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">
 																											+가격옵션 추가</h4>
@@ -773,24 +922,11 @@ function addMgName(){
 																								</div>	
 																											</li>
 																											
-																											<script>
-																											//가격옵션추가 눌렀을때 input 나오게하기.
-																											function addPO${vs.index}${vss.index}(){
-																											$('#addPriceOptionBtn${vs.index}${vss.index}').prepend("<div class='add_priceoption' style='margin:0 15px 0 15px;'> <div class='row' style='margin-left: 5px;'>"
-																																		+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
-																																		+"style='width: relative; font-size: 15px;' type='text' placeholder='ex) ice'>"
-																																		+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control'"
-																																		+"style='width: relative; font-size: 15px;' type='text'placeholder='ex) 1500'>"
-																																		+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
-																																		+"onclick='javascript:deleteAlert();' class='btn btn-danger btn-xs'"
-																																		+"style='float: left; margin-top: 7px;'> <i class='fa fa-trash-o '></i> </button>"
-																																		+"</div></div></div>");  
-																														}
-																											</script>
+																											
 																											<li>
 																												<div class="row">
 																													<div class="col-lg-12">
-																														<button type="button" class="save_Btn">적용하기</button>
+																														<button type="button" class="save_Btn" onclick="menuupdateBtn${vs.index}${vss.index}()">적용하기</button>
 																													</div>
 																												</div>
 																											</li>
@@ -1171,8 +1307,6 @@ function addMgName(){
 																						
 				<script>
 				function menu_priceOption2${vs.index}(){
-					//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
-					//ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 					//이거는 각자 자른 번호를 부여하기 위함.
 					indexstring = indexnum.toString();
 					indexFinal = ${vs.index}+indexstring;
@@ -1184,7 +1318,7 @@ function addMgName(){
 						+"style='width: relative; font-size: 15px;' type='text' placeholder='가격명' id='menu_basic_name${vs.index}"+indexstring+"'>"
 						+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control PRICEPRICEPRICE'"
 						+" forCheck='"+indexFinal+"' "
-						+"style='width: relative; font-size: 15px;' type='number' placeholder='가격' value='${vs.index}"+indexstring+"' id='menu_basic_name${vs.index}"+indexstring+"'>"
+						+"style='width: relative; font-size: 15px;' type='number' placeholder='가격' id='menu_basic_name${vs.index}"+indexstring+"'>"
 						+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
 						+" fordelete='menuOne_${vs.index}"+indexstring+"' "
 						+" fordelete2='menutwo_${vs.index}"+indexstring+"' "
@@ -1192,6 +1326,7 @@ function addMgName(){
 						+"class='btn btn-danger btn-xs deleteOpBasicChuga' style='float: left; margin-top: 7px;'>"
 						+"<i class='fa fa-trash-o '></i></button></div></div>");
                  	  indexnum++;
+                 	  
                  	//메뉴추가에서 가격 row 삭제
                 	  $(".deleteOpBasicChuga").click(function() {
                 			var fordelete = $(this).attr("fordelete"); //div 의 id
@@ -1203,8 +1338,8 @@ function addMgName(){
                		  
                		  //확인창에도 옵션 누적시켜줄거임
                    	$('#priceOne_${vs.index}').append('<h4 id="menutwo_${vs.index}'+indexstring+'" style="margin-left: 0px;">'
-                   	+'<span id="menutwo_name${vs.index}'+indexstring+'"></span> : '
-                   	+'<span id="menutwo_price${vs.index}'+indexstring+'"></span> 원</h4>');
+                   	+'<span id="menutwo_name${vs.index}'+indexstring+'">미입력</span> : '
+                   	+'<span id="menutwo_price${vs.index}'+indexstring+'">미입력</span> 원</h4>');
                     
                    	$(".NAMENAMENAME").on("propertychange change keyup paste input",
 							function() {
@@ -1225,6 +1360,64 @@ function addMgName(){
 					  var newMenu_option = document.getElementById("menutwo_price"+indexFinall);
 					  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				  });
+				}
+				
+				function addMenuChecking${vs.index}(){
+					//메뉴그룹 정보
+					var mg_seq = $("#mg_seq${vs.index}").val();
+					var mg_code = $("#mg_code${vs.index}").val();
+					//기본 첫째줄 
+					var menu_name = $("#newmenu_name_input${vs.index}").val();
+					var optionBasic_name = $("#newmenu_basic_name_input${vs.index}").val();
+					var optionBasic_price = $("#newmenu_basic_price_input${vs.index}").val();
+					//두번째 줄
+					var zzzz = document.getElementById("hwakin_chang_${vs.index}").innerText;
+					
+					
+// 					//빈칸있으면 뭐라하기
+					if(menu_name==""||optionBasic_name==""||optionBasic_price==""||zzzz.indexOf("미입력")!=-1){
+						Swal.fire({
+				    		  icon: "error",
+				    		  title: "입력사항을 확인해주세요",
+				    		  showConfirmButton: false,
+	 			    		  timer : 1500,
+						})
+					}
+					else{
+						//ajax
+						var paramm = {
+								"mg_seq" : mg_seq,
+								"mg_code" : mg_code,
+								"m_name" : menu_name,
+								"opb_name" : optionBasic_name,
+								"opb_price" : optionBasic_price,
+								"opb_total" : zzzz
+						};
+						$.ajax({
+		  		    	    type: "POST",
+		  		    	    url: "/insertMenu.store",
+		  		    	    data: JSON.stringify(paramm), 
+		  		    	    dataType: "json",
+		  		    	    contentType: "application/json",
+		  		    	    success: function (data) {
+		  		    	        if (data == 1) {
+			  		    	        Swal.fire({
+			  		    	            icon: "success",
+			  		    	            title: "메뉴 추가 완료",
+			  		    	            showConfirmButton: false,
+			  		    	            timer: 1500
+			  		    	        });
+			  		    	        location.href = location.href;
+		  		    	        }else{alert("통신은됨");}
+		  		    	    },
+		  		    	    error: function (data) {
+		  		    	        console.log("메뉴추가 통신에러");
+		  		    	    }
+		  		    	});//ajax end
+					}
+					
+					
+					
 				}
 				
 				  $(document).ready(function(){
@@ -1258,7 +1451,7 @@ function addMgName(){
 					
 					
 				</script>
-																						<table class="modal_table">
+																				<table class="modal_table">
 																							<ul>
 																								<li
 																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
@@ -1367,7 +1560,7 @@ function addMgName(){
 																		
 																	<!--------------------final check----------------------------->
 
-																		<div class="modal fade" id="finalCh${vs.index}" role="dialog">
+																		<div class="modal fade" id="finalCh${vs.index}" role="dialog" >
 																			<div class="modal-dialog">
 
 																				<!-- Modal content-->
@@ -1378,14 +1571,15 @@ function addMgName(){
 																						<h3
 																							style="color: black; font-weight: bolder; text-align: center;">그룹명
 																							: ${mg.mg_name}</h3>
-
+																							<input type="hidden" id="mg_seq${vs.index}" value="${mg.mg_seq}">
+																							<input type="hidden" id="mg_code${vs.index}" value="${mg.mg_code}">
 																						<button type="button" class="close"
 																							data-dismiss="modal"
 																							style="font-size: 20px; color: black;">취소</button>
 
 																					</div>
 																					<div class="modal-body"
-																						style="max-height: 750px; overflow-y: scroll;">
+																						style="max-height: 600px; overflow-y: scroll;">
 
 																						<table class="modal_table">
 																							<ul>
@@ -1415,13 +1609,11 @@ function addMgName(){
 
 																								<li
 																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																									<div class="row">
+																									<div class="row" id="hwakin_chang_${vs.index}">
 
 																										<h4 style="font-weight: bolder; color: black;">가격</h4>
 																										<h4 id="priceOne_${vs.index}" style="margin-left: 10px;">
 																										<span id="newMenu_basic${vs.index}"></span> : <span id="newMenu_basic_price${vs.index}"></span> 원</h4>
-																										<h4 style="margin-left: 10px;">ICE(ML) : 2000원</h4>
-																										<h4 style="margin-left: 10px;">HOT(ML) : 2000원</h4>
 																									</div>
 
 
@@ -1482,7 +1674,7 @@ function addMgName(){
 																								
 																								<li>
 																								<div class="col-lg-12">
-																										<button type="button" class="save_Btn" onclick="">메뉴
+																										<button type="button" class="save_Btn" onclick="addMenuChecking${vs.index}()">메뉴
 																											추가하기</button>
 																									</div>
 																								</li>

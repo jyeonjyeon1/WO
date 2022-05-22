@@ -23,4 +23,13 @@ public interface SMenuService {
 	void deleteMenuGroup_MAO(HashMap<String, String> map);
 	void updateMenuGroup(HashMap<String, String> map);
 	void updateMenuGroup_MAO(HashMap<String, String> map);
+	String maxMgSeq(String si_code);
+	String maxMenuSeq(HashMap<String, Object> map);
+	String maxOgbSeq(String si_code);
+	String maxOpbSeq(HashMap<String, Object> map);
+	void insertMenu(HashMap<String, Object> map);
+	void insertOGB(HashMap<String, Object> map);
+	int getm_seq(HashMap<String, Object> map);
+	int getogb_seq(HashMap<String, Object> map);
+	void insertOPB(HashMap<String, Object> map);
 }

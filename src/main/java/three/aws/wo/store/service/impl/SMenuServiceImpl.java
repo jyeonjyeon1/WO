@@ -74,4 +74,49 @@ public class SMenuServiceImpl implements SMenuService {
 	public void updateMenuGroup_MAO(HashMap<String, String> map) {
 		sMenuDAO.updateMenuGroup_MAO(map);
 	}
+
+	@Override
+	public String maxMgSeq(String si_code) {
+		return sMenuDAO.maxMgSeq(si_code);
+	}
+
+	@Override
+	public String maxMenuSeq(HashMap<String, Object> map) {
+		return sMenuDAO.maxMenuSeq(map);
+	}
+
+	@Override
+	public String maxOgbSeq(String si_code) {
+		return sMenuDAO.maxOgbSeq(si_code);
+	}
+
+	@Override
+	public String maxOpbSeq(HashMap<String, Object> map) {
+		return sMenuDAO.maxOpbSeq(map);
+	}
+
+	@Override
+	public void insertMenu(HashMap<String, Object> map) {
+		sMenuDAO.insertMenu(map);
+	}
+
+	@Override
+	public void insertOGB(HashMap<String, Object> map) {
+		sMenuDAO.insertOGB(map);
+	}
+
+	@Override
+	public int getm_seq(HashMap<String, Object> map) {
+		return sMenuDAO.getm_seq(map);
+	}
+
+	@Override
+	public int getogb_seq(HashMap<String, Object> map) {
+		return sMenuDAO.getogb_seq(map);
+	}
+
+	@Override
+	public void insertOPB(HashMap<String, Object> map) {
+		sMenuDAO.insertOPB(map);
+	}
 }

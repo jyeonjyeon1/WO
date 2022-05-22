@@ -223,25 +223,95 @@ public class StoreMenuController {
 		return result;
 	}
 
-	// Deleting MenuGroup
 	@ResponseBody
 	@RequestMapping("/updateMenu.store")
 	public int updateMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
+		System.out.println("updating menu");
 		String si_code = "2222111212";
+//		var paramm = {
+//			"mg_seq" : mg_seq,
+//			"mg_code" : mg_code,
+//			"opb_total" : zzzz
+//		};
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String mg_seq = param.get("mg_seq");
 		String mg_code = param.get("mg_code");
-		System.out.println("deleting menugroup");
-
-		HashMap<String, String> map = new HashMap<String, String>();
+		String opb_total = param.get("opb_total");
+		String[] basic_menu_split = opb_total.replaceAll("\\n","").replaceAll("\\t","").split("CUTCUTCUT");
+		int basic_num = basic_menu_split.length; // 총 기본옵션 +4 메뉴는 [4]부터
+		for(String s : basic_menu_split) {
+			System.out.println(s);
+		}
+		int m_seq = Integer.parseInt(basic_menu_split[2].split(":")[1]);
+		
+		String m_ori_name = basic_menu_split[0].split(":")[1];
+		String m_name = basic_menu_split[3].split(":")[1];
+		
 		map.put("si_code", si_code);
-		map.put("mg_code", mg_code);
-//		try {
-//			sMenuService.deleteMenuGroup(map);
-//			sMenuService.deleteMenuGroup_MAO(map);
-//			result = 1;
-//		} catch (Exception e) {
-//			System.err.println("mggroup delete FAIL");
-//		}
+		map.put("m_name", m_name);
+		map.put("m_seq", m_seq);
+		if(!m_ori_name.equals(m_name)) {
+			//MENU에서 이름 바꿔줄거임
+			sMenuService.updateMenu(map);
+			//OGB에서 이름 바꿔줄거임
+			sMenuService.updateOGB(map);
+		}
+		
+		//해당 m_seq에 해당하는 ogb_seq + ogb_code를 얻어올거임
+		int ogb_seq = sMenuService.ogbSeqfromMSeq(map);
+		String ogb_code = sMenuService.ogbCodefromMSeq(map);
+		
+		
+		System.out.println(ogb_seq);
+		System.out.println(ogb_code);
+		map.put("ogb_seq", ogb_seq);
+		//option_basic에 해당 menu 다 삭제
+		sMenuService.deleteOptionBasics(map);
+		
+		try {
+			for (int i = 4; i < basic_num; i++) {
+				String code = ogb_code + "00" + String.valueOf(i-3);
+				String[] split = basic_menu_split[i].split(" : ");
+				String name = split[0];
+				int price = Integer.parseInt(split[1].replace("", "").replaceAll(",", ""));
+				HashMap<String, Object> mapp = new HashMap<String, Object>();
+				mapp.put("si_code", si_code);
+				mapp.put("ogb_seq", ogb_seq);
+				mapp.put("opb_code", code);
+				mapp.put("opb_name", name);
+				mapp.put("opb_price", price);
+				sMenuService.insertOPB(mapp);
+			}
+			result = 1;
+		} catch (Exception e) {
+			System.err.println("optionbasic 새로 넣는 과정 오류");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteMenu.store")
+	public int deleteMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
+		int result = 0;
+		System.out.println("deleting menu");
+		String si_code = "2222111212";
+		String m_code = param.get("m_code");
+		int m_seq = Integer.parseInt(param.get("m_seq"));
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("si_code", si_code);
+		map.put("m_code", m_code);
+		map.put("m_seq", m_seq);
+		
+		try {
+			sMenuService.deleteMenu(map);
+			sMenuService.deleteMenu_MAO(map);
+			result = 1;
+		} catch (Exception e) {
+			System.err.println("메뉴 단일 삭제 오류");
+		}
+		
 		return result;
 	}
 

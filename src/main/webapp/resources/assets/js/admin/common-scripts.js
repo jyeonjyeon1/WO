@@ -395,8 +395,9 @@ $(document).ready(function () {
 	//원래 있던 메뉴 삭제
 	$(".deleteMenuOriginal").click(function() {
 		var m_codeforDelete = $(this).attr("value"); //m_code
-		var fordelete = $(this).attr("fordelete"); // ${vs.index}${vss.index}
+		var fordelete = $(this).attr("fordelete"); // ${vs.index}${vss.index}${basicOpVs.index}
 		var fordelete2 = "zzz" + fordelete;
+		var fordelete3 = "menutwo__" + fordelete;
 		//삭제 확인
 		Swal.fire({
 			title: "진짜삭제되니까 테스트용 메뉴만 삭제하세요",
@@ -411,6 +412,7 @@ $(document).ready(function () {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				$("#" + fordelete2).remove();
+				$("#" + fordelete3).remove();
 			}//if (result.isConfirmed)
 		})//then((result)
 

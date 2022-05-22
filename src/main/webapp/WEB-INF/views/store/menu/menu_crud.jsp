@@ -196,6 +196,12 @@ li {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.288);
 }
 
+.menu_oneInfoUpdate:hover , .menu_oneOptionUpdate:hover,
+.menu_oneImgUpdate:hover {
+	cursor: pointer;
+	background-color: #190d4010;
+}
+
 /*메뉴편집 - 메뉴삭제 */
 .menu_oneDelete {
 	display: block; /* 중요 */
@@ -204,6 +210,11 @@ li {
 	text-align: center;
 	font-weight: bolder;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.288);
+}
+
+.menu_oneDelete:hover{
+	cursor: pointer;
+	background-color: #f56c4d25;
 }
 
 /*메뉴편집 - 옵션설정 - 해제버튼 */
@@ -683,11 +694,11 @@ function addMgName(){
 																			<c:forEach var="menu" items="${storeMenuList}"
 																					varStatus="vss">
 																					<c:if test="${menu.mg_name eq mg.mg_name }">
-																						<li><a class="menu_one">
+																						<li><a class="menu_one" id="menu_one${vs.index}${vss.index}">
 																								<div class="row">
 																									<div class="col-lg-2"
 																										style="text-align: left; margin-left: 20px;">
-																										<img src="resources/assets/images/cart-1.jpg"
+																										<img src="${menu.m_img_file }"
 																											style="width: 100px; height: 100px; border: 1px solid rgba(0, 0, 0, 0.692); border-radius: 5px; padding: 10px; margin: 10px;">
 																									</div>
 																									<div class="col-lg-8"
@@ -711,21 +722,20 @@ function addMgName(){
 																								</div>
 
 																						</a>
-																							<ul class="trd_menu sub_menu">
+																							<ul class="trd_menu sub_menu" id="sub_menu_one${vs.index}${vss.index}" m_seq="${menu.m_seq}" m_code="${menu.m_code}">
 																								<li><a class="menu_oneInfoUpdate"
 																									data-toggle="modal"
 																									href="#menu_oneInfoUpdate${vs.index}${vss.index}">메뉴정보수정</a></li>
 																								<li><a class="menu_oneOptionUpdate" data-toggle="modal" href="#menu_updateOption${vs.index}${vss.index}">옵션설정</a></li>
 																								<li><a class="menu_oneImgUpdate" data-toggle="modal" href="#menu_updateImg${vs.index}${vss.index}">이미지변경</a></li>
-																								<li><a class="menu_oneDelete">메뉴삭제</a></li>
+																								<li><a class="menu_oneDelete" onclick="deleteMenu${vs.index}${vss.index}()">메뉴삭제</a></li>
 																							</ul></li>
 																					</c:if>
 																					
 	<script>
 	//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 	//ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-	var m_name = $("#m_name${vs.index}${vss.index}").val
-	var m_code = $("#m_code${vs.index}${vss.index}").val
+	
 	//가격옵션추가 눌렀을때 input 나오게하기.
 	function addPO${vs.index}${vss.index}(){
 		indexstringgg = indexnummm.toString();
@@ -770,13 +780,14 @@ function addMgName(){
 		  //확인창에도 옵션 누적시켜줄거임
    	$('#priceOne__${vs.index}${vss.index}').append('<h4 id="menutwo__'+indexFinalll+'" style="margin-left: 0px;">'
    	+'<span id="menutwo_name_'+indexFinalll+'">미입력</span> : '
-   	+'<span id="menutwo_price_'+indexFinalll+'">미입력</span> 원</h4>');
+   	+'<span id="menutwo_price_'+indexFinalll+'">미입력</span>CUTCUTCUT</h4>');
     
    	$(".NAMENAMENAMENAME").on("propertychange change keyup paste input",
 			function() {
    		var indexFinall = $(this).attr("forCheck");
    		console.log(indexFinall);
 	  var newmenu_basic_price_input = $(this).val();
+	  if(newmenu_basic_price_input==""){newmenu_basic_price_input = "미입력";}
 	  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
 	  var newMenu_option = document.getElementById("menutwo_name_"+indexFinall);
 	  newMenu_option.innerText = newmenu_basic_price_input;
@@ -786,68 +797,186 @@ function addMgName(){
 			function() {
    		var indexFinall = $(this).attr("forCheck");
    		console.log(indexFinall);
-	  var newmenu_basic_price_input = $(this).val();
+	  var newmenu_basic_price_input = ($(this).val()).toString();
+	  if(newmenu_basic_price_input==""){newmenu_basic_price_input = "미입력";}
 	  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
 	  var newMenu_option = document.getElementById("menutwo_price_"+indexFinall);
-	  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	  newMenu_option.innerText = newmenu_basic_price_input;
   });
 } 	
 	
+	//asdasdasdasd
+	$(document).ready(function(){
+		//이름들
+		var newMenu_name = document.getElementById("menu_name${vs.index}${vss.index}");
+		newMenu_name.innerText = $("#newmenu_name_input_${vs.index}${vss.index}").val();
+		//원래 이름
+		var original_Menu_name = document.getElementById("menu_original_name${vs.index}${vss.index}");
+		original_Menu_name.innerText = $("#newmenu_name_input_${vs.index}${vss.index}").val();
+		//메뉴 코드
+		var original_Menu_code = document.getElementById("menu_original_code${vs.index}${vss.index}");
+		original_Menu_code.innerText = $("#newmenu_code_input_${vs.index}${vss.index}").val();
+		//메뉴 시퀀스
+		var original_Menu_seq = document.getElementById("menu_original_seq${vs.index}${vss.index}");
+		original_Menu_seq.innerText = $("#newmenu_seq_input_${vs.index}${vss.index}").val();
+		
+		  $("#newmenu_name_input_${vs.index}${vss.index}").on("propertychange change keyup paste input",
+					function() {
+			  var newmenu_basic_name_inputnewMenu_name_input = $("#newmenu_name_input_${vs.index}${vss.index}").val();
+			  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+			  var newMenu_name = document.getElementById("menu_name${vs.index}${vss.index}");
+			  newMenu_name.innerText = newmenu_basic_name_inputnewMenu_name_input;
+		  });
+	})
+	
    	function menuupdateBtn${vs.index}${vss.index}(){
+   		var mg_seq = $("#mg_seq${vs.index}").val();
+		var mg_code = $("#mg_code${vs.index}").val();
+		var m_name = $("#m_namee${vs.index}${vss.index}").val;
+		var m_code = $("#m_codee${vs.index}${vss.index}").val;
+		var m_seq = $("#m_seqq${vs.index}${vss.index}").val;
    		var zzzz = document.getElementById("hwakin_chang__${vs.index}${vss.index}").innerText;
-   		alert(zzzz);
-   	}
+   		//이게 없으면 메뉴를 다 삭제했다는 것을 의미
+   		if(zzzz.indexOf(" : ")==-1){
+      		 Swal.fire({
+   	            icon: "error",
+   	            title: "최소 한 개의 기본옵션 필요합니다",
+   	            html: "<br><br>",
+   	            showConfirmButton: true,
+   	            confirmButtonText: "확인",
+   	            confirmButtonColor: "#3085d6"
+   	        });
+      	} else if(zzzz.indexOf("미입력")!=-1){ //미입력한 부분이 있으면 안됨~
+      		 Swal.fire({
+ 	            icon: "error",
+ 	            title: "미입력한 부분을 확인해주세요",
+ 	            html: "<br><br>",
+ 	            showConfirmButton: true,
+ 	            confirmButtonText: "확인",
+ 	            confirmButtonColor: "#3085d6"
+ 	        });
+    	}
+   		else{
+   			//innerText 가공
+   			var dataa = zzzz.split("메뉴이름:")[1];
+   			var menuname = dataa.split("CUTCUTCUT")[0];
+   			var menus = dataa.split("CUTCUTCUT");
+   			var menulength = menus.length; //-2가 총 수량, 처음과 마지막은 다른 정보
+			var content_text = "<br>";
+   			for(i=1;i<menulength-1;i++){
+   				// : 기준 오른쪽(금액)만 컴마 처리 
+   				menus[i] = menus[i].split(" : ")[0] + " : " + menus[i].split(" : ")[1].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   				content_text += "<p style='font-size:14px'>"+menus[i]+" 원<p>";
+   			}
+   			content_text = content_text.replace(/\\t/gi,"");
+   			Swal.fire({
+   				title: "아래와 같이 변경하시겠습니까?",
+				html : '<p style="font-size:16px;">메뉴명 : '+menuname+'</p>'
+						+content_text,
+   				icon: "warning",
+   				showCancelButton: true,
+   				confirmButtonColor: "#3085d6",
+   				cancelButtonColor: "#d33",
+   				confirmButtonText: "확인",
+   				cancelButtonText: "아니오"
+   			}).then((result) => {
+   				if (result.isConfirmed) {
+					
+   				//ajax
+   		   			var paramm = {
+   		   					"mg_seq" : mg_seq,
+   		   					"mg_code" : mg_code,
+   		   					"m_seq" : m_seq,
+   		   					"m_name" : m_name,
+   		   					"m_code" : m_code,
+   		   					"opb_total" : zzzz
+   		   			};
+   		  	 		$.ajax({
+   		  	 	    	    type: "POST",
+   		  	 	    	    url: "/updateMenu.store",
+   		  	 	    	    data: JSON.stringify(paramm), 
+   		  	 	    	    dataType: "json",
+   		  	 	    	    contentType: "application/json",
+   		  	 	    	    success: function (data) {
+   		  	 	    	        if (data == 1) {
+   		  	 		    	        Swal.fire({
+   		  	 		    	            icon: "success",
+   		  	 		    	            title: "메뉴 수정 완료",
+   		  	 		    	            showConfirmButton: false,
+   		  	 		    	            timer: 1500
+   		  	 		    	        });
+   		  	 		    	        location.href = location.href;
+   		  	 	    	        }else{alert("통신은됨");}
+   		  	 	    	    },
+   		  	 	    	    error: function (data) {
+   		  	 	    	        console.log("메뉴추가 통신에러");
+   		  	 	    	    }
+   		  	 		});//ajax end
+   				
+   				}//if (result.isConfirmed)
+   			})//then((result)
+   			
+   		}
+   	}//menuupdateBtn끝
+   	
+   	function deleteMenu${vs.index}${vss.index}(){
+   		var m_code = $("#sub_menu_one${vs.index}${vss.index}").attr("m_code");
+   		var m_seq = $("#sub_menu_one${vs.index}${vss.index}").attr("m_seq");
+   		var param = {"m_code":m_code,"m_seq":m_seq};
+   		Swal.fire({
+			  title: "진짜삭제되니까 테스트용 메뉴만 삭제하세요",
+//			  title: "삭제하시겠습니까??",
+			  html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
+			  icon: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			 		$.ajax({
+	 	 		  type: "POST",
+	 	           url: "/deleteMenu.store",
+	 	          data: JSON.stringify(param),
+	 	           dataType: "json",
+	 	          contentType: "application/json",
+	 	          success:function(data){
+	 	        	  if(data==1){
+	 	         	 	console.log("삭제 성공");
+	 	         	 	$("#menu_one${vs.index}${vss.index}").remove();
+	 	          		$("#sub_menu_one${vs.index}${vss.index}").remove();
+	 	         	 	//숨겨버릴거임 
+		 	         	 Swal.fire({
+					  		  icon: "success",
+					  		  title: "삭제 완료",
+					  		  showConfirmButton: false,
+					  		  timer: 1500
+						 });
+	 	        	  }
+	 	           },
+		           error:function(data){
+			          console.log("삭제");
+		          }
+	 	 	  	});//ajax  
+			  }//if (result.isConfirmed)
+			})//then((result)
+   		
+   	}//deleteMenu끝
 	
 	</script>
 	<!-- 확인용 -->
 	<div class="row" id="hwakin_chang__${vs.index}${vss.index}" style="display:none;">
-		<h4>메뉴이름:<span id="menu_name${vs.index}${vss.index}"></span></h4>
+		<h4>메뉴원본이름:<span id="menu_original_name${vs.index}${vss.index}"></span>CUTCUTCUT</h4>
+		<h4>메뉴code:<span id="menu_original_code${vs.index}${vss.index}"></span>CUTCUTCUT</h4>
+		<h4>메뉴seq:<span id="menu_original_seq${vs.index}${vss.index}"></span>CUTCUTCUT</h4>
+		<h4>메뉴이름:<span id="menu_name${vs.index}${vss.index}"></span>CUTCUTCUT</h4>
 		<h4 id="priceOne__${vs.index}${vss.index}" style="margin-left: 10px;">
-		<c:forEach var="bbb" items="${basicOpList}" varStatus="basicOpVs">
-			<c:if test="${bbb.m_code eq menu.m_code }">
-			
-				<span id="newMenu_basic_${vs.index}${vss.index}${basicOpVs.index}">${bbb.opb_name}</span> : 
-				<span id="newMenu_basic_price_${vs.index}${vss.index}${basicOpVs.index}"></span>${bbb.opb_price} 원
-				<script>
-				//asdasdasdasd
-				$(document).ready(function(){
-					//이름들
-					var newMenu_name = document.getElementById("menu_name${vs.index}${vss.index}");
-					newMenu_name.innerText = $("#newmenu_name_input_${vs.index}${vss.index}").val();
 					
-					  $("#newmenu_name_input_${vs.index}${vss.index}").on("propertychange change keyup paste input",
-								function() {
-						  var newmenu_basic_name_inputnewMenu_name_input = $("#newmenu_name_input_${vs.index}${vss.index}").val();
-						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
-						  var newMenu_name = document.getElementById("menu_name${vs.index}${vss.index}");
-						  newMenu_name.innerText = newmenu_basic_name_inputnewMenu_name_input;
-					  });
-					  
-					  $("#newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}").on("propertychange change keyup paste input",
-								function() {
-						  var newmenu_basic_name_input = $("#newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}").val();
-						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
-						  var newMenu_option = document.getElementById("newMenu_basic_${vs.index}${vss.index}${basicOpVs.index}");
-						  newMenu_option.innerText = newmenu_basic_name_input;
-					  });
-					  
-					  $("#newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}").on("propertychange change keyup paste input",
-								function() {
-						  var newmenu_basic_price_input = $("#newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}").val();
-						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
-						  var newMenu_option = document.getElementById("newMenu_basic_price_${vs.index}${vss.index}${basicOpVs.index}");
-						  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-					  });
-					  
-					  
-					})//doc ready 끝
-					</script>
-					
-			</c:if>
-		</c:forEach>
 		</h4>
 	</div>	 
 																					<!------------- 메뉴편집_메뉴정보수정 Modal start-------------->
+									
 																					<div class="modal fade"
 																						id="menu_oneInfoUpdate${vs.index}${vss.index}"
 																						role="dialog">
@@ -874,8 +1003,10 @@ function addMgName(){
 																														<input class="form-control" id="newmenu_name_input_${vs.index}${vss.index}"
 																															style="width: relative; font-size: 15px;"
 																															type="text" value="${menu.m_name }">
-																														<input type="hidden" id="m_name${vs.index}${vss.index}" value="${menu.m_name }"/>
-																														<input type="hidden" id="m_code${vs.index}${vss.index}" value="${menu.m_code }"/>
+																														<input type="hidden" id="newmenu_seq_input_${vs.index}${vss.index}"
+																															type="text" value="${menu.m_seq }">
+																															<input type="hidden" id="newmenu_code_input_${vs.index}${vss.index}"
+																															type="text" value="${menu.m_code }">
 																													</div>
 																												</div>
 																											</li>
@@ -887,6 +1018,7 @@ function addMgName(){
 																												<c:forEach var="basicOpList" items="${basicOpList}" varStatus="basicOpVs">
 																														<c:if test="${basicOpList.m_code eq menu.m_code }">
 																														<div class="add_priceoption">
+																													<input type="hidden" id="opb_code${vs.index}${vss.index}${basicOpVs.index}" value="${basicOpList.opb_code }"/>
 																													<div  class="row" id="zzz${vs.index}${vss.index}${basicOpVs.index}" style="margin-left: 5px;">
 																														<div class="col-lg-5"
 																															style="padding: 5px;">
@@ -911,6 +1043,33 @@ function addMgName(){
 																														</div>
 																													</div>
 																													</div>
+																													<script>
+				//asdasdasdasd
+				$(document).ready(function(){
+						$('#priceOne__${vs.index}${vss.index}').append('<h4 id="menutwo__${vs.index}${vss.index}${basicOpVs.index}" style="margin-left: 0px;">'
+						   	+'<span id="menutwo_name_${vs.index}${vss.index}${basicOpVs.index}">'+$("#newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}").val()+'</span> : '
+						   	+'<span id="menutwo_price_${vs.index}${vss.index}${basicOpVs.index}">'+$("#newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}").val()+'</span>CUTCUTCUT</h4>');
+					  
+						
+						$("#newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}").on("propertychange change keyup paste input",
+								function() {
+						  var newmenu_basic_name_input = $("#newmenu_basic_name_input_${vs.index}${vss.index}${basicOpVs.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_option = document.getElementById("menutwo_name_${vs.index}${vss.index}${basicOpVs.index}");
+						  newMenu_option.innerText = newmenu_basic_name_input;
+					  });
+					  
+					  $("#newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}").on("propertychange change keyup paste input",
+								function() {
+						  var newmenu_basic_price_input = $("#newmenu_basic_price_input_${vs.index}${vss.index}${basicOpVs.index}").val();
+						  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+						  var newMenu_option = document.getElementById("menutwo_price_${vs.index}${vss.index}${basicOpVs.index}");
+						  newMenu_option.innerText = newmenu_basic_price_input;
+					  });
+					  
+					  
+					})//doc ready 끝
+					</script>
 																													</c:if>
 																													</c:forEach>
 																													<div id="addPriceOptionBtn${vs.index}${vss.index}"></div>
@@ -1081,15 +1240,26 @@ function addMgName(){
 																									메뉴를 확인하세요.
 																								</h5>
 																								<h6>
-																								<c:set var="ogcode" value="ff"></c:set>
-																								<c:forEach var="MAOList" items="${MAOList}">
-																									<c:if test="${MAOList.og_code eq ogList.og_code}">
-																									<c:if test="${ogcode ne MAOList.og_code}">
-																											${MAOList.m_name}, 
-																									<c:set var="ogcode" value="${MAOList.og_code}" />		
-																									</c:if>
-																									</c:if>
-																								</c:forEach></h6>
+																								<!-- <h5 style="margin-left: 15px; color: rgba(0, 0, 0, 0.801)">
+																								<c:set var="item" value="dd"></c:set>
+																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVs">
+																								<c:if test="${ MAOList.og_code eq ogList.og_code}">
+																								<c:if test="${item ne MAOList.m_name}">
+																								${MAOList.m_name}  
+																								<c:set var="item" value="${MAOList.m_name}" />
+																								</c:if>
+																								</c:if>
+																								위에건 잘 나오는데, 밑에꺼는 안나옴..
+																								</c:forEach></h5> -->
+																								<c:set var="mName" value="ff"></c:set>
+                                                                        <c:forEach var="MAOList" items="${MAOList}">
+                                                                           <c:if test="${MAOList.og_code eq ogList.og_code}">
+                                                                           <c:if test="${mName ne MAOList.m_name}">
+                                                                                 ${MAOList.m_name}, 
+                                                                           <c:set var="mName" value="${MAOList.m_name}" />      
+                                                                           </c:if>
+                                                                           </c:if>
+                                                                        </c:forEach></h6>
 																							</div>
 																						</div>
 																					</label>
@@ -1881,7 +2051,7 @@ function addMgName(){
 																			<c:forEach var="optionList" items="${optionList}" varStatus="optionVs">
 																			<c:if test="${ogList.og_seq eq optionList.og_seq }">
 																			
-																			<li><a class="menu_one">
+																			<li><a class="menu_one" id="">
 																					<div class="row" style="padding: 10px;">
 																						<div class="col-lg-8"
 																							style="text-align: left; line-height: 20px;">
@@ -1900,7 +2070,7 @@ function addMgName(){
 																					</div>
 
 																			</a>
-																				<ul class="trd_menu sub_menu">
+																				<ul class="trd_menu sub_menu" >
 																					<li><a class="option_oneUpdate" data-toggle="modal" href="#option_oneUpdate_modal${ogVs.index}${optionVs.index}">옵션명 및 가격 변경</a></li>
 																					<li><a class="option_oneDelete">옵션삭제</a></li>
 																				</ul></li>

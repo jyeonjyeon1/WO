@@ -32,4 +32,11 @@ public interface SMenuService {
 	int getm_seq(HashMap<String, Object> map);
 	int getogb_seq(HashMap<String, Object> map);
 	void insertOPB(HashMap<String, Object> map);
+	void updateMenu(HashMap<String, Object> map);
+	void updateOGB(HashMap<String, Object> map);
+	int ogbSeqfromMSeq(HashMap<String, Object> map);
+	String ogbCodefromMSeq(HashMap<String, Object> map);
+	void deleteOptionBasics(HashMap<String, Object> map);
+	void deleteMenu(HashMap<String, Object> map);
+	void deleteMenu_MAO(HashMap<String, Object> map);
 }

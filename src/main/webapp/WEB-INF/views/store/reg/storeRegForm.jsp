@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="ko" class="">
 
@@ -259,7 +260,7 @@
         AWS.config.update({
             region: 'ap-northeast-2',
             credentials: new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: 'ap-northeast-2:52319aff-fb44-4474-a806-e15724f49133',
+                IdentityPoolId: "<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>",
             })
         })
 
@@ -286,7 +287,7 @@
         AWS.config.update({
             region: 'ap-northeast-2',
             credentials: new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: 'ap-northeast-2:52319aff-fb44-4474-a806-e15724f49133',
+                IdentityPoolId: "<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>";
             })
         })
 

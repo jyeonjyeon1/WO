@@ -145,6 +145,54 @@
 		AND
 		OGB_CODE =#{ogb_code}
 	</select>
-	
+	<update id="updateMenu">
+		UPDATE MENU
+		SET 
+		<if test="m_name !=null">
+		<!-- 이미지 변경할 경우 용도 -->
+			M_NAME = #{m_name}
+		</if>
+		<if test="m_img_file !=null">
+		<!-- 이미지 변경할 경우 용도 -->
+			M_IMG_FILE = #{m_img_file}
+		</if>
+		WHERE M_SEQ = #{m_seq} AND SI_CODE = #{si_code}
+	</update>
+	<update id="updateOGB">
+		UPDATE OPTIONGROUP_BASIC
+		SET M_NAME = #{m_name}
+		WHERE M_SEQ = #{m_seq} AND SI_CODE = #{si_code}
+	</update>
+	<select id="ogbSeqfromMSeq" resultType="int">
+		SELECT OGB_SEQ FROM OPTIONGROUP_BASIC
+		WHERE M_SEQ = #{m_seq}
+		AND
+		SI_CODE = #{si_code}
+	</select>
+	<select id="ogbCodefromMSeq" resultType="String">
+		SELECT OGB_CODE FROM OPTIONGROUP_BASIC
+		WHERE M_SEQ = #{m_seq}
+		AND
+		SI_CODE = #{si_code}
+	</select>
+	<delete id="deleteOptionBasics">
+		DELETE FROM OPTION_BASIC
+		WHERE SI_CODE = #{si_code} 
+		AND OGB_SEQ = #{ogb_seq}
+	</delete>
+	<delete id="deleteMenu">
+		DELETE FROM MENU
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		M_CODE = #{m_code}
+	</delete>
+	<delete id="deleteMenu_MAO">
+		DELETE FROM MENUANDOPTION
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		M_CODE = #{m_code}
+	</delete>
 </mapper>
  

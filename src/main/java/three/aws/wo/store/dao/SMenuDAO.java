@@ -99,4 +99,32 @@ public class SMenuDAO {
 	public void insertOPB(HashMap<String, Object> map) {
 		sqlSession.insert("SMenuDAO.insertOPB", map);
 	}
+
+	public void updateMenu(HashMap<String, Object> map) {
+		sqlSession.update("SMenuDAO.updateMenu", map);
+	}
+
+	public void updateOGB(HashMap<String, Object> map) {
+		sqlSession.update("SMenuDAO.updateOGB", map);
+	}
+
+	public int ogbSeqfromMSeq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.ogbSeqfromMSeq",map);
+	}
+
+	public String ogbCodefromMSeq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.ogbCodefromMSeq",map);
+	}
+
+	public void deleteOptionBasics(HashMap<String, Object> map) {
+		sqlSession.delete("SMenuDAO.deleteOptionBasics",map);
+	}
+
+	public void deleteMenu(HashMap<String, Object> map) {
+		sqlSession.delete("SMenuDAO.deleteMenu",map);
+	}
+	
+	public void deleteMenu_MAO(HashMap<String, Object> map) {
+		sqlSession.delete("SMenuDAO.deleteMenu_MAO",map);
+	}
 }

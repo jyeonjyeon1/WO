@@ -459,7 +459,6 @@
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	var code = "";
-	function fileUpload(){
 		var fileInput = document.getElementsByClassName("ex_file");
 
 		for( var i=0; i<fileInput.length; i++ ){
@@ -476,7 +475,7 @@
         AWS.config.update({
             region: 'ap-northeast-2',
             credentials: new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: 'ap-northeast-2:52319aff-fb44-4474-a806-e15724f49133',
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
             })
         })
 
@@ -503,7 +502,7 @@
         AWS.config.update({
             region: 'ap-northeast-2',
             credentials: new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: 'ap-northeast-2:52319aff-fb44-4474-a806-e15724f49133',
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
             })
         })
 

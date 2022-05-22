@@ -119,4 +119,40 @@ public class SMenuServiceImpl implements SMenuService {
 	public void insertOPB(HashMap<String, Object> map) {
 		sMenuDAO.insertOPB(map);
 	}
+
+	@Override
+	public void updateMenu(HashMap<String, Object> map) {
+		sMenuDAO.updateMenu(map);
+	}
+
+	@Override
+	public void updateOGB(HashMap<String, Object> map) {
+		sMenuDAO.updateOGB(map);
+	}
+
+	@Override
+	public int ogbSeqfromMSeq(HashMap<String, Object> map) {
+		return sMenuDAO.ogbSeqfromMSeq(map);
+	}
+
+	@Override
+	public String ogbCodefromMSeq(HashMap<String, Object> map) {
+		return sMenuDAO.ogbCodefromMSeq(map);
+	}
+
+	@Override
+	public void deleteOptionBasics(HashMap<String, Object> map) {
+		sMenuDAO.deleteOptionBasics(map);
+
+	}
+
+	@Override
+	public void deleteMenu(HashMap<String, Object> map) {
+		sMenuDAO.deleteMenu(map);
+	}
+
+	@Override
+	public void deleteMenu_MAO(HashMap<String, Object> map) {
+		sMenuDAO.deleteMenu_MAO(map);
+	}
 }

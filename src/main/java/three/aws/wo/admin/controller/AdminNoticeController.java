@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.service.FaqService;
-import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 import three.aws.wo.admin.vo.QnAVO;
-import three.aws.wo.store.vo.StoreVO;
+import three.aws.wo.user.vo.UserVO;
 
 @Controller
 public class AdminNoticeController {
@@ -27,9 +26,15 @@ public class AdminNoticeController {
 	@RequestMapping("/faq.user")
 	public String noticeList(HttpSession session, NoticeVO vo, Model model) {
 
+		String u_id = "";
+		UserVO uv = (UserVO) session.getAttribute("userSession");
+		if(uv == null) {
+			u_id = "No_Data";
+		}
+		else if (uv != null) {
+			u_id = uv.getU_id();
+		}
 
-		//UserVO userSession = (UserVO) session.getAttribute("userSession");
-		//String u_id = userSession.getU_id();
 		
 //		자주 묻는 질문 ////////////////////////////////////////
 
@@ -48,8 +53,8 @@ public class AdminNoticeController {
 		
 //		1:1 문의 ////////////////////////////////////////
 
-		//List<QnAVO> myqnaList =noticeService.myqnaList(u_id);
-		List<QnAVO> myqnaList =noticeService.myqnaList();
+		List<QnAVO> myqnaList =noticeService.myqnaList(u_id);
+		
 		
 		//System.out.println(noticeList);
 //		자주 묻는 질문 ////////////////////////////////////////

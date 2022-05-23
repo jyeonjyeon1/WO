@@ -578,7 +578,7 @@ function toggle_facility() {
                       </div>
 
                                                                
-                        <div class="container" id ="Toggle1" style="text-align: left; display: none;">
+ <!--                        <div class="container" id ="Toggle1" style="text-align: left; display: none;">
                           <div class="radio" style="padding: 0;">
                             <input id="radio-1" name="radio" type="radio" checked>
                             <label for="radio-1" class="radio-label">무료</label>
@@ -589,7 +589,7 @@ function toggle_facility() {
                             <label for="radio-2" class="radio-label">유료</label>
                           </div>
 
-                        </div>
+                        </div> -->
 
                         <div class="row" style="margin-top: 60px; margin-left: 30px; ">
                           <div class="col-lg-3">

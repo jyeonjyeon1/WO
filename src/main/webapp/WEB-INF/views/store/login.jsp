@@ -23,7 +23,8 @@
     <link href="resources/assets/css/admin/style.css" rel="stylesheet">
     <link href="resources/assets/css/admin/style-responsive.css" rel="stylesheet">
   	<script src="resources/assets/js/admin/jquery/jquery.min.js"></script>
-  	
+  	  <!--script for this page-->
+  	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   	<script>
 	
 	var s_id_input = "";
@@ -69,12 +70,12 @@
   				dataType: "json",
   		        contentType: "application/json",
   		        success:function(data){
-  		        	console.log("오키")
-  		        
+  		        	console.log("오키");
   		        	
   		        if(data==1){
+  		        		alert("아이디있음");
   		        		location.href="/index.store";
-  		        		alert("일치계정있음");
+  		        		
  	        	}else if(data==0){
   		        		alert("아이디가없음");
   		        	}else{

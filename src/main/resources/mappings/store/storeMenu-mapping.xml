@@ -9,7 +9,7 @@
 		MENU m
 		ON (m.MG_CODE = g.MG_CODE )
 		WHERE m.SI_CODE = #{storeName}
-		ORDER BY g.M_SEQ
+		ORDER BY m.M_SEQ
 	</select>
 	
 	<select id="storeMgList" resultType="StoreMenuGroupVO" parameterType="StoreMenuGroupVO">

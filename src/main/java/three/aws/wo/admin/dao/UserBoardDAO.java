@@ -7,8 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
+import three.aws.wo.admin.vo.QnAVO;
+import three.aws.wo.store.vo.StoreVO;
 @Repository
 public class UserBoardDAO {
 	@Autowired
@@ -53,6 +56,24 @@ public class UserBoardDAO {
 	
 	public List<NoticeVO> eventList() {
 		return sqlSession.selectList("UserBoardDAO.eventList");
+	}
+	
+//	1:1 ¹®ÀÇ ////////////////////////////////////////
+
+
+	
+	//public List<QnAVO> myqnaList(String u_id) { return
+	//sqlSession.selectList("UserBoardDAO.myqnaList", u_id); 
+	//}
+	 
+	
+	public List<QnAVO> myqnaList() {
+		return sqlSession.selectList("UserBoardDAO.myqnaList");
+	}
+	
+	
+	public void addqna(QnAVO vo) {
+		sqlSession.insert("UserBoardDAO.addqna", vo);
 	}
 	
 	

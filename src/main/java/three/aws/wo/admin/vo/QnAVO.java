@@ -6,9 +6,11 @@ import lombok.Data;
 
 @Data
 public class QnAVO {
-	private String qa_code;
+	private int qa_seq;
 	private String u_id;
-	private String str_code;
+	private String si_code;
+	private String si_name;
+	private String si_loc;
 	private String qa_type;
 	private String qa_title;
 	private boolean qa_type_ans;

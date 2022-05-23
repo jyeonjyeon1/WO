@@ -3,8 +3,11 @@ package three.aws.wo.admin.service;
 import java.util.HashMap;
 import java.util.List;
 
+import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
+import three.aws.wo.admin.vo.QnAVO;
+import three.aws.wo.store.vo.StoreVO;
 
 public interface FaqService {
 	
@@ -22,6 +25,12 @@ public interface FaqService {
 	List<NoticeVO> newsList();
 	List<NoticeVO> noticeList();
 	List<NoticeVO> eventList();
+	
+//	1:1 ¹®ÀÇ ////////////////////////////////////////
+	
+	//List<QnAVO> myqnaList(String u_id);	
+	List<QnAVO> myqnaList();
+	void addqna(QnAVO vo) throws Exception;
 	
 	void updateVisits(HashMap<String, Integer> param);
 }

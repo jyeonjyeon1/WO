@@ -22,11 +22,11 @@
 	</select>
 	
 	<select id="orderfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'order' ORDER BY FAC_CODE DESC
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'order' or FAC_TYPE = 'payment' ORDER BY FAC_CODE DESC
 	</select>
 	
 	<select id="cancelfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'cancel'  or FAC_TYPE = 'refund' ORDER BY FAC_CODE DESC
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'cancel' or FAC_TYPE = 'refund' ORDER BY FAC_CODE DESC
 	</select>
 	
 	<select id="userfaqList" resultType="FAQVO" resultMap="faqVO">
@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="pointfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'point'  or FAC_TYPE = 'coupon' ORDER BY FAC_CODE DESC
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'point' or FAC_TYPE = 'coupon' ORDER BY FAC_CODE DESC
 	</select>
 	
 	<select id="etcfaqList" resultType="FAQVO" resultMap="faqVO">
@@ -76,9 +76,32 @@
 		SELECT * FROM NOTICE_BOARD WHERE n_type = 'event' AND n_status = 'TRUE' ORDER BY n_seq DESC
 	</select> 
 	
+	<resultMap type="QnAVO" id="qnaVO">
+		<id column="QA_SEQ" property="qa_seq" jdbcType="INTEGER"/>
+		<result column="U_ID" property="u_id" jdbcType="VARCHAR" />
+		<result column="SI_CODE" property="si_code" jdbcType="VARCHAR" />
+		<result column="QA_TYPE" property="qa_type" jdbcType="VARCHAR" />
+		<result column="QA_TITLE" property="qa_title" jdbcType="VARCHAR" />
+		<result column="QA_TYPE_ANS" property="qa_type_ans" jdbcType="BOOLEAN" />
+		<result column="QA_CONTENT_Q" property="qa_content_q" jdbcType="VARCHAR" />
+		<result column="QA_CONTENT_A" property="qa_content_a" jdbcType="VARCHAR" />
+		<result column="QA_DATE_Q" property="qa_date_q" jdbcType="TIMESTAMP" />
+		<result column="QA_DATE_A" property="qa_date_a" jdbcType="TIMESTAMP" />
+	</resultMap>
 	
 	
+	<select id="myqnaList" resultType="QnAVO" resultMap="qnaVO">
+		SELECT *
+			FROM QNA 
+			WHERE U_ID = 'user03' ORDER BY QA_SEQ DESC
+	</select>
+
 	
+	<insert id="addqna" parameterType="QnAVO">
+		INSERT INTO QNA
+			(U_ID, QA_TYPE, QA_TITLE, QA_TYPE_ANS, QA_CONTENT_Q, QA_DATE_Q, QA_DATE_A)
+			VALUES('user03', #{qa_type }, #{qa_title }, FALSE, #{qa_content_q }, DEFAULT, NULL);
+	</insert>
     
 </mapper>
  

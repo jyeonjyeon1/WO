@@ -10,6 +10,8 @@ import three.aws.wo.admin.dao.UserBoardDAO;
 import three.aws.wo.admin.service.FaqService;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
+import three.aws.wo.admin.vo.QnAVO;
+import three.aws.wo.store.vo.StoreVO;
 
 @Service
 public class FaqServiceImpl implements FaqService {
@@ -77,7 +79,21 @@ public class FaqServiceImpl implements FaqService {
 		
 		return userBoardDAO.eventList();
 	}
-
+	
+	
+//	1:1 ¹®ÀÇ ////////////////////////////////////////
+	
+	@Override
+	//public List<QnAVO> myqnaList(String u_id) {
+	public List<QnAVO> myqnaList() {
+		//return userBoardDAO.myqnaList(u_id);
+		return userBoardDAO.myqnaList();
+	}
+	
+	@Override
+	public void addqna(QnAVO vo) {
+		userBoardDAO.addqna(vo);
+	}
 	
 	////////////////////////////////////
 	

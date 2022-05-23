@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,8 @@ public class AdminStoreController {
 	private AStoreService aStoreService;
 	@Autowired
 	private AMessageService aMessageService;
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 
 	@RequestMapping("/store_mng.admin")
 	public String storeList(StoreVO vo, Model model) {
@@ -47,6 +51,7 @@ public class AdminStoreController {
 		String sa_buss = vo.getSa_business_registration_image();
 		vo.setSa_bankbook_image(bankUrl + si_code + sa_bank);
 		vo.setSa_business_registration_image(bussUrl + si_code + sa_buss);
+		vo.setSa_password(pwdEncoder.encode(vo.getSi_code()));
 		aStoreService.insertStoreAccount(vo);
 		System.out.println("가게 등록 완료 DB확인");
 		return "redirect:/store_mng.admin";
@@ -123,6 +128,7 @@ public class AdminStoreController {
 		String sf_buss = vo.getSf_business_registration_image();
 		vo.setSf_bankbook_image(bankUrl + sf_code + sf_bank);
 		vo.setSf_business_registration_image(bussUrl + sf_code + sf_buss);
+		vo.setSf_password(pwdEncoder.encode(vo.getSf_code()));
 		aStoreService.insertStoreForm(vo);
 		System.out.println("승인목록 확인+ DB확인");
 		return "redirect:/registed.store";

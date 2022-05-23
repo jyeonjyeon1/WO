@@ -398,7 +398,6 @@ li {
    })  
   
   $("#main_menu > li > a").click(function(){
-	
     $(this).next($('.snd_menu')).slideToggle('fast');
   })
   $(".snd_menu > li > a").click(function(e){
@@ -691,9 +690,11 @@ function addMgName(){
 																		
 																		<!--*******메뉴 start*******-->
 																			<ul class="snd_menu sub_menu" id="menuGroupUl${vs.index}">
+																			<c:set var = "cnt" value = "0" />
 																			<c:forEach var="menu" items="${storeMenuList}"
 																					varStatus="vss">
 																					<c:if test="${menu.mg_name eq mg.mg_name }">
+																					<c:set var = "cnt" value = "${cnt + 1}" />
 																						<li><a class="menu_one" id="menu_one${vs.index}${vss.index}">
 																								<div class="row">
 																									<div class="col-lg-2"
@@ -1376,13 +1377,17 @@ function addMgName(){
                                                          </div>
                                                    <!------------ 메뉴편집_이미지변경 Modal end --------------->
                                                    						</c:forEach>
-																				<li><a class="menu_addOne" onclick="menu_addOne${vs.index}()">
+																			<li><a class="menu_addOne" onclick="menu_addOne${vs.index}()">
 																				<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ 메뉴추가</h4></a>
-																				</li>
+																			</li>
 																			</ul>
 																	<!--*******메뉴 end*******-->
 																			</li>
-																			
+																			<c:if test="${cnt eq 0 }">
+																				<li><a class="menu_addOne" onclick="menu_addOne${vs.index}()">
+																					<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ 메뉴추가</h4></a>
+																				</li>
+																			</c:if>
 																		<script>
 												function menu_addOne${vs.index}() {
 													$('#menu_addOne${vs.index}').modal();

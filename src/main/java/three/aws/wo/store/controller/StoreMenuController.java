@@ -28,7 +28,7 @@ public class StoreMenuController {
 	@RequestMapping("/CRUD.store")
 	public String storeMenuList(HttpSession session, Model model) {
 		// storeCode for IMSI test... (if session -> storeName = session)
-		String storeName = "2222111212";
+		String storeName = "7845124578";
 		System.out.println("Welcome storemenuCRUD Page");
 		List<StoreMenuVO> storeMenuList = sMenuService.storeMenuList(storeName);
 		List<StoreMenuGroupVO> storeMgList = sMenuService.storeMgList(storeName);
@@ -52,7 +52,7 @@ public class StoreMenuController {
 	@ResponseBody
 	@RequestMapping("/addMgName.store")
 	public String addMgName(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
-		String si_code = "2222111212";
+		String si_code = "7845124578";
 		String mg_name = param.get("mg_name");
 //		String totalCount = String.valueOf(param.get("totalCount"));
 		System.out.println("adding menugroup");
@@ -82,7 +82,7 @@ public class StoreMenuController {
 	@RequestMapping("/deleteMenuGroup.store")
 	public int deleteMenuGroup(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
-		String si_code = "2222111212";
+		String si_code = "7845124578";
 		String mg_code = param.get("mg_code");
 		System.out.println("deleting menugroup");
 
@@ -104,7 +104,7 @@ public class StoreMenuController {
 	@RequestMapping("/updateMenuGroup.store")
 	public int updateMenuGroup(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
-		String si_code = "2222111212";
+		String si_code = "7845124578";
 		String mg_code = param.get("mg_code");
 		String mg_name = param.get("mg_name");
 		System.out.println("updating menugroup");
@@ -128,7 +128,7 @@ public class StoreMenuController {
 	@RequestMapping("/insertMenu.store")
 	public int insertMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
-		String si_code = "2222111212";
+		String si_code = "7845124578";
 		int mg_seq = Integer.parseInt(param.get("mg_seq"));
 		String mg_code = param.get("mg_code");
 		String m_name = param.get("m_name");
@@ -228,7 +228,7 @@ public class StoreMenuController {
 	public int updateMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
 		System.out.println("updating menu");
-		String si_code = "2222111212";
+		String si_code = "7845124578";
 //		var paramm = {
 //			"mg_seq" : mg_seq,
 //			"mg_code" : mg_code,
@@ -296,7 +296,7 @@ public class StoreMenuController {
 	public int deleteMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
 		System.out.println("deleting menu");
-		String si_code = "2222111212";
+		String si_code = "7845124578";
 		String m_code = param.get("m_code");
 		int m_seq = Integer.parseInt(param.get("m_seq"));
 		HashMap<String, Object> map = new HashMap<String, Object>();

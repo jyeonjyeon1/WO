@@ -60,11 +60,11 @@ public class StoreController {
 //		return "/menu/menu_crud";
 //	}
 	
-	@GetMapping("/pumjeol.store")
-	public String toPumjeolPage() {
-		System.out.println("store menu_pumjeol");
-		return "/menu/menu_pumjeol";
-	}
+//	@GetMapping("/pumjeol.store")
+//	public String toPumjeolPage() {
+//		System.out.println("store menu_pumjeol");
+//		return "/menu/menu_pumjeol";
+//	}
 	
 //====================order  ============================
 		@GetMapping("/Ooneday.store")

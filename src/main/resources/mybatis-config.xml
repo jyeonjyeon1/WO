@@ -50,11 +50,12 @@
 		<mapper resource="mappings/admin/adminSMS-mapping.xml" />
 		<mapper resource="mappings/admin/adminUser-mapping.xml" /> 
 		<mapper resource="mappings/admin/adminStore-mapping.xml" />
-		<mapper resource="mappings/admin/terms-mapping.xml" />
+		<mapper resource="mappings/admin/adminterms-mapping.xml" />
 		<mapper resource="mappings/admin/adminOrder-mapping.xml" /> 
 		
 		
 		<mapper resource="mappings/store/storeMenu-mapping.xml" /> 
 		<mapper resource="mappings/store/storeLogin-mapping.xml" />
+		<mapper resource="mappings/store/storePumjeol-mapping.xml" />
 	</mappers>
 </configuration>

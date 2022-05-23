@@ -9,13 +9,14 @@
 		MENU m
 		ON (m.MG_CODE = g.MG_CODE )
 		WHERE m.SI_CODE = #{storeName}
-		ORDER BY g.MG_SEQ
+		ORDER BY g.M_SEQ
 	</select>
 	
 	<select id="storeMgList" resultType="StoreMenuGroupVO" parameterType="StoreMenuGroupVO">
 		SELECT * FROM menu_group
 		WHERE SI_CODE = #{storeName}
 		ORDER BY MG_SEQ
+		
 	</select>
 	<select id="maxMgSeq" resultType="String">
 		SELECT MG_CODE FROM MENU_GROUP 
@@ -23,6 +24,7 @@
 		MG_SEQ = (SELECT MAX(MG_SEQ) FROM MENU_GROUP 
 		WHERE 
 		SI_CODE = #{si_code})
+		
 	</select>
 	<select id="maxMenuSeq" resultType="String">
 		SELECT M_CODE FROM MENU 
@@ -194,5 +196,7 @@
 		AND
 		M_CODE = #{m_code}
 	</delete>
+	
+	
 </mapper>
  

@@ -48,6 +48,7 @@ public class StoreMenuController {
 
 	}
 
+//======================crud related to menu==================================
 	// Adding MenuGroup
 	@ResponseBody
 	@RequestMapping("/addMgName.store")
@@ -123,7 +124,7 @@ public class StoreMenuController {
 		return result;
 	}
 
-	// ¸Þ´º Ãß°¡
+	//add menu
 	@ResponseBody
 	@RequestMapping("/insertMenu.store")
 	public int insertMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
@@ -134,10 +135,10 @@ public class StoreMenuController {
 		String m_name = param.get("m_name");
 		String opb_name = param.get("opb_name");
 		int opb_price = Integer.parseInt(param.get("opb_price"));
-		// ¸ðµç ¸Þ´º
+		// all menu
 		String basic_menu_options = param.get("opb_total");
 		String[] basic_menu_split = basic_menu_options.split("\\n");
-		int basic_num = basic_menu_split.length; // ÃÑ ±âº»¿É¼Ç +1
+		int basic_num = basic_menu_split.length; // ï¿½ï¿½ ï¿½âº»ï¿½É¼ï¿½ +1
 
 		System.out.println("inserting menu");
 		// getting m_code of max m_seq from menu
@@ -181,20 +182,20 @@ public class StoreMenuController {
 		map.put("opb_name", opb_name);
 		map.put("opb_price", opb_price);
 		map.put("opb_code", opb_code);
-		// map¿¡ si_code m_name ogb_code m_code
+		// si_code m_name ogb_code m_code in map
 
 		try {
 			sMenuService.insertMenu(map);
-			// menu ¸ÕÀú µî·ÏÇÏ°í seq ¹Þ¾Æ¿È
+			// first set-> menu / second get<- seq 
 			int m_seq = sMenuService.getm_seq(map);
 
 			map.put("m_seq", m_seq);
 			sMenuService.insertOGB(map);
 
-//			//OGB ¸ÕÀú µî·ÏÇÏ°í seq ¹Þ¾Æ¿È
+//			//first set-> OGB / get <- seq 
 			int ogb_seq = sMenuService.getogb_seq(map);
 
-			// ogb_seq ¹Þ¾Æ¿Â ÈÄ¿¡ ÀÔ·Â (Ã¹¹øÂ°°Í¸¸)
+			// ogb_seq ï¿½Þ¾Æ¿ï¿½ ï¿½Ä¿ï¿½ ï¿½Ô·ï¿½ (Ã¹ï¿½ï¿½Â°ï¿½Í¸ï¿½)
 			map.put("ogb_seq", ogb_seq);
 			sMenuService.insertOPB(map);
 			// (#{si_code},#{ogb_seq} ,#{opb_code},#{opb_name} ,#{opb_price})
@@ -203,7 +204,7 @@ public class StoreMenuController {
 					String code = ogb_code + "00" + String.valueOf(i);
 					String[] split = basic_menu_split[i].split(" : ");
 					String name = split[0];
-					int price = Integer.parseInt(split[1].replace(" ¿ø", "").replaceAll(",", ""));
+					int price = Integer.parseInt(split[1].replace(" ï¿½ï¿½", "").replaceAll(",", ""));
 					HashMap<String, Object> mapp = new HashMap<String, Object>();
 					mapp.put("si_code", si_code);
 					mapp.put("ogb_seq", ogb_seq);
@@ -216,7 +217,7 @@ public class StoreMenuController {
 
 			result = 1;
 		} catch (Exception e) {
-			System.err.println("À½·á µî·Ï FAIL");
+			System.err.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ FAIL");
 			e.printStackTrace();
 		}
 
@@ -240,7 +241,7 @@ public class StoreMenuController {
 		String mg_code = param.get("mg_code");
 		String opb_total = param.get("opb_total");
 		String[] basic_menu_split = opb_total.replaceAll("\\n","").replaceAll("\\t","").split("CUTCUTCUT");
-		int basic_num = basic_menu_split.length; // ÃÑ ±âº»¿É¼Ç +4 ¸Þ´º´Â [4]ºÎÅÍ
+		int basic_num = basic_menu_split.length; // ï¿½ï¿½ ï¿½âº»ï¿½É¼ï¿½ +4 ï¿½Þ´ï¿½ï¿½ï¿½ [4]ï¿½ï¿½ï¿½ï¿½
 		for(String s : basic_menu_split) {
 			System.out.println(s);
 		}
@@ -253,13 +254,13 @@ public class StoreMenuController {
 		map.put("m_name", m_name);
 		map.put("m_seq", m_seq);
 		if(!m_ori_name.equals(m_name)) {
-			//MENU¿¡¼­ ÀÌ¸§ ¹Ù²ãÁÙ°ÅÀÓ
+			//MENUï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ù²ï¿½ï¿½Ù°ï¿½ï¿½ï¿½
 			sMenuService.updateMenu(map);
-			//OGB¿¡¼­ ÀÌ¸§ ¹Ù²ãÁÙ°ÅÀÓ
+			//OGBï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ù²ï¿½ï¿½Ù°ï¿½ï¿½ï¿½
 			sMenuService.updateOGB(map);
 		}
 		
-		//ÇØ´ç m_seq¿¡ ÇØ´çÇÏ´Â ogb_seq + ogb_code¸¦ ¾ò¾î¿Ã°ÅÀÓ
+		//ï¿½Ø´ï¿½ m_seqï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ogb_seq + ogb_codeï¿½ï¿½ ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½
 		int ogb_seq = sMenuService.ogbSeqfromMSeq(map);
 		String ogb_code = sMenuService.ogbCodefromMSeq(map);
 		
@@ -267,7 +268,7 @@ public class StoreMenuController {
 		System.out.println(ogb_seq);
 		System.out.println(ogb_code);
 		map.put("ogb_seq", ogb_seq);
-		//option_basic¿¡ ÇØ´ç menu ´Ù »èÁ¦
+		//option_basicï¿½ï¿½ ï¿½Ø´ï¿½ menu ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		sMenuService.deleteOptionBasics(map);
 		
 		try {
@@ -286,7 +287,7 @@ public class StoreMenuController {
 			}
 			result = 1;
 		} catch (Exception e) {
-			System.err.println("optionbasic »õ·Î ³Ö´Â °úÁ¤ ¿À·ù");
+			System.err.println("optionbasic ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		return result;
 	}
@@ -309,10 +310,38 @@ public class StoreMenuController {
 			sMenuService.deleteMenu_MAO(map);
 			result = 1;
 		} catch (Exception e) {
-			System.err.println("¸Þ´º ´ÜÀÏ »èÁ¦ ¿À·ù");
+			System.err.println("ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return result;
 	}
+	
+//======================crud related to option==================================
+	@ResponseBody
+	@RequestMapping("/addOgName.store")
+	public String addOgName(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
+		String si_code = "7845124578";
+		String mg_name = param.get("mg_name");
+//		String totalCount = String.valueOf(param.get("totalCount"));
+		System.out.println("adding menugroup");
+		// using totalCount inappropriate (deleting mg in the middle makes munjae)
 
+		// getting mg_code of max mg_seq from menu_group
+		String current_max_code = sMenuService.maxMgSeq(si_code);
+		String mg_code = "";
+		if (current_max_code == null) {
+			mg_code = "11";
+		} else {
+			mg_code = String.valueOf(Integer.parseInt(current_max_code) + 1);
+		}
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("si_code", si_code);
+		map.put("mg_code", mg_code);
+		map.put("mg_name", mg_name);
+
+		sMenuService.insertMgName(map);
+
+		return "ok";
+	}
 }

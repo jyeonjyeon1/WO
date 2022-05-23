@@ -494,6 +494,10 @@ function addMgName(){
    
 } 
 
+ 
+ 	 
+ 
+
 
 </script>
 
@@ -657,7 +661,7 @@ function addMgName(){
 
 																			</table>
 																		</div>
-																		<div id="count" value="1"></div>
+						
 																	</div>
 																</div>
 															</div>
@@ -690,11 +694,11 @@ function addMgName(){
 																		
 																		<!--*******메뉴 start*******-->
 																			<ul class="snd_menu sub_menu" id="menuGroupUl${vs.index}">
-																			<c:set var = "cnt" value = "0" />
+																			
 																			<c:forEach var="menu" items="${storeMenuList}"
 																					varStatus="vss">
 																					<c:if test="${menu.mg_name eq mg.mg_name }">
-																					<c:set var = "cnt" value = "${cnt + 1}" />
+																					
 																						<li><a class="menu_one" id="menu_one${vs.index}${vss.index}">
 																								<div class="row">
 																									<div class="col-lg-2"
@@ -1198,15 +1202,6 @@ function addMgName(){
 																						style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px; width: 580px;">
 																						<div class="row">
 																						
-																						<%-- 상품에 옵션그룹이 포함되면 checkde / 상품에 옵션그룹이 포함되지않으면 unchecked 해야되는데 안되는중.. ㅜㅜ
-																						 <c:forEach var="MAOList" items="${MAOList}">
-																						<c:if test="${MAOList.m_code eq menu.m_code}">
-																						<c:if test="${MAOList.og_code eq ogList.og_code}">
-																						<input id="chbox1${vs.index}${vss.index}" type="checkbox"
-																									style="width: 30px; height: 30px;" checked>
-																						</c:if>
-																						</c:if>
-																						</c:forEach> --%>
 																						<div class="col-lg-1">
 																						<input id="chbox1${vs.index}${vss.index}" type="checkbox"
 																									style="width: 30px; height: 30px;"
@@ -1383,7 +1378,7 @@ function addMgName(){
 																			</ul>
 																	<!--*******메뉴 end*******-->
 																			</li>
-																			<c:if test="${cnt eq 0 }">
+																			<c:if test="${storeMenuList.size() eq 0 }">
 																				<li><a class="menu_addOne" onclick="menu_addOne${vs.index}()">
 																					<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ 메뉴추가</h4></a>
 																				</li>
@@ -1899,9 +1894,12 @@ function addMgName(){
 																							style="font-size: 15px; font-weight: bolder; color: black;">옵션그룹명</h5>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<input class="form-control"
+																								<input class="form-control" id="og_name_input"
 																									style="width: relative; font-size: 15px;"
 																									type="text" placeholder="예)샷추가">
+																								<input type="hidden" class="form-control" id="og_seq_input"
+																									style="width: relative; font-size: 15px;"
+																									type="text">
 																							</div>
 																						</div>
 																					</li>
@@ -1910,7 +1908,7 @@ function addMgName(){
 																						<h5
 																							style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">옵션</h5>
 
-																						<div class="groupAdd_OptionList">
+																						<div class="groupAdd_OptionList" id="addOg_option">
 																							<div class="row" style="margin-left: 5px;">
 																								<div class="col-lg-5" style="padding: 5px;">
 																									<input class="form-control"
@@ -1932,22 +1930,13 @@ function addMgName(){
 																								</div>
 																							</div>
 																						</div>
+																						
 																						<div class="row" style="margin-left: 5px;">
 																							<a class="groupAdd_Option" onclick="groupAdd_Option()">+ 가격옵션
 																								추가하기</a>
 																						</div>
 																					</li>
-																					<script>
-																					function groupAdd_Option() {
-																					$('.groupAdd_OptionList').append("	<div class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
-																	                        + "<input class='form-control' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가'>"
-																													+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control'"
-																													+"style='width: relative; font-size: 15px;'	type='text' placeholder='500'></div>"
-																													+"<div class='col-lg-2' style='padding: 5px;'> <button type='button' onclick='javascript:deleteAlert();'"
-																													+"class='btn btn-danger btn-xs'	style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
-																													+"</button>	</div></div>");  
-																					}
-																					</script>
+																					
 	
 
 
@@ -1974,7 +1963,7 @@ function addMgName(){
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<button type="button" class="save_Btn">추가하기</button>
+																								<button type="button" class="save_Btn" onclick="addOgGroup()">추가하기</button>
 																							</div>
 																						</div>
 																					</li>
@@ -1986,6 +1975,52 @@ function addMgName(){
 																</div>
 															</div>
 															<!--------옵션그룹 추가 modal end-------->
+															
+															<script>
+																					let indexN = 1;
+																					let indexS = "";
+																					let indexF = ""; 
+																				 	  
+																					function groupAdd_Option() {
+																						indexS = indexN.toString(); 
+																						indexF = indexS;
+																						$('#addOg_option').append("	<div id='addOg_option"+indexS+"' class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
+																	                        + "<input class='form-control' forCh1='"+indexF+"' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가' id='addOpName_input'"+indexS+">"
+																													+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control' forCh1='"+indexF+"'"
+																													+"style='width: relative; font-size: 15px;'	type='number' placeholder='500' id='addOpPrice_input'"+indexS+"></div>"
+																													+"<div class='col-lg-2' style='padding: 5px;'> <button type='button'"
+																													+" forDel1='addOg_option"+indexS+"' "
+																													+"class='btn btn-danger btn-xs deleteBtbt' style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
+																													+"</button>	</div></div>");  
+																					
+																													indexN++;
+																						//메뉴 삭제
+																				 		$(".deleteBtbt").click(function() {
+																				 			console.log("fff");
+																				 			var forDel1 = $(this).attr("forDel1");
+																				 			$("#"+forDel1).remove();
+																				 			console.log("#"+forDel1);
+																				 		});
+																					
+																					}
+																					
+																					
+																						
+																						//옵션편집-옵션그룹추가-추가하기버튼 클릭시
+																						 function addOgGroup(){
+																							 var Og_name_input = $("#og_name_input").val();
+																							console.log(Og_name_input);
+																						 	 
+																						 	/*    var param ={"mg_name" : mg_name,
+																						 			  	"totalCount" : totalCount
+																						 			  	};  */
+																						 	   
+																						 		 	  } 
+																						 		
+																					
+																					
+																					
+																					</script>
 
 															<!--옵션그룹 리스트 start-->
 															<c:forEach var="ogList" items="${ogList}" varStatus="ogVs">

@@ -97,7 +97,7 @@
     	SF_OPEN, SF_CLOSE, SF_PARKING_ABLE, SF_USESTORE, SF_REFERINFO, SF_EMAIL, SF_ACC_NO, SF_BUSINESS_REGISTRATION_IMAGE, SF_BANKBOOK_IMAGE, SF_REP_NAME,SF_PASSWORD)
     	VALUES (#{sf_code},#{sf_name},#{sf_loc},#{sf_zipcode},#{sf_address},#{sf_address},#{sf_addr_detail},#{sf_tel},
     	#{sf_open},#{sf_close},#{sf_parking_able},#{sf_usestore},#{sf_referinfo},#{sf_email},#{sf_code},#{sf_business_registration_image},#{sf_bankbook_image}
-    	,#{sf_rep_name}, #{sf_code})
+    	,#{sf_rep_name}, #{sf_password})
     </insert>
 	<select id="storePendingList" resultType="StoreFormVO">
 		SELECT * FROM STORE_FORM 

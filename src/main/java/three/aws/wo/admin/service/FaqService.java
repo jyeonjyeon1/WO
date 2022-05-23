@@ -28,8 +28,7 @@ public interface FaqService {
 	
 //	1:1 ¹®ÀÇ ////////////////////////////////////////
 	
-	//List<QnAVO> myqnaList(String u_id);	
-	List<QnAVO> myqnaList();
+	List<QnAVO> myqnaList(String u_id);
 	void addqna(QnAVO vo) throws Exception;
 	
 	void updateVisits(HashMap<String, Integer> param);

@@ -540,7 +540,7 @@
 
         </div>
         <!-- FAQ 자주묻는 질문 끝 -->
-
+		
 		<!-- 1:1 문의 -->
         <div class="tapsection" id="content3" style="padding-top:20px; border-top: 1px solid rgba(0, 0, 0, .15);">
           <div class="col-12">
@@ -721,7 +721,7 @@
 						<div class="form-group" style="padding:10px;">
 							<label class="col-sm-2 col-sm-2 control-label" style="padding-bottom:5px;">내용</label>
 							<div class="col-sm-8">
-								<h6><textarea id="qa_content_q" name="qa_content_q" style="resize: none; padding:10px; border-radius: 5px;  border:1px solid #cdd4da;" cols="85" rows="10"
+								<textarea id="qa_content_q" name="qa_content_q" style="resize: none; padding:10px; border-radius: 5px;  border:1px solid #cdd4da; width:100%;" rows="10"
 									placeholder="문의 내용"></textarea>
 							</div>
 						</div>
@@ -729,6 +729,7 @@
 							<button type="submit" class="w-btn w-btn-gra1"
 								style="float: right;">문의 등록</button>
 						</div>
+						<input type="hidden" name="u_id" value="${userSession.u_id}" />
 					 </form>
 					</div>
 				  </div>

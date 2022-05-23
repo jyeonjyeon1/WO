@@ -93,14 +93,14 @@
 	<select id="myqnaList" resultType="QnAVO" resultMap="qnaVO">
 		SELECT *
 			FROM QNA 
-			WHERE U_ID = 'user03' ORDER BY QA_SEQ DESC
+			WHERE U_ID = #{u_id } ORDER BY QA_SEQ DESC
 	</select>
 
 	
 	<insert id="addqna" parameterType="QnAVO">
 		INSERT INTO QNA
 			(U_ID, QA_TYPE, QA_TITLE, QA_TYPE_ANS, QA_CONTENT_Q, QA_DATE_Q, QA_DATE_A)
-			VALUES('user03', #{qa_type }, #{qa_title }, FALSE, #{qa_content_q }, DEFAULT, NULL);
+			VALUES(#{u_id }, #{qa_type }, #{qa_title }, FALSE, #{qa_content_q }, DEFAULT, NULL);
 	</insert>
     
 </mapper>

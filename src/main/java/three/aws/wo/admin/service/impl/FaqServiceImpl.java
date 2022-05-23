@@ -84,10 +84,8 @@ public class FaqServiceImpl implements FaqService {
 //	1:1 ¹®ÀÇ ////////////////////////////////////////
 	
 	@Override
-	//public List<QnAVO> myqnaList(String u_id) {
-	public List<QnAVO> myqnaList() {
-		//return userBoardDAO.myqnaList(u_id);
-		return userBoardDAO.myqnaList();
+	public List<QnAVO> myqnaList(String u_id) {
+		return userBoardDAO.myqnaList(u_id);
 	}
 	
 	@Override

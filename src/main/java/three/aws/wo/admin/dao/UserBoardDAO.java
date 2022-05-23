@@ -62,13 +62,8 @@ public class UserBoardDAO {
 
 
 	
-	//public List<QnAVO> myqnaList(String u_id) { return
-	//sqlSession.selectList("UserBoardDAO.myqnaList", u_id); 
-	//}
-	 
-	
-	public List<QnAVO> myqnaList() {
-		return sqlSession.selectList("UserBoardDAO.myqnaList");
+	public List<QnAVO> myqnaList(String u_id) { 
+		return sqlSession.selectList("UserBoardDAO.myqnaList", u_id); 
 	}
 	
 	

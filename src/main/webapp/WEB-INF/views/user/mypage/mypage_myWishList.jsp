@@ -70,8 +70,9 @@
 						</h3>
 					</div>
 					<div class="row">
-						<c:forEach var="myWishList" items="${myWishList}" varStatus="vs">
-
+						<c:forEach var="myWishList" items="${myWishList}"
+							varStatus="vs">
+							
 							<a class="col-11 search_result_list_col" href="jw3.html">
 								<div class="row">
 									<div class="col-2 search_list_img_bg">
@@ -81,7 +82,7 @@
 
 									<div class="col-2" style="float: left; padding: 2.5vh 0;">
 										<strong class="text-primary">${myWishList.si_loc}</strong>
-										<h3>${myWishList.si_name}</h3>
+										<h3>스타벅스</h3>
 									</div>
 									<div class="col-5" style="padding-top: 2.5vh;">
 										<div class="row">
@@ -95,8 +96,7 @@
 										</div>
 										<div class="row">
 											<lable class="col-4 search_list_option">영업시간 </lable>
-											<lable class="col-7 search_list_option_re ">${myWishList.si_open}~${myWishList.si_close}
-											</lable>
+											<lable class="col-7 search_list_option_re ">${myWishList.si_open}~${myWishList.si_close} </lable>
 										</div>
 
 									</div>
@@ -105,36 +105,9 @@
 						</c:forEach>
 
 					</div>
-					<!-- 게시판 하단의 페이징 버튼 -->
-					<div class="box-footer clearfix">
-						<ul class="pagination pagination-sm no-margin pull-right">
 
-							<li th:if="${pageMaker.prev} == true"><a
-								th:href="@{/myWishList.user(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&laquo;</a>
-							</li>
-
-							<li
-								th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"
-								th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
-								<a
-								th:href="@{/myWishList.user(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}"
-								th:text="${idx}"></a>
-							</li>
-
-							<li
-								th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
-								<a
-								th:href="@{/myWishList.user(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&raquo;</a>
-							</li>
-
-						</ul>
-
-					</div>
 				</div>
-				<!-- /.box -->
-
 			</div>
-		</div>
 		</div>
 	</section>
 

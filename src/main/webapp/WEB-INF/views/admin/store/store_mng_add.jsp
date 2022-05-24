@@ -8,9 +8,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="author" content="Dashboard">
-<meta name="keyword"
-	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <title>워킹오더 관리자 페이지</title>
 
 <!-- Favicons -->
@@ -198,6 +195,13 @@
 									<div class="col-sm-4">
 										<input class="form-control" id="si_code" name="si_code" type="text" placeholder="사업자번호">
 										<p class="regCode_label">사업자번호는 10자리입니다</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">지점명</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" placeholder="예) 종로점"
+											>
 									</div>
 								</div>
 								<div class="form-group">

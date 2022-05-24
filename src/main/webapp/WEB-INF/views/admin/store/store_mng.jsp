@@ -8,9 +8,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="author" content="Dashboard">
-<meta name="keyword"
-	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <title>워킹오더 관리자 페이지</title>
 
 <!-- Favicons -->
@@ -288,8 +285,8 @@
 											class="dataTable-sorter">매장명</a></th>
 										<th data-sortable="" style="width: 10%;"><a href="#"
 											class="dataTable-sorter">코드</a></th>
-										<th data-sortable="" style="width: 10%;"><a href="#"
-											class="dataTable-sorter">비번</a></th>
+<!-- 										<th data-sortable="" style="width: 10%;"><a href="#" -->
+<!-- 											class="dataTable-sorter">비번</a></th> -->
 										<th data-sortable="" style="width: 10%;"><a href="#"
 											class="dataTable-sorter">주소</a></th>
 										<th data-sortable="" style="width: 11%;"><a href="#"
@@ -308,8 +305,8 @@
 										<tr>
 											<td>${vs.index +1}</td>
 											<td>${storeList.si_name}</td>
-											<td>${storeList.si_code}</td>
-											<td><a data-toggle="modal" href="#passModal${vs.index}"><i class="password_see fa fa-eye"></i></a></td>
+											<td><a class="password_see" href="store_mng_update.admin?si_code=${storeList.si_code}">${storeList.si_code}</a></td>
+<%-- 											<td><a data-toggle="modal" href="#passModal${vs.index}"><i class="password_see fa fa-eye"></i></a></td> --%>
 											<td>${storeList.si_addr_road}, 
 												${storeList.si_addr_detail}</td>
 											<td>${storeList.si_tel}</td>

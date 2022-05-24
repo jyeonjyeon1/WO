@@ -92,4 +92,29 @@ public class AStoreServiceImpl implements AStoreService {
 		aStoreDAO.deletePending(sf_seq);
 	}
 
+	@Override
+	public void updateStoreInfo(StoreVO vo) {
+		aStoreDAO.updateStoreInfo(vo);
+	}
+
+	@Override
+	public String getOriginalPass(StoreVO vo) {
+		return aStoreDAO.getOriginalPass(vo);
+	}
+
+	@Override
+	public void updateStoreAccount(StoreVO vo) {
+		aStoreDAO.updateStoreAccount(vo);
+	}
+
+	@Override
+	public String getOriginalBankbook(StoreVO vo) {
+		return aStoreDAO.getOriginalBankbook(vo);
+	}
+
+	@Override
+	public String getOriginalBussReg(StoreVO vo) {
+		return aStoreDAO.getOriginalBussReg(vo);
+	}
+
 }

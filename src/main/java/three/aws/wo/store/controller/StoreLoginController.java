@@ -25,8 +25,8 @@ public class StoreLoginController {
 	@Autowired
 	private StoreLoginService storeLoginService;
 	
-	//@Inject
-	//BCryptPasswordEncoder pwdEncoder;
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 	
 	@ResponseBody
 	@RequestMapping(value="/loginCheck.store",method=RequestMethod.POST)
@@ -69,6 +69,15 @@ public class StoreLoginController {
 	public void setLogin(String s_id, HttpSession session, HttpServletResponse response ) throws Exception {
 		StoreVO vo = storeLoginService.encryption(s_id);
 		session.setAttribute("storeSession", vo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/sendResetPassword.store",method=RequestMethod.POST)
+	public int test(@RequestBody HashMap<String, String> param) {
+		String num = param.get("tel_reset");
+		String bcrypt = pwdEncoder.encode(num);
+		System.out.println(num + " : "+bcrypt);
+		return 1;
 	}
 	
 }

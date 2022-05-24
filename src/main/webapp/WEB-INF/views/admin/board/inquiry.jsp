@@ -199,6 +199,7 @@
 											placeholder="홍길동" style="width: 35%;">
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">제목/내용</label>
 									<div class="col-sm-2 dropthebeat">
@@ -283,79 +284,23 @@
 								</thead>
 
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td><a href="inquiry_answer.admin">포인트가 사려졌어요ㅠㅠ</a></td>
-										<td>etgohome</td>
-										<td>홍오공</td>
-										<td>010-9856-8565</td>
-										<td>미답변</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>2022.04.06 12:11:02</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td><a href="inquiry_answer.admin">배고파요</a></td>
-										<td>etgohome</td>
-										<td>홍오공</td>
-										<td>010-9856-8565</td>
-										<td>미답변</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>2022.04.06 12:11:02</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td><a href="inquiry_answer.admin">1+1=?</a></td>
-										<td>etgohome</td>
-										<td>홍오공</td>
-										<td>010-9856-8565</td>
-										<td>미답변</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>2022.04.06 12:11:02</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td><a href="inquiry_answer.admin">쿠폰 주세요</a></td>
-										<td>etgohome</td>
-										<td>홍오공</td>
-										<td>010-9856-8565</td>
-										<td>미답변</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>2022.04.06 12:11:02</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td><a href="inquiry_answer.admin">매장 신고합니다</a></td>
-										<td>etgohome</td>
-										<td>홍오공</td>
-										<td>010-9856-8565</td>
-										<td>미답변</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>2022.04.06 12:11:02</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td><a href="inquiry_answer.admin">테트리스 하실?</a></td>
-										<td>etgohome</td>
-										<td>홍오공</td>
-										<td>010-9856-8565</td>
-										<td>미답변</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>2022.04.06 12:11:02</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td><a href="inquiry_answer.admin">포인트가사려졌어요ㅠㅠ</a></td>
-										<td>etgohome</td>
-										<td>홍오공</td>
-										<td>010-9856-8565</td>
-										<td>미답변</td>
-										<td>2022.04.06 12:11:02</td>
-										<td>2022.04.06 12:11:02</td>
-									</tr>
-
-
-
+									<c:forEach var="adminqnaList" items="${adminqnaList}" varStatus="vs">
+										<tr>
+											<td>${vs.index +1 }</td>
+											<td><a href="inquiry_answer.admin?qa_seq=${adminqnaList.qa_seq }">${adminqnaList.qa_title }</a></td>
+											<td>${adminqnaList.u_id }</td>
+											<td>${adminqnaList.u_name }</td>
+											<td>${adminqnaList.u_tel }</td>
+											<c:if test="${adminqnaList.qa_type_ans eq false }">
+												<td>미답변</td>
+											</c:if>
+											<c:if test="${adminqnaList.qa_type_ans eq true }">
+												<td>답변완료</td>
+											</c:if>
+											<td>${adminqnaList.qa_date_q.substring(0,19) }</td>
+											<td>${adminqnaList.qa_date_a.substring(0,19) }</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 

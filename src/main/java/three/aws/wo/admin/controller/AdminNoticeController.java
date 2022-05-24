@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -92,6 +93,36 @@ public class AdminNoticeController {
 		noticeService.addqna(vo);
 		return "redirect:/faq.user";
 	}
+	
+	
+	
+	
+	@RequestMapping("/inquiry.admin")
+	public String adminqnaList(QnAVO vo, Model model) {		
+		List<QnAVO> adminqnaList =noticeService.adminqnaList();
+		model.addAttribute("adminqnaList" ,adminqnaList);
+		
+		return "/board/inquiry";
+	}
+	
+	@RequestMapping("/inquiry_answer.admin")
+	public String adminanswerList(QnAVO vo, Model model, HttpServletRequest request) {		
+		
+		int qa_seq = Integer.parseInt(request.getParameter("qa_seq"));
+		
+		List<QnAVO> adminanswerList =noticeService.adminanswerList(qa_seq);
+		
+		model.addAttribute("adminanswerList", adminanswerList);
+		return "/board/inquiry_answer";
+	}
+	
+	
+	@RequestMapping("/addanswer.admin")
+	public String addanswer(QnAVO vo) throws Exception {
+		noticeService.addanswer(vo);
+		return "redirect:/inquiry.admin";
+	}
+	
 	
 }
 

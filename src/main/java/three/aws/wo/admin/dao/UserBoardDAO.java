@@ -58,7 +58,7 @@ public class UserBoardDAO {
 		return sqlSession.selectList("UserBoardDAO.eventList");
 	}
 	
-//	1:1 문의 ////////////////////////////////////////
+//	user 1:1 문의 ////////////////////////////////////////
 
 
 	
@@ -70,6 +70,31 @@ public class UserBoardDAO {
 	public void addqna(QnAVO vo) {
 		sqlSession.insert("UserBoardDAO.addqna", vo);
 	}
+	
+	
+//	admin 1:1 문의 ////////////////////////////////////////
+
+
+	
+	public List<QnAVO> adminqnaList() { 
+		return sqlSession.selectList("UserBoardDAO.adminqnaList"); 
+	}
+	
+	
+	public List<QnAVO> adminanswerList(int qa_seq) { 
+		return sqlSession.selectList("UserBoardDAO.adminanswerList", qa_seq); 
+	}
+	
+	
+	
+	public void addadminqna(QnAVO vo) {
+		sqlSession.update("UserBoardDAO.addadminqna", vo);
+	}
+	
+	public void addanswer(QnAVO vo) {
+		sqlSession.update("UserBoardDAO.addanswer", vo);
+	}
+	
 	
 	
 	////////////////////////////////////////////////////////

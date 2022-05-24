@@ -20,6 +20,15 @@
 </head>
 
 <body>
+	<script>
+	 	function submit_no_sms() {
+	 		document.postForm.submit();
+	    }
+	 	
+	 	function submit_sms() {
+	 		document.postForm.submit();
+	    }
+	</script>
   <section id="container">
         <!-- 헤더 import -->
     <%@ include file="../inc/admin_header.jsp" %>
@@ -174,90 +183,85 @@
               <i class="fa fa-plus-circle" style="font-size: 14px;"></i>
               1:1 문의
             </div>
+            
             <div class="form-panel" style="margin-top:0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
-              <form class="form-horizontal style-form" method="get">
+              <c:forEach var="adminanswerList" items="${adminanswerList}" varStatus="vs">
+              <form name="getForm" class="form-horizontal style-form" method="get">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">작성자</label>
 
                   <div class="col-sm-3 col-sm-4 col-sm-4">
-                    <input type="text" class="form-control round-form" value="sonny" readonly> 
+                    <input type="text" class="form-control round-form" value="${adminanswerList.u_id}" readonly> 
                   </div>
                   <div class="col-sm-3 col-sm-4 col-sm-4">
-                    <input type="text" class="form-control round-form" value="손오반" readonly>
+                    <input type="text" class="form-control round-form" value="${adminanswerList.u_name}" readonly>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">전화번호</label>
                   <div class="col-sm-6">
-                    <input class="form-control" type="text" value="010-1234-4567" readonly>
+                    <input class="form-control" type="text" value="${adminanswerList.u_tel}" readonly>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">문의 제목</label>
                   <div class="col-sm-6">
-                    <input class="form-control" type="text" value="쿠폰 사용이 안돼요" readonly>
+                    <input class="form-control" type="text" value="${adminanswerList.qa_title}" readonly>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">문의 내용</label>
                   <div class="col-sm-10">
-                   <textarea class="form-control" rows="10" style="width: 98%;" readonly>문의가 이쩌염
-그것은 비밀~~~ 꺄르르르
-쿠폰 사용하고 싶어요                    
+                   <textarea class="form-control" rows="10" style="width: 98%;" readonly>${adminanswerList.qa_content_q}
                   </textarea>
                   </div>
                 </div>
                 <div class="form-group" style="border-bottom: 5px solid #eaeaea;">
                   <label class="col-sm-2 col-sm-2 control-label">등록시간</label>
                   <div class="col-sm-10">
-                    <input class="form-control round-form" type="datetime-local" value="2022-04-16T10:00"
+                    <input class="form-control round-form" type="text" value="${adminanswerList.qa_date_q.substring(0,19)}"
                       style="width: 30%;display: inline-block;margin-right: 10px; min-width: 173px;" readonly>
 
                   </div>
                 </div>
+            </form>
+            
+            
+            <form name="postForm" class="form-horizontal style-form" method="post" action="/addanswer.admin">
                 <!-- 답변 -->
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">답변</label>
                   <div class="col-sm-10">
-                   <textarea class="form-control" rows="10" style="width: 98%;" placeholder="답변내용을 입력하세요"></textarea>
+                   <textarea class="form-control" rows="10" style="width: 98%;" id="qa_content_a" name="qa_content_a" placeholder="답변내용을 입력하세요">${adminanswerList.qa_content_a}</textarea>
                   </div>
                 </div>
-                
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">답변자</label>
-                  <div class="col-sm-10">
-                    <input class="form-control round-form" type="text" value=" - "
-                    style="width: 30%;display: inline-block;margin-right: 10px;"> 
-
-                  </div>
-                </div>
-
-                
+                <input type="hidden" class="form-control round-form" name="qa_seq" value="${adminanswerList.qa_seq }" readonly>
 
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">답변일시</label>
                   <div class="col-sm-10">
-                    <input class="form-control round-form" type="datetime-local" value=""
-                    style="width: 30%;display: inline-block;margin-right: 10px;"> 
+                    <input class="form-control round-form" type="text" value="${adminanswerList.qa_date_a.substring(0,19)}"
+                    style="width: 30%;display: inline-block;margin-right: 10px; "readonly> 
 
                   </div>
                 </div>
 
                 <button type="button" onclick="window.history.back()" class="btn grey__button"
                   style="width:70px;float: right; margin-left: 10px;">뒤로</button>
-                <button type="button" onclick="location.href='inquiry.html'" class="btn btn-theme"
+                <button type="button" onclick="submit_no_sms()" class="btn btn-theme"
                   style="width:130px;float: right;margin-left: 10px; height: 30px; font-size: 12px;">
-                  완료 (알림 미발송)
+                  완료 (문자 미발송)
                 </button>
-                <button type="button" onclick="location.href='inquiry.html'" class="btn btn-theme"
+                <button type="button" onclick="submit_sms()" class="btn btn-theme"
                 style="width:110px;float: right;margin-left: 10px; height: 30px; font-size: 12px;">
-                  완료 (알림발송)
+                  완료 (문자발송)
                 </button>
                 <button type="button" onclick="location.href='inquiry.html'" class="btn btn-theme"
                 style="width:70px;float: right;margin-left: 10px; height: 30px; font-size: 12px;">
                   임시저장
                 </button>
               </form>
+              </c:forEach>
             </div>
 
 

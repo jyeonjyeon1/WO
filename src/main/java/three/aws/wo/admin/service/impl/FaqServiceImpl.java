@@ -11,7 +11,6 @@ import three.aws.wo.admin.service.FaqService;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 import three.aws.wo.admin.vo.QnAVO;
-import three.aws.wo.store.vo.StoreVO;
 
 @Service
 public class FaqServiceImpl implements FaqService {
@@ -81,7 +80,7 @@ public class FaqServiceImpl implements FaqService {
 	}
 	
 	
-//	1:1 문의 ////////////////////////////////////////
+//	user 1:1 문의 ////////////////////////////////////////
 	
 	@Override
 	public List<QnAVO> myqnaList(String u_id) {
@@ -92,6 +91,30 @@ public class FaqServiceImpl implements FaqService {
 	public void addqna(QnAVO vo) {
 		userBoardDAO.addqna(vo);
 	}
+	
+//	admin 1:1 문의 ////////////////////////////////////////
+	
+	@Override
+	public List<QnAVO> adminqnaList() {
+		return userBoardDAO.adminqnaList();
+	}
+	
+	
+	@Override
+	public List<QnAVO> adminanswerList(int qa_seq) {
+		return userBoardDAO.adminanswerList(qa_seq);
+	}
+	
+	@Override
+	public void addadminqna(QnAVO vo) {
+		userBoardDAO.addadminqna(vo);
+	}
+	
+	@Override
+	public void addanswer(QnAVO vo) {
+		userBoardDAO.addanswer(vo);
+	}
+	
 	
 	////////////////////////////////////
 	

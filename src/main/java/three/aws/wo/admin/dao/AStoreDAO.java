@@ -73,4 +73,24 @@ public class AStoreDAO {
 	public void deletePending(int sf_seq) {
 		sqlSession.delete("AStoreDAO.deletePending",sf_seq);
 	}
+
+	public void updateStoreInfo(StoreVO vo) {
+		sqlSession.update("AStoreDAO.updateStoreInfo",vo);
+	}
+
+	public String getOriginalPass(StoreVO vo) {
+		return sqlSession.selectOne("AStoreDAO.getOriginalPass",vo);
+	}
+
+	public void updateStoreAccount(StoreVO vo) {
+		sqlSession.update("AStoreDAO.updateStoreAccount",vo);
+	}
+
+	public String getOriginalBankbook(StoreVO vo) {
+		return sqlSession.selectOne("AStoreDAO.getOriginalBankbook",vo);
+	}
+
+	public String getOriginalBussReg(StoreVO vo) {
+		return sqlSession.selectOne("AStoreDAO.getOriginalBussReg",vo);
+	}
 }

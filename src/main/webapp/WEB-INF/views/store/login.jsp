@@ -90,6 +90,13 @@
   			
   		}
   	</script>
+  	<style>
+  	input::-webkit-inner-spin-button {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	}
+	</style>
 </head>
 
 <body style="background-color: #0A2533;">
@@ -99,7 +106,7 @@
   <div id="login-page">
     <div class="container">
       <form class="form-login" action="index.store" >
-        <h2 class="form-login-heading"><img src="resources/assets/images/admin/logo/logo_white.PNG" style="width:28px">&nbsp; walking order store</h2>
+        <h2 class="form-login-heading"><img src="resources/assets/images/admin/logo/logo_white.png" style="width:28px">&nbsp; walking order store</h2>
         <div class="login-wrap">
           <input type="text" class="form-control" name="s_id" id="s_id" placeholder="관리번호" style="font-size: 12px;" autofocus>
           <br>
@@ -124,12 +131,13 @@
                 <h4 class="modal-title">비밀번호 초기화 요청</h4>
               </div>
               <div class="modal-body">
-                <p>이메일을 입력하시면 초기화된 비밀번호를 알려 드립니다.</p>
-                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                <p>휴대폰번호를 입력하시면 초기화된 비밀번호를 알려 드립니다.</p>
+                <p>입력한 사업자번호와 가입시 입력한 휴대폰번호가 일치할 경우만 전송됩니다.</p>
+                <input type="number" id="tel_reset" placeholder="010-1111-2222" autocomplete="off" class="form-control placeholder-no-fix">
               </div>
               <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">취소</button>
-                <button class="btn btn-theme" type="button">전송</button>
+                <button class="btn btn-theme" type="button" onclick="resettel()">전송</button>
               </div>
             </div>
           </div>
@@ -148,6 +156,27 @@
     $.backstretch("img/login-bg.jpg", {
       speed: 500
     });
+    
+    function resettel(){
+    	var tel_reset = $("#tel_reset").val();
+    	var param = {"tel_reset" : tel_reset};
+    	$.ajax({
+			type : "post",
+			url : "/sendResetPassword.store",
+			data : JSON.stringify(param),
+			dataType : "json",
+			contentType : "application/json",
+			success : function(data) {
+				console.log("오키")
+			},
+			error : function(data) {
+				console.log("로그인 통신x")
+			}
+
+		});//ajax 끝
+    }
+    
+    
   </script>
 </body>
 

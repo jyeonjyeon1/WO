@@ -56,6 +56,41 @@ public class AdminStoreController {
 		System.out.println("가게 등록 완료 DB확인");
 		return "redirect:/store_mng.admin";
 	}
+	
+	@RequestMapping("/updateStore.admin")
+	public String updateStore(StoreVO vo) {
+		System.out.println(vo);
+		String si_code = vo.getSi_code();
+		if(vo.getSa_password()==null || (vo.getSa_password()).equals("")) {
+			String pwd = aStoreService.getOriginalPass(vo);
+			vo.setSa_password(pwd);
+		}else {
+			vo.setSa_password(pwdEncoder.encode(vo.getSi_code()));
+		}
+		
+		if(vo.getSa_business_registration_image()==null || (vo.getSa_business_registration_image()).equals("")) {
+			String busReg = aStoreService.getOriginalBussReg(vo);
+			vo.setSa_business_registration_image(busReg);
+		}else {
+			String bussUrl = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/businessreg/";
+			String sa_buss = vo.getSa_business_registration_image();
+			vo.setSa_business_registration_image(bussUrl + si_code + sa_buss);
+		}
+		
+		if(vo.getSa_bankbook_image()==null || (vo.getSa_bankbook_image()).equals("")) {
+			String bankbook = aStoreService.getOriginalBankbook(vo);
+			vo.setSa_bankbook_image(bankbook);
+		}else {
+			String bankUrl = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/bankcopy/";
+			String sa_bank = vo.getSa_bankbook_image();
+			vo.setSa_bankbook_image(bankUrl + si_code + sa_bank);
+		}
+		
+		aStoreService.updateStoreAccount(vo);
+		
+		System.out.println("가게 수정 완료 DB확인");
+		return "redirect:/store_mng.admin";
+	}
 
 	@RequestMapping("/store_menu.admin")
 	public String menuStoreList(StoreVO vo, Model model) {

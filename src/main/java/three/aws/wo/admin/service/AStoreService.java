@@ -24,4 +24,9 @@ public interface AStoreService {
 	void replicateStoreAccount(String sf_code);
 	void deleteJoinInq(int f_seq);
 	void deletePending(int sf_seq);
+	void updateStoreInfo(StoreVO vo);
+	String getOriginalPass(StoreVO vo);
+	void updateStoreAccount(StoreVO vo);
+	String getOriginalBankbook(StoreVO vo);
+	String getOriginalBussReg(StoreVO vo);
 }

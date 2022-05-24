@@ -5,20 +5,32 @@
 
 <head>
 <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="author" content="Dashboard">
-<meta name="keyword"
-	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <title>워킹오더 관리자 페이지</title>
 
 <!-- Favicons -->
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
+<link href="resources/assets/images/admin/apple-touch-icon.png"
+	rel="apple-touch-icon">
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
+
 <!-- 테이블용 css -->
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	rel="stylesheet" />
+<style>
+.tel_form, .email_form, .regName_label,.regRepName_label,.regCode_label{
+	display:none;
+}
+.tel_form.active, .email_form.active, .regName_label.active,.regRepName_label.active,.regCode_label.active{
+	display: block;
+	padding-left: 5px;
+	color: red;
+}
 
+</style>
 </head>
 
 <body>
@@ -158,7 +170,7 @@
 			<!-- allmenu import -->
 			<%@ include file="../inc/admin_allmenu.jsp"%>
 			<section class="wrapper site-min-height">
-				<h3>
+				<h3 style="margin-bottom: 5px;">
 					<i class="fa fa-angle-right"></i> 매장 수정
 				</h3>
 				<div class="row mt" style="margin-top: 5px;">
@@ -169,37 +181,51 @@
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
-							<form class="form-horizontal style-form" method="get">
+							<form name="storeUpdateForm" action="/updateStore.admin" class="form-horizontal style-form" method="post">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">매장명</label>
 									<div class="col-sm-6">
-										<input class="form-control" type="text"
-											value="${storeOne.si_name}">
+										<input class="form-control" id="si_name" name="si_name" value="${storeOne.si_name}" type="text" placeholder="매장명">
+										<p class="regName_label">이름 이상</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">코드</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text"
-											value="${storeOne.si_code}" disabled>
+										<input class="form-control" value="${storeOne.si_code}" id="si_code" name="si_code" type="text" placeholder="사업자번호" readonly>
+										<p class="regCode_label">사업자번호는 10자리입니다</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">비밀번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="password" placeholder=""
-											value="${storeOne.sa_password}">
+										<input class="form-control" id="" name="sa_password" type="password" placeholder="비밀번호">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">지점명</label>
+									<div class="col-sm-4">
+										<input class="form-control" name="si_loc" value="${storeOne.si_loc}" type="text" placeholder="예) 종로점"
+											>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">대표자</label>
+									<div class="col-sm-4">
+										<input class="form-control" id="rep_name" name="sa_rep_name"
+											type="text" placeholder="대표자 성함" value="${storeOne.sa_rep_name}">
+											<p class="regRepName_label">이름 이상</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">주소</label>
 									<div class="col-sm-2">
-										<input class="form-control" id="post__code" type="text"
-											value="${storeOne.si_zipcode}">
+										<input class="form-control" name="si_zipcode" id="post__code" type="text" value="${storeOne.si_zipcode}"
+											placeholder="우편번호">
 									</div>
 									<div class="col-sm-6">
-										<input class="form-control" id="road__Address" type="text"
-											value="${storeOne.si_addr_road}">
+										<input class="form-control" name="si_address" id="road__Address" type="text"
+											value="${storeOne.si_addr_road}" placeholder="서울시 종로구 삼일대로28길 14">
 									</div>
 									<div class="col-sm-2" style="margin-top: 2px;">
 										<input class="grey__button" type="button"
@@ -208,47 +234,68 @@
 									<div class="col-sm-2">&nbsp;</div>
 									<div class="col-sm-2">&nbsp;</div>
 									<div class="col-sm-3">
-										<input class="form-control" id="extra__Address" type="text"
-											value="(동)">
+										<input class="form-control" name="si_addr_road" id="extra__Address" type="text"
+											placeholder="동">
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control" id="detail__Address" type="text"
-											value="${storeOne.si_addr_detail}">
+										<input class="form-control" name="si_addr_detail" id="detail__Address" type="text"
+											placeholder="상세주소" value="${storeOne.si_addr_detail}">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">전화번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text"
-											value="${storeOne.si_tel}">
+										<input class="form-control" type="text" name="si_tel" id="si_tel"
+											placeholder="0212345678" value="${storeOne.si_tel}">
+										<p class="tel_form">전화번호 형식을 맞춰주세요</p>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">이메일</label>
 									<div class="col-sm-5">
-										<input class="form-control" type="email"
-											value="${storeOne.sa_email}">
+										<input class="form-control" type="email" name="sa_email" id="sa_email"
+											placeholder="walking@walking.com" value="${storeOne.sa_email}">
+										<p class="email_form">이메일 형식을 맞춰주세요</p>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">서류</label>
-									<div class="col-sm-6"
+									<label class="col-sm-2 col-sm-2 control-label"
+										style="padding: 25px 15px;">서류</label>
+									<div class="col-sm-3"
 										style="margin-top: 2px; padding: 0 0 0 15px;">
-										<a href="${storeList.sa_business_registration_image}" style="display:inline-block;">
+										<a href="${storeOne.sa_business_registration_image}" style="display:inline-block;">
 									<input class="img-responsive grey__button" type="button"
-									value="사업자등록증" style="margin-right: 5px;"></a><a href="${storeList.sa_bankbook_image}" style="display:inline-block;">
+									value="사업자등록증" style="margin-right: 5px;"></a> 
+									</div>
+									<div class="col-lg-3" style="padding: 0;">
+									
+										<input id="businessreg" type="file" class="grey__button" accept="image/*"
+											name="sa_business_registration_image">
+											
+									</div>
+									<div class="col-sm-3">&nbsp;</div>
+									<div class="col-sm-4">&nbsp;</div>
+									<div class="col-sm-3"
+										style="margin-top: 2px; padding: 0 0 0 15px;">
+										<a href="${storeOne.sa_bankbook_image}" style="display:inline-block;">
 									<input class="img-responsive grey__button" type="button" 
 									value="통장사본">
-								</a> 
+								</a>
+									</div>
+									<div class="col-lg-4" style="padding: 0;">
+									
+										<input id="bankcopy" type="file" class="grey__button" accept="image/*"
+											name="sa_bankbook_image">
+											
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">영업시간</label>
 									<div class="col-sm-10">
-										<input class="form-control round-form" type="time"
+										<input class="form-control round-form" name="si_open" type="time"
 											value="${storeOne.si_open}"
 											style="width: 20%; display: inline-block; margin-right: 10px;">
-										~ <input class="form-control round-form" type="time"
+										~ <input class="form-control round-form" name="si_close" type="time"
 											value="${storeOne.si_close}"
 											style="width: 20%; display: inline-block; margin-left: 10px;">
 									</div>
@@ -259,28 +306,25 @@
 									<label class="col-sm-2 col-sm-2 control-label">주차여부</label>
 									<div class="col-sm-10" style="padding: 0;">
 										<div class="col-sm-7">
-											<c:choose>
-												<c:when test="${storeOne.si_parking_able eq 'true'}">
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}1" id="inlineRadio1" value="option1"
-														checked> 가능
-													</label>
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}1" id="inlineRadio2" value="option2">
-														불가
-													</label>
-												</c:when>
-												<c:otherwise>
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}2" id="inlineRadio1" value="option1">
-														가능
-													</label>
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}2" id="inlineRadio2" value="option2"
-														checked> 불가
-													</label>
-												</c:otherwise>
-											</c:choose>
+										<c:choose>
+										<c:when test="${storeOne.si_parking_able eq true}">
+										<label class="radio-inline"> <input type="radio"
+												name="si_parking_able" id="" value="true" checked> 가능
+											</label> <label class="radio-inline"> <input type="radio"
+												name="si_parking_able" id="" value="false" >
+												불가
+											</label>
+										</c:when>
+										<c:otherwise>
+										<label class="radio-inline"> <input type="radio"
+												name="si_parking_able" id="" value="true"> 가능
+											</label> <label class="radio-inline"> <input type="radio"
+												name="si_parking_able" id="" value="false" checked>
+												불가
+											</label>
+										</c:otherwise>
+										</c:choose>
+											
 										</div>
 									</div>
 								</div>
@@ -288,49 +332,40 @@
 									<label class="col-sm-2 col-sm-2 control-label">매장사용</label>
 									<div class="col-sm-10" style="padding: 0;">
 										<div class="col-sm-7">
-											<c:choose>
-												<c:when test="${storeOne.si_usestore eq 'true'}">
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}3" id="inlineRadio3" checked> 가능
-													</label>
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}3" id="inlineRadio4" >
-														불가
-													</label>
-												</c:when>
-												<c:otherwise>
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}4" id="inlineRadio3">
-														가능
-													</label>
-													<label class="radio-inline"> <input type="radio"
-														name="${vs.index}4" id="inlineRadio4" checked> 불가
-													</label>
-												</c:otherwise>
-											</c:choose>
+										<c:choose>
+										<c:when test="${storeOne.si_usestore eq true}">
+										<label class="radio-inline"> <input type="radio"
+												name="si_usestore" id="" value="true" checked> 가능
+											</label> <label class="radio-inline"> <input type="radio"
+												name="si_usestore" id="" value="false" >
+												불가
+											</label>
+										</c:when>
+										<c:otherwise>
+										<label class="radio-inline"> <input type="radio"
+												name="si_usestore" id="" value="true"> 가능
+											</label> <label class="radio-inline"> <input type="radio"
+												name="si_usestore" id="" value="false" checked>
+												불가
+											</label>
+										</c:otherwise>
+										</c:choose>
 										</div>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">특이사항</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="textarea"
-											value="${storeOne.si_referinfo}">
-
+										<input class="form-control" value="${storeOne.si_referinfo }" id="si_referinfo" name="si_referinfo" type="text" placeholder="">
 									</div>
-
-									<!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
 								</div>
 
 
 
 								<button type="button" onclick="window.history.back()"
 									class="btn btn-theme" style="float: right; margin-left: 10px;">뒤로</button>
-								<button type="button" onclick="location.href='store_mng.html'"
-									class="btn btn-theme" style="float: right;">수정</button>
+								<button type="button" onclick="finalCheck()" class="btn btn-theme" style="float: right;">수정</button>
+								<!-- onclick="location.href='store_mng.html'" -->
 							</form>
 						</div>
 					</div>
@@ -339,27 +374,27 @@
 					<!-- 오른쪽 사진 영역 시작 -->
 					<div class="col-lg-3" style="min-width: 450px; padding: 0;">
 						<div class="card-header" style="font-size: 16px;">
-							<i class="fa fa-plus-circle" style="font-size: 14px;"></i> 매장 이미지
+							<i class="fa fa-plus-circle" style="font-size: 14px;"></i> 매장 정보
 						</div>
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
+							<form class="form-horizontal style-form" method="get">
 								<div class="row mt">
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 										<div class="project-wrapper">
 											<div class="project">
-												<div class="photo-wrapper">
+												<div class="photo-wrapper_">
 													<div class="photo store_image_small">
-														<a class="fancybox"
-															href="${storeOne.si_image}"><img
-															class="img-responsive"
-															src="${storeOne.si_image}" alt=""></a>
+													<a class="fancybox"
+                                                            href="${storeOne.si_image}"><img
+                                                            class="img-responsive"
+                                                            src="${storeOne.si_image}"></a>
 													</div>
 													<div class="overlay"></div>
 												</div>
 											</div>
 										</div>
-										
-										<div class="row" style="padding: 0 15px">
+										<div class="row" style="padding: 7px 15px">
 											<div class="col-lg-7" style="padding: 0;">
 												<input id="" type="file" class="cut__side" value="수정"
 													name="">
@@ -372,22 +407,20 @@
 										</div>
 									</div>
 									<!-- col-lg-4 -->
-									<c:if test = "${not empty storeOne.si_image2}">
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 										<div class="project-wrapper">
 											<div class="project">
-												<div class="photo-wrapper">
+												<div class="photo-wrapper_">
 													<div class="photo store_image_small">
 														<a class="fancybox"
-															href="${storeOne.si_image2}"><img
-															class="img-responsive"
-															src="${storeOne.si_image2}"
-															alt=""></a>
+                                                            href="${storeOne.si_image2}"><img
+                                                            class="img-responsive"
+                                                            src="${storeOne.si_image2}"></a>
 													</div>
 													<div class="overlay"></div>
 												</div>
 											</div>
-											<div class="row" style="padding: 0 15px">
+											<div class="row" style="padding: 7px 15px">
 												<div class="col-lg-7" style="padding: 0;">
 													<input id="" type="file" class="cut__side" value="수정"
 														name="">
@@ -401,40 +434,43 @@
 										</div>
 
 									</div>
-									</c:if>
 									<!-- col-lg-4 -->
-									<c:if test = "${not empty storeOne.si_image3}">
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
 										<div class="project-wrapper">
 											<div class="project">
-												<div class="photo-wrapper">
+												<div class="photo-wrapper_">
 													<div class="photo store_image_small">
 														<a class="fancybox"
-															href="${storeOne.si_image3}"><img
-															class="img-responsive"
-															src="${storeOne.si_image3}"
-															alt=""></a>
+                                                            href="${storeOne.si_image3}"><img
+                                                            class="img-responsive"
+                                                            src="${storeOne.si_image3}"></a>
 													</div>
 													<div class="overlay"></div>
 												</div>
 											</div>
-											<div class="row" style="padding: 0 15px">
-												<div class="col-lg-7" style="padding: 0;">
-													<input id="" type="file" class="cut__side" value="수정"
-														name="">
+										</div>
+										<div class="row" style="padding: 7px 15px">
+											<div class="col-lg-7" style="padding: 0;">
+												<input id="" type="file" class="cut__side" value="수정"
+													name="">
 
-												</div>
-												<div class="col-lg-5">
-													<input id="" type="button" class="cut__side" value="제거">
+											</div>
+											<div class="col-lg-5">
+												<input id="" type="button" class="cut__side" value="제거">
 
-												</div>
 											</div>
 										</div>
-
 									</div>
-									</c:if>
-							</div>
+									<!-- col-lg-4 -->
+								</div>
+
+
+
+								<button type="button" onclick="" class="btn btn-theme"
+									style="float: right;">수정</button>
+							</form>
 						</div>
+						<!-- /여기까지 -->
 					</div>
 				</div>
 			</section>
@@ -449,60 +485,236 @@
 		<%@ include file="../inc/admin_footer.jsp"%>
 		<!--footer end-->
 	</section>
-
-	<!--script for this page-->
-
-	<script src="resources/assets/js/admin/fancybox/jquery.fancybox.js"></script>
-	<script type="text/javascript">
-    $(function() {
-      //    fancybox
-      jQuery(".fancybox").fancybox();
-    });
-  </script>
 	<!-- 다음 지도 api -->
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
-    function getPostCode() {
-      new daum.Postcode({
-        oncomplete: function (data) {
-          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	var code = $("#si_code").val();
+	function fileUpload(){
+		var fileInput = document.getElementsByClassName("ex_file");
 
-          // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-          // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-          var roadAddr = data.roadAddress; // 도로명 주소 변수
-          var extraRoadAddr = ''; // 참고 항목 변수
+		for( var i=0; i<fileInput.length; i++ ){
+			if( fileInput[i].files.length > 0 ){
+				for( var j = 0; j < fileInput[i].files.length; j++ ){
+					console.log(fileInput[i].files[j].name); // 파일명 출력
+				}
+			}
+		}
 
-          // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-          // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-          if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-            extraRoadAddr += data.bname;
-          }
-          // 건물명이 있고, 공동주택일 경우 추가한다.
-          if (data.buildingName !== '' && data.apartment === 'Y') {
-            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-          }
-          // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-          if (extraRoadAddr !== '') {
-            extraRoadAddr = ' (' + extraRoadAddr + ')';
-          }
+	}
+	 // 사업자등록증 업로드 
+    uploadImgbusinessreg = () => {
+        AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+            })
+        })
 
-          // 우편번호와 주소 정보를 해당 필드에 넣는다.
-          document.getElementById('post__code').value = data.zonecode;
-          document.getElementById("road__Address").value = roadAddr;
+        let files = document.getElementById('businessreg').files;
+        let file = files[0];
+        let fileNamebusinessreg = file.name;
+        fileNamebusinessreg = code + fileNamebusinessreg;
 
-          // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-          if (roadAddr !== '') {
-            document.getElementById("extra__Address").value = extraRoadAddr;
-          } else {
-            document.getElementById("extra__Address").value = '';
-          }
+        let upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: 'walkingorder/businessreg',
+                Key: fileNamebusinessreg,
+                ContentType : "image/jpeg",
+                Body: file
+            }
+        })
 
-          document.getElementById("detail__Address").focus();
-        }
-      }).open();
+        const promise = upload.promise();
+        
     }
+
+    // 통장사본 업로드 
+    uploadImgbankcopy = () => {
+        AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+            })
+        })
+
+        let files = document.getElementById('bankcopy').files;
+        let file = files[0];
+        let fileNamebankcopy = file.name;
+        fileNamebankcopy = code + fileNamebankcopy;
+
+        let upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: 'walkingorder/bankcopy',
+                Key: fileNamebankcopy,
+                ContentType : "image/jpeg",
+                Body: file
+            }
+        })
+
+        const promise = upload.promise();
+        
+    }
+    
+    function getPostCode() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+              extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if (data.buildingName !== '' && data.apartment === 'Y') {
+              extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if (extraRoadAddr !== '') {
+              extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('post__code').value = data.zonecode;
+            document.getElementById("road__Address").value = roadAddr;
+
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if (roadAddr !== '') {
+              document.getElementById("extra__Address").value = extraRoadAddr;
+            } else {
+              document.getElementById("extra__Address").value = '';
+            }
+
+            document.getElementById("detail__Address").focus();
+          }
+        }).open();
+      }
+
+    var ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8;
+	ch1 = false;//특이사항
+// 	ch2 = false;//우편 
+ 	ch3 = false;//대표이름
+	ch4 = false;//매장명
+	ch5 = false;//phone authentication
+	ch6 = false;//regEmail
+	ch7 = false;//regCode
+	
+	var regRepName = /^[a-zA-Z가-힣\s]+$/;
+	var regName = /^[a-zA-Z0-9가-힣\s\'\"]+$/;
+	var regCode = /^[0-9]{10}$/;
+	var regPhone = /^0([0-9]{7,11})$/;
+	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	
+	jQuery(document).ready(
+			function() {
+				$("#si_referinfo").on("propertychange change keyup paste input",
+						function(){
+					var referinfo = $("#si_referinfo").val();
+					if(referinfo == ""){ch1 = false;}
+					else {ch1=true;}
+				});
+				$("#si_name").on(
+						"propertychange change keyup paste input",
+						function() {
+							var name = $("#si_name").val();
+
+							if (regName.test(name) == false) {
+								$(".regName_label").addClass('active');
+								ch4 = false;
+							} else {
+								$(".regName_label").removeClass('active');
+								ch4 = true;
+							}
+						});
+				$("#si_code").on(
+						"propertychange change keyup paste input",
+						function() {
+							code = $("#si_code").val();
+							if (regCode.test(code) == false) {
+								$(".regCode_label").addClass('active');
+								ch7 = false;
+							} else {
+								$(".regCode_label").removeClass('active');
+								ch7 = true;
+							}
+						});
+				$("#rep_name").on(
+						"propertychange change keyup paste input",
+						function() {
+							var rep_name = $("#rep_name").val();
+
+							if (regRepName.test(rep_name) == false) {
+								$(".regRepName_label").addClass('active');
+								ch3 = false;
+							} else {
+								$(".regRepName_label").removeClass('active');
+								ch3 = true;
+							}
+						});
+				$("#si_tel").on("propertychange change keyup paste input",
+		                  function() {
+		                     var tel = $("#si_tel").val();
+		                     if(tel.indexOf('-')!=-1){
+		                        $(".tel_form").addClass('active');
+		                        ch5 = false;
+		                     }else if (tel.length > 7 && regPhone.test(tel) == false) {
+		                    	 $(".tel_form").addClass('active');
+		                        ch5 = false;
+		                     } else {
+		                    	 $(".tel_form").removeClass('active');
+		                        ch5 = true;
+		                     }
+		                  });
+
+
+				$("#sa_email").on(
+						"propertychange change keyup paste input",
+						function() {
+							var email = $("#sa_email").val();
+
+							if (email.length > 7
+									&& regEmail.test(email) == false) {
+								$(".email_form").addClass('active');
+								ch6 = false;
+							} else {
+								$(".email_form").removeClass('active');
+								ch6 = true;
+							}
+						});
+
+			});
+
+	
+	function finalCheck(){
+	if(1==1) {
+		try{
+			uploadImgbusinessreg();
+		}catch(error){
+			console.log(error);
+		}
+		try{
+			uploadImgbankcopy();
+		}catch(error){
+			console.log(error);
+		}
+		document.storeUpdateForm.submit();
+	}else{
+		Swal.fire({
+			icon:"error",
+			text:"어딘가 잘못 작성"
+		});
+	}
+}
+    
+    
   </script>
+  
 </body>
 
 </html>

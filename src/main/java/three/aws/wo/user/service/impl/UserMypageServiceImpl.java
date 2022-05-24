@@ -10,6 +10,7 @@ import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.user.dao.UserMypageDAO;
 import three.aws.wo.user.service.UserMypageService;
+import three.aws.wo.user.util.Criteria;
 import three.aws.wo.user.vo.ReviewVO;
 import three.aws.wo.user.vo.UserWishVO;
 @Service
@@ -58,6 +59,11 @@ public class UserMypageServiceImpl implements UserMypageService {
 	@Override
 	public List<CouponVO> usedCouponList(String u_id) {
 		return userMypageDAO.usedCouponList(u_id);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) {
+		return userMypageDAO.myWishListCount(cri);
 	}
 	
 }

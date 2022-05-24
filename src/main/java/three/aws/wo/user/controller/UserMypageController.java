@@ -1,5 +1,6 @@
 package three.aws.wo.user.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,15 +10,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
 import three.aws.wo.store.vo.MenuBasicOptionVO;
 import three.aws.wo.user.service.UserMypageService;
+import three.aws.wo.user.util.Criteria;
+import three.aws.wo.user.util.PageMaker;
 import three.aws.wo.user.vo.ReviewVO;
 import three.aws.wo.user.vo.UserVO;
 import three.aws.wo.user.vo.UserWishVO;
@@ -78,7 +83,7 @@ public class UserMypageController {
 	// 위시리스트 
 	@ResponseBody
 	@RequestMapping(value="/myWish.user", method=RequestMethod.POST)
-	public void myWish(@RequestBody HashMap<String, String> param, HttpSession session) {
+	public void myWish(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
 		
 		HashMap<String, String> wish = new HashMap<String, String>();
 		
@@ -94,6 +99,7 @@ public class UserMypageController {
 		
 		userMypageService.myWish(wish);
 
+		
 	}
 	
 //	@RequestMapping(value="/myWishList.user", method=RequestMethod.GET)
@@ -103,14 +109,22 @@ public class UserMypageController {
 //	}
 	
 	// 위시리스트 
-	@RequestMapping(value="/myWishList.user")
-	public String myWishList(HttpSession session, Model model) {
+	@RequestMapping(value="/myWishList.user", method = RequestMethod.GET)
+	public String myWishList(@ModelAttribute("cri") Criteria cri, HttpSession session, Model model) {
 		
 		UserVO userSession = (UserVO) session.getAttribute("userSession");
 		String u_id = userSession.getU_id();
+		
 		List<UserWishVO> wish = userMypageService.myWishList(u_id);
 		
+		System.out.println(wish.size());
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(userMypageService.listCountCriteria(cri));
+		
 		model.addAttribute("myWishList", wish);
+		model.addAttribute("pageMaker", pageMaker);  // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
 		
 		return "/mypage/mypage_myWishList";
 	}

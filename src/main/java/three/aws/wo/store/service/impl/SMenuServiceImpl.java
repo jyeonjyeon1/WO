@@ -155,4 +155,36 @@ public class SMenuServiceImpl implements SMenuService {
 	public void deleteMenu_MAO(HashMap<String, Object> map) {
 		sMenuDAO.deleteMenu_MAO(map);
 	}
+	
+	//option start
+	@Override
+	public String maxOgCode(String si_code) {
+		return sMenuDAO.maxOgCode(si_code);
+	}
+	
+	@Override
+	public String maxOpCode(HashMap<String , Object> map) {
+		return sMenuDAO.maxOpCode(map);
+	}
+	
+	@Override
+	public void addOg(HashMap<String, Object> map) {
+		sMenuDAO.addOg(map);
+	}
+	
+	@Override
+	public int currentOg_seq(HashMap<String, Object> map) {
+		return sMenuDAO.currentOg_seq(map);
+	}
+	
+	@Override
+	public void addOp1(HashMap<String, Object> map) {
+		sMenuDAO.addOp1(map);
+	}
+	
+	@Override
+	public void addOp2(HashMap<String, Object> map) {
+		sMenuDAO.addOp2(map);
+	}
+	
 }

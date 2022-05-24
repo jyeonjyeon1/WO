@@ -871,7 +871,7 @@ function addMgName(){
    			for(i=1;i<menulength-1;i++){
    				// : 기준 오른쪽(금액)만 컴마 처리 
    				menus[i] = menus[i].split(" : ")[0] + " : " + menus[i].split(" : ")[1].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-   				content_text += "<p style='font-size:14px'>"+menus[i]+" 원<p>";
+   				content_text += "<p style='font-size:14px'>"+menus[i]+" won<p>";
    			}
    			content_text = content_text.replace(/\\t/gi,"");
    			Swal.fire({
@@ -1509,7 +1509,7 @@ function addMgName(){
                		  //확인창에도 옵션 누적시켜줄거임
                    	$('#priceOne_${vs.index}').append('<h4 id="menutwo_${vs.index}'+indexstring+'" style="margin-left: 0px;">'
                    	+'<span id="menutwo_name${vs.index}'+indexstring+'">미입력</span> : '
-                   	+'<span id="menutwo_price${vs.index}'+indexstring+'">미입력</span> 원</h4>');
+                   	+'<span id="menutwo_price${vs.index}'+indexstring+'">미입력</span> won</h4>');
                     
                    	$(".NAMENAMENAME").on("propertychange change keyup paste input",
 							function() {
@@ -1551,7 +1551,8 @@ function addMgName(){
 				    		  title: "입력사항을 확인해주세요",
 				    		  showConfirmButton: false,
 	 			    		  timer : 1500,
-						})
+						});
+						
 					}
 					else{
 						//ajax
@@ -1783,7 +1784,7 @@ function addMgName(){
 
 																										<h4 style="font-weight: bolder; color: black;">가격</h4>
 																										<h4 id="priceOne_${vs.index}" style="margin-left: 10px;">
-																										<span id="newMenu_basic${vs.index}"></span> : <span id="newMenu_basic_price${vs.index}"></span> 원</h4>
+																										<span id="newMenu_basic${vs.index}"></span> : <span id="newMenu_basic_price${vs.index}"></span> won</h4>
 																									</div>
 
 
@@ -1897,9 +1898,6 @@ function addMgName(){
 																								<input class="form-control" id="og_name_input"
 																									style="width: relative; font-size: 15px;"
 																									type="text" placeholder="예)샷추가">
-																								<input type="hidden" class="form-control" id="og_seq_input"
-																									style="width: relative; font-size: 15px;"
-																									type="text">
 																							</div>
 																						</div>
 																					</li>
@@ -1911,23 +1909,16 @@ function addMgName(){
 																						<div class="groupAdd_OptionList" id="addOg_option">
 																							<div class="row" style="margin-left: 5px;">
 																								<div class="col-lg-5" style="padding: 5px;">
-																									<input class="form-control"
+																									<input class="form-control" id="addOpName_input"
 																										style="width: relative; font-size: 15px;"
 																										type="text" placeholder="예) 1샷 추가">
 																								</div>
 																								<div class="col-lg-5" style="padding: 5px;">
-																									<input class="form-control"
+																									<input class="form-control" id="addOpPrice_input"
 																										style="width: relative; font-size: 15px;"
 																										type="text" placeholder="500">
 																								</div>
-																								<div class="col-lg-2" style="padding: 5px;">
-																									<button type="button"
-																										onclick="javascript:deleteAlert();"
-																										class="btn btn-danger btn-xs"
-																										style="float: left; margin-top: 7px;">
-																										<i class="fa fa-trash-o "></i>
-																									</button>
-																								</div>
+																								
 																							</div>
 																						</div>
 																						
@@ -1947,15 +1938,15 @@ function addMgName(){
 																							필수여부</h5>
 																						<div class="row"
 																							style="line-height: 20px; margin-left: 10px;">
-																							<input type="radio" name="radio1" id="radio1"
-																								value="1" checked> <label for="radio1"
+																							<input type="radio" name="radio111" id="radio111"
+																								value="1" checked> <label for="radio111"
 																								style="font-size: 15px;"> [필수] 옵션을 반드시
 																								선택해야 주문이 가능해요</label>
 																						</div>
 																						<div class="row"
 																							style="line-height: 20px; margin-left: 10px;">
-																							<input type="radio" name="radio1" id="radio2"
-																								value="2"> <label for="radio2"
+																							<input type="radio" name="radio111" id="radio222"
+																								value="2"> <label for="radio222"
 																								style="font-size: 15px;"> [선택] 옵션을 선택하지
 																								않아도 주문이 가능해요</label>
 																						</div>
@@ -1963,7 +1954,7 @@ function addMgName(){
 																					<li>
 																						<div class="row">
 																							<div class="col-lg-12">
-																								<button type="button" class="save_Btn" onclick="addOgGroup()">추가하기</button>
+																								<button type="button" class="save_Btn" onclick="addOgGroup()">확인하기</button>
 																							</div>
 																						</div>
 																					</li>
@@ -1975,7 +1966,108 @@ function addMgName(){
 																</div>
 															</div>
 															<!--------옵션그룹 추가 modal end-------->
+															<!-- 옵션그룹추가 final check modal start -->
+															<div class="modal fade" id="hwakin_chang2" role="dialog" >
+																			<div class="modal-dialog">
+
+																				<!-- Modal content-->
+																				<div class="modal-content" style="width: auto;">
+																					<div class="modal-header">
+																						<!-- header -->
+																						<h4 class="modal-title">추가 옵션그룹 확인</h4>
+																						<button type="button" class="close"
+																							data-dismiss="modal"
+																							style="font-size: 20px; color: black;">취소</button>
+
+																					</div>
+																					<div class="modal-body"
+																						style="max-height: 600px; overflow-y: scroll;">
+
+																						<table class="modal_table">
+																							<ul>
+																								<li
+																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+
+																									<div class="option_2"
+																										style="background-color: #6161613d; border-radius: 7px; padding: 10px; height: auto;">
+																										<h3 style="font-weight: bolder; color: black;">옵션그룹 확인</h3>
+																										<h5 style="color: black;">입력한 옵션그룹 정보를 확인하신
+																											후, 적용하시려면 '옵션그룹 추가' 버튼을 클릭해 주세요</h5>
+
+																									</div>
+																								</li>
+
+																								<li
+																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																									<div class="row">
+
+																										<h4 style="font-weight: bolder; color: black;">옵션그룹명</h4>
+																										<h4 id="newOg_name" style="margin-left: 10px;"> </h4>
+																									</div>
+
+
+																								</li>
+
+																								<li
+																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																									<div class="row">
+																											<h4 style="font-weight: bolder; color: black;">가격</h4>
+																					<h4 id="addOg2_option" style="margin-left: 10px;">
+																					<span id="addOpNameee"></span> : <span id="addOpPriceee"></span> won</h4>
+																										</div>
+
+
+																								</li>
+																								<li
+																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																									<div class="row">
+																											<h4 style="font-weight: bolder; color: black;">필수여부</h4>
+																					<h4 id="addOg_ROSS" style="margin-left: 10px;"></h4>
+																										</div>
+																								</li>
+
+																								<li
+																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
+																									<div class="addMenu_info"
+																										style="padding: 25px; border: 1px solid rgba(0, 0, 0, 0.26);">
+																										<ul>
+																											<li
+																												style="list-style-type: disc; line-height: 20px;">
+																												사장님이 직접 수정하신 사항에 대한책임은 사장님 본인에게 있습니다.</li>
+																											<li
+																												style="list-style-type: disc; line-height: 20px;">
+																												잘못 추가한 메뉴로 인한 손해에 대해서 워킹오더는 어떠한 책임도 부담하지
+																												않습니다.</li>
+																											<li
+																												style="list-style-type: disc; line-height: 20px;">
+																												추가한 메뉴의 원산지 정보는 "메뉴관리-주문안내/원산지"에서 반드시 업데이트
+																												해주세요.</li>
+																											<li
+																												style="list-style-type: disc; line-height: 20px;">
+																												등록한 메뉴 및 그 정보 등이 허위/불법정보에 해당하거나, 상표권을 침해할 경우
+																												워킹오더는 그에 따른 조치를 이행할 수 있습니다.</li>
+																										</ul>
+																									</div>
+																								</li>
+																								
+																								<li>
+																								<div class="col-lg-12">
+																										<button type="button" class="save_Btn" onclick="addOgReal()">옵션그룹 
+																											추가하기</button>
+																									</div>
+																								</li>
+																							</ul>
+
+																						</table>
+																						
+																						
+																					</div>
+
+																				</div>
+																			</div>
+																		</div>
 															
+															<!-- 옵션그룹추가 final check modal end -->
 															<script>
 																					let indexN = 1;
 																					let indexS = "";
@@ -1985,40 +2077,163 @@ function addMgName(){
 																						indexS = indexN.toString(); 
 																						indexF = indexS;
 																						$('#addOg_option').append("	<div id='addOg_option"+indexS+"' class='row' style='margin-left: 5px;'>	<div class='col-lg-5' style='padding: 5px;'>"
-																	                        + "<input class='form-control' forCh1='"+indexF+"' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가' id='addOpName_input'"+indexS+">"
-																													+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control' forCh1='"+indexF+"'"
+																	                        + "<input class='form-control opNameopName' forCh1='"+indexF+"' style='width: relative; font-size: 15px;' type='text' placeholder='예) 1샷 추가' id='addOpName_input'"+indexS+">"
+																													+"</div> <div class='col-lg-5' style='padding: 5px;'>	<input class='form-control opPriceopPrice' forCh1='"+indexF+"'"
 																													+"style='width: relative; font-size: 15px;'	type='number' placeholder='500' id='addOpPrice_input'"+indexS+"></div>"
 																													+"<div class='col-lg-2' style='padding: 5px;'> <button type='button'"
 																													+" forDel1='addOg_option"+indexS+"' "
+																													+" forDel2='addOg2_option"+indexS+"' "
 																													+"class='btn btn-danger btn-xs deleteBtbt' style='float: left; margin-top: 7px;'><i class='fa fa-trash-o '></i>"
 																													+"</button>	</div></div>");  
 																					
 																													indexN++;
+																													
+																													
 																						//메뉴 삭제
 																				 		$(".deleteBtbt").click(function() {
 																				 			console.log("fff");
 																				 			var forDel1 = $(this).attr("forDel1");
 																				 			$("#"+forDel1).remove();
-																				 			console.log("#"+forDel1);
+																				 			
+																				 			var forDel2 =  $(this).attr("forDel2");
+																				 			$("#"+forDel2).remove();
+																				 			
 																				 		});
-																					
+																						
+																				 		  //확인창에도 옵션 누적
+																		                   	$('#addOg2_option').append('<h4 id="addOg2_option'+indexS+'" style="margin-left: 0px;">'
+																		                   	+'<span id="addOp2Name_input'+indexS+'">미입력</span> : '
+																		                   	+'<span id="addOp2Price_input'+indexS+'">미입력</span> won</h4>');
+																		                    
+																		                   	$(".opNameopName").on("propertychange change keyup paste input",
+																									function() {
+																		                   		var indexFF = $(this).attr("forCh1");
+																		                   		console.log(indexFF);
+																							  var newOpName_input = $(this).val();
+																							  //추가옵션그룹 확인 MODAL에 전달
+																							  var newOpName = document.getElementById("addOp2Name_input"+indexFF);
+																							  newOpName.innerText = newOpName_input;
+																						  });
+																		                   	
+																		                   	$(".opPriceopPrice").on("propertychange change keyup paste input",
+																									function() {
+																		                   		var indexFF = $(this).attr("forCh1");
+																		                   		console.log(indexFF);
+																							  var newOpPrice_input = $(this).val();
+																							//추가옵션그룹 확인 MODAL에 전달
+																							  var newOpPrice = document.getElementById("addOp2Price_input"+indexFF);
+																							  newOpPrice.innerText = newOpPrice_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+																						  });
 																					}
 																					
 																					
 																						
-																						//옵션편집-옵션그룹추가-추가하기버튼 클릭시
+																						//옵션편집-옵션그룹추가-확인하기버튼 클릭시
 																						 function addOgGroup(){
-																							 var Og_name_input = $("#og_name_input").val();
-																							console.log(Og_name_input);
-																						 	 
-																						 	/*    var param ={"mg_name" : mg_name,
-																						 			  	"totalCount" : totalCount
-																						 			  	};  */
+																							//첫번째 줄
+																							var Og_name_input =$("#og_name_input").val();
+																							var opName_input = $("#addOpName_input").val();
+																							var opPrice_input = $("#addOpPrice_input").val();
+																								
+																							//두번째 줄~
+																							var addOpttt = document.getElementById("addOg2_option").innerText;
+																							
+																							//세번째 줄
+																							var addOp_ROS = "[필수]";
+																							if($(":input:radio[name=radio111]:checked").val()==1) {
+																								addOp_ROS ="[필수]";
+																							}else {
+																								addOp_ROS="[선택]";
+																							}
+																							
+																							//필수여부 MODAL에 전달
+																						  var addOg_ROSS = document.getElementById("addOg_ROSS");
+																						  addOg_ROSS.innerText = addOp_ROS;
+																					  
+																							//빈칸있으면 뭐라하기
+																							if(Og_name_input==""||opName_input==""||opPrice_input==""||addOpttt.indexOf("미입력")!=-1){
+																								Swal.fire({
+																						    		  icon: "error",
+																						    		  title: "입력사항을 확인해주세요",
+																						    		  showConfirmButton: false,
+																			 			    		  timer : 1500,
+																								});
+																								}else {
+																									$("#hwakin_chang2").modal();
+																								}
+																							
+																							
+																						   	}
+																								
+																							function addOgReal() {
+																								
+																								var addOgN = document.getElementById("newOg_name").innerText;
+																								var addOpt = document.getElementById("addOg2_option").innerText;
+																								var og_ROS = document.getElementById("addOg_ROSS").innerText;
+																								console.log(addOgN + "/" + addOpt + "/"+og_ROS);
+																								 
+																								
+																									//ajax
+																									var parammm = {
+																											"og_name" : addOgN,
+																											"ogop_total" : addOpt,
+																											"og_ros" : og_ROS
+																									};
+																									
+																									$.ajax({
+																					  		    	    type: "POST",
+																					  		    	    url: "/insertOg.store",
+																					  		    	    data: JSON.stringify(parammm), 
+																					  		    	    dataType: "json",
+																					  		    	    contentType: "application/json",
+																					  		    	    success: function (data) {
+																					  		    	        if (data == 1) {
+																						  		    	        Swal.fire({
+																						  		    	            icon: "success",
+																						  		    	            title: "메뉴 추가 완료",
+																						  		    	            showConfirmButton: false,
+																						  		    	            timer: 1500
+																						  		    	        });
+																						  		    	        location.href = location.href;
+																					  		    	        }else{alert("통신은됨");}
+																					  		    	    },
+																					  		    	    error: function (data) {
+																					  		    	        console.log("메뉴추가 통신에러");
+																					  		    	    }
+																					  		    	});//ajax end 
+																								
+																								
+																							}
+																							
+																						   	$(document).ready(function(){
+																								  var newOg_name_input1 = "";
+																								  $("#og_name_input").on("propertychange change keyup paste input",
+																											function() {
+																									  newOg_name_input1 = $("#og_name_input").val();
+																									  //옵션그룹추가 그룹명명 입력시 확인하기 모달로 전달
+																									  var newOg_name = document.getElementById("newOg_name");
+																									  newOg_name.innerText = newOg_name_input1;
+																								  });
+																								  
+																								  $("#addOpName_input").on("propertychange change keyup paste input",
+																											function() {
+																									  var addOpName_input1 = $("#addOpName_input").val();
+																									  //옵션그룹추가 옵션명 입력시 확인하기 모달로 전달
+																									  var addOpNameee = document.getElementById("addOpNameee");
+																									  addOpNameee.innerText = addOpName_input1;
+																								  });
+																								  
+																								  $("#addOpPrice_input").on("propertychange change keyup paste input",
+																											function() {
+																									  var addOpPrice_input1 = $("#addOpPrice_input").val();
+																									  //옵션그룹추가 옵션가격 입력시 확인하기 모달로 전달
+																									  var addOpPriceee = document.getElementById("addOpPriceee");
+																									  addOpPriceee.innerText = addOpPrice_input1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+																								  });
+																								  
+																								})//doc ready 끝
 																						 	   
-																						 		 	  } 
-																						 		
-																					
-																					
+																						 		 	  
 																					
 																					</script>
 
@@ -2328,8 +2543,7 @@ function addMgName(){
 																									</div>
 																								</div>
 																								<div class="row" style="margin-left: 5px;">
-																									<button type="button" class="groupAdd_Option">+ 가격옵션
-																										추가하기</button>
+																									<button type="button" class="groupAdd_Option">+ 가격옵션 추가하기</button>
 																								</div>
 																							</li>
 																							<li>

@@ -39,4 +39,11 @@ public interface SMenuService {
 	void deleteOptionBasics(HashMap<String, Object> map);
 	void deleteMenu(HashMap<String, Object> map);
 	void deleteMenu_MAO(HashMap<String, Object> map);
+	//option start
+	String maxOgCode(String si_code);
+	String maxOpCode(HashMap<String, Object> map);
+	void addOg(HashMap<String, Object> map);
+	int currentOg_seq(HashMap<String, Object> map);
+	void addOp1(HashMap<String, Object> map);
+	void addOp2(HashMap<String, Object> map);
 }

@@ -129,4 +129,28 @@ public class SMenuDAO {
 	public void deleteMenu_MAO(HashMap<String, Object> map) {
 		sqlSession.delete("SMenuDAO.deleteMenu_MAO",map);
 	}
+	
+	//option start
+	public String maxOgCode(String si_code) {
+		return sqlSession.selectOne("SMenuDAO.maxOgCode",si_code);
+	}
+	
+	public String maxOpCode(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.maxOpCode",map);
+	}
+	
+	public void addOg(HashMap<String, Object> map) {
+		sqlSession.insert("SMenuDAO.addOg",map);
+	}
+	public int currentOg_seq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.currentOg_seq",map);
+	}
+	
+	public void addOp1(HashMap<String, Object> map) {
+		sqlSession.insert("SMenuDAO.addOp1",map);
+	}
+	
+	public void addOp2(HashMap<String, Object> map) {
+		sqlSession.insert("SMenuDAO.addOp2",map);
+	}
 }

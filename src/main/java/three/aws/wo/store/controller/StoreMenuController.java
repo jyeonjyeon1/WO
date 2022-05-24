@@ -204,7 +204,7 @@ public class StoreMenuController {
 					String code = ogb_code + "00" + String.valueOf(i);
 					String[] split = basic_menu_split[i].split(" : ");
 					String name = split[0];
-					int price = Integer.parseInt(split[1].replace(" ��", "").replaceAll(",", ""));
+					int price = Integer.parseInt(split[1].replace(" won", "").replaceAll(",", ""));
 					HashMap<String, Object> mapp = new HashMap<String, Object>();
 					mapp.put("si_code", si_code);
 					mapp.put("ogb_seq", ogb_seq);
@@ -318,30 +318,73 @@ public class StoreMenuController {
 	
 //======================crud related to option==================================
 	@ResponseBody
-	@RequestMapping("/addOgName.store")
-	public String addOgName(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
+	@RequestMapping("/insertOg.store")
+	public int insertOg(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
 		String si_code = "7845124578";
-		String mg_name = param.get("mg_name");
-//		String totalCount = String.valueOf(param.get("totalCount"));
-		System.out.println("adding menugroup");
-		// using totalCount inappropriate (deleting mg in the middle makes munjae)
-
-		// getting mg_code of max mg_seq from menu_group
-		String current_max_code = sMenuService.maxMgSeq(si_code);
-		String mg_code = "";
-		if (current_max_code == null) {
-			mg_code = "11";
-		} else {
-			mg_code = String.valueOf(Integer.parseInt(current_max_code) + 1);
+		
+		String og_name = param.get("og_name");
+		String ogop_total = param.get("ogop_total");
+		String og_ros_String = param.get("og_ros");
+		String og_code=null;
+		Boolean og_ros = false;
+		
+		String[] ogop_split = ogop_total.replaceAll("\\n","").replaceAll("\\t","").split(" won");
+		
+		//og_ros
+		if(og_ros_String.equals("[필수]")) {
+			og_ros = true;
+		}else if(og_ros_String.equals("[선택]")) og_ros=false;
+		
+		//getting max_og_code
+		String current_max_Ogcode = sMenuService.maxOgCode(si_code);
+		if(current_max_Ogcode==null) {
+			og_code="11";
+		}else {
+			og_code= String.valueOf(Integer.parseInt(current_max_Ogcode)+1);
 		}
+		
+		//insert option_group
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("si_code", si_code);
+			map.put("og_code", og_code);
+			map.put("og_name", og_name);
+			map.put("og_ros", og_ros);
+			sMenuService.addOg(map);
+			
+		//getting og_seq
+		int og_seq = sMenuService.currentOg_seq(map);
+				
+		//insert options
+		String op_name = ogop_split[0].split(":")[0];
+		int op_price = Integer.parseInt(ogop_split[0].split(":")[1]);
+		String op_code = og_code + "001" ; 
+			HashMap<String, Object> mapp = new HashMap<String, Object>();
+			mapp.put("op_code", op_code);
+			mapp.put("og_seq", og_seq);
+			mapp.put("si_code", si_code);
+			mapp.put("op_name", op_name);
+			mapp.put("op_price", op_price);
+			sMenuService.addOp1(mapp);
+		
+		
+		if(ogop_split.length>=2) {
+			for(int i=1; i<ogop_split.length;i++) {
+				String op_name2 = ogop_split[i].split(":")[0];
+				int op_price2 = Integer.parseInt(ogop_split[i].split(":")[1]);
+				String op_code2 =  String.valueOf(Integer.parseInt(op_code)+i) ; 
+				HashMap<String, Object> mappp = new HashMap<String, Object>();
+				mappp.put("op_code", op_code2);
+				mappp.put("og_seq", og_seq);
+				mappp.put("si_code", si_code);
+				mappp.put("op_name", op_name2);
+				mappp.put("op_price", op_price2);
+				sMenuService.addOp2(mappp);
+		}	
+			
+			
+				}
 
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("si_code", si_code);
-		map.put("mg_code", mg_code);
-		map.put("mg_name", mg_name);
 
-		sMenuService.insertMgName(map);
-
-		return "ok";
+		return 1;
 	}
 }

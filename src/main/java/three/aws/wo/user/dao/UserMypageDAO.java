@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
-import three.aws.wo.user.util.Criteria;
 import three.aws.wo.user.vo.ReviewVO;
 import three.aws.wo.user.vo.UserWishVO;
 
@@ -49,9 +48,4 @@ public class UserMypageDAO {
 	public List<CouponVO> usedCouponList(String u_id) {
 		return sqlSession.selectList("UserMypageDAO.usedCouponList", u_id);
 	}
-
-	public int myWishListCount(Criteria cri) {
-		return sqlSession.selectOne("UserMypageDAO.myWishListCount", cri);
-	}
-
 }

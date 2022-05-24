@@ -75,22 +75,10 @@
 	</insert>
 	
 	<select id="myWishList" resultType="UserWishVO" parameterType="UserWishVO">
-		<!-- <![CDATA[ -->
 		SELECT * FROM LIKE_STORE store
 		INNER JOIN 
 		STORE_INFO info
 		ON (store.SI_CODE = info.SI_CODE )
-		WHERE store.U_ID = 'user02'
-		order by si_reg_date desc
-		OFFSET 3 limit 0 
-		<!-- ]]> -->
-	</select>
-	
-	<select id="myWishListCount" resultType="UserWishVO" parameterType="UserWishVO">
-		SELECT COUNT(*) FROM LIKE_STORE store
-		INNER JOIN 
-		STORE_INFO info
-		ON (info.SI_CODE = store.SI_CODE )
 		WHERE store.U_ID = #{u_id}
 	</select>
 	
@@ -110,3 +98,4 @@
 	
 	
 </mapper>
+ 

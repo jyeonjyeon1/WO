@@ -5,7 +5,6 @@ import java.util.List;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
-import three.aws.wo.user.util.Criteria;
 import three.aws.wo.user.vo.ReviewVO;
 import three.aws.wo.user.vo.UserWishVO;
 
@@ -18,5 +17,4 @@ public interface UserMypageService {
 	List<CouponVO> usableCouponList(String u_id);
 	List<CouponVO> usedCouponList(String u_id);
 	List<UserWishVO> myWishList(String storeName);
-	int listCountCriteria(Criteria cri);
 }

@@ -348,20 +348,36 @@ function toggle_facility() {
 }
 	function update_tel(){
 		var param = {"si_tel" : $("#si_tel").val()};
-		
-		$.ajax({
+		console.log(param);
+		 $.ajax({
 			type:"POST",
 			url: "/updateTel.store",
 	        data: JSON.stringify(param),
 	        dataType: "json",
 	        contentType: "application/json",
 	        success:function(data){
-	        	alert("가게 전화번호 변경완료.. swal 왜 안되냐?..");
+	        	Swal.fire({
+		    	            icon: "success",
+		    	            title: "전화번호 수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	        	
+		    	     location.href = location.href;
 	        },error: function(data) {
 	        	console.log("추가오류");
 	        }
-		});
+		}); 
 		
+	}
+	
+	//가게편의정보변경 modal
+	function update_comf() {
+		
+			console.log("체크");
+		
+		
+	
 	}
 
 
@@ -579,7 +595,7 @@ function toggle_facility() {
                       <span id="park_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
                       <label  class="switch-button">  
                        
-                        <input type="checkbox" id="btn_toggle" onclick="toggle_park()"  /> 
+                        <input type="checkbox" id="park_toggle" name="park_toggle" onclick="toggle_park()"/> 
                         <span class="onoff-switch"></span> 
                       </label>
                     </div>
@@ -653,10 +669,10 @@ function toggle_facility() {
                        <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-6"></div>
                          <div class="col-lg-3" style="text-align: right;">
-                          <button class="UpdateBtn" onclick="" >수정</button>
+                          <button type="button" class="UpdateBtn" onclick="update_comf()" >수정</button>
                          </div>
                         <div class="col-lg-3" style="text-align: left;">
-                          <button class="closeBtn" onclick="close_modalC()" >닫기</button>
+                          <button type="button" class="closeBtn" onclick="close_modalC()" >닫기</button>
                         </div>
                        </div> 
                       

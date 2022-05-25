@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
- 
 
 <head>
     <meta charset="UTF-8" />
@@ -17,7 +16,7 @@
     <!-- Css Styles 추가 -->
 
     <!--Css icon from mings-->
-    
+
 
 
      <!-- ========================= JS here ========================= -->
@@ -25,8 +24,8 @@
      <script src="resources/assets/js/main.js"></script>
      <script type="text/javascript">
           jQuery(document).ready(function () {
-             $('#headers').load("header.html");
-             $('#footers').load("footer.html");  
+             $('#headers').load("header.user");
+             $('#footers').load("footer.user");  
          });
          //========= Hero Slider 
      </script>
@@ -48,20 +47,20 @@
                         <h4>My Page</h4>
                         <ul>
                             
-                            <li><a class="mypage_side_hover" href="mypage_mycoupon.html"><i class="lni lni-ticket"> My쿠폰</i></a></li>
-                            <li><a class="mypage_side_hover" href="mypage_mypoint.html"><i class="lni lni-database"> My포인트</i></a></li>
-                            <li><a class="mypage_side_hover" href="mypage_myreview.html"><i class="lni lni-pencil-alt"> My리뷰</i></a></li>
+                            <li><a class="mypage_side_hover" href="myCoupon.user"><i class="lni lni-ticket"> My쿠폰</i></a></li>
+                            <li><a class="mypage_side_hover" href="myPoint.user"><i class="lni lni-database"> My포인트</i></a></li>
+                            <li><a class="mypage_side_hover" href="myReviewList.user"><i class="lni lni-pencil-alt"> My리뷰</i></a></li>
                             <div class="sidebar_line">
-                            <li><a class="mypage_side_hover" href="mypage_orderlist.html"><i class="lni lni-radio-button"> 주문내역</i></a></li>
+                            <li><a class="mypage_side_hover" href="myOrderList.user"><i class="lni lni-radio-button"> 주문내역</i></a></li>
                             </div>
-                            <li><a class="mypage_side_hover" href="mypage_myWishList.html"><i class="lni lni-heart"> 위시리스트</i></a></li>
-                            <li><a class="mypage_side_hover" href="mypage_myBasket.html"><i class="lni lni-cart"> 장바구니</i></a></li>
+                            <li><a class="mypage_side_hover" href="myWishList.user"><i class="lni lni-heart"> 위시리스트</i></a></li>
+                            <li><a class="mypage_side_hover" href="cart.user"><i class="lni lni-cart"> 장바구니</i></a></li>
                             
                             <div class="sidebar_line">
                             <li><a class="mypage_side_hover" href="#"><i class="lni lni-user"> 회원정보변경/탈퇴</i></a></li>
                             </div>
-                            <li><a class="mypage_side_hover" href="#"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
-                            <li class="active"><a class="mypage_side_hover" href="mypage_currentOrder.html"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
+                            <li><a class="mypage_side_hover" href="faq.user"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
+                            <li class="active"><a class="mypage_side_hover" href="currentOrder.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
                             
                         </ul>
                     </div>
@@ -78,7 +77,7 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-12 col-sm-12">
                                     <h4><a href="#">메가커피 종로3가점 > </a></h4>
-                                    <h5><a>신한카드결제</a> | 4월4일 10:02</h5>                                        
+                                    <h5><a>신한카드결제</a> | 4월4일 10:02</h5>                        
                                     
                                     <p>가져갈게요</p>
                                     </div>
@@ -118,7 +117,7 @@
                                     <a href="#" class="menubar_btn">재주문할게요! <span class="arrow_right"></span></a>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="mypage_writingReview.html" class="menubar_btn">리뷰작성 <span class="arrow_right"></span></a>
+                                    <a href="myReview.user" class="menubar_btn">리뷰작성 <span class="arrow_right"></span></a>
                                 </div>
                                 </div>
                                 </div>

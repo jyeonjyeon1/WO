@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminDAO">
+	
+	<select id="adminLogin" resultType="int">
+		SELECT COUNT(*) FROM ADMINS 
+		WHERE A_ID = #{a_id} 
+		AND
+		A_PASSWORD = #{a_password}
+	</select>
+	<select id="getAdminName" resultType="String">
+		SELECT A_NAME FROM ADMINS 
+		WHERE A_ID = #{a_id} 
+	</select>
+	
+	<select id="getNextNoticeSeq" resultType="int">
+		select (max(n_seq)+1) from notice_board
+	</select>
+	
+	<insert id="insertNotice" parameterType="NoticeVO">
+		INSERT INTO NOTICE_BOARD(N_SEQ,N_TITLE,N_CONTENT, N_FIX, N_TYPE, N_STATUS)
+		VALUES(#{n_seq},#{n_title},#{n_content},#{n_fix},#{n_type},#{n_status} )
+	</insert>
+	
+	<select id="noticeList" resultType="NoticeVO">
+		SELECT * FROM NOTICE_BOARD ORDER BY N_SEQ DESC
+	</select>
+	
+	<select id="oneNotice" resultType="NoticeVO">
+		SELECT * FROM NOTICE_BOARD
+		WHERE
+		N_SEQ = #{n_seq}
+	</select>
+	
+
+	
+</mapper>

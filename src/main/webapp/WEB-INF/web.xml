@@ -35,7 +35,9 @@
 		</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/servlet/user-servlet.xml
+			<param-value>
+				/WEB-INF/servlet/user-servlet.xml
+<!-- 				/WEB-INF/spring/spring-security.xml -->
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -43,7 +45,7 @@
 
 	<servlet-mapping>
 		<servlet-name>user</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.user</url-pattern>
 	</servlet-mapping>
 	
 	<!-- USER 접근 -->
@@ -71,7 +73,8 @@
 		</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/servlet/store-servlet.xml
+			<param-value>
+				/WEB-INF/servlet/store-servlet.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>3</load-on-startup>

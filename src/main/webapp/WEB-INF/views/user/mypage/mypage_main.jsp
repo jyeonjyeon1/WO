@@ -42,20 +42,20 @@
                     <div class="mypage_sidebar">
                         <h4>My Page</h4>
                         <ul>
-                            <li><a class="mypage_side_hover" href="mypage_mycoupon.html"><i class="lni lni-ticket"> My쿠폰</i></a></li>
-                            <li><a class="mypage_side_hover" href="mypage_mypoint.html"><i class="lni lni-database"> My포인트</i></a></li>
-                            <li><a class="mypage_side_hover" href="mypage_myreview.html"><i class="lni lni-pencil-alt"> My리뷰</i></a></li>
+                            <li><a class="mypage_side_hover" href="myCoupon.user"><i class="lni lni-ticket"> My쿠폰</i></a></li>
+                            <li><a class="mypage_side_hover" href="myPoint.user"><i class="lni lni-database"> My포인트</i></a></li>
+                            <li><a class="mypage_side_hover" href="myReviewList.user"><i class="lni lni-pencil-alt"> My리뷰</i></a></li>
                             <div class="sidebar_line">
-                            <li><a class="mypage_side_hover" href="mypage_orderlist.html"><i class="lni lni-radio-button"> 주문내역</i></a></li>
+                            <li><a class="mypage_side_hover" href="myOrderList.user"><i class="lni lni-radio-button"> 주문내역</i></a></li>
                             </div>
-                            <li><a class="mypage_side_hover" href="mypage_myWishList.html"><i class="lni lni-heart"> 위시리스트</i></a></li>
-                            <li><a class="mypage_side_hover" href="mypage_myBasket.html"><i class="lni lni-cart"> 장바구니</i></a></li>
+                            <li><a class="mypage_side_hover" href="myWishList.user"><i class="lni lni-heart"> 위시리스트</i></a></li>
+                            <li><a class="mypage_side_hover" href="cart.user"><i class="lni lni-cart"> 장바구니</i></a></li>
                             <div class="sidebar_line">
-                            <li><a class="mypage_side_hover" href="#"><i class="lni lni-user"> 회원정보변경/탈퇴</i></a></li>
+                            <li><a class="mypage_side_hover" href="myChoice.user"><i class="lni lni-user"> 회원탈퇴/수정</i></a></li>
                             </div>
-                            <li><a class="mypage_side_hover" href="#"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
+                            <li><a class="mypage_side_hover" href="faq.user"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
                             <li><a class="mypage_side_hover" href="#"><i class="lni lni-baloon"></i>이벤트 모아보기</i></a></li>
-                            <li><a class="mypage_side_hover" href="mypage_currentOrder.html"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
+                            <li><a class="mypage_side_hover" href="currentOrder.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
                             
                         </ul>
                     </div>
@@ -65,26 +65,26 @@
                 <div class="row">
                    
                     <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;">
-                    <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_currentOrder.html'" style="width: 100%;">
+                    <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage.user'" style="width: 100%;">
                         <div class="mypage_menubar_text" >
-                            <h5><a href="#">현재 주문 확인하기</a></h5>
+                            <h5><a href="currentOrder.user">현재 주문 확인하기</a></h5>
                             <p>7분후 조리완료</p>
                         </div>
                     </button>
                     </div>
                
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: right;">
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_mycoupon.html'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myCoupon.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
-                                <h5><a href="#">My쿠폰</a></h5>
+                                <h5><a href="myCoupon.user">My쿠폰</a></h5>
                                 <p>3장</p>
                             </div>
                         </button>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: center;">
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_mypoint.html'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myPoint.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
-                                <h5><a href="#">My포인트</a></h5>
+                                <h5><a href="myPoint.user">My포인트</a></h5>
                                 <p>100point</p>
                             </div>
                         </button>
@@ -92,18 +92,18 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: left;">
 
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_myreview.html'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myReview.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
-                                <h5><a href="#">My리뷰</a></h5>
+                                <h5><a href="myReview.user">My리뷰</a></h5>
                                 <p>11개</p>
                             </div>
                         </button>
 
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: right;">
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_orderlist.html'"  style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='OrderList.user'"  style="width: 100%;">
                             <div class="mypage_menubar_text" >
-                                <h5><a href="#">주문내역</a></h5>
+                                <h5><a href="myOrderList.user">주문내역</a></h5>
                                 <p>31개</p>
                             </div>
                         </button>
@@ -111,18 +111,18 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: center;">
 
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_myWishList.html'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myWishList.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
-                                <h5><a href="#">위시리스트</a></h5>
+                                <h5><a href="myWishList.user">위시리스트</a></h5>
                                 <p>1개</p>
                             </div>
                         </button>
 
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: left;">
-                    <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='mypage_myBasket'" style="width: 100%;">
+                    <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='cart.user'" style="width: 100%;">
                         <div class="mypage_menubar_text" >
-                            <h5><a href="#">장바구니</a></h5>
+                            <h5><a href="cart.user">장바구니</a></h5>
                             <p>2개</p>
                         </div>
                     </button>

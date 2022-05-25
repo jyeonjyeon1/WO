@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserBoardDAO">
+
+	<!-- 자주 묻는 질문 -->
+	<resultMap type="FAQVO" id="faqVO">
+		<id column="FAC_CODE" property="fac_code" jdbcType="VARCHAR"/>
+		<result column="FAC_SEQ" property="fac_seq" jdbcType="INTEGER" />
+		<result column="FAC_TYPE" property="fac_type" jdbcType="VARCHAR" />
+		<result column="FAC_TITLE" property="fac_title" jdbcType="VARCHAR" />
+		<result column="FAC_CONTENT" property="fac_content" jdbcType="VARCHAR"/>
+		<result column="FAC_VISITS" property="fac_visits" jdbcType="INTEGER" />
+		
+    </resultMap>
+    
+    
+    
+    <select id="toptenList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ ORDER BY FAC_VISITS DESC LIMIT 10;
+	</select>
+	
+	<select id="orderfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'order' or FAC_TYPE = 'payment' ORDER BY FAC_CODE DESC
+	</select>
+	
+	<select id="cancelfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'cancel' or FAC_TYPE = 'refund' ORDER BY FAC_CODE DESC
+	</select>
+	
+	<select id="userfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'user' ORDER BY FAC_CODE DESC
+	</select>
+	
+	<select id="pointfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'point' or FAC_TYPE = 'coupon' ORDER BY FAC_CODE DESC
+	</select>
+	
+	<select id="etcfaqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ WHERE FAC_TYPE = 'etc' ORDER BY FAC_CODE DESC
+	</select>
+	
+	<update id="updateVisits">
+		UPDATE FAQ SET FAC_VISITS = #{fac_visits} WHERE FAC_SEQ = #{fac_seq};
+	</update>
+
+	<!-- 워킹오더 소식 -->
+	<resultMap type="NoticeVO" id="noticeVO">
+		<id column="N_seq" property="n_seq" jdbcType="INTEGER"/>
+		<result column="N_code" property="n_code" jdbcType="VARCHAR" />
+		<result column="N_title" property="n_title" jdbcType="VARCHAR" />
+		<result column="N_content" property="n_content" jdbcType="VARCHAR"/>
+		<result column="N_regdate" property="n_regdate" jdbcType="DATE"/>
+		<result column="N_fix" property="n_fix" jdbcType="BOOLEAN" />
+		<result column="N_status" property="n_status" jdbcType="BOOLEAN" />
+		<result column="N_type" property="n_type" jdbcType="VARCHAR" />
+		<result column="N_pic_url" property="n_pic_url" jdbcType="VARCHAR" />
+		<result column="N_file_url" property="n_file_url" jdbcType="VARCHAR" />
+		<result column="N_enddate" property="n_enddate" jdbcType="DATE" />
+
+<!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
+	
+	
+	</resultMap>
+	
+	<select id="newsList" resultType="NoticeVO" resultMap="noticeVO">
+		SELECT * FROM NOTICE_BOARD WHERE n_status = 'TRUE' ORDER BY n_seq DESC
+	</select>
+	
+	<select id="noticeList" resultType="NoticeVO" resultMap="noticeVO">
+		SELECT * FROM NOTICE_BOARD WHERE n_type = 'notice' AND n_status = 'TRUE' ORDER BY n_seq DESC
+	</select>
+	
+	<select id="eventList" resultType="NoticeVO" resultMap="noticeVO">
+		SELECT * FROM NOTICE_BOARD WHERE n_type = 'event' AND n_status = 'TRUE' ORDER BY n_seq DESC
+	</select> 
+	
+	<resultMap type="QnAVO" id="qnaVO">
+		<id column="QA_SEQ" property="qa_seq" jdbcType="INTEGER"/>
+		<result column="U_ID" property="u_id" jdbcType="VARCHAR" />
+		<result column="U_NAME" property="u_name" jdbcType="VARCHAR" />
+		<result column="U_TEL" property="u_tel" jdbcType="VARCHAR" />
+		<result column="SI_CODE" property="si_code" jdbcType="VARCHAR" />
+		<result column="QA_TYPE" property="qa_type" jdbcType="VARCHAR" />
+		<result column="QA_TITLE" property="qa_title" jdbcType="VARCHAR" />
+		<result column="QA_TYPE_ANS" property="qa_type_ans" jdbcType="BOOLEAN" />
+		<result column="QA_CONTENT_Q" property="qa_content_q" jdbcType="VARCHAR" />
+		<result column="QA_CONTENT_A" property="qa_content_a" jdbcType="VARCHAR" />
+		<result column="QA_DATE_Q" property="qa_date_q" jdbcType="TIMESTAMP" />
+		<result column="QA_DATE_A" property="qa_date_a" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	
+	<select id="myqnaList" resultType="QnAVO" resultMap="qnaVO">
+		SELECT *
+			FROM QNA 
+			WHERE U_ID = #{u_id } ORDER BY QA_SEQ DESC
+	</select>
+
+	
+	<insert id="addqna" parameterType="QnAVO">
+		INSERT INTO QNA
+			(U_ID, QA_TYPE, QA_TITLE, QA_TYPE_ANS, QA_CONTENT_Q, QA_DATE_Q, QA_DATE_A)
+			VALUES(#{u_id }, #{qa_type }, #{qa_title }, FALSE, #{qa_content_q }, DEFAULT, NULL);
+	</insert>
+    
+    <select id="adminqnaList" resultType="QnAVO">
+		SELECT Q.*, U.U_NAME, U.U_TEL
+			FROM QNA Q JOIN USERS U ON Q.U_ID = U.U_ID
+	</select>
+	
+	 <select id="adminanswerList" resultType="QnAVO">
+		SELECT Q.*, U.U_NAME, U.U_TEL
+			FROM QNA Q JOIN USERS U ON Q.U_ID = U.U_ID
+			AND QA_SEQ = #{qa_seq }
+	</select>
+	
+	<update id="addanswer" parameterType="QnAVO">
+		UPDATE QNA
+			SET QA_TYPE_ANS=TRUE, QA_CONTENT_A=#{qa_content_a }, QA_DATE_A=CURRENT_TIMESTAMP
+			WHERE QA_SEQ = #{qa_seq };
+	</update>
+</mapper>
+ 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AOrderDAO">
+	<resultMap type="PointVO" id="pointVO">
+		<result column="PT_SEQ" property="pt_seq" jdbcType="INTEGER"/>
+		<result column="U_ID" property="u_id" jdbcType="VARCHAR" />
+		<result column="U_NAME" property="u_name" jdbcType="VARCHAR" />
+		<result column="PT_REGDATE" property="pt_regdate" jdbcType="TIMESTAMP" />
+		<result column="PT_TYPE" property="pt_type" jdbcType="VARCHAR"/>
+		<result column="PT_DESCRIPTION" property="pt_description" jdbcType="VARCHAR"/>
+		<result column="PT_HANDLER" property="pt_handler" jdbcType="VARCHAR" />
+		<result column="PT_AMOUNT" property="pt_amount" jdbcType="INTEGER" />
+		<result column="U_POINT" property="u_point" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="pointList" resultType="PointVO" resultMap="pointVO">
+<!-- 		SELECT * FROM POINT ORDER BY PT_SEQ DESC -->
+		SELECT * FROM 
+		POINT a 
+		INNER JOIN 
+		USERS b ON (a.U_ID = b.U_ID)
+		ORDER BY PT_SEQ DESC
+	</select>
+	<select id="orderList" resultType="OrdersVO">
+		SELECT * FROM
+		ORDERS o
+		INNER JOIN
+		USERS u
+		ON (o.U_ID = u.U_ID)
+		INNER JOIN
+		STORE_INFO si
+		ON (o.SI_CODE = si.SI_CODE)
+		WHERE O_ORDER_STATE != '결제실패'
+		<if test="si_code !=null">
+		<!-- 이거는 매장 별 조회 용도 -->
+			AND o.SI_CODE = #{si_code}
+		</if>
+		ORDER BY O_SEQ DESC
+	</select>
+	<update id="changePoint">
+		UPDATE SYSTEM_SETTING
+		SET
+		VALUE = CASE WHEN KEY= 'point_use' THEN #{point_use} ELSE #{point_percentage} END
+		WHERE
+		KEY IN ('point_use','point_percentage')
+	</update>
+	
+	
+	
+</mapper>

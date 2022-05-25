@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StoreLoginDAO">
+	<select id="storeLoggin" resultType="StoreVO">
+		SELECT * FROM store_account sa
+		INNER JOIN
+		store_info si
+		ON (sa.SI_CODE = si.SI_CODE)
+		WHERE sa.SA_ACC_NO = #{sa_acc_no}
+	</select>
+	<select id="storeLoginCheck" resultType="int">
+		SELECT COUNT(*) FROM STORE_ACCOUNT
+		WHERE SA_ACC_NO = #{sa_acc_no}
+		AND
+		SA_PASSWORD = #{sa_password}
+	</select>
+</mapper>

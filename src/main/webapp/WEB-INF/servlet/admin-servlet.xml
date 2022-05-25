@@ -19,5 +19,13 @@
 		<property name="prefix" value="/WEB-INF/views/admin/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+	
+<!-- 	<mvc:interceptors> -->
+<!-- 		<mvc:interceptor> -->
+<!-- 		<mvc:mapping path="/*.admin"/> -->
+<!-- 		<mvc:exclude-mapping path="/login.admin"/> -->
+<!-- 		<mvc:exclude-mapping path="/loginCheck.admin"/> -->
+<!-- 		<bean id="AdminInterceptor" class="three.aws.wo.admin.util.AdminInterceptor"></bean> -->
+<!-- 		</mvc:interceptor> -->
+<!-- 	</mvc:interceptors> -->
 </beans>

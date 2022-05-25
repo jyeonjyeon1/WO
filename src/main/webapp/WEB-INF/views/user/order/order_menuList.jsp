@@ -18,8 +18,8 @@
         
         <script type="text/javascript">
             jQuery(document).ready(function () {
-                $('#headers').load("header.html");
-                $('#footers').load("footer.html");
+                $('#headers').load("header.user");
+                $('#footers').load("footer.user");
             });
             //========= Hero Slider
         </script>
@@ -83,6 +83,7 @@
         <!-- 키오스크 -->
         <div class="container" style="padding-bottom: 30px; background-color: white;">
             <div class="col-lg-12">
+            <c:forEach var="reviewList" items="${reviewList}" varStatus="vs">
                 <input class="tabinput" id="tab1" type="radio" name="tabs" checked="checked">
                 <!--디폴트 메뉴-->
                 <label class="tablabel_k" for="tab1">신메뉴</label>
@@ -119,7 +120,7 @@
                                     <div class="product__item__pic set-bg" data-setbg="resources/assets/images/jaewoo/new_menu.jpg">
                                         <ul class="product__item__pic__hover">
                                             <div class="button" data-toggle="modal" data-target=".bs-example-modal-lg">
-                                                <a href="order_checkOption.html" class="btn">
+                                                <a href="myOrder.user" class="btn">
                                                     <i class="lni lni-cart"></i>
                                                     주문하기</a>
                                             </div>
@@ -188,7 +189,7 @@
                                     <div class="product__item__pic set-bg" data-setbg="resources/assets/images/jaewoo/new_menu.jpg">
                                         <ul class="product__item__pic__hover">
                                             <div class="button">
-                                                <a href="product-details.html" class="btn">
+                                                <a href="myOrder.user" class="btn">
                                                     <i class="lni lni-cart"></i>
                                                     주문하기</a>
                                             </div>

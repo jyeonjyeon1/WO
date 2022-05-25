@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SMenuDAO">
+	<select id="storeMenuList" resultType="StoreMenuVO" parameterType="StoreMenuVO">
+		SELECT * FROM MENU_GROUP g
+		INNER JOIN
+		MENU m
+		ON (m.MG_CODE = g.MG_CODE )
+		WHERE m.SI_CODE = #{storeName}
+		ORDER BY m.M_SEQ
+	</select>
+	
+	<select id="storeMgList" resultType="StoreMenuGroupVO" parameterType="StoreMenuGroupVO">
+		SELECT * FROM menu_group
+		WHERE SI_CODE = #{storeName}
+		ORDER BY MG_SEQ
+		
+	</select>
+	<select id="maxMgSeq" resultType="String">
+		SELECT MG_CODE FROM MENU_GROUP 
+		WHERE 
+		MG_SEQ = (SELECT MAX(MG_SEQ) FROM MENU_GROUP 
+		WHERE 
+		SI_CODE = #{si_code})
+		
+	</select>
+	<select id="maxMenuSeq" resultType="String">
+		SELECT M_CODE FROM MENU 
+		WHERE 
+		M_SEQ = (SELECT MAX(M_SEQ) FROM MENU 
+		WHERE 
+		SI_CODE = #{si_code} and MG_CODE = #{mg_code})
+	</select>
+	<select id="maxOgbSeq" resultType="String">
+		SELECT OGB_CODE FROM OPTIONGROUP_BASIC 
+		WHERE 
+		OGB_SEQ = (SELECT MAX(OGB_SEQ) FROM OPTIONGROUP_BASIC 
+		WHERE 
+		SI_CODE = #{si_code})
+	</select>
+	<select id="maxOpbSeq" resultType="String">
+		SELECT OPB_CODE FROM OPTION_BASIC 
+		WHERE 
+		OPB_SEQ = (SELECT MAX(OPB_SEQ) FROM OPTION_BASIC 
+		WHERE 
+		SI_CODE = #{si_code} and 
+		OGB_SEQ = (SELECT OGB_SEQ FROM OPTIONGROUP_BASIC WHERE OGB_CODE = #{ogb_code}))
+	</select>
+	
+	<insert id="insertMgName" >
+		INSERT INTO
+    	menu_group(SI_CODE, MG_CODE, MG_NAME) VALUES (#{si_code},#{mg_code} ,#{mg_name})
+	</insert>
+	
+	<select id="ogList" resultType="StoreOptionGroupVO" parameterType="StoreOptionGroupVO">
+		SELECT * FROM option_group 
+		WHERE SI_CODE = #{storeName}
+		ORDER BY OG_SEQ
+	</select>
+	
+	
+	<select id="optionList" resultType="StoreOptionVO" parameterType="StoreOptionVO">
+		SELECT * FROM options op
+		INNER JOIN
+		option_group og
+		ON (op.OG_SEQ = og.OG_SEQ )
+		WHERE og.SI_CODE = #{storeName}
+		ORDER BY OP_SEQ
+	</select>
+	
+	
+	<select id="MAOList" resultType="MenuAndOptionVO" parameterType="MenuAndOptionVO">
+		SELECT * FROM menuandoption 
+		WHERE SI_CODE = #{storeName}
+	</select>
+	
+	<select id="basicOpList" resultType="MenuBasicOptionVO" parameterType="MenuBasicOptionVO">
+		SELECT * FROM optiongroup_basic ogb
+		INNER JOIN
+		option_basic opb
+		ON (ogb.OGB_SEQ = opb.OGB_SEQ )
+		WHERE ogb.SI_CODE = #{storeName}
+	</select>
+	
+	<delete id="deleteMenuGroup">
+		DELETE FROM MENU_GROUP 
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</delete>
+	<delete id="deleteMenuGroup_MAO">
+		DELETE FROM MENUANDOPTION
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</delete>
+	<update id="updateMenuGroup">
+		UPDATE MENU_GROUP
+		SET MG_NAME = #{mg_name}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</update>
+	<update id="updateMenuGroup_MAO">
+		UPDATE MENUANDOPTION
+		SET MG_NAME = #{mg_name}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		MG_CODE = #{mg_code}
+	</update>
+	<insert id="insertMenu">
+		INSERT INTO
+    	MENU(SI_CODE, M_CODE, M_NAME,MG_CODE,MG_SEQ) 
+    	VALUES 
+    	(#{si_code},#{m_code} ,#{m_name},#{mg_code} ,#{mg_seq})
+	</insert>
+	
+	<insert id="insertOGB">
+		INSERT INTO
+    	OPTIONGROUP_BASIC(SI_CODE, M_CODE, M_NAME,OGB_CODE,M_SEQ) 
+    	VALUES 
+    	(#{si_code},#{m_code} ,#{m_name},#{ogb_code} ,#{m_seq})
+	</insert>
+	
+	<insert id="insertOPB">
+		INSERT INTO
+    	OPTION_BASIC(SI_CODE, OGB_SEQ, OPB_CODE,OPB_NAME,OPB_PRICE) 
+    	VALUES 
+    	(#{si_code},#{ogb_seq} ,#{opb_code},#{opb_name} ,#{opb_price})
+	</insert>
+	
+	<select id="getm_seq" resultType="int">
+		SELECT M_SEQ FROM MENU
+		WHERE SI_CODE = #{si_code}
+		AND
+		M_CODE =#{m_code}
+	</select>
+	<select id="getogb_seq" resultType="int">
+		SELECT OGB_SEQ FROM OPTIONGROUP_BASIC
+		WHERE SI_CODE = #{si_code}
+		AND
+		OGB_CODE =#{ogb_code}
+	</select>
+	<update id="updateMenu">
+		UPDATE MENU
+		SET 
+		<if test="m_name !=null">
+		<!-- 이미지 변경할 경우 용도 -->
+			M_NAME = #{m_name}
+		</if>
+		<if test="m_img_file !=null">
+		<!-- 이미지 변경할 경우 용도 -->
+			M_IMG_FILE = #{m_img_file}
+		</if>
+		WHERE M_SEQ = #{m_seq} AND SI_CODE = #{si_code}
+	</update>
+	<update id="updateOGB">
+		UPDATE OPTIONGROUP_BASIC
+		SET M_NAME = #{m_name}
+		WHERE M_SEQ = #{m_seq} AND SI_CODE = #{si_code}
+	</update>
+	<select id="ogbSeqfromMSeq" resultType="int">
+		SELECT OGB_SEQ FROM OPTIONGROUP_BASIC
+		WHERE M_SEQ = #{m_seq}
+		AND
+		SI_CODE = #{si_code}
+	</select>
+	<select id="ogbCodefromMSeq" resultType="String">
+		SELECT OGB_CODE FROM OPTIONGROUP_BASIC
+		WHERE M_SEQ = #{m_seq}
+		AND
+		SI_CODE = #{si_code}
+	</select>
+	<delete id="deleteOptionBasics">
+		DELETE FROM OPTION_BASIC
+		WHERE SI_CODE = #{si_code} 
+		AND OGB_SEQ = #{ogb_seq}
+	</delete>
+	<delete id="deleteMenu">
+		DELETE FROM MENU
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		M_CODE = #{m_code}
+	</delete>
+	<delete id="deleteMenu_MAO">
+		DELETE FROM MENUANDOPTION
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		M_CODE = #{m_code}
+	</delete>
+	
+	<!-- option start -->
+	
+	
+	<select id="maxOgCode" resultType="String">
+		SELECT OG_CODE FROM OPTION_GROUP
+		WHERE 
+		OG_SEQ = (SELECT MAX(OG_SEQ) FROM OPTION_GROUP 
+		WHERE 
+		SI_CODE = #{si_code})
+	</select>
+	
+	<insert id="addOg">
+		INSERT INTO
+    	OPTION_GROUP(OG_CODE, OG_NAME, SI_CODE,OG_ROS) 
+    	VALUES 
+    	(#{og_code},#{og_name} ,#{si_code},#{og_ros})
+	</insert>
+	
+	<select id="currentOg_seq" resultType="int">
+		SELECT OG_SEQ FROM OPTION_GROUP 
+		WHERE 
+		OG_CODE = #{og_code} and SI_CODE = #{si_code}
+		
+	</select>
+	
+	
+	<select id="maxOpCode" resultType="String">
+		SELECT OP_CODE FROM OPTIONS
+		WHERE 
+		OP_SEQ = (SELECT MAX(OP_SEQ) FROM OPTIONS 
+		WHERE 
+		SI_CODE = #{si_code})
+	</select>
+	
+	<insert id="addOp1">
+		INSERT INTO
+    	OPTIONS(OP_CODE, OG_SEQ, SI_CODE,OP_NAME,OP_PRICE,OP_OOS) 
+    	VALUES 
+    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},#{op_oos})
+	</insert>
+	
+	<insert id="addOp2">
+		INSERT INTO
+    	OPTIONS(OP_CODE, OG_SEQ, SI_CODE,OP_NAME,OP_PRICE,OP_OOS) 
+    	VALUES 
+    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},#{op_oos})
+	</insert>
+	
+	
+</mapper>
+ 

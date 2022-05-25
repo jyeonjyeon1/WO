@@ -79,6 +79,8 @@
 	<resultMap type="QnAVO" id="qnaVO">
 		<id column="QA_SEQ" property="qa_seq" jdbcType="INTEGER"/>
 		<result column="U_ID" property="u_id" jdbcType="VARCHAR" />
+		<result column="U_NAME" property="u_name" jdbcType="VARCHAR" />
+		<result column="U_TEL" property="u_tel" jdbcType="VARCHAR" />
 		<result column="SI_CODE" property="si_code" jdbcType="VARCHAR" />
 		<result column="QA_TYPE" property="qa_type" jdbcType="VARCHAR" />
 		<result column="QA_TITLE" property="qa_title" jdbcType="VARCHAR" />
@@ -103,5 +105,21 @@
 			VALUES(#{u_id }, #{qa_type }, #{qa_title }, FALSE, #{qa_content_q }, DEFAULT, NULL);
 	</insert>
     
+    <select id="adminqnaList" resultType="QnAVO">
+		SELECT Q.*, U.U_NAME, U.U_TEL
+			FROM QNA Q JOIN USERS U ON Q.U_ID = U.U_ID
+	</select>
+	
+	 <select id="adminanswerList" resultType="QnAVO">
+		SELECT Q.*, U.U_NAME, U.U_TEL
+			FROM QNA Q JOIN USERS U ON Q.U_ID = U.U_ID
+			AND QA_SEQ = #{qa_seq }
+	</select>
+	
+	<update id="addanswer" parameterType="QnAVO">
+		UPDATE QNA
+			SET QA_TYPE_ANS=TRUE, QA_CONTENT_A=#{qa_content_a }, QA_DATE_A=CURRENT_TIMESTAMP
+			WHERE QA_SEQ = #{qa_seq };
+	</update>
 </mapper>
  

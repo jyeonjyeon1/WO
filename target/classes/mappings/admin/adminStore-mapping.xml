@@ -97,7 +97,7 @@
     	SF_OPEN, SF_CLOSE, SF_PARKING_ABLE, SF_USESTORE, SF_REFERINFO, SF_EMAIL, SF_ACC_NO, SF_BUSINESS_REGISTRATION_IMAGE, SF_BANKBOOK_IMAGE, SF_REP_NAME,SF_PASSWORD)
     	VALUES (#{sf_code},#{sf_name},#{sf_loc},#{sf_zipcode},#{sf_address},#{sf_address},#{sf_addr_detail},#{sf_tel},
     	#{sf_open},#{sf_close},#{sf_parking_able},#{sf_usestore},#{sf_referinfo},#{sf_email},#{sf_code},#{sf_business_registration_image},#{sf_bankbook_image}
-    	,#{sf_rep_name}, #{sf_code})
+    	,#{sf_rep_name}, #{sf_password})
     </insert>
 	<select id="storePendingList" resultType="StoreFormVO">
 		SELECT * FROM STORE_FORM 
@@ -139,4 +139,38 @@
     <delete id="deletePending">
     	DELETE FROM STORE_FORM WHERE SF_SEQ = #{sf_seq}
     </delete>
+    <update id="updateStoreInfo">
+    	UPDATE STORE_INFO SET
+		SI_NAME = #{si_name}, SI_TEL = #{si_tel}, SI_PARKING_ABLE = #{si_parking_able}, 
+		SI_ZIPCODE = #{si_zipcode},
+		SI_LOC = #{si_loc},
+		SI_ADDR_ROAD = #{si_address},
+		SI_ADDRESS = #{si_address},
+		SI_ADDR_DETAIL = #{si_addr_detail},
+		SI_OPEN = #{si_open}, SI_CLOSE = #{si_close}, 
+		SI_REFERINFO = #{si_referinfo},
+		SI_USESTORE = #{si_usestore}
+		WHERE SI_CODE = #{si_code}
+    </update>
+    <select id="getOriginalPass" resultType="String">
+    	SELECT SA_PASSWORD FROM STORE_ACCOUNT
+    	WHERE SI_CODE = #{si_code}
+    </select>
+    <select id="getOriginalBussReg" resultType="String">
+    	SELECT SA_BUSINESS_REGISTRATION_IMAGE FROM STORE_ACCOUNT
+    	WHERE SI_CODE = #{si_code}
+    </select>
+    <select id="getOriginalBankbook" resultType="String">
+    	SELECT SA_BANKBOOK_IMAGE FROM STORE_ACCOUNT
+    	WHERE SI_CODE = #{si_code}
+    </select>
+    <update id="updateStoreAccount">
+    	UPDATE STORE_ACCOUNT SET
+		SA_PASSWORD = #{sa_password},
+		SA_REP_NAME = #{sa_rep_name},
+		SA_BANKBOOK_IMAGE = #{sa_bankbook_image},
+		SA_BUSINESS_REGISTRATION_IMAGE = #{sa_business_registration_image},
+		SA_EMAIL = #{sa_email}
+		WHERE SI_CODE = #{si_code}
+    </update>
 </mapper>

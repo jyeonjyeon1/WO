@@ -83,6 +83,7 @@
         <!-- 키오스크 -->
         <div class="container" style="padding-bottom: 30px; background-color: white;">
             <div class="col-lg-12">
+            <c:forEach var="reviewList" items="${reviewList}" varStatus="vs">
                 <input class="tabinput" id="tab1" type="radio" name="tabs" checked="checked">
                 <!--디폴트 메뉴-->
                 <label class="tablabel_k" for="tab1">신메뉴</label>

@@ -9,13 +9,14 @@
 		MENU m
 		ON (m.MG_CODE = g.MG_CODE )
 		WHERE m.SI_CODE = #{storeName}
-		ORDER BY g.MG_SEQ
+		ORDER BY m.M_SEQ
 	</select>
 	
 	<select id="storeMgList" resultType="StoreMenuGroupVO" parameterType="StoreMenuGroupVO">
 		SELECT * FROM menu_group
 		WHERE SI_CODE = #{storeName}
 		ORDER BY MG_SEQ
+		
 	</select>
 	<select id="maxMgSeq" resultType="String">
 		SELECT MG_CODE FROM MENU_GROUP 
@@ -23,6 +24,7 @@
 		MG_SEQ = (SELECT MAX(MG_SEQ) FROM MENU_GROUP 
 		WHERE 
 		SI_CODE = #{si_code})
+		
 	</select>
 	<select id="maxMenuSeq" resultType="String">
 		SELECT M_CODE FROM MENU 
@@ -194,5 +196,55 @@
 		AND
 		M_CODE = #{m_code}
 	</delete>
+	
+	<!-- option start -->
+	
+	
+	<select id="maxOgCode" resultType="String">
+		SELECT OG_CODE FROM OPTION_GROUP
+		WHERE 
+		OG_SEQ = (SELECT MAX(OG_SEQ) FROM OPTION_GROUP 
+		WHERE 
+		SI_CODE = #{si_code})
+	</select>
+	
+	<insert id="addOg">
+		INSERT INTO
+    	OPTION_GROUP(OG_CODE, OG_NAME, SI_CODE,OG_ROS) 
+    	VALUES 
+    	(#{og_code},#{og_name} ,#{si_code},#{og_ros})
+	</insert>
+	
+	<select id="currentOg_seq" resultType="int">
+		SELECT OG_SEQ FROM OPTION_GROUP 
+		WHERE 
+		OG_CODE = #{og_code} and SI_CODE = #{si_code}
+		
+	</select>
+	
+	
+	<select id="maxOpCode" resultType="String">
+		SELECT OP_CODE FROM OPTIONS
+		WHERE 
+		OP_SEQ = (SELECT MAX(OP_SEQ) FROM OPTIONS 
+		WHERE 
+		SI_CODE = #{si_code})
+	</select>
+	
+	<insert id="addOp1">
+		INSERT INTO
+    	OPTIONS(OP_CODE, OG_SEQ, SI_CODE,OP_NAME,OP_PRICE,OP_OOS) 
+    	VALUES 
+    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},#{op_oos})
+	</insert>
+	
+	<insert id="addOp2">
+		INSERT INTO
+    	OPTIONS(OP_CODE, OG_SEQ, SI_CODE,OP_NAME,OP_PRICE,OP_OOS) 
+    	VALUES 
+    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},#{op_oos})
+	</insert>
+	
+	
 </mapper>
  

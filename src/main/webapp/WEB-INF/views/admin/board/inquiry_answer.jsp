@@ -236,6 +236,8 @@
                   </div>
                 </div>
                 <input type="hidden" class="form-control round-form" name="qa_seq" value="${adminanswerList.qa_seq }" readonly>
+                <input type="hidden" class="form-control" name="u_tel" value="${adminanswerList.u_tel}" readonly>
+				<input type="hidden" class="form-control" name="qa_title" value="${adminanswerList.qa_title}" readonly>
 
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">답변일시</label>

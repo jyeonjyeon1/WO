@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.service.FaqService;
+import three.aws.wo.admin.util.MessageSend;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 import three.aws.wo.admin.vo.QnAVO;
@@ -120,6 +121,16 @@ public class AdminNoticeController {
 	@RequestMapping("/addanswer.admin")
 	public String addanswer(QnAVO vo) throws Exception {
 		noticeService.addanswer(vo);
+		MessageSend ms = new MessageSend();
+		String u_tel = vo.getU_tel();
+		String qa_title = vo.getQa_title();
+		if(qa_title.length() > 15) {
+			qa_title = qa_title.substring(0,15) + "...";
+		}
+		String sms_text = "[" + qa_title + "] 에 대한 답변이 등록되었습니다.";
+		System.out.println(u_tel);
+		int result = ms.sendSMS(u_tel, sms_text, "SMS");
+
 		return "redirect:/inquiry.admin";
 	}
 	

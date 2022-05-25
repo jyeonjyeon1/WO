@@ -10,8 +10,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>워킹오더 매장관리자 페이지</title>
 
   <!-- Favicons -->
@@ -486,13 +484,13 @@ function toggle_facility() {
                       <span class="title">가게정보 <a class="service_info" style="font-size: 13px; margin-left: 30px;" onclick="modal_a()" >변경요청은 고객센터로 문의해주세요</a></span>
                       <ul> 
                           <li>로고</li>
-                          <img src=${fn:toLowerCase(storeSession.si_image) } style="width: 100px; height: 100px;">s
+                          <img src=${fn:toLowerCase(storeSession.si_image) } style="width: 100px; height: 100px;">
                           <li>가게 이름</li>
                             <div>${storeSession.si_name }</div>
                           <li>가게 코드(사업자등록번호)</li>
                             <div>${storeSession.si_code }</div>
                           <li>가게 위치</li>
-                            <div>${storeSession.si_addr_road }</div>
+                            <div>${storeSession.si_addr_road }, ${storeSession.si_addr_detail }</div>
                          
                       </ul>
                   </div>
@@ -503,7 +501,7 @@ function toggle_facility() {
                       <div style="font-size: 30px; font-weight: bolder; color: black;"> 1577-1577 </div>
                       
                       <div>
-                      <button class="closeBtn" onclick="close_modalA()" >닫기</button>
+                      <button type="button" class="closeBtn" onclick="close_modalA()" >닫기</button>
                     </div>
                     </div>
                   </div>
@@ -549,11 +547,21 @@ function toggle_facility() {
                           	<div>[불가능]</div>
                           	</c:when>
                           	<c:otherwise>
-                          	[가능] 유료? 무료? 컬럼하나더만들까?
+                          	[가능]
                           	</c:otherwise>
                           </c:choose>
-                           
-                          <li>기타시설</li>
+                          <li>매장사용</li>
+                          <c:choose>
+                          	<c:when test="${storeSession.si_usestore eq false}">
+                          	<div>[불가능]</div>
+                          	</c:when>
+                          	<c:otherwise>
+                          	[가능]
+                          	</c:otherwise>
+                          </c:choose>
+                           <li>기타시설</li>
+                            <div>${storeSession.si_referinfo }</div> 
+                          <li>특이사항</li>
                             <div>${storeSession.si_referinfo }</div> 
                       </ul>
                   </div>

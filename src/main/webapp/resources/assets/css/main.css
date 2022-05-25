@@ -2007,14 +2007,14 @@ ol {
   width: 100%;
 }
 
-/* 작은 화면에서는 검색창 안보임 */
+/* �옉�� �솕硫댁뿉�꽌�뒗 寃��깋李� �븞蹂댁엫 */
 @media (max-width: 767px) {
   .header .main-menu-search {
     display: none;
   }
 }
 
-/* 운직이는 stickys */
+/* �슫吏곸씠�뒗 stickys */
 .header .stickys {
   position: fixed;
   top: 0;
@@ -5343,7 +5343,7 @@ ol {
   height: auto
 }
 
-/*지도이미지*/
+/*吏��룄�씠誘몄�*/
 .map_image {
   position: relative;
   text-align: center;
@@ -6327,10 +6327,10 @@ mypage_menubar
 
 #myform fieldset {
   display: inline-block;
-  /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+  /* �븯�쐞 蹂꾩젏 �씠誘몄��뱾�씠 �엳�뒗 �쁺�뿭留� �옄由щ�� 李⑥��븿.*/
   direction: rtl;
   border: 0;
-  /* 필드셋 테두리 제거 */
+  /* �븘�뱶�뀑 �뀒�몢由� �젣嫄� */
 }
 
 #myform input[type=radio] {
@@ -6339,16 +6339,16 @@ mypage_menubar
 
 #myform input[type=radio]:checked~label {
   text-shadow: 0 0 0 rgb(255, 208, 0);
-  /* 마우스 클릭 체크 */
+  /* 留덉슦�뒪 �겢由� 泥댄겕 */
 }
 
 #myform label {
   font-size: 3em;
-  /* 이모지 크기 */
+  /* �씠紐⑥� �겕湲� */
   color: transparent;
-  /* 기존 이모지 컬러 제거 */
+  /* 湲곗〈 �씠紐⑥� 而щ윭 �젣嫄� */
   text-shadow: 0 0 0 #f0f0f0;
-  /* 새 이모지 색상 부여 */
+  /* �깉 �씠紐⑥� �깋�긽 遺��뿬 */
 }
 
 #myform fieldset legend {
@@ -6565,7 +6565,7 @@ mypage_menubar
   padding: 20px 0 0;
 }
 
-/*라디오버튼 숨김*/
+/*�씪�뵒�삤踰꾪듉 �닲源�*/
 .tabinput {
   display: none;
 }
@@ -6584,7 +6584,7 @@ mypage_menubar
   cursor: pointer;
 }
 
-/*input 클릭시, label 스타일*/
+/*input �겢由��떆, label �뒪���씪*/
 .tabinput:checked+label {
   border-radius: 10px;
   color: #000000;
@@ -6616,7 +6616,7 @@ mypage_menubar
   width: 100%;
 }
 
-/* 조건 검색 버튼 */
+/* 議곌굔 寃��깋 踰꾪듉 */
 .showdetail_btn {
   font-weight: 700;
   background-color: transparent;
@@ -6692,9 +6692,9 @@ mypage_menubar
 }
 
 
-/* style.css 카피카피카피 */
-/* style.css 카피카피카피 */
-/* style.css 카피카피카피 */
+/* style.css 移댄뵾移댄뵾移댄뵾 */
+/* style.css 移댄뵾移댄뵾移댄뵾 */
+/* style.css 移댄뵾移댄뵾移댄뵾 */
 /******************************************************************
   Template Name: Ogani
   Description:  Ogani eCommerce  HTML Template
@@ -9578,7 +9578,7 @@ mypage_menubar
   }
 }
 
-/* 큰거임 */
+/* �겙嫄곗엫 */
 @media (min-width: 768px) {
   .search_result_list_col {
     color: #888;

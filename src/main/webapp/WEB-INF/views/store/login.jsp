@@ -6,9 +6,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <title>워킹오더 관리자 페이지</title>
   
     <!-- Favicons -->
@@ -27,16 +24,16 @@
   	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   	<script>
 	
-	var s_id_input = "";
-	var s_pw_input = "";
+	var sa_acc_no_input = "";
+	var sa_password_input = "";
 	  	
   	jQuery(document).ready(function() {
-  		$("#s_id").on("propertychange change keyup paste input", function() {
-  			s_id_input = $("#s_id").val();
+  		$("#sa_acc_no").on("propertychange change keyup paste input", function() {
+  			sa_acc_no_input = $("#sa_acc_no").val();
   			onEnter();
   		});
-  		$("#s_pw").on("propertychange change keyup paste input", function() {
-  			s_pw_input = $("#s_pw").val();
+  		$("#sa_password").on("propertychange change keyup paste input", function() {
+  			sa_password_input = $("#sa_password").val();
   			onEnter();
   		});
   	});
@@ -49,12 +46,12 @@
   	}
   	
   		function finalCheck(){
-  				console.log(s_id_input + "and " + s_pw_input);
-  			if(s_id_input !="" && s_pw_input !=""){
+  				console.log(sa_acc_no_input + "and " + sa_password_input);
+  			if(sa_acc_no_input !="" && sa_password_input !=""){
   				loginCheck();  				
-  			}else if(s_id_input != "" && s_pw_input=="" ){
+  			}else if(sa_acc_no_input != "" && sa_password_input=="" ){
   				alert("비밀번호 미입력");
-  			}else if(s_id_input =="" && s_pw_input != "") {
+  			}else if(sa_acc_no_input =="" && sa_password_input != "") {
   				alert("아이디 미입력");
   			}else {
   				alert("아이디와 비밀번호 미입력");
@@ -62,7 +59,7 @@
   		}
   		
   		function loginCheck(){
-  			var param={"s_id":s_id_input, "s_pw":s_pw_input}
+  			var param={"sa_acc_no":sa_acc_no_input, "sa_password":sa_password_input}
   			$.ajax({
   				type: "post",
   				url: "/loginCheck.store",
@@ -70,16 +67,15 @@
   				dataType: "json",
   		        contentType: "application/json",
   		        success:function(data){
-  		        	console.log("오키");
   		        	
   		        if(data==1){
-  		        		alert("아이디있음");
   		        		location.href="/index.store";
   		        		
  	        	}else if(data==0){
-  		        		alert("아이디가없음");
-  		        	}else{
-  		        		alert("비번이 잘못되었음.")
+	 	        		Swal.fire({
+	 	    				icon : "error",
+	 	    				text : "일치 계정 없음"
+	 	    			});
   		        	}
   		        },
   		        error:function(data){
@@ -108,9 +104,9 @@
       <form class="form-login" action="index.store" >
         <h2 class="form-login-heading"><img src="resources/assets/images/admin/logo/logo_white.png" style="width:28px">&nbsp; walking order store</h2>
         <div class="login-wrap">
-          <input type="text" class="form-control" name="s_id" id="s_id" placeholder="관리번호" style="font-size: 12px;" autofocus>
+          <input type="text" class="form-control" name="sa_acc_no" id="sa_acc_no" placeholder="관리번호" style="font-size: 12px;" autofocus>
           <br>
-          <input type="password" class="form-control" name="s_pw" id="s_pw" placeholder="비밀번호" style="font-size: 12px;">
+          <input type="password" class="form-control" name="sa_password" id="sa_password" placeholder="비밀번호" style="font-size: 12px;">
           <label class="checkbox">
             <input type="checkbox" value="remember-me" style="font-size: 12px; margin-top: 2px; margin-left: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;자동로그인
             <span class="pull-right">

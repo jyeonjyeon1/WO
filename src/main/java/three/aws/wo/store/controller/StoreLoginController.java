@@ -21,63 +21,56 @@ import three.aws.wo.user.vo.UserVO;
 
 @Controller
 public class StoreLoginController {
-	
+
 	@Autowired
 	private StoreLoginService storeLoginService;
-	
+
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;
-	
+
 	@ResponseBody
-	@RequestMapping(value="/loginCheck.store",method=RequestMethod.POST)
-	public int storeLoginCheck(@RequestBody HashMap<String, String> param, HttpSession session, HttpServletRequest request, HttpServletResponse response)
-				throws Exception {
-			
-		StoreVO s_encryption = storeLoginService.encryption(param.get("s_id"));
-		//boolean s_pwdMatch = pwdEncoder.matches(param.get("s_pw"), s_encryption.getSa_password());
-		int result =0;
-		
-		//no encryption pw
+	@RequestMapping(value = "/loginCheck.store", method = RequestMethod.POST)
+	public int storeLoginCheck(@RequestBody HashMap<String, String> param, HttpSession session,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int result = 0;
+		String inputId = param.get("sa_acc_no");
+		StoreVO vo = storeLoginService.storeLoggin(inputId);
+		String inputPwd = param.get("sa_password");
 		boolean s_pwdMatch = false;
-		
-		if(s_encryption ==null) {
-			result=0;//no id
-		} else {
-			System.out.println(param.get("s_pw"));
-			System.out.println(s_encryption.getSa_password());
-			if(param.get("s_pw").equals(s_encryption.getSa_password())) {
-				s_pwdMatch = true;
-			}else {
-				s_pwdMatch = false;//no pw
-			}
+		if(vo != null) {
+			s_pwdMatch = pwdEncoder.matches(inputPwd,vo.getSa_password());
 		}
-		 
-		String s_id = param.get("s_id");
-		
-		if(s_pwdMatch ==true) {
-			result=1;
-			setLogin(s_id, session, response);
-			
-		}else {
-			result=2;
-			System.out.println("not equals pw");
+
+		if(vo != null && s_pwdMatch == true) {
+			result = 1;
+			setLogin(inputId, session, response);
 		}
+
 		return result;
 
 	}
-	
-	public void setLogin(String s_id, HttpSession session, HttpServletResponse response ) throws Exception {
-		StoreVO vo = storeLoginService.encryption(s_id);
+
+	public void setLogin(String sa_acc_no, HttpSession session, HttpServletResponse response) throws Exception {
+		StoreVO vo = storeLoginService.storeLoggin(sa_acc_no);
 		session.setAttribute("storeSession", vo);
+		System.out.println(session);
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="/sendResetPassword.store",method=RequestMethod.POST)
+	@RequestMapping(value = "/sendResetPassword.store", method = RequestMethod.POST)
 	public int test(@RequestBody HashMap<String, String> param) {
 		String num = param.get("tel_reset");
 		String bcrypt = pwdEncoder.encode(num);
-		System.out.println(num + " : "+bcrypt);
+		System.out.println(num + " : " + bcrypt);
 		return 1;
 	}
 	
+	@RequestMapping("/logout.store")
+	public String userLogout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		System.out.println(session);
+		return "redirect:/login.store";
+	}
+
 }

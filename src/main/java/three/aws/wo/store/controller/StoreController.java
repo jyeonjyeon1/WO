@@ -41,11 +41,11 @@ public class StoreController {
 
 
 //==================== info ============================
-	@GetMapping("/basic.store")
-	public String toBasicPage() {
-		System.out.println("store info_basic");
-		return "/info/info_basic";
-	}
+//	@GetMapping("/basic.store")
+//	public String toBasicPage() {
+//		System.out.println("store info_basic");
+//		return "/info/info_basic";
+//	}
 	
 	@GetMapping("/manage.store")
 	public String toManagePage() {

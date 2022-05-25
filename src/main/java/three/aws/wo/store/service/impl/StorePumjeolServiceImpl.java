@@ -21,4 +21,14 @@ public class StorePumjeolServiceImpl implements StorePumjeolSerivce {
 	public void updateMenuPumjeol_MAO(HashMap<String, Object> map) {
 		storePumjeolDAO.updateMenuPumjeol_MAO(map);
 	}
+	
+	@Override
+	public void updateOptionPumjeol(HashMap<String, Object> map) {
+		storePumjeolDAO.updateOptionPumjeol(map);
+	}
+
+	@Override
+	public void updateOptionPumjeol_MAO(HashMap<String, Object> map) {
+		storePumjeolDAO.updateOptionPumjeol_MAO(map);
+	}
 }

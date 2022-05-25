@@ -8,4 +8,8 @@ public interface StorePumjeolSerivce {
 
 	void updateMenuPumjeol_MAO(HashMap<String, Object> map);
 
+	void updateOptionPumjeol(HashMap<String, Object> map);
+
+	void updateOptionPumjeol_MAO(HashMap<String, Object> map);
+
 }

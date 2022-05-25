@@ -744,8 +744,6 @@ li {
                               </nav>
 
                               <!--그룹 리스트 end-->
-
-                                             
                                           </div>
 <!-- ***********************************************************메뉴편집 Tab end************************************************************* -->
 
@@ -758,31 +756,109 @@ li {
                                               <!--옵션그룹 리스트 start-->
                                              <nav>
                                                 <ul id="main_menu">
-                                                   <li><a class="menuGroup" href="javascript:">샷추가</a>
+                                                <!-- 하나의 옵션 시작 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
+                                                <c:forEach var="og" items="${ogList}" varStatus="ogvs">
+                                                   <li><a class="menuGroup" href="javascript:">${og.og_name}</a>
                                                    <!--서브메뉴시작-->
                                                       <ul class="snd_menu sub_menu">
+                                                      <!-- 하나의 옵션 시작 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
+					                                   <c:forEach var="option" items="${optionList}" varStatus="opvs"> 
+					                                    <c:if test="${og.og_seq eq option.og_seq }">
+					                                    <input type="hidden" id="op__code${ogvs.index}${opvs.index }" value="${option.op_code }"/>
                                                          <li><a class="menu_one" >
                                                             <div class="row" style="padding: 10px;">
 					                                           <div class="col-lg-8" style="text-align:left; line-height: 20px;">
-                                                                  <div class="menu_oneOption">
-					                                                <h4 style="color:black;">1샷추가</h4>
+                                                                  <div id="mokumoku_${ogvs.index}${opvs.index }"; class="menu_oneOption">
+					                                                <h4 style="color:black;">${option.op_name}</h4>
 				                                                		<ul>
 					                                                		<li style="list-style-type: disc; line-height: 10px; margin-left: 25px;">
-					                                              			<h5 >500원</h5>
+					                                              			<h5 >${option.op_price} 원</h5>
 					                                             			</li>
 					                                            		</ul>
-					                                            		<div class="col-lg-6" style="text-align: right;">
-                                                                     		<button type="button" id="park_111" class="btn btn-lg btn-primary park_disable" onclick="toggle_park()">품절</button> 
-                                                                     		<span class="onoff-switch"></span> 
-                                                                	 	</div>
-					                                            		
                                                                     </div>
                                                                   </div>
+                                                                  
+                                                                  
+                                                                  
+                                                                  <div class="col-lg-3" style="text-align: right;padding-top:8px;">
+                                                               		<button type="button" id="park_option_${ogvs.index}${opvs.index}" class="custom_btnn <c:choose>
+                                                               			<c:when test="${option.op_oos eq true}">pumjeol_btn</c:when>
+                                                               			<c:otherwise>not_>pumjeol_btn</c:otherwise>
+                                                               			</c:choose>" 
+                                                               			onclick="toggle_park_option${ogvs.index}${opvs.index}()">
+                                                               			<c:choose>
+                                                               			<c:when test="${option.op_oos eq true}">해제</c:when>
+                                                               			<c:otherwise>품절</c:otherwise>
+                                                               			</c:choose>
+                                                               			
+                                                               			</button> 
+                                                               		<span class="onoff-switch"></span> 
+                                                          	 	  </div>
                                                                </div>
                                                          	</a></li>
+                                                         	
+                                                         	 
+                                                         	<script>
+                            	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                                                         	function toggle_park_option${ogvs.index}${opvs.index}() {
+                                                         		var op_oos = "";
+                                                         		 if($("#park_option_${ogvs.index}${opvs.index }").hasClass("pumjeol_btn") ==true){
+                                                         			document.getElementById('mokumoku_${ogvs.index}${opvs.index }').style.opacity = "1";
+                                                         			document.getElementById('park_option_${ogvs.index}${opvs.index }').textContent = '품절';
+                                                         			 $("#park_option_${ogvs.index}${opvs.index }").removeClass("pumjeol_btn");
+                 	                                                 $("#park_option_${ogvs.index}${opvs.index }").addClass("not_pumjeol_btn");
+                 	                                                 op_oos = "false";
+                                                         		 }else{
+                                                         			document.getElementById('mokumoku_${ogvs.index}${opvs.index }').style.opacity = "0.25";
+                                                         			document.getElementById('park_option_${ogvs.index}${opvs.index }').textContent = '해제';
+                                                         			 
+                                                         			 $("#park_option_${ogvs.index}${opvs.index }").addClass("pumjeol_btn");
+                	                                                 $("#park_option_${ogvs.index}${opvs.index }").removeClass("not_pumjeol_btn");
+                	                                                 op_oos = "true";
+                                                         		 }
+                                                         		 
+                                                         		var op_code = $("#op__code${ogvs.index}${opvs.index }").val();
+                                                         		
+                                                         		 var param = {
+                                                                		 "op_code" : op_code,
+                                                                		 "op_oos" : op_oos
+                                                                		 }
+//                                                          		 alert(op_code+":"+op_oos);
+                                                                 
+                                               		  	 		$.ajax({
+                                               		  	 	    	    type: "POST",
+                                               		  	 	    	    url: "/updateOptionPumjeol.store",
+                                               		  	 	    	    data: JSON.stringify(param), 
+                                               		  	 	    	    dataType: "json",
+                                               		  	 	    	    contentType: "application/json",
+                                               		  	 	    	    success: function (data) {
+                                               		  	 	    	        if (data == 1) {
+                                               		  	 	    	        	
+                                               		  	 		    	        Swal.fire({
+                                               		  	 		    	            icon: "success",
+                                               		  	 		    	            title: "품절 처리 완료",
+                                               		  	 		    	            showConfirmButton: false,
+                                               		  	 		    	            timer: 1500
+                                               		  	 		    	        });
+                                               		  	 		    	  
+                                               		  	 	    	        }else{alert("통신은됨");}
+                                               		  	 	    	    },
+                                               		  	 	    	    error: function (data) {
+                                               		  	 	    	        console.log("품절 상태 변화 통신에러");
+                                               		  	 	    	    }
+                                               		  	 		});//ajax end
+                                                         	}
+                                                         		
+                                                         	
+                                                         	</script>
+                                                         	</c:if>
+                                                         	</c:forEach>
+                                                         	<!-- 하나의 옵션 끝 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
                                                       	</ul>
                                                        <!--서브메뉴끝-->
                                                        </li>
+                                                       </c:forEach>
+                                                       <!--  옵션 끝 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
                                                 	</ul>
                                              	</nav>
                                              <!--메뉴그룹 리스트 end-->

@@ -18,5 +18,20 @@
 		SI_CODE=#{si_code} AND 
 		M_CODE=#{m_code}
 	</update>
+	<update id="updateOptionPumjeol"> 
+		UPDATE OPTIONS SET 
+		OP_OOS = #{op_oos} 
+		WHERE 
+		SI_CODE=#{si_code} AND 
+		OP_CODE=#{op_code}
+
+	</update>
+	<update id="updateOptionPumjeol_MAO">
+		UPDATE MENUANDOPTION SET 
+		OP_OOS = #{op_oos}  
+		WHERE 
+		SI_CODE=#{si_code} AND 
+		OP_CODE=#{op_code}
+	</update> 
 </mapper>
  

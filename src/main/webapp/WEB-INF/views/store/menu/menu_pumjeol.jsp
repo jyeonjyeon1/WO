@@ -41,6 +41,7 @@ input::-webkit-inner-spin-button {
 }
 
 .custom_btnn{
+color: rgb(0, 98, 231);
     display: inline-block;
     padding: 10px 16px;
     margin-bottom: 0;
@@ -58,6 +59,7 @@ input::-webkit-inner-spin-button {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
+    background-color: white;
     border: 2px solid rgb(0, 98, 231);
     border-radius: 6px;
  }
@@ -764,12 +766,17 @@ li {
                                                       <!-- 하나의 옵션 시작 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
 					                                   <c:forEach var="option" items="${optionList}" varStatus="opvs"> 
 					                                    <c:if test="${og.og_seq eq option.og_seq }">
-					                                    <input type="hidden" id="op__code${ogvs.index}${opvs.index }" value="${option.op_code }"/>
                                                          <li><a class="menu_one" >
                                                             <div class="row" style="padding: 10px;">
 					                                           <div class="col-lg-8" style="text-align:left; line-height: 20px;">
-                                                                  <div id="mokumoku_${ogvs.index}${opvs.index }"; class="menu_oneOption">
+                                                                  
+                                                                  <div id="mokumoku_${ogvs.index}${opvs.index }" class="col-lg-11" style="text-align: left; margin-top: 5px;opacity:
+						                                              <c:choose>
+						                                             <c:when test="${option.op_oos eq true}">0.25</c:when>
+						                                             <c:otherwise>1</c:otherwise>
+						                                             </c:choose>">
 					                                                <h4 style="color:black;">${option.op_name}</h4>
+					                                                <input type="hidden" id="op__code${ogvs.index}${opvs.index }" value="${option.op_code }"/>
 				                                                		<ul>
 					                                                		<li style="list-style-type: disc; line-height: 10px; margin-left: 25px;">
 					                                              			<h5 >${option.op_price} 원</h5>
@@ -781,37 +788,35 @@ li {
                                                                   
                                                                   
                                                                   <div class="col-lg-3" style="text-align: right;padding-top:8px;">
-                                                               		<button type="button" id="park_option_${ogvs.index}${opvs.index}" class="custom_btnn <c:choose>
+                                                                  
+                                                               		<button type="button" id="park_option_${ogvs.index}${opvs.index}" style="margin-top: 5px;" 
+                                                               		onclick="toggle_park_option${ogvs.index}${opvs.index}()" class="custom_btnn <c:choose>
                                                                			<c:when test="${option.op_oos eq true}">pumjeol_btn</c:when>
                                                                			<c:otherwise>not_>pumjeol_btn</c:otherwise>
-                                                               			</c:choose>" 
-                                                               			onclick="toggle_park_option${ogvs.index}${opvs.index}()">
+                                                               			</c:choose>">
+                                                               			
                                                                			<c:choose>
                                                                			<c:when test="${option.op_oos eq true}">해제</c:when>
                                                                			<c:otherwise>품절</c:otherwise>
                                                                			</c:choose>
+                                                               		</button> 
                                                                			
-                                                               			</button> 
-                                                               		<span class="onoff-switch"></span> 
-                                                          	 	  </div>
-                                                               </div>
-                                                         	</a></li>
-                                                         	
+                                                               		<span class="onoff-switch"></span>
+                                                               		
                                                          	 
                                                          	<script>
                             	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                                                          	function toggle_park_option${ogvs.index}${opvs.index}() {
                                                          		var op_oos = "";
                                                          		 if($("#park_option_${ogvs.index}${opvs.index }").hasClass("pumjeol_btn") ==true){
-                                                         			document.getElementById('mokumoku_${ogvs.index}${opvs.index }').style.opacity = "1";
                                                          			document.getElementById('park_option_${ogvs.index}${opvs.index }').textContent = '품절';
+                                                         			document.getElementById('mokumoku_${ogvs.index}${opvs.index}').style.opacity = "1";
                                                          			 $("#park_option_${ogvs.index}${opvs.index }").removeClass("pumjeol_btn");
                  	                                                 $("#park_option_${ogvs.index}${opvs.index }").addClass("not_pumjeol_btn");
                  	                                                 op_oos = "false";
                                                          		 }else{
-                                                         			document.getElementById('mokumoku_${ogvs.index}${opvs.index }').style.opacity = "0.25";
                                                          			document.getElementById('park_option_${ogvs.index}${opvs.index }').textContent = '해제';
-                                                         			 
+                                                         			 document.getElementById('mokumoku_${ogvs.index}${opvs.index}').style.opacity = "0.25";
                                                          			 $("#park_option_${ogvs.index}${opvs.index }").addClass("pumjeol_btn");
                 	                                                 $("#park_option_${ogvs.index}${opvs.index }").removeClass("not_pumjeol_btn");
                 	                                                 op_oos = "true";
@@ -851,6 +856,10 @@ li {
                                                          		
                                                          	
                                                          	</script>
+                                                         	 
+                                                          	 	  </div>
+                                                               </div>
+                                                         	</a></li>
                                                          	</c:if>
                                                          	</c:forEach>
                                                          	<!-- 하나의 옵션 끝 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->

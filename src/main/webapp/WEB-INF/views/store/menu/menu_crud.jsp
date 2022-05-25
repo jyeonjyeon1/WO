@@ -697,7 +697,7 @@ function addMgName(){
 																			
 																			<c:forEach var="menu" items="${storeMenuList}"
 																					varStatus="vss">
-																					<c:if test="${menu.mg_name eq mg.mg_name }">
+																					<c:if test="${menu.mg_code eq mg.mg_code }">
 																					
 																						<li><a class="menu_one" id="menu_one${vs.index}${vss.index}">
 																								<div class="row">
@@ -1949,7 +1949,7 @@ function addMgName(){
 																							style="line-height: 20px; margin-left: 10px;">
 																							<input type="radio" name="radio111" id="radio222"
 																								value="2"> <label for="radio222"
-																								style="font-size: 15px;"> [선택] 옵션을 선택하지
+																								style="fontradio111-size: 15px;"> [선택] 옵션을 선택하지
 																								않아도 주문이 가능해요</label>
 																						</div>
 																					</li>
@@ -2136,13 +2136,13 @@ function addMgName(){
 																							var Og_name_input =$("#og_name_input").val();
 																							var opName_input = $("#addOpName_input").val();
 																							var opPrice_input = $("#addOpPrice_input").val();
-																								
+																							console.log($(":input:radio[name=radio111]:checked").val());
 																							//두번째 줄~
 																							var addOpttt = document.getElementById("addOg2_option").innerText;
 																							
 																							//세번째 줄
 																							var addOp_ROS = "[필수]";
-																							if($(":input:radio[name=radio111]:checked").val()==1) {
+																							if($(":input:radio[name=radio111]:checked").val()=='1') {
 																								addOp_ROS ="[필수]";
 																							}else {
 																								addOp_ROS="[선택]";
@@ -2167,73 +2167,78 @@ function addMgName(){
 																							
 																						   	}
 																								
-																							function addOgReal() {
-																								
-																								var addOgN = document.getElementById("newOg_name").innerText;
-																								var addOpt = document.getElementById("addOg2_option").innerText;
-																								var og_ROS = document.getElementById("addOg_ROSS").innerText;
-																								console.log(addOgN + "/" + addOpt + "/"+og_ROS);
-																								 
-																								
-																									//ajax
-																									var parammm = {
-																											"og_name" : addOgN,
-																											"ogop_total" : addOpt,
-																											"og_ros" : og_ROS
-																									};
-																									
-																									$.ajax({
-																					  		    	    type: "POST",
-																					  		    	    url: "/insertOg.store",
-																					  		    	    data: JSON.stringify(parammm), 
-																					  		    	    dataType: "json",
-																					  		    	    contentType: "application/json",
-																					  		    	    success: function (data) {
-																					  		    	        if (data == 1) {
-																						  		    	        Swal.fire({
-																						  		    	            icon: "success",
-																						  		    	            title: "메뉴 추가 완료",
-																						  		    	            showConfirmButton: false,
-																						  		    	            timer: 1500
-																						  		    	        });
-																						  		    	        location.href = location.href;
-																					  		    	        }else{alert("통신은됨");}
-																					  		    	    },
-																					  		    	    error: function (data) {
-																					  		    	        console.log("옵션추가 통신에러");
-																					  		    	    }
-																					  		    	});//ajax end 
-																								
-																								
-																							}
+	function addOgReal() {
+		
+		var addOgN = document.getElementById("newOg_name").innerText;
+		var addOpt = document.getElementById("addOg2_option").innerText;
+		var og_ROS = document.getElementById("addOg_ROSS").innerText;//필수 선택
+		console.log(addOgN + "/" + addOpt + "/"+og_ROS);
+		addOpt = addOpt.replace(/원/gi,"won");
+		if(og_ROS.indexOf("필수") != -1){
+			og_ROS = og_ROS.replace("필수", "true"); //필수 일 경우
+		}else{
+			og_ROS = og_ROS.replace("선택", "false");
+		}
+		
+			//ajax
+			var parammm = {
+					"og_name" : addOgN,
+					"ogop_total" : addOpt,
+					"og_ros" : og_ROS
+			};
+			
+			$.ajax({
+ 		    	    type: "POST",
+ 		    	    url: "/insertOg.store",
+ 		    	    data: JSON.stringify(parammm), 
+ 		    	    dataType: "json",
+ 		    	    contentType: "application/json",
+ 		    	    success: function (data) {
+ 		    	        if (data == 1) {
+  		    	        Swal.fire({
+  		    	            icon: "success",
+  		    	            title: "메뉴 추가 완료",
+  		    	            showConfirmButton: false,
+  		    	            timer: 1500
+  		    	        });
+  		    	        location.href = location.href;
+ 		    	        }else{alert("통신은됨");}
+ 		    	    },
+ 		    	    error: function (data) {
+ 		    	        console.log("옵션추가 통신에러");
+ 		    	    }
+ 		    	});//ajax end 
+		
+		
+	}
 																							
-																						   	$(document).ready(function(){
-																								  var newOg_name_input1 = "";
-																								  $("#og_name_input").on("propertychange change keyup paste input",
-																											function() {
-																									  newOg_name_input1 = $("#og_name_input").val();
-																									  //옵션그룹추가 그룹명명 입력시 확인하기 모달로 전달
-																									  var newOg_name = document.getElementById("newOg_name");
-																									  newOg_name.innerText = newOg_name_input1;
-																								  });
-																								  
-																								  $("#addOpName_input").on("propertychange change keyup paste input",
-																											function() {
-																									  var addOpName_input1 = $("#addOpName_input").val();
-																									  //옵션그룹추가 옵션명 입력시 확인하기 모달로 전달
-																									  var addOpNameee = document.getElementById("addOpNameee");
-																									  addOpNameee.innerText = addOpName_input1;
-																								  });
-																								  
-																								  $("#addOpPrice_input").on("propertychange change keyup paste input",
-																											function() {
-																									  var addOpPrice_input1 = $("#addOpPrice_input").val();
-																									  //옵션그룹추가 옵션가격 입력시 확인하기 모달로 전달
-																									  var addOpPriceee = document.getElementById("addOpPriceee");
-																									  addOpPriceee.innerText = addOpPrice_input1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-																								  });
-																								  
-																								})//doc ready 끝
+  	$(document).ready(function(){
+	  var newOg_name_input1 = "";
+	  $("#og_name_input").on("propertychange change keyup paste input",
+				function() {
+		  newOg_name_input1 = $("#og_name_input").val();
+		  //옵션그룹추가 그룹명명 입력시 확인하기 모달로 전달
+		  var newOg_name = document.getElementById("newOg_name");
+		  newOg_name.innerText = newOg_name_input1;
+	  });
+	  
+	  $("#addOpName_input").on("propertychange change keyup paste input",
+				function() {
+		  var addOpName_input1 = $("#addOpName_input").val();
+		  //옵션그룹추가 옵션명 입력시 확인하기 모달로 전달
+		  var addOpNameee = document.getElementById("addOpNameee");
+		  addOpNameee.innerText = addOpName_input1;
+	  });
+	  
+	  $("#addOpPrice_input").on("propertychange change keyup paste input",
+				function() {
+		  var addOpPrice_input1 = $("#addOpPrice_input").val();
+		  //옵션그룹추가 옵션가격 입력시 확인하기 모달로 전달
+		  var addOpPriceee = document.getElementById("addOpPriceee");
+		  addOpPriceee.innerText = addOpPrice_input1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	  });
+	  
+	})//doc ready 끝
 																						 	   
 																						 		 	  
 																					
@@ -2462,14 +2467,14 @@ function addMgName(){
 																										<c:otherwise>
 																										<div class="row"
 																									style="line-height: 20px; margin-left: 10px;">
-																									<input type="radio" name="radio3${ogVs.index}" id="radio4${ogVs.index}"
+																									<input type="radio" name="radio2${ogVs.index}" id="radio4${ogVs.index}"
 																										value="1" checked> <label for="radio4${ogVs.index}"
 																										style="font-size: 15px;"> [필수] 옵션을 반드시
 																										선택해야 주문이 가능해요</label>
 																								</div>
 																								<div class="row"
 																									style="line-height: 20px; margin-left: 10px;">
-																									<input type="radio" name="radio3${ogVs.index}" id="radio5${ogVs.index}"
+																									<input type="radio" name="radio2${ogVs.index}" id="radio5${ogVs.index}"
 																										value="2"> <label for="radio5${ogVs.index}"
 																										style="font-size: 15px;" > [선택] 옵션을
 																										선택하지 않아도 주문이 가능해요</label>
@@ -2489,16 +2494,16 @@ function addMgName(){
 																							
 																			<script>
 																				function update_og_ros${ogVs.index}() {
-																					var updateOp_ROS = "[필수]";
-																					if($(":input:radio[name=radio3${ogVs.index}]:checked").val()==1) {
-																						updateOp_ROS ="[필수]";
+																					var updateOp_ROS = "[true]";
+																					if($(":input:radio[name=radio2${ogVs.index}]:checked").val()==1) {
+																						updateOp_ROS ="[true]";
 																					}else {
-																						updateOp_ROS="[선택]";
+																						updateOp_ROS="[false]";
 																					}
 																					var ogCode_forRos = document.getElementById("hidden_ogCodeForROS${ogVs.index}").innerText;
-																					
+																					alert(updateOp_ROS);
 																					var param = {
-																							"og_ros" :updateOp_ROS,
+																							"og_ros" : updateOp_ROS,
 																							"og_code" : ogCode_forRos
 																					}
 																					

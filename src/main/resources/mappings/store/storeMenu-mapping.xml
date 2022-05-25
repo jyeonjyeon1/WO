@@ -8,7 +8,7 @@
 		INNER JOIN
 		MENU m
 		ON (m.MG_CODE = g.MG_CODE )
-		WHERE m.SI_CODE = #{storeName}
+		WHERE m.SI_CODE = #{storeName} and g.SI_CODE = #{storeName}
 		ORDER BY m.M_SEQ
 	</select>
 	
@@ -235,14 +235,14 @@
 		INSERT INTO
     	OPTIONS(OP_CODE, OG_SEQ, SI_CODE,OP_NAME,OP_PRICE,OP_OOS) 
     	VALUES 
-    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},#{op_oos})
+    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},default)
 	</insert>
 	
 	<insert id="addOp2">
 		INSERT INTO
     	OPTIONS(OP_CODE, OG_SEQ, SI_CODE,OP_NAME,OP_PRICE,OP_OOS) 
     	VALUES 
-    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},#{op_oos})
+    	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},default)
 	</insert>
 	
 	<update id="updateOgRos">

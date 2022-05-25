@@ -18,5 +18,12 @@ public class StorePumjeolDAO {
 		sqlSession.update("StorePumjeolDAO.updateMenuPumjeol_MAO",map);
 	}
 	
+	public void updateOptionPumjeol(HashMap<String, Object> map) {
+		sqlSession.update("StorePumjeolDAO.updateOptionPumjeol",map);
+	}
+	
+	public void updateOptionPumjeol_MAO(HashMap<String, Object> map) {
+		sqlSession.update("StorePumjeolDAO.updateOptionPumjeol_MAO",map);
+	}
 	
 }

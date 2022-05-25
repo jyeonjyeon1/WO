@@ -17,6 +17,9 @@ import three.aws.wo.store.service.StorePumjeolSerivce;
 import three.aws.wo.store.vo.MenuBasicOptionVO;
 import three.aws.wo.store.vo.StoreMenuGroupVO;
 import three.aws.wo.store.vo.StoreMenuVO;
+import three.aws.wo.store.vo.StoreOptionGroupVO;
+import three.aws.wo.store.vo.StoreOptionVO;
+import three.aws.wo.store.vo.StoreVO;
 
 @Controller
 public class StorePumjeolController {
@@ -28,15 +31,26 @@ public class StorePumjeolController {
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping("/pumjeol.store")
 	public String pumjeol(HttpSession session, Model model) {
-		String storeName = "2222111212";
+		StoreVO vo = (StoreVO)session.getAttribute("storeSession");
+		String si_code = "";
+		if(vo != null) {
+			si_code = vo.getSi_code();
+		}else {
+			si_code = "2222111212";
+		}
+		
 		System.out.println("@@@@@@@@@@@@@");
-		List<StoreMenuVO> storeMenuList = sMenuService.storeMenuList(storeName);
-		List<StoreMenuGroupVO> storeMgList = sMenuService.storeMgList(storeName);
-		List<MenuBasicOptionVO> basicOpList = sMenuService.basicOpList(storeName);
+		List<StoreMenuVO> storeMenuList = sMenuService.storeMenuList(si_code);
+		List<StoreMenuGroupVO> storeMgList = sMenuService.storeMgList(si_code);
+		List<MenuBasicOptionVO> basicOpList = sMenuService.basicOpList(si_code);
+		List<StoreOptionGroupVO> ogList = sMenuService.ogList(si_code);
+		List<StoreOptionVO> optionList = sMenuService.optionList(si_code);
 
 		model.addAttribute("storeMenuList", storeMenuList);
 		model.addAttribute("storeMgList", storeMgList);
 		model.addAttribute("basicOpList", basicOpList);
+		model.addAttribute("ogList", ogList);
+		model.addAttribute("optionList", optionList);
 
 		return "/menu/menu_pumjeol";
 	}
@@ -45,7 +59,13 @@ public class StorePumjeolController {
 	@RequestMapping("/updateMenuPumjeol.store")
 	public int updateMenuPumjeol(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result= 0;
-		String si_code = "2222111212";
+		StoreVO vo = (StoreVO)session.getAttribute("storeSession");
+		String si_code = "";
+		if(vo != null) {
+			si_code = vo.getSi_code();
+		}else {
+			si_code = "2222111212";
+		}
 		System.out.println("updateMenuPumjeol");
 		String m_code = param.get("m_code");
 		boolean m_oos = Boolean.valueOf(param.get("m_oos"));
@@ -63,6 +83,39 @@ public class StorePumjeolController {
 			System.err.println("메뉴 품절 변경 에러...");
 		}
 		
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateOptionPumjeol.store")
+	public int updateOptionPumjeol(@RequestBody HashMap<String, String> param, HttpSession session) {
+		int result= 0;
+		StoreVO vo = (StoreVO)session.getAttribute("storeSession");
+		String si_code = "";
+		if(vo != null) {
+			si_code = vo.getSi_code();
+		}else {
+			si_code = "2222111212";
+		}
+		System.out.println("updateOptionPumjeol");
+		String op_code = param.get("op_code");
+		boolean op_oos = Boolean.valueOf(param.get("op_oos"));
+		System.out.println(op_code);
+		System.out.println(op_oos);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("si_code", si_code);
+		map.put("op_code", op_code);
+		map.put("op_oos", op_oos);
+		try {
+			storePumjeolService.updateOptionPumjeol(map);
+			storePumjeolService.updateOptionPumjeol_MAO(map);
+			result=1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("옵션 품절 변경 에러...");
+		}
 		
 		return result;
 	}

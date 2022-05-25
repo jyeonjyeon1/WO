@@ -150,7 +150,7 @@ public class StoreMenuController {
 		// all menu
 		String basic_menu_options = param.get("opb_total");
 		String[] basic_menu_split = basic_menu_options.split("\\n");
-		int basic_num = basic_menu_split.length; // �� �⺻�ɼ� +1
+		int basic_num = basic_menu_split.length; // 占쏙옙 占썩본占심쇽옙 +1
 
 		System.out.println("inserting menu");
 		// getting m_code of max m_seq from menu
@@ -207,7 +207,7 @@ public class StoreMenuController {
 //			//first set-> OGB / get <- seq 
 			int ogb_seq = sMenuService.getogb_seq(map);
 
-			// ogb_seq �޾ƿ� �Ŀ� �Է� (ù��°�͸�)
+			// ogb_seq 占쌨아울옙 占식울옙 占쌉뤄옙 (첫占쏙옙째占싶몌옙)
 			map.put("ogb_seq", ogb_seq);
 			sMenuService.insertOPB(map);
 			// (#{si_code},#{ogb_seq} ,#{opb_code},#{opb_name} ,#{opb_price})
@@ -229,7 +229,7 @@ public class StoreMenuController {
 
 			result = 1;
 		} catch (Exception e) {
-			System.err.println("���� ��� FAIL");
+			System.err.println("占쏙옙占쏙옙 占쏙옙占� FAIL");
 			e.printStackTrace();
 		}
 
@@ -254,7 +254,7 @@ public class StoreMenuController {
 		String mg_code = param.get("mg_code");
 		String opb_total = param.get("opb_total");
 		String[] basic_menu_split = opb_total.replaceAll("\\n","").replaceAll("\\t","").split("CUTCUTCUT");
-		int basic_num = basic_menu_split.length; // �� �⺻�ɼ� +4 �޴��� [4]����
+		int basic_num = basic_menu_split.length; // 占쏙옙 占썩본占심쇽옙 +4 占쌨댐옙占쏙옙 [4]占쏙옙占쏙옙
 		for(String s : basic_menu_split) {
 			System.out.println(s);
 		}
@@ -267,13 +267,13 @@ public class StoreMenuController {
 		map.put("m_name", m_name);
 		map.put("m_seq", m_seq);
 		if(!m_ori_name.equals(m_name)) {
-			//MENU���� �̸� �ٲ��ٰ���
+			//MENU占쏙옙占쏙옙 占싱몌옙 占쌕뀐옙占쌕곤옙占쏙옙
 			sMenuService.updateMenu(map);
-			//OGB���� �̸� �ٲ��ٰ���
+			//OGB占쏙옙占쏙옙 占싱몌옙 占쌕뀐옙占쌕곤옙占쏙옙
 			sMenuService.updateOGB(map);
 		}
 		
-		//�ش� m_seq�� �ش��ϴ� ogb_seq + ogb_code�� ���ð���
+		//占쌔댐옙 m_seq占쏙옙 占쌔댐옙占싹댐옙 ogb_seq + ogb_code占쏙옙 占쏙옙占시곤옙占쏙옙
 		int ogb_seq = sMenuService.ogbSeqfromMSeq(map);
 		String ogb_code = sMenuService.ogbCodefromMSeq(map);
 		
@@ -281,7 +281,7 @@ public class StoreMenuController {
 		System.out.println(ogb_seq);
 		System.out.println(ogb_code);
 		map.put("ogb_seq", ogb_seq);
-		//option_basic�� �ش� menu �� ����
+		//option_basic占쏙옙 占쌔댐옙 menu 占쏙옙 占쏙옙占쏙옙
 		sMenuService.deleteOptionBasics(map);
 		
 		try {
@@ -300,7 +300,7 @@ public class StoreMenuController {
 			}
 			result = 1;
 		} catch (Exception e) {
-			System.err.println("optionbasic ���� �ִ� ���� ����");
+			System.err.println("optionbasic 占쏙옙占쏙옙 占쌍댐옙 占쏙옙占쏙옙 占쏙옙占쏙옙");
 		}
 		return result;
 	}
@@ -324,7 +324,7 @@ public class StoreMenuController {
 			sMenuService.deleteMenu_MAO(map);
 			result = 1;
 		} catch (Exception e) {
-			System.err.println("�޴� ���� ���� ����");
+			System.err.println("占쌨댐옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙");
 		}
 		
 		return result;
@@ -346,9 +346,9 @@ public class StoreMenuController {
 		String[] ogop_split = ogop_total.replaceAll("\\n","").replaceAll("\\t","").split(" won");
 		
 		//og_ros
-		if(og_ros_String.equals("[필수]")) {
+		if(og_ros_String.equals("[true]")) {
 			og_ros = true;
-		}else if(og_ros_String.equals("[선택]")) og_ros=false;
+		}else if(og_ros_String.equals("[false]")) og_ros=false;
 		
 		//getting max_og_code
 		String current_max_Ogcode = sMenuService.maxOgCode(si_code);
@@ -410,7 +410,7 @@ public class StoreMenuController {
 		boolean og_ros = false;
 		System.out.println(og_code + " / " + og_ros_input);
 		
-		if(og_ros_input.equals("[필수]")) {
+		if(og_ros_input.equals("[true]")) {
 			og_ros = true;
 		} else {
 			og_ros = false;

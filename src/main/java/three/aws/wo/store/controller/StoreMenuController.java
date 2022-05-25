@@ -19,29 +19,23 @@ import three.aws.wo.store.vo.StoreMenuGroupVO;
 import three.aws.wo.store.vo.StoreMenuVO;
 import three.aws.wo.store.vo.StoreOptionGroupVO;
 import three.aws.wo.store.vo.StoreOptionVO;
-import three.aws.wo.store.vo.StoreVO;
 
 @Controller
 public class StoreMenuController {
 	@Resource
 	private SMenuService sMenuService;
-	
-	
-	
-	
+
 	@RequestMapping("/CRUD.store")
 	public String storeMenuList(HttpSession session, Model model) {
-		
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
-		
+		// storeCode for IMSI test... (if session -> storeName = session)
+		String storeName = "7845124578";
 		System.out.println("Welcome storemenuCRUD Page");
-		List<StoreMenuVO> storeMenuList = sMenuService.storeMenuList(si_code);
-		List<StoreMenuGroupVO> storeMgList = sMenuService.storeMgList(si_code);
-		List<StoreOptionGroupVO> ogList = sMenuService.ogList(si_code);
-		List<StoreOptionVO> optionList = sMenuService.optionList(si_code);
-		List<MenuAndOptionVO> MAOList = sMenuService.MAOList(si_code);
-		List<MenuBasicOptionVO> basicOpList = sMenuService.basicOpList(si_code);
+		List<StoreMenuVO> storeMenuList = sMenuService.storeMenuList(storeName);
+		List<StoreMenuGroupVO> storeMgList = sMenuService.storeMgList(storeName);
+		List<StoreOptionGroupVO> ogList = sMenuService.ogList(storeName);
+		List<StoreOptionVO> optionList = sMenuService.optionList(storeName);
+		List<MenuAndOptionVO> MAOList = sMenuService.MAOList(storeName);
+		List<MenuBasicOptionVO> basicOpList = sMenuService.basicOpList(storeName);
 
 		model.addAttribute("storeMenuList", storeMenuList);
 		model.addAttribute("storeMgList", storeMgList);
@@ -59,10 +53,7 @@ public class StoreMenuController {
 	@ResponseBody
 	@RequestMapping("/addMgName.store")
 	public String addMgName(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
-		
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
-		
+		String si_code = "7845124578";
 		String mg_name = param.get("mg_name");
 //		String totalCount = String.valueOf(param.get("totalCount"));
 		System.out.println("adding menugroup");
@@ -92,8 +83,7 @@ public class StoreMenuController {
 	@RequestMapping("/deleteMenuGroup.store")
 	public int deleteMenuGroup(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
+		String si_code = "7845124578";
 		String mg_code = param.get("mg_code");
 		System.out.println("deleting menugroup");
 
@@ -115,8 +105,7 @@ public class StoreMenuController {
 	@RequestMapping("/updateMenuGroup.store")
 	public int updateMenuGroup(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
+		String si_code = "7845124578";
 		String mg_code = param.get("mg_code");
 		String mg_name = param.get("mg_name");
 		System.out.println("updating menugroup");
@@ -140,8 +129,7 @@ public class StoreMenuController {
 	@RequestMapping("/insertMenu.store")
 	public int insertMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
+		String si_code = "7845124578";
 		int mg_seq = Integer.parseInt(param.get("mg_seq"));
 		String mg_code = param.get("mg_code");
 		String m_name = param.get("m_name");
@@ -241,8 +229,7 @@ public class StoreMenuController {
 	public int updateMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
 		System.out.println("updating menu");
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
+		String si_code = "7845124578";
 //		var paramm = {
 //			"mg_seq" : mg_seq,
 //			"mg_code" : mg_code,
@@ -310,8 +297,7 @@ public class StoreMenuController {
 	public int deleteMenu(@RequestBody HashMap<String, String> param, HttpSession session) {
 		int result = 0;
 		System.out.println("deleting menu");
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
+		String si_code = "7845124578";
 		String m_code = param.get("m_code");
 		int m_seq = Integer.parseInt(param.get("m_seq"));
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -334,9 +320,8 @@ public class StoreMenuController {
 	@ResponseBody
 	@RequestMapping("/insertOg.store")
 	public int insertOg(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
+		String si_code = "7845124578";
 		
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
 		String og_name = param.get("og_name");
 		String ogop_total = param.get("ogop_total");
 		String og_ros_String = param.get("og_ros");
@@ -371,7 +356,7 @@ public class StoreMenuController {
 				
 		//insert options
 		String op_name = ogop_split[0].split(":")[0];
-		int op_price = Integer.parseInt(ogop_split[0].split(":")[1].replace(" ", "").replaceAll(",", ""));
+		int op_price = Integer.parseInt(ogop_split[0].split(":")[1]);
 		String op_code = og_code + "001" ; 
 			HashMap<String, Object> mapp = new HashMap<String, Object>();
 			mapp.put("op_code", op_code);
@@ -385,7 +370,7 @@ public class StoreMenuController {
 		if(ogop_split.length>=2) {
 			for(int i=1; i<ogop_split.length;i++) {
 				String op_name2 = ogop_split[i].split(":")[0];
-				int op_price2 = Integer.parseInt(ogop_split[i].split(":")[1].replace(" ", "").replaceAll(",", ""));
+				int op_price2 = Integer.parseInt(ogop_split[i].split(":")[1]);
 				String op_code2 =  String.valueOf(Integer.parseInt(op_code)+i) ; 
 				HashMap<String, Object> mappp = new HashMap<String, Object>();
 				mappp.put("op_code", op_code2);
@@ -395,34 +380,11 @@ public class StoreMenuController {
 				mappp.put("op_price", op_price2);
 				sMenuService.addOp2(mappp);
 		}	
+			
+			
 				}
+
+
 		return 1;
 	}
-	
-	@ResponseBody
-	@RequestMapping("/updateOg_ros.store")
-	public int updateOgRos(@RequestBody HashMap<String, String> param, HttpSession session, Model model) {
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = svo.getSi_code();
-		
-		String og_code = param.get("og_code");
-		String og_ros_input = param.get("og_ros");
-		boolean og_ros = false;
-		System.out.println(og_code + " / " + og_ros_input);
-		
-		if(og_ros_input.equals("[필수]")) {
-			og_ros = true;
-		} else {
-			og_ros = false;
-		}
-		System.out.println(og_ros);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("og_code", og_code);
-		map.put("og_ros", og_ros);
-		map.put("si_code", si_code);
-		sMenuService.updateOgRos(map);
-		
-		return 1;
-	}
-	
 }

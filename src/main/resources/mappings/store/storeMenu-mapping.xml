@@ -245,12 +245,6 @@
     	(#{op_code},#{og_seq} ,#{si_code},#{op_name},#{op_price},#{op_oos})
 	</insert>
 	
-	<update id="updateOgRos">
-		UPDATE OPTION_GROUP
-		SET OG_ROS = #{og_ros}
-		WHERE SI_CODE = #{si_code} AND og_code = #{og_code}
-	</update>
-	
 	
 </mapper>
  

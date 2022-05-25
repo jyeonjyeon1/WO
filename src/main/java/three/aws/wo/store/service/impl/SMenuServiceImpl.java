@@ -187,9 +187,4 @@ public class SMenuServiceImpl implements SMenuService {
 		sMenuDAO.addOp2(map);
 	}
 	
-	@Override
-	public void updateOgRos(HashMap<String, Object> map) {
-		sMenuDAO.updateOgRos(map);
-	}
-	
 }

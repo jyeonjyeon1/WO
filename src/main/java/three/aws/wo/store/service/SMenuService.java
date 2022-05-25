@@ -46,5 +46,4 @@ public interface SMenuService {
 	int currentOg_seq(HashMap<String, Object> map);
 	void addOp1(HashMap<String, Object> map);
 	void addOp2(HashMap<String, Object> map);
-	void updateOgRos(HashMap<String, Object> map);
 }

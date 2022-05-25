@@ -738,6 +738,7 @@ function addMgName(){
 																					</c:if>
 																					
 	<script>
+	//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 	//ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 	
 	//가격옵션추가 눌렀을때 input 나오게하기.
@@ -840,7 +841,6 @@ function addMgName(){
 		var m_code = $("#m_codee${vs.index}${vss.index}").val;
 		var m_seq = $("#m_seqq${vs.index}${vss.index}").val;
    		var zzzz = document.getElementById("hwakin_chang__${vs.index}${vss.index}").innerText;
-   		console.log(zzzz);
    		//이게 없으면 메뉴를 다 삭제했다는 것을 의미
    		if(zzzz.indexOf(" : ")==-1){
       		 Swal.fire({
@@ -871,7 +871,7 @@ function addMgName(){
    			for(i=1;i<menulength-1;i++){
    				// : 기준 오른쪽(금액)만 컴마 처리 
    				menus[i] = menus[i].split(" : ")[0] + " : " + menus[i].split(" : ")[1].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-   				content_text += "<p style='font-size:14px'>"+menus[i]+" 원<p>";
+   				content_text += "<p style='font-size:14px'>"+menus[i]+" won<p>";
    			}
    			content_text = content_text.replace(/\\t/gi,"");
    			Swal.fire({
@@ -886,6 +886,7 @@ function addMgName(){
    				cancelButtonText: "아니오"
    			}).then((result) => {
    				if (result.isConfirmed) {
+					
    				//ajax
    		   			var paramm = {
    		   					"mg_seq" : mg_seq,
@@ -1508,7 +1509,7 @@ function addMgName(){
                		  //확인창에도 옵션 누적시켜줄거임
                    	$('#priceOne_${vs.index}').append('<h4 id="menutwo_${vs.index}'+indexstring+'" style="margin-left: 0px;">'
                    	+'<span id="menutwo_name${vs.index}'+indexstring+'">미입력</span> : '
-                   	+'<span id="menutwo_price${vs.index}'+indexstring+'">미입력</span> 원</h4>');
+                   	+'<span id="menutwo_price${vs.index}'+indexstring+'">미입력</span> won</h4>');
                     
                    	$(".NAMENAMENAME").on("propertychange change keyup paste input",
 							function() {
@@ -1541,10 +1542,7 @@ function addMgName(){
 					var optionBasic_price = $("#newmenu_basic_price_input${vs.index}").val();
 					//두번째 줄
 					var zzzz = document.getElementById("hwakin_chang_${vs.index}").innerText;
-				
-					zzzz = zzzz.replace(/원/gi, "won");
 					
-					console.log(zzzz);
 					
 // 					//빈칸있으면 뭐라하기
 					if(menu_name==""||optionBasic_name==""||optionBasic_price==""||zzzz.indexOf("미입력")!=-1){
@@ -1786,7 +1784,7 @@ function addMgName(){
 
 																										<h4 style="font-weight: bolder; color: black;">가격</h4>
 																										<h4 id="priceOne_${vs.index}" style="margin-left: 10px;">
-																										<span id="newMenu_basic${vs.index}"></span> : <span id="newMenu_basic_price${vs.index}"></span> 원</h4>
+																										<span id="newMenu_basic${vs.index}"></span> : <span id="newMenu_basic_price${vs.index}"></span> won</h4>
 																									</div>
 
 
@@ -2015,7 +2013,7 @@ function addMgName(){
 																									<div class="row">
 																											<h4 style="font-weight: bolder; color: black;">가격</h4>
 																					<h4 id="addOg2_option" style="margin-left: 10px;">
-																					<span id="addOpNameee"></span> : <span id="addOpPriceee"></span> 원</h4>
+																					<span id="addOpNameee"></span> : <span id="addOpPriceee"></span> won</h4>
 																										</div>
 
 
@@ -2105,7 +2103,7 @@ function addMgName(){
 																				 		  //확인창에도 옵션 누적
 																		                   	$('#addOg2_option').append('<h4 id="addOg2_option'+indexS+'" style="margin-left: 0px;">'
 																		                   	+'<span id="addOp2Name_input'+indexS+'">미입력</span> : '
-																		                   	+'<span id="addOp2Price_input'+indexS+'">미입력</span> 원</h4>');
+																		                   	+'<span id="addOp2Price_input'+indexS+'">미입력</span> won</h4>');
 																		                    
 																		                   	$(".opNameopName").on("propertychange change keyup paste input",
 																									function() {
@@ -2200,7 +2198,7 @@ function addMgName(){
 																					  		    	        }else{alert("통신은됨");}
 																					  		    	    },
 																					  		    	    error: function (data) {
-																					  		    	        console.log("옵션추가 통신에러");
+																					  		    	        console.log("메뉴추가 통신에러");
 																					  		    	    }
 																					  		    	});//ajax end 
 																								
@@ -2399,7 +2397,9 @@ function addMgName(){
 																				
 																			<li><a class="option_addOne" onclick="option_addOne${ogVs.index}()">
 				
-																					<h4 style="color: blue; padding: 10px; margin-right: 65px;">+옵션추가</h4>
+																					<h4
+																						style="color: blue; padding: 10px; margin-right: 65px;">+
+																						옵션추가</h4>
 
 																			</a></li>
 																			
@@ -2427,8 +2427,6 @@ function addMgName(){
 																							<h3
 																							style="color: black; font-weight: bolder; text-align: center;">그룹명
 																							: ${ogList.og_name}</h3>
-																							<h3 id ="hidden_ogCodeForROS${ogVs.index}" style="display:none;">${ogList.og_code}</h3>
-																							
 																							<button type="button" class="close"
 																								data-dismiss="modal"
 																								style="font-size: 20px; color: black;">취소</button>
@@ -2481,62 +2479,17 @@ function addMgName(){
 																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button type="button" class="save_Btn" onclick="update_og_ros${ogVs.index}()">적용하기</button>
+																										<button type="button" class="save_Btn">적용하기</button>
 																									</div>
 																								</div>
 																							</li>
-																							
-																							
-																			<script>
-																				function update_og_ros${ogVs.index}() {
-																					var updateOp_ROS = "[필수]";
-																					if($(":input:radio[name=radio3${ogVs.index}]:checked").val()==1) {
-																						updateOp_ROS ="[필수]";
-																					}else {
-																						updateOp_ROS="[선택]";
-																					}
-																					var ogCode_forRos = document.getElementById("hidden_ogCodeForROS${ogVs.index}").innerText;
-																					
-																					var param = {
-																							"og_ros" :updateOp_ROS,
-																							"og_code" : ogCode_forRos
-																					}
-																					
-																					$.ajax({
-																	  		    	    type: "POST",
-																	  		    	    url: "/updateOg_ros.store",
-																	  		    	    data: JSON.stringify(param), 
-																	  		    	    dataType: "json",
-																	  		    	    contentType: "application/json",
-																	  		    	    success: function (data) {
-																	  		    	        if (data == 1) {
-																		  		    	        Swal.fire({
-																		  		    	            icon: "success",
-																		  		    	            title: "필수여부 수정 완료",
-																		  		    	            showConfirmButton: false,
-																		  		    	            timer: 1500
-																		  		    	        });
-																		  		    	        location.href = location.href;
-																	  		    	        }else{alert("통신은됨");}
-																	  		    	        
-																	  		    	        
-																	  		    	    },
-																	  		    	    error: function (data) {
-																	  		    	        console.log("필수여부 수정 통신에러");
-																	  		    	    }
-																	  		    	});//ajax end
-																					
-																					
-																				}
-																			</script>
 
 																						</div>
-																						
+																						<div id="count" value="1"></div>
 																					</div>
 																				</div>
 																			</div>
 																			<!--------필수여부 수정 모달 end--------->
-																			
 																			
 																				<!--------+옵션 추가버튼 클릭시 modal start-------->
 																	<div class="modal fade" id="option_addOne${ogVs.index}"

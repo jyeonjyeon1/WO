@@ -153,8 +153,4 @@ public class SMenuDAO {
 	public void addOp2(HashMap<String, Object> map) {
 		sqlSession.insert("SMenuDAO.addOp2",map);
 	}
-	
-	public void updateOgRos(HashMap<String, Object> map) {
-		sqlSession.update("SMenuDAO.updateOgRos", map);
-	}
 }

@@ -60,17 +60,7 @@ if (selectHeader) {
 }
 });
 
-$(document).ready(function () {
-	$(".showdetail_btn").click(function () {
 
-		if ($('.option_select_form').hasClass('active') == false) {
-			$(".option_select_form").addClass("active");
-		} else {
-			$(".option_select_form").removeClass("active");
-		}
-	});
-
-});
 
 
 (function ($) {

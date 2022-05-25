@@ -7,8 +7,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>워킹오더 매장관리자 페이지</title>
 
   <!-- Favicons -->
@@ -22,7 +20,15 @@
   <!-- Custom styles for this template -->
   <link href="resources/assets/css/admin/style.css" rel="stylesheet">
   <link href="resources/assets/css/admin/style-responsive.css" rel="stylesheet">
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+.admin__name {
+	margin: 23px;
+	color: white;
+	font-weight: 700;
+	font-size: 13px;
+}
+</style>
 </head>
 
 <body>
@@ -33,7 +39,9 @@
     <!--header start-->
     <header class="header black-bg">
       <div class="sidebar-toggle-box">
-        <div class="openup tooltips" data-placement="right" data-original-title="메뉴 여/닫기" ></div>
+        <div class="openup tooltips"
+			style="background-image: url(resources/assets/images/admin/logo/logo_white.svg);"
+			data-placement="right" data-original-title="메뉴 여/닫기"></div>
       </div>
       <!--logo start-->
       <a href="index.store" class="logo"><b>walking<span>order</span></b></a>
@@ -46,15 +54,16 @@
     <!--logout-->
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login.html">Logout</a></li>
+        	<li class="admin__name">${storeSession.si_name}</li>
+          <li><a class="logout" href="logout.store">Logout</a></li>
         </ul>
       </div>
     </header>    <!--header end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
 
-  <script src="../resources/assets/js/admin/datatable/datatable-modified.js" crossorigin="anonymous"></script>
-  <script src="../resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+  <script src="resources/assets/js/admin/datatable/datatable-modified.js" crossorigin="anonymous"></script>
+  <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 </body>
 
 </html>

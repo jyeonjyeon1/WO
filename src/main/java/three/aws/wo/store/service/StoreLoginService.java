@@ -4,5 +4,5 @@ import three.aws.wo.store.vo.StoreVO;
 
 public interface StoreLoginService {
 	
-	public StoreVO encryption(String sa_acc) throws Exception;
+	public StoreVO storeLoggin(String sa_acc_no) throws Exception;
 }

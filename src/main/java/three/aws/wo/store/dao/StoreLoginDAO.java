@@ -11,7 +11,7 @@ public class StoreLoginDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public StoreVO encryption(String sa_acc)throws Exception {
-		return sqlSession.selectOne("StoreLoginDAO.encryption", sa_acc);
+	public StoreVO storeLoggin(String sa_acc_no)throws Exception {
+		return sqlSession.selectOne("StoreLoginDAO.storeLoggin", sa_acc_no);
 	}
 }

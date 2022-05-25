@@ -13,7 +13,7 @@ public class StoreLoginServiceImpl implements StoreLoginService {
 	private StoreLoginDAO storeLoginDAO;
 	
 	@Override
-	public StoreVO encryption(String sa_acc) throws Exception {
-		return storeLoginDAO.encryption(sa_acc);
+	public StoreVO storeLoggin(String sa_acc_no) throws Exception {
+		return storeLoginDAO.storeLoggin(sa_acc_no);
 	}
 }

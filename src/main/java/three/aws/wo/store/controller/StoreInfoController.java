@@ -77,7 +77,7 @@ public class StoreInfoController {
 	public int updateSiStatus(@RequestBody HashMap<String, String> param, HttpSession session ) {
 		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
 		String si_status_input = param.get("si_status");
-		
+		String si_code = svo.getSi_code();
 		boolean si_status = false;
 		if(si_status_input.equals("y")) {
 			si_status =true;
@@ -87,8 +87,9 @@ public class StoreInfoController {
 		System.out.println(si_status);
 		
 		HashMap<String , Object> map = new HashMap<String, Object>();
-		map.put("si_code",svo.getSi_code());
+		map.put("si_code",si_code);
 		map.put("si_status",si_status);
+		System.out.println(map);
 		sInfoService.updateSiStatus(map);
 		
 		svo.setSi_status(si_status);

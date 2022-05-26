@@ -19,6 +19,6 @@ public class SInfoDAO {
 	}
 	
 	public void updateSiStatus(HashMap<String, Object> map) {
-		sqlSession.update("SinfoDAO.updateSiStatus",map);
+		sqlSession.update("SInfoDAO.updateSiStatus",map);
 	}
 }

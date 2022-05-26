@@ -631,7 +631,7 @@ public class StoreMenuController {
 		op_code = String.valueOf(Integer.parseInt(current_max_op_code) + 1);
 		try {
 			for (int i = 0; i < option_num; i++) {
-				String code = String.valueOf(Integer.parseInt(op_code) + i+ 1);
+				String code = String.valueOf(Integer.parseInt(op_code) + i + 1);
 				String[] split = option_split[i].split(" : ");
 				String name = split[0];
 				int price = Integer.parseInt(split[1].replace(" won", "").replaceAll(",", ""));
@@ -647,6 +647,72 @@ public class StoreMenuController {
 		} catch (Exception e) {
 			System.err.println("insertMenu>insertOPB  FAIL");
 			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	// updating individual menu's optiongroup
+	@ResponseBody
+	@RequestMapping("/updateMenusOptionGroup.store")
+	public int updateMenusOptionGroup(@RequestBody HashMap<String, String> param, HttpSession session) {
+		int result = 0;
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		String si_code = "";
+		if (svo != null) {
+			si_code = svo.getSi_code();
+		} else {
+			si_code = "2222111212";
+		}
+		
+		String og_seq_list = param.get("og_seq_list");
+		String m_code = param.get("m_code");
+		String mg_code = param.get("mg_code");
+		String mg_name = param.get("mg_name");
+		String m_name = param.get("m_name");
+		String m_img_file = param.get("m_img_file");
+		int mg_seq = Integer.parseInt(param.get("mg_seq"));
+		int m_seq = Integer.parseInt(param.get("m_seq"));
+		boolean m_oos = Boolean.valueOf(param.get("m_oos"));
+		
+		//mappp for insert
+		String og_seq_String[] = og_seq_list.split(",");
+		System.out.println(og_seq_list);
+		for(String a : og_seq_String) {
+			System.out.println(a);
+			int og_seq = Integer.parseInt(a);
+			//mapp for getting StoreOptionVO as List
+			HashMap<String,Object> mapp = new HashMap<String,Object>();
+			mapp.put("og_seq", og_seq);
+			mapp.put("si_code", si_code);
+			List<StoreOptionVO> opvo = sMenuService.optionByOgSeq(mapp);
+			
+			mapp.put("m_seq", m_seq);
+			//first delete * from MAO where si_code = and m_seq = 
+			sMenuService.deleteMAObyOgSeq(mapp);
+			for(StoreOptionVO vo : opvo) {//op su man keum insert
+			//mappp for insert
+				HashMap<String,Object> mappp = new HashMap<String,Object>();
+				mappp.put("og_seq", og_seq);
+				mappp.put("si_code", si_code);
+				mappp.put("mg_code ", mg_code);
+				mappp.put("mg_name ", mg_name);
+				mappp.put("mg_seq ", mg_seq);
+				mappp.put("m_seq", m_seq);
+				mappp.put("m_code", m_code);
+				mappp.put("m_name", m_name);
+				mappp.put("m_oos", m_oos);
+				mappp.put("m_img_file", m_img_file);
+				mappp.put("op_code", vo.getOp_code());
+				mappp.put("op_name", vo.getOp_name());
+				mappp.put("op_price", vo.getOp_price());
+				mappp.put("op_seq", vo.getOg_seq());
+				mappp.put("op_oos", og_seq);
+				System.out.println(mappp);
+			}
+			
+			
+			System.out.println(opvo);
 		}
 
 		return result;

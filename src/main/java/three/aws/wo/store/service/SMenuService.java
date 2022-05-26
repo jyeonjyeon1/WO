@@ -57,4 +57,6 @@ public interface SMenuService {
 	void deleteOption_MAO(HashMap<String, String> map);
 	String maxOptionSeq(HashMap<String, Object> map);
 	void insertOptions(HashMap<String, Object> mapp);
+	List<StoreOptionVO> optionByOgSeq(HashMap<String, Object> mapp);
+	void deleteMAObyOgSeq(HashMap<String, Object> mapp);
 }

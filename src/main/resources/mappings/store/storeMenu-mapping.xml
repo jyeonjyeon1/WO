@@ -66,7 +66,7 @@
 		INNER JOIN
 		option_group og
 		ON (op.OG_SEQ = og.OG_SEQ )
-		WHERE og.SI_CODE = #{storeName}
+		WHERE og.SI_CODE = #{storeName} and op.SI_CODE = #{storeName}
 		ORDER BY OP_SEQ
 	</select>
 	
@@ -320,6 +320,13 @@
 		INSERT INTO OPTIONS VALUES
 		(default, #{op_code},#{og_seq},#{si_code},#{op_name},#{op_price},default)
 	</insert>
-	
+	<select id="optionByOgSeq" resultType="StoreOptionVO">
+		SELECT * FROM OPTIONS
+		WHERE SI_CODE = #{si_code} AND OG_SEQ = #{og_seq}
+	</select>
+	<delete id="deleteMAObyOgSeq">
+		DELETE FROM MENUANDOPTIONS
+		WHERE SI_CODE = #{si_code} AND M_SEQ = #{m_seq}
+	</delete> 
 </mapper>
  

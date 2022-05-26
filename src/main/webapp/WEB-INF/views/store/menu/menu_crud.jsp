@@ -413,8 +413,61 @@ li {
   $("li > a").blur(function(){
     $(this).removeClass("selec");
   }) 
-
+  
+  let inside = [];
+  
+  for(i=0;i<100000;i++){
+	  try{
+		  var i_string = "000";
+		  if(i<10){i_string = "00"+ i.toString();}
+		  else if(i<100){i_string = "0"+ i.toString();}
+		  else {i_string = i.toString();}
+		  inside[i] = (document.getElementById("ogogVs"+i_string).innerText).replace(/\t/g,"").replace(/\n/g,"").replace(/\s/g,"");
+		  var inside_split = [];
+		  inside_split = inside[i].split(",,,,");
+		  let inside_length = inside_split.length;
+		  inside_split.length = inside_length - 1;
+		  
+		  var unique_split = inside_split.filter((element, index) => {
+		      return inside_split.indexOf(element) === index;
+		  });
+		  
+		  var last_modify = unique_split.toString();
+		  last_modify = last_modify.replace(/,/g,", ");
+		  
+		  document.getElementById("ogogVs"+i_string).innerText = last_modify;
+	  }catch(error){
+		  
+	  }
+  }
+  
+  let inside_ = [];
+  for(i=0;i<100;i++){
+	  try{
+		  inside_[i] = (document.getElementById("ogul"+i.toString()).innerText).replace(/\t/g,"").replace(/\n/g,"").replace(/\s/g,"");
+		  console.log(inside_[i]);
+		  var inside_split = [];
+		  inside_split = inside_[i].split(",,,,");
+		  var inside_length2 = inside_split.length;
+		  inside_split.length = inside_length2 - 1;
+		  console.log(inside_split);
+		  
+		  var unique_split = inside_split.filter((element, index) => {
+		      return inside_split.indexOf(element) === index;
+		  });
+		  
+		  var last_modify = unique_split.toString();
+		  last_modify = last_modify.replace(/,/g,", ");
+		  
+		  document.getElementById("ogul"+i.toString()).innerText = last_modify;
+	  }catch(error){
+		  
+	  }
+  }
+  
 })//doc ready 끝
+
+
 
 let indexnum = 1;
 let indexstring = "";
@@ -699,7 +752,11 @@ function addMgName(){
 																			<c:forEach var="menu" items="${storeMenuList}"
 																					varStatus="vss">
 																					<c:if test="${menu.mg_code eq mg.mg_code }">
-																					
+																					<input type="hidden" id="m_name${vs.index}${vss.index}" value="${menu.m_name }"/>
+																					<input type="hidden" id="m_code${vs.index}${vss.index}" value="${menu.m_code }"/>
+																					<input type="hidden" id="m_seq${vs.index}${vss.index}" value="${menu.m_seq }"/>
+																					<input type="hidden" id="m_oos${vs.index}${vss.index}" value="${menu.m_oos }"/>
+																					<input type="hidden" id="m_img_file${vs.index}${vss.index}" value="${menu.m_img_file }"/>
 																						<li><a class="menu_one" id="menu_one${vs.index}${vss.index}">
 																								<div class="row">
 																									<div class="col-lg-2"
@@ -1128,17 +1185,17 @@ function addMgName(){
 																								<c:if test="${ogog ne MAOList.og_code}">
 																								<div class="option_1" style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
 																									<div class="row">
-																										<div class="col-lg-8">
+																										<div class="col-sm-9">
 																											<h4 style="font-weight: bolder; color: black;">${MAOList.og_name}</h4>
-																											<h5 style="margin-left: 10px;">
-																											<c:forEach var="optionList" items="${optionList }">
-																												<c:if test="${optionList.og_code eq MAOList.og_code}">
-																													${optionList.op_name},
-																												</c:if>
-																											</c:forEach>
-																											</h5>
+<h5 style="margin-left: 10px;">
+<c:forEach var="optionList" items="${optionList }">
+<c:if test="${optionList.og_code eq MAOList.og_code}">
+${optionList.op_name},
+</c:if>
+</c:forEach>
+</h5>
 																									</div>
-																										<div class="col-lg-4">
+																										<div class="col-sm-3">
 																											<input type="button" class="menu_option_undo"
 																												value="해제">
 																										</div>
@@ -1195,7 +1252,7 @@ function addMgName(){
 																						</h5>
 																					</div>
 																					 
-																					 <c:forEach var="ogList" items="${ogList}">
+																					 <c:forEach var="ogList" items="${ogList}" varStatus="ogogVs">
 																					 <!-- 장바구니 빈칸 용 기본 옵션 ' '은 제외하고 출력   -->
 																					 <c:if test="${ogList.og_code ne ' '}"> 
 																					<label for="chbox1" class="menu_addOptionGroup1"
@@ -1203,8 +1260,8 @@ function addMgName(){
 																						<div class="row">
 																						
 																						<div class="col-lg-1">
-																						<input id="chbox1${vs.index}${vss.index}" type="checkbox"
-																									style="width: 30px; height: 30px;"
+																						<input id="chbox1${vs.index}${vss.index}${ogogVs.index}" name="op_check${vs.index}${vss.index}" type="checkbox"
+																									style="width: 30px; height: 30px;" value="${ogList.og_seq}" og_code="${ogList.og_code}"
 																									 <c:forEach var="MAOList" items="${MAOList}">
 																						<c:if test="${MAOList.m_code eq menu.m_code}">
 																						<c:if test="${MAOList.og_code eq ogList.og_code}">
@@ -1235,27 +1292,17 @@ function addMgName(){
 																									<span style="background-color: #2e27963d; font-weight: bolder;">연결메뉴</span> 연결된
 																									메뉴를 확인하세요.
 																								</h5>
-																								<h6>
-																								<!-- <h5 style="margin-left: 15px; color: rgba(0, 0, 0, 0.801)">
-																								<c:set var="item" value="dd"></c:set>
-																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVs">
-																								<c:if test="${ MAOList.og_code eq ogList.og_code}">
-																								<c:if test="${item ne MAOList.m_name}">
-																								${MAOList.m_name}  
-																								<c:set var="item" value="${MAOList.m_name}" />
-																								</c:if>
-																								</c:if>
-																								위에건 잘 나오는데, 밑에꺼는 안나옴..
-																								</c:forEach></h5> -->
-																								<c:set var="mName" value="ff"></c:set>
-                                                                        <c:forEach var="MAOList" items="${MAOList}">
-                                                                           <c:if test="${MAOList.og_code eq ogList.og_code}">
-                                                                           <c:if test="${mName ne MAOList.m_name}">
-                                                                                 ${MAOList.m_name}, 
-                                                                           <c:set var="mName" value="${MAOList.m_name}" />      
-                                                                           </c:if>
-                                                                           </c:if>
-                                                                        </c:forEach></h6>
+<h6 id="ogogVs${vs.index}${vss.index}${ogogVs.index}">
+<c:set var="mName" value="ff"></c:set>
+<c:forEach var="MAOList" items="${MAOList}">
+<c:if test="${MAOList.og_code eq ogList.og_code}">
+<c:if test="${mName ne MAOList.m_name}">
+${MAOList.m_name},,,,
+<c:set var="mName" value="${MAOList.m_name}" />      
+</c:if>
+</c:if>
+</c:forEach>
+</h6>
 																							</div>
 																						</div>
 																					</label>
@@ -1264,13 +1311,67 @@ function addMgName(){
 																					<!-- ogList forEach END -->
 																					<div class="row" style="overflow-y: auto;">
 																						<div class="col-lg-12">
-																							<button type="button" class="save_Btn">옵션그룹 수정하기</button>
+																							<button type="button" onclick="optionSave${vs.index}${vss.index}()" class="save_Btn">옵션그룹 수정하기</button>
 																						</div>
 																					</div>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
+																	<script>
+																	function optionSave${vs.index}${vss.index}(){
+																		var query = 'input[name="op_check${vs.index}${vss.index}"]:checked';
+																	      var selectedEls = document.querySelectorAll(query);
+																	      //og_seq만
+																	      let og_seq = '';
+																	      selectedEls.forEach((el) => {
+																	    	  og_seq += el.value + ",";
+																	      })
+																	      var mg_seq = $("#mg_seq${vs.index}").val();
+																		  var mg_code = $("#mg_code${vs.index}").val();
+																		  var mg_name = $("#mg_name${vs.index}").val();
+																	      var m_code = $("#m_code${vs.index}${vss.index}").val();
+																	      var m_seq = $("#m_seq${vs.index}${vss.index}").val();
+																	      var m_name = $("#m_name${vs.index}${vss.index}").val();
+																	      var m_oos = $("#m_oos${vs.index}${vss.index}").val();
+																	      var m_img_file = $("#m_img_file${vs.index}${vss.index}").val();
+																	      var paramm = {
+																	    	  "og_seq_list" : og_seq,
+																	    	  "m_code" : m_code,
+																	    	  "m_seq": m_seq,
+																	    	  "mg_seq": mg_seq,
+																	    	  "mg_code": mg_code,
+																	    	  "mg_name": mg_name,
+																	    	  "m_name": m_name,
+																	    	  "m_oos": m_oos,
+																	    	  "m_img_file": m_img_file
+																	      };
+																	      
+																	      
+																	      $.ajax({
+															  		    	    type: "POST",
+															  		    	    url: "/updateMenusOptionGroup.store",
+															  		    	    data: JSON.stringify(paramm), 
+															  		    	    dataType: "json",
+															  		    	    contentType: "application/json",
+															  		    	    success: function (data) {
+															  		    	        if (data == 1) {
+																  		    	        Swal.fire({
+																  		    	            icon: "success",
+																  		    	            title: "옵션그룹 수정 완료",
+																  		    	            showConfirmButton: false,
+																  		    	            timer: 1500
+																  		    	        });
+																  		    	        location.href = location.href;
+															  		    	        }else{alert("통신은됨");}
+															  		    	    },
+															  		    	    error: function (data) {
+															  		    	        console.log("메뉴추가 통신에러");
+															  		    	    }
+															  		    	});//ajax end
+																		
+																	}
+																	</script>
 																	<!-------------메뉴편집_메뉴옵션수정_옵션추가 Modal end--------------->
 																	<!------------ 메뉴편집_이미지변경 Modal start --------------->
                                                    				<div class="modal fade" id="menu_updateImg${vs.index}${vss.index}" role="dialog">
@@ -1747,6 +1848,7 @@ function addMgName(){
 																							: ${mg.mg_name}</h3>
 																							<input type="hidden" id="mg_seq${vs.index}" value="${mg.mg_seq}">
 																							<input type="hidden" id="mg_code${vs.index}" value="${mg.mg_code}">
+																							<input type="hidden" id="mg_name${vs.index}" value="${mg.mg_name}">
 																						<button type="button" class="close"
 																							data-dismiss="modal"
 																							style="font-size: 20px; color: black;">취소</button>
@@ -2283,16 +2385,16 @@ function addMgName(){
 																										style="background-color: rgba(226, 77, 94, 0.267); border-radius: 5px; padding: 3px; font-size: smaller;">연결메뉴</span>
 																									수정사항이 다음 메뉴에 동시에 적용됩니다.
 																								</h4>
-																								<h5 style="margin-left: 15px; color: rgba(0, 0, 0, 0.801)">
-																								<c:set var="item" value="dd"></c:set>
-																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVs">
-																								<c:if test="${ MAOList.og_code eq ogList.og_code}">
-																								<c:if test="${item ne MAOList.m_name}">
-																								${MAOList.m_name}  
-																								<c:set var="item" value="${MAOList.m_name}" />
-																								</c:if>
-																								</c:if>
-																								</c:forEach></h5>
+<h5 id="ogul${ogVs.index }" style="margin-left: 15px; color: rgba(0, 0, 0, 0.801)">
+<c:set var="item" value="dd"></c:set>
+<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVs">
+<c:if test="${ MAOList.og_code eq ogList.og_code}">
+<c:if test="${item ne MAOList.m_name}">
+${MAOList.m_name},,,,
+<c:set var="item" value="${MAOList.m_name}" />
+</c:if>
+</c:if>
+</c:forEach></h5>
 																								<h4 style="color: black;">
 																									<span
 																										style="background-color: rgba(226, 77, 94, 0.267); border-radius: 5px; padding: 3px; font-size: smaller;">필수여부</span>

@@ -15,7 +15,7 @@
 			<style>
 			.container-md {
 				width: 250px;
-				height: 350px;
+				height: 500px;
 				overflow: scroll;
 				overflow-x: hidden
 			}
@@ -38,7 +38,7 @@
 			}
 			
 			.p_mb {
-				margin-bottom: 50px;
+				margin-bottom: 20px;
 			}
 			
 			<!-- 스크롤바 css코드 종료 -->
@@ -53,6 +53,11 @@
 				margin : 10px;
 				width : 600px;
 				color : green;
+			}
+			.ml-5 {
+				padding : 5px;
+				width : 300px;
+				height : 100px;
 			}
 			</style>
 		<!-- ========================= JS here ========================= -->

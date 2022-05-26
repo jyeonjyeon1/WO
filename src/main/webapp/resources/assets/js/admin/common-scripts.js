@@ -300,6 +300,7 @@ $(document).ready(function () {
 	$(".updateMenuGroup").click(function() {
 		var mg_codeforUpdate = $(this).attr("value");
 		var forupdate = $(this).attr("forupdate"); //a 의 id
+		var mg_name = $(this).attr("mg_name"); //a 의 name
 		
 		//이름 수정 시작
 		Swal.fire({
@@ -307,6 +308,7 @@ $(document).ready(function () {
 		    text: "변경할 메뉴그룹명 : ",
 		    showCancelButton: true,
 		    input: "text",
+		    inputValue : mg_name,
 		    confirmButtonColor: "#3085d6",
   		    cancelButtonColor: "#d33",
 		    cancelButtonText: "취소",
@@ -348,6 +350,7 @@ $(document).ready(function () {
 	
 		var og_codeforUpdate = $(this).attr("value");
 		var forupdate = $(this).attr("forupdate"); //a 의 id
+		var og_name = $(this).attr("og_name"); //a 의 id
 		
 		//이름 수정 시작
 		Swal.fire({
@@ -355,6 +358,7 @@ $(document).ready(function () {
 		    text: "변경할 옵션그룹명 : ",
 		    showCancelButton: true,
 		    input: "text",
+		    inputValue : og_name,
 		    confirmButtonColor: "#3085d6",
   		    cancelButtonColor: "#d33",
 		    cancelButtonText: "취소",

@@ -19,4 +19,8 @@ public class MenuAndOptionVO {
 	private String op_name;
 	private int op_price;
 	private boolean op_oos;
+	private int m_seq;
+	private int mg_seq;
+	private int op_seq;
+	private int og_seq;
 }

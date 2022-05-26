@@ -197,4 +197,12 @@ public class SMenuDAO {
 	public void insertOptions(HashMap<String, Object> mapp) {
 		sqlSession.insert("SMenuDAO.insertOptions",mapp);
 	}
+
+	public List<StoreOptionVO> optionByOgSeq(HashMap<String, Object> mapp) {
+		return sqlSession.selectList("SMenuDAO.optionByOgSeq",mapp);
+	}
+
+	public void deleteMAObyOgSeq(HashMap<String, Object> mapp) {
+		sqlSession.delete("SMenuDAO.deleteMAObyOgSeq", mapp);
+	}
 }

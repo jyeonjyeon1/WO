@@ -241,5 +241,15 @@ public class SMenuServiceImpl implements SMenuService {
 	public void insertOptions(HashMap<String, Object> mapp) {
 		sMenuDAO.insertOptions(mapp);
 	}
+
+	@Override
+	public List<StoreOptionVO> optionByOgSeq(HashMap<String, Object> mapp) {
+		return sMenuDAO.optionByOgSeq(mapp);
+	}
+
+	@Override
+	public void deleteMAObyOgSeq(HashMap<String, Object> mapp) {
+		sMenuDAO.deleteMAObyOgSeq(mapp);
+	}
 	
 }

@@ -12,6 +12,5 @@ public class StoreMenuVO {
 	private String m_name;
 	private int m_price;
 	private String m_img_file;
-	private String mg_name;
 
 }

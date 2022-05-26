@@ -83,34 +83,16 @@
         <!-- 키오스크 -->
         <div class="container" style="padding-bottom: 30px; background-color: white;">
             <div class="col-lg-12">
-            <c:forEach var="reviewList" items="${reviewList}" varStatus="vs">
-                <input class="tabinput" id="tab1" type="radio" name="tabs" checked="checked">
+            <c:forEach var="menutitle" items="${menutitle}" varStatus="vs">
+            	<c:if test="${vs.index eq 0 }">
+                <input class="tabinput" id="tab${vs.index +1 }" type="radio" name="tabs" checked="checked">
+                </c:if>
+                <c:if test="${vs.index ne 0 }">
+                <input class="tabinput" id="tab${vs.index +1 }" type="radio" name="tabs">
+                </c:if>
                 <!--디폴트 메뉴-->
-                <label class="tablabel_k" for="tab1">신메뉴</label>
-
-                <input class="tabinput" id="tab2" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab2">시즌메뉴</label>
-
-                <input class="tabinput" id="tab3" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab3">커피</label>
-
-                <input class="tabinput" id="tab4" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab4">라떼</label>
-
-                <input class="tabinput" id="tab5" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab5">디카페인콜드블루</label>
-
-                <input class="tabinput" id="tab6" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab6">스무디/프라페</label>
-
-                <input class="tabinput" id="tab7" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab7">모히토/에이드</label>
-
-                <input class="tabinput" id="tab8" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab8">주스/티</label>
-
-                <input class="tabinput" id="tab9" type="radio" name="tabs">
-                <label class="tablabel_k" for="tab9">디저트</label>
+                <label class="tablabel_k" for="tab${vs.index +1 }">${menutitle.mg_name }</label>
+            </c:forEach>
                 <!-- 키오스크 메뉴1-->
                 <div class="tapsection" id="content1" style="border-top: 1px solid #ddd;">
                     <div class="product__details__tab__desc">
@@ -134,54 +116,7 @@
                                     </div>
                                 </div>
 
-                                <div
-                                    class="modal fade bs-example-modal-lg"
-                                    tabindex="-1"
-                                    role="dialog"
-                                    aria-labelledby="mySmallModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                              <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                              <div class="container-fluid">
-                                                <div class="row">
-                                                  <div class="col-md-4">.col-md-4</div>
-                                                  <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
-                                                  <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-sm-9">
-                                                    Level 1: .col-sm-9
-                                                    <div class="row">
-                                                      <div class="col-xs-8 col-sm-6">
-                                                        Level 2: .col-xs-8 .col-sm-6
-                                                      </div>
-                                                      <div class="col-xs-4 col-sm-6">
-                                                        Level 2: .col-xs-4 .col-sm-6
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                              <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                          </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                    </div>
-                                </div>
+                               
                             </div>
 
                             <div class="col-lg-3 col-md-4 col-sm-4">
@@ -1899,3 +1834,7 @@
         </body>
 
     </html>
+    
+    
+    
+    

@@ -330,6 +330,13 @@ ul {
 	  }else {
 		  document.getElementById('Toggle2').style.display ="none";
 	  }
+	  
+	  if(document.getElementById('toggle_special').checked) {
+		  document.getElementById('Toggle3').style.display ="block";
+	  }else {
+		  document.getElementById('Toggle3').style.display ="none";
+	  }
+	  
   })
    
   
@@ -478,10 +485,16 @@ function toggle_speciall() {
 		const query = 'input[name="Checkfac"]:checked';
 		const selectedEls = document.querySelectorAll(query);
 		
-		let si_referinfo = '';
+		let si_etc = '';
 		selectedEls.forEach((el) => {
-			si_referinfo += el.value + ",";
+			si_etc += el.value + ",";
 		})
+		
+		//특이사항
+		var si_referinfo = "";
+		if(document.getElementById('toggle_special').checked) {
+			si_referinfo =  $("#si_referinfo_input").val();
+		}
 
 		
 		//바로 보여주기위한!
@@ -496,8 +509,8 @@ function toggle_speciall() {
 		//보내기
 		var param = {
 				"si_parking_able" : si_parking_able,
+				"si_etc" : si_etc,
 				"si_referinfo" : si_referinfo
-				
 		}
 		$.ajax({
 			type:"POST",
@@ -513,6 +526,7 @@ function toggle_speciall() {
 		    	            timer: 1500
 		    	        });
 	        	document.getElementById('park_able').textContent = show_park;
+	        	document.getElementById('etc').textContent = si_etc;
 	        	document.getElementById('referinfo').textContent = si_referinfo;
 	        	$(".modalC").fadeOut();   
 	        },error: function(data) {
@@ -592,8 +606,6 @@ function toggle_speciall() {
              </ul>
           </li>
           
-
-
           <p class="sidebar-title" >정산</p>
           <li class="sub-menu">
             <a id="settlement" href="javascript:;">
@@ -659,6 +671,8 @@ function toggle_speciall() {
                         
                       </label>
                     </div>
+                    
+                    
                     </div>
                     </span> 
 
@@ -735,9 +749,9 @@ function toggle_speciall() {
                           </c:choose>
                           </div>
                            <li>기타시설</li>
-                            <div id="referinfo">${storeSession.si_referinfo }</div> 
+                            <div id="etc">${storeSession.si_etc }</div> 
                           <li>특이사항</li>
-                            <div>${storeSession.si_referinfo }</div> 
+                            <div id="referinfo">${storeSession.si_referinfo }</div> 
                       </ul>
                   </div>
                   
@@ -793,7 +807,7 @@ function toggle_speciall() {
                         <span id="facility_disable" style="font-size: 13px; color: rgb(26, 25, 25);">
                         
                         <c:choose>
-                      <c:when test="${storeSession.si_referinfo eq ''}">
+                      <c:when test="${storeSession.si_etc eq ''}">
                       설정안함</span>
                        <label  class="switch-button">  
                          <input type="checkbox" id="fac_toggle" onclick="toggle_facility()"  /> 
@@ -814,21 +828,21 @@ function toggle_speciall() {
                       <div class="row" style="margin-left: 44px; text-align: left;" >
                       <label class="checkbox-inline">
                         <input type="checkbox" name="Checkfac" id="room" value="룸" 
-                        	<c:if test="${fn:contains(storeSession.si_referinfo,'룸')}">
+                        	<c:if test="${fn:contains(storeSession.si_etc,'룸')}">
                         	checked
                         	</c:if>
                         > 룸
                       </label>
                       <label class="checkbox-inline">
                         <input type="checkbox" name="Checkfac" id="seat" value="좌석"
-                        <c:if test="${fn:contains(storeSession.si_referinfo,'좌석')}">
+                        <c:if test="${fn:contains(storeSession.si_etc,'좌석')}">
                         	checked
                         	</c:if>
                         > 좌석
                       </label>
                       <label class="checkbox-inline">
                         <input type="checkbox" name="Checkfac" id="danche" value="단체석"
-                        <c:if test="${fn:contains(storeSession.si_referinfo,'단체석')}">
+                        <c:if test="${fn:contains(storeSession.si_etc,'단체석')}">
                         	checked
                         	</c:if>
                         > 단체석
@@ -837,7 +851,7 @@ function toggle_speciall() {
                     <div class="row" style="margin-left: 44px; text-align: left;">
                       <label class="checkbox-inline">
                         <input type="checkbox" name="Checkfac" id="wifi" value="무선인터넷"
-                        <c:if test="${fn:contains(storeSession.si_referinfo,'무선인터넷')}">
+                        <c:if test="${fn:contains(storeSession.si_etc,'무선인터넷')}">
                         	checked
                         	</c:if>
                         > 무선인터넷
@@ -845,7 +859,7 @@ function toggle_speciall() {
                     
                       <label class="checkbox-inline" >
                         <input type="checkbox" name="Checkfac" id="childChair" value="유아용 의자" 
-                        <c:if test="${fn:contains(storeSession.si_referinfo,'유아용 의자')}">
+                        <c:if test="${fn:contains(storeSession.si_etc,'유아용 의자')}">
                         	checked
                         	</c:if>
                         > 유아용 의자
@@ -856,13 +870,13 @@ function toggle_speciall() {
                       <label class="checkbox-inline">
                         <input type="checkbox" name="Checkfac" id="jangfacility" value="장애인 편의시설"
                         
-                        <c:if test="${fn:contains(storeSession.si_referinfo,'장애인 편의시설')}">
+                        <c:if test="${fn:contains(storeSession.si_etc,'장애인 편의시설')}">
                         	checked
                         	</c:if>> 장애인 편의시설
                       </label>
                       <label class="checkbox-inline" >
                         <input type="checkbox" name="Checkfac" id="pat" value="반려동물 동반" 
-                        <c:if test="${fn:contains(storeSession.si_referinfo,'반려동물 동반')}">
+                        <c:if test="${fn:contains(storeSession.si_etc,'반려동물 동반')}">
                         	checked
                         	</c:if>
                         > 반려동물 동반
@@ -875,24 +889,36 @@ function toggle_speciall() {
                           <div class="col-lg-3">
                         <div style="font-size: 15px; font-weight: bolder;  color: black; text-align: left; ">특이사항</div>
                       </div>
+                      
                       <div class="col-lg-6" style="text-align: right;">
-                        <span id="special_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
+                        <span id="special_disable" style="font-size: 13px; color: rgb(26, 25, 25);">
+                        <c:choose>
+                        <c:when test="${storeSession.si_referinfo eq ''}">
+                        설정안함</span>
                         <label  class="switch-button">  
-                         
-                          <input type="checkbox" id="toggle_special" onclick="toggle_speciall()" />
-                          <span class="onoff-switch"></span> 
+                        <input type="checkbox" id="toggle_special" onclick="toggle_speciall()" />
+                        
+                        </c:when>
+                        <c:otherwise>
+                        설정함</span>
+                        <label  class="switch-button">  
+                        <input type="checkbox" id="toggle_special" onclick="toggle_speciall()" checked/>
+                        
+                        
+                        </c:otherwise>
+                        </c:choose>
+                        
+                        
+                        <span class="onoff-switch"></span> 
                         </label>
                       </div>
                         </div>
-                        
-                        
                         <div id="Toggle3" style="display:none; text-align:left;">
                         	
-                      <input class="form-control" type="text" placeholder="ex) 음료주문시 쿠키 서비스!" style="width: 50%; margin-left: 40px; margin-top: 5px;">
-                      
+                      <input class="form-control" type="text" id="si_referinfo_input" value="${storeSession.si_referinfo}" style="width: 50%; margin-left: 40px; margin-top: 5px;">
+                     	 
                         </div>
-					
-                      
+                        
                        <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-6"></div>
                          <div class="col-lg-3" style="text-align: right;">

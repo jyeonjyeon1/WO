@@ -52,7 +52,6 @@ public class StoreInfoController {
 		
 		String si_parking_able_input = param.get("si_parking_able");
 		boolean si_parking_able = false;
-		String si_etc = param.get("si_etc");
 		String si_referinfo = param.get("si_referinfo");
 		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
 		
@@ -66,14 +65,10 @@ public class StoreInfoController {
 		HashMap<String , Object> map = new HashMap<String, Object>();
 		map.put("si_code",svo.getSi_code());
 		map.put("si_parking_able",si_parking_able);
-		map.put("si_etc",si_etc);
 		map.put("si_referinfo",si_referinfo);
-		System.out.println(si_referinfo);
 		sInfoService.updatePyeon2(map);
 		svo.setSi_parking_able(si_parking_able);
-		svo.setSi_referinfo(si_etc);
 		svo.setSi_referinfo(si_referinfo);
-		
 		return 1;
 	}
 	

@@ -40,6 +40,4 @@ public class StoreVO {
 	private String sa_bankbook_image;
 	private String sa_rep_name;
 	private String sa_acc_no;
-	private String si_etc;
-	private String si_onesanji;
 }

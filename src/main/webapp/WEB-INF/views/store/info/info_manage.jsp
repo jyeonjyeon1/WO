@@ -221,27 +221,7 @@ ul {
       .switch-button input:checked + .onoff-switch:before { 
         -webkit-transform: translateX(26px); -ms-transform: translateX(26px); transform: translateX(26px); 
       }
-
-      /*주말 평일 동일 / 별도 선택 */
-  .weekweek input[type="radio"] {
-        display: none;
-    }
  
-    .weekweek input[type="radio"] + span {
-        display: inline-block;
-        padding: 15px 10px;
-        border: 1px solid #dfdfdf;
-        background-color: #113a6b4b;
-        text-align: center;
-        cursor: pointer;
-    }
- 
-    .weekweek input[type="radio"]:checked + span {
-        background-color: #113a6b;
-        color: #ffffff;
-    }
-
-
 
   </style>
     
@@ -269,50 +249,17 @@ function close_modalB() {
 //toggle버튼 기능구현
 
 function toggle_gong(){
-
-  if(document.getElementById('btn_toggle').checked) {
+  $("#Toggle1").toggle();
+  if(document.getElementById('Toggle1').style.display === 'none') {
       
-      document.getElementById('gong_disable').textContent = '설정함';
+      document.getElementById('gong_disable').textContent = '설정안함';
     } else {
            
-      document.getElementById('gong_disable').textContent = '설정안함';
+      document.getElementById('gong_disable').textContent = '설정함';
     }
 }
 
-function toggle_fix(){
 
-	  if(document.getElementById('btn_toggle2').checked) {
-	      
-	      document.getElementById('fix_disable').textContent = '설정함';
-	    } else {
-	           
-	      document.getElementById('fix_disable').textContent = '설정안함';
-	    }
-	}
-	
-	
-function toggle_imsi(){
-
-	  if(document.getElementById('btn_toggle3').checked) {
-	      
-	      document.getElementById('imsi_disable').textContent = '설정함';
-	      document.getElementById('imsi_date').style.display = "block";
-	      
-	    } else {
-	           
-	      document.getElementById('imsi_disable').textContent = '설정안함';
-	      document.getElementById('imsi_date').style.display = "none";
-	    }
-	}
-
-function samesame() {
- document.getElementById("same_content").style.display="block";
- document.getElementById("diff_content").style.display="none";
-}
-function diffdiff(){
-  document.getElementById("diff_content").style.display="block";
-  document.getElementById("same_content").style.display="none";
-}
 
 
   </script>
@@ -432,15 +379,7 @@ function diffdiff(){
 
                     <div class="box purple">
                       <span class="title">영업시간 <a class="change_info" onclick="modal_a()" >변경하기</a></span>
-                      <ul style="display:none;"> 
-                        <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px;">[평일/주말 동일]</li>
-                           <li>매일</li>
-                         <div>${storeSession.si_open} ~ ${storeSession.si_close}</div>
-                         
-                      </ul>
-
                       <ul> 
-                        <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px; ">[평일/주말 별도]</li>
                           <li>월~금</li>
                          <div>${storeSession.si_open} ~ ${storeSession.si_close}</div>
                           <li>토요일</li>
@@ -452,91 +391,9 @@ function diffdiff(){
                   </div>
                   <!--모달1-->
                   <div class="modalA">
-                    <div class="modalA_content" style="height: auto;">
-                      <h2 style="font-size: 20px; color: black; border-bottom: 1px solid rgba(245, 163, 163, 0.575); padding-bottom: 20px;">영업시간</h2>
-                      
+                    <div class="modalA_content">
+                      <h2 style="font-size: 20px; color: black; border-bottom: 1px solid rgba(0, 0, 0, 0.575); padding-bottom: 20px;">영업시간</h2>
 
-
-
-                      <label class="weekweek" onclick="samesame()">
-                        <input type="radio" id="same" name="week" value="same" checked>
-                        <span>평일/주말 동일</span>
-                    </label>
-                     
-                    <label class="weekweek" onclick="diffdiff()">
-                        <input type="radio" id="diff" name="week" value="diff">
-                        <span>평일/주말 별도</span>
-                    </label>
-
-                    <!--평일 주말 동일 -->
-                    <div class="container" id="same_content" style="display: none;">
-                    <div class="row">
-                      <h4 style="color: black; text-align: left; padding-left: 20px; font-weight: bolder;">매일</h4>
-                    </div>
-                  
-                    <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
-                      
-                        <input class="form-control round-form" name="si_open" type="time"
-                          value=""
-                          style="width: 20%; display: inline-block; margin:0 ">
-                        ~ <input class="form-control round-form" name="si_close" type="time"
-                          value=""
-                          style="width: 20%; display: inline-block; margin: 0;">
-                      
-                    </div>
-                 
-                  </div>
-
-
-
-
-                    <!--평일 주말 별도-->
-                    <div class="container" id="diff_content"  style="display: none;">
-                    <div class="row">
-                      <h4 style="color: black; text-align: left;  padding-left: 20px;  font-weight: bolder;">월~금</h4>
-                    </div>
-                    
-                    <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
-                      
-                      <input class="form-control round-form" name="si_open" type="time"
-                        value=""
-                        style="width: 20%; display: inline-block; margin:0 ">
-                      ~ <input class="form-control round-form" name="si_close" type="time"
-                        value=""
-                        style="width: 20%; display: inline-block; margin: 0;">
-                    
-                  </div>
-
-                  <div class="row">
-                    <h4 style="color: black; text-align: left;  padding-left: 20px;  font-weight: bolder;">토요일</h4>
-                  </div>
-                  
-                  <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
-                    
-                    <input class="form-control round-form" name="si_open" type="time"
-                      value=""
-                      style="width: 20%; display: inline-block; margin:0 ">
-                    ~ <input class="form-control round-form" name="si_close" type="time"
-                      value=""
-                      style="width: 20%; display: inline-block; margin: 0;">
-                  
-                </div>
-                <div class="row">
-                  <h4 style="color: black; text-align: left;  padding-left: 20px;  font-weight: bolder;">일요일</h4>
-                </div>
-                
-                <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
-                  
-                  <input class="form-control round-form" name="si_open" type="time"
-                    value=""
-                    style="width: 20%; display: inline-block; margin:0 ">
-                  ~ <input class="form-control round-form" name="si_close" type="time"
-                    value=""
-                    style="width: 20%; display: inline-block; margin: 0;">
-                
-              </div>
-
-                  </div> 
 
                       <div>
                        <div class="row" style="margin-top: 30px;">
@@ -559,7 +416,7 @@ function diffdiff(){
                       <span class="title" style="margin-top: 30px;">휴무일 <a class="change_info" onclick="modal_b()" >변경하기</a></span> 
                       <ul> 
                           <li>공휴일</li> 
-                          <div>""</div>
+                          <div>??</div>
                           <li>정기휴무</li> 
                           <div>${storeSession.si_holiday_fix}</div>
                           <li>임시휴무</li> 
@@ -588,21 +445,16 @@ function diffdiff(){
                     </div>
                       </div>
 
-                         
+                          <!--설정안함을 표시하기위한 toggle-->                                     
+                        <div class="container" id ="Toggle1" style="text-align: left; display: none;">
+                         </div>
 
                          <div class="row" style="margin-top: 60px; margin-left: 30px; ">
                           <div class="col-lg-3">
                         <div style="font-size: 15px; font-weight: bolder;  color: black; text-align: left; margin-top: 5px; ">정기휴무</div>
                         
                       </div>
-                      	<div class="col-lg-6" style="text-align: right;">
-                      <span id="fix_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
-                      <label  class="switch-button">  
-                       
-                        <input type="checkbox" id="btn_toggle2" onclick="toggle_fix()"  /> 
-                        <span class="onoff-switch"></span> 
-                      </label>
-                    </div>
+                      
                         </div>
                         
                         <div class="row" style="margin-top: 60px; margin-left: 30px; ">
@@ -610,19 +462,8 @@ function diffdiff(){
                         <div style="font-size: 15px; font-weight: bolder;  color: black; text-align: left; margin-top: 5px; ">임시휴무</div>
                         
                       </div>
-                      <div class="col-lg-6" style="text-align: right;">
-                      <span id="imsi_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
-                      <label  class="switch-button">  
-                       
-                        <input type="checkbox" id="btn_toggle3" onclick="toggle_imsi()"  /> 
-                        <span class="onoff-switch"></span> 
-                      </label>
-                    </div>
+                      
                         </div>
-                        <div class="row" id="imsi_date" style="display:none;">
-                        <input class="form-control round-form" type="date" style="margin-left: 70px; width: 30%; display: inline-block; float:left;"> 
-                        </div>
-                        
 
                         
 

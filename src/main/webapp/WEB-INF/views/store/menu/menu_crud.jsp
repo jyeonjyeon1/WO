@@ -684,6 +684,7 @@ function addMgName(){
 																			<button type="button" class="btn btn-primary btn-xs updateMenuGroup"
 																				forupdate="menuGroup${vs.index}"
 																				value="${mg.mg_code}" 
+																				mg_name="${mg.mg_name}"
 																				style="float: right; margin-right: 10px; margin-top: 5px;">
 																				<i class="fa fa-pencil"></i>
 																			</button></div>
@@ -2262,6 +2263,7 @@ function addMgName(){
 																			</button>
 																			<button type="button" class="btn btn-primary btn-xs updateOptionGroup"
 																			forupdate="optionGroup${ogVs.index}"
+																			og_name = "${ogList.og_name}"
 																			value="${ogList.og_code}"
 																				style="float: right; margin-right: 10px; margin-top: 10px;">
 																				<i class="fa fa-pencil"></i>

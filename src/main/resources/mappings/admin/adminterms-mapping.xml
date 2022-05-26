@@ -16,10 +16,12 @@
 	
 	<select id="termsList" resultType="TermsVO" resultMap="termsVO">
 		SELECT * FROM TERMS WHERE T_TYPE ='term'
+		ORDER BY T_CODE
 	</select>
 	
 	<select id="infoList" resultType="TermsVO" resultMap="termsVO">
 		SELECT * FROM TERMS WHERE T_TYPE ='privacy'
+		ORDER BY T_CODE
 	</select>
 	
 	

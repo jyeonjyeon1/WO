@@ -1247,7 +1247,7 @@ function addMgName(){
 																								</c:if>
 																								위에건 잘 나오는데, 밑에꺼는 안나옴..
 																								</c:forEach></h5> -->
-																								<c:set var="mName" value="ff"></c:set>
+																		<c:set var="mName" value="ff"></c:set>
                                                                         <c:forEach var="MAOList" items="${MAOList}">
                                                                            <c:if test="${MAOList.og_code eq ogList.og_code}">
                                                                            <c:if test="${mName ne MAOList.m_name}">

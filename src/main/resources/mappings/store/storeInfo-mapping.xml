@@ -13,6 +13,7 @@
 	<update id="updatePyeon2">
 		UPDATE STORE_INFO SET 
 		SI_PARKING_ABLE = #{si_parking_able},
+		SI_ETC = #{si_etc},
 		SI_REFERINFO = #{si_referinfo}
 		WHERE 
 		SI_CODE=#{si_code} 

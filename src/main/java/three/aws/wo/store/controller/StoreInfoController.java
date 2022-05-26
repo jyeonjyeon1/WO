@@ -45,4 +45,59 @@ public class StoreInfoController {
 		
 		return 1;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/updatePyeon2.store")
+	public int updatePyeon2(@RequestBody HashMap<String, String> param, HttpSession session ) {
+		
+		String si_parking_able_input = param.get("si_parking_able");
+		boolean si_parking_able = false;
+		String si_referinfo = param.get("si_referinfo");
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		
+		if(si_parking_able_input.equals("y")) {
+			si_parking_able =true;
+		}else {
+			si_parking_able=false;
+		}
+		
+		
+		HashMap<String , Object> map = new HashMap<String, Object>();
+		map.put("si_code",svo.getSi_code());
+		map.put("si_parking_able",si_parking_able);
+		map.put("si_referinfo",si_referinfo);
+		sInfoService.updatePyeon2(map);
+		svo.setSi_parking_able(si_parking_able);
+		svo.setSi_referinfo(si_referinfo);
+		return 1;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateSiStatus.store")
+	public int updateSiStatus(@RequestBody HashMap<String, String> param, HttpSession session ) {
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		String si_status_input = param.get("si_status");
+		
+		boolean si_status = false;
+		if(si_status_input.equals("y")) {
+			si_status =true;
+		}else {
+			si_status=false;
+		}
+		System.out.println(si_status);
+		
+		HashMap<String , Object> map = new HashMap<String, Object>();
+		map.put("si_code",svo.getSi_code());
+		map.put("si_status",si_status);
+		sInfoService.updateSiStatus(map);
+		
+		svo.setSi_status(si_status);
+		
+		return 1;
+	}
+	
+	
+	
+	
+	
 }

@@ -243,9 +243,33 @@ ul {
       .switch-button input:checked + .onoff-switch:before { 
         -webkit-transform: translateX(26px); -ms-transform: translateX(26px); transform: translateX(26px); 
       }
+      
+         /*toggle2버튼 css*/
+  .switch-button2 { 
+  position: relative; 
+  display: inline-block; 
+  width: 55px; height: 30px; } 
+  
+  .switch-button2 input { opacity: 0; width: 0; height: 0; } 
+  
+  .onoff-switch2 { 
+    position: absolute; cursor: pointer; 
+    top: 0; left: 0; right: 0; bottom: 0; border-radius:20px; 
+    background-color: rgb(216, 68, 68); box-shadow: inset 1px 5px 1px rgb(168, 55, 55); 
+    -webkit-transition: .4s; transition: .4s; } 
+    
+    .onoff-switch2:before { position: absolute; content: ""; 
+    height: 22px; width: 22px; left: 4px; bottom: 4px; background-color: #fff; 
+    -webkit-transition: .5s; transition: .4s; border-radius:20px; } 
+    
+    .switch-button2 input:checked + .onoff-switch2 { 
+      background-color: #2283f2; box-shadow: inset 1px 5px 1px #1758a3; } 
+      
+      .switch-button2 input:checked + .onoff-switch2:before { 
+        -webkit-transform: translateX(26px); -ms-transform: translateX(26px); transform: translateX(26px); 
+      }     
+      
   /*라디오버튼 css*/
-
-
 .radio {
   margin: 0.5rem;
 }
@@ -290,7 +314,25 @@ ul {
   </style>
     
   <script>
-
+   $(document).ready(function(){
+	  if(document.getElementById('btn_toggle2').checked) {
+		    document.getElementById('store_status').style.color="rgb(65, 63, 196)";
+		    document.getElementById('store_status').textContent = '가게 영업중';
+		   
+		    
+		  }else {
+		    document.getElementById('store_status').style.color="rgb(238, 56, 56)";
+		    document.getElementById('store_status').textContent = '영업 준비중';
+		  }
+	  
+	  if(document.getElementById('fac_toggle').checked) {
+		  document.getElementById('Toggle2').style.display ="block";
+	  }else {
+		  document.getElementById('Toggle2').style.display ="none";
+	  }
+  })
+   
+  
 //modal js
 function modal_a() {
   $(".modalA").fadeIn();
@@ -317,34 +359,82 @@ function close_modalC() {
   $(".modalC").fadeOut();
 }
 
-//toggle버튼 기능구현
+
+//영업중, 영업준비중 표시 si_status
+function toggle_status() {
+	var si_status = "n";
+  if(document.getElementById('btn_toggle2').checked) {
+	  document.getElementById('store_status').style.color="rgb(65, 63, 196)";
+	  document.getElementById('store_status').textContent = '가게 영업중';  
+    si_status="y";
+    
+  }else {
+	  document.getElementById('store_status').style.color="rgb(238, 56, 56)";
+	    document.getElementById('store_status').textContent = '영업 준비중';
+    si_status="n";
+  }
+  
+  var param = {"si_status" : si_status};
+	console.log(param);
+	 $.ajax({
+		type:"POST",
+		url: "/updateSiStatus.store",
+      data: JSON.stringify(param),
+      dataType: "json",
+      contentType: "application/json",
+      success:function(data){
+      	Swal.fire({
+	    	            icon: "success",
+	    	            title: "수정완료",
+	    	            showConfirmButton: false,
+	    	            timer: 1500
+	    	        });
+      },error: function(data) {
+      	console.log("가게영업상태 수정오류");
+      }
+	}); 
+	
+  
+  
+  
+  
+  
+}
 
 function toggle_park() {
-  $("#Toggle1").toggle();
 
 
-  if(document.getElementById('Toggle1').style.display === 'none') {
+  if(document.getElementById('park_toggle').checked) {
       
-      document.getElementById('park_disable').textContent = '설정안함';
+      document.getElementById('park_disable').textContent = '설정함';
     } else {
            
-      document.getElementById('park_disable').textContent = '설정함';
+      document.getElementById('park_disable').textContent = '설정안함';
     }
 
 }
 
 function toggle_facility() {
-  $("#Toggle2").toggle();
-
-
-  if(document.getElementById('Toggle2').style.display === 'none') {
+  if(document.getElementById('fac_toggle').checked) {
       
-      document.getElementById('facility_disable').textContent = '설정안함';
-    } else {
-           
       document.getElementById('facility_disable').textContent = '설정함';
+      document.getElementById('Toggle2').style.display ="block";
+    } else {
+      document.getElementById('facility_disable').textContent = '설정안함';
+      document.getElementById('Toggle2').style.display ="none";
     }
+}
 
+function toggle_speciall() {
+	console.log("ffff");
+	 if(document.getElementById('toggle_special').checked) {
+		 document.getElementById('Toggle3').style.display = 'block';
+	      document.getElementById('special_disable').textContent = '설정함';
+	    } else {
+	    	document.getElementById('Toggle3').style.display = 'none';     
+	      document.getElementById('special_disable').textContent = '설정안함';
+	    } 
+	
 }
 	function update_tel(){
 		var param = {"si_tel" : $("#si_tel").val()};
@@ -362,8 +452,9 @@ function toggle_facility() {
 		    	            showConfirmButton: false,
 		    	            timer: 1500
 		    	        });
-	        	
-		    	     location.href = location.href;
+	        	document.getElementById('si_tel_show').textContent = $("#si_tel").val();
+	        
+	        	$(".modalB").fadeOut(); 
 	        },error: function(data) {
 	        	console.log("추가오류");
 	        }
@@ -371,13 +462,65 @@ function toggle_facility() {
 		
 	}
 	
+	
+	
 	//가게편의정보변경 modal
 	function update_comf() {
+		//주차
+		var si_parking_able = "y";
+		if(document.getElementById('park_toggle').checked) {
+			si_parking_able="y";
+		}else{
+			si_parking_able="n";
+		}
 		
-			console.log("체크");
+		//기타시설(체크박스임)
+		const query = 'input[name="Checkfac"]:checked';
+		const selectedEls = document.querySelectorAll(query);
+		
+		let si_referinfo = '';
+		selectedEls.forEach((el) => {
+			si_referinfo += el.value + ",";
+		})
+
+		
+		//바로 보여주기위한!
+		var show_park = "[불가능]";
+		if(si_parking_able=='y') {
+			show_park ="[가능]";
+		}else {
+			show_park ="[불가능]"
+		}
 		
 		
-	
+		//보내기
+		var param = {
+				"si_parking_able" : si_parking_able,
+				"si_referinfo" : si_referinfo
+				
+		}
+		$.ajax({
+			type:"POST",
+			url: "/updatePyeon2.store",
+	        data: JSON.stringify(param),
+	        dataType: "json",
+	        contentType: "application/json",
+	        success:function(data){
+	        	Swal.fire({
+		    	            icon: "success",
+		    	            title: "가게 편의정보 수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	        	document.getElementById('park_able').textContent = show_park;
+	        	document.getElementById('referinfo').textContent = si_referinfo;
+	        	$(".modalC").fadeOut();   
+	        },error: function(data) {
+	        	console.log("추가오류");
+	        }
+		});
+		
+		
 	}
 
 
@@ -402,7 +545,7 @@ function toggle_facility() {
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a><img src=${fn:toLowerCase(storeSession.si_image) } class="img-circle" width="80"></a></p>
-          <h5 class="centered">더리터 위례점</h5>
+          <h5 class="centered">${storeSession.si_name}</h5>
           <p class="sidebar-title" >주문 확인</p>
           <li class="sub-menu">
             <a href="index.store">
@@ -494,7 +637,30 @@ function toggle_facility() {
                   
                   <!-- /panel-heading -->
                   <div class="panel-body col-lg-12" style="padding: 0 11px 11px 11px;">
-
+					  <div>
+                      <span class="title" style="margin-top: 30px; background-color: rgba(33, 31, 145, 0.158); color:rgb(65, 63, 196); padding:30px; border-radius: 5px; border-bottom:0;">
+                        <div class="row">
+                          <div class="col-lg-2" id="store_status" style="margin-top: 5px;">
+                        가게 영업중
+                      </div>
+                      <div class="col-lg-6">
+                      <label  class="switch-button2" >  
+                       
+                        <input type="checkbox" id="btn_toggle2" onclick="toggle_status()" 
+                        	<c:choose>
+                      	<c:when test="${storeSession.si_status eq true}">
+                      	checked
+                      	</c:when>
+                      	<c:otherwise>
+                      	</c:otherwise>
+                      </c:choose>
+                        /> 
+                        <span class="onoff-switch2"></span> 
+                        
+                      </label>
+                    </div>
+                    </div>
+                    </span> 
 
                     <div class="box blue">
                       <span class="title">가게정보 <a class="service_info" style="font-size: 13px; margin-left: 30px;" onclick="modal_a()" >변경요청은 고객센터로 문의해주세요</a></span>
@@ -527,7 +693,7 @@ function toggle_facility() {
                   <div class="box orange">
                       <span class="title" style="margin-top: 30px;">가게 전화번호 <a class="change_info" onclick="modal_b()" >변경하기</a></span> 
                       <ul> 
-                          <li>${storeSession.si_tel }</li> 
+                          <li id="si_tel_show">${storeSession.si_tel }</li> 
                           
                       </ul>
                   </div>
@@ -536,8 +702,8 @@ function toggle_facility() {
                     <div class="modalB_content">
                       <h2 style="font-size: 20px; color: black; border-bottom: 1px solid rgba(0, 0, 0, 0.575); padding-bottom: 20px;">가게 전화번호</h2>
                       <div style="font-size: 15px; font-weight: bolder; margin-top: 60px; color: black; text-align: left; margin-left: 44px;">대표번호</div>
-                      <input class="form-control" id="si_tel" type="text" value="${storeSession.si_tel }" style="width: 50%; margin-left: 40px; margin-top: 5px;">
-                      
+                      <input class="form-control" id="si_tel" type="text" value=" ${storeSession.si_tel }"  style="width: 50%; margin-left: 40px; margin-top: 5px;">
+                     
                       <div>
                        <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-6"></div>
@@ -558,33 +724,26 @@ function toggle_facility() {
                       <span class="title" style="margin-top: 30px;">가게 편의정보 <a class="change_info" onclick="modal_c()">변경하기</a></span> 
                       <ul> 
                           <li>주차</li>
+                          <div id="park_able">
                           <c:choose>
                           	<c:when test="${storeSession.si_parking_able eq false}">
-                          	<div>[불가능]</div>
+                          	[불가능]
                           	</c:when>
                           	<c:otherwise>
                           	[가능]
                           	</c:otherwise>
                           </c:choose>
-                          <li>매장사용</li>
-                          <c:choose>
-                          	<c:when test="${storeSession.si_usestore eq false}">
-                          	<div>[불가능]</div>
-                          	</c:when>
-                          	<c:otherwise>
-                          	[가능]
-                          	</c:otherwise>
-                          </c:choose>
+                          </div>
                            <li>기타시설</li>
-                            <div>${storeSession.si_referinfo }</div> 
+                            <div id="referinfo">${storeSession.si_referinfo }</div> 
                           <li>특이사항</li>
                             <div>${storeSession.si_referinfo }</div> 
                       </ul>
                   </div>
                   
                   <!--모달3-->
-                  <div class="modalC">
-                    <div class="modalC_content">
+                  <div class="modalC" >
+                    <div class="modalC_content" style="height: auto;">
                       <h2 style="font-size: 20px; color: black; border-bottom: 1px solid rgba(0, 0, 0, 0.575); padding-bottom: 20px;">가게 편의정보</h2>
                       
                       <div class="row" style="margin-top: 60px; margin-left: 30px; ">
@@ -592,10 +751,21 @@ function toggle_facility() {
                       <div style="font-size: 15px; font-weight: bolder;  color: black; text-align: left; ">주차</div>
                     </div>
                     <div class="col-lg-6" style="text-align: right;">
-                      <span id="park_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
-                      <label  class="switch-button">  
-                       
-                        <input type="checkbox" id="park_toggle" name="park_toggle" onclick="toggle_park()"/> 
+                      <span id="park_disable" style="font-size: 13px; color: rgb(26, 25, 25);">
+                      <c:choose>
+                      <c:when test="${storeSession.si_parking_able eq true}">
+                      설정함</span>
+                       <label  class="switch-button">  
+                        <input type="checkbox" id="park_toggle" name="park_toggle" onclick="toggle_park()" checked/> 
+                      </c:when>
+                      <c:otherwise>
+                      설정안함</span>
+                       <label  class="switch-button">  
+                        <input type="checkbox" id="park_toggle" name="park_toggle" onclick="toggle_park()" /> 
+                      </c:otherwise>
+                      </c:choose>
+                     
+                     
                         <span class="onoff-switch"></span> 
                       </label>
                     </div>
@@ -620,11 +790,21 @@ function toggle_facility() {
                         <div style="font-size: 15px; font-weight: bolder;  color: black; text-align: left; ">기타시설</div>
                       </div>
                       <div class="col-lg-6" style="text-align: right;">
-                        <span id="facility_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
-                        <label  class="switch-button">  
-                         
-                          <input type="checkbox" id="btn_toggle" onclick="toggle_facility()"  /> 
-                          <span class="onoff-switch"></span> 
+                        <span id="facility_disable" style="font-size: 13px; color: rgb(26, 25, 25);">
+                        
+                        <c:choose>
+                      <c:when test="${storeSession.si_referinfo eq ''}">
+                      설정안함</span>
+                       <label  class="switch-button">  
+                         <input type="checkbox" id="fac_toggle" onclick="toggle_facility()"  /> 
+                      </c:when>
+                      <c:otherwise>
+                      설정함</span>
+                       <label  class="switch-button">  
+                         <input type="checkbox" id="fac_toggle" onclick="toggle_facility()"  checked/> 
+                      </c:otherwise>
+                      </c:choose>
+                         <span class="onoff-switch"></span> 
                         </label>
                       </div>
                         </div>
@@ -633,39 +813,86 @@ function toggle_facility() {
                       <div class="facility" id="Toggle2" style="display: none;">
                       <div class="row" style="margin-left: 44px; text-align: left;" >
                       <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1" checked> 룸
+                        <input type="checkbox" name="Checkfac" id="room" value="룸" 
+                        	<c:if test="${fn:contains(storeSession.si_referinfo,'룸')}">
+                        	checked
+                        	</c:if>
+                        > 룸
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2"> 좌석
+                        <input type="checkbox" name="Checkfac" id="seat" value="좌석"
+                        <c:if test="${fn:contains(storeSession.si_referinfo,'좌석')}">
+                        	checked
+                        	</c:if>
+                        > 좌석
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2"> 단체석
+                        <input type="checkbox" name="Checkfac" id="danche" value="단체석"
+                        <c:if test="${fn:contains(storeSession.si_referinfo,'단체석')}">
+                        	checked
+                        	</c:if>
+                        > 단체석
                       </label>
                     </div>
                     <div class="row" style="margin-left: 44px; text-align: left;">
                       <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2"> 무선인터넷
+                        <input type="checkbox" name="Checkfac" id="wifi" value="무선인터넷"
+                        <c:if test="${fn:contains(storeSession.si_referinfo,'무선인터넷')}">
+                        	checked
+                        	</c:if>
+                        > 무선인터넷
                       </label>
                     
                       <label class="checkbox-inline" >
-                        <input type="checkbox" id="inlineCheckbox2" value="option2" > 유아용 의자
+                        <input type="checkbox" name="Checkfac" id="childChair" value="유아용 의자" 
+                        <c:if test="${fn:contains(storeSession.si_referinfo,'유아용 의자')}">
+                        	checked
+                        	</c:if>
+                        > 유아용 의자
                       </label>
 
                     </div>
                     <div class="row" style="margin-left: 44px; text-align: left;">
                       <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2"> 장애인 편의시설
+                        <input type="checkbox" name="Checkfac" id="jangfacility" value="장애인 편의시설"
+                        
+                        <c:if test="${fn:contains(storeSession.si_referinfo,'장애인 편의시설')}">
+                        	checked
+                        	</c:if>> 장애인 편의시설
                       </label>
                       <label class="checkbox-inline" >
-                        <input type="checkbox" id="inlineCheckbox2" value="option2" > 반려동물 동반
+                        <input type="checkbox" name="Checkfac" id="pat" value="반려동물 동반" 
+                        <c:if test="${fn:contains(storeSession.si_referinfo,'반려동물 동반')}">
+                        	checked
+                        	</c:if>
+                        > 반려동물 동반
                       </label>
-
                     </div>
-
                     </div>
                     <!--기타시설 체크박스 end-->
-
-                      <div>
+                    
+                    <div class="row" style="margin-top: 60px; margin-left: 30px; ">
+                          <div class="col-lg-3">
+                        <div style="font-size: 15px; font-weight: bolder;  color: black; text-align: left; ">특이사항</div>
+                      </div>
+                      <div class="col-lg-6" style="text-align: right;">
+                        <span id="special_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
+                        <label  class="switch-button">  
+                         
+                          <input type="checkbox" id="toggle_special" onclick="toggle_speciall()" />
+                          <span class="onoff-switch"></span> 
+                        </label>
+                      </div>
+                        </div>
+                        
+                        
+                        <div id="Toggle3" style="display:none; text-align:left;">
+                        	
+                      <input class="form-control" type="text" placeholder="ex) 음료주문시 쿠키 서비스!" style="width: 50%; margin-left: 40px; margin-top: 5px;">
+                      
+                        </div>
+					
+                      
                        <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-6"></div>
                          <div class="col-lg-3" style="text-align: right;">
@@ -676,10 +903,12 @@ function toggle_facility() {
                         </div>
                        </div> 
                       
-                    </div>
+                    
                     </div>
                   </div>
                   <!--모달3 end-->
+                  
+                
                   </div>
 
                 </div>

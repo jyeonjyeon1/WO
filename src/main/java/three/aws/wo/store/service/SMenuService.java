@@ -47,4 +47,14 @@ public interface SMenuService {
 	void addOp1(HashMap<String, Object> map);
 	void addOp2(HashMap<String, Object> map);
 	void updateOgRos(HashMap<String, Object> map);
+	void updateOptionGroup(HashMap<String, String> map);
+	void updateOptionGroup_MAO(HashMap<String, String> map);
+	void deleteOptionGroup(HashMap<String, String> map);
+	void deleteOptionGroup_MAO(HashMap<String, String> map);
+	void updateOption(HashMap<String, Object> map);
+	void updateOption_MAO(HashMap<String, Object> map);
+	void deleteOption(HashMap<String, String> map);
+	void deleteOption_MAO(HashMap<String, String> map);
+	String maxOptionSeq(HashMap<String, Object> map);
+	void insertOptions(HashMap<String, Object> mapp);
 }

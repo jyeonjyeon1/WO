@@ -98,6 +98,20 @@
 		AND
 		MG_CODE = #{mg_code}
 	</delete>
+	<delete id="deleteOptionGroup">
+		DELETE FROM OPTION_GROUP 
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OG_CODE = #{og_code}
+	</delete>
+	<delete id="deleteOptionGroup_MAO">
+		DELETE FROM MENUANDOPTION
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OG_CODE = #{og_code}
+	</delete>
 	<update id="updateMenuGroup">
 		UPDATE MENU_GROUP
 		SET MG_NAME = #{mg_name}
@@ -113,6 +127,22 @@
 		SI_CODE = #{si_code}
 		AND
 		MG_CODE = #{mg_code}
+	</update>
+	<update id="updateOptionGroup">
+		UPDATE OPTION_GROUP
+		SET OG_NAME = #{og_name}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OG_CODE = #{og_code}
+	</update>
+	<update id="updateOptionGroup_MAO">
+		UPDATE MENUANDOPTION
+		SET OG_NAME = #{og_name}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OG_CODE = #{og_code}
 	</update>
 	<insert id="insertMenu">
 		INSERT INTO
@@ -160,6 +190,22 @@
 		</if>
 		WHERE M_SEQ = #{m_seq} AND SI_CODE = #{si_code}
 	</update>
+	<update id="updateOption">
+		UPDATE OPTIONS
+		SET OP_NAME = #{op_name}, OP_PRICE = #{op_price}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OP_CODE = #{op_code}
+	</update>
+	<update id="updateOption_MAO">
+		UPDATE MENUANDOPTION
+		SET OP_NAME = #{op_name}, OP_PRICE = #{op_price}
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OP_CODE = #{op_code}
+	</update>
 	<update id="updateOGB">
 		UPDATE OPTIONGROUP_BASIC
 		SET M_NAME = #{m_name}
@@ -198,14 +244,27 @@
 	</delete>
 	
 	<!-- option start -->
-	
+	<delete id="deleteOption">
+		DELETE FROM OPTIONS
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OP_CODE = #{op_code}
+	</delete>
+	<delete id="deleteOption_MAO">
+		DELETE FROM MENUANDOPTION
+		WHERE
+		SI_CODE = #{si_code}
+		AND
+		OP_CODE = #{op_code}
+	</delete>
 	
 	<select id="maxOgCode" resultType="String">
 		SELECT OG_CODE FROM OPTION_GROUP
 		WHERE 
 		OG_SEQ = (SELECT MAX(OG_SEQ) FROM OPTION_GROUP 
 		WHERE 
-		SI_CODE = #{si_code})
+		SI_CODE = #{si_code} AND OG_CODE != ' ')
 	</select>
 	
 	<insert id="addOg">
@@ -228,7 +287,7 @@
 		WHERE 
 		OP_SEQ = (SELECT MAX(OP_SEQ) FROM OPTIONS 
 		WHERE 
-		SI_CODE = #{si_code})
+		SI_CODE = #{si_code} AND OP_CODE != ' ')
 	</select>
 	
 	<insert id="addOp1">
@@ -250,7 +309,17 @@
 		SET OG_ROS = #{og_ros}
 		WHERE SI_CODE = #{si_code} AND og_code = #{og_code}
 	</update>
-	
+	<select id="maxOptionSeq" resultType="String">
+		SELECT OP_CODE FROM OPTIONS 
+		WHERE 
+		OP_SEQ = (SELECT MAX(OP_SEQ) FROM OPTIONS 
+		WHERE 
+		SI_CODE = #{si_code} and OG_SEQ = #{og_seq} and OP_CODE != ' ')
+	</select>
+	<insert id="insertOptions">
+		INSERT INTO OPTIONS VALUES
+		(default, #{op_code},#{og_seq},#{si_code},#{op_name},#{op_price},default)
+	</insert>
 	
 </mapper>
  

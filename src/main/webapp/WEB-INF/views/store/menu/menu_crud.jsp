@@ -1487,7 +1487,7 @@ function addMgName(){
 						+"style='width: relative; font-size: 15px;' type='text' placeholder='가격명' id='menu_basic_name${vs.index}"+indexstring+"'>"
 						+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control PRICEPRICEPRICE'"
 						+" forCheck='"+indexFinal+"' "
-						+"style='width: relative; font-size: 15px;' type='number' placeholder='가격' id='menu_basic_name${vs.index}"+indexstring+"'>"
+						+"style='width: relative; font-size: 15px;' type='number' placeholder='가격' id='menu_basic_price${vs.index}"+indexstring+"'>"
 						+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
 						+" fordelete='menuOne_${vs.index}"+indexstring+"' "
 						+" fordelete2='menutwo_${vs.index}"+indexstring+"' "
@@ -2195,13 +2195,13 @@ function addMgName(){
  		    	    contentType: "application/json",
  		    	    success: function (data) {
  		    	        if (data == 1) {
-  		    	        Swal.fire({
-  		    	            icon: "success",
-  		    	            title: "메뉴 추가 완료",
-  		    	            showConfirmButton: false,
-  		    	            timer: 1500
-  		    	        });
-  		    	        location.href = location.href;
+	  		    	        Swal.fire({
+	  		    	            icon: "success",
+	  		    	            title: "메뉴 추가 완료",
+	  		    	            showConfirmButton: false,
+	  		    	            timer: 1500
+	  		    	        });
+	  		    	        location.href="CRUD.store"
  		    	        }else{alert("통신은됨");}
  		    	    },
  		    	    error: function (data) {
@@ -2246,22 +2246,30 @@ function addMgName(){
 
 															<!--옵션그룹 리스트 start-->
 															<c:forEach var="ogList" items="${ogList}" varStatus="ogVs">
-															
+															<!-- 장바구니 빈칸 용 기본 옵션 ' '은 제외하고 출력   -->
+															<c:if test="${ogList.og_code ne ' '}"> 
 															<nav>
 																<ul id="main_menu">
-																	<li><a class="menuGroup" href="javascript:">${ogList.og_name}
-																			<button type="button"
-																				onclick="javascript:deleteAlert();"
-																				class="btn btn-danger btn-xs"
-																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																	<li><div id="optiongroupBtns${ogVs.index}">
+																	<button type="button" 
+																				class="btn btn-danger btn-xs deletingOptionGroup"
+																				style="float: right; margin-right: 10px; margin-top: 10px;"
+																				value="${ogList.og_code}"
+																				fordelete="optionGroup${ogVs.index}"
+																				fordelete2 = "optionGroupUl${ogVs.index}"
+																				fordelete3 = "optiongroupBtns${ogVs.index}">
 																				<i class="fa fa-trash-o "></i>
 																			</button>
-																			<button type="button" class="btn btn-primary btn-xs"
-																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																			<button type="button" class="btn btn-primary btn-xs updateOptionGroup"
+																			forupdate="optionGroup${ogVs.index}"
+																			value="${ogList.og_code}"
+																				style="float: right; margin-right: 10px; margin-top: 10px;">
 																				<i class="fa fa-pencil"></i>
-																			</button>
+																			</button></div>
+																	
+																	<a class="menuGroup" href="javascript:" id="optionGroup${ogVs.index}">${ogList.og_name}
 																	</a> <!--서브메뉴시작-->
-																		<ul class="snd_menu sub_menu">
+																		<ul class="snd_menu sub_menu" id="optionGroupUl${ogVs.index}">
 
 																			<li class="menu_one_plus"><a>
 																					<div class="row" style="padding: 10px;">
@@ -2313,7 +2321,7 @@ function addMgName(){
 																			<c:forEach var="optionList" items="${optionList}" varStatus="optionVs">
 																			<c:if test="${ogList.og_seq eq optionList.og_seq }">
 																			
-																			<li><a class="menu_one" id="">
+																			<li><a class="menu_one" id="optiondisplay_${ogVs.index}${optionVs.index}">
 																					<div class="row" style="padding: 10px;">
 																						<div class="col-lg-8"
 																							style="text-align: left; line-height: 20px;">
@@ -2332,9 +2340,9 @@ function addMgName(){
 																					</div>
 
 																			</a>
-																				<ul class="trd_menu sub_menu" >
-																					<li><a class="option_oneUpdate" data-toggle="modal" href="#option_oneUpdate_modal${ogVs.index}${optionVs.index}">옵션명 및 가격 변경</a></li>
-																					<li><a class="option_oneDelete">옵션삭제</a></li>
+																				<ul class="trd_menu sub_menu" id="optiontoggle_${ogVs.index}${optionVs.index}">
+																					<li><a class="menu_oneOptionUpdate" data-toggle="modal" href="#option_oneUpdate_modal${ogVs.index}${optionVs.index}">옵션명 및 가격 변경</a></li>
+																					<li><a class="menu_oneDelete" onclick="deleteOption${ogVs.index}${optionVs.index}()">옵션삭제</a></li>
 																				</ul></li>
 																				
 																				
@@ -2367,14 +2375,15 @@ function addMgName(){
 																										<div class="option_list">
 																											<div class="row" style="margin-left: 5px;">
 																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
+																													<input class="form-control" id="op_name${ogVs.index}${optionVs.index}"
 																														style="width: relative; font-size: 15px;"
 																														type="text" value="${optionList.op_name}">
 																												</div>
 																												<div class="col-lg-5" style="padding: 5px;">
-																													<input class="form-control"
+																													<input class="form-control" id="op_price${ogVs.index}${optionVs.index}"
 																														style="width: relative; font-size: 15px;"
 																														type="text" value="${optionList.op_price}">
+																													<input type="hidden" id="op_code${ogVs.index}${optionVs.index}" value="${optionList.op_code}"/>
 																												</div>
 
 																											</div>
@@ -2384,11 +2393,13 @@ function addMgName(){
 																									<li>
 																										<div class="row">
 																											<div class="col-lg-12">
-																												<button type="button" class="save_Btn">수정하기</button>
+																												<button type="button" class="save_Btn"
+																												onclick="update_Option${ogVs.index}${optionVs.index}()">수정하기</button>
 																											</div>
 																										</div>
 																									</li>
 																								</ul>
+
 
 																							</table>
 																						</div>
@@ -2398,13 +2409,104 @@ function addMgName(){
 																			</div>
 																			<!------------옵션명 및 가격변경 modal end-------------->
 																				
-																				
+<script>
+
+function update_Option${ogVs.index}${optionVs.index}(){
+	var op_name = $("#op_name${ogVs.index}${optionVs.index}").val();
+	var op_code = $("#op_code${ogVs.index}${optionVs.index}").val();
+	var op_price = $("#op_price${ogVs.index}${optionVs.index}").val();
+	
+	if(op_name&&op_price){
+		var param = {
+			"op_name":op_name,
+			"op_code":op_code,
+			"op_price":op_price
+		}
+		$.ajax({
+	    	    type: "POST",
+	    	    url: "/update_one_option.store",
+	    	    data: JSON.stringify(param), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "옵션 수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+		    	        location.href = "CRUD.store"
+	    	        }else{alert("통신은됨");}
+	    	        
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("단일 옵션 수정 통신에러");
+	    	    }
+	    	});//ajax end
+	}else{
+		 Swal.fire({
+            icon: "warning",
+            title: "값을 입력하세요",
+            showConfirmButton: false,
+            timer: 1000
+        });
+	}
+}//update_Option end
+
+function deleteOption${ogVs.index}${optionVs.index}(){
+	var op_code = $("#op_code${ogVs.index}${optionVs.index}").val();
+	
+	var display = "optiondisplay_${ogVs.index}${optionVs.index}"; //화면에서 삭제
+	var toggle = "optiontoggle_${ogVs.index}${optionVs.index}"; //열림 토글도 삭제
+	
+	Swal.fire({
+		  title: "진짜삭제되니까 테스트용 옵션만 삭제하세요",
+//		  title: "삭제하시겠습니까??",
+		  html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+		  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		 		$.ajax({
+	 		  type: "POST",
+	           url: "/deleteOption.store",
+	          data: JSON.stringify({"op_code":op_code}),
+	           dataType: "json",
+	          contentType: "application/json",
+	          success:function(data){
+	        	  if(data==1){
+	         	 	console.log("삭제 성공");
+	         	 	//숨겨버릴거임 
+	         	 	$("#"+display).remove();
+	         	 	$("#"+toggle).remove();
+	 	         	 Swal.fire({
+				  		  icon: "success",
+				  		  title: "삭제 완료",
+				  		  showConfirmButton: false,
+				  		  timer: 1500
+					 });
+	        	  }
+	           },
+	           error:function(data){
+		          console.log("삭제");
+	          }
+	 	  	});//ajax  
+		  }//if (result.isConfirmed)
+		})//then((result)
+				
+}//deleteOption end
+</script>
 																				</c:if>	
 																				</c:forEach>
 																				
-																			<li><a class="option_addOne" onclick="option_addOne${ogVs.index}()">
+																			<li><a class="menu_addOne" onclick="option_addOne${ogVs.index}()">
 				
-																					<h4 style="color: blue; padding: 10px; margin-right: 65px;">+옵션추가</h4>
+																					<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ 옵션추가</h4>
 
 																			</a></li>
 																			
@@ -2433,7 +2535,8 @@ function addMgName(){
 																							style="color: black; font-weight: bolder; text-align: center;">그룹명
 																							: ${ogList.og_name}</h3>
 																							<h3 id ="hidden_ogCodeForROS${ogVs.index}" style="display:none;">${ogList.og_code}</h3>
-																							
+																							<input type="hidden" id="og_code${ogVs.index}" value="${ogList.og_code}">
+																							<input type="hidden" id="og_seq${ogVs.index}" value="${ogList.og_seq}">
 																							<button type="button" class="close"
 																								data-dismiss="modal"
 																								style="font-size: 20px; color: black;">취소</button>
@@ -2572,49 +2675,200 @@ function addMgName(){
 																								<h5
 																									style="font-size: 15px; font-weight: bolder; color: black; margin-top: 20px">옵션</h5>
 
-																								<div class="groupAdd_OptionList">
+																								<div class="groupAdd_OptionList" id="optionOne_${ogVs.index}">
 																									<div class="row" style="margin-left: 5px;">
 																										<div class="col-lg-5" style="padding: 5px;">
 																											<input class="form-control"
 																												style="width: relative; font-size: 15px;"
-																												type="text" placeholder="예) 1샷 추가">
+																												type="text" placeholder="예) 1샷 추가"
+																												id="newoption_name_input${ogVs.index}">
 																										</div>
 																										<div class="col-lg-5" style="padding: 5px;">
 																											<input class="form-control"
 																												style="width: relative; font-size: 15px;"
-																												type="text" placeholder="500">
+																												type="number" placeholder="500"
+																												id="option_price_input${ogVs.index}">
 																										</div>
-																										<div class="col-lg-2" style="padding: 5px;">
+																										<!-- <div class="col-lg-2" style="padding: 5px;">
 																											<button type="button"
 																												onclick="javascript:deleteAlert();"
 																												class="btn btn-danger btn-xs"
 																												style="float: left; margin-top: 7px;">
 																												<i class="fa fa-trash-o "></i>
 																											</button>
-																										</div>
+																										</div> -->
 																									</div>
 																								</div>
+																								
 																								<div class="row" style="margin-left: 5px;">
-																									<button type="button" class="groupAdd_Option">+ 가격옵션 추가하기</button>
+																									<button type="button" class="menu_priceOption"
+																									onclick="option_priceOption2${ogVs.index}()">+ 가격옵션 추가하기</button>
 																								</div>
 																							</li>
 																							<li>
 																								<div class="row">
 																									<div class="col-lg-12">
-																										<button type="button" class="save_Btn">옵션 추가하기</button>
+																										<button type="button" class="save_Btn"
+																										onclick="addOptionChecking${ogVs.index}()">옵션 추가하기</button>
 																									</div>
 																								</div>
 																							</li>
 																						</ul>
 
 																					</table>
+		<div class="row" id="hwakin_chang22_${ogVs.index}" style="display:none">
+			<h4 id="priceOne_option_${ogVs.index}" style="margin-left: 10px;">
+			<span id="newOption_${ogVs.index}"></span> : <span id="newOption_price${ogVs.index}"></span> 원</h4>
+		</div>
+																					
+<script>
+function option_priceOption2${ogVs.index}(){
+	//이거는 각자 자른 번호를 부여하기 위함.
+	indexstring = indexnum.toString();
+	indexFinal = ${ogVs.index}+indexstring;
+	console.log("dd");
+	//가격 밑으로 오게 바꿨어용 #price_list2${vs.index} -->>optionOne_${ogVs.index}
+        $('#optionOne_${ogVs.index}').append("<div id='optionOne_${ogVs.index}"+indexstring+"' class='row' style='margin-left: 2px;'>"
+		+"<div class='col-lg-5' style='padding: 5px;'> <input class='form-control OPTIONOPTION' "
+		+"forCheck='"+indexFinal+"' "
+		+"style='width: relative; font-size: 15px;' type='text' placeholder='가격명' id='option_name_${ogVs.index}"+indexstring+"'>"
+		+"</div> <div class='col-lg-5' style='padding: 5px;'> <input class='form-control OPTIONPRICEOPTIONPRICE'"
+		+" forCheck='"+indexFinal+"' "
+		+"style='width: relative; font-size: 15px;' type='number' placeholder='가격' id='option_price_${ogVs.index}"+indexstring+"'>"
+		+"</div> <div class='col-lg-2' style='padding: 5px;'> <button type='button'"
+		+" fordelete='optionOne_${ogVs.index}"+indexstring+"' "
+		+" fordelete2='optiontwo_${ogVs.index}"+indexstring+"' "
+		+"value='"+indexFinal+"'"
+		+"class='btn btn-danger btn-xs deleteOptionChuga' style='float: left; margin-top: 7px;'>"
+		+"<i class='fa fa-trash-o '></i></button></div></div>");
+ 	  indexnum++;
+ 	  
+ 	//메뉴추가에서 가격 row 삭제
+	  $(".deleteOptionChuga").click(function() {
+			var fordelete = $(this).attr("fordelete"); //div 의 id
+			$("#"+fordelete).remove();
+			//확인창에서도 삭제
+			var fordelete2 = $(this).attr("fordelete2"); //div 의 id
+			$("#"+fordelete2).remove();
+		  });//메뉴추가에서 가격 row 삭제 끝
+		  
+		  //확인창에도 옵션 누적시켜줄거임
+   	$('#priceOne_option_${ogVs.index}').append('<h4 id="optiontwo_${ogVs.index}'+indexstring+'" style="margin-left: 0px;">'
+   	+'<span id="optiontwo_name${ogVs.index}'+indexstring+'">미입력</span> : '
+   	+'<span id="optiontwo_price${ogVs.index}'+indexstring+'">미입력</span> 원</h4>');
+    
+   	$(".OPTIONOPTION").on("propertychange change keyup paste input",
+			function() {
+   		var indexFinall = $(this).attr("forCheck");
+   		console.log(indexFinall);
+	  var newmenu_basic_price_input = $(this).val();
+	  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+	  var newMenu_option = document.getElementById("optiontwo_name"+indexFinall);
+	  newMenu_option.innerText = newmenu_basic_price_input;
+  });
+   	
+   	$(".OPTIONPRICEOPTIONPRICE").on("propertychange change keyup paste input",
+			function() {
+   		var indexFinall = $(this).attr("forCheck");
+   		console.log(indexFinall);
+	  var newmenu_basic_price_input = $(this).val();
+	  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+	  var newMenu_option = document.getElementById("optiontwo_price"+indexFinall);
+	  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  });
+}
+
+function addOptionChecking${ogVs.index}(){
+	//메뉴그룹 정보
+	var og_seq = $("#og_seq${ogVs.index}").val();
+	var og_code = $("#og_code${ogVs.index}").val();
+	//기본 첫째줄 
+	var option_name = $("#newoption_name_input${ogVs.index}").val();
+	var op_price = $("#option_price_input${ogVs.index}").val();
+	//두번째 줄
+	var zzzz = document.getElementById("hwakin_chang22_${ogVs.index}").innerText;
+
+	zzzz = zzzz.replace(/원/gi, "won");
+	
+	console.log(zzzz);
+	
+//		//빈칸있으면 뭐라하기
+	if(option_name==""||op_price==""||zzzz.indexOf("미입력")!=-1){
+		Swal.fire({
+    		  icon: "error",
+    		  title: "입력사항을 확인해주세요",
+    		  showConfirmButton: false,
+	    		  timer : 1500,
+		});
+		
+	}
+	else{
+		//ajax
+		var paramm = {
+				"og_seq" : og_seq,
+				"og_code" : og_code,
+				"op_name" : option_name,
+				"op_price" : op_price,
+				"op_total" : zzzz
+		};
+		
+		$.ajax({
+	    	    type: "POST",
+	    	    url: "/addOptions.store",
+	    	    data: JSON.stringify(paramm), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "옵션 추가 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+		    	        location.reload();
+	    	        }else{alert("통신은됨");}
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("메뉴추가 통신에러");
+	    	    }
+	    	});//ajax end
+	}
+	
+	
+	
+}
+
+  $(document).ready(function(){
+	  
+	  $("#newoption_name_input${ogVs.index}").on("propertychange change keyup paste input",
+				function() {
+		  var newmenu_basic_name_input = $("#newoption_name_input${ogVs.index}").val();
+		  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+		  var newMenu_option = document.getElementById("newOption_${ogVs.index}");
+		  newMenu_option.innerText = newmenu_basic_name_input;
+	  });
+	  
+	  $("#option_price_input${ogVs.index}").on("propertychange change keyup paste input",
+				function() {
+		  var newmenu_basic_price_input = $("#option_price_input${ogVs.index}").val();
+		  //메뉴추가 메뉴명 입력시 확인하기 모달로 전달
+		  var newMenu_option = document.getElementById("newOption_price${ogVs.index}");
+		  newMenu_option.innerText = newmenu_basic_price_input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	  });
+	  
+	  
+	})//doc ready 끝
+
+
+</script>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
 																	<!--------+옵션 추가 버튼 클릭시 modal end-------->
 																
-																
+																</c:if>
 															</c:forEach>
 															<!--메뉴그룹 리스트 end-->
 

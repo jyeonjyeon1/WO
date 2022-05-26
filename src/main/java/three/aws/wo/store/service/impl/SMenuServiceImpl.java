@@ -191,5 +191,55 @@ public class SMenuServiceImpl implements SMenuService {
 	public void updateOgRos(HashMap<String, Object> map) {
 		sMenuDAO.updateOgRos(map);
 	}
+
+	@Override
+	public void updateOptionGroup(HashMap<String, String> map) {
+		sMenuDAO.updateOptionGroup(map);
+	}
+
+	@Override
+	public void updateOptionGroup_MAO(HashMap<String, String> map) {
+		sMenuDAO.updateOptionGroup_MAO(map);
+	}
+	
+	@Override
+	public void deleteOptionGroup(HashMap<String, String> map) {
+		sMenuDAO.deleteOptionGroup(map);
+	}
+
+	@Override
+	public void deleteOptionGroup_MAO(HashMap<String, String> map) {
+		sMenuDAO.deleteOptionGroup_MAO(map);
+	}
+
+	@Override
+	public void updateOption(HashMap<String, Object> map) {
+		sMenuDAO.updateOption(map);
+	}
+
+	@Override
+	public void updateOption_MAO(HashMap<String, Object> map) {
+		sMenuDAO.updateOption_MAO(map);
+	}
+	
+	@Override
+	public void deleteOption(HashMap<String, String> map) {
+		sMenuDAO.deleteOption(map);
+	}
+
+	@Override
+	public void deleteOption_MAO(HashMap<String, String> map) {
+		sMenuDAO.deleteOption_MAO(map);
+	}
+
+	@Override
+	public String maxOptionSeq(HashMap<String, Object> map) {
+		return sMenuDAO.maxOptionSeq(map);
+	}
+
+	@Override
+	public void insertOptions(HashMap<String, Object> mapp) {
+		sMenuDAO.insertOptions(mapp);
+	}
 	
 }

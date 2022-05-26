@@ -157,4 +157,44 @@ public class SMenuDAO {
 	public void updateOgRos(HashMap<String, Object> map) {
 		sqlSession.update("SMenuDAO.updateOgRos", map);
 	}
+
+	public void updateOptionGroup(HashMap<String, String> map) {
+		sqlSession.update("SMenuDAO.updateOptionGroup", map);
+	}
+	
+	public void updateOptionGroup_MAO(HashMap<String, String> map) {
+		sqlSession.update("SMenuDAO.updateOptionGroup_MAO", map);
+	}
+	
+	public void deleteOptionGroup(HashMap<String, String> map) {
+		sqlSession.delete("SMenuDAO.deleteOptionGroup", map);
+	}
+	
+	public void deleteOptionGroup_MAO(HashMap<String, String> map) {
+		sqlSession.delete("SMenuDAO.deleteOptionGroup_MAO", map);
+	}
+
+	public void updateOption(HashMap<String, Object> map) {
+		sqlSession.update("SMenuDAO.updateOption", map);
+	}
+	
+	public void updateOption_MAO(HashMap<String, Object> map) {
+		sqlSession.update("SMenuDAO.updateOption_MAO", map);
+	}
+
+	public void deleteOption(HashMap<String, String> map) {
+		sqlSession.delete("SMenuDAO.deleteOption", map);
+	}
+	
+	public void deleteOption_MAO(HashMap<String, String> map) {
+		sqlSession.delete("SMenuDAO.deleteOption_MAO", map);
+	}
+
+	public String maxOptionSeq(HashMap<String, Object> map) {
+		return sqlSession.selectOne("SMenuDAO.maxOptionSeq",map);
+	}
+
+	public void insertOptions(HashMap<String, Object> mapp) {
+		sqlSession.insert("SMenuDAO.insertOptions",mapp);
+	}
 }

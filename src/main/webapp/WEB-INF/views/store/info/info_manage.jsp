@@ -283,7 +283,7 @@ function toggle_gong(){
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">더리터 위례점</h5>
+          <h5 class="centered">${storeSession.si_name}</h5>
           <p class="sidebar-title" >주문 확인</p>
           <li class="sub-menu">
             <a href="index.store">

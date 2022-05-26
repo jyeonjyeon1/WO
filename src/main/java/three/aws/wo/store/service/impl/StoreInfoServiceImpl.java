@@ -17,5 +17,14 @@ public class StoreInfoServiceImpl implements StoreInfoService {
 	public void updateTel(HashMap<String, String> map) {
 		sInfoDAO.updateTel(map);
 	}
-
+	
+	@Override
+	public void updatePyeon2(HashMap<String, Object> map) {
+		sInfoDAO.updatePyeon2(map);
+	}
+	
+	@Override
+	public void updateSiStatus(HashMap<String, Object> map) {
+		sInfoDAO.updateSiStatus(map);
+	}
 }

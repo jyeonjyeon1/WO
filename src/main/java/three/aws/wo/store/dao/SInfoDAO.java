@@ -14,4 +14,11 @@ public class SInfoDAO {
 	public void updateTel(HashMap<String, String> map) {
 		sqlSession.update("SInfoDAO.updateTel",map);
 	}
+	public void updatePyeon2(HashMap<String, Object> map) {
+		sqlSession.update("SInfoDAO.updatePyeon2",map);
+	}
+	
+	public void updateSiStatus(HashMap<String, Object> map) {
+		sqlSession.update("SinfoDAO.updateSiStatus",map);
+	}
 }

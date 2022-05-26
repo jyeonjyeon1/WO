@@ -10,5 +10,22 @@
 		SI_CODE=#{si_code} 
 	</update>
 	
+	<update id="updatePyeon2">
+		UPDATE STORE_INFO SET 
+		SI_PARKING_ABLE = #{si_parking_able},
+		SI_REFERINFO = #{si_referinfo}
+		WHERE 
+		SI_CODE=#{si_code} 
+	</update>
+	
+	<update id="updateSiStatus">
+		UPDATE STORE_INFO SET 
+		SI_STATUS = #{si_status}
+		WHERE 
+		SI_CODE=#{si_code} 
+	</update>
+	
+	
+	
 </mapper>
  

@@ -22,7 +22,7 @@
 		UPDATE STORE_INFO SET 
 		SI_STATUS = #{si_status}
 		WHERE 
-		SI_CODE=#{si_code} 
+		SI_CODE = #{si_code} 
 	</update>
 	
 	

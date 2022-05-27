@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -271,7 +272,16 @@ function count_length(){
     </aside>
 		<!--sidebar end-->
 
-
+		<%-- <c:forEach var="reviewlist" items="${reviewlist}" varStatus="vs">
+			
+		</c:forEach>
+		
+		
+		<c:forEach var="reviewlist" items="${reviewlist}" varStatus="vss">
+			
+		</c:forEach> --%>
+		
+		
 
 		<!-- **********************************************************************************************************************************************************
         MAIN CONTENT
@@ -279,13 +289,27 @@ function count_length(){
 		<!--main content start-->
 		<section id="main-content">
 
+		<c:forEach var="reviewlist" items="${reviewlist}" varStatus="vs">
+			<c:set var="allNum" value="${vs.count }" />
+			<c:if test="${reviewlist.ur_ans eq NULL }">
+				<c:set var="noAnswerNum" value="${noAnswerNum + 1 }" />
+			</c:if>
+			<c:if test="${reviewlist.ur_open eq true }">
+				<c:set var="reportNum" value="${reportNum + 1 }" />
+			</c:if>
+			
+			<c:if test="${reviewlist.ur_ans eq NULL }">
+				<c:set var="noAnswerNum" value="${noAnswerNum + 1 }" />
+			</c:if>
+		</c:forEach>
+		
+
 			<section class="wrapper" style="height: 1500px;">
 				<div class="col-lg-12">
 					<div class="card-header"
 						style="font-size: 16px; background-color: rgb(255, 255, 255); border-radius: 10px;">
 						<i class="fa fa-plus-circle" style="margin-bottom: 15px;"></i>최근(30일)
 						리뷰 255개
-
 						<div class="row">
 							<div class="col-lg-2">
 								<div class="row" style="text-align: center; margin-top: 30px;">
@@ -299,6 +323,7 @@ function count_length(){
 							</div>
 							<div class="col-lg-10">
 								<div class="hGraph">
+								
 									<ul>
 										<li><span class="gTerm">5점</span><span class="gBar"
 											style="width: 90%"><span>220개</span></span></li>
@@ -322,7 +347,6 @@ function count_length(){
 				<div class="col-lg-12" style="min-width: 500px;">
 					<div class="form-panel"
 						style="margin-top: 0; border-radius: 0 0 10px 10px;">
-						<form class="form-horizontal style-form" method="get">
 							<div class="row content-panel"
 								style="border: none; box-shadow: none; padding: 0; margin: 0 5px">
 
@@ -333,15 +357,13 @@ function count_length(){
 										<!-- 메뉴관리 -->
 										<div id="menu" class="tab-pane active no-padding">
 
-
-
 											<ul class="nav nav-tabs nav-justified">
 												<li class="active"><a data-toggle="tab"
-													href="#faq__111">전체 리뷰(19)</a></li>
-												<li><a data-toggle="tab" href="#faq__222">미답변 리뷰(7)</a>
-												</li>
-												<li><a data-toggle="tab" href="#faq__333">신고 리뷰(0)</a>
-												</li>
+													href="#faq__111">전체 리뷰(${allNum })</a></li>
+												<li><a data-toggle="tab" href="#faq__222">미답변
+														리뷰(${noAnswerNum })</a></li>
+												<li><a data-toggle="tab" href="#faq__333">신고
+														리뷰(${reportNum })</a></li>
 
 
 											</ul>
@@ -354,253 +376,258 @@ function count_length(){
 													<!-- 메뉴편집 -->
 													<div id="faq__111" class="tab-pane active">
 														<!--리뷰1개-->
-														<div class="review_container"
-															style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
-															<div class="row">
-																<div class="col-lg-2">
-																	<h4
-																		style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">배고프젼</h4>
-																	<div class="star-ratings">
-																		<div class="star-ratings-fill space-x-2 text-lg"
-																			style="width: 80%;">
-																			<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+														<c:forEach var="reviewlist" items="${reviewlist}" varStatus="vs">
+														<form class="form-horizontal style-form" method="get">
+															<div class="review_container"
+																style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
+																<div class="row">
+																	<div class="col-lg-2">
+																		<h4
+																			style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">${reviewlist.u_nickname }</h4>
+																		<div class="star-ratings">
+																			<div class="star-ratings-fill space-x-2 text-lg"
+																				style="width: 80%;">
+																				<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+																			</div>
+																			<div class="star-ratings-base space-x-2 text-lg">
+																				<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+																			</div>
 																		</div>
-																		<div class="star-ratings-base space-x-2 text-lg">
-																			<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+																		<h6>${reviewlist.ur_regdate.substring(0,19) }</h6>
+																	</div>
+
+																	<div class="col-lg-10">
+																		<h3>${reviewlist.ur_content }</h3>
+																		<img src="${reviewlist.ur_pic_url }"
+																			style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
+																		<h4>주문메뉴</h4>
+																		<c:set var="listVar">${reviewlist.o_list_detail}</c:set>
+																		<c:forTokens items="${listVar}" delims=",,,"
+																			var="value">
+																			<span class="review_menu">${value}</span>
+																		</c:forTokens>
+																		<div style="margin-top: 20px;">
+																			<span class="answerReview_click"
+																				id="toggle${vs.index}"
+																				onclick="openCloseToc${vs.index}()">사장님 댓글
+																				등록하기</span>
 																		</div>
+																	</form>
+																	
+																	<form class="form-horizontal style-form" name="postForm" method="post" action="/reviewanswer.store">
+																		<div class="answer_review button"
+																			style="margin-top: 20px; margin-bottom: 10px;">
+																			<ol id="review_content${vs.index}"
+																				style="padding: 0; display: none">
+																				<textarea name="ur_ans" maxlength="99" id="pikabu" oninput="count_length()" 
+																				style="width: 700px; height: 300px; resize: none; font-size: 20px;" 
+																				placeholder="${reviewlist.ur_ans }"></textarea>
+																				<span id="show_length" style="font-size: 20px;">0</span>
+																				<span id="show_maxlength" style="font-size: 15px;">/100</span>
+																			</ol>
+																			<input type="hidden" name="ur_code" value=${reviewlist.ur_code }>
+																			<button class="answerReview_ok button" id="content_ok${vs.index}" onclick="submit_btn()">
+																			등록</button>
+																		</div>
+																	</form>
 																	</div>
-																	<h6>2022.05.01</h6>
 																</div>
-
-																<div class="col-lg-10">
-																	<h3>오랜만에 먹었더니 너무 맛있었어요 >< 너무간편하고 좋아요</h3>
-																	<img src="../5.jpg"
-																		style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
-																	<h4>주문메뉴</h4>
-																	<span class="review_menu">달고나라떼</span><span
-																		class="review_menu">아메리카노</span><span
-																		class="review_menu">바닐라라떼</span> <br>
-																	<div style="margin-top: 20px;">
-																		<span class="answerReview_click" id="toggle1"
-																			onclick="openCloseToc1()">사장님 댓글 등록하기</span>
-																	</div>
-																	<div class="answer_review button"
-																		style="margin-top: 20px; margin-bottom: 10px;">
-																		<ol id="review_content1"
-																			style="padding: 0; display: none">
-																			<textarea maxlength="99" id="pikabu"
-																				oninput="count_length()"
-																				style="width: 700px; height: 300px; resize: none; font-size: 20px;"
-																				placeholder="리뷰에 대한 답변을 해주세요!"; ></textarea>
-
-																			<span id="show_length" style="font-size: 20px;">0</span>
-																			<span id="show_maxlength" style="font-size: 15px;">/100</span>
-
-																		</ol>
-
-																		<span class="answerReview_ok" id="content_ok1"
-																			onclick="">등록</span>
-
-
-																	</div>
-
-
-
-																</div>
-
 															</div>
-
-														</div>
-
-														<script>
-												//리뷰1개 js
-											  function openCloseToc1() {
-											    if(document.getElementById('review_content1').style.display === 'block') {
-											      document.getElementById('content_ok1').style.display='none';
-											      document.getElementById('review_content1').style.display = 'none';
-											      document.getElementById('toggle1').textContent = '사장님 댓글 등록하기';
-											    } else {
-											      document.getElementById('content_ok1').style.display='block';
-											      document.getElementById('review_content1').style.display = 'block';
-											      document.getElementById('content_ok1').textContent='등록';
-											      document.getElementById('toggle1').textContent = '취소';
-											    }
-											  }
-											
-											  </script>
-											  
-											  <!--리뷰1개-->
-														<div class="review_container"
-															style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
-															<div class="row">
-																<div class="col-lg-2">
-																	<h4
-																		style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">배고프젼</h4>
-																	<div class="star-ratings">
-																		<div class="star-ratings-fill space-x-2 text-lg"
-																			style="width: 80%;">
-																			<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-																		</div>
-																		<div class="star-ratings-base space-x-2 text-lg">
-																			<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-																		</div>
-																	</div>
-																	<h6>2022.05.01</h6>
-																</div>
-
-																<div class="col-lg-10">
-																	<h3>오랜만에 먹었더니 너무 맛있었어요 >< 너무간편하고 좋아요</h3>
-																	<img src="../5.jpg"
-																		style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
-																	<h4>주문메뉴</h4>
-																	<span class="review_menu">달고나라떼</span><span
-																		class="review_menu">아메리카노</span><span
-																		class="review_menu">바닐라라떼</span> <br>
-																	<div style="margin-top: 20px;">
-																		<span class="answerReview_click" id="toggle2"
-																			onclick="openCloseToc2()">사장님 댓글 등록하기</span>
-																	</div>
-																	<div class="answer_review button"
-																		style="margin-top: 20px; margin-bottom: 10px;">
-																		<ol id="review_content2"
-																			style="padding: 0; display: none">
-																			<textarea maxlength="99" id="pikabu"
-																				oninput="count_length()"
-																				style="width: 700px; height: 300px; resize: none; font-size: 20px;"
-																				placeholder="리뷰에 대한 답변을 해주세요!"; ></textarea>
-
-																			<span id="show_length" style="font-size: 20px;">0</span>
-																			<span id="show_maxlength" style="font-size: 15px;">/100</span>
-
-																		</ol>
-
-																		<span class="answerReview_ok" id="content_ok2"
-																			onclick="">등록</span>
-
-
-																	</div>
-
-
-
-																</div>
-
-															</div>
-
-														</div>
-
-														<script>
-												//리뷰1개 js
-											  function openCloseToc2() {
-											    if(document.getElementById('review_content2').style.display === 'block') {
-											      document.getElementById('content_ok2').style.display='none';
-											      document.getElementById('review_content2').style.display = 'none';
-											      document.getElementById('toggle2').textContent = '사장님 댓글 등록하기';
-											    } else {
-											      document.getElementById('content_ok2').style.display='block';
-											      document.getElementById('review_content2').style.display = 'block';
-											      document.getElementById('content_ok2').textContent='등록';
-											      document.getElementById('toggle2').textContent = '취소';
-											    }
-											  }
-											
-											  </script>
-											  <!-- 리뷰1개끝 -->
-
-
-
-
-
+															
+															<script>
+															  function openCloseToc${vs.index}() {
+															    if(document.getElementById('review_content${vs.index}').style.display === 'block') {
+															      document.getElementById('content_ok${vs.index}').style.display='none';
+															      document.getElementById('review_content${vs.index}').style.display = 'none';
+															      document.getElementById('toggle${vs.index}').textContent = '사장님 댓글 등록하기';
+															    } else {
+															      document.getElementById('content_ok${vs.index}').style.display='block';
+															      document.getElementById('review_content${vs.index}').style.display = 'block';
+															      document.getElementById('content_ok${vs.index}').textContent='등록';
+															      document.getElementById('toggle${vs.index}').textContent = '취소';
+															    }
+															  }
+															
+															  function submit_btn() {
+															 		document.postForm.submit();
+															    }
+														  </script>
+														</c:forEach>
+														
 													</div>
 
 													<div id="faq__222" class="tab-pane">
-													
-													<!--리뷰1개-->
-														<div class="review_container"
-															style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
-															<div class="row">
-																<div class="col-lg-2">
-																	<h4
-																		style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">배고프젼</h4>
-																	<div class="star-ratings">
-																		<div class="star-ratings-fill space-x-2 text-lg"
-																			style="width: 80%;">
-																			<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+
+														<!--리뷰1개-->
+														<c:forEach var="reviewlist" items="${reviewlist}" varStatus="vss">
+															<c:if test="${reviewlist.ur_ans eq NULL }">
+																<div class="review_container"
+																	style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
+																	<div class="row">
+																		<div class="col-lg-2">
+																			<h4
+																				style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">${reviewlist.u_nickname }</h4>
+																			<div class="star-ratings">
+																				<div class="star-ratings-fill space-x-2 text-lg"
+																					style="width: 80%;">
+																					<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+																				</div>
+																				<div class="star-ratings-base space-x-2 text-lg">
+																					<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+																				</div>
+																			</div>
+																			<h6>${reviewlist.ur_regdate.substring(0,19) }</h6>
 																		</div>
-																		<div class="star-ratings-base space-x-2 text-lg">
-																			<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+
+																		<div class="col-lg-10">
+																			<h3>${reviewlist.ur_content }</h3>
+																			<img src="${reviewlist.ur_pic_url }"
+																				style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
+																			<h4>주문메뉴</h4>
+																			<c:set var="listVar">${reviewlist.o_list_detail}</c:set>
+																			<c:forTokens items="${listVar}" delims=",,,"
+																				var="value">
+																				<span class="review_menu">${value}</span>
+																			</c:forTokens>
+																			<div style="margin-top: 20px;">
+																				<span class="answerReview_click"
+																					id="toggleb${vss.index}"
+																					onclick="openCloseTocb${vss.index}()">사장님 댓글
+																					등록하기</span>
+																			</div>
+																		</form>
+																	
+																		<form class="form-horizontal style-form" name="postForm" method="post" action="/reviewanswer.store">
+																			<div class="answer_review button"
+																				style="margin-top: 20px; margin-bottom: 10px;">
+																				<ol id="review_contentb${vss.index}"
+																					style="padding: 0; display: none">
+																					<textarea maxlength="99" id="pikabu"
+																						oninput="count_length()"
+																						style="width: 700px; height: 300px; resize: none; font-size: 20px;"
+																						placeholder="리뷰에 대한 답변을 해주세요!"></textarea>
+
+																					<span id="show_length" style="font-size: 20px;">0</span>
+																					<span id="show_maxlength" style="font-size: 15px;">/100</span>
+																				</ol>
+																				<button class="answerReview_ok button"
+																					id="content_okb${vss.index}" onclick="">등록</button>
+																			</div>
+																		</form>
 																		</div>
 																	</div>
-																	<h6>2022.05.01</h6>
 																</div>
-
-																<div class="col-lg-10">
-																	<h3>오랜만에 먹었더니 너무 맛있었어요 >< 너무간편하고 좋아요</h3>
-																	<img src="../5.jpg"
-																		style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
-																	<h4>주문메뉴</h4>
-																	<span class="review_menu">달고나라떼</span><span
-																		class="review_menu">아메리카노</span><span
-																		class="review_menu">바닐라라떼</span> <br>
-																	<div style="margin-top: 20px;">
-																		<span class="answerReview_click" id="toggle3"
-																			onclick="openCloseToc3()">사장님 댓글 등록하기</span>
-																	</div>
-																	<div class="answer_review button"
-																		style="margin-top: 20px; margin-bottom: 10px;">
-																		<ol id="review_content3"
-																			style="padding: 0; display: none">
-																			<textarea maxlength="99" id="pikabu"
-																				oninput="count_length()"
-																				style="width: 700px; height: 300px; resize: none; font-size: 20px;"
-																				placeholder="리뷰에 대한 답변을 해주세요!"; ></textarea>
-
-																			<span id="show_length" style="font-size: 20px;">0</span>
-																			<span id="show_maxlength" style="font-size: 15px;">/100</span>
-
-																		</ol>
-
-																		<span class="answerReview_ok" id="content_ok3"
-																			onclick="">등록</span>
+																<script>
+																  function openCloseTocb${vss.index}() {
+																	 console.log(document.getElementById('review_contentb${vss.index}').style.display);
+																    if(document.getElementById('review_contentb${vss.index}').style.display === 'block') {
+																      document.getElementById('content_okb${vss.index}').style.display='none';
+																      document.getElementById('review_contentb${vss.index}').style.display = 'none';
+																      document.getElementById('toggleb${vss.index}').textContent = '사장님 댓글 등록하기';
+																    } else {
+																      document.getElementById('content_okb${vss.index}').style.display='block';
+																      document.getElementById('review_contentb${vss.index}').style.display = 'block';
+																      document.getElementById('content_okb${vss.index}').textContent='등록';
+																      document.getElementById('toggleb${vss.index}').textContent = '취소';
+																    }
+																  }
+																
+															  </script>
+																
+															</c:if>
+														</c:forEach>
+														<!-- 리뷰1개끝 -->
 
 
-																	</div>
-
-
-
-																</div>
-
-															</div>
-
-														</div>
-
-														<script>
-												//리뷰1개 js
-											  function openCloseToc3() {
-											    if(document.getElementById('review_content3').style.display === 'block') {
-											      document.getElementById('content_ok3').style.display='none';
-											      document.getElementById('review_content3').style.display = 'none';
-											      document.getElementById('toggle3').textContent = '사장님 댓글 등록하기';
-											    } else {
-											      document.getElementById('content_ok3').style.display='block';
-											      document.getElementById('review_content3').style.display = 'block';
-											      document.getElementById('content_ok3').textContent='등록';
-											      document.getElementById('toggle3').textContent = '취소';
-											    }
-											  }
-											
-											  </script>
-											  <!-- 리뷰1개끝 -->
-													
-													
 													</div>
 													<!-- /tab-pane -->
-													<div id="faq__333" class="tab-pane">333</div>
+													
+													<div id="faq__333" class="tab-pane">
+														<c:forEach var="reviewlist" items="${reviewlist}" varStatus="vsss">
+															<c:if test="${reviewlist.ur_open eq true }">
+																<div class="review_container"
+																	style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
+																	<div class="row">
+																		<div class="col-lg-2">
+																			<h4
+																				style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">${reviewlist.u_nickname }</h4>
+																			<div class="star-ratings">
+																				<div class="star-ratings-fill space-x-2 text-lg"
+																					style="width: 80%;">
+																					<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+																				</div>
+																				<div class="star-ratings-base space-x-2 text-lg">
+																					<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+																				</div>
+																			</div>
+																			<h6>${reviewlist.ur_regdate.substring(0,19) }</h6>
+																		</div>
+	
+																		<div class="col-lg-10">
+																			<h3>${reviewlist.ur_content }</h3>
+																			<img src="${reviewlist.ur_pic_url }"
+																				style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
+																			<h4>주문메뉴</h4>
+																			<c:set var="listVar">${reviewlist.o_list_detail}</c:set>
+																			<c:forTokens items="${listVar}" delims=",,,"
+																				var="value">
+																				<span class="review_menu">${value}</span>
+																			</c:forTokens>
+																			<div style="margin-top: 20px;">
+																				<span class="answerReview_click"
+																					id="togglec${vsss.index}"
+																					onclick="openCloseTocc${vsss.index}()">사장님 댓글
+																					등록하기</span>
+																			</div>
+																		</form>
+																	
+																		<form class="form-horizontal style-form" name="postForm" method="post" action="/reviewanswer.store">
+																			<div class="answer_review button"
+																				style="margin-top: 20px; margin-bottom: 10px;">
+																				<ol id="review_contentc${vsss.index}"
+																					style="padding: 0; display: none">
+																					<textarea maxlength="99" id="pikabu"
+																						oninput="count_length()"
+																						style="width: 700px; height: 300px; resize: none; font-size: 20px;"
+																						placeholder="리뷰에 대한 답변을 해주세요!"></textarea>
+	
+																					<span id="show_length" style="font-size: 20px;">0</span>
+																					<span id="show_maxlength" style="font-size: 15px;">/100</span>
+																				</ol>
+																				<button class="answerReview_ok button"
+																					id="content_okc${vsss.index}" onclick="">등록</button>
+																			</div>
+																		</form>
+																		</div>
+																	</div>
+																</div>
+																<script>
+																  function openCloseTocc${vsss.index}() {
+																	  console.log("33");
+																    if(document.getElementById('review_contentc${vsss.index}').style.display === 'block') {
+																      document.getElementById('content_okc${vsss.index}').style.display='none';
+																      document.getElementById('review_contentc${vsss.index}').style.display = 'none';
+																      document.getElementById('togglec${vsss.index}').textContent = '사장님 댓글 등록하기';
+																    } else {
+																      document.getElementById('content_okc${vsss.index}').style.display='block';
+																      document.getElementById('review_contentc${vsss.index}').style.display = 'block';
+																      document.getElementById('content_okc${vsss.index}').textContent='등록';
+																      document.getElementById('togglec${vsss.index}').textContent = '취소';
+																    }
+																  }
+																
+															  </script>
+															</c:if>
+														</c:forEach>
 													<!-- /tab-pane -->
-
+													</div>
 												</div>
 												<!-- /tab-content -->
 											</div>
 										</div>
+									</div>
+								</div>
+							</div>
 						</form>
 					</div>
 

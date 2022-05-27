@@ -305,6 +305,21 @@ function toggle_imsi(){
 	    }
 	}
 
+
+function toggle_fix(){
+
+	  if(document.getElementById('btn_toggle2').checked) {
+	      
+	      document.getElementById('fix_disable').textContent = '설정함';
+	      document.getElementById('fix_date').style.display = "block";
+	      
+	    } else {
+	           
+	      document.getElementById('fix_disable').textContent = '설정안함';
+	      document.getElementById('fix_date').style.display = "none";
+	    }
+	}
+
 function samesame() {
  document.getElementById("same_content").style.display="block";
  document.getElementById("diff_content").style.display="none";
@@ -312,6 +327,138 @@ function samesame() {
 function diffdiff(){
   document.getElementById("diff_content").style.display="block";
   document.getElementById("same_content").style.display="none";
+}
+
+
+function updateAllday() {
+	
+	console.log("ffff");
+	
+	var si_Allday = "y";
+	var si_openA = $("#si_openA").val();
+	var si_closeA = $("#si_closeA").val(); 
+	var si_openW = "4";
+	var si_closeW = "5";
+	var si_openSat = "6";
+	var si_closeSat = "7";
+	var si_openSun = "8";
+	var si_closeSun = "9";
+	
+	var param = { 
+		"si_Allday" : si_Allday,
+		"si_openA" : si_openA,
+		"si_closeA" : si_closeA,
+		"si_openW" :  si_openW,
+		"si_closeW" : si_closeW,
+		"si_openSat" : si_openSat,
+		"si_closeSat" : si_closeSat,
+		"si_openSun" : si_openSun,
+		"si_closeSun" : si_closeSun
+	}
+	
+	console.log(param);
+	  $.ajax({
+		type:"POST",
+		url: "/updateAllday.store",
+     data: JSON.stringify(param),
+     dataType: "json",
+     contentType: "application/json",
+     success:function(data){
+     	Swal.fire({
+	    	            icon: "success",
+	    	            title: "영업시간 수정완료",
+	    	            showConfirmButton: false,
+	    	            timer: 1500
+	    	        });
+     	if(si_Allday=="y") {
+     		document.getElementById('same111').style.display ="block";
+     		document.getElementById('same222').style.display ="none";
+     	}else {
+     		document.getElementById('same111').style.display ="none";
+     		document.getElementById('same222').style.display ="block";
+     	}
+     	
+     },error: function(data) {
+     	console.log("가게영업시간 수정오류");
+     }
+	});  
+	
+	
+}
+
+
+function update_holiday(){
+	var si_holiday_gong ="";
+	var si_holiday_fix="";
+	var si_holiday_imsi="";
+	
+
+	if(document.getElementById('btn_toggle').checked) {
+		si_holiday_gong="y";
+	}else {
+		si_holiday_gong="n";
+	}
+	
+	if(document.getElementById('btn_toggle2').checked) {
+		si_holiday_fix=$("#holiday_fixSelect option:selected").val();
+	}else {
+		si_holiday_fix="";
+	}
+	
+	
+	if(document.getElementById('btn_toggle3').checked) {
+		si_holiday_imsi=$('#holiday_imsi_date').val();
+	}else {
+		si_holiday_imsi="";
+	}
+	
+	var param = { 
+			"si_holiday_gong" : si_holiday_gong,
+			"si_holiday_fix" : si_holiday_fix,
+			"si_holiday_imsi" : si_holiday_imsi
+		}
+	
+	
+	console.log(si_holiday_gong+"/"+si_holiday_fix+"/"+si_holiday_imsi);
+	
+	
+	
+	   $.ajax({
+			type:"POST",
+			url: "/updateHoliday.store",
+	     data: JSON.stringify(param),
+	     dataType: "json",
+	     contentType: "application/json",
+	     success:function(data){
+	     	Swal.fire({
+		    	            icon: "success",
+		    	            title: "영업시간 수정완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	     	if(document.getElementById('btn_toggle').checked) {
+	     		document.getElementById('holiday_gong_show').textContent = "[설정함]";
+	     	}else {
+	     		document.getElementById('holiday_gong_show').textContent = "[설정안함]";
+	     	}
+	     	if(document.getElementById('btn_toggle2').checked) {
+	     		document.getElementById('holiday_fix_show').textContent = si_holiday_fix;
+	     	}else {
+	     		document.getElementById('holiday_fix_show').textContent="";
+	     	}
+	     	if(document.getElementById('btn_toggle3').checked) {
+	     		document.getElementById('holiday_imsi_show').textContent = si_holiday_imsi;
+	     	}else {
+	     		document.getElementById('holiday_imsi_show').textContent ="";
+	     	}
+	     	
+	     	
+	     	
+	     },error: function(data) {
+	     	console.log("가게영업시간 수정오류");
+	     }
+		});   
+	
 }
 
 
@@ -432,23 +579,33 @@ function diffdiff(){
 
                     <div class="box purple">
                       <span class="title">영업시간 <a class="change_info" onclick="modal_a()" >변경하기</a></span>
-                      <ul style="display:none;"> 
+                      <c:choose>
+                      <c:when test="${storeSession.si_Allday}">
+                      <ul id="same111"> 
                         <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px;">[평일/주말 동일]</li>
                            <li>매일</li>
-                         <div>${storeSession.si_open} ~ ${storeSession.si_close}</div>
+                         <div>${storeSession.si_openA} ~ ${storeSession.si_closeA}</div>
                          
                       </ul>
-
-                      <ul> 
+                      </c:when>
+                      <c:otherwise>
+                        <ul id="same222"> 
                         <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px; ">[평일/주말 별도]</li>
                           <li>월~금</li>
-                         <div>${storeSession.si_open} ~ ${storeSession.si_close}</div>
+                         <div>${storeSession.si_openW} ~ ${storeSession.si_closeW}</div>
                           <li>토요일</li>
-                            <div>오전 10:50 ~ 오후 10:50</div>
+                            <div>${storeSession.si_openSat} ~ ${storeSession.si_closeSat}</div>
                           <li>일요일</li>
-                            <div>오전 10:50 ~ 오후 09:50</div>
+                            <div>${storeSession.si_openSun} ~ ${storeSession.si_closeSun}</div>
                          
                       </ul>
+                      </c:otherwise>
+                      </c:choose>
+                      
+                      
+                      
+
+                    
                   </div>
                   <!--모달1-->
                   <div class="modalA">
@@ -476,10 +633,10 @@ function diffdiff(){
                   
                     <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
                       
-                        <input class="form-control round-form" name="si_open" type="time"
+                        <input class="form-control round-form" name="si_openA" id="si_openA" type="time"
                           value=""
                           style="width: 20%; display: inline-block; margin:0 ">
-                        ~ <input class="form-control round-form" name="si_close" type="time"
+                        ~ <input class="form-control round-form" name="si_closeA" id="si_closeA" type="time"
                           value=""
                           style="width: 20%; display: inline-block; margin: 0;">
                       
@@ -498,10 +655,10 @@ function diffdiff(){
                     
                     <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
                       
-                      <input class="form-control round-form" name="si_open" type="time"
+                      <input class="form-control round-form" name="si_openW" type="time"
                         value=""
                         style="width: 20%; display: inline-block; margin:0 ">
-                      ~ <input class="form-control round-form" name="si_close" type="time"
+                      ~ <input class="form-control round-form" name="si_closeW" type="time"
                         value=""
                         style="width: 20%; display: inline-block; margin: 0;">
                     
@@ -513,10 +670,10 @@ function diffdiff(){
                   
                   <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
                     
-                    <input class="form-control round-form" name="si_open" type="time"
+                    <input class="form-control round-form" name="si_openSat" type="time"
                       value=""
                       style="width: 20%; display: inline-block; margin:0 ">
-                    ~ <input class="form-control round-form" name="si_close" type="time"
+                    ~ <input class="form-control round-form" name="si_closeSat" type="time"
                       value=""
                       style="width: 20%; display: inline-block; margin: 0;">
                   
@@ -527,10 +684,10 @@ function diffdiff(){
                 
                 <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
                   
-                  <input class="form-control round-form" name="si_open" type="time"
+                  <input class="form-control round-form" name="si_openSun" type="time"
                     value=""
                     style="width: 20%; display: inline-block; margin:0 ">
-                  ~ <input class="form-control round-form" name="si_close" type="time"
+                  ~ <input class="form-control round-form" name="si_closSun" type="time"
                     value=""
                     style="width: 20%; display: inline-block; margin: 0;">
                 
@@ -542,10 +699,10 @@ function diffdiff(){
                        <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-6"></div>
                          <div class="col-lg-3" style="text-align: right;">
-                          <button class="UpdateBtn" onclick="" >수정</button>
+                          <button type="button" class="UpdateBtn" onclick="updateAllday()" >수정</button>
                          </div>
                         <div class="col-lg-3" style="text-align: left;">
-                          <button class="closeBtn" onclick="close_modalA()" >닫기</button>
+                          <button type="button" class="closeBtn" onclick="close_modalA()" >닫기</button>
                         </div>
                        </div> 
                       
@@ -559,17 +716,28 @@ function diffdiff(){
                       <span class="title" style="margin-top: 30px;">휴무일 <a class="change_info" onclick="modal_b()" >변경하기</a></span> 
                       <ul> 
                           <li>공휴일</li> 
-                          <div>""</div>
+                          <div id="holiday_gong_show">
+                          <c:choose>
+                          <c:when test="${storeSession.si_holiday_gong}">
+                          [설정함]
+                          </c:when>
+                          <c:otherwise>
+                          [설정안함]
+                          </c:otherwise>
+                          </c:choose>
+                         </div>
                           <li>정기휴무</li> 
-                          <div>${storeSession.si_holiday_fix}</div>
+                          <div id="holiday_fix_show">
+                          매주 ${storeSession.si_holiday_fix}
+                          </div>
                           <li>임시휴무</li> 
-                          <div>${storeSession.si_holiday_imsi}</div>
+                          <div id="holiday_imsi_show">${storeSession.si_holiday_imsi}</div>
                           
                       </ul>
                   </div>
                   <!--모달2-->
                   <div class="modalB">
-                    <div class="modalB_content">
+                    <div class="modalB_content" style="height: auto;">
                       <h2 style="font-size: 20px; color: black; border-bottom: 1px solid rgba(0, 0, 0, 0.575); padding-bottom: 20px;">휴무일</h2>
                       
                       
@@ -605,6 +773,26 @@ function diffdiff(){
                     </div>
                         </div>
                         
+                        <div class="row" id="fix_date" style="display:none;">
+                        <div class="col-lg-2" style="padding-right:0;">
+                        <h5 style="margin-left:40px; ">요일선택 : </h5>
+                        </div>
+                        <div class="col-lg-10" style="margin-top:5px; padding-left:0;">
+                        <div class="dataTable-dropdown" >
+                        
+											<select class="dataTable-selector" id="holiday_fixSelect" style="width:20%; float:left;">
+												<option value="월요일">월</option>
+												<option value="화요일">화</option>
+												<option value="수요일">수</option>
+												<option value="목요일">목</option>
+												<option value="금요일">금</option>
+												<option value="토요일">토</option>
+												<option value="일요일">일</option>
+											</select>
+										</div>
+                        </div>
+                        </div>
+                        
                         <div class="row" style="margin-top: 60px; margin-left: 30px; ">
                           <div class="col-lg-3">
                         <div style="font-size: 15px; font-weight: bolder;  color: black; text-align: left; margin-top: 5px; ">임시휴무</div>
@@ -620,7 +808,7 @@ function diffdiff(){
                     </div>
                         </div>
                         <div class="row" id="imsi_date" style="display:none;">
-                        <input class="form-control round-form" type="date" style="margin-left: 70px; width: 30%; display: inline-block; float:left;"> 
+                        <input id="holiday_imsi_date" class="form-control round-form" type="date" style="margin-left: 70px; width: 30%; display: inline-block; float:left;"> 
                         </div>
                         
 
@@ -630,10 +818,10 @@ function diffdiff(){
                        <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-6"></div>
                          <div class="col-lg-3" style="text-align: right;">
-                          <button class="UpdateBtn" onclick="" >수정</button>
+                          <button type="button" class="UpdateBtn" onclick="update_holiday()" >수정</button>
                          </div>
                         <div class="col-lg-3" style="text-align: left;">
-                          <button class="closeBtn" onclick="close_modalB()" >닫기</button>
+                          <button type="button" class="closeBtn" onclick="close_modalB()" >닫기</button>
                         </div>
                        </div> 
                       

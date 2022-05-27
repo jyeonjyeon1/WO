@@ -6,4 +6,6 @@ public interface StoreInfoService {
 	void updateTel(HashMap<String, String> map);
 	void updatePyeon2(HashMap<String, Object> map);
 	void updateSiStatus(HashMap<String, Object> map);
+	void updateAllday(HashMap<String, Object> map);
+	void updateHoliday(HashMap<String, Object> map);
 }

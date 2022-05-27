@@ -21,4 +21,12 @@ public class SInfoDAO {
 	public void updateSiStatus(HashMap<String, Object> map) {
 		sqlSession.update("SInfoDAO.updateSiStatus",map);
 	}
+	
+	public void updateAllday(HashMap<String, Object> map) {
+		sqlSession.update("SInfoDAO.updateAllday",map);
+	}
+	
+	public void updateHoliday(HashMap<String, Object> map) {
+		sqlSession.update("SInfoDAO.updateHoliday",map);
+	}
 }

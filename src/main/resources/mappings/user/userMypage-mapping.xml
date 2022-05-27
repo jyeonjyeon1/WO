@@ -76,18 +76,19 @@
 	</insert>
 	
 	<select id="myWishList" resultType="UserWishVO" parameterType="UserWishVO">
-		<!-- <![CDATA[ -->
+		
 		SELECT * FROM LIKE_STORE store
 		INNER JOIN 
 		STORE_INFO info
-		ON (store.SI_CODE = info.SI_CODE )
-		WHERE store.U_ID = 'user02'
-		order by si_reg_date desc
-		OFFSET 3 limit 0 
-		<!-- ]]> -->
+		ON (info.SI_CODE = store.SI_CODE )
+		WHERE store.U_ID = #{u_id}
+		ORDER BY
+        ls_seq DESC limit #{cri.amount} offset (#{cri.pageNum}-1) * #{cri.amount}
+      	
+		
 	</select>
 	
-	<select id="myWishListCount" resultType="UserWishVO" parameterType="UserWishVO">
+	<select id="myWishListCount" resultType="int" parameterType="UserWishVO">
 		SELECT COUNT(*) FROM LIKE_STORE store
 		INNER JOIN 
 		STORE_INFO info

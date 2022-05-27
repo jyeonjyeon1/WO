@@ -34,6 +34,7 @@
 		<typeAlias alias="MessageVO" type="three.aws.wo.admin.vo.MessageVO" />
 		<typeAlias alias="PointVO" type="three.aws.wo.admin.vo.PointVO" />
 		<typeAlias alias="UserWishVO" type="three.aws.wo.user.vo.UserWishVO" />
+		<typeAlias alias="MenuListVO" type="three.aws.wo.user.vo.MenuListVO" />
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
 		<mapper resource="mappings/user/user-mapping.xml" /> 
@@ -50,10 +51,14 @@
 		<mapper resource="mappings/admin/adminSMS-mapping.xml" />
 		<mapper resource="mappings/admin/adminUser-mapping.xml" /> 
 		<mapper resource="mappings/admin/adminStore-mapping.xml" />
-		<mapper resource="mappings/admin/terms-mapping.xml" />
+		<mapper resource="mappings/admin/adminterms-mapping.xml" />
 		<mapper resource="mappings/admin/adminOrder-mapping.xml" /> 
 		
 		
 		<mapper resource="mappings/store/storeMenu-mapping.xml" /> 
+		<mapper resource="mappings/store/storeLogin-mapping.xml" />
+		<mapper resource="mappings/store/storePumjeol-mapping.xml" />
+		<mapper resource="mappings/store/storeInfo-mapping.xml" />
+		
 	</mappers>
 </configuration>

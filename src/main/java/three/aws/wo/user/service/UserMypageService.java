@@ -13,8 +13,9 @@ public interface UserMypageService {
 	void insertReview(ReviewVO vo) throws Exception;
 	String getOrderCode() throws Exception;
 	void myWish(HashMap<String, String> wish);
+	List<UserWishVO> myWishList(UserWishVO userWishVO);
+	int myWishListCount(String u_id);
 	List<PointVO> userPointList(String u_id);
 	List<CouponVO> usableCouponList(String u_id);
 	List<CouponVO> usedCouponList(String u_id);
-	List<UserWishVO> myWishList(String storeName);
 }

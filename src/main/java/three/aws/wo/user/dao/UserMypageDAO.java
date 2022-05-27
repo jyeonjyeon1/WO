@@ -33,8 +33,12 @@ public class UserMypageDAO {
 		sqlSession.insert("UserMypageDAO.myWish", wish);
 	}
 
-	public List<UserWishVO> myWishList(String storeName) {
-		return sqlSession.selectList("UserMypageDAO.myWishList",storeName);
+	public List<UserWishVO> myWishList(UserWishVO userWishVO) {
+		return sqlSession.selectList("UserMypageDAO.myWishList",userWishVO);
+	}
+	
+	public int myWishListCount(String u_id) {
+		return sqlSession.selectOne("UserMypageDAO.myWishListCount",u_id);
 	}
 	
 	public List<PointVO> userPointList(String u_id) {

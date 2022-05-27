@@ -38,10 +38,14 @@ public class UserMypageServiceImpl implements UserMypageService {
 	}
 	
 	@Override
-	public List<UserWishVO> myWishList(String storeName) {
-		return userMypageDAO.myWishList(storeName);
+	public List<UserWishVO> myWishList(UserWishVO userWishVO) {
+		return userMypageDAO.myWishList(userWishVO);
 	}
 
+	@Override
+	public int myWishListCount(String u_id) {
+		return userMypageDAO.myWishListCount(u_id);
+	}
 
 	@Override
 	public List<PointVO> userPointList(String u_id) {
@@ -59,5 +63,7 @@ public class UserMypageServiceImpl implements UserMypageService {
 	public List<CouponVO> usedCouponList(String u_id) {
 		return userMypageDAO.usedCouponList(u_id);
 	}
+
+	
 	
 }

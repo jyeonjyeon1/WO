@@ -104,11 +104,11 @@ public class UserController {
 		return "/mypage/mypage_main";
 	}
 	
-	@GetMapping("/myCoupon.user")
-	public String tomyCouponPage() {
-		System.out.println("myCoupon");
-		return "/mypage/mypage_myCoupon";
-	}
+//	@GetMapping("/myCoupon.user")
+//	public String tomyCouponPage() {
+//		System.out.println("myCoupon");
+//		return "/mypage/mypage_myCoupon";
+//	}
 	
 //	@GetMapping("/myPoint.user")
 //	public String tomyPointPage() {
@@ -171,10 +171,10 @@ public class UserController {
 
 //	==================== order ============================
 
-	@GetMapping("/menuList.user")
-	public String tomenuListPage() {
-		System.out.println("menuList");
-		return "/order/order_menuList";
-	}
+//	@GetMapping("/menuList.user")
+//	public String tomenuListPage() {
+//		System.out.println("menuList");
+//		return "/order/order_menuList";
+//	}
 	
 }

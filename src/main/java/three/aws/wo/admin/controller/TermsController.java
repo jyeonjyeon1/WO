@@ -21,7 +21,7 @@ public class TermsController {
       List<TermsVO> termsList = termsService.termsList();
       System.out.println(termsList);
       
-      model.addAttribute("termsList" ,termsList);
+      model.addAttribute("termsLists" ,termsList);
       
       return "/info/info_termOfService";
    }

@@ -17,7 +17,7 @@
 				width: 250px;
 				height: 350px;
 				overflow: scroll;
-				overflow-x: hidden
+				overflow-x: hidden;
 			}
 			
 			.container-md::-webkit-scrollbar {
@@ -40,6 +40,17 @@
 			.p_mb {
 				margin-bottom: 50px;
 			}
+			.ml-5 {
+				padding : 5px;
+				width : 300px;
+				height : 100px;
+			}
+			.text-warning2{
+			color: #6f6f6f!important;
+			}
+			.text-warning3{
+			color: #081828!important;
+			}
 			</style>
 			<!-- 스크롤바 css코드 종료 -->
 		<!-- ========================= JS here ========================= -->
@@ -55,7 +66,7 @@
 			<div class="ml-5 pl-5">
 				<ul class="m-5 p-2">
 					<c:forEach var="infoList" items="${infoList}" varStatus="vs">
-						<li class="p-2"><a href="#a${vs.index}" class="text-warning">${infoList.t_title}</a></li>
+						<li class="p-2"><a href="#a${vs.index}" class="text-warning2">${infoList.t_title}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -63,7 +74,7 @@
 				class="container-md g-0 border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<ul class="m-5 p-2">
 					<c:forEach var="infoList" items="${infoList}" varStatus="vs">
-						<li class="p-2"><a name="a${vs.index}" class="fw-bold text-center fs-3 mb-4 text-warning">${infoList.t_title}</a>
+						<li class="p-2"><a name="a${vs.index}" class="fw-bold text-center fs-3 mb-4 text-warning3">${infoList.t_title}</a>
 							<p class="fw-bold fs-4 p-1 mb-3">${infoList.t_content}</p>
 						</li>
 					</c:forEach>

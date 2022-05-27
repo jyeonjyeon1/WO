@@ -17,7 +17,7 @@
 				width: 250px;
 				height: 500px;
 				overflow: scroll;
-				overflow-x: hidden
+				overflow-x: hidden;
 			}
 			
 			.container-md::-webkit-scrollbar {
@@ -59,6 +59,12 @@
 				width : 300px;
 				height : 100px;
 			}
+			.text-warning2{
+			color: #6f6f6f!important;
+			}
+			.text-warning3{
+			color: #081828!important;
+			}
 			</style>
 		<!-- ========================= JS here ========================= -->
 	</head>
@@ -72,18 +78,18 @@
 			<p class="fw-bold text-center fs-1 p_mb">이용 약관</p>
 			<div class="ml-5 pl-5">
 				<ul class="m-5 p-2">
-					<c:forEach var="termsList" items="${termsList}" varStatus="vs">
-						<li class="p-2"><a href="#a${vs.index}" class="text-warning">${termsList.t_title}</a></li>
+					<c:forEach var="termsLists" items="${termsLists}" varStatus="vs">
+						<li class="p-2"><a href="#a${vs.index}" class="text-warning2">${termsLists.t_title}</a></li>
 					</c:forEach>
 					
 				</ul>
 			</div>
 			<div
 				class="container-md g-0 border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-				<ul class="m-5 p-2">
-					<c:forEach var="termsList" items="${termsList}" varStatus="vs">
-						<li class="p-2"><a name="a${vs.index}" class="fw-bold text-center fs-3 mb-4 text-warning">${termsList.t_title}</a>
-							<p class="fw-bold fs-4 p-1 mb-3">${termsList.t_content}</p>
+				<ul class="m-5 p-2" style="float: right;">
+					<c:forEach var="termsLists" items="${termsLists}" varStatus="vss">
+						<li class="p-2"><a name="a${vss.index}" class="fw-bold text-center fs-3 mb-4 text-warning3">${termsLists.t_title}</a>
+							<p class="fw-bold fs-4 p-1 mb-3">${termsLists.t_content}</p>
 						</li>
 					</c:forEach>
 					

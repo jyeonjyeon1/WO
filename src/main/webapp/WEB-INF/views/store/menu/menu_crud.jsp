@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -380,23 +381,17 @@ li {
 }
 
 /*이미지 수정 파일업로드*/
-#input-image {
+.input-image {
 	visibility: hidden;
 }
 </style>
 
 
 <script>
-
+let nansu = 0;
 //메뉴그룹리스트 js
   $(document).ready(function(){
 
-	  // input file에 change 이벤트 부여
-    const inputImage = document.getElementById("input-image")
-   inputImage.addEventListener("change", e => {
-       readImage(e.target)
-   })  
-  
   $("#main_menu > li > a").click(function(){
     $(this).next($('.snd_menu')).slideToggle('fast');
   })
@@ -414,32 +409,31 @@ li {
     $(this).removeClass("selec");
   }) 
   
-  let inside = [];
-  
-  for(i=0;i<100000;i++){
-	  try{
-		  var i_string = "000";
-		  if(i<10){i_string = "00"+ i.toString();}
-		  else if(i<100){i_string = "0"+ i.toString();}
-		  else {i_string = i.toString();}
-		  inside[i] = (document.getElementById("ogogVs"+i_string).innerText).replace(/\t/g,"").replace(/\n/g,"").replace(/\s/g,"");
-		  var inside_split = [];
-		  inside_split = inside[i].split(",,,,");
-		  let inside_length = inside_split.length;
-		  inside_split.length = inside_length - 1;
+//   let inside = [];
+//   for(i=0;i<100000;i++){
+// 	  try{
+// 		  var i_string = "000";
+// 		  if(i<10){i_string = "00"+ i.toString();}
+// 		  else if(i<100){i_string = "0"+ i.toString();}
+// 		  else {i_string = i.toString();}
+// 		  inside[i] = (document.getElementById("ogogVs"+i_string).innerText).replace(/\t/g,"").replace(/\n/g,"").replace(/\s/g,"");
+// 		  var inside_split = [];
+// 		  inside_split = inside[i].split(",,,,");
+// 		  let inside_length = inside_split.length;
+// 		  inside_split.length = inside_length - 1;
 		  
-		  var unique_split = inside_split.filter((element, index) => {
-		      return inside_split.indexOf(element) === index;
-		  });
+// 		  var unique_split = inside_split.filter((element, index) => {
+// 		      return inside_split.indexOf(element) === index;
+// 		  });
 		  
-		  var last_modify = unique_split.toString();
-		  last_modify = last_modify.replace(/,/g,", ");
+// 		  var last_modify = unique_split.toString();
+// 		  last_modify = last_modify.replace(/,/g,", ");
 		  
-		  document.getElementById("ogogVs"+i_string).innerText = last_modify;
-	  }catch(error){
+// 		  document.getElementById("ogogVs"+i_string).innerText = last_modify;
+// 	  }catch(error){
 		  
-	  }
-  }
+// 	  }
+//   }
   
   let inside_ = [];
   for(i=0;i<100;i++){
@@ -517,39 +511,6 @@ function addMgName(){
 		  }
 	 
 }
-	  
-//이미지수정 이미지파일 추가
- function readImage(input) {
-
-    // 인풋 태그에 파일이 있는 경우
-    if(input.files && input.files[0]) {
-    	console.log("gggg");
-        // FileReader 인스턴스 생성
-      
-        
-        var reader = new FileReader();
-        // 이미지가 로드가 된 경우
-        reader.onload=function(e) {   
-        	  console.log("dd");
-            var previewImage = document.getElementById("preview-image");
-            previewImage.src = e.target.result;
-            previewImage.style.display = "block";
-          var label = document.getElementById("addImgLabel");
-            label.style.display = "none";
-            var label2 = document.getElementById("fixImgLabel");
-            label2.style.display = "block";
-            
-        }
-        // reader가 이미지 읽도록 하기
-        reader.readAsDataURL(input.files[0]);
-    }
-
-   
-} 
-
- 
- 	 
- 
 
 
 </script>
@@ -558,6 +519,7 @@ function addMgName(){
 </head>
 
 <body>
+<input type="hidden" id="si_code" value="${storeSession.si_code }"/>
 	<section id="container">
 		<!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -573,10 +535,10 @@ function addMgName(){
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<p class="centered">
-						<a><img src="resources/assets/images/admin/doggy.jpg"
+						<a><img src="${storeSession.si_image }"
 							class="img-circle" width="80"></a>
 					</p>
-					<h5 class="centered">더리터 위례점</h5>
+					<h5 class="centered">${storeSession.si_name } ${storeSession.si_loc}</h5>
 					<p class="sidebar-title">주문 확인</p>
 					<li class="sub-menu"><a href="index.store"> <i
 							class="fa fa-h-square"></i> <span>HOME</span>
@@ -731,14 +693,14 @@ function addMgName(){
 																				fordelete="menuGroup${vs.index}"
 																				fordelete2 = "menuGroupUl${vs.index}"
 																				fordelete3 = "menugroupBtns${vs.index}"
-																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				style="float: right; margin-right: 10px; margin-top: 15px;">
 																				<i class="fa fa-trash-o "></i>
 																			</button>
 																			<button type="button" class="btn btn-primary btn-xs updateMenuGroup"
 																				forupdate="menuGroup${vs.index}"
 																				value="${mg.mg_code}" 
 																				mg_name="${mg.mg_name}"
-																				style="float: right; margin-right: 10px; margin-top: 5px;">
+																				style="float: right; margin-right: 10px; margin-top: 15px;">
 																				<i class="fa fa-pencil"></i>
 																			</button></div>
 																			
@@ -790,14 +752,118 @@ function addMgName(){
 																									data-toggle="modal"
 																									href="#menu_oneInfoUpdate${vs.index}${vss.index}">메뉴정보수정</a></li>
 																								<li><a class="menu_oneOptionUpdate" data-toggle="modal" href="#menu_updateOption${vs.index}${vss.index}">옵션설정</a></li>
-																								<li><a class="menu_oneImgUpdate" data-toggle="modal" href="#menu_updateImg${vs.index}${vss.index}">이미지변경</a></li>
+																								<li><a class="menu_oneImgUpdate" data-toggle="modal" href="#menu_updateImg${vs.index}${vss.index}" onclick="imageClick${vs.index}${vss.index}()">이미지변경</a></li>
 																								<li><a class="menu_oneDelete" onclick="deleteMenu${vs.index}${vss.index}()">메뉴삭제</a></li>
 																							</ul></li>
 																					</c:if>
 																					
 	<script>
-	//ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 	
+	//이미지 업로드 버튼 클릭해서 모달 띄울 때 eventlistener
+	function imageClick${vs.index}${vss.index}(){
+		  // input file에 change 이벤트 부여
+	    let inputImage = document.getElementById("input-image${vs.index}${vss.index}");
+		  
+	   inputImage.addEventListener("change", e => {
+	       readImage${vs.index}${vss.index}(e.target);
+	   })
+	}
+	
+	//이미지수정 이미지파일 추가
+	 function readImage${vs.index}${vss.index}(input) {
+	    // 인풋 태그에 파일이 있는 경우
+	    if(input.files && input.files[0]) {
+	        // FileReader 인스턴스 생성
+	        var reader = new FileReader();
+	        // 이미지가 로드가 된 경우
+	        reader.onload=function(e) {   
+        	//화면에 바꿔줌
+            var previewImage = document.getElementById("preview-image${vs.index}${vss.index}");
+            previewImage.src = e.target.result;
+            previewImage.style.display = "block";
+            var label = document.getElementById("addImgLabel${vs.index}${vss.index}");
+            label.style.display = "none";
+            var label2 = document.getElementById("fixImgLabel${vs.index}${vss.index}");
+            label2.style.display = "block";
+	            
+	        }
+	        // reader가 이미지 읽도록 하기
+	        reader.readAsDataURL(input.files[0]);
+	        
+	    }
+	} 
+	 
+	 //이미지 업로드 버튼
+	 function uploadMenuImage${vs.index}${vss.index}(){
+		 //죽복 이미지이름 방지
+		 nansu = Math.floor(Math.random() * 1000); //0~999 
+		 uploadImage${vs.index}${vss.index}();
+	 }
+	 
+// 		 // 이미지 업로드 실제 S3로 
+	    uploadImage${vs.index}${vss.index} = () => {
+	        AWS.config.update({
+	            region: 'ap-northeast-2',
+	            credentials: new AWS.CognitoIdentityCredentials({
+	                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+	            })
+	        })
+			let si_code = $("#si_code").val();
+	        let files = document.getElementById("input-image${vs.index}${vss.index}").files;
+	        let file = files[0];
+	        let fileName = file.name;
+	        fileName = si_code +"_"+ nansu +"___"+ fileName;
+			
+	        let upload = new AWS.S3.ManagedUpload({
+	            params: {
+	                Bucket: 'walkingorder/menu_img_store',
+	                Key: fileName,
+	                ContentType : "image/jpeg",
+	                Body: file
+	            }
+	        })
+	        const promise = upload.promise();
+	        
+	      //ajax
+	      var m_code = $("#m_code${vs.index}${vss.index}").val();
+	      var param = {
+	   			"m_pending_img":"https://walkingorder.s3.ap-northeast-2.amazonaws.com/menu_img_store/"+fileName,
+	   			"m_code": m_code,
+	   			"si_code": si_code
+	      };
+	 		$.ajax({
+	    	    type: "POST",
+	    	    url: "/uploadmenuimage.store",
+	    	    data: JSON.stringify(param), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "이미지 승인 신청 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "이미지 신청 실패",
+		    	            content: "이미 신청 중인 이미지가 있습니다.",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("메뉴추가 통신에러");
+	    	    }
+	 		});//ajax end
+	        
+	        
+	        
+	    }
+	 
 	//가격옵션추가 눌렀을때 input 나오게하기.
 	function addPO${vs.index}${vss.index}(){
 		indexstringgg = indexnummm.toString();
@@ -894,9 +960,9 @@ function addMgName(){
    	function menuupdateBtn${vs.index}${vss.index}(){
    		var mg_seq = $("#mg_seq${vs.index}").val();
 		var mg_code = $("#mg_code${vs.index}").val();
-		var m_name = $("#m_namee${vs.index}${vss.index}").val;
-		var m_code = $("#m_codee${vs.index}${vss.index}").val;
-		var m_seq = $("#m_seqq${vs.index}${vss.index}").val;
+		var m_name = $("#m_name${vs.index}${vss.index}").val();
+		var m_code = $("#m_code${vs.index}${vss.index}").val();
+		var m_seq = $("#m_seq${vs.index}${vss.index}").val();
    		var zzzz = document.getElementById("hwakin_chang__${vs.index}${vss.index}").innerText;
    		console.log(zzzz);
    		//이게 없으면 메뉴를 다 삭제했다는 것을 의미
@@ -1180,16 +1246,24 @@ function addMgName(){
 																						<ul>
 																						<li style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
 																								<c:set var="ogog" value="dd"></c:set>
+																								<c:set var="ogogog" value="ff"></c:set>
+																								<c:set var="ogogogog" value="fff"></c:set>
+																								<c:set var="ogogogogog" value="ffff"></c:set>
+																								<c:set var="ogogogogogog" value="ffffff"></c:set>
+																								<c:set var="ogogogogogogog" value="fffffff"></c:set>
+																								<c:set var="ogogogogogogogog" value="ffffffff"></c:set>
 																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVss">
-																								<c:if test="${ MAOList.m_code eq menu.m_code}">
-																								<c:if test="${ogog ne MAOList.og_code}">
+																								<c:if test="${ MAOList.m_code eq menu.m_code }">
+																								<c:if test="${ogog ne MAOList.og_code && ogogog ne MAOList.og_code && 
+																								ogogogog ne MAOList.og_code&& ogogogogog ne MAOList.og_code&& ogogogogogog ne MAOList.og_code
+																								&& ogogogogogogog ne MAOList.og_code&& ogogogogogogogog ne MAOList.og_code}">
 																								<div class="option_1" style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
 																									<div class="row">
 																										<div class="col-sm-9">
 																											<h4 style="font-weight: bolder; color: black;">${MAOList.og_name}</h4>
 <h5 style="margin-left: 10px;">
 <c:forEach var="optionList" items="${optionList }">
-<c:if test="${optionList.og_code eq MAOList.og_code}">
+<c:if test="${optionList.og_seq eq MAOList.og_seq}">
 ${optionList.op_name},
 </c:if>
 </c:forEach>
@@ -1201,7 +1275,27 @@ ${optionList.op_name},
 																										</div>
 																									</div>
 																								</div>
-																								<c:set var="ogog" value="${MAOList.og_code}" />
+																								<c:if test="${MAOVss.index%7 eq 0 }">
+																									<c:set var="ogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 1 }">
+																									<c:set var="ogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 2 }">
+																									<c:set var="ogogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 3 }">
+																									<c:set var="ogogogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 4 }">
+																									<c:set var="ogogogogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 5 }">
+																									<c:set var="ogogogogogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 6 }">
+																									<c:set var="ogogogogogogogog" value="${MAOList.og_code}" />
+																								</c:if>
 																								</c:if>
 																								</c:if>
 																								</c:forEach>
@@ -1293,12 +1387,26 @@ ${optionList.op_name},
 																									메뉴를 확인하세요.
 																								</h5>
 <h6 id="ogogVs${vs.index}${vss.index}${ogogVs.index}">
-<c:set var="mName" value="ff"></c:set>
-<c:forEach var="MAOList" items="${MAOList}">
+<c:set var="nm" value="ff"></c:set>
+<c:set var="nmm" value="fff"></c:set>
+<c:set var="nmmm" value="ffff"></c:set>
+<c:set var="nmmmm" value="fffff"></c:set>
+<c:forEach var="MAOList" items="${MAOList}" varStatus="mmm">
 <c:if test="${MAOList.og_code eq ogList.og_code}">
-<c:if test="${mName ne MAOList.m_name}">
-${MAOList.m_name},,,,
-<c:set var="mName" value="${MAOList.m_name}" />      
+<c:if test="${nm ne MAOList.m_name && nmm ne MAOList.m_name && nmmm ne MAOList.m_name && nmmmm ne MAOList.m_name}">
+${MAOList.m_name}<c:if test="${not mmm.last}">, </c:if>
+<c:if test="${mmm.index%4 eq 0 }">
+	<c:set var="nm" value="${MAOList.m_name}" />      
+</c:if>
+<c:if test="${mmm.index%4 eq 1 }">
+	<c:set var="nmm" value="${MAOList.m_name}" />      
+</c:if>
+<c:if test="${mmm.index%4 eq 2 }">
+	<c:set var="nmmm" value="${MAOList.m_name}" />      
+</c:if>
+<c:if test="${mmm.index%4 eq 3 }">
+	<c:set var="nmmmm" value="${MAOList.m_name}" />      
+</c:if>
 </c:if>
 </c:if>
 </c:forEach>
@@ -1419,11 +1527,11 @@ ${MAOList.m_name},,,,
                                                                                           style="text-align: center; width: auto; height: 300px;">
                                                                                           <img
                                                                                           style="width: 100%; height: 100%; display: none;"
-                                                                                          id="preview-image" src=""> <label
-                                                                                          for="input-image" id="addImgLabel"
+                                                                                          id="preview-image${vs.index}${vss.index}" src=""> <label
+                                                                                          for="input-image${vs.index}${vss.index}" id="addImgLabel${vs.index}${vss.index}"
                                                                                           style="font-size: 15px; margin-top: 140px; line-height: 20px; margin-left: 220px; cursor: pointer;">+<br>이미지추가
                                                                                        </label>
-                                                                                       </a> <input type="file" id="input-image"
+                                                                                       </a> <input type="file" id="input-image${vs.index}${vss.index}" class="input-image"
                                                                                           name="chooseFile" accept="image/*">
                                                                                     </div>
 
@@ -1431,7 +1539,7 @@ ${MAOList.m_name},,,,
                                                                                  <h6
                                                                                     style="font-size: 13px; margin-bottom: 40px;">
                                                                                     -접수 건이 폭증할 경우, 처리일이 다소 지연될 수 있습니다. <label
-                                                                                       for="input-image" id="fixImgLabel"
+                                                                                       for="input-image${vs.index}${vss.index}" id="fixImgLabel${vs.index}${vss.index}"
                                                                                        style="float: right; color: blue; cursor: pointer; font-size: 15px; display: none;">이미지
                                                                                        다시업로드</label>
                                                                                  </h6>
@@ -1452,16 +1560,18 @@ ${MAOList.m_name},,,,
                                                                                           style="list-style-type: disc; line-height: 20px;">임의로
                                                                                           어색하게 합성된 이미지는 등록이 어려워요.</li>
                                                                                     </ul>
-                                                                                    <a href="#"
-                                                                                       style="text-decoration: underline; color: blue;">자세히
-                                                                                       알아보기</a>
+<!--                                                                                     <a href="#" -->
+<!--                                                                                        style="text-decoration: underline; color: blue;">자세히 -->
+<!--                                                                                        알아보기</a> -->
                                                                                  </div>
                                                                                  </div>
                                                                               </li>
                                                                               <li>
                                                                               <div class="row">
                                                                                  <div class="col-lg-12">
-                                                                                    <button type="button" type="button" class="save_Btn">승인 신청하기</button>
+                                                                                    <button type="button" type="button" class="save_Btn"
+                                                                                    onclick="uploadMenuImage${vs.index}${vss.index}()"
+                                                                                    >승인 신청하기</button>
                                                                                  </div>
                                                                               </div>
                                                                            </li>
@@ -1728,16 +1838,17 @@ ${MAOList.m_name},,,,
 				</script>
 																				<table class="modal_table">
 																							<ul>
-																								<li
-																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																									<div class="row">
-																									<a class="menu_addOptionGroup" data-toggle="modal" href="#menu_addOptionGroup2${vs.index}" >
-																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">+
-																											옵션그룹 추가</h4>
-																									</a>
+	<!-- ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
+<!-- 																								<li -->
+<!-- 																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;"> -->
+<!-- 																									<div class="row"> -->
+<%-- 																									<a class="menu_addOptionGroup" data-toggle="modal" href="#menu_addOptionGroup2${vs.index}" > --%>
+<!-- 																										<h4 style="color: blue; padding: 10px; margin-right: 65px;">+ -->
+<!-- 																											옵션그룹 추가</h4> -->
+<!-- 																									</a> -->
 																										
-																									</div>
-																								</li>
+<!-- 																									</div> -->
+<!-- 																								</li> -->
 																								<li>
 																									<div class="col-lg-12">
 																										<button type="button" id="#finalBtn${vs.index}" class="save_Btn" data-toggle="modal" href="#finalCh${vs.index}">확인하기</button>
@@ -1894,35 +2005,36 @@ ${MAOList.m_name},,,,
 
 
 																								</li>
-																								<li
-																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
-																									<div class="row">
+<!-- ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ -->
+<!-- 																								<li -->
+<!-- 																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;"> -->
+<!-- 																									<div class="row"> -->
 
-																										<h4 style="font-weight: bolder; color: black;">옵션</h4>
+<!-- 																										<h4 style="font-weight: bolder; color: black;">옵션</h4> -->
 
 
 
-																										<ul style="margin-bottom: 20px;">
-																											<h4 style="margin-left: 10px; color: black;">샷추가</h4>
-																											<li
-																												style="line-height: 20px; margin-left: 10px;"><h4>+1샷추가
-																													: 500원</h4></li>
-																											<li
-																												style="line-height: 20px; margin-left: 10px;"><h4>+2샷추가
-																													: 1000원</h4></li>
-																											<li
-																												style="line-height: 20px; margin-left: 10px;"><h4>+3샷추가
-																													: 1500원</h4></li>
-																										</ul>
+<!-- 																										<ul style="margin-bottom: 20px;"> -->
+<!-- 																											<h4 style="margin-left: 10px; color: black;">샷추가</h4> -->
+<!-- 																											<li -->
+<!-- 																												style="line-height: 20px; margin-left: 10px;"><h4>+1샷추가 -->
+<!-- 																													: 500원</h4></li> -->
+<!-- 																											<li -->
+<!-- 																												style="line-height: 20px; margin-left: 10px;"><h4>+2샷추가 -->
+<!-- 																													: 1000원</h4></li> -->
+<!-- 																											<li -->
+<!-- 																												style="line-height: 20px; margin-left: 10px;"><h4>+3샷추가 -->
+<!-- 																													: 1500원</h4></li> -->
+<!-- 																										</ul> -->
 
-																										<ul style="margin-bottom: 20px;">
-																											<h4 style="margin-left: 10px; color: black;">휘핑추가</h4>
-																											<li
-																												style="line-height: 20px; margin-left: 10px;"><h4>휘핑추가
-																													: 500원</h4></li>
-																										</ul>
-																									</div>
-																								</li>
+<!-- 																										<ul style="margin-bottom: 20px;"> -->
+<!-- 																											<h4 style="margin-left: 10px; color: black;">휘핑추가</h4> -->
+<!-- 																											<li -->
+<!-- 																												style="line-height: 20px; margin-left: 10px;"><h4>휘핑추가 -->
+<!-- 																													: 500원</h4></li> -->
+<!-- 																										</ul> -->
+<!-- 																									</div> -->
+<!-- 																								</li> -->
 
 																								<li
 																									style="border-bottom: 1px solid black; margin: 15px; padding-bottom: 10px;">
@@ -2430,11 +2542,12 @@ ${MAOList.m_name},,,,
 																						<div class="col-lg-8"
 																							style="text-align: left; line-height: 20px;">
 																							<div class="menu_oneOption">
-																								<h4 style="color: black;">${optionList.op_name}</h4>
+																								<h4 id="op_name__${ogVs.index}${optionVs.index}"
+																								 style="color: black;">${optionList.op_name}</h4>
 																								<ul>
-																									<li
+																									<li 
 																										style="list-style-type: disc; line-height: 10px; margin-left: 25px;">
-																										<h5><fmt:formatNumber
+																										<h5 id="op_price__${ogVs.index}${optionVs.index}"><fmt:formatNumber
 												value="${optionList.op_price}" pattern="###,###" /></h5>
 																									</li>
 																								</ul>
@@ -2540,7 +2653,14 @@ function update_Option${ogVs.index}${optionVs.index}(){
 		    	            showConfirmButton: false,
 		    	            timer: 1500
 		    	        });
-		    	        location.href = "CRUD.store"
+		    	        
+		    	        var changeName = document.getElementById("op_name__${ogVs.index}${optionVs.index}");
+		    	        var changeprice = document.getElementById("op_price__${ogVs.index}${optionVs.index}");
+						changeName.innerText = op_name;
+						changeprice.innerText = op_price.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		    	        
+		    	        
+// 		    	        location.href = "CRUD.store"
 	    	        }else{alert("통신은됨");}
 	    	        
 	    	    },
@@ -3108,7 +3228,7 @@ function addOptionChecking${ogVs.index}(){
 	<!--common script for all pages-->
 	<script src="resources/assets/js/admin/common-scripts.js"></script>
 	<!--script for this page-->
-
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
 </body>
 
 </html>

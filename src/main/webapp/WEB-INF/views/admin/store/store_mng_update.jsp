@@ -289,7 +289,7 @@
 											
 									</div>
 								</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">영업시간</label>
 									<div class="col-sm-10">
 										<input class="form-control round-form" name="si_open" type="time"
@@ -299,7 +299,7 @@
 											value="${storeOne.si_close}"
 											style="width: 20%; display: inline-block; margin-left: 10px;">
 									</div>
-								</div>
+								</div> --%>
 
 
 								<div class="form-group">

@@ -80,5 +80,13 @@ public class UserOrderDAO {
 	public void orderPointUse(HashMap<String, Object> insertPoint) {
 		sqlSession.insert("UserOrderDAO.orderPointUse",insertPoint);
 	}
+
+	public List<OrdersVO> myOrderList(String u_id) {
+		return sqlSession.selectList("UserOrderDAO.myOrderList", u_id);
+	}
+
+	public List<OrdersVO> myCurrentList(String u_id) {
+		return sqlSession.selectList("UserOrderDAO.myCurrentList", u_id);
+	}
 	
 }

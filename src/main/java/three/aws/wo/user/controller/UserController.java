@@ -92,11 +92,11 @@ public class UserController {
 	
 //	==================== mypage ============================
 
-	@GetMapping("/currentOrder.user")
-	public String tocurrentOrderPage() {
-		System.out.println("currentOrder");
-		return "/mypage/mypage_currentOrder";
-	}
+//	@GetMapping("/currentOrder.user")
+//	public String tocurrentOrderPage() {
+//		System.out.println("currentOrder");
+//		return "/mypage/mypage_currentOrder";
+//	}
 	
 	@GetMapping("/mypage.user")
 	public String tomainPage() {
@@ -134,11 +134,11 @@ public class UserController {
 //		return "/mypage/mypage_myWishList";
 //	}
 
-	@GetMapping("/myOrderList.user")
-	public String tomyOrderListPage() {
-		System.out.println("myOrderList");
-		return "/mypage/mypage_myOrderList";
-	}
+//	@GetMapping("/myOrderList.user")
+//	public String tomyOrderListPage() {
+//		System.out.println("myOrderList");
+//		return "/mypage/mypage_myOrderList";
+//	}
 	
 	@RequestMapping(value="/myChoice.user", method = RequestMethod.GET)
 	public String tomyInfoPage() throws Exception{

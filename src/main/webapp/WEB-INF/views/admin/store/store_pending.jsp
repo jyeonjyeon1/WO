@@ -314,7 +314,7 @@
 															</a>
 														</div>
 
-														<div class="modal-body" style="padding-bottom: 0;">
+														<%-- <div class="modal-body" style="padding-bottom: 0;">
 															<p style="margin-bottom: 2px;">영업시간</p>
 															<input class="form-control round-form" type="time"
 																value="${storePendingList.sf_open}"
@@ -322,7 +322,7 @@
 															~ <input class="form-control round-form" type="time"
 																value="${storePendingList.sf_close}"
 																style="width: 20%; display: inline-block; margin-left: 10px;">
-														</div>
+														</div> --%>
 														<div class="modal-body" style="padding-bottom: 0;">
 															<p style="margin-bottom: 2px;">주차여부</p>
 

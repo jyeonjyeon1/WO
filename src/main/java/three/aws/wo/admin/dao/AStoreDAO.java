@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import three.aws.wo.store.vo.FranchiseVO;
 import three.aws.wo.store.vo.StoreFormVO;
+import three.aws.wo.store.vo.StoreMenuVO;
 import three.aws.wo.store.vo.StoreVO;
 @Repository
 public class AStoreDAO {
@@ -93,4 +94,18 @@ public class AStoreDAO {
 	public String getOriginalBussReg(StoreVO vo) {
 		return sqlSession.selectOne("AStoreDAO.getOriginalBussReg",vo);
 	}
+
+	public List<StoreMenuVO> pendingMenuImg() {
+		return sqlSession.selectList("AStoreDAO.pendingMenuImg");
+	}
+
+	public void confirmMenuImg(HashMap<String, String> param) {
+		sqlSession.update("AStoreDAO.confirmMenuImg",param);
+	}
+
+	public void rejectMenuImg(HashMap<String, String> param) {
+		sqlSession.update("AStoreDAO.rejectMenuImg",param);
+	}
+	
+	
 }

@@ -324,9 +324,27 @@
 		SELECT * FROM OPTIONS
 		WHERE SI_CODE = #{si_code} AND OG_SEQ = #{og_seq}
 	</select>
-	<delete id="deleteMAObyOgSeq">
-		DELETE FROM MENUANDOPTIONS
+	<delete id="deleteMAObyMSeq">
+		DELETE FROM MENUANDOPTION
 		WHERE SI_CODE = #{si_code} AND M_SEQ = #{m_seq}
 	</delete> 
+	<insert id="insertMAO">
+		INSERT INTO MENUANDOPTION(SI_CODE,SI_LOC,MG_CODE,MG_NAME,M_CODE,M_NAME,
+		M_OOS,M_IMG_FILE,OG_CODE,OG_NAME,OP_CODE,OG_ROS,OP_NAME,OP_PRICE,OP_OOS,MG_SEQ,M_SEQ,OG_SEQ,OP_SEQ) 
+		VALUES (#{si_code},(select si_loc from store_info where si_code=#{si_code}), 
+		#{mg_code},#{mg_name}, #{m_code},#{m_name},#{m_oos}, #{m_img_file}, 
+		(select og_code from option_group where og_seq = #{og_seq}), 
+		(select og_name from option_group where og_seq = #{og_seq}),#{op_code},
+		(select og_ros from option_group where og_seq = #{og_seq}),
+		#{op_name},#{op_price},#{op_oos},#{mg_seq},#{m_seq},#{og_seq},#{op_seq});
+	</insert>
+	<select id="checkPendingMenuImg" resultType="String">
+		SELECT M_PENDING_IMG FROM MENU 
+		WHERE M_CODE=#{m_code}
+		AND SI_CODE = #{si_code};
+	</select>
+	<update id="updatePendingMenuImg">
+		UPDATE MENU SET M_PENDING_IMG = #{m_pending_img} WHERE M_CODE=#{m_code} and SI_CODE = #{si_code}
+	</update>
 </mapper>
  

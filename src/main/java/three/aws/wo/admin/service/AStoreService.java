@@ -5,6 +5,7 @@ import java.util.List;
 
 import three.aws.wo.store.vo.FranchiseVO;
 import three.aws.wo.store.vo.StoreFormVO;
+import three.aws.wo.store.vo.StoreMenuVO;
 import three.aws.wo.store.vo.StoreVO;
 
 public interface AStoreService {
@@ -29,4 +30,7 @@ public interface AStoreService {
 	void updateStoreAccount(StoreVO vo);
 	String getOriginalBankbook(StoreVO vo);
 	String getOriginalBussReg(StoreVO vo);
+	List<StoreMenuVO> pendingMenuImg();
+	void confirmMenuImg(HashMap<String, String> param);
+	void rejectMenuImg(HashMap<String, String> param);
 }

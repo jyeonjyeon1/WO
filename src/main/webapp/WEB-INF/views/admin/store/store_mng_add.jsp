@@ -283,7 +283,7 @@
 											
 									</div>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">영업시간</label>
 									<div class="col-sm-10">
 										<input class="form-control round-form" name="si_open" type="time"
@@ -293,7 +293,7 @@
 											value="21:00"
 											style="width: 20%; display: inline-block; margin-left: 10px;">
 									</div>
-								</div>
+								</div> -->
 
 
 								<div class="form-group">
@@ -479,6 +479,8 @@
 
         let files = document.getElementById('businessreg').files;
         let file = files[0];
+        console.log(files);
+        console.log(files[0]);
         let fileNamebusinessreg = file.name;
         fileNamebusinessreg = code + fileNamebusinessreg;
 

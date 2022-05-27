@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
  
@@ -7,7 +9,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Walking Order</title>
+    <title>워킹오더 지난 주문내역</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="resources/assets/images/logo/logo_only.svg" rel="icon"/>
@@ -46,7 +48,7 @@
                             <li><a class="mypage_side_hover" href="#"><i class="lni lni-user"> 회원정보변경/탈퇴</i></a></li>
                             </div>
                             <li><a class="mypage_side_hover" href="faq.user"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
-                            <li class="active"><a class="mypage_side_hover" href="myOrderList.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
+                            <li class="active"><a class="mypage_side_hover" href="currentOrder.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
                             
                         </ul>
                     </div>

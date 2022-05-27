@@ -27,12 +27,12 @@
 	color: white;
 	font-weight: 700;
 	font-size: 13px;
+	line-height:1.42857143;
 }
 </style>
 </head>
 
 <body>
-  <section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
         *********************************************************************************************************************************************************** -->
@@ -46,20 +46,17 @@
       <!--logo start-->
       <a href="index.store" class="logo"><b>walking<span>order</span></b></a>
       <!--logo end-->
-      <div class="nav notify-row" id="top_menu">
-        
-      </div>
+      <div class="nav notify-row" id="top_menu"></div>
  
 
     <!--logout-->
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
         	<li class="admin__name">${storeSession.si_name}</li>
-          <li><a class="logout" href="logout.store">Logout</a></li>
+          <li><a class="logout" href="logout.store" style="height:30.56px;line-height:1.42857143;">Logout</a></li>
         </ul>
       </div>
     </header>    <!--header end-->
-  </section>
   <!-- js placed at the end of the document so the pages load faster -->
 
   <script src="resources/assets/js/admin/datatable/datatable-modified.js" crossorigin="anonymous"></script>

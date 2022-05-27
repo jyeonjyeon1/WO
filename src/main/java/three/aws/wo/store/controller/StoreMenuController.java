@@ -664,7 +664,6 @@ public class StoreMenuController {
 		} else {
 			si_code = "2222111212";
 		}
-		
 		String og_seq_list = param.get("og_seq_list");
 		String m_code = param.get("m_code");
 		String mg_code = param.get("mg_code");
@@ -675,11 +674,18 @@ public class StoreMenuController {
 		int m_seq = Integer.parseInt(param.get("m_seq"));
 		boolean m_oos = Boolean.valueOf(param.get("m_oos"));
 		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("m_seq", m_seq);
+		map.put("si_code", si_code);
+		//first delete * from MAO where si_code = and m_seq = 
+		sMenuService.deleteMAObyMSeq(map);
+		
+		try {
 		//mappp for insert
 		String og_seq_String[] = og_seq_list.split(",");
-		System.out.println(og_seq_list);
+//		System.out.println(og_seq_list);
 		for(String a : og_seq_String) {
-			System.out.println(a);
+//			System.out.println(a);
 			int og_seq = Integer.parseInt(a);
 			//mapp for getting StoreOptionVO as List
 			HashMap<String,Object> mapp = new HashMap<String,Object>();
@@ -687,9 +693,6 @@ public class StoreMenuController {
 			mapp.put("si_code", si_code);
 			List<StoreOptionVO> opvo = sMenuService.optionByOgSeq(mapp);
 			
-			mapp.put("m_seq", m_seq);
-			//first delete * from MAO where si_code = and m_seq = 
-			sMenuService.deleteMAObyOgSeq(mapp);
 			for(StoreOptionVO vo : opvo) {//op su man keum insert
 			//mappp for insert
 				HashMap<String,Object> mappp = new HashMap<String,Object>();
@@ -706,15 +709,36 @@ public class StoreMenuController {
 				mappp.put("op_code", vo.getOp_code());
 				mappp.put("op_name", vo.getOp_name());
 				mappp.put("op_price", vo.getOp_price());
-				mappp.put("op_seq", vo.getOg_seq());
-				mappp.put("op_oos", og_seq);
-				System.out.println(mappp);
+				mappp.put("op_seq", vo.getOp_seq());
+				mappp.put("op_oos", vo.isOp_oos());
+//				System.out.println(mappp);
+				sMenuService.insertMAO(mappp);
 			}
-			
-			
-			System.out.println(opvo);
+//			System.out.println(opvo);
+			result=1;
+		}
+		}catch (Exception e) {
+			System.err.println("menu e option add ERROR");
 		}
 
 		return result;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/uploadmenuimage.store")
+	public int uploadMenuImage(@RequestBody HashMap<String, String> param, HttpSession session) {
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		String si_code = "";
+		if (svo != null) {
+			si_code = svo.getSi_code();
+		} else {
+			si_code = "2222111212";
+		}
+		System.out.println(param);
+		int result = sMenuService.checkPendingMenuImg(param);
+		sMenuService.updatePendingMenuImg(param);
+		return result;
+	}
+	
+	
 }

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.store.vo.IndexVO;
 import three.aws.wo.user.vo.BasketVO;
 
@@ -31,7 +32,7 @@ public class IndexDAO {
 		return sqlSession.selectList("IndexDAO.todayDrinkList");
 	}
 	
-	public List<IndexVO> eventBoardList(){
+	public List<BannerVO> eventBoardList(){
 		return sqlSession.selectList("IndexDAO.eventBoardList");
 	}
 

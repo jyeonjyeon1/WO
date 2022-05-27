@@ -155,7 +155,12 @@
                     </c:forEach >
                     <c:forEach var="myOrderList" items="${myOrderList}">
                     <c:if test="${myOrderList.o_order_state ne '전달완료' }">
-					<fmt:formatDate var="today" value="${nowDate}"/>
+					<fmt:formatDate var="todayd" value="${nowDate}" pattern="yyyy-MM-dd"/>
+					<fmt:formatDate var="ordd_date" value="${myOrderList.o_order_date}" pattern="yyyy-MM-dd"/>
+					<fmt:parseDate var="today" value="${todayd}" pattern="yyyy-MM-dd"></fmt:parseDate>
+					<fmt:parseDate var="ord_date" value="${ordd_date}" pattern="yyyy-MM-dd"></fmt:parseDate>
+					<fmt:parseNumber value ="${today.time /(1000*60*60*24) }" var="now" integerOnly="true"></fmt:parseNumber>
+					<fmt:parseNumber value ="${ord_date.time /(1000*60*60*24) }" var="ord" integerOnly="true"></fmt:parseNumber>
                     <div class="row" style="margin-top: 25px;">
                     <div class="col-lg-12 col-md-6 col-sm-12">
                         
@@ -175,7 +180,7 @@
                                         <h3>주문번호 : <a>${myOrderList.o_code}</a></h3>
                                     </div>
                                     <div class="col-lg-12 col-md-6 col-sm-6">
-                                        <h2>수령완료</h2>
+                                        <h2>${myOrderList.o_order_state }</h2>
                                         </div>
                                         </div>
                                     </div>
@@ -212,7 +217,10 @@
 	                                	<a class="menubar_btn orderList_disable">
                                     리뷰작성 완료! <span class="arrow_right"></span></a>
 	                                </c:when>
-<%--                                 	<c:when test="${myOrderList.o_review eq false && myOrderList.o_order_date > today}"></c:when> --%>
+                                	<c:when test="${myOrderList.o_review eq false && now - ord > 12 }">
+                                	<a href="myReview.user?order=${myOrderList.o_code}" class="menubar_btn orderList_disable">
+                                    리뷰작성기간만료 <span class="arrow_right"></span></a>
+                                	</c:when>
                                 	<c:otherwise>
                                 		<a href="myReview.user?order=${myOrderList.o_code}" class="menubar_btn">
                                     리뷰작성 <span class="arrow_right"></span></a>

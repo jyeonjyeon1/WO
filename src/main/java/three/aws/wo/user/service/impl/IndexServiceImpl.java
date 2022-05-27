@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.store.vo.IndexVO;
 import three.aws.wo.user.dao.IndexDAO;
 import three.aws.wo.user.service.IndexService;
@@ -35,7 +36,7 @@ public class IndexServiceImpl implements IndexService {
 	}
 
 	@Override
-	public List<IndexVO> eventBoardList() {
+	public List<BannerVO> eventBoardList() {
 		return indexDAO.eventBoardList();
 	}
 

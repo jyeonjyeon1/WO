@@ -2,6 +2,7 @@ package three.aws.wo.user.service;
 
 import java.util.List;
 
+import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.store.vo.IndexVO;
 
 
@@ -15,5 +16,5 @@ public interface IndexService {
 	
 	List<IndexVO> todayDrinkList();
 
-	List<IndexVO> eventBoardList();
+	List<BannerVO> eventBoardList();
 }

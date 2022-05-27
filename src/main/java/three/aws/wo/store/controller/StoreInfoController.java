@@ -147,17 +147,17 @@ public class StoreInfoController {
 		
 		sInfoService.updateAllday(map);
 		
-		if(si_Allday) {
+			svo.setSi_Allday(si_Allday);
 			svo.setSi_openA(si_openA);
 			svo.setSi_closeA(si_closeA);
-		}else {
+		
 			svo.setSi_openW(si_openW);
 			svo.setSi_closeW(si_closeW);
 			svo.setSi_openSat(si_openSat);
 			svo.setSi_closeSat(si_closeSat);
 			svo.setSi_openSun(si_openSun);
 			svo.setSi_closeSun(si_closeSun);
-		}
+		
 		
 		
 		return 1;
@@ -171,7 +171,7 @@ public class StoreInfoController {
 		
 		String si_holiday_gong_input =param.get("si_holiday_gong");
 		String si_holiday_fix = param.get("si_holiday_fix");
-		String si_holiday_imsi_input = param.get("si_holiday_imsi");
+		String si_holiday_imsi = param.get("si_holiday_imsi");
 		
 		String si_code = svo.getSi_code();
 		
@@ -181,9 +181,13 @@ public class StoreInfoController {
 		}else {
 			si_holiday_gong=false;
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-		Date si_holiday_imsi = sdf.parse(si_holiday_imsi_input);
 		
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+//		Date si_holiday_imsi = sdf.parse(si_holiday_imsi_input);
+//		
+//		if(si_holiday_imsi_input.equals("")) {
+//			si_holiday_imsi = null;
+//		}
 		System.out.println(si_holiday_gong+"/"+si_holiday_fix +"/"+ si_holiday_imsi);
 		
 		HashMap<String , Object> map = new HashMap<String, Object>();
@@ -193,6 +197,12 @@ public class StoreInfoController {
 		map.put("si_holiday_imsi",si_holiday_imsi);
 
 		sInfoService.updateHoliday(map);
+		
+		
+			svo.setSi_holiday_gong(si_holiday_gong);
+			svo.setSi_holiday_fix(si_holiday_fix);
+			svo.setSi_holiday_imsi(si_holiday_imsi);
+			
 		
 		return 1;
 		

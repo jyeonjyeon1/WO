@@ -1,5 +1,8 @@
 package three.aws.wo.store.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -163,12 +166,12 @@ public class StoreInfoController {
 	
 	@ResponseBody
 	@RequestMapping("/updateHoliday.store")
-	public int updateHoliday(@RequestBody HashMap<String, String> param, HttpSession session) {
+	public int updateHoliday(@RequestBody HashMap<String, String> param, HttpSession session) throws ParseException {
 		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
 		
 		String si_holiday_gong_input =param.get("si_holiday_gong");
 		String si_holiday_fix = param.get("si_holiday_fix");
-		String si_holiday_imsi = param.get("si_holiday_imsi");
+		String si_holiday_imsi_input = param.get("si_holiday_imsi");
 		
 		String si_code = svo.getSi_code();
 		
@@ -178,6 +181,8 @@ public class StoreInfoController {
 		}else {
 			si_holiday_gong=false;
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		Date si_holiday_imsi = sdf.parse(si_holiday_imsi_input);
 		
 		System.out.println(si_holiday_gong+"/"+si_holiday_fix +"/"+ si_holiday_imsi);
 		
@@ -187,7 +192,7 @@ public class StoreInfoController {
 		map.put("si_holiday_fix",si_holiday_fix);
 		map.put("si_holiday_imsi",si_holiday_imsi);
 
-		//sInfoService.updateAllday(map);
+		sInfoService.updateHoliday(map);
 		
 		return 1;
 		

@@ -30,18 +30,18 @@
 		UPDATE STORE_INFO SET 
 		
 		<if test="si_Allday = true">
-		si_Allday_input = true;
-		si_openA = #{si_openA},
-		si_closeA = #{si_closeA}
+		SI_ALLDAY = true,
+		SI_OPENA = #{si_openA},
+		SI_CLOSEA = #{si_closeA}
 		
 		</if>
 		<if test="si_Allday = false">
-		si_openW = #{si_openW},
-		si_closeW = #{si_closeW},
-		si_openSat = #{si_openSat},
-		si_closeSat = #{si_closeSat},
-		si_openSun = #{si_openSun},
-		si_closeSun = #{si_closeSun}
+		SI_OPENW = #{si_openW},
+		SI_CLOSEW = #{si_closeW},
+		SI_OPENSAT = #{si_openSat},
+		SI_CLOSESAT = #{si_closeSat},
+		SI_OPENSUN = #{si_openSun},
+		SI_CLOSESUN = #{si_closeSun}
 		</if>
 		WHERE 
 		SI_CODE = #{si_code} 
@@ -50,9 +50,9 @@
 	
 	<update id="updateHoliday">
 		UPDATE STORE_INFO SET 
-		si_holiday_gong = #{si_holiday_gong},
-		si_holiday_fix = #{si_holiday_fix},
-		si_holiday_imsi = #{si_holiday_imsi}
+		SI_HOLIDAY_GONG = #{si_holiday_gong},
+		SI_HOLIDAY_FIX = #{si_holiday_fix},
+		SI_HOLIDAY_IMSI = #{si_holiday_imsi}
 		
 		WHERE 
 		SI_CODE = #{si_code} 

@@ -6,6 +6,5 @@ import three.aws.wo.admin.vo.TermsVO;
 
 public interface TermsService {
 	List<TermsVO> termsList();
-	
 	List<TermsVO> infoList();
 }

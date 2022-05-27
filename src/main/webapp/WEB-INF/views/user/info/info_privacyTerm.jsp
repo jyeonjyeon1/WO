@@ -63,13 +63,14 @@
 
 		<div class="div_li m-5 p-5">
 			<p class="fw-bold text-center fs-1 p_mb">개인정보처리방침</p>
-			<div class="ml-5 pl-5">
-				<ul class="m-5 p-2">
-					<c:forEach var="infoList" items="${infoList}" varStatus="vs">
-						<li class="p-2"><a href="#a${vs.index}" class="text-warning2">${infoList.t_title}</a></li>
-					</c:forEach>
-				</ul>
-			</div>
+			<h2> &nbsp; &ensp; &emsp;</h2>
+<!-- 			<div class="ml-5 pl-5"> -->
+<!-- 				<ul class="m-5 p-2"> -->
+<%-- 					<c:forEach var="infoList" items="${infoList}" varStatus="vs"> --%>
+<%-- 						<li class="p-2"><a href="#a${vs.index}" class="text-warning2">${infoList.t_title}</a></li> --%>
+<%-- 					</c:forEach> --%>
+<!-- 				</ul> -->
+<!-- 			</div> -->
 			<div
 				class="container-md g-0 border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<ul class="m-5 p-2">

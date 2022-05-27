@@ -10,6 +10,7 @@ import three.aws.wo.admin.dao.AStoreDAO;
 import three.aws.wo.admin.service.AStoreService;
 import three.aws.wo.store.vo.FranchiseVO;
 import three.aws.wo.store.vo.StoreFormVO;
+import three.aws.wo.store.vo.StoreMenuVO;
 import three.aws.wo.store.vo.StoreVO;
 @Service
 public class AStoreServiceImpl implements AStoreService {
@@ -117,4 +118,17 @@ public class AStoreServiceImpl implements AStoreService {
 		return aStoreDAO.getOriginalBussReg(vo);
 	}
 
+	@Override
+	public List<StoreMenuVO> pendingMenuImg() {
+		return aStoreDAO.pendingMenuImg();
+	}
+	
+	@Override
+	public void confirmMenuImg(HashMap<String, String> param) {
+		aStoreDAO.confirmMenuImg(param);
+	}
+	@Override
+	public void rejectMenuImg(HashMap<String, String> param) {
+		aStoreDAO.rejectMenuImg(param);
+	}
 }

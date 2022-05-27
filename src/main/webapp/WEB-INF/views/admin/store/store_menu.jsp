@@ -213,7 +213,8 @@
                     <input type="text" class="form-control round-form" placeholder="동" style="width: 35%;">
                   </div>
                 </div>
-
+				<button type="button" class="btn btn-theme" onclick="location.href='pending_menuimg.admin'"
+									style="width: 140px; float: left;">메뉴 이미지 승인</button>
                 <button type="submit" class="btn btn-theme" style="width:70px;float: right;">검색</button>
               </form>
             </div>
@@ -264,136 +265,6 @@
 											</td>
 										</tr>
 										</c:forEach>
-                      <tr>
-                        <td>1</td>
-                        <td>메가커피종로3가점</td>
-                        <td><a>8868500662</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>맛있는커피</td>
-                        <td><a>1234234234</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>맛있는커피</td>
-                        <td><a>654745767</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.adminml#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>맛있는커피</td>
-                        <td><a>456545775</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>맛있는커피</td>
-                        <td><a>4567665567</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>메가커피종로3가점</td>
-                        <td><a>8868500662</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td>맛있는커피</td>
-                        <td><a>1234234234</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td>맛있는커피</td>
-                        <td><a>asdasdasd</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>9</td>
-                        <td>맛있는커피</td>
-                        <td><a>4567665567</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>10</td>
-                        <td>맛있는커피</td>
-                        <td><a>4567665567</a></td>
-                        <td>서울특별시 중구 통일로 92, 12층</td>
-                        <td>02-856-8565</td>
-                        <td>영업준비중</td>
-                        
-                        <td>
-                          <a data-toggle="modal" href="store_menu.admin#myModal" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                          <button onclick="location.href='store_menu_detail.admin'" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
                 

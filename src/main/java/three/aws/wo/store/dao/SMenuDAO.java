@@ -209,4 +209,17 @@ public class SMenuDAO {
 	public void insertMAO(HashMap<String, Object> mappp) {
 		sqlSession.insert("SMenuDAO.insertMAO", mappp);
 	}
+
+	public int checkPendingMenuImg(HashMap<String, String> param) {
+		String img = sqlSession.selectOne("SMenuDAO.checkPendingMenuImg", param);
+		int result = 0;
+		if(img == null) {
+			result = 1;
+		}
+		return result;
+	}
+
+	public void updatePendingMenuImg(HashMap<String, String> param) {
+		sqlSession.update("SMenuDAO.updatePendingMenuImg", param);
+	}
 }

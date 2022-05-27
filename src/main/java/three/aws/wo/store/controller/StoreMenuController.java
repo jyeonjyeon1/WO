@@ -723,4 +723,22 @@ public class StoreMenuController {
 
 		return result;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/uploadmenuimage.store")
+	public int uploadMenuImage(@RequestBody HashMap<String, String> param, HttpSession session) {
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		String si_code = "";
+		if (svo != null) {
+			si_code = svo.getSi_code();
+		} else {
+			si_code = "2222111212";
+		}
+		System.out.println(param);
+		int result = sMenuService.checkPendingMenuImg(param);
+		sMenuService.updatePendingMenuImg(param);
+		return result;
+	}
+	
+	
 }

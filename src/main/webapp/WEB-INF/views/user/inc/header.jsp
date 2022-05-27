@@ -55,7 +55,7 @@ $(document).ready(
 //검색버튼 누르면~
 function searchBtn(){
 	var Sname = $("#search_Sname").val();
-	location.href="/storeList.user?search="+Sname;	
+	location.href="/storeList.user?search="+Sname;
 }
 //---------------- NAVER ------------------------
 const naverLogin = new naver.LoginWithNaverId(

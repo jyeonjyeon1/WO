@@ -60,4 +60,6 @@ public interface SMenuService {
 	List<StoreOptionVO> optionByOgSeq(HashMap<String, Object> mapp);
 	void deleteMAObyMSeq(HashMap<String, Object> mapp);
 	void insertMAO(HashMap<String, Object> mappp);
+	int checkPendingMenuImg(HashMap<String, String> param);
+	void updatePendingMenuImg(HashMap<String, String> param);
 }

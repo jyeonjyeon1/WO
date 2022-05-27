@@ -28,5 +28,6 @@ public class OrdersVO {
 	private String u_name;
 	private String u_tel;
 	private String si_name;
+	private String si_loc;
 
 }

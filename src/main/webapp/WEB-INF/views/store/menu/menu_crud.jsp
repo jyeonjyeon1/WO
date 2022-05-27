@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -387,7 +388,7 @@ li {
 
 
 <script>
-
+let nansu = 0;
 //메뉴그룹리스트 js
   $(document).ready(function(){
 
@@ -518,6 +519,7 @@ function addMgName(){
 </head>
 
 <body>
+<input type="hidden" id="si_code" value="${storeSession.si_code }"/>
 	<section id="container">
 		<!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -533,10 +535,10 @@ function addMgName(){
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<p class="centered">
-						<a><img src="resources/assets/images/admin/doggy.jpg"
+						<a><img src="${storeSession.si_image }"
 							class="img-circle" width="80"></a>
 					</p>
-					<h5 class="centered">더리터 위례점</h5>
+					<h5 class="centered">${storeSession.si_name } ${storeSession.si_loc}</h5>
 					<p class="sidebar-title">주문 확인</p>
 					<li class="sub-menu"><a href="index.store"> <i
 							class="fa fa-h-square"></i> <span>HOME</span>
@@ -756,9 +758,12 @@ function addMgName(){
 																					</c:if>
 																					
 	<script>
+	
+	//이미지 업로드 버튼 클릭해서 모달 띄울 때 eventlistener
 	function imageClick${vs.index}${vss.index}(){
 		  // input file에 change 이벤트 부여
-	    let inputImage = document.getElementById("input-image${vs.index}${vss.index}")
+	    let inputImage = document.getElementById("input-image${vs.index}${vss.index}");
+		  
 	   inputImage.addEventListener("change", e => {
 	       readImage${vs.index}${vss.index}(e.target);
 	   })
@@ -768,28 +773,97 @@ function addMgName(){
 	 function readImage${vs.index}${vss.index}(input) {
 	    // 인풋 태그에 파일이 있는 경우
 	    if(input.files && input.files[0]) {
-	    	console.log("gggg");
 	        // FileReader 인스턴스 생성
-	      
-	        
 	        var reader = new FileReader();
 	        // 이미지가 로드가 된 경우
 	        reader.onload=function(e) {   
-	        	  console.log("dd");
-	            var previewImage = document.getElementById("preview-image${vs.index}${vss.index}");
-	            previewImage.src = e.target.result;
-	            previewImage.style.display = "block";
-	          var label = document.getElementById("addImgLabel${vs.index}${vss.index}");
-	            label.style.display = "none";
-	            var label2 = document.getElementById("fixImgLabel${vs.index}${vss.index}");
-	            label2.style.display = "block";
+        	//화면에 바꿔줌
+            var previewImage = document.getElementById("preview-image${vs.index}${vss.index}");
+            previewImage.src = e.target.result;
+            previewImage.style.display = "block";
+            var label = document.getElementById("addImgLabel${vs.index}${vss.index}");
+            label.style.display = "none";
+            var label2 = document.getElementById("fixImgLabel${vs.index}${vss.index}");
+            label2.style.display = "block";
 	            
 	        }
 	        // reader가 이미지 읽도록 하기
 	        reader.readAsDataURL(input.files[0]);
+	        
 	    }
 	} 
-	
+	 
+	 //이미지 업로드 버튼
+	 function uploadMenuImage${vs.index}${vss.index}(){
+		 //죽복 이미지이름 방지
+		 nansu = Math.floor(Math.random() * 1000); //0~999 
+		 uploadImage${vs.index}${vss.index}();
+	 }
+	 
+// 		 // 이미지 업로드 실제 S3로 
+	    uploadImage${vs.index}${vss.index} = () => {
+	        AWS.config.update({
+	            region: 'ap-northeast-2',
+	            credentials: new AWS.CognitoIdentityCredentials({
+	                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+	            })
+	        })
+			let si_code = $("#si_code").val();
+	        let files = document.getElementById("input-image${vs.index}${vss.index}").files;
+	        let file = files[0];
+	        let fileName = file.name;
+	        fileName = si_code +"_"+ nansu +"___"+ fileName;
+			
+	        let upload = new AWS.S3.ManagedUpload({
+	            params: {
+	                Bucket: 'walkingorder/menu_img_store',
+	                Key: fileName,
+	                ContentType : "image/jpeg",
+	                Body: file
+	            }
+	        })
+	        const promise = upload.promise();
+	        
+	      //ajax
+	      var m_code = $("#m_code${vs.index}${vss.index}").val();
+	      var param = {
+	   			"m_pending_img":"https://walkingorder.s3.ap-northeast-2.amazonaws.com/menu_img_store/"+fileName,
+	   			"m_code": m_code,
+	   			"si_code": si_code
+	      };
+	 		$.ajax({
+	    	    type: "POST",
+	    	    url: "/uploadmenuimage.store",
+	    	    data: JSON.stringify(param), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "이미지 승인 신청 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "이미지 신청 실패",
+		    	            content: "이미 신청 중인 이미지가 있습니다.",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("메뉴추가 통신에러");
+	    	    }
+	 		});//ajax end
+	        
+	        
+	        
+	    }
+	 
 	//가격옵션추가 눌렀을때 input 나오게하기.
 	function addPO${vs.index}${vss.index}(){
 		indexstringgg = indexnummm.toString();
@@ -886,9 +960,9 @@ function addMgName(){
    	function menuupdateBtn${vs.index}${vss.index}(){
    		var mg_seq = $("#mg_seq${vs.index}").val();
 		var mg_code = $("#mg_code${vs.index}").val();
-		var m_name = $("#m_namee${vs.index}${vss.index}").val;
-		var m_code = $("#m_codee${vs.index}${vss.index}").val;
-		var m_seq = $("#m_seqq${vs.index}${vss.index}").val;
+		var m_name = $("#m_name${vs.index}${vss.index}").val();
+		var m_code = $("#m_code${vs.index}${vss.index}").val();
+		var m_seq = $("#m_seq${vs.index}${vss.index}").val();
    		var zzzz = document.getElementById("hwakin_chang__${vs.index}${vss.index}").innerText;
    		console.log(zzzz);
    		//이게 없으면 메뉴를 다 삭제했다는 것을 의미
@@ -1175,9 +1249,14 @@ function addMgName(){
 																								<c:set var="ogogog" value="ff"></c:set>
 																								<c:set var="ogogogog" value="fff"></c:set>
 																								<c:set var="ogogogogog" value="ffff"></c:set>
+																								<c:set var="ogogogogogog" value="ffffff"></c:set>
+																								<c:set var="ogogogogogogog" value="fffffff"></c:set>
+																								<c:set var="ogogogogogogogog" value="ffffffff"></c:set>
 																								<c:forEach var="MAOList" items="${MAOList}" varStatus="MAOVss">
 																								<c:if test="${ MAOList.m_code eq menu.m_code }">
-																								<c:if test="${ogog ne MAOList.og_code && ogogog ne MAOList.og_code && ogogogog ne MAOList.og_code&& ogogogogog ne MAOList.og_code}">
+																								<c:if test="${ogog ne MAOList.og_code && ogogog ne MAOList.og_code && 
+																								ogogogog ne MAOList.og_code&& ogogogogog ne MAOList.og_code&& ogogogogogog ne MAOList.og_code
+																								&& ogogogogogogog ne MAOList.og_code&& ogogogogogogogog ne MAOList.og_code}">
 																								<div class="option_1" style="border: 1px solid rgba(0, 0, 0, 0.164); border-radius: 3px; padding: 10px; margin-top: 10px;">
 																									<div class="row">
 																										<div class="col-sm-9">
@@ -1196,17 +1275,26 @@ ${optionList.op_name},
 																										</div>
 																									</div>
 																								</div>
-																								<c:if test="${MAOVss.index%4 eq 0 }">
+																								<c:if test="${MAOVss.index%7 eq 0 }">
 																									<c:set var="ogog" value="${MAOList.og_code}" />
 																								</c:if>
-																								<c:if test="${MAOVss.index%4 eq 1 }">
+																								<c:if test="${MAOVss.index%7 eq 1 }">
 																									<c:set var="ogogog" value="${MAOList.og_code}" />
 																								</c:if>
-																								<c:if test="${MAOVss.index%4 eq 2 }">
+																								<c:if test="${MAOVss.index%7 eq 2 }">
 																									<c:set var="ogogogog" value="${MAOList.og_code}" />
 																								</c:if>
-																								<c:if test="${MAOVss.index%4 eq 3 }">
+																								<c:if test="${MAOVss.index%7 eq 3 }">
 																									<c:set var="ogogogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 4 }">
+																									<c:set var="ogogogogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 5 }">
+																									<c:set var="ogogogogogogog" value="${MAOList.og_code}" />
+																								</c:if>
+																								<c:if test="${MAOVss.index%7 eq 6 }">
+																									<c:set var="ogogogogogogogog" value="${MAOList.og_code}" />
 																								</c:if>
 																								</c:if>
 																								</c:if>
@@ -1439,7 +1527,7 @@ ${MAOList.m_name}<c:if test="${not mmm.last}">, </c:if>
                                                                                           style="text-align: center; width: auto; height: 300px;">
                                                                                           <img
                                                                                           style="width: 100%; height: 100%; display: none;"
-                                                                                          id="preview-image${vs.index}${vss.index}" src="${menu.m_img_file}"> <label
+                                                                                          id="preview-image${vs.index}${vss.index}" src=""> <label
                                                                                           for="input-image${vs.index}${vss.index}" id="addImgLabel${vs.index}${vss.index}"
                                                                                           style="font-size: 15px; margin-top: 140px; line-height: 20px; margin-left: 220px; cursor: pointer;">+<br>이미지추가
                                                                                        </label>
@@ -1472,16 +1560,18 @@ ${MAOList.m_name}<c:if test="${not mmm.last}">, </c:if>
                                                                                           style="list-style-type: disc; line-height: 20px;">임의로
                                                                                           어색하게 합성된 이미지는 등록이 어려워요.</li>
                                                                                     </ul>
-                                                                                    <a href="#"
-                                                                                       style="text-decoration: underline; color: blue;">자세히
-                                                                                       알아보기</a>
+<!--                                                                                     <a href="#" -->
+<!--                                                                                        style="text-decoration: underline; color: blue;">자세히 -->
+<!--                                                                                        알아보기</a> -->
                                                                                  </div>
                                                                                  </div>
                                                                               </li>
                                                                               <li>
                                                                               <div class="row">
                                                                                  <div class="col-lg-12">
-                                                                                    <button type="button" type="button" class="save_Btn">승인 신청하기</button>
+                                                                                    <button type="button" type="button" class="save_Btn"
+                                                                                    onclick="uploadMenuImage${vs.index}${vss.index}()"
+                                                                                    >승인 신청하기</button>
                                                                                  </div>
                                                                               </div>
                                                                            </li>
@@ -2452,11 +2542,12 @@ ${MAOList.m_name},,,,
 																						<div class="col-lg-8"
 																							style="text-align: left; line-height: 20px;">
 																							<div class="menu_oneOption">
-																								<h4 style="color: black;">${optionList.op_name}</h4>
+																								<h4 id="op_name__${ogVs.index}${optionVs.index}"
+																								 style="color: black;">${optionList.op_name}</h4>
 																								<ul>
-																									<li
+																									<li 
 																										style="list-style-type: disc; line-height: 10px; margin-left: 25px;">
-																										<h5><fmt:formatNumber
+																										<h5 id="op_price__${ogVs.index}${optionVs.index}"><fmt:formatNumber
 												value="${optionList.op_price}" pattern="###,###" /></h5>
 																									</li>
 																								</ul>
@@ -2562,7 +2653,14 @@ function update_Option${ogVs.index}${optionVs.index}(){
 		    	            showConfirmButton: false,
 		    	            timer: 1500
 		    	        });
-		    	        location.href = "CRUD.store"
+		    	        
+		    	        var changeName = document.getElementById("op_name__${ogVs.index}${optionVs.index}");
+		    	        var changeprice = document.getElementById("op_price__${ogVs.index}${optionVs.index}");
+						changeName.innerText = op_name;
+						changeprice.innerText = op_price.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		    	        
+		    	        
+// 		    	        location.href = "CRUD.store"
 	    	        }else{alert("통신은됨");}
 	    	        
 	    	    },
@@ -3130,7 +3228,7 @@ function addOptionChecking${ogVs.index}(){
 	<!--common script for all pages-->
 	<script src="resources/assets/js/admin/common-scripts.js"></script>
 	<!--script for this page-->
-
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
 </body>
 
 </html>

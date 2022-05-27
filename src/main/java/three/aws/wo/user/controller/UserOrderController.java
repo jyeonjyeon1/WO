@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -137,12 +138,12 @@ public class UserOrderController {
 		insertInfo.put("o_daily_seq", dailySeq);
 		insertInfo.put("o_point", o_point);
 		insertInfo.put("o_payment_list", param.get("o_payment_list"));
-		if(o_point==0) {
+		if (o_point == 0) {
 			insertInfo.put("o_point_status", false);
-		}else {
+		} else {
 			insertInfo.put("o_point_status", true);
 		}
-		
+
 		userOrderService.insertOrder(insertInfo);
 		System.out.println(insertInfo);
 
@@ -166,23 +167,23 @@ public class UserOrderController {
 
 		// 결제 성공하면 포인트 주입
 		HashMap<String, Object> insertPoint = new HashMap<String, Object>();
-		//시스템에 적립금 설정이 true인지 확인
+		// 시스템에 적립금 설정이 true인지 확인
 		String point_use = userOrderService.isPointUse();
 		int point_percentage = 0;
-		if(point_use.equals("true")) {
+		if (point_use.equals("true")) {
 			// 시스템에 설정된 point_percentage 불러옴
 			point_percentage = Integer.parseInt(userOrderService.getPointPercentage());
 		}
-		
-		int point = Integer.parseInt(param.get("o_total_price")) * point_percentage / 100; 
+
+		int point = Integer.parseInt(param.get("o_total_price")) * point_percentage / 100;
 		System.out.println(point);
 		insertPoint.put("u_id", u_id);
 		insertPoint.put("pt_amount", point);
 		userOrderService.orderPointUpdate(insertPoint);
 		userOrderService.orderPointAdd(insertPoint);
-		
-		//포인트 사용한 경우 차감
-		if(o_point!=0) {
+
+		// 포인트 사용한 경우 차감
+		if (o_point != 0) {
 			insertPoint.replace("pt_amount", -(o_point));
 			userOrderService.orderPointUse(insertPoint);
 			userOrderService.orderPointUpdate(insertPoint);
@@ -206,11 +207,42 @@ public class UserOrderController {
 		model.addAttribute("completeOrder", vo);
 		return "/order/order_complete";
 	}
-	
+
 	@RequestMapping(value = "/paytest.user", method = RequestMethod.GET)
 	public String payTest(HttpServletRequest request, Model model) {
 		// 주문번호 불러옴
 		return "/paytest";
 	}
-	
+
+	@RequestMapping("/myOrderList.user")
+	public String tomyOrderListPage(HttpSession session, Model model) {
+		// 세션에 있는 유저를 가져옴
+		UserVO vo = (UserVO) session.getAttribute("userSession");
+		if (vo == null) { // 이거는 나중에 interceptor에서 처리할 것
+			return "/login/login_login";
+		}
+		// 유저 아이디 받아옴
+		String u_id = vo.getU_id();
+		List<OrdersVO> myOrderList = userOrderService.myOrderList(u_id);
+		model.addAttribute("myOrderList", myOrderList);
+		System.out.println("myOrderList");
+		return "/mypage/mypage_myOrderList";
+
+	}
+
+	@RequestMapping("/currentOrder.user")
+	public String tocurrentOrderPage(HttpSession session, Model model) {
+		System.out.println("currentOrder");
+		// 세션에 있는 유저를 가져옴
+		UserVO vo = (UserVO) session.getAttribute("userSession");
+		if (vo == null) { // 이거는 나중에 interceptor에서 처리할 것
+			return "/login/login_login";
+		}
+		// 유저 아이디 받아옴
+		String u_id = vo.getU_id();
+		List<OrdersVO> myCurrentList = userOrderService.myCurrentList(u_id);
+		model.addAttribute("myCurrentList", myCurrentList);
+		return "/mypage/mypage_currentOrder";
+	}
+
 }

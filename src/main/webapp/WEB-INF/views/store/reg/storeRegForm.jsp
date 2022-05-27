@@ -152,7 +152,7 @@
 											accept="image/*" name="sf_bankbook_image">
 									</div>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-sm-2 control-label">영업시간</label>
 									<div class="col-sm-10">
 										<input class="form-control round-form" name="sf_open"
@@ -162,7 +162,7 @@
 											type="time" value="21:00"
 											style="width: 20%; display: inline-block; margin-left: 10px;">
 									</div>
-								</div>
+								</div> -->
 
 
 								<div class="form-group">

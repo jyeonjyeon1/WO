@@ -256,5 +256,15 @@ public class SMenuServiceImpl implements SMenuService {
 	public void insertMAO(HashMap<String, Object> mappp) {
 		sMenuDAO.insertMAO(mappp);
 	}
+
+	@Override
+	public int checkPendingMenuImg(HashMap<String, String> param) {
+		return sMenuDAO.checkPendingMenuImg(param);
+	}
+	
+	@Override
+	public void updatePendingMenuImg(HashMap<String, String> param) {
+		sMenuDAO.updatePendingMenuImg(param);
+	}
 	
 }

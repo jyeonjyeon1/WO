@@ -90,5 +90,12 @@ public class UserOrderServiceImpl implements UserOrderService {
 	public void orderPointUse(HashMap<String, Object> insertPoint) {
 		userOrderDAO.orderPointUse(insertPoint);
 	}
-
+	@Override
+	public List<OrdersVO> myCurrentList(String u_id) {
+		return userOrderDAO.myCurrentList(u_id);
+	}
+	@Override
+	public List<OrdersVO> myOrderList(String u_id) {
+		return userOrderDAO.myOrderList(u_id);
+	}
 }

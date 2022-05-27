@@ -22,6 +22,7 @@ import three.aws.wo.admin.service.AStoreService;
 import three.aws.wo.admin.util.MessageSend;
 import three.aws.wo.store.vo.FranchiseVO;
 import three.aws.wo.store.vo.StoreFormVO;
+import three.aws.wo.store.vo.StoreMenuVO;
 import three.aws.wo.store.vo.StoreVO;
 
 @Controller
@@ -56,38 +57,38 @@ public class AdminStoreController {
 		System.out.println("가게 등록 완료 DB확인");
 		return "redirect:/store_mng.admin";
 	}
-	
+
 	@RequestMapping("/updateStore.admin")
 	public String updateStore(StoreVO vo) {
 		System.out.println(vo);
 		String si_code = vo.getSi_code();
-		if(vo.getSa_password()==null || (vo.getSa_password()).equals("")) {
+		if (vo.getSa_password() == null || (vo.getSa_password()).equals("")) {
 			String pwd = aStoreService.getOriginalPass(vo);
 			vo.setSa_password(pwd);
-		}else {
+		} else {
 			vo.setSa_password(pwdEncoder.encode(vo.getSi_code()));
 		}
-		
-		if(vo.getSa_business_registration_image()==null || (vo.getSa_business_registration_image()).equals("")) {
+
+		if (vo.getSa_business_registration_image() == null || (vo.getSa_business_registration_image()).equals("")) {
 			String busReg = aStoreService.getOriginalBussReg(vo);
 			vo.setSa_business_registration_image(busReg);
-		}else {
+		} else {
 			String bussUrl = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/businessreg/";
 			String sa_buss = vo.getSa_business_registration_image();
 			vo.setSa_business_registration_image(bussUrl + si_code + sa_buss);
 		}
-		
-		if(vo.getSa_bankbook_image()==null || (vo.getSa_bankbook_image()).equals("")) {
+
+		if (vo.getSa_bankbook_image() == null || (vo.getSa_bankbook_image()).equals("")) {
 			String bankbook = aStoreService.getOriginalBankbook(vo);
 			vo.setSa_bankbook_image(bankbook);
-		}else {
+		} else {
 			String bankUrl = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/bankcopy/";
 			String sa_bank = vo.getSa_bankbook_image();
 			vo.setSa_bankbook_image(bankUrl + si_code + sa_bank);
 		}
-		
+
 		aStoreService.updateStoreAccount(vo);
-		
+
 		System.out.println("가게 수정 완료 DB확인");
 		return "redirect:/store_mng.admin";
 	}
@@ -249,7 +250,7 @@ public class AdminStoreController {
 			return "/store/store_mng_update";
 		}
 	}
-	
+
 /////////////------- DB에서 지우는 작업들---------///////////////////////////////////
 	@ResponseBody
 	@RequestMapping(value = "/deleteJoinInq.admin", method = RequestMethod.POST)
@@ -259,7 +260,7 @@ public class AdminStoreController {
 		aStoreService.deleteJoinInq(f_seq);
 		return 1;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/deletePending.admin", method = RequestMethod.POST)
 	public int deletePending(@RequestBody HashMap<String, String> param) {
@@ -267,5 +268,52 @@ public class AdminStoreController {
 		int sf_seq = Integer.parseInt(param.get("sf_seq"));
 		aStoreService.deletePending(sf_seq);
 		return 1;
+	}
+
+	// store menu image seung in
+	@RequestMapping("pending_menuimg.admin")
+	public String menuPending(Model model) {
+		System.out.println("pending_menuimg");
+		List<StoreMenuVO> pendingMenuImg = aStoreService.pendingMenuImg();
+		System.out.println(pendingMenuImg);
+		model.addAttribute("pendingMenuImg", pendingMenuImg);
+		return "/store/store_menu_img";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/confirmMenuImg.admin", method = RequestMethod.POST)
+	public int confirmMenuImg(@RequestBody HashMap<String, String> param) {
+		int result = 0;
+		System.out.println(param);
+		try {
+			aStoreService.confirmMenuImg(param);
+			MessageSend ms = new MessageSend();
+			String sms_text = "[워킹오더]\n신청하신 메뉴("+param.get("m_name")+") 이미지가 승인되었습니다";
+//			int aa = ms.sendSMS(param.get("si_tel"),sms_text, "SMS");
+			int aa = ms.sendSMS("01091722555",sms_text, "SMS");
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/rejectMenuImg.admin", method = RequestMethod.POST)
+	public int rejectMenuImg(@RequestBody HashMap<String, String> param) {
+		int result = 0;
+		System.out.println(param);
+		try {
+			aStoreService.rejectMenuImg(param);
+			
+			MessageSend ms = new MessageSend();
+			String sms_text = "[워킹오더]\n신청하신 메뉴("+param.get("m_name")+") 이미지는 승인 거절되었습니다";
+//			int aa = ms.sendSMS(param.get("si_tel"),sms_text, "SMS");
+			int aa = ms.sendSMS("01091722555",sms_text, "SMS");
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

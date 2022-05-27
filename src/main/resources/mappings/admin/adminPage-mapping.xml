@@ -6,7 +6,37 @@
 	<select id="bannerList" resultType="BannerVO">
 		SELECT * FROM BANNER ORDER BY B_SEQ DESC
 	</select>
+	<delete id="deleteBanner">
+		DELETE FROM BANNER WHERE B_SEQ = #{b_seq}
+	</delete>
+	<update id="updateBanner">
+		UPDATE BANNER SET
+		B_TITLE = #{b_title}, B_MEMO = #{b_memo} 
+		,B_SETTIME = #{b_settime},B_CLICK_URL=#{b_click_url}
+		<if test="b_startdate !=null">
+			,B_STARTDATE = #{b_startdate,jdbcType=VARCHAR}
+		</if>
+		<if test="b_enddate !=null">
+			,B_ENDDATE = #{b_enddate,jdbcType=VARCHAR}
+		</if>
+		<if test="b_image !=null">
+			,B_IMAGE = #{b_image}
+		</if>
+		WHERE B_SEQ = #{b_seq}
+	</update>
+	<insert id="insertBanner">
+		INSERT INTO BANNER VALUES(default, null,#{b_title},#{b_click_url},#{b_image},default,
+		<choose>
+		<when test="b_startdate !=null">#{b_startdate,jdbcType=VARCHAR},</when>
+		<otherwise>default,</otherwise>
+		</choose>
+		<choose>
+		<when test="b_enddate !=null">#{b_enddate,jdbcType=VARCHAR},</when>
+		<otherwise>default,</otherwise>
+		</choose>
+		#{b_settime}, #{b_memo}
+		)
 	
-
+	</insert>
 	
 </mapper>

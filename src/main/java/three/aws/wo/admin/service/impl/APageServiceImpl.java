@@ -1,5 +1,6 @@
 package three.aws.wo.admin.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,7 +19,18 @@ public class APageServiceImpl implements APageService {
 	public List<BannerVO> bannerList() {
 		return aPageDAO.bannerList();
 	}
+	@Override
+	public void deleteBanner(int b_seq) {
+		aPageDAO.deleteBanner(b_seq);
+	}
 	
-	
+	@Override
+	public void updateBanner(HashMap<String, Object> param) {
+		aPageDAO.updateBanner(param);
+	}
+	@Override
+	public void insertBanner(HashMap<String, Object> param) {
+		aPageDAO.insertBanner(param);
+	}
 	
 }

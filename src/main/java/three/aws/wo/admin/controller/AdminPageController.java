@@ -54,4 +54,59 @@ public class AdminPageController {
 		index++;
 		return "/page/banner_input";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteBanner.admin")
+	public int deleteBanner(@RequestBody HashMap<String,String> param) {
+		int result = 0;
+		int b_seq = Integer.parseInt(param.get("b_seq"));
+		try {
+			aPageService.deleteBanner(b_seq);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateBanner.admin")
+	public int updateBanner(@RequestBody HashMap<String,Object> param) {
+		int result = 0;
+		System.out.println(param);
+		if(param.get("b_image").equals("no")) {
+			param.remove("b_image");
+		}
+		if((boolean)param.get("b_settime")==false){
+			param.remove("b_startdate");
+			param.remove("b_enddate");
+		}
+		System.out.println(param);
+		try {
+			aPageService.updateBanner(param);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/insertBanner.admin")
+	public int insertBanner(@RequestBody HashMap<String,Object> param) {
+		int result = 0;
+		System.out.println(param);
+		if((boolean)param.get("b_settime")==false){
+			param.remove("b_startdate");
+			param.remove("b_enddate");
+		}
+		System.out.println(param);
+		try {
+			aPageService.insertBanner(param);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

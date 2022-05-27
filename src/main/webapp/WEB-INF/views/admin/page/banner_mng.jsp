@@ -33,7 +33,9 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	rel="stylesheet" />
-
+<script>
+let nansu = 0;
+</script>
 </head>
 
 <body>
@@ -205,7 +207,7 @@
 													class="fileupload-new"><i class="fa fa-paperclip"></i>
 														이미지 선택</span> <span class="fileupload-exists"><i
 														class="fa fa-undo"></i> 변경</span> <input type="file"
-													class="default" />
+													class="default" id="input-image${vs.index}"/>
 												</span> <a href="#" class="btn btn-theme04 fileupload-exists"
 													style="border-radius: 3px; font-size: 12px; height: 30px;"
 													data-dismiss="fileupload"> <i class="fa fa-trash-o">
@@ -217,17 +219,18 @@
 									</div>
 									<label class="control-label col-md-2">제목</label>
 									<div class="col-sm-6">
-										<input class="form-control" type="text"
+										<input class="form-control" type="text" id="b_title${vs.index}"
 											placeholder="제목을 입력하세요" value="${bannerList.b_title }" style="height: 30px; margin: 5px 0;">
 									</div>
 									<label class="control-label col-md-2">내용<br>(관리자 메모용)</label>
 									<div class="col-sm-6">
-										<textarea class="form-control" type="text"
-											placeholder="내용 문구를 입력하세요" value="${bannerList.b_memo }" style="margin: 5px 0;"></textarea>
+										<textarea class="form-control" type="text" id="b_memo${vs.index}"
+											placeholder="내용 문구를 입력하세요" style="margin: 5px 0;">${bannerList.b_memo}</textarea>
 									</div>
 									<label class="control-label col-md-2">연결URL</label>
 									<div class="col-sm-6">
 										<input class="form-control" type="text" value="${bannerList.b_click_url }"
+										id="b_click_url${vs.index}"
 											placeholder="URL을 입력하세요" style="height: 30px; margin: 5px 0 10px 0;">
 									</div>
 
@@ -240,15 +243,17 @@
 <fmt:formatDate var="nowDatee" value="${javaDate}" pattern="yyyy-MM-dd"/>
 <c:set var="sevenDayAfter" value="<%=new Date(new Date().getTime() + 60*60*24*1000*7)%>"/>
 <fmt:formatDate value="${sevenDayAfter}" pattern="yyyy-MM-dd" var="sevenDayAfterStr"/>
-										<input type="checkbox" <c:if test="${bannerList.b_settime eq true }">checked</c:if>
-											style="display: inline-block; margin-right: 10px;"> <input
-											class="form-control round-form" type="date"
+										<input type="checkbox" id="b_settime${vs.index}"
+										<c:if test="${bannerList.b_settime eq true }">checked</c:if>
+											style="display: inline-block; margin-right: 10px;"> 
+										<input
+											class="form-control round-form" type="date" id="b_startdate${vs.index}"
 											value=<c:choose>
 											<c:when test="${bannerList.b_settime eq true }">"${bannerList.startdate }"</c:when>
 											<c:otherwise>"${nowDatee}"</c:otherwise>
 											</c:choose>
 											style="width: 30%; display: inline-block; margin-right: 10px;">
-										~ <input class="form-control round-form" type="date"
+										~ <input class="form-control round-form" type="date" id="b_enddate${vs.index}"
 											value=<c:choose>
 											<c:when test="${bannerList.b_settime eq true }">"${bannerList.enddate }"</c:when>
 											<c:otherwise>"${sevenDayAfterStr}"</c:otherwise>
@@ -260,7 +265,7 @@
 									style="padding:5px 5px;width: 55px; float: right; margin-left: 10px;">
 									삭제</button>
 									</div>
-
+<input type="hidden" id="b_seq${vs.index}" value="${bannerList.b_seq}"/>
 								</div>
 <script type="text/javascript">
 function deleteBanner${vs.index}(){
@@ -274,9 +279,129 @@ function deleteBanner${vs.index}(){
 		  cancelButtonText: "아니오"
 	}).then((result) => {
 	  if (result.isConfirmed) {
-      $("#deleteBanner${vs.index}").remove();
+		  $.ajax({
+	    	    type: "POST",
+	    	    url: "/deleteBanner.admin",
+	    	    data: JSON.stringify({"b_seq": $("#b_seq${vs.index}").val()}), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "배너 삭제 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "배너 삭제 실패",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("배너 삭제 통신에러");
+	    	    }
+	 		});//ajax end  
+		  
+        $("#deleteBanner${vs.index}").remove();
 	  }//if (result.isConfirmed)
 	})//then((result)
+}
+
+function updateBanner${vs.index}(){
+	nansu = Math.floor(Math.random() * 1000); //0~999 
+	  Swal.fire({
+		  title: "수정하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "수정",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  uploadImage${vs.index}();
+		  }//if (result.isConfirmed)
+		})//then((result)
+	}
+
+//이미지 업로드 실제 S3로 
+uploadImage${vs.index} = () => {
+    AWS.config.update({
+        region: 'ap-northeast-2',
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+        })
+    })
+    var b_seq = $("#b_seq${vs.index}").val();
+	var b_title = $("#b_title${vs.index}").val();
+	var b_click_url = $("#b_click_url${vs.index}").val();
+	var b_memo = $("#b_memo${vs.index}").val();
+	var b_startdate = $("#b_startdate${vs.index}").val();
+	var b_enddate = $("#b_enddate${vs.index}").val();
+	var b_settime = $("#b_settime${vs.index}").is(":checked");
+	var b_image = "no";
+    
+    let files = document.getElementById("input-image${vs.index}").files;
+    let file = files[0];
+    if(file != null){
+	    let fileName = file.name;
+	    fileName = nansu +"___"+ fileName;
+	    let upload = new AWS.S3.ManagedUpload({
+	        params: {
+	            Bucket: 'walkingorder/banner',
+	            Key: fileName,
+	            ContentType : "image/jpeg",
+	            Body: file
+	        }
+	    })
+	    const promise = upload.promise();
+	    b_image = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/banner/"+fileName;
+	    if(b_image.indexOf("+") != -1){b_image = b_image.replace(/\+/g,"%2B");}
+    }
+  //ajax
+	var param = {
+		"b_seq" : parseInt(b_seq),    //int
+		"b_title" : b_title,
+		"b_image": b_image,
+		"b_memo" : b_memo,
+		"b_click_url" : b_click_url,
+		"b_startdate" : b_startdate,
+		"b_enddate" : b_enddate,
+		"b_settime" : b_settime   //boolean
+	}
+	$.ajax({
+	    type: "POST",
+	    url: "/updateBanner.admin",
+	    data: JSON.stringify(param), 
+	    dataType: "json",
+	    contentType: "application/json",
+	    success: function (data) {
+	        if (data == 1) {
+    	        Swal.fire({
+    	            icon: "success",
+    	            title: "배너 수정 완료",
+    	            showConfirmButton: false,
+    	            timer: 1500
+    	        });
+	        }else if(data == 0){
+	        	Swal.fire({
+    	            icon: "warning",
+    	            title: "배너 수정 실패",
+    	            showConfirmButton: false,
+    	            timer: 1500
+    	        });
+	        }
+	    },
+	    error: function (data) {
+	        console.log("배너 수정 통신에러");
+	    }
+	});//ajax end 
+    
 }
 </script>
 								</c:forEach>

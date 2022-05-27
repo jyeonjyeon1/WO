@@ -1,5 +1,6 @@
 package three.aws.wo.user.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -225,6 +225,9 @@ public class UserOrderController {
 		String u_id = vo.getU_id();
 		List<OrdersVO> myOrderList = userOrderService.myOrderList(u_id);
 		model.addAttribute("myOrderList", myOrderList);
+		
+		Date now = new Date();
+		model.addAttribute("nowDate",now);
 		System.out.println("myOrderList");
 		return "/mypage/mypage_myOrderList";
 
@@ -242,6 +245,23 @@ public class UserOrderController {
 		String u_id = vo.getU_id();
 		List<OrdersVO> myCurrentList = userOrderService.myCurrentList(u_id);
 		model.addAttribute("myCurrentList", myCurrentList);
+		return "/mypage/mypage_currentOrder";
+	}
+	
+	@RequestMapping("/myorder.user")
+	public String myorderDetail(HttpSession session, Model model,HttpServletRequest request) {
+		String order = request.getParameter("order");
+		///myorder.user?order=${myCurrentList.o_code}
+		System.out.println("myorderDetail");
+		// 세션에 있는 유저를 가져옴
+		UserVO vo = (UserVO) session.getAttribute("userSession");
+		if (vo == null) { // 이거는 나중에 interceptor에서 처리할 것
+			return "/login/login_login";
+		}
+		// 유저 아이디 받아옴
+		String u_id = vo.getU_id();
+		OrdersVO myorderDetail = userOrderService.myorderDetail(order);
+		model.addAttribute("myorderDetail", myorderDetail);
 		return "/mypage/mypage_currentOrder";
 	}
 

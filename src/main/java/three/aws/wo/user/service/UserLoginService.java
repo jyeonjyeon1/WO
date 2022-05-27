@@ -1,10 +1,12 @@
 package three.aws.wo.user.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import three.aws.wo.user.vo.SearchKeywordVO;
 import three.aws.wo.user.vo.UserVO;
 
 public interface UserLoginService {
@@ -21,5 +23,7 @@ public interface UserLoginService {
 	void insertSNSUser(String kakaoId);
 
 	int checkSNSUser(int sns_seq);
+
+	List<SearchKeywordVO> searchKeywords();
 
 }

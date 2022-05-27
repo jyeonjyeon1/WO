@@ -10,7 +10,7 @@ public class OrdersVO {
 	private String o_code;
 	private String u_id;	
 	private String si_code;
-	private String o_order_date;
+	private Date o_order_date;
 	private boolean o_coupon_status;
 	private String c_code;
 	private String o_list;
@@ -23,6 +23,7 @@ public class OrdersVO {
 	private String o_order_state;	//주문 상태 (결제완료 접수 준비 등)
 	private int o_daily_seq;		//주문번호 생성을 위함)
 	private boolean o_payment_status;	//결제성태
+	private boolean o_review;	//리뷰상태
 	
 	//외래
 	private String u_name;

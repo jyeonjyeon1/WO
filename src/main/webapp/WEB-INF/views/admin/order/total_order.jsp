@@ -386,7 +386,7 @@
 												</div>
 											</td>
 											<td>${orderList.o_payment_list}</td>
-											<td>${(orderList.o_order_date).substring(0,19)}</td>
+											<td><fmt:formatDate value="${orderList.o_order_date}" pattern="yy-MM-dd a hh:mm"/></td>
 											<!-- <td><a data-toggle="modal" href="#myModal"
 												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 											</td> -->

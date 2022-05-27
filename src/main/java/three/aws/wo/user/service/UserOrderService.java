@@ -6,6 +6,7 @@ import java.util.List;
 import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.BasketVO;
 import three.aws.wo.user.vo.OrdersVO;
+import three.aws.wo.user.vo.SearchKeywordVO;
 
 public interface UserOrderService {
 	List<BasketVO> cartList(String u_id);
@@ -25,4 +26,5 @@ public interface UserOrderService {
 	void orderPointUse(HashMap<String, Object> insertPoint);
 	List<OrdersVO> myCurrentList(String u_id);
 	List<OrdersVO> myOrderList(String u_id);
+	OrdersVO myorderDetail(String order);
 }

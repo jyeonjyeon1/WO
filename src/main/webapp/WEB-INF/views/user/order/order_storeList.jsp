@@ -18,7 +18,6 @@
     <!-- ========================= JS here ========================= -->
     <script src="resources/assets/js/jquery-3.6.0.js"></script>
     <script type="text/javascript">
-        jQuery(document).ready(function () {
 
             $(".showdetail_btn").click(function () {
                 if ($('.option_select_form').hasClass('active') == false) {
@@ -27,8 +26,6 @@
                     $(".option_select_form").removeClass("active");
                 }
             });
-        });
-            //========= Hero Slider
             
      //paging 처리 (값보내기)
             

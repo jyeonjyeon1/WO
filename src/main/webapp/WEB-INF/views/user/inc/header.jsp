@@ -55,7 +55,13 @@ $(document).ready(
 //검색버튼 누르면~
 function searchBtn(){
 	var Sname = $("#search_Sname").val();
-	location.href="/storeList.user?search="+Sname;
+	var searchUrl = $("#searchUrl").val();
+	if(Sname=="" || Sname == null){
+		location.href=searchUrl;
+	}else{
+		location.href="/storeList.user?search="+Sname;
+	}
+	
 }
 //---------------- NAVER ------------------------
 const naverLogin = new naver.LoginWithNaverId(
@@ -108,6 +114,10 @@ function kakaoLogout() {
 function logout(){
 	naverLogin.logout();
 }
+
+window.addEventListener('locationchange', function(){
+    console.log('location changed!');
+})
 </script>
 
 
@@ -177,7 +187,17 @@ function logout(){
 									</div>
 								</div>
 								<div class="search-input">
+								<c:if test="${!empty userSession}">
+									<c:forEach var="searchKeywords" items="${searchKeywords}" varStatus="vs">
+									<c:if test="${vs.last }">
+										<input id="search_Sname" type="text" placeholder="${searchKeywords.sb_keyword}">
+										<input type="hidden" id="searchUrl" value="${searchKeywords.sb_url}"/>
+									</c:if>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty userSession}">
 									<input id="search_Sname" type="text" placeholder="검색">
+								</c:if>
 								</div>
 								<div class="search-btn">
 									<button onclick="searchBtn()">

@@ -34,6 +34,12 @@
 		AND
 		U_ID IS NULL
 	</select>
+	<select id="searchKeywords" resultType="SearchKeywordVO">
+		SELECT * FROM SEARCH_BAR ORDER BY RANDOM()<!--  LIMIT 1 -->
+	</select>
+	<select id="myorderDetail" resultType="OrdersVO">
+		SELECT * FROM ORDERS WHERE O_CODE = #{order}
+	</select>
 	
 </mapper>
  

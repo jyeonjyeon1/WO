@@ -86,23 +86,23 @@
 
               <ul class="nav coupon_tab" id="myTab" role="tablist">
 				<c:forEach var="usableCouponList" items="${usableCouponList}" varStatus="vs">
-					
+					<c:set var="usableNum" value="${vs.index + 1 }" />
 				</c:forEach>
                 <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
                   <button class="coupon_link" id="tab_use" data-bs-toggle="tab" data-bs-target="#home" type="button"
                     role="tab" aria-controls="home" aria-selected="true">사용가능쿠폰
-                    <h5>2장</h5>
+                    <h5>${usableNum }장</h5>
                   </button>
 
                 </li>
 
 				<c:forEach var="usedCouponList" items="${usedCouponList}" varStatus="vs">
-					
+					<c:set var="usedNum" value="${vs.index + 1 }" />
 				</c:forEach>
                 <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
                   <button class="coupon_link" id="tab_used" data-bs-toggle="tab" data-bs-target="#profile" type="button"
                     role="tab" aria-controls="profile" aria-selected="false">사용불가쿠폰
-                    <h5>1장</h5>
+                    <h5>${usedNum }장</h5>
                   </button>
                 </li>
 

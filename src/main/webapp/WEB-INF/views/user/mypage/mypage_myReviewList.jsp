@@ -54,11 +54,10 @@
                         </ul>
                     </div>
             </div>
-            
-            <%! int count = 0; %>
+ 
             
             <c:forEach var="reviewList" items="${reviewList}" varStatus="vs">
-            	<% count ++; %>
+            	<c:set var="reviewNum" value="${vs.index + 1 }" />
             </c:forEach>
             
             <div class="col-lg-9 col-md-7">
@@ -66,9 +65,7 @@
                     <div class="mypage_myreview_top">
                     <div class="row">
                         <div class="col-lg-4 col-md-7">
-                            <h3>내가 쓴 리뷰 > <%=count %>개</h3>
-                            <% count = 0; %>
-                            
+                            <h3>내가 쓴 리뷰 > ${reviewNum }개</h3>
                         </div>
                 </div>
                 <div class="row">
@@ -119,7 +116,11 @@
 	                    <div class="col-lg-6 col-md-6" style="margin: 15px;">
 	                        <div class="row">
 	                            <div class="orderedMenu" style="padding: 0; margin: 0;">
-	                            <div class="orderedMenu_btn" style="margin:5px;">${reviewList.o_list}</div>
+		                            <c:set var="testVar">${reviewList.o_list_detail}</c:set>
+									<c:forTokens items="${testVar}" delims=",,," var="value">
+										<div class="orderedMenu_btn" style="margin:5px;">${value}</div>
+									</c:forTokens>
+	                            
 	                            </div>
 	                        </div>
 	                        <div class="row" style="margin-top: 15px;">

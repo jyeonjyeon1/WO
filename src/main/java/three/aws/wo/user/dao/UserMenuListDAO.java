@@ -17,8 +17,8 @@ public class UserMenuListDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<MenuListVO> cartList(String u_id) {
-		return sqlSession.selectList("UserMenuListDAO.cartList", u_id);
+	public List<MenuListVO> menutitle() {
+		return sqlSession.selectList("UserMenuListDAO.menutitle");
 
 	}
 	

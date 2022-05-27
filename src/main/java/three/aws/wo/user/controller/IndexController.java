@@ -55,9 +55,14 @@ public class IndexController {
 	
 	@RequestMapping("/list.user")
 	public String indexList(IndexVO vo, Model model, HttpSession session) {
+		String u_id = "";
 		UserVO uv = (UserVO) session.getAttribute("userSession");
-		String u_id = uv.getU_id();
-		
+		if(uv == null) {
+			u_id = "No_Data";
+		}
+		else if (uv != null) {
+			u_id = uv.getU_id();
+		}
 		
 		List<IndexVO> myStoreList = indexService.myStoreList(u_id);
 		model.addAttribute("myStoreList" ,myStoreList);

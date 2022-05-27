@@ -652,7 +652,7 @@ function toggle_speciall() {
 					  <div>
                       <span class="title" style="margin-top: 30px; background-color: rgba(33, 31, 145, 0.158); color:rgb(65, 63, 196); padding:30px; border-radius: 5px; border-bottom:0;">
                         <div class="row">
-                          <div class="col-lg-2" id="store_status" style="margin-top: 5px;">
+                          <div class="col-lg-3" id="store_status" style="margin-top: 5px;">
                         가게 영업중
                       </div>
                       <div class="col-lg-6">

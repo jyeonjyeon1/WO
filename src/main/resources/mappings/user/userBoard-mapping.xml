@@ -108,6 +108,7 @@
     <select id="adminqnaList" resultType="QnAVO">
 		SELECT Q.*, U.U_NAME, U.U_TEL
 			FROM QNA Q JOIN USERS U ON Q.U_ID = U.U_ID
+			ORDER BY QA_SEQ DESC
 	</select>
 	
 	 <select id="adminanswerList" resultType="QnAVO">

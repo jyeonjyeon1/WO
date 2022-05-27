@@ -29,20 +29,19 @@
 	<update id="updateAllday">
 		UPDATE STORE_INFO SET 
 		
-		<if test="si_Allday = true">
-		SI_ALLDAY = true,
-		SI_OPENA = #{si_openA},
-		SI_CLOSEA = #{si_closeA}
 		
-		</if>
-		<if test="si_Allday = false">
+		SI_ALLDAY = #{si_Allday},
+		SI_OPENA = #{si_openA},
+		SI_CLOSEA = #{si_closeA},
+		
+		
 		SI_OPENW = #{si_openW},
 		SI_CLOSEW = #{si_closeW},
 		SI_OPENSAT = #{si_openSat},
 		SI_CLOSESAT = #{si_closeSat},
 		SI_OPENSUN = #{si_openSun},
 		SI_CLOSESUN = #{si_closeSun}
-		</if>
+		
 		WHERE 
 		SI_CODE = #{si_code} 
 	</update>
@@ -57,9 +56,6 @@
 		WHERE 
 		SI_CODE = #{si_code} 
 	</update>
-	
-	
-	
 	
 </mapper>
  

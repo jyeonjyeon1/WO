@@ -337,12 +337,18 @@ function updateAllday() {
 	var si_Allday = "y";
 	var si_openA = $("#si_openA").val();
 	var si_closeA = $("#si_closeA").val(); 
-	var si_openW = "4";
-	var si_closeW = "5";
-	var si_openSat = "6";
-	var si_closeSat = "7";
-	var si_openSun = "8";
-	var si_closeSun = "9";
+	var si_openW = $("#si_openW").val();
+	var si_closeW = $("#si_closeW").val();
+	var si_openSat = $("#si_openSat").val();
+	var si_closeSat = $("#si_closeSat").val();
+	var si_openSun = $("#si_openSun").val();
+	var si_closeSun = $("#si_closeSun").val();
+	
+	if(document.getElementById('same').checked) {
+		si_Allday = "y";
+	}else if(document.getElementById('diff').checked) {
+		si_Allday = "n";
+	}
 	
 	var param = { 
 		"si_Allday" : si_Allday,
@@ -373,10 +379,17 @@ function updateAllday() {
      	if(si_Allday=="y") {
      		document.getElementById('same111').style.display ="block";
      		document.getElementById('same222').style.display ="none";
+     		document.getElementById('A_show').textContent = si_openA +"~"+ si_closeA;
+     		
      	}else {
      		document.getElementById('same111').style.display ="none";
      		document.getElementById('same222').style.display ="block";
+     		document.getElementById('W_show').textContent = si_openW +"~"+ si_closeW;
+     		document.getElementById('Sat_show').textContent = si_openSat+"~"+ si_closeSat;
+     		document.getElementById('Sun_show').textContent = si_openSun +"~"+ si_closeSun;
+     		
      	}
+     	  $(".modalA").fadeOut();
      	
      },error: function(data) {
      	console.log("가게영업시간 수정오류");
@@ -451,7 +464,7 @@ function update_holiday(){
 	     	}else {
 	     		document.getElementById('holiday_imsi_show').textContent ="";
 	     	}
-	     	
+	     	  $(".modalB").fadeOut();
 	     	
 	     	
 	     },error: function(data) {
@@ -580,16 +593,31 @@ function update_holiday(){
                     <div class="box purple">
                       <span class="title">영업시간 <a class="change_info" onclick="modal_a()" >변경하기</a></span>
                       <c:choose>
-                      <c:when test="${storeSession.si_Allday}">
-                      <ul id="same111"> 
+                      <c:when test="${storeSession.si_Allday==true}">
+                      <ul id="same111" style="display:block;"> 
+                        <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px;">[평일/주말 동일]</li>
+                           <li>매일</li>
+                         <div id="A_show">${storeSession.si_openA} ~ ${storeSession.si_closeA}</div>
+                         
+                      </ul>
+                      <ul id="same222" style="display:none;"> 
+                        <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px; ">[평일/주말 별도]</li>
+                          <li>월~금</li>
+                         <div id="W_show">${storeSession.si_openW} ~ ${storeSession.si_closeW}</div>
+                          <li>토요일</li>
+                            <div id="Sat_show">${storeSession.si_openSat} ~ ${storeSession.si_closeSat}</div>
+                          <li>일요일</li>
+                            <div id="Sun_show">${storeSession.si_openSun} ~ ${storeSession.si_closeSun}</div>
+                      </ul>
+                      </c:when>
+                      <c:otherwise>
+                         <ul id="same111" style="display:none;"> 
                         <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px;">[평일/주말 동일]</li>
                            <li>매일</li>
                          <div>${storeSession.si_openA} ~ ${storeSession.si_closeA}</div>
                          
                       </ul>
-                      </c:when>
-                      <c:otherwise>
-                        <ul id="same222"> 
+                      <ul id="same222" style="display:block;"> 
                         <li style="font-size: 30px; color: #0a4670; background-color: rgba(149, 117, 235, 0.336); width: fit-content; padding: 15px; border-radius: 5px; ">[평일/주말 별도]</li>
                           <li>월~금</li>
                          <div>${storeSession.si_openW} ~ ${storeSession.si_closeW}</div>
@@ -597,7 +625,6 @@ function update_holiday(){
                             <div>${storeSession.si_openSat} ~ ${storeSession.si_closeSat}</div>
                           <li>일요일</li>
                             <div>${storeSession.si_openSun} ~ ${storeSession.si_closeSun}</div>
-                         
                       </ul>
                       </c:otherwise>
                       </c:choose>
@@ -655,10 +682,10 @@ function update_holiday(){
                     
                     <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
                       
-                      <input class="form-control round-form" name="si_openW" type="time"
+                      <input class="form-control round-form" name="si_openW" id="si_openW" type="time"
                         value=""
                         style="width: 20%; display: inline-block; margin:0 ">
-                      ~ <input class="form-control round-form" name="si_closeW" type="time"
+                      ~ <input class="form-control round-form" name="si_closeW" id="si_closeW" type="time"
                         value=""
                         style="width: 20%; display: inline-block; margin: 0;">
                     
@@ -670,10 +697,10 @@ function update_holiday(){
                   
                   <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
                     
-                    <input class="form-control round-form" name="si_openSat" type="time"
+                    <input class="form-control round-form" name="si_openSat" id="si_openSat" type="time"
                       value=""
                       style="width: 20%; display: inline-block; margin:0 ">
-                    ~ <input class="form-control round-form" name="si_closeSat" type="time"
+                    ~ <input class="form-control round-form" name="si_closeSat" id="si_closeSat" type="time"
                       value=""
                       style="width: 20%; display: inline-block; margin: 0;">
                   
@@ -684,10 +711,10 @@ function update_holiday(){
                 
                 <div class="row" style="max-width: 700px; text-align: left; margin-left: 15px;">
                   
-                  <input class="form-control round-form" name="si_openSun" type="time"
+                  <input class="form-control round-form" name="si_openSun" id="si_openSun" type="time"
                     value=""
                     style="width: 20%; display: inline-block; margin:0 ">
-                  ~ <input class="form-control round-form" name="si_closSun" type="time"
+                  ~ <input class="form-control round-form" name="si_closeSun" id="si_closeSun" type="time"
                     value=""
                     style="width: 20%; display: inline-block; margin: 0;">
                 
@@ -747,10 +774,25 @@ function update_holiday(){
                       
                     </div>
                     <div class="col-lg-6" style="text-align: right;">
-                      <span id="gong_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
+                      <span id="gong_disable" style="font-size: 13px; color: rgb(26, 25, 25);">
+                      <c:choose>
+                      <c:when test="${storeSession.si_holiday_gong}">
+                      설정함
+                      </c:when>
+                      <c:otherwise>
+                      설정안함
+                      </c:otherwise>
+                      </c:choose>
+                      
+                      
+                      </span>
                       <label  class="switch-button">  
                        
-                        <input type="checkbox" id="btn_toggle" onclick="toggle_gong()"  /> 
+                        <input type="checkbox" id="btn_toggle" onclick="toggle_gong()"   
+                        <c:if test="${storeSession.si_holiday_gong}">
+                    	checked
+                    	</c:if>
+                        /> 
                         <span class="onoff-switch"></span> 
                       </label>
                     </div>
@@ -764,16 +806,38 @@ function update_holiday(){
                         
                       </div>
                       	<div class="col-lg-6" style="text-align: right;">
-                      <span id="fix_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
+                      <span id="fix_disable" style="font-size: 13px; color: rgb(26, 25, 25);">
+                      <c:choose>
+                      <c:when test="${storeSession.si_holiday_fix ne ''}">
+                      설정함
+                      </c:when>
+                      <c:otherwise>
+                      설정안함
+                      </c:otherwise>
+                      </c:choose>
+                      </span>
                       <label  class="switch-button">  
                        
-                        <input type="checkbox" id="btn_toggle2" onclick="toggle_fix()"  /> 
+                        <input type="checkbox" id="btn_toggle2" onclick="toggle_fix()"  
+                        <c:if test="${storeSession.si_holiday_fix ne ''}">
+                        checked
+                        </c:if>
+                        /> 
                         <span class="onoff-switch"></span> 
                       </label>
                     </div>
                         </div>
                         
-                        <div class="row" id="fix_date" style="display:none;">
+                     
+                        <c:choose>
+                        <c:when test="${storeSession.si_holiday_fix ne ''}">
+                           <div class="row" id="fix_date"  style="display:block;">
+                        </c:when>
+                        <c:otherwise>
+                          <div class="row" id="fix_date"  style="none;">
+                        </c:otherwise>
+                        </c:choose>
+                        
                         <div class="col-lg-2" style="padding-right:0;">
                         <h5 style="margin-left:40px; ">요일선택 : </h5>
                         </div>
@@ -781,13 +845,42 @@ function update_holiday(){
                         <div class="dataTable-dropdown" >
                         
 											<select class="dataTable-selector" id="holiday_fixSelect" style="width:20%; float:left;">
-												<option value="월요일">월</option>
-												<option value="화요일">화</option>
-												<option value="수요일">수</option>
-												<option value="목요일">목</option>
-												<option value="금요일">금</option>
-												<option value="토요일">토</option>
-												<option value="일요일">일</option>
+												
+												<option value="월요일"
+												<c:if test="${storeSession.si_holiday_fix eq '월요일'}">
+												selected
+												</c:if>
+												>월</option>
+												<option value="화요일"
+												<c:if test="${storeSession.si_holiday_fix eq '화요일'}">
+												selected
+												</c:if>
+												>화</option>
+												<option value="수요일"
+												<c:if test="${storeSession.si_holiday_fix eq '수요일'}">
+												selected
+												</c:if>
+												>수</option>
+												<option value="목요일"
+												<c:if test="${storeSession.si_holiday_fix eq '목요일'}">
+												selected
+												</c:if>
+												>목</option>
+												<option value="금요일"
+												<c:if test="${storeSession.si_holiday_fix eq '금요일'}">
+												selected
+												</c:if>
+												>금</option>
+												<option value="토요일"
+												<c:if test="${storeSession.si_holiday_fix eq '토요일'}">
+												selected
+												</c:if>
+												>토</option>
+												<option value="일요일"
+												<c:if test="${storeSession.si_holiday_fix eq '일요일'}">
+												selected
+												</c:if>
+												>일</option>
 											</select>
 										</div>
                         </div>
@@ -799,16 +892,39 @@ function update_holiday(){
                         
                       </div>
                       <div class="col-lg-6" style="text-align: right;">
-                      <span id="imsi_disable" style="font-size: 13px; color: rgb(26, 25, 25);">설정안함</span>
+                      <span id="imsi_disable" style="font-size: 13px; color: rgb(26, 25, 25);">
+                      <c:choose>
+                      <c:when test="${storeSession.si_holiday_imsi ne ''}">
+                      설정함
+                      </c:when>
+                      <c:otherwise>
+                      설정안함
+                      </c:otherwise>
+                      </c:choose>
+                      </span>
                       <label  class="switch-button">  
                        
-                        <input type="checkbox" id="btn_toggle3" onclick="toggle_imsi()"  /> 
+                        <input type="checkbox" id="btn_toggle3" onclick="toggle_imsi()"  
+                        	<c:if test="${storeSession.si_holiday_imsi ne ''}">
+                        checked
+                        </c:if>
+                        /> 
                         <span class="onoff-switch"></span> 
                       </label>
                     </div>
                         </div>
-                        <div class="row" id="imsi_date" style="display:none;">
-                        <input id="holiday_imsi_date" class="form-control round-form" type="date" style="margin-left: 70px; width: 30%; display: inline-block; float:left;"> 
+                        <div class="row" id="imsi_date" 
+                        
+                        <c:choose>
+                      <c:when test="${storeSession.si_holiday_imsi ne ''}">
+                      style="display:block;"
+                      </c:when>
+                      <c:otherwise>
+                      style="display:none;"
+                      </c:otherwise>
+                      </c:choose>
+                        >
+                        <input id="holiday_imsi_date" class="form-control round-form" type="date" value="${storeSession.si_holiday_imsi}" style="margin-left: 70px; width: 30%; display: inline-block; float:left;"> 
                         </div>
                         
 

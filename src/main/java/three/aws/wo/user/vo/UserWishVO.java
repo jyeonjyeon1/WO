@@ -3,6 +3,7 @@ package three.aws.wo.user.vo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import three.aws.wo.user.util.Criteria;
 
 @Getter
 @Setter
@@ -21,6 +22,7 @@ public class UserWishVO {
 	private String si_open;
 	private String si_close;
 	private String si_image;
+	private Criteria cri;
 	
 	
 }

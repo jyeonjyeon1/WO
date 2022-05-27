@@ -248,8 +248,13 @@ public class SMenuServiceImpl implements SMenuService {
 	}
 
 	@Override
-	public void deleteMAObyOgSeq(HashMap<String, Object> mapp) {
-		sMenuDAO.deleteMAObyOgSeq(mapp);
+	public void deleteMAObyMSeq(HashMap<String, Object> mapp) {
+		sMenuDAO.deleteMAObyMSeq(mapp);
+	}
+
+	@Override
+	public void insertMAO(HashMap<String, Object> mappp) {
+		sMenuDAO.insertMAO(mappp);
 	}
 	
 }

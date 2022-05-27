@@ -202,7 +202,11 @@ public class SMenuDAO {
 		return sqlSession.selectList("SMenuDAO.optionByOgSeq",mapp);
 	}
 
-	public void deleteMAObyOgSeq(HashMap<String, Object> mapp) {
-		sqlSession.delete("SMenuDAO.deleteMAObyOgSeq", mapp);
+	public void deleteMAObyMSeq(HashMap<String, Object> mapp) {
+		sqlSession.delete("SMenuDAO.deleteMAObyMSeq", mapp);
+	}
+
+	public void insertMAO(HashMap<String, Object> mappp) {
+		sqlSession.insert("SMenuDAO.insertMAO", mappp);
 	}
 }

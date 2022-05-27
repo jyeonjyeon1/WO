@@ -21,6 +21,7 @@ public class ReviewVO {
 	private String ur_ans;
 	
 	private String o_list;
+	private String o_list_detail;
 	private String si_name;
 	private String si_loc;
 

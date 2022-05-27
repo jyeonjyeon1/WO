@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -366,7 +368,7 @@
 												</div>
 											</td>
 											<td>${orderList.o_payment_list}</td>
-											<td>${(orderList.o_order_date).substring(0,19)}</td>
+											<td><fmt:formatDate value="${orderList.o_order_date}" pattern="yy-MM-dd a hh:mm"/></td>
 											<!-- <td><a data-toggle="modal" href="#myModal"
 												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 											</td> -->

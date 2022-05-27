@@ -70,18 +70,18 @@
             </div>
             <!-- 메뉴바 끝!-->
             <!-- 현재주문확인하기 content 시작!-->
+            <div class="col-lg-9 col-md-7 col-sm-12" >
             <c:forEach var="myCurrentList" items="${myCurrentList }">
-            <div class="col-lg-9 col-md-7 col-sm-12" style="margin-bottom:20px;">
+            
+            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom:20px;">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        
                         <div class="menubar_currentOrder">
                             <div class="menubar_currentOrder_text" >
                                     <div class="row">
                                         <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <h4><a href="#">${myCurrentList.si_name } ${myCurrentList.si_loc } > </a></h4>
-                                    <h5><a>${myCurrentList.o_payment_list}</a> | 
-                                    ${(myCurrentList.o_order_date).substring(0,16) }
+                                    <h4><a href="/menuList.user?store=${myCurrentList.si_code}">${myCurrentList.si_name } ${myCurrentList.si_loc } > </a></h4>
+                                    <h5><a>${myCurrentList.o_payment_list}</a> | <fmt:formatDate value="${myCurrentList.o_order_date}" pattern="yy년MM월dd일 a hh:mm"/>
                                  </h5>                        
                                     
                                     <p>가져갈게요</p>
@@ -120,7 +120,7 @@
                                 <div class="menubar_currentOrder_line">
                                 <div class="row">    
                                     <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <a href="#" class="menubar_btn">주문 확인 <span class="arrow_right"></span></a>
+                                    <a href="/myorder.user?order=${myCurrentList.o_code}" class="menubar_btn">주문 확인 <span class="arrow_right"></span></a>
                                 </div>
                                 </div>
                                 </div>
@@ -129,8 +129,8 @@
                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-5 col-sm-12"> </div>
                 </c:forEach>
+                </div>
             <!-- 현재주문확인하기 content 끝!-->
 
         </div>

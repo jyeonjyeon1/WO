@@ -98,4 +98,9 @@ public class UserOrderServiceImpl implements UserOrderService {
 	public List<OrdersVO> myOrderList(String u_id) {
 		return userOrderDAO.myOrderList(u_id);
 	}
+	
+	@Override
+	public OrdersVO myorderDetail(String order) {
+		return userOrderDAO.myorderDetail(order);
+	}
 }

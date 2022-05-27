@@ -1,6 +1,7 @@
 package three.aws.wo.user.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.user.vo.SearchKeywordVO;
 import three.aws.wo.user.vo.UserVO;
 
 @Repository
@@ -41,6 +43,10 @@ public class UserLoginDAO {
 
 	public int checkSNSUser(int sns_seq) {
 		return sqlSession.selectOne("UserLoginDAO.checkSNSUser", sns_seq);
+	}
+
+	public List<SearchKeywordVO> searchKeywords() {
+		return sqlSession.selectList("UserLoginDAO.searchKeywords");
 	}
 
 }

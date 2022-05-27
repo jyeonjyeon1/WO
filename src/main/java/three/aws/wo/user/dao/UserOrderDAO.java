@@ -88,5 +88,9 @@ public class UserOrderDAO {
 	public List<OrdersVO> myCurrentList(String u_id) {
 		return sqlSession.selectList("UserOrderDAO.myCurrentList", u_id);
 	}
+
+	public OrdersVO myorderDetail(String order) {
+		return sqlSession.selectOne("UserOrderDAO.myorderDetail", order);
+	}
 	
 }

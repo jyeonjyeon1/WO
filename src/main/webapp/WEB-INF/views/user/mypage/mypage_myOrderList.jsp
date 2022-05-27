@@ -93,6 +93,8 @@
                         
 
                     </div>
+                    <c:forEach var="myOrderList" items="${myOrderList}">
+                    <c:if test="${myOrderList.o_order_state eq '전달완료' }">
                     <div class="row" style="margin-top: 25px;">
                     <div class="col-lg-12 col-md-6 col-sm-12">
                         
@@ -100,18 +102,19 @@
                             <div class="menubar_currentOrder_text" >
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <h4><a href="#">메가커피 종로3가점 > </a></h4>
-                                    <h5><a>신한카드결제</a> | 4월4일 10:02</h5>                                        
+                                    <h4><a href="/menuList.user?store=${myOrderList.si_code}">${myOrderList.si_name} ${myOrderList.si_loc}> </a></h4>
+                                    <h5><a>${myOrderList.o_payment_list}</a> | 
+                                    <fmt:formatDate value="${myOrderList.o_order_date}" pattern="yy년MM월dd일 a hh:mm"/></h5>                                        
                                     
                                     <p>가져갈게요</p>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-6 col-sm-12">
-                                        <h3>주문번호 : <a>271</a></h3>
+                                        <h3>주문번호 : <a>${myOrderList.o_code}</a></h3>
                                     </div>
                                     <div class="col-lg-12 col-md-6 col-sm-12">
-                                        <h2>조리중</h2>
+                                        <h2>${myOrderList.o_order_state}</h2>
                                         </div>
                                         </div>
                                     </div>
@@ -124,7 +127,7 @@
                                 </div>
                             
                                 <div class="col-lg-10 col-md-6 col-sm-6">
-                                 <h6>(ice)아메리카노 1</h6>
+                                 <h6>${myOrderList.o_list}</h6>
                                 </div>
                                 
                                 </div>
@@ -133,16 +136,14 @@
                                  <h1>결제금액</h1>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                 <h6>1500원</h6>
+                                 <h6><fmt:formatNumber value="${myOrderList.o_total_price}" 
+                                 pattern="###,###"/> 원</h6>
                                 </div>
                                 </div>
                                 <div class="menubar_currentOrder_line">
                                 <div class="row">    
-                                    <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <a href="#" class="menubar_btn">재주문할게요! <span class="arrow_right"></span></a>
-                                </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="myReview.user" class="menubar_btn">리뷰작성 <span class="arrow_right"></span></a>
+                                    <a href="/myorder.user?order=${myOrderList.o_code}" class="menubar_btn">주문 확인 <span class="arrow_right"></span></a>
                                 </div>
                                 </div>
                                 </div>
@@ -150,6 +151,11 @@
                         </div>
                        </div>
                     </div>
+                    </c:if>
+                    </c:forEach >
+                    <c:forEach var="myOrderList" items="${myOrderList}">
+                    <c:if test="${myOrderList.o_order_state ne '전달완료' }">
+					<fmt:formatDate var="today" value="${nowDate}"/>
                     <div class="row" style="margin-top: 25px;">
                     <div class="col-lg-12 col-md-6 col-sm-12">
                         
@@ -157,15 +163,16 @@
                             <div class="menubar_lastOrder_text" >
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <h4><a href="#">컴포즈커피 종각점 > </a></h4>
-                                    <h5><a>삼성카드결제</a> | 4월4일 10:02</h5>                                        
+                                    <h4><a href="/menuList.user?store=${myOrderList.si_code}">${myOrderList.si_name} ${myOrderList.si_loc}> </a></h4>
+                                    <h5><a>${myOrderList.o_payment_list}</a> | 
+                                    <fmt:formatDate value="${myOrderList.o_order_date}" pattern="yy년MM월dd일 a hh:mm"/></h5>                                        
                                     
                                     <p>가져갈게요</p>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-6 col-sm-6">
-                                        <h3>주문번호 : <a>2</a></h3>
+                                        <h3>주문번호 : <a>${myOrderList.o_code}</a></h3>
                                     </div>
                                     <div class="col-lg-12 col-md-6 col-sm-6">
                                         <h2>수령완료</h2>
@@ -181,7 +188,7 @@
                                 </div>
                             
                                 <div class="col-lg-10 col-md-6 col-sm-6">
-                                 <h6>(hot)아메리카노 1</h6>
+                                 <h6>${myOrderList.o_list}</h6>
                                 </div>
                                 
                                 </div>
@@ -190,7 +197,8 @@
                                  <h1>결제금액</h1>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                 <h6>1500원</h6>
+                                 <h6><fmt:formatNumber value="${myOrderList.o_total_price}" 
+                                 pattern="###,###"/> 원</h6>
                                 </div>
                                 </div>
                                 <div class="menubar_lastOrder_line">
@@ -199,7 +207,19 @@
                                     <a href="#" class="menubar_btn">재주문할게요! <span class="arrow_right"></span></a>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="#" class="menubar_btn orderList_disable">리뷰작성 완료! <span class="arrow_right"></span></a>
+                                	<c:choose>
+	                                <c:when test="${myOrderList.o_review eq true}">
+	                                	<a class="menubar_btn orderList_disable">
+                                    리뷰작성 완료! <span class="arrow_right"></span></a>
+	                                </c:when>
+<%--                                 	<c:when test="${myOrderList.o_review eq false && myOrderList.o_order_date > today}"></c:when> --%>
+                                	<c:otherwise>
+                                		<a href="myReview.user?order=${myOrderList.o_code}" class="menubar_btn">
+                                    리뷰작성 <span class="arrow_right"></span></a>
+                                	</c:otherwise>
+                                	</c:choose>
+                                    
+                                    
                                 </div>
                                 </div>
                                 </div>
@@ -207,62 +227,9 @@
                         </div>
                        </div>
                     </div>
-                    <div class="row" style="margin-top: 25px;">
-                        <div class="col-lg-12 col-md-6 col-sm-12">
-                            
-                            <div class="menubar_lastOrder">
-                                <div class="menubar_lastOrder_text" >
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <h4><a href="#">메가커피 종로3가점 > </a></h4>
-                                        <h5><a>신한카드결제</a> | 4월4일 10:02</h5>                                        
-                                        
-                                        <p>가져갈게요</p>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-6 col-sm-6">
-                                            <h3>주문번호 : <a>18</a></h3>
-                                        </div>
-                                        <div class="col-lg-12 col-md-6 col-sm-6">
-                                            <h2>수령완료</h2>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-lg-2 col-md-6 col-sm-6">
-                                     <h1>메뉴</h1>
-                                    </div>
-                                
-                                    <div class="col-lg-10 col-md-6 col-sm-6">
-                                     <h6>(ice)아메리카노 1 외 1개</h6>
-                                    </div>
-                                    
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2 col-md-6 col-sm-6">
-                                     <h1>결제금액</h1>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                     <h6>4000원</h6>
-                                    </div>
-                                    </div>
-                                    <div class="menubar_lastOrder_line">
-                                    <div class="row">    
-                                        <div class="col-lg-3 col-md-6 col-sm-6">
-                                        <a href="#" class="menubar_btn">재주문할게요!<span class="arrow_right"></span></a>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <a href="#" class="menubar_btn orderList_disable">리뷰작성 기간만료 <span class="arrow_right"></span></a>
-                                    </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                           </div>
-                        </div>
+                    
+                    </c:if>
+                    </c:forEach>
                         
 
                 </div>    

@@ -383,10 +383,10 @@
 							<div class="modal-body" style="padding-bottom: 0;">
 								<p style="margin-bottom: 2px;">영업시간</p>
 								<input class="form-control round-form" type="time"
-									value="${storeList.si_open}"
+									value="${storeList.si_openA}"
 									style="width: 20%; display: inline-block; margin-right: 10px;">
 								~ <input class="form-control round-form" type="time"
-									value="${storeList.si_close}"
+									value="${storeList.si_closeA}"
 									style="width: 20%; display: inline-block; margin-left: 10px;">
 							</div>
 							<div class="modal-body" style="padding-bottom: 0;">

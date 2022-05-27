@@ -27,4 +27,14 @@ public class StoreInfoServiceImpl implements StoreInfoService {
 	public void updateSiStatus(HashMap<String, Object> map) {
 		sInfoDAO.updateSiStatus(map);
 	}
+	
+	@Override
+	public void updateAllday(HashMap<String, Object> map) {
+		sInfoDAO.updateAllday(map);
+	}
+	
+	@Override
+	public void updateHoliday(HashMap<String, Object> map) {
+		sInfoDAO.updateHoliday(map);
+	}
 }

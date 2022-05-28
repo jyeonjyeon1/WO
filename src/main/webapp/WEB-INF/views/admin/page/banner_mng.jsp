@@ -11,19 +11,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="author" content="Dashboard">
-<meta name="keyword"
-	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <title>워킹오더 관리자 페이지</title>
 
 <!-- Favicons -->
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
-
-
-<!-- Bootstrap core CSS -->
-
-<!--external css-->
-
 <link rel="stylesheet" type="text/css"
 	href="resources/assets/js/admin/bootstrap-fileupload/bootstrap-fileupload.css" />
 <!-- Custom styles for this template -->
@@ -451,14 +442,12 @@ uploadImage${vs.index} = () => {
 let index_num = 1;
   function addBanner(){
 	  
-	  var param = {"index" : index_num};
 	  $.ajax({
 	        url : "bannerAdd.admin",
 	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
 	        type: "get",
 	        success: function(data) {
 	          $("#addBanner").append(data); // 반환된 data를 body태그에 추가
-			  index_num++;
 	        },
 	        error: function (){alert("실패");}
 	    });

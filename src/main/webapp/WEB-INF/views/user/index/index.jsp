@@ -57,7 +57,7 @@
 						<div class="col-lg-12 col-md-6 col-12 md-custom-padding">
 							<!-- Start Small Banner -->
 							<div class="hero-small-banner"
-								style="margin-top: 20px; background-image: url(${fn:toLowerCase(todayDrinkList.td_image) }); border-radius: 20px 20px 20px 20px;">
+								style="margin-top: 20px; background-image: url(${todayDrinkList.td_image}); border-radius: 20px 20px 20px 20px;">
 							</div>
 							<!-- End Small Banner -->
 						</div>

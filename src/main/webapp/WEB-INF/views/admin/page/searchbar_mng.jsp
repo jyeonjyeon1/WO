@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,15 +8,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>워킹오더 관리자 페이지</title>
+  <title>워킹오더 검색어 관리</title>
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
   <!-- 테이블용 css -->
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-
+<style>
+.inactivee{
+	display:none;
+}
+</style>
 </head>
 
 <body>
@@ -176,17 +179,22 @@
               검색 결과
             </div>
             <div class="card-body">
+            <div class="col-sm-1">
+            <br>
+            <button type="button" class="btn btn-success" onclick="addKeyword()">검색 추가</button>
+            <br><br>
+            <button type="button" class="btn btn-danger" onclick="deleteAll()">일괄 삭제</button>
+            <br><br>
+            <button type="button" class="btn btn-warning" onclick="deleteSelected()">선택 삭제</button>
+            </div>
               <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
 
                 <div class="dataTable-container">
-                  <button type="button" class="grey__button">일괄 삭제</button>
                   <table id="datatablesSimple">
                     <thead>
                       <tr>
                         <th data-sortable="" style="width: 7%;"><a href="#" class="dataTable-sorter">
-                            <label class="checkbox-inline">
-                              <input type="checkbox" id="inlineCheckbox1" value="option1">&nbsp;
-                            </label></a>
+                            &nbsp;
                         </th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">번호</a></th>
                         <th data-sortable="" style="width: 30%;"><a href="#" class="dataTable-sorter">검색문구</a></th>
@@ -196,40 +204,132 @@
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td>
+                      
+                      <c:forEach var="searchKeywordList" items="${searchKeywordList }" varStatus="vs">
+                      <tr id="oneRow${vs.index}">
+                      	<td>
                           <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1">&nbsp;
-                          </label></a>
+                            <input type="checkbox" name="sb_seqs" value="${searchKeywordList.sb_seq}">&nbsp;
+                          </label>
                         </td>
-                        <td>1</td>
-                        <td id="search__textval1">더울땐 팥빙수 어뗘~<input type="text" id="search__text1" class="form-control" value="더울땐 팥빙수 어뗘~"></td>
-                        <td id="search__urlval1">https://walkingorder.com/search?팥빙수<input type="text" id="search__url1" class="form-control" value="https://walkingorder.com/search?팥빙수"></td>
+                        <td>${vs.count}</td>
+                        <td id="sb_keyword${vs.index}">${searchKeywordList.sb_keyword}
+                        	<input type="text" id="search____text${vs.index}" class="inactivee" value="${searchKeywordList.sb_keyword}"></td>
+                        <td id="sb_url${vs.index}">${searchKeywordList.sb_url}
+                        	<input type="text" id="search____url${vs.index}" class="inactivee" value="${searchKeywordList.sb_url}"></td>
                         <td>
-                          <button type="button" onclick="javascript:;" class="btn btn-primary btn-xs search_change1"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                          <button type="button" id="change_btn${vs.index}" onclick="changeKeyword${vs.index}()" class="btn btn-primary btn-xs">
+                          	<i id="change_icon${vs.index}" class="fa fa-pencil"></i>
+                          </button>
+                          <button type="button" onclick="deleteOne${vs.index}()" class="btn btn-danger btn-xs">
+                          	<i class="fa fa-trash-o "></i>
+                          </button>
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1">&nbsp;
-                          </label></a>
-                        </td>
-                        <td>2</td>
-                        <td id="search__textval2">더울땐 팥빙수 어뗘~<input type="text" id="search__text2" class="form-control" value="더울땐 팥빙수 어뗘~"></td>
-                        <td id="search__urlval2">https://walkingorder.com/search?팥빙수<input type="text" id="search__url2" class="form-control" value="https://walkingorder.com/search?팥빙수"></td>
-                        <td>
-                          <button type="button" onclick="javascript:;" class="btn btn-primary btn-xs search_change2"><i class="fa fa-pencil"></i></button>
-                          <button type="button" onclick="javascript:deleteAlert();" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </td>
+                      
+                      <script>
+                      function changeKeyword${vs.index}(){
+                    	  
+                    	  if ($("#search____text${vs.index}").hasClass("inactivee")==false) {//수정 부분
+                    		  var original = document.getElementById("sb_keyword${vs.index}").innerText;
+                    	  	  var change = $("#search____text${vs.index}").val();
+                    	  	  var original2 = document.getElementById("sb_url${vs.index}").innerText;
+                  	  	      var change2 = $("#search____url${vs.index}").val();
+                    		  if(change!=original || change2!=original2){
+                    	        Swal.fire({
+                          		    title: "정말 수정하시겠습니까?",
+                          		    html: "<br>",
+                          		    icon: "warning",
+                          		    showCancelButton: true,
+                          		    confirmButtonColor: "#3085d6",
+                          		    cancelButtonColor: "#d33",
+                          		    confirmButtonText: "네",
+                          		    cancelButtonText: "아니오"
+                          		  }).then((result) => {
+                          		    if (result.isConfirmed) {
+                          		      Swal.fire(
+                          		        "수정완료",
+                          		        "수정되었습니다.",
+                          		        "success"
+                          		      );
+                          		    document.getElementById("sb_keyword${vs.index}").innerText = change;
+                          		    document.getElementById("sb_url${vs.index}").innerText = change2;
+                          		      
+                          		      
+                          		    $("#search____text${vs.index}").addClass("inactivee");
+                        	        $("#search____text${vs.index}").removeClass("form-control");
+                        	        $("#search____url${vs.index}").addClass("inactivee");
+                        	        $("#search____url${vs.index}").removeClass("form-control");
+                        	        $("#change_btn${vs.index}").addClass("btn-primary");
+                        	        $("#change_btn${vs.index}").removeClass("btn-success");
+                        	        $("#change_icon${vs.index}").removeClass("fa-check");
+                        	        $("#change_icon${vs.index}").addClass("fa-pencil");
+                          		    }
+                          		 })
+	                    		  }//바뀌지 않은지
+	                    		  else{//안바뀌었을때는 그냥 닫힘
+	                    			 $("#search____text${vs.index}").addClass("inactivee");
+	                      	        $("#search____text${vs.index}").removeClass("form-control");
+	                      	        $("#search____url${vs.index}").addClass("inactivee");
+	                      	        $("#search____url${vs.index}").removeClass("form-control");
+	                      	        $("#change_btn${vs.index}").addClass("btn-primary");
+	                      	        $("#change_btn${vs.index}").removeClass("btn-success");
+	                      	        $("#change_icon${vs.index}").removeClass("fa-check");
+	                      	        $("#change_icon${vs.index}").addClass("fa-pencil");
+	                    		  }
+                    		  
+                    		  }else{//처음 클릭
+                    	        $("#search____text${vs.index}").addClass("form-control");
+                    	        $("#search____text${vs.index}").removeClass("inactivee");
+                    	        $("#search____url${vs.index}").addClass("form-control");
+                    	        $("#search____url${vs.index}").removeClass("inactivee");
+                    	        $("#change_btn${vs.index}").removeClass("btn-primary");
+                    	        $("#change_btn${vs.index}").addClass("btn-success");
+                    	        $("#change_icon${vs.index}").addClass("fa-check");
+                    	        $("#change_icon${vs.index}").removeClass("fa-pencil");
+                    	    }
+                    	  
+                      }
+                      
+                      function deleteOne${vs.index}(){
+                    	  Swal.fire({
+                    		    title: "정말 삭제하시겠습니까?",
+                    		    text: "삭제시 복구할 수 없습니다.",
+                    		    icon: "warning",
+                    		    showCancelButton: true,
+                    		    confirmButtonColor: "#3085d6",
+                    		    cancelButtonColor: "#d33",
+                    		    confirmButtonText: "네",
+                    		    cancelButtonText: "아니오"
+                    		  }).then((result) => {
+                    		    if (result.isConfirmed) {
+                    		      Swal.fire(
+                    		        "삭제완료",
+                    		        "삭제되었습니다.",
+                    		        "success"
+                    		      )
+                    		      $("#search____text${vs.index}").remove();
+                      	          $("#search____text${vs.index}").remove();
+                      	          $("#oneRow${vs.index}").remove();
+                    		    }
+                    		  })
+                    	  
+                      }
+                      </script>
+                      </c:forEach>
+                       <tr id="addKeyword">
+                        <th data-sortable="" style="width: 7%;">
+                            &nbsp;
+                        </th>
+                        <th data-sortable="" style="width: 10%;"> </th>
+                        <th data-sortable="" style="width: 30%;"> </th>
+                        <th data-sortable="" style="width: 30%;"> </th>
+                        <th data-sortable="" style="width: 20%;"> </th>
                       </tr>
-                     
+                      
 
                     </tbody>
-
                   </table>
-                  
                 
 
               </div>
@@ -250,7 +350,36 @@
   </section>
  
   <!--script for this page-->
+  <script>
+  function addKeyword(){//addSearchKeyword
+	  $.ajax({
+	        url : "addSearchKeyword.admin",
+	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+	        type: "get",
+	        success: function(data) {
+	          $("#addKeyword").append(data); // 반환된 data를 body태그에 추가
+	        },
+	        error: function (){alert("실패");}
+	    });
+  }
   
+  function deleteAll(){
+	  
+  }
+  
+  function deleteSelected(){
+	  var query = "input[name='sb_seqs']:checked";
+      var selectedEls = document.querySelectorAll(query);
+      //og_seq만
+      let sb_seq = "";
+      selectedEls.forEach((el) => {
+    	  sb_seq += el.value + ",";
+      })
+      
+      alert(sb_seq);
+  }
+  
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
   <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>

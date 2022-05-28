@@ -229,6 +229,7 @@ input::-webkit-inner-spin-button {
 						"propertychange change keyup paste input",
 						function() {
 							var tel = $("#u_tel").val();
+							ch5 = false;
 							if (tel.indexOf('-') != -1) {
 								$(".tel_form").addClass('active');
 								ch5 = false;
@@ -236,7 +237,7 @@ input::-webkit-inner-spin-button {
 									&& regPhone.test(tel) == false) {
 								$(".tel_form").addClass('active');
 								ch5 = false;
-							} else {
+							} else if(regPhone.test(tel)==true){
 								$(".tel_form").removeClass('active');
 								ch5 = true;
 							}
@@ -292,7 +293,7 @@ input::-webkit-inner-spin-button {
 	var verifNum = []; //인증번호
 	var verifTime = 180;// 180초=3분
 	function phoneVerif(){
-		if(ch5){//번호 제대로 입력했을 경우만
+		if(ch5==true){//번호 제대로 입력했을 경우만
 			//$("#phoneVerif_btn").attr("disabled", true); //비활성화
 			$("#u_tel").attr("readonly", true);
 			document.getElementById("phoneVerif_btn").innerHTML = "인증 확인";

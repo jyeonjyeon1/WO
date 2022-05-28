@@ -260,34 +260,36 @@ $(document).ready(function () {
         $(".fa-check").removeClass("fa-check");
       }
     });
-    $(".search_change1").click(function () {
-
-      if ($("#search__text1").hasClass('active')==false) {
-        $("#search__text1").addClass("active");
-        $("#search__url1").addClass("active");
-        $(".fa-pencil").addClass("fa-check");
-        $(".fa-pencil").removeClass("fa-pencil");
-      }else{
-        $("#search__text1").removeClass("active");
-        $("#search__url1").removeClass("active");
-        $(".fa-check").addClass("fa-pencil");
-        $(".fa-check").removeClass("fa-check");
-      }
-    });
-    $(".search_change2").click(function () {
-
-      if ($("#search__text2").hasClass('active')==false) {
-        $("#search__text2").addClass("active");
-        $("#search__url2").addClass("active");
-        $(".fa-pencil").addClass("fa-check");
-        $(".fa-pencil").removeClass("fa-pencil");
-      }else{
-        $("#search__text2").removeClass("active");
-        $("#search__url2").removeClass("active");
-        $(".fa-check").addClass("fa-pencil");
-        $(".fa-check").removeClass("fa-check");
-      }
-    });
+    
+//    $(".search_change1").click(function () {
+//
+//      if ($("#search__text1").hasClass('active')==false) {
+//        $("#search__text1").addClass("active");
+//        $("#search__url1").addClass("active");
+//        $(".fa-pencil").addClass("fa-check");
+//        $(".fa-pencil").removeClass("fa-pencil");
+//      }else{
+//        $("#search__text1").removeClass("active");
+//        $("#search__url1").removeClass("active");
+//        $(".fa-check").addClass("fa-pencil");
+//        $(".fa-check").removeClass("fa-check");
+//      }
+//    });
+//    
+//    $(".search_change2").click(function () {
+//
+//      if ($("#search__text2").hasClass('active')==false) {
+//        $("#search__text2").addClass("active");
+//        $("#search__url2").addClass("active");
+//        $(".fa-pencil").addClass("fa-check");
+//        $(".fa-pencil").removeClass("fa-pencil");
+//      }else{
+//        $("#search__text2").removeClass("active");
+//        $("#search__url2").removeClass("active");
+//        $(".fa-check").addClass("fa-pencil");
+//        $(".fa-check").removeClass("fa-check");
+//      }
+//    });
    
 //    $("#banner_add_btn").click(function () {
 //

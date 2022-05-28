@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,14 +10,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>워킹오더 관리자 페이지</title>
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
   <!-- 테이블용 css -->
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css"
+	href="resources/assets/js/admin/bootstrap-fileupload/bootstrap-fileupload.css" />
 
 </head>
 
@@ -165,28 +172,245 @@
     <section id="main-content">
     <!-- allmenu import -->
     <%@ include file="../inc/admin_allmenu.jsp" %>
+    
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-        <div class="row mt">
-          <div class="col-lg-12">
-            <p>Place your content here.</p>
-            <form method="POST">
-              <input type="text" name="name" id="name" value="default value" required>
-              <input type="checkbox" name="group[]" id="checkbox1" value="0" checked>
-              <input type="checkbox" name="group[]" id="checkbox2" value="1">
-              <button type="reset"> Reset </button>
-              <button type="submit"> Submit </button>
-            </form>
-          </div>
-        </div>
-        </form>
-      </section>
-      <!-- /wrapper -->
-    </section>
-    <!-- /MAIN CONTENT -->
-    <!--main content end-->
+				<h3>
+					<i class="fa fa-angle-right"></i> 오늘의 음료 관리
+				</h3>
+				<div class="row mt">
+					<div class="col-lg-10" style="min-width: 400px;">
+						<div class="card-header" style="font-size: 16px;">
+							<i class="fa fa-picture-o" style="font-size: 14px;"></i> 오늘의 음료
+						</div>
+						<div class="form-panel"
+							style="margin-top: 0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
+							<form class="form-horizontal style-form" method="get">
+
+							<c:forEach var="todayDrinkList" items="${todayDrinkList }" varStatus="vs">
+								<div class="form-group" id="deleteTodayDrink${vs.index }">
+
+									<div class="col-md-4" style="min-height: 160px;">
+										<div class="fileupload fileupload-new"
+											data-provides="fileupload">
+											<div class="fileupload-new thumbnail"
+												style="width: 100%; height: 180px;">
+												<img
+													src="${todayDrinkList.td_image }"
+													alt="" />
+											</div>
+											<div class="fileupload-preview fileupload-exists thumbnail"
+												style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+											<div>
+												<span class="btn grey__button btn-file"> <span
+													class="fileupload-new"><i class="fa fa-paperclip"></i>
+														이미지 선택</span> <span class="fileupload-exists"><i
+														class="fa fa-undo"></i> 변경</span> <input type="file"
+													class="default" id="input-image${vs.index}"/>
+												</span> <a href="#" class="btn btn-theme04 fileupload-exists"
+													style="border-radius: 3px; font-size: 12px; height: 30px;"
+													data-dismiss="fileupload"> <i class="fa fa-trash-o">
+
+												</i> 제거
+												</a>
+											</div>
+										</div>
+									</div>
+									<label class="control-label col-md-2">음료명</label>
+									<div class="col-sm-6">
+										<input class="form-control" type="text" id="td_name${vs.index}"
+											placeholder="제목을 입력하세요" value="${todayDrinkList.td_name }" style="height: 30px; margin: 5px 0;">
+									</div>
+									<label class="control-label col-md-2">내용<br>(음료 설명)</label>
+									<div class="col-sm-6">
+										<textarea class="form-control" type="text" id="td_content${vs.index}"
+											placeholder="내용 문구를 입력하세요" style="margin: 5px 0;">${todayDrinkList.td_content}</textarea>
+									</div>
+									<label class="control-label col-md-2">연결URL</label>
+									<div class="col-sm-6">
+										<input class="form-control" type="text" value="${todayDrinkList.td_url }"
+										id="td_url${vs.index}"
+											placeholder="URL을 입력하세요" style="height: 30px; margin: 5px 0 10px 0;">
+									</div>
+
+									<label class="col-sm-2 col-sm-2 control-label"> </label>
+									<div class="col-sm-6">
+										<%-- <input type="checkbox" id="b_settime${vs.index}"
+											style="display: inline-block; margin-right: 10px;"> 
+										<input
+											class="form-control round-form" type="date" id="b_startdate${vs.index}"
+											value=""
+											style="width: 30%; display: inline-block; margin-right: 10px;">
+										~ <input class="form-control round-form" type="date" id="b_enddate${vs.index}"
+											value=""
+											style="width: 30%; display: inline-block; margin-left: 10px;"> --%>
+									<button type="button" class="btn btn-primary" onclick="updateTodayDrink${vs.index}()"
+									style="padding:5px 5px;width: 55px; float: right; margin-left: 10px;">수정</button>
+									<button type="button" class="btn btn-danger" onclick="deleteTodayDrink${vs.index}()"
+									style="padding:5px 5px;width: 55px; float: right; margin-left: 10px;">
+									삭제</button>
+									</div>
+<input type="hidden" id="td_seq${vs.index}" value="${todayDrinkList.td_seq}"/>
+								</div>
+<script type="text/javascript">
+function deleteTodayDrink${vs.index}(){
+  Swal.fire({
+	  title: "삭제하시겠습니까??",
+	  icon: "warning",
+	  showCancelButton: true,
+	  confirmButtonColor: "#3085d6",
+	  cancelButtonColor: "#d33",
+	  confirmButtonText: "삭제",
+		  cancelButtonText: "아니오"
+	}).then((result) => {
+	  if (result.isConfirmed) {
+		  $.ajax({
+	    	    type: "POST",
+	    	    url: "/deleteTodayDrink.admin",
+	    	    data: JSON.stringify({"td_seq": $("#td_seq${vs.index}").val()}), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "오늘의 음료 삭제 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "오늘의 음료 삭제 실패",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("오늘의 음료 삭제 통신에러");
+	    	    }
+	 		});//ajax end  
+		  
+        $("#deleteTodayDrink${vs.index}").remove();
+	  }//if (result.isConfirmed)
+	})//then((result)
+}
+
+function updateTodayDrink${vs.index}(){
+	nansu = Math.floor(Math.random() * 1000); //0~999 
+	  Swal.fire({
+		  title: "수정하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "수정",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  uploadImage${vs.index}();
+		  }//if (result.isConfirmed)
+		})//then((result)
+	}
+
+//이미지 업로드 실제 S3로 
+uploadImage${vs.index} = () => {
+    AWS.config.update({
+        region: 'ap-northeast-2',
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+        })
+    })
+    var td_seq = $("#td_seq${vs.index}").val();
+	var td_name = $("#td_name${vs.index}").val();
+	var td_url = $("#td_url${vs.index}").val();
+	var td_content = $("#td_content${vs.index}").val();
+	var td_image = "no";
+    
+    let files = document.getElementById("input-image${vs.index}").files;
+    let file = files[0];
+    if(file != null){
+	    let fileName = file.name;
+	    fileName = nansu +"___"+ fileName;
+	    let upload = new AWS.S3.ManagedUpload({
+	        params: {
+	            Bucket: 'walkingorder/todaydrink',
+	            Key: fileName,
+	            ContentType : "image/jpeg",
+	            Body: file
+	        }
+	    })
+	    const promise = upload.promise();
+	    td_image = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/todaydrink/"+fileName;
+	    if(td_image.indexOf("+") != -1){td_image = td_image.replace(/\+/g,"%2B");}
+    }
+  //ajax
+	var param = {
+		"td_seq" : parseInt(td_seq),    //int
+		"td_name" : td_name,
+		"td_image": td_image,
+		"td_content" : td_content,
+		"td_url" : td_url
+	}
+	$.ajax({
+	    type: "POST",
+	    url: "/updateTodayDrink.admin",
+	    data: JSON.stringify(param), 
+	    dataType: "json",
+	    contentType: "application/json",
+	    success: function (data) {
+	        if (data == 1) {
+    	        Swal.fire({
+    	            icon: "success",
+    	            title: "오늘의 음료 수정 완료",
+    	            showConfirmButton: false,
+    	            timer: 1500
+    	        });
+	        }else if(data == 0){
+	        	Swal.fire({
+    	            icon: "warning",
+    	            title: "오늘의 음료 수정 실패",
+    	            showConfirmButton: false,
+    	            timer: 1500
+    	        });
+	        }
+	    },
+	    error: function (data) {
+	        console.log("오늘의 음료 수정 통신에러");
+	    }
+	});//ajax end 
+    
+}
+</script>
+								</c:forEach>
+								
+								<!-- zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz -->
+								<div id="addTodayDrink"></div>
+								<!-- zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz -->
+								<span class="label label-info">NOTE!</span> <span
+									style="font-size: 11px;"> 최신버전의 브라우저에서만 미리보기가 가능합니다. </span>
 
 
+								<button type="button" onclick="window.history.back()"
+									class="btn btn-theme"
+									style="width: 70px; float: right; margin-left: 10px;">뒤로</button>
+								<button id="banner_add_btn" type="button" onclick="addTodayDrink()"
+									class="btn btn-theme"
+									style="width: 70px; float: right; margin-left: 10px;">
+									추가</button>
+							</form>
+						</div>
+
+
+					</div>
+				</div>
+				<!-- 테이블 -->
+
+			</section>
+			<!-- /wrapper -->
+		</section>
+		<!-- /MAIN CONTENT -->
+		<!--main content end-->
 
     <!-- 푸더 import -->
 		<%@ include file="../inc/admin_footer.jsp" %>
@@ -194,10 +418,29 @@
   </section>
  
   <!--script for this page-->
-  
-
+  <script type="text/javascript"
+		src="resources/assets/js/admin/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script src="resources/assets/js/admin/advanced-form-components.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
   <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
+	<script>
+  function addTodayDrink(){
+	  
+	  $.ajax({
+	        url : "addTodayDrink.admin",
+	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+	        type: "get",
+	        success: function(data) {
+	          $("#addTodayDrink").append(data); // 반환된 data를 body태그에 추가
+	        },
+	        error: function (){alert("실패");}
+	    });
+  }
+  
+ 
+  </script>
 </body>
 
 </html>

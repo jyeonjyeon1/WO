@@ -21,4 +21,12 @@ public class BannerVO {
 	private String regdate;
 	private String startdate;
 	private String enddate;
+	
+	//today drink
+	private int td_seq;
+	private String td_name;
+	private String td_content;
+	private String td_image;
+	private String td_url;
+	
 }

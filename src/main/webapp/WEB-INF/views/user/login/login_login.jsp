@@ -47,12 +47,28 @@
 				style="font-size: 12px; margin-top: 2px; margin-left: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디
 				저장<br> <br>
 			</label>
+			
+			
+			
 			<button type="button" onclick="finalCheck()"
 				class="btn btn-outline-warning" style="width: 100%;">
 				<i class="fa fa-lock"></i> 로그인 &nbsp;
 			</button>
-			<h4 class="text-center mt-40 mb-30" style="color: #6f6f6f">소셜
-				로그인</h4>
+			<div class="row">
+			
+			<div class="row" style="max-width: 500px; ">
+			<div class="col-lg-7" style=" text-align:right;">
+				
+                <input type="button" class="login_bottom_btn"  value="아이디/비밀번호 찾기 " onclick="location.href='findUser.user'">
+                </div>
+                <div class="col-lg-5" style="text-align:center; padding-left:0">
+                
+                <input type="button" class="login_bottom_btn" style="border-left:1px solid gray; padding-left:30px;" value="회원가입"  onclick="location.href='join.user'">
+            </div>
+            </div>
+            </div>
+			<h5 class="text-center mt-40 mb-30" style="color: color:#000157; margin-bottom:15px;">소셜
+				로그인</h5>
 			<div class="row" style="max-width: 400px; margin: auto;">
 				<!-- 카카오 로그인-->
 				<button class="kaka_login" type="button" onclick="kakaoLogin();">
@@ -65,12 +81,8 @@
 				<button id="GgCustomLogin" class="google_login" type="button" onclick="onSignIn(googleUser)">
 				</button>
 
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			</div>
-			 <div class="col-sm-12" style="max-width: 500px; margin:20px auto 100px;">
-                <input type="button" class="login_bottom_btn" value="아이디/비밀번호 찾기" style="width: 200px;" onclick="location.href='findUser.user'">
-                <input type="button" class="login_bottom_btn" value="회원가입" style="width: 100px;" onclick="location.href='join.user'">
-            </div>
+			 
 
 		</form>
 	</div>

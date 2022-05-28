@@ -3107,65 +3107,103 @@ function addOptionChecking${ogVs.index}(){
 
 														<!--주문안내/원산지 편집 start-->
 														<div id="faq__333" class="tab-pane">
-															<div class="info_order"
-																style="border: 1px solid rgba(0, 0, 0, 0.281); padding: 20px; margin: 10px;">
-																<h3 style="font-weight: bolder; color: black;">주문안내</h3>
-																<h4>해야하나모르겠지만그냥하는걸로생각해볼까 모르겠다 흠 어쩌지 여기는 대충 그냥 뭐랄까
-																	우리카페는 뭐가유명해요 머가 맛있어요 많이찾아주세요 뭐이런내용들어가는건데 해야하나말아야하나
-																	모르겠다~</h4>
-															</div>
+																
 
-															<div class="onesanji"
+															<div class="wonsanji"
 																style="border: 1px solid rgba(0, 0, 0, 0.281); padding: 20px; margin: 10px;">
-																<h3 style="font-weight: bolder; color: black;">원산지</h3>
-																<h4>
-																	이거는 필수긴한데 해야하나 모르겠다 뭐일단은 예를들면...<br> 아메리카노 원두(브라질,
-																	콜롬비아, 과테말라 외 2종) 카페라떼 원두(브라질, 콜롬비아, 과테말라),
-																	멸균우유(국산원유100%) 카푸치노 원두(브라질, 콜롬비아, 과테말라 외 2종),
-																	멸균우유(국산원유100%), 시나몬파우더[갈색설탕,계피분말(베트남산),코코아버터(싱가포르산)]
-																	바닐라라떼 원두(브라질, 콜롬비아, 과테말라 외 2종), 멸균우유(국산원유100%),
-																	설탕시럽(국산),바닐라시럽(이탈리아산) 헤이즐넛라떼 원두(브라질, 콜롬비아, 과테말라 외 2종),
-																	멸균우유(국산원유100%), 설탕시럽(국산),헤이즐넛시럽(이탈리아산) 카라멜마끼아또 원두(브라질,
-																	콜롬비아, 과테말라 외 2종), 멸균우유(국산원유100%), 설탕시럽(국산),
-																	카라멜소스(탈지분유(국산),기타과당,가공버터(호주산),정제소금(국산) 카페모카 원두(브라질,
-																	콜롬비아, 과테말라 외 2종), 멸균우유(국산원유100%),
-																	설탕시럽(국산),초코소스[코코아분말(네덜란드산),코코아매스(싱가포르산)] 연유라떼 원두(브라질,
-																	콜롬비아, 과테말라 외 2종), 멸균우유(국산원유100%),
-																	설탕시럽(국산),연유[혼합탈지분유(탈지분유,탈염유청퍼미에이트/네덜란드산,유크림(이탈리아산)유당(미국산)
-																	티라미수라떼 원두(브라질, 콜롬비아, 과테말라 외 2종),
-																	멸균우유(국산원유100%),설탕시럽(국산),체다치즈분말(가공치즈,산도조철제)/덴마크산,
-																	유크림(국산),가당연유(국산),
-																	마스카포네치즈분말(호주산)커피농축액(콜롬비아산),코코아분말(싱가포르산),정제소금(국산) 콜드브루
-																	콜드브루원액(콜롬비아, 탄자니아, 브라질) 콜드브루라떼 콜드브루원액(콜롬비아, 탄자니아,
-																	브라질),멸균우유(국산원유100%) 딥초코라떼 멸균우유(국산원유100%),
-																	설탕시럽(국산),코코아분말(네덜란드산,브라질,싱가포르산) 녹차라떼
-																	멸균우유(국산원유100%),가루녹차(국산),식물성크림(국산),
-																	식물성유지(인도네시아,필리핀,말레이시아),유청분말(국산),혼합탈지분유(네덜란드산),정제소금(국산)
-																	자색고구마라떼 멸균우유(국산원유100%),
-																	자색고구마분말(중국산),식물성크림(국산),식물성유지(인도네시아,필리핀,말레이시아),유청분말(국산)
-																	밀크티 멸균우유(국산원유100%), 홍차분말(인도산), 민트초코라떼
-																	멸균우유(국산원유100%),다크컴파운드칩스(싱가포르산),식물성크림(국산),
-																	식물성유지(인도네시아,필리핀,말레이시아,유청분말(국산),혼합탈지분유(네덜란드산)분말유크림(호주산),유당(미국산),
-																	정제소금(국산),가루녹차(국산),인스턴트커피(베트남산),페퍼민트추출분말(독일)민트시럽(이탈리아산),모히또민트시럽(이탈리아산)
-																	얼그레이 홍차엽(스리랑카산) 캐모마일 캐모마일꽃(크로아티아산) 페퍼민트
-																	서양박하잎(외국산:독일산,이집트산,폴란드산 등) 히비스커스 히비스커스꽃잎(나이지리아산) 유자티
-																	유자당절임(국산),사양벌꿀(국산)정제염(국산),라임(베트남) 자몽티 설탕시럽(국산),
-																	자몽시럽(프랑스),자몽농축액(미국산) 레몬티
-																	레몬당절임(미국산),사양벌꿀(국산),정제소금(국산),레몬시럽(이탈리아) 딸기주스 설탕시럽(국산),
-																	딸기(국산) 사과주스 설탕시럽(국산),사과농축액(칠레산) 망고주스
-																	설탕시럽(국산),망고베이스(인도산),망고(베트남산) 자몽주스 설탕시럽(국산),
-																	자몽농축액(미국산),자몽주스(미국산) 레몬에이드
-																	레몬농축액(아르헨티나산),레몬시럽(이탈리아),설탕시럽(국산),라임(베트남), 사이다(국산)
-																	모히또에이드
-																	설탕시럽(국산),라임청(베트남산),정제소금(국산),레몬농축과즙액(아르헨티나산),라임(프랑스),모히또민트(이탈리아),
-																	사이다(국산),라임슬라이스(베트남) 유자에이드
-																	유자당절임(국산),사양벌꿀(국산)정제염(국산),설탕시럽(국산),사이다(국산),라임슬라이스(베트남)
-																	청포도에이드
-																	설탕시럽(국산),백포도농축액(아르헨티나산),청포도퓨레(칠레산),포도(국산),청포도(스페인산),청포도농축액(이탈리아산),탄산수(국산)
-																	자몽에이드 설탕시럽(국산),자몽과즙농축액(미국산)자몽펄프셀(미국산),자몽시럽(프랑스),탄산수(국산)
-																	복숭아숭숭 홍차추출분말(칠레),복숭아과즙분날 ......
+																<div class="row">
+																	<div class="col-lg-3">
+																		<h3 style="font-weight: bolder; color: black;">원산지</h3>
+																	</div>
+																	<div class="col-lg-9" style="text-align: right;">
+																		<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" href="#wonsanji_modal"
+																			style="float: right; margin-right: 10px; margin-top: 25px; width:30px; height:25px;">
+																			<i class="fa fa-pencil"></i>
+																		</button>
+																	</div>
+																</div>
+
+																
+																<h4 id="wonsanji_content">
+																<c:choose>
+																<c:when test="${ empty storeSession.si_wonsanji }">
+																원산지를 등록해주세요.
+																</c:when>
+																<c:otherwise>
+																${storeSession.si_wonsanji }
+																</c:otherwise>
+																</c:choose>
+																
 																</h4>
 															</div>
+																<!--원산지 수정 modal-->
+															<div class="modal fade" id="wonsanji_modal" role="dialog">
+																<div class="modal-dialog"><div class="modal-content" style="height: auto;">
+																		<div class="modal-header">
+																			<!-- header -->
+																			<h4 class="modal-title">원산지 수정하기</h4>
+																			<button type="button" class="close"
+																				data-dismiss="modal"
+																				style="font-size: 20px; color: black;">취소</button>
+																			</div>
+																		<div class="modal-body">
+																			<!-- body -->
+																			
+																			<div class="row" style="text-align: center;">
+																			<textarea id="wonsanji_input" style="width: 90%; min-height: 300px; overflow-y:scroll; resize: none;" placeholder="원산지를 등록해주세요." ></textarea>
+																			
+																		</div>
+																		<div class="row" style="text-align: center;">
+																			
+																				<button type="button" class="save_Btn" style="margin: 15px; width:90%" onclick="updateOnesangi()" >수정하기</button>
+																			
+																			</div>
+
+																		</div>
+						
+																	</div>
+																</div>
+															</div>
+															<script type="text/javascript">
+															function updateOnesangi() {
+																var si_wonsanji = $("#wonsanji_input").val();
+																
+																
+																if(si_wonsanji=="") {
+																	Swal.fire({
+													    	            icon: "warning",
+													    	            title: "원산지 등록 실패! <br>내용을 입력해 주세요",
+													    	            showConfirmButton: false,
+													    	            timer: 1500
+													    	        });
+																}else{
+																	console.log(si_wonsanji);
+																	var param ={"si_wonsanji" : si_wonsanji}
+																	  $.ajax({
+																 		  type: "POST",
+																           url: "/updateWonsanji.store",
+																          data: JSON.stringify(param),
+																           dataType: "json",
+																          contentType: "application/json",
+																          success:function(data){
+																         	  
+																         	 Swal.fire({
+																	    		  icon: "success",
+																	    		  title: "수정 완료",
+																	    		  showConfirmButton: false,
+																	    		  timer: 1500
+																			});
+																				 document.getElementById('wonsanji_content').textContent =si_wonsanji ;
+																				  $("#wonsanji_modal").modal('hide');
+																			
+																           },error: function(data) {
+																             	console.log("오류");
+																           }
+																 	  })   
+																}
+															}
+															
+															</script>
 
 
 														</div>

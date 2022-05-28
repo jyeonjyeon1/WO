@@ -267,4 +267,9 @@ public class SMenuServiceImpl implements SMenuService {
 		sMenuDAO.updatePendingMenuImg(param);
 	}
 	
+	@Override
+	public void updateOnesanji(HashMap<String, String> map) {
+		sMenuDAO.updateOnesanji(map);
+	}
+	
 }

@@ -222,4 +222,8 @@ public class SMenuDAO {
 	public void updatePendingMenuImg(HashMap<String, String> param) {
 		sqlSession.update("SMenuDAO.updatePendingMenuImg", param);
 	}
+	
+	public void updateOnesanji(HashMap<String, String> map) {
+		sqlSession.update("SMenuDAO.updateOnesanji",map);
+	}
 }

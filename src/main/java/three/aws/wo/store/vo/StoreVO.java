@@ -39,7 +39,7 @@ public class StoreVO {
 	private String sa_rep_name;
 	private String sa_acc_no;
 	private String si_etc;
-	private String si_onesanji;
+	private String si_wonsanji;
 	
 	private boolean si_Allday;
 	private String si_openA;
@@ -51,11 +51,6 @@ public class StoreVO {
 	private String si_openSun;
 	private String si_closeSun;
 	private boolean si_holiday_gong;
-	
-	
-	
-	
-	
 	
 	
 }

@@ -303,9 +303,9 @@ input::-webkit-inner-spin-button {
 	<!-- header import -->
 	<%@ include file="/WEB-INF/views/user/inc/header.jsp"%>
 
-	<div class="container"
-		style="margin: 30PX auto 50px; max-width: 420px;">
-		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">아이디 찾기</h4>
+	<div class="container" style="margin: 30PX auto 50px; max-width: 700px;">
+		  <h4 class="text-center" style="color: #14385c; padding: 30px 30px 10px 30px;">아이디 찾기</h4>
+            <h6 style="color: #6f6f6f; text-align: center; padding-bottom: 20px;">아이디는 가입시 입력하신 핸드폰번호를 통해 찾을 수 있습니다. </h6>
 		
 		<div class="dis2">
 
@@ -333,25 +333,18 @@ input::-webkit-inner-spin-button {
 				
 				<br>
 				<div class="row">
-	                <div style=" text-align: center;">
+	                <div class="col-lg-6">
 					<button type="button" id="submit"
-						class="btn btn-outline-warning" style="display: inline-block; margin-bottom: 10px; width: 60%;" value="check" onclick="telCheck()">아이디 찾기
+						class="btn btn-outline-success" style="display: inline-block; margin-bottom: 10px; width: 100%;" value="check" onclick="telCheck()">아이디 찾기
 						&nbsp;</button>
-	                <div style=" text-align: center;">
-	                        <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 60%;" type="button">취소</button></div>
-	                </div>
-	            
-				</div>
-				
-			
-					
+                        </div>
+                        <div class="col-lg-6">
+	                        <button class="btn btn-outline-secondary" style="display: inline-block; margin:auto; width: 100%;" type="button">로그인으로 돌아가기</button></div>
+	                </div>	
 			</form>
-				
-
-
 		</div>
 		
-		<!-- 이름과 비밀번호가 일치하지 않을 때 -->
+		
 		<div class="dis1" style="display: none;">
 
 			<label>찾으시는 아이디는  
@@ -365,7 +358,7 @@ input::-webkit-inner-spin-button {
 		</div>
 		
 
-	</div>
+	
 
 	<!-- footer import -->
 	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>

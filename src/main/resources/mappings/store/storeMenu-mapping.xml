@@ -338,7 +338,7 @@
 		(select og_ros from option_group where og_seq = #{og_seq}),
 		#{op_name},#{op_price},#{op_oos},#{mg_seq},#{m_seq},#{og_seq},#{op_seq});
 	</insert>
-	<select id="checkPendingMenuImg" resultType="String">
+	<select id="checkPendingMenuImg" resultType="int">
 		SELECT M_PENDING_IMG FROM MENU 
 		WHERE M_CODE=#{m_code}
 		AND SI_CODE = #{si_code};
@@ -346,5 +346,12 @@
 	<update id="updatePendingMenuImg">
 		UPDATE MENU SET M_PENDING_IMG = #{m_pending_img} WHERE M_CODE=#{m_code} and SI_CODE = #{si_code}
 	</update>
+	<update id="updateOnesanji">
+		UPDATE STORE_INFO SET 
+		SI_WONSANJI = #{si_wonsanji} 
+		WHERE 
+		SI_CODE=#{si_code} 
+	</update>
+	
 </mapper>
  

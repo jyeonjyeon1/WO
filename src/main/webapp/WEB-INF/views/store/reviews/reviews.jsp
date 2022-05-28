@@ -288,9 +288,17 @@ function count_length(){
         *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
-
+		
+		<c:set var="fiveStar" value="0" />
+		<c:set var="fourStar" value="0" />
+		<c:set var="threeStar" value="0" />
+		<c:set var="twoStar" value="0" />
+		<c:set var="oneStar" value="0" />
+		
+		
 		<c:forEach var="reviewlist" items="${reviewlist}" varStatus="vs">
 			<c:set var="allNum" value="${vs.count }" />
+			<c:set var="avgStar" value="${reviewlist.AVGSTAR }" />
 			<c:if test="${reviewlist.ur_ans eq NULL }">
 				<c:set var="noAnswerNum" value="${noAnswerNum + 1 }" />
 			</c:if>
@@ -298,18 +306,34 @@ function count_length(){
 				<c:set var="reportNum" value="${reportNum + 1 }" />
 			</c:if>
 			
-			<c:if test="${reviewlist.ur_ans eq NULL }">
-				<c:set var="noAnswerNum" value="${noAnswerNum + 1 }" />
+			<c:if test="${reviewlist.ur_regdate ge reviewlist.onemonth }">
+				<c:set var="dateNum" value="${dateNum + 1 }" />
+			</c:if>
+			
+			
+			<c:if test="${reviewlist.ur_star eq 50 }">
+				<c:set var="fiveStar" value="${fiveStar + 1 }" />
+			</c:if>
+			<c:if test="${reviewlist.ur_star eq 40 }">
+				<c:set var="fourStar" value="${fourStar + 1 }" />
+			</c:if>
+			<c:if test="${reviewlist.ur_star eq 30 }">
+				<c:set var="threeStar" value="${threeStar + 1 }" />
+			</c:if>
+			<c:if test="${reviewlist.ur_star eq 20 }">
+				<c:set var="twoStar" value="${twoStar + 1 }" />
+			</c:if>
+			<c:if test="${reviewlist.ur_star eq 10 }">
+				<c:set var="oneStar" value="${oneStar + 1 }" />
 			</c:if>
 		</c:forEach>
 		
-
 			<section class="wrapper" style="height: 1500px;">
 				<div class="col-lg-12">
 					<div class="card-header"
 						style="font-size: 16px; background-color: rgb(255, 255, 255); border-radius: 10px;">
 						<i class="fa fa-plus-circle" style="margin-bottom: 15px;"></i>최근(30일)
-						리뷰 255개
+						리뷰 ${dateNum }개
 						<div class="row">
 							<div class="col-lg-2">
 								<div class="row" style="text-align: center; margin-top: 30px;">
@@ -317,7 +341,7 @@ function count_length(){
 									<h6>최근 6개월 기준</h6>
 								</div>
 								<div class="row" style="text-align: center;">
-									<h1 style="margin-top: 0; font-weight: bolder;">4.8</h1>
+									<h1 style="margin-top: 0; font-weight: bolder;">${avgStar / 10 }</h1>
 								</div>
 
 							</div>
@@ -326,15 +350,15 @@ function count_length(){
 								
 									<ul>
 										<li><span class="gTerm">5점</span><span class="gBar"
-											style="width: 90%"><span>220개</span></span></li>
+											style="width: ${(fiveStar / allNum) * 100 }%"><span>${fiveStar}개</span></span></li>
 										<li><span class="gTerm">4점</span><span class="gBar"
-											style="width: 20%"><span>20개</span></span></li>
+											style="width: ${(fourStar / allNum) * 100 }%"><span>${fourStar}개</span></span></li>
 										<li><span class="gTerm">3점</span><span class="gBar"
-											style="width: 10%"><span>10개</span></span></li>
+											style="width: ${(threeStar / allNum) * 100 }%"><span>${threeStar}개</span></span></li>
 										<li><span class="gTerm">2점</span><span class="gBar"
-											style="width: 5%"><span>5개</span></span></li>
+											style="width: ${(twoStar / allNum) * 100 }%"><span>${twoStar}개</span></span></li>
 										<li><span class="gTerm">1점</span><span class="gBar"
-											style="width: 0%"><span>0개</span></span></li>
+											style="width: ${(oneStar / allNum) * 100 }%"><span>${oneStar}개</span></span></li>
 
 									</ul>
 								</div>
@@ -386,7 +410,7 @@ function count_length(){
 																			style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">${reviewlist.u_nickname }</h4>
 																		<div class="star-ratings">
 																			<div class="star-ratings-fill space-x-2 text-lg"
-																				style="width: 80%;">
+																				style="width: ${reviewlist.ur_star * 2 }%;">
 																				<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 																			</div>
 																			<div class="star-ratings-base space-x-2 text-lg">
@@ -425,7 +449,7 @@ function count_length(){
 																				<span id="show_length" style="font-size: 20px;">0</span>
 																				<span id="show_maxlength" style="font-size: 15px;">/100</span>
 																			</ol>
-																			<input type="hidden" name="ur_code" value=${reviewlist.ur_code }>
+																			<input type="hidden" name="ur_seq" value=${reviewlist.ur_seq }>
 																			<button class="answerReview_ok button" id="content_ok${vs.index}" onclick="submit_btn()">
 																			등록</button>
 																		</div>
@@ -469,7 +493,7 @@ function count_length(){
 																				style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">${reviewlist.u_nickname }</h4>
 																			<div class="star-ratings">
 																				<div class="star-ratings-fill space-x-2 text-lg"
-																					style="width: 80%;">
+																					style="width: ${reviewlist.ur_star * 2 }%;">
 																					<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 																				</div>
 																				<div class="star-ratings-base space-x-2 text-lg">
@@ -502,16 +526,17 @@ function count_length(){
 																				style="margin-top: 20px; margin-bottom: 10px;">
 																				<ol id="review_contentb${vss.index}"
 																					style="padding: 0; display: none">
-																					<textarea maxlength="99" id="pikabu"
+																					<textarea name="ur_ans" maxlength="99" id="pikabu"
 																						oninput="count_length()"
 																						style="width: 700px; height: 300px; resize: none; font-size: 20px;"
-																						placeholder="리뷰에 대한 답변을 해주세요!"></textarea>
+																						placeholder="${reviewlist.ur_ans }"></textarea>
 
 																					<span id="show_length" style="font-size: 20px;">0</span>
 																					<span id="show_maxlength" style="font-size: 15px;">/100</span>
 																				</ol>
+																				<input type="hidden" name="ur_seq" value=${reviewlist.ur_seq }>
 																				<button class="answerReview_ok button"
-																					id="content_okb${vss.index}" onclick="">등록</button>
+																					id="content_okb${vss.index}" onclick="submit_btn()">등록</button>
 																			</div>
 																		</form>
 																		</div>
@@ -553,7 +578,7 @@ function count_length(){
 																				style="font-size: 20px; font-weight: bolder; color: #000000; text-align: left; margin: 0;">${reviewlist.u_nickname }</h4>
 																			<div class="star-ratings">
 																				<div class="star-ratings-fill space-x-2 text-lg"
-																					style="width: 80%;">
+																					style="width: ${reviewlist.ur_star * 2 }%;">
 																					<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 																				</div>
 																				<div class="star-ratings-base space-x-2 text-lg">
@@ -586,16 +611,17 @@ function count_length(){
 																				style="margin-top: 20px; margin-bottom: 10px;">
 																				<ol id="review_contentc${vsss.index}"
 																					style="padding: 0; display: none">
-																					<textarea maxlength="99" id="pikabu"
+																					<textarea name="ur_ans" maxlength="99" id="pikabu"
 																						oninput="count_length()"
 																						style="width: 700px; height: 300px; resize: none; font-size: 20px;"
-																						placeholder="리뷰에 대한 답변을 해주세요!"></textarea>
+																						placeholder="${reviewlist.ur_ans }"></textarea>
 	
 																					<span id="show_length" style="font-size: 20px;">0</span>
 																					<span id="show_maxlength" style="font-size: 15px;">/100</span>
 																				</ol>
+																				<input type="hidden" name="ur_seq" value=${reviewlist.ur_seq }>
 																				<button class="answerReview_ok button"
-																					id="content_okc${vsss.index}" onclick="">등록</button>
+																					id="content_okc${vsss.index}" onclick="submit_btn()">등록</button>
 																			</div>
 																		</form>
 																		</div>

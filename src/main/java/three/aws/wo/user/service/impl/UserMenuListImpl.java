@@ -14,8 +14,13 @@ public class UserMenuListImpl implements UserMenuListService {
 	private UserMenuListDAO userMenuListDAO;
 	
 	@Override
-	public List<MenuListVO> menutitle() {
-		return userMenuListDAO.menutitle();
+	public List<MenuListVO> menuTitle() {
+		return userMenuListDAO.menuTitle();
+	}
+	
+	@Override
+	public List<MenuListVO> menuList() {
+		return userMenuListDAO.menuList();
 	}
 
 }

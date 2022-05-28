@@ -5,10 +5,15 @@
 <mapper namespace="UserMenuListDAO">
 
 	
-	<select id="menutitle" resultType="MenuListVO" parameterType="MenuListVO">
-		SELECT * FROM MENU_GROUP WHERE SI_CODE = '2222111212';
+	<select id="menuTitle" resultType="MenuListVO" parameterType="MenuListVO">
+		SELECT * FROM MENU_GROUP WHERE SI_CODE = '2222111212' ORDER BY MG_CODE
 	</select>
 	
+	<select id="menuList" resultType="MenuListVO" parameterType="MenuListVO">
+		SELECT *
+			FROM MENU M LEFT JOIN OPTIONGROUP_BASIC OB ON M.M_SEQ = OB.M_SEQ LEFT JOIN OPTION_BASIC OB2 ON OB.OGB_SEQ = OB2.OGB_SEQ 
+			WHERE M.SI_CODE = '2222111212' AND OB2.OPB_CODE LIKE '%1' ORDER BY M.M_CODE
+	</select>
 
 </mapper>
  

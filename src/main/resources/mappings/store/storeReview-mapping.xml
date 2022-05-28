@@ -5,15 +5,18 @@
 <mapper namespace="StoreReviewDAO">
 	<select id="reviewlist" resultType="StoreReviewVO" parameterType="StoreReviewVO">
 		SELECT O.O_LIST_DETAIL, U.U_NICKNAME, 
-			UR.UR_CODE, UR.U_ID, UR.SI_CODE, UR.UR_REGDATE, UR.UR_STAR, UR.UR_PIC_URL, UR.UR_CONTENT, UR.O_CODE, UR.UR_OPEN, UR.UR_ANS
+			UR.UR_SEQ, UR.U_ID, UR.SI_CODE, UR.UR_REGDATE, UR.UR_STAR, UR.UR_PIC_URL, UR.UR_CONTENT, UR.O_CODE, UR.UR_OPEN, UR.UR_ANS, 
+				(CURRENT_DATE - INTERVAL '1 MONTHS')::DATE AS ONEMONTH, 
+				(SELECT AVG(UR_STAR) FROM USER_REVIEW WHERE UR_REGDATE >= (SELECT CURRENT_DATE - INTERVAL '6 MONTHS')) AS AVGSTAR
 			FROM USER_REVIEW UR JOIN USERS U ON UR.U_ID = U.U_ID JOIN ORDERS O ON UR.O_CODE = O.O_CODE 
-			WHERE UR.SI_CODE ='6954123111';
+			WHERE UR.SI_CODE ='6954123111'
+			ORDER BY UR.UR_SEQ DESC;
 	</select>
 	
 	<update id="reviewanswer" parameterType="StoreReviewVO">
 		UPDATE USER_REVIEW
 			SET UR_ANS=#{ur_ans }
-			WHERE UR_CODE=#{ur_code };
+			WHERE ur_seq=#{ur_seq };
 	</update>
 	
 </mapper>

@@ -49,29 +49,29 @@ public class AdminController {
 		return "/board/inquiry";
 	}
 	
-	@GetMapping("/inquiry_answer.admin")
-	public String toinquiry_answer() {
-		System.out.println("inquiry_answer");
-		return "/board/inquiry_answer";
-	}
+	// @GetMapping("/inquiry_answer.admin")
+	// public String toinquiry_answer() {
+	// 	System.out.println("inquiry_answer");
+	// 	return "/board/inquiry_answer";
+	// }
 	
-	@GetMapping("/notices_.admin")
-	public String tonotices() {
-		System.out.println("notices");
-		return "/board/notices";
-	}
+	// @GetMapping("/notices_.admin")
+	// public String tonotices() {
+	// 	System.out.println("notices");
+	// 	return "/board/notices";
+	// }
 	
-	@GetMapping("/notices_add_.admin")
-	public String tonotices_add() {
-		System.out.println("notices_add");
-		return "/board/notices_add";
-	}
+	// @GetMapping("/notices_add_.admin")
+	// public String tonotices_add() {
+	// 	System.out.println("notices_add");
+	// 	return "/board/notices_add";
+	// }
 	
-	@GetMapping("/notices_update_.admin")
-	public String tonotices_update() {
-		System.out.println("notices_update");
-		return "/board/notices_update";
-	}
+	// @GetMapping("/notices_update_.admin")
+	// public String tonotices_update() {
+	// 	System.out.println("notices_update");
+	// 	return "/board/notices_update";
+	// }
 	
 	@GetMapping("/review_mng.admin")
 	public String toreview_mng() {
@@ -92,11 +92,11 @@ public class AdminController {
 		return "/message/ka_tmplt";
 	}
 	
-	@GetMapping("/mess_hist_.admin")
-	public String tomess_hist() {
-		System.out.println("mess_hist");
-		return "/message/mess_hist";
-	}
+	// @GetMapping("/mess_hist_.admin")
+	// public String tomess_hist() {
+	// 	System.out.println("mess_hist");
+	// 	return "/message/mess_hist";
+	// }
 	
 	@GetMapping("/mess_send.admin")
 	public String tomess_send() {
@@ -135,11 +135,11 @@ public class AdminController {
 		return "/order/refund_order";
 	}
 //	==================== page ============================
-	@GetMapping("/banner_mng.admin")
-	public String tobanner_mng() {
-		System.out.println("banner_mng");
-		return "/page/banner_mng";
-	}
+//	@GetMapping("/banner_mng.admin")
+//	public String tobanner_mng() {
+//		System.out.println("banner_mng");
+//		return "/page/banner_mng";
+//	}
 	
 	@GetMapping("/doc_form.admin")
 	public String todoc_form() {
@@ -147,11 +147,11 @@ public class AdminController {
 		return "/page/doc_form";
 	}
 	
-	@GetMapping("/drink_recom.admin")
-	public String todrink_recom() {
-		System.out.println("drink_recom");
-		return "/page/drink_recom";
-	}
+	// @GetMapping("/drink_recom.admin")
+	// public String todrink_recom() {
+	// 	System.out.println("drink_recom");
+	// 	return "/page/drink_recom";
+	// }
 	
 	@GetMapping("/policy_add.admin")
 	public String topolicy_add() {
@@ -171,11 +171,11 @@ public class AdminController {
 		return "/page/policy_update";
 	}
 	
-	@GetMapping("/searchbar_mng.admin")
-	public String tosearchbar_mng() {
-		System.out.println("searchbar_mng");
-		return "/page/searchbar_mng";
-	}
+	// @GetMapping("/searchbar_mng.admin")
+	// public String tosearchbar_mng() {
+	// 	System.out.println("searchbar_mng");
+	// 	return "/page/searchbar_mng";
+	// }
 	
 	@GetMapping("/terms_add.admin")
 	public String toterms_add() {
@@ -261,11 +261,11 @@ public class AdminController {
 //		return "/store/join_inq";
 //	}
 	
-	@GetMapping("/store_menu_.admin")
-	public String tostore_menu() {
-		System.out.println("store_menu");
-		return "/store/store_menu";
-	}
+	// @GetMapping("/store_menu_.admin")
+	// public String tostore_menu() {
+	// 	System.out.println("store_menu");
+	// 	return "/store/store_menu";
+	// }
 	
 	@GetMapping("/store_menu_detail.admin")
 	public String tostore_menu_detail() {
@@ -273,11 +273,11 @@ public class AdminController {
 		return "/store/store_menu_detail";
 	}
 	
-	@GetMapping("/store_mng_.admin")
-	public String tostore_mng() {
-		System.out.println("store_mng");
-		return "/store/store_mng";
-	}
+	// @GetMapping("/store_mng_.admin")
+	// public String tostore_mng() {
+	// 	System.out.println("store_mng");
+	// 	return "/store/store_mng";
+	// }
 	
 	@GetMapping("/store_mng_add.admin")
 	public String tostore_mng_add() {
@@ -286,23 +286,23 @@ public class AdminController {
 	}
 	
 //	==================== user ============================
-	@GetMapping("/user_mng_.admin")
-	public String touser_mng() {
-		System.out.println("user_mng");
-		return "/user/user_mng";
-	}
+	// @GetMapping("/user_mng_.admin")
+	// public String touser_mng() {
+	// 	System.out.println("user_mng");
+	// 	return "/user/user_mng";
+	// }
 	
-	@GetMapping("/point_mng_.admin")
-	public String topoint_mng() {
-		System.out.println("point_mng");
-		return "/user/point_mng";
-	}
+	// @GetMapping("/point_mng_.admin")
+	// public String topoint_mng() {
+	// 	System.out.println("point_mng");
+	// 	return "/user/point_mng";
+	// }
 	
-	@GetMapping("/coupon_mng.admin")
-	public String tocoupon_mng() {
-		System.out.println("coupon_mng");
-		return "/user/coupon_mng";
-	}
+	// @GetMapping("/coupon_mng.admin")
+	// public String tocoupon_mng() {
+	// 	System.out.println("coupon_mng");
+	// 	return "/user/coupon_mng";
+	// }
 	
 	@GetMapping("/coupon_add.admin")
 	public String tocoupon_add() {

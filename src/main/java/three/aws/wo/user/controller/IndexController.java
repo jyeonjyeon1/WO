@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.store.vo.IndexVO;
 import three.aws.wo.user.service.IndexService;
-import three.aws.wo.user.service.UStoreService;
 import three.aws.wo.user.vo.UserVO;
 
 @Controller
@@ -46,7 +46,7 @@ public class IndexController {
 		List<IndexVO> todayDrinkList = indexService.todayDrinkList();
 		model.addAttribute("todayDrinkList" ,todayDrinkList);
 		
-		List<IndexVO> eventBoardList = indexService.eventBoardList();
+		List<BannerVO> eventBoardList = indexService.eventBoardList();
 		model.addAttribute("eventBoardList" ,eventBoardList);
 		
 		return "/index/index";

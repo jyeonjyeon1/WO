@@ -289,11 +289,11 @@ $(document).ready(function () {
       }
     });
    
-    $("#banner_add_btn").click(function () {
-
-        $("#image__add1").addClass("active");
-      
-    });
+//    $("#banner_add_btn").click(function () {
+//
+//        $("#image__add1").addClass("active");
+//      
+//    });
 
 
 //메뉴그룹 수정

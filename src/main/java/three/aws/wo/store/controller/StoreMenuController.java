@@ -741,4 +741,22 @@ public class StoreMenuController {
 	}
 	
 	
+	//onesanji
+	
+	@ResponseBody
+	@RequestMapping("/updateWonsanji.store")
+	public int updateWonsanji(@RequestBody HashMap<String, String> param, HttpSession session) {
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		String si_code = svo.getSi_code();
+		String si_wonsanji = param.get("si_wonsanji");
+		System.out.println(si_wonsanji);
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("si_code", si_code);
+		map.put("si_wonsanji", si_wonsanji);
+		sMenuService.updateOnesanji(map);
+		svo.setSi_wonsanji(si_wonsanji);
+		return 1;
+	}
+	
+	
 }

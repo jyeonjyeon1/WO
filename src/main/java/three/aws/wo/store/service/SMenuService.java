@@ -62,4 +62,5 @@ public interface SMenuService {
 	void insertMAO(HashMap<String, Object> mappp);
 	int checkPendingMenuImg(HashMap<String, String> param);
 	void updatePendingMenuImg(HashMap<String, String> param);
+	void updateOnesanji(HashMap<String, String> map);
 }

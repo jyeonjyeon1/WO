@@ -28,9 +28,9 @@ public class AdminPageController {
 		System.out.println("banner_mng");
 //		Date date = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-//    	//¿øÇÏ´Â µ¥ÀÌÅÍ Æ÷¸Ë ÁöÁ¤
+//    	//ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //		String datte = simpleDateFormat.format(date); 
-//    	//ÁöÁ¤ÇÑ Æ÷¸ËÀ¸·Î º¯È¯ 
+//    	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ 
 //		model.addAttribute("nowDate",datte); //now date
 		
 		List<BannerVO> bannerList = aPageService.bannerList();
@@ -47,7 +47,7 @@ public class AdminPageController {
 	public String asda(Model model) {
 //		Date date = new Date();
 //		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-//    	//¿øÇÏ´Â µ¥ÀÌÅÍ Æ÷¸Ë ÁöÁ¤
+//    	//ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //		String datte = simpleDateFormat.format(date);
 //		model.addAttribute("nowDate",datte);
 		model.addAttribute("inputIndex",index);
@@ -109,4 +109,19 @@ public class AdminPageController {
 		}
 		return result;
 	}
+	@GetMapping("/searchbar_mng.admin")
+	public String tosearchbar_mng() {
+		System.out.println("searchbar_mng");
+		return "/page/searchbar_mng";
+	}
+
+	@GetMapping("/drink_recom.admin")
+	public String todrink_recom() {
+		System.out.println("drink_recom");
+		return "/page/drink_recom";
+	}
+
+
+
+
 }

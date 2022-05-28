@@ -19,26 +19,21 @@ input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 }
 
-.idCheck_label_false, .idCheck_label_true, .match_password, .email_form,
-	.tel_form, .valid_password, .regName_label, .idCheck_label_joongbok {
+ .match_password, 
+	.tel_form2, .valid_password {
 	display: none;
 }
 
-.idCheck_label_false.active, .email_form.active, .tel_form.active,
-	.match_password.false, .valid_password.active, .regName_label.active,
-	.idCheck_label_joongbok.active {
+.tel_form2.active,
+	.match_password.false, .valid_password.active {
 	display: block;
 	padding-left: 5px;
 	color: red;
 }
 
-.idCheck_label_true.active {
-	display: block;
-	padding-left: 5px;
-	color: blue;
-}
 
-.reg-form-control {
+
+.reg-form-control2 {
 	display: block;
 	width: 100%;
 	padding: .8rem 1rem;
@@ -80,25 +75,25 @@ input::-webkit-inner-spin-button {
 	background-color: rgb(249, 248, 255);
 }
 
-.phoneVerif_btn:hover {
+.phoneVerif2_btn2:hover {
 	background: #f2f2f2;
 }
-.phoneVerif_btn:disabled ,.u_tel:disabled {
+.phoneVerif2_btn2:disabled ,.u_tel_pass:disabled {
 	background: #f2f2f2;
 }
 
-.verif_num{
+.verif_num2{
 	display:none;
 }
-.verif_num.active{
+.verif_num2.active{
 	margin-left:10px;display:inline-block; width: 35%;
 }
 
-.phone_reset_btn.active{
+.phone_reset_btn2.active{
 	display:none;
 }
 
-.phone_reset_btn {
+.phone_reset_btn2 {
 	float:right;
 	font-size: 10px;
 	width:20px;
@@ -117,15 +112,15 @@ input::-webkit-inner-spin-button {
 <script src="resources/assets/js/main.js"></script>
 
 <script>
-	var ch2, ch3, ch5 , ch6;
-	ch2 = false;//regPassword
-	ch3 = false;//Passwork recheck match
-	ch5 = true;//regPhone
-	ch6 = false;
+	var ch12, ch13, ch15 , ch16;
+	ch12 = false;//regPassword
+	ch13 = false;//Passwork recheck match
+	ch15 = true;//regPhone2
+	ch16 = false;
 	
 	var regId = /^[a-zA-Z0-9]{4,14}$/;
 	var regPassword = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
-	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
+	var regPhone2 = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //no need if we get authentication
 	
 	$(document).ready(
 		function() {
@@ -139,10 +134,10 @@ input::-webkit-inner-spin-button {
 						if (pwd.length > 3
 								&& regPassword.test(pwd) == false) {
 							$(".valid_password").addClass('active');
-							ch2 = false;
+							ch12 = false;
 						} else {
 							$(".valid_password").removeClass('active');
-							ch2 = true;
+							ch12 = true;
 						}
 					});
 
@@ -153,26 +148,26 @@ input::-webkit-inner-spin-button {
 						var pwc = $("#passCheck").val();
 						if (pwc != '' && pw != pwc) {
 							$(".match_password").addClass('false');
-							ch3 = false;
+							ch13 = false;
 						} else {
 							$(".match_password").removeClass('false');
-							ch3 = true;
+							ch13 = true;
 						}
 					});
-			$("#u_tel").on(
+			$("#u_tel_pass").on(
 					"propertychange change keyup paste input",
 					function() {
-						var tel = $("#u_tel").val();
+						var tel = $("#u_tel_pass").val();
 						if (tel.indexOf('-') != -1) {
-							$(".tel_form").addClass('active');
-							ch5 = false;
+							$(".tel_form2").addClass('active');
+							ch15 = false;
 						} else if (tel.length > 7
-								&& regPhone.test(tel) == false) {
-							$(".tel_form").addClass('active');
-							ch5 = false;
+								&& regPhone2.test(tel) == false) {
+							$(".tel_form2").addClass('active');
+							ch15 = false;
 						} else {
-							$(".tel_form").removeClass('active');
-							ch5 = true;
+							$(".tel_form2").removeClass('active');
+							ch15 = true;
 						}
 					});
 		
@@ -180,27 +175,27 @@ input::-webkit-inner-spin-button {
 	
 	
 	var verifNum = []; //인증번호
-	var verifTime = 180;// 180초=3분
-	function phoneVerif(){
-		if(ch5){//번호 제대로 입력했을 경우만
-			//$("#phoneVerif_btn").attr("disabled", true); //비활성화
-			$("#u_tel").attr("disabled", true);
-			document.getElementById("phoneVerif_btn").innerHTML = "인증 확인";
-			$("#phoneVerif_btn").removeAttr("onclick");//phoneverif 삭제
-			$("#phoneVerif_btn").attr("onclick","checkVerif()");//checkVerif 추가
-			$(".verif_num").addClass('active');
-			$(".phone_reset_btn").removeClass('active');
-			$("#u_tel").removeClass('col-12');
-			$("#u_tel").addClass('col-7');
+	var verifTime2 = 180;// 180초=3분
+	function phoneVerif2(){
+		if(ch15){//번호 제대로 입력했을 경우만
+			//$("#phoneVerif2_btn2").attr("disabled", true); //비활성화
+			$("#u_tel_pass").attr("disabled", true);
+			document.getElementById("phoneVerif2_btn2").innerHTML = "인증 확인";
+			$("#phoneVerif2_btn2").removeAttr("onclick");//phoneverif2 삭제
+			$("#phoneVerif2_btn2").attr("onclick","checkVerif2()");//checkVerif2 추가
+			$(".verif_num2").addClass('active');
+			$(".phone_reset_btn2").removeClass('active');
+			$("#u_tel_pass").removeClass('col-12');
+			$("#u_tel_pass").addClass('col-7');
 			
 			
-			verifTime = 179;//또 인증할 경우
+			verifTime2 = 179;//또 인증할 경우
 			setClock();
 		    tid = setInterval(setClock,1000); //1초마다 setClock 함수 실행
 		    //인정번호 생성 6자리
 		    var dateInfo = new Date(); //현재시간으로 암호 생성할것
 		    var sec = dateInfo.getSeconds();
-		    var verifNumMade= Math.floor((sec+11)*(sec+11) * parseInt($("#u_tel").val().substring(8))+sec).toString();
+		    var verifNumMade= Math.floor((sec+11)*(sec+11) * parseInt($("#u_tel_pass").val().substring(8))+sec).toString();
 		    if (verifNumMade.length >6){
 		    	verifNumMade = verifNumMade.substring(0,6);
 		    }else if (verifNumMade.length <6){
@@ -208,7 +203,7 @@ input::-webkit-inner-spin-button {
 		    }
 		    verifNum.push(verifNumMade);
 		    var param = {
-	    		"u_tel":$("#u_tel").val(),
+	    		"u_tel_pass":$("#u_tel_pass").val(),
 		    	"verifNumMade": verifNumMade
 		    }
 		     $.ajax({
@@ -229,63 +224,63 @@ input::-webkit-inner-spin-button {
 		}
 	}
 	
-	function checkVerif(){
-		if($("#verif_num").val()==verifNum){
+	function checkVerif2(){
+		if($("#verif_num2").val()==verifNum){
 			alert("성공");
 			verifNum = [];
-			document.getElementById("phoneVerif_btn").innerHTML = "번호 인증";
-			$("#phoneVerif_btn").removeAttr("onclick");//checkVerif 삭제
-			$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
-			$("#u_tel").attr("disabled", true);
+			document.getElementById("phoneVerif2_btn2").innerHTML = "번호 인증";
+			$("#phoneVerif2_btn2").removeAttr("onclick");//checkVerif2 삭제
+			$("#phoneVerif2_btn2").attr("onclick","phoneVerif2()");//phoneverif2 추가
+			$("#u_tel_pass").attr("disabled", true);
 			clearInterval(tid);
-			ch6 = true;
+			ch16 = true;
 		}else{
-			alert("실패"+$("#verif_num").val()+":"+verifNum);
+			alert("실패"+$("#verif_num2").val()+":"+verifNum);
 		}
 		
 	}
 	
 	function setClock(){
-		var time = Math.floor(verifTime / 60) + " : " + modifyNumber(verifTime % 60); // 남은 시간 계산    
-		document.getElementById("phoneVerifTime").innerHTML = "남은 시간 :  0" +time;
-		document.getElementById("phoneVerifTime").style.color = "blue";
-		document.getElementById("phoneVerifTime").style.display = "inline-block";
-		verifTime--; 
-		if(verifTime < 60){
-			document.getElementById("phoneVerifTime").style.color = "red";
+		var time = Math.floor(verifTime2 / 60) + " : " + modifyNumber2(verifTime2 % 60); // 남은 시간 계산    
+		document.getElementById("phoneVerifTime2").innerHTML = "남은 시간 :  0" +time;
+		document.getElementById("phoneVerifTime2").style.color = "blue";
+		document.getElementById("phoneVerifTime2").style.display = "inline-block";
+		verifTime2--; 
+		if(verifTime2 < 60){
+			document.getElementById("phoneVerifTime2").style.color = "red";
 		}
-		if (verifTime < 0) {          // 시간이 종료 되었으면..        
+		if (verifTime2 < 0) {          // 시간이 종료 되었으면..        
 	        clearInterval(tid);     // 타이머 해제
 	        verifNum=[];			//인증번호 삭제
 	        
 	        //다시 처음 상태로
-	        $(".verif_num").removeClass('active');
-	        $(".phone_reset_btn").addClass('active');
-	        $("#u_tel").removeClass('col-7');
-			$("#u_tel").addClass('col-12');
-			document.getElementById("phoneVerif_btn").innerHTML = "번호 인증";
-			$("#phoneVerif_btn").removeAttr("onclick");//checkVerif 삭제
-			$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
-			$("#u_tel").attr("disabled", false);
+	        $(".verif_num2").removeClass('active');
+	        $(".phone_reset_btn2").addClass('active');
+	        $("#u_tel_pass").removeClass('col-7');
+			$("#u_tel_pass").addClass('col-12');
+			document.getElementById("phoneVerif2_btn2").innerHTML = "번호 인증";
+			$("#phoneVerif2_btn2").removeAttr("onclick");//checkVerif2 삭제
+			$("#phoneVerif2_btn2").attr("onclick","phoneVerif2()");//phoneverif2 추가
+			$("#u_tel_pass").attr("disabled", false);
 	    } 
 	}
 	
-	function reset_Phone(){
+	function reset_Phone2(){
 		clearInterval(tid);
 		verifNum=[];
 		//다시 처음 상태로
-	    $(".verif_num").removeClass('active');
-	    $(".phone_reset_btn").addClass('active');
-	    $("#u_tel").removeClass('col-7');
-		$("#u_tel").addClass('col-12');
-		document.getElementById("phoneVerifTime").style.display = "none";
-		$("#u_tel").attr("disabled", false);
-		document.getElementById("phoneVerif_btn").innerHTML = "번호 인증";
-		$("#phoneVerif_btn").removeAttr("onclick");//checkVerif 삭제
-		$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
+	    $(".verif_num2").removeClass('active');
+	    $(".phone_reset_btn2").addClass('active');
+	    $("#u_tel_pass").removeClass('col-7');
+		$("#u_tel_pass").addClass('col-12');
+		document.getElementById("phoneVerifTime2").style.display = "none";
+		$("#u_tel_pass").attr("disabled", false);
+		document.getElementById("phoneVerif2_btn2").innerHTML = "번호 인증";
+		$("#phoneVerif2_btn2").removeAttr("onclick");//checkVerif2 삭제
+		$("#phoneVerif2_btn2").attr("onclick","phoneVerif2()");//phoneverif2 추가
 	}
 	
-	function modifyNumber(time){
+	function modifyNumber2(time){
 	    if(parseInt(time)<10){
 	        return "0"+ time;
 	    }
@@ -293,8 +288,8 @@ input::-webkit-inner-spin-button {
 	        return time;
 	}
 	
-	function finalCheck() {
-		if ( ch5 && ch6 ) {
+	function finalCheck2() {
+		if ( ch15 && ch16 ) {
 			document.regForm.submit();
 			//여기에 넣을것 
 		} else {
@@ -308,9 +303,9 @@ input::-webkit-inner-spin-button {
 	}
 	
 	function idtelCheck() {
-		var u_tel = $("#u_tel").val();
+		var u_tel_pass = $("#u_tel_pass").val();
 		var u_id = $("#u_id").val();
-		var param = {"u_tel": u_tel, "u_id": u_id }
+		var param = {"u_tel_pass": u_tel_pass, "u_id": u_id }
 		$.ajax({
 			type: "POST",
             url: "/findId.user",
@@ -319,8 +314,8 @@ input::-webkit-inner-spin-button {
             contentType: "application/json",
 			success : function(data) {
 				if(data != null){
-					$(".dis1").show();
-					$(".dis2").hide();
+					$(".Passdis1").show();
+					$(".Passdis2").hide();
 					var id = data;
 					$("#id").text(id);
 				}else{
@@ -343,33 +338,34 @@ input::-webkit-inner-spin-button {
 
 	<div class="container"
 		style="margin: 30PX auto 50px; max-width: 420px;">
-		<h4 class="text-center mt-60 mb-60" style="color: #6f6f6f">비밀번호 찾기</h4>
+		<h4 class="text-center " style="color: #14385c; padding: 30px 30px 10px 30px;">비밀번호 찾기</h4>
+		<h6 style="color: #6f6f6f; text-align: center; padding-bottom: 40px;">아이디는 가입시 입력하신 핸드폰번호를 통해 찾을 수 있습니다. </h6>
 		
-		<div class="dis2">
+		<div class="Passdis2">
 			
 				<form> 
 					<div class="row">
 						<div class="col-12">
 							<input type="text" name="u_id" id="u_id" placeholder="아이디"
-								class="reg-form-control" autofocus />
+								class="reg-form-control2" autofocus />
 						</div>
 					</div>    
 					<div class="row">
 					
 						<div class="col-9 mt-10">
-							<input type="text" id="u_tel" name="u_tel"
-								placeholder="전화번호( - 제외)" class="reg-form-control col-12 u_tel" style="display:inline-block;">
-								<input type="text" id="verif_num" 
-								placeholder="인증번호" class="reg-form-control col-5 verif_num">
-							<p class="tel_form">전화번호 형식을 맞춰주세요</p>
-							<div id="phoneVerifTime" class="phoneVerifTime">
+							<input type="text" id="u_tel_pass" name="u_tel_pass"
+								placeholder="전화번호( - 제외)" class="reg-form-control2 col-12 u_tel_pass" style="display:inline-block;">
+								<input type="text" id="verif_num2" 
+								placeholder="인증번호" class="reg-form-control2 col-5 verif_num2">
+							<p class="tel_form2">전화번호 형식을 맞춰주세요</p>
+							<div id="phoneVerifTime2" class="phoneVerifTime2">
 							</div>
-							<button class="phone_reset_btn active" type="button" onclick="reset_Phone()">
+							<button class="phone_reset_btn2 active" type="button" onclick="reset_Phone2()">
 								<i class="fa fa-rotate-left"></i>
 							</button>
 						</div>
 						<div class="col-3 mt-10" style="padding-left: 0;">
-							<button type="button" onclick="phoneVerif()" id="phoneVerif_btn" class="reg-form-control phoneVerif_btn">번호
+							<button type="button" onclick="phoneVerif2()" id="phoneVerif2_btn2" class="reg-form-control2 phoneVerif2_btn2">번호
 								인증</button>
 						</div>
 					</div>
@@ -378,15 +374,16 @@ input::-webkit-inner-spin-button {
 				<br>
 				
 				<div class="row">
-	                <div style=" text-align: center;">
+	                <div class="col-lg-6">
 					<button type="button" id="submit"
-						class="btn btn-outline-warning" style="display: inline-block; margin-bottom: 10px; width: 60%;"  onclick="idtelCheck()">비밀번호 찾기
+						class="btn btn-outline-success" style="display: inline-block; margin-bottom: 10px; width: 100%;"  onclick="idtelCheck()">비밀번호 찾기
 						&nbsp;</button>
-	                <div style=" text-align: center;">
-	                        <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 60%;" type="button">취소</button></div>
+						</div>
+	                <div class="col-lg-6">
+	                        <button class="cencle btn btn-danger col-sm-6" style="display: inline-block; margin:auto; width: 100%;" type="button">취소</button></div>
 	                </div>
 	            </div>
-				</div>
+				
 				
 					
 			</form>
@@ -396,18 +393,18 @@ input::-webkit-inner-spin-button {
 		</div>
 		
 		<!-- 이름과 비밀번호가 일치하지 않을 때 -->
-		<div class="dis1" style="display: none;">
+		<div class="Passdis1" style="display: none;">
 			<div class="row">
 				<div class="col-5 mt-10">
 					<input type="password" name="u_password" id="u_password"
-						placeholder="새 비밀번호 (필수)" class="reg-form-control">
+						placeholder="새 비밀번호 (필수)" class="reg-form-control2">
 					<p class="valid_password">특수기호 대소문자 어쩌구</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-5 mt-10">
 					<input type="password" id="passCheck" placeholder="새 비밀번호 확인 (필수)"
-						class="reg-form-control">
+						class="reg-form-control2">
 					<p class="match_password">비밀번호가 일치하지 않습니다.</p>
 				</div>
 			</div>

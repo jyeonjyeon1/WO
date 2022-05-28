@@ -26,8 +26,9 @@
 	<%@ include file="/WEB-INF/views/user/inc/header.jsp"%>
 
 <div class="container" style="margin: 30PX auto 50px; max-width: 600px;">
-    <h3 class="text-center mt-60 mb-60" style="color:#6f6f6f">회원변경/탈퇴 선택</h3>
-    <section id="container">
+     <h3 class="text-center" style="color: #14385c; padding: 30px 30px 10px 30px;">회원변경/탈퇴 선택</h3>
+         <h6 style="color: #6f6f6f; text-align: center; padding-bottom: 40px;">ㅇㅇ</h6>
+		<section id="container">
         <form >
         
 

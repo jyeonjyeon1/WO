@@ -35,7 +35,7 @@ public class UserRegController {
 	public UserRegController(UserService userService) {
 		this.userService = userService;
 	}
-	// È¸¿ø°¡ÀÔ get
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ get
 	@RequestMapping(value = "/register.user", method = RequestMethod.GET)
 	public void getinsertUser() throws Exception {
 		logger.info("get register");
@@ -52,22 +52,22 @@ public class UserRegController {
 			}else if(result == 0) {
 				String inputPass = vo.getU_password();
 				String pwd = pwdEncoder.encode(inputPass);
-				System.out.println("ºñ¹Ð¹øÈ£" + pwd);
+				System.out.println("ï¿½ï¿½Ð¹ï¿½È£" + pwd);
 				vo.setU_password(pwd);
 				
 				userService.insertUser(vo);
 			}
-			// ¿ä±â¿¡¼­~ ÀÔ·ÂµÈ ¾ÆÀÌµð°¡ Á¸ÀçÇÑ´Ù¸é -> ´Ù½Ã È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î µ¹¾Æ°¡±â 
-			// Á¸ÀçÇÏÁö ¾Ê´Â´Ù¸é -> register
+			// ï¿½ï¿½â¿¡ï¿½ï¿½~ ï¿½Ô·Âµï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ -> ï¿½Ù½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ 
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½ -> register
 		
 		
-		System.out.println("È¸¿ø°¡ÀÔ ¿Ï·á DBÈ®ÀÎ");
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ DBÈ®ï¿½ï¿½");
 		return "/login/login_joined";
 	}
 
 
 
-	// ¾ÆÀÌµð Áßº¹ Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å©
 	@ResponseBody
 	@RequestMapping(value = "/idcheck.user", method = RequestMethod.POST)
 	public int idCheck(@RequestBody HashMap<String, String> param) throws Exception {
@@ -79,14 +79,14 @@ public class UserRegController {
 	@ResponseBody
 	@RequestMapping("/emailcheck.user")
 	public int emailCheck(String email) {
-		System.out.println("emailÁßº¹È®ÀÎ");
+		System.out.println("emailï¿½ßºï¿½È®ï¿½ï¿½");
 		return userService.emailCheck(email);
 	}
 
 	@ResponseBody
 	@RequestMapping("/telcheck.user")
 	public int telCheck(String tel) {
-		System.out.println("telÁßº¹È®ÀÎ");
+		System.out.println("telï¿½ßºï¿½È®ï¿½ï¿½");
 		return userService.telCheck(tel);
 	}
 	
@@ -103,7 +103,7 @@ public class UserRegController {
 	
 		String inputPass = vo.getU_password();
 		String pwd = pwdEncoder.encode(inputPass);
-		System.out.println("ºñ¹Ð¹øÈ£ = " + pwd);
+		System.out.println("ï¿½ï¿½Ð¹ï¿½È£ = " + pwd);
 		vo.setU_password(pwd);
 		
 		userService.updateUser(vo);
@@ -111,24 +111,24 @@ public class UserRegController {
 		return "redirect:/index.user";
 	}
 	
-	// È¸¿ø Å»Åð get
+	// È¸ï¿½ï¿½ Å»ï¿½ï¿½ get
 	@RequestMapping(value="/deleteUser.user", method = RequestMethod.GET)
 	public String deleteUser() throws Exception{
 		System.out.println("memberDelete_get");
 		return "/mypage/mypage_withdraw";
 	}
 	
-	// È¸¿ø Å»Åð post
+	// È¸ï¿½ï¿½ Å»ï¿½ï¿½ post
 	@RequestMapping(value="/deleteUser.user", method = RequestMethod.POST)
 	public String deleteUser(UserVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		System.out.println("memberDelete_post");
-		// ¼¼¼Ç¿¡ ÀÖ´Â member¸¦ °¡Á®¿Í memberº¯¼ö¿¡ ³Ö¾îÁÝ´Ï´Ù.
+		// ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Ö´ï¿½ memberï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ memberï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ý´Ï´ï¿½.
 		UserVO userSession = (UserVO) session.getAttribute("userSession");
-		System.out.println("¼¼¼Ç ¾òÀ½");
-		// ¼¼¼Ç¿¡ÀÖ´Â ºñ¹Ð¹øÈ£
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		// ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Ð¹ï¿½È£
 		String sessionPass = userSession.getU_password();
 		
-		// vo·Î µé¾î¿À´Â ºñ¹Ð¹øÈ£
+		// voï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£
 		String voPass = vo.getU_password();	
 		boolean pwdMatch = pwdEncoder.matches(voPass, sessionPass);
 		
@@ -148,14 +148,14 @@ public class UserRegController {
 		return "/login/login_choice";
 	}
 	
-	// ¾ÆÀÌµð Ã£±â ÆäÀÌÁö ÀÌµ¿
+	// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping(value="findId.user", method=RequestMethod.GET)
 	public String findIdView() {
 		System.out.println("findIdView");
 		return "login/findId";
 	}
 	
-    // ¾ÆÀÌµð Ã£±â ½ÇÇà 
+    // ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	@ResponseBody
 	@RequestMapping(value="findId.user", method=RequestMethod.POST)
 	public String findId(@RequestBody HashMap<String, String> param) {
@@ -166,20 +166,20 @@ public class UserRegController {
 		return result;
 	}
 	
-    // ºñ¹Ð¹øÈ£ Ã£±â ÆäÀÌÁö·Î ÀÌµ¿
+    // ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping(value="findPassword.user", method=RequestMethod.GET)
 	public String findPasswordView() {
 		return "login/findPassword";
 	}
 	
-    // ºñ¹Ð¹øÈ£ Ã£±â ½ÇÇà
+    // ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value="findPassword.user", method=RequestMethod.POST)
 	public String findPassword(@RequestBody HashMap<String, String> param) {
 		HashMap<String, String> idtel = new HashMap<String, String>();
 		
 		String u_id = param.get("u_id");
-		String u_tel = param.get("u_tel");
+		String u_tel = param.get("u_tel_pass");
 		idtel.put("u_id", u_id);
 		idtel.put("u_tel", u_tel);
 		UserVO user = userService.findPassword(idtel);
@@ -188,7 +188,7 @@ public class UserRegController {
 		return result;
 	}
 	
-	// ºñ¹Ð¹øÈ£ ¹Ù²Ù±â ½ÇÇà
+	// ï¿½ï¿½Ð¹ï¿½È£ ï¿½Ù²Ù±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value="updatePassword.user", method=RequestMethod.POST)
 	public void updatePassword(@RequestBody HashMap<String, String> param) {

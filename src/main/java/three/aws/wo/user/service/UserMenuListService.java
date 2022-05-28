@@ -5,6 +5,7 @@ import java.util.List;
 import three.aws.wo.user.vo.MenuListVO;
 
 public interface UserMenuListService {
-	List<MenuListVO> menutitle();
+	List<MenuListVO> menuTitle();
 
+	List<MenuListVO> menuList();
 }

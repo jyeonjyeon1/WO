@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ReviewVO {
-	private String ur_code;
+	private int ur_seq;
 	private String u_id;
 	private String str_code;
 	private Date ur_regdate;

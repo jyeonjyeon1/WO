@@ -77,5 +77,15 @@
 			WHERE SB_SEQ = #{sb_seq}
 		</if>
 	</delete>
+	<select id="docList" resultType="AdminVO">
+		SELECT * FROM DOCUMENTS ORDER BY D_SEQ ASC
+	</select>
+	<delete id="deleteDoc">
+		DELETE FROM DOCUMENTS WHERE D_SEQ = #{d_seq}
+	</delete>
+	<insert id="insertDoc">
+		INSERT INTO DOCUMENTS(D_NAME, D_FILE_NAME, D_FILE_URL, D_MEMO) VALUES 
+		(#{d_name},#{d_file_name},#{d_file_url},#{d_memo})
+	</insert>
 	
 </mapper>

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.user.vo.SearchKeywordVO;
 
@@ -68,4 +69,15 @@ public class APageDAO {
 	public void deleteKeyword(HashMap<String, Object> param) {
 		sqlSession.delete("APageDAO.deleteKeyword",param);
 	}
+    public List<AdminVO> docList() {
+        return sqlSession.selectList("APageDAO.docList");
+    }
+
+    public void deleteDoc(int d_seq) {
+        sqlSession.delete("APageDAO.deleteDoc",d_seq);
+    }
+
+    public void insertDoc(HashMap<String, String> param) {
+        sqlSession.insert("APageDAO.insertDoc",param);
+    }
 }

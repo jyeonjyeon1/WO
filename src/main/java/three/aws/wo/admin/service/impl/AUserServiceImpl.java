@@ -23,5 +23,13 @@ public class AUserServiceImpl implements AUserService{
 	public List<UserVO> visitHistory() {
 		return aUserDAO.visitHistory();
 	}
+    @Override
+    public String getOriginalPass(String u_id) {
+        return aUserDAO.getOriginalPass(u_id);
+    }
+    @Override
+    public void updateUser(UserVO vo) {
+        aUserDAO.updateUser(vo);
+    }
 
 }

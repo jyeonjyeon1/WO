@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import three.aws.wo.admin.dao.APageDAO;
 import three.aws.wo.admin.service.APageService;
+import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.user.vo.SearchKeywordVO;
 @Service
@@ -70,4 +71,17 @@ public class APageServiceImpl implements APageService {
 	public void deleteKeyword(HashMap<String, Object> param) {
 		aPageDAO.deleteKeyword(param);
 	}
+    @Override
+    public List<AdminVO> docList() {
+        return aPageDAO.docList();
+    }
+    @Override
+    public void deleteDoc(int d_seq) {
+        aPageDAO.deleteDoc(d_seq);
+    }
+    @Override
+    public void insertDoc(HashMap<String, String> param) {
+        aPageDAO.insertDoc(param);
+    }
+    
 }

@@ -27,11 +27,11 @@ public class StoreController {
 	
 
 //	==================== index ============================
-	@GetMapping("/index.store")
-	public String toindexPage() {
-		System.out.println("store index");
-		return "/index";
-	}
+//	@GetMapping("/index.store")
+//	public String toindexPage() {
+//		System.out.println("store index");
+//		return "/index";
+//	}
 	
 	@GetMapping("/login.store")
 	public String tologinPage() {

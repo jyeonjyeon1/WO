@@ -30,4 +30,17 @@
 		ON (vh.U_ID = u.U_ID)
 		ORDER BY vh.VH_SEQ DESC
 	</select>
+	<select id="getOriginalPass" resultType="String">
+    	SELECT U_PASSWORD FROM USERS
+    	WHERE U_ID = #{u_id}
+    </select>
+    <update id="updateUser" parameterType="UserVO">
+		UPDATE USERS
+		SET U_PASSWORD= #{u_password}, U_INFO = #{u_info},
+		U_NAME = #{u_name} , U_TEL = #{u_tel}, 
+		U_EMAIL = #{u_email}, U_SMS_USABLE = #{u_sms_usable}, 
+		U_EMAIL_USABLE = #{u_email_usable}, U_STATUS = #{u_status}
+		WHERE U_ID = #{u_id}
+	</update>
+    
 </mapper>

@@ -19,5 +19,5 @@ public interface UserService {
 	void updatePassword(HashMap<String, String> idpw);
 	// ¾ÏÈ£È­
 	int idChk(UserVO vo) throws Exception;
-	
+    void regPointRecord(String u_id);
 }

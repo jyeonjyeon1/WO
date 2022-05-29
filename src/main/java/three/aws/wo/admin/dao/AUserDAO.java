@@ -20,4 +20,11 @@ public class AUserDAO {
 	public List<UserVO> visitHistory() {
 		return sqlSession.selectList("AUserDAO.visitHistory");
 	}
+    public String getOriginalPass(String u_id) {
+        return sqlSession.selectOne("AUserDAO.getOriginalPass", u_id);
+    }
+
+    public void updateUser(UserVO vo) {
+        sqlSession.update("AUserDAO.updateUser", vo);
+    }
 }

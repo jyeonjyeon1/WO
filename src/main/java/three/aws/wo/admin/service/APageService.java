@@ -3,6 +3,7 @@ package three.aws.wo.admin.service;
 import java.util.HashMap;
 import java.util.List;
 
+import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.user.vo.SearchKeywordVO;
 
@@ -21,5 +22,9 @@ public interface APageService {
 	void insertKeyword(HashMap<String, Object> param);
 	void updateKeyword(HashMap<String, Object> param);
 	void deleteKeyword(HashMap<String, Object> param);
+    List<AdminVO> docList();
+    void deleteDoc(int d_seq);
+    void insertDoc(HashMap<String, String> param);
+    
 
 }

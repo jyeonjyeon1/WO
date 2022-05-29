@@ -53,5 +53,9 @@
 	<update id="updatePassword" parameterType="UserVO" >
 		UPDATE USERS SET U_PASSWORD = #{u_password} where U_ID = #{u_id}
 	</update>
+	
+	<insert id="regPointRecord">
+		INSERT INTO POINT (U_ID,PT_TYPE,PT_DESCRIPTION,PT_AMOUNT) VALUES (#{u_id},'적립','가입 축하 적립',1000)
+	</insert>
 </mapper>
  

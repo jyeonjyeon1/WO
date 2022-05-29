@@ -284,7 +284,8 @@
 										<th>수신설정</th>
 										<th>상태</th>
 										<th>가입일</th>
-										<th>상태변경</th>
+										<th>마지막로그인</th>
+										<th>수정</th>
 									</tr>
 								</thead>
 								<tfoot>
@@ -299,7 +300,7 @@
 										<th>상태</th>
 										<th>가입일</th>
 										<th>마지막로그인</th>
-										<th>상태변경</th>
+										<th>수정</th>
 									</tr>
 								</tfoot>
 								<tbody>
@@ -347,7 +348,7 @@
 <div aria-hidden="true" aria-labelledby="myModalLabel"
 	role="dialog" tabindex="-1" id="myModal${vs.index}"
 	class="modal fade" style="margin: 20px auto 0;">
-	<form method="post" action="updateUser.admin">
+	<form method="post" action="updateUser.admin" name="updateform${vs.index}">
 	<input type="hidden" name="u_id" value="${userList.u_id}"/>
 	<div class="modal-dialog store">
 		<div class="modal-content">
@@ -362,6 +363,10 @@
 					<p style="margin-bottom: 2px;">회원 이름</p>
 					<input type="text" name="u_name" value="${userList.u_name}"
 						class="form-control">
+				</div>
+				<div class="modal-body" style="padding-bottom: 0;">
+					<p style="margin-bottom: 2px;">회원 특이사항 기록용(관리자만 조회)</p>
+					<textarea name="u_info" class="form-control">${userList.u_info}</textarea>
 				</div>
 				<div class="modal-body" style="padding-bottom: 0;">
 					<p style="margin-bottom: 2px;">회원 비밀번호 변경</p>
@@ -393,21 +398,21 @@
 						<c:when test="${userList.u_sms_usable eq 'true'}">
 							<label class="radio-inline"> <input
 								type="radio" name="u_sms_usable" id="u_sms_ok${vs.index}"
-								value="sms_ok" checked> 동의
+								value="true" checked> 동의
 							</label>
 							<label class="radio-inline"> <input
 								type="radio" name="u_sms_usable" id="u_sms_no${vs.index}"
-								value="sms_no"> 미동의
+								value="false"> 미동의
 							</label>
 						</c:when>
 						<c:otherwise>
 							<label class="radio-inline"> <input
 								type="radio" name="u_sms_usable" id="u_sms_ok${vs.index}"
-								value="option1"> 동의
+								value="true"> 동의
 							</label>
 							<label class="radio-inline"> <input
 								type="radio" name="u_sms_usable" id="u_sms_no${vs.index}"
-								value="option2" checked> 미동의
+								value="false" checked> 미동의
 							</label>
 						</c:otherwise>
 					</c:choose>
@@ -470,14 +475,14 @@
 				</div>
 				<div class="modal-body" style="padding-bottom: 0;">
 					<p style="margin-bottom: 2px;">가입일</p>
-					<input type="text" name="u_regdate"
+					<input type="text" name=""
 						value="<fmt:formatDate value="${userList.u_regdate}" pattern="yy-MM-dd a hh:mm"/>"
 						class="form-control">
 				</div>
 				<!-- 마지막 정보는 아래 패딩 유지 -->
 				<div class="modal-body">
 					<p style="margin-bottom: 2px;">마지막 로그인</p>
-					<input type="text" name="u_lastdate"
+					<input type="text" name=""
 						value="<fmt:formatDate value="${userList.u_lastdate}" pattern="yy-MM-dd a hh:mm"/>"
 						class="form-control">
 				</div>
@@ -486,12 +491,23 @@
 				<button data-dismiss="modal" class="btn btn-default"
 					type="button">확인</button>
 				<button
-					class="btn btn-theme" type="submit">수정</button>
+					class="btn btn-theme" type="button" onclick="updateComp${vs.index}()">수정</button>
 			</div>
 		</div>
 	</div>
 	</form>
 </div>
+<script>
+function updateComp${vs.index}(){
+	Swal.fire({
+        icon: "success",
+        title: "회원 정보 수정 완료",
+        showConfirmButton: false,
+        timer: 1500
+    });
+	document.updateform${vs.index}.submit();
+}
+</script>
 <!-- Modal END -->
 									</c:forEach>
 

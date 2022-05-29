@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,9 +10,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>워킹오더 관리자 페이지</title>
+  <title>워킹오더 서류관리</title>
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
@@ -165,55 +166,10 @@
     <section id="main-content"> 
     <!-- allmenu import -->
     <%@ include file="../inc/admin_allmenu.jsp" %>
-      <section class="wrapper site-min-height">
+      <section class="wrapper" style="min-height:600px;">
         <h3><i class="fa fa-angle-right"></i> 증빙서류 및 문서</h3>
-        <div class="row mt">
-          <div class="col-lg-12">
-            <div class="card-header" style="font-size: 16px;">
-              <i class="fa fa-search" style="font-size: 14px;"></i>
-              검색
-            </div>
-            <div class="form-panel" style="margin-top:0; padding-bottom: 38px;">
-              <form class="form-horizontal style-form" method="get">
-                
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">구분</label>
-                  <div class="col-sm-10">
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio1" value="option1" checked> 정책코드
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio2" value="option2"> 정책명
-                    </label>
-                   
-                    <input type="text" class="form-control round-form" placeholder="환불정책" style="margin-left:15px; width:35%;display: inline;">
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">등록일</label>
-                  <div class="col-sm-10"> 
-                    <input class="form-control round-form" type="date" style="margin-right: 10px; width: 15%;min-width: 120px; display: inline-block;"> ~ 
-                    <input class="form-control round-form" type="date" style="margin-left: 10px;width: 15%;min-width: 120px;display: inline-block;">
-                  </div>
-                  <!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
-                </div>
-                
-                
-                <button type="button" onclick="location.href='policy_add.admin'" class="btn btn-theme" style="font-size: 14px; width:60px;float: left;">
-                  추가
-                </button>
-                <button type="submit" class="btn btn-theme" style="width:70px;float: right;">검색</button>
-              </form>
-            </div>
-
-
-            </form>
-          </div>
-        </div>
+        <a type="button" data-toggle="modal" href="#addDoc" class="btn btn-theme" 
+        style="margin-left:20px;margin-top:10px;width:100px;float: left;">서류 추가</a>
         <!-- 테이블 -->
         <div class="row mt">
           <div class="col-lg-12 cardd mb-4" style="height: fit-content;">
@@ -230,52 +186,118 @@
                       <tr>
                         <th data-sortable="" style="width: 7%;"><a href="#" class="dataTable-sorter">번호</a></th>
                         <th data-sortable="" style="width: 19%;"><a href="#" class="dataTable-sorter">서류명</a></th>
-                        <th data-sortable="" style="width: 19%;"><a href="#" class="dataTable-sorter">파일명</a></th>
-                        <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">수정자</a></th>
-                        <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">등록일시</a></th>
-                        <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">수정일시</a></th>
+                        <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">서류 설명</a></th>
+                        <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">파일명</a></th>
+                        <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">등록일시</a></th>
+                        <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter"> </a></th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>사업자등록등</td>
-                        <td><a href="#">business_reg.pdf</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
+                    <c:forEach var="docList" items="${docList}" varStatus="vs">
+                      <tr id="deleteForm${vs.index}">
+                        <td>${vs.count}<input type="hidden" id="d_seq${vs.index }" value="${docList.d_seq}"/></td>
+                        <td>${docList.d_name}</td>
+                        <td>${docList.d_memo}</td>
+                        <td><a href="${docList.d_file_url}">${docList.d_file_name}</a></td>
+                        <td><fmt:formatDate value="${docList.d_regdate}" pattern="yy-MM-dd a hh:mm"/></td>
+                        <td>
+                        	<button onclick="deleteDoc${vs.index}()"
+							class="btn btn-danger btn-xs">
+								<i class="fa fa-trash-o "></i>
+							</button>
+						</td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>통장사본</td>
-                        <td><a href="#">bank.pdf</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>통신판매신고증</td>
-                        <td><a href="#">someting.pdf</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>소개자료</td>
-                        <td><a href="#">intro.pptx</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
-                      </tr>
-
+<script>
+function deleteDoc${vs.index}(){
+	Swal.fire({
+		  title: "삭제하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $.ajax({
+		    	    type: "POST",
+		    	    url: "/deleteDoc.admin",
+		    	    data: JSON.stringify({"d_seq": $("#d_seq${vs.index}").val()}), 
+		    	    dataType: "json",
+		    	    contentType: "application/json",
+		    	    success: function (data) {
+		    	        if (data == 1) {
+			    	        Swal.fire({
+			    	            icon: "success",
+			    	            title: "문서 삭제 완료",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+			    	        $("#deleteForm${vs.index}").remove();
+		    	        }else if(data == 0){
+		    	        	Swal.fire({
+			    	            icon: "warning",
+			    	            title: "문서 삭제 실패",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+		    	        }
+		    	    },
+		    	    error: function (data) {
+		    	        console.log("배너 삭제 통신에러");
+		    	    }
+		 		});//ajax end  
+		  }//if (result.isConfirmed)
+		})//then((result)
+	
+}
+</script>                      
+                    </c:forEach>
                     </tbody>
 
                   </table>
-                
-                
+<!-- 서류 추가 모달 -->
+<div aria-hidden="true" aria-labelledby="myModalLabel"
+	role="dialog" tabindex="-1" id="addDoc"
+	class="modal fade" style="margin: 20px auto 0;">
+	<div class="modal-dialog store">
+		<div class="modal-content">
+			<div class="modal-header_store">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title"> 서류 추가</h4>
+			</div>
+			<!-- 	정보시작 -->
+			<div class="modal_wrapbody" style="height:250px;">
+				<div class="modal-body" style="padding-bottom: 0;">
+					<p style="margin-bottom: 2px;">서류명</p>
+					<input type="text" id="d_name" value=""  autocomplete="off"
+						class="form-control">
+				</div>
+				<div class="modal-body" style="padding-bottom: 0;">
+					<p style="margin-bottom: 2px;">서류 메모</p>
+					<input type="text" id="d_memo" value="" autocomplete="off"
+						class="form-control">
+				</div>
+				<!-- 마지막 정보는 아래 패딩 유지 -->
+				<div class="modal-body">
+					<p style="margin-bottom: 2px;">파일</p>
+					<input id="mydoc" type="file" class="grey__button" accept="*"
+											id="d_file_name">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-default"
+					type="button">취소</button>
+				<button
+					class="btn btn-theme" type="button" onclick="insertDoc()">등록</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 서류 추가 모달 끄트! -->               
+                </div>
               </div>
             </div>
           </div>
@@ -285,10 +307,10 @@
     </section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
-    <div class="container">
-      <input type="text" id="datepicker2_1"> ~
-      <input type="text" id="datepicker2_2">
-<script>
+<!--     <div class="container"> -->
+<!--       <input type="text" id="datepicker2_1"> ~ -->
+<!--       <input type="text" id="datepicker2_2"> -->
+<!-- <script>
   datePickerSet($("#datepicker1_1"), $("#datepicker1_2"), true); //다중은 시작하는 달력 먼저, 끝달력 2번째
         datePickerSet($("#datepicker2_1"), $("#datepicker2_2"), true);
 /*
@@ -367,9 +389,9 @@ function datePickerSet(sDate, eDate, flag) {
     }
 }
         </script>
-
-    </div>
-    <div class="container" style="height: 100px;"></div>
+ -->
+<!--     </div> -->
+<!--     <div class="container" style="height: 100px;"></div> -->
 
     <!-- 푸더 import -->
 		<%@ include file="../inc/admin_footer.jsp" %>
@@ -377,9 +399,102 @@ function datePickerSet(sDate, eDate, flag) {
   </section>
  
   <!--script for this page-->
-  
+<script>
+let nansu = "";
+function insertDoc(){
+	nansu = Math.floor(Math.random() * 1000); //0~999 
+	uploadDoc();
+}
+//통장사본 업로드 
+uploadDoc = () => {
+    AWS.config.update({
+        region: 'ap-northeast-2',
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+        })
+    })
+    
+    let files = document.getElementById("mydoc").files;
+    let file = files[0];
+    let d_file_name="";
+    var d_name = $("#d_name").val();
+    var d_memo = $("#d_memo").val();
+    if(d_name == null || d_name=="" ){
+    	Swal.fire({
+            icon: "warning",
+            title: "서류명을 입력하세요",
+            showConfirmButton: false,
+            timer: 1000
+        });
+    }
+    else if(file == null){
+    	Swal.fire({
+            icon: "warning",
+            title: "파일이 없습니다",
+            showConfirmButton: false,
+            timer: 1000
+        });
+    }
+    else if(file != null){
+	    let fileName = file.name;
+	    fileName = nansu +"____"+ fileName;
+	    let upload = new AWS.S3.ManagedUpload({
+	        params: {
+	            Bucket: 'walkingorder/foradmin',
+	            Key: fileName,
+	            Body: file
+	        }
+	    })
+    const promise = upload.promise();
+    d_file_name = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/foradmin/"+fileName;
+    if(d_file_name.indexOf("+") != -1){d_file_name = d_file_name.replace(/\+/g,"%2B");}
+    
+    console.log(d_name);
+    console.log(d_memo);
+    console.log(d_file_name);
+    
+    var param = {
+    	"d_name" : d_name,
+    	"d_memo" : d_memo,
+    	"d_file_url" : d_file_name
+    }
+  //ajax
+	$.ajax({
+	    type: "POST",
+	    url: "/insertDoc.admin",
+	    data: JSON.stringify(param), 
+	    dataType: "json",
+	    contentType: "application/json",
+	    success: function (data) {
+	        if (data == 1) {
+    	        Swal.fire({
+    	            icon: "success",
+    	            title: "서류 등록 완료",
+    	            showConfirmButton: false,
+    	            timer: 1500
+    	        });
+    	        location.href=location.href;
+	        }else if(data == 0){
+	        	Swal.fire({
+    	            icon: "warning",
+    	            title: "서류 등록 실패",
+    	            showConfirmButton: false,
+    	            timer: 1500
+    	        });
+	        }
+	    },
+	    error: function (data) {
+	        console.log("배너 수정 통신에러");
+	    }
+	});//ajax end 
+  }
+}
+</script>
+ 
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
   <script src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
 </body>
 
 </html>

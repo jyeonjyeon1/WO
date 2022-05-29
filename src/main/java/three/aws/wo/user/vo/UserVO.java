@@ -17,6 +17,7 @@ public class UserVO {
 	private String u_name;
 	private String u_nickname;
 	private String u_tel;
+	private String u_info;
 	private String u_email;
 	private String u_birthday;
 	private boolean u_sms_usable;		//문자 수신 동의

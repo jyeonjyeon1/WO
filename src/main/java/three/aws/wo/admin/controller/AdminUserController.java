@@ -284,11 +284,16 @@ public class AdminUserController {
 		System.out.println(vo);
 		String u_id = vo.getU_id();
 		if (vo.getU_password() == null || (vo.getU_password()).equals("")) {
-			String pwd = "";//aUserService.getOriginalPass(vo);
+            String pwd = aUserService.getOriginalPass(u_id);
 			vo.setU_password(pwd);
 		} else {
 			vo.setU_password(pwdEncoder.encode(vo.getU_password()));
 		}
+        try {
+            aUserService.updateUser(vo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 		System.out.println("유저 수정 완료 DB확인");
 		return "redirect:/user_mng.admin";
 	}

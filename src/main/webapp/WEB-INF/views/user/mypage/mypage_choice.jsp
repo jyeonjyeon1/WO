@@ -27,48 +27,20 @@
 			location.href = "/";
 					    
 		})
-	
+		
+		$("#submit").on("click", function(){
+			if($("#u_password").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#u_password").focus();
+				return false;
+			}	
+		});
 		
 		
 	});
 	
-	function change() {
-		console.log("ccc");
-		
-		if($("#u_password").val()==""){
-			Swal.fire({
-	            icon: "warning",
-	            title: "비밀번호를 입력해 주세요.",
-	           
-	            showConfirmButton: true
-	            //timer: 1500
-	        });
-			
-			//alert("비밀번호를 입력해주세요.");
-			$("#u_password").focus();
-			
-		}else {
-			document.pwCheckCheck.submit();
-			if(${msg == false}) {
-				console.log("비번이 맞지 않습니다.")
-				Swal.fire({
-		            icon: "warning",
-		            title: "비밀번호가 맞지 않습니다.",
-		            content: "다시 입력해 주세요.",
-		            showConfirmButton: true
-		            //timer: 1500
-		        });
-			}else {
-				console.log("비번맞아요.");
-			}
-		}
-		
-		
-	}
 	
-	function bye() {
-		
-	}
+	
 </script>
 </head>
 <body>
@@ -105,11 +77,11 @@
         	<div class="row" style="margin:0" >
         	<div class="col-lg-1"></div>
                 <div class="col-lg-3" style="text-align:right;" >
-                <button type="button" class="btn btn-outline-success " style=" display: inline-block;  width: 100%; " id="submit" onclick="change()" > 회원변경
+                <button type="submit" class="btn btn-outline-success " style=" display: inline-block;  width: 100%; " id="submit"> 회원변경
                     &nbsp;</button>
                 </div>
                 <div class="col-lg-3" style="text-align:left;" >
-                <button type="button" class="btn btn-outline-danger " style=" display: inline-block;  width: 100%; " id="submit" onclick="bye()" > 탈퇴
+                <button type="button" class="btn btn-outline-danger " style=" display: inline-block;  width: 100%; " id="submit" onclick='return submit2(this.form);' > 탈퇴
                     &nbsp;</button>
                 </div>
                     <div class="col-lg-5" style="text-align:left;">
@@ -118,8 +90,13 @@
 				
 				
 			</form>
-			
-			
+			<script>
+			 function submit2(frm) { 
+				    frm.action='/deleteUser.user'; 
+				    frm.submit(); 
+				    return true; 
+				  } 
+			</script>
 			
 			
 		</section>

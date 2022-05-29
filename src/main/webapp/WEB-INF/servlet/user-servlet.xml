@@ -18,6 +18,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/user/" />
 		<property name="suffix" value=".jsp" />
+		
 	</bean>
 
 </beans>

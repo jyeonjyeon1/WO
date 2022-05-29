@@ -38,6 +38,7 @@
 		<typeAlias alias="SearchKeywordVO" type="three.aws.wo.user.vo.SearchKeywordVO" />
 		<typeAlias type="three.aws.wo.user.vo.MenuListVO" alias="MenuListVO"/>
 		<typeAlias alias="BannerVO" type="three.aws.wo.admin.vo.BannerVO" />
+		<typeAlias alias="SearchVO" type="three.aws.wo.user.vo.SearchVO" />
 		
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
@@ -65,6 +66,8 @@
 		<mapper resource="mappings/store/storeLogin-mapping.xml" />
 		<mapper resource="mappings/store/storePumjeol-mapping.xml" />
 		<mapper resource="mappings/store/storeInfo-mapping.xml" />
+		<mapper resource="mappings/store/storeIndex-mapping.xml" />
+        <mapper resource="mappings/store/storeReview-mapping.xml" />
 		
 	</mappers>
 </configuration>

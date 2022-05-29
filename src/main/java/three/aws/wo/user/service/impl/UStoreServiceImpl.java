@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.dao.UStoreDAO;
 import three.aws.wo.user.service.UStoreService;
+import three.aws.wo.user.vo.SearchVO;
 
 @Service
 public class UStoreServiceImpl implements UStoreService {
@@ -20,14 +21,19 @@ public class UStoreServiceImpl implements UStoreService {
 	}
 	
 	@Override
-	public List<StoreVO> storeListByPage(String SearchWord){
-		return uStoreDAO.storeListByPage(SearchWord);
+	public List<StoreVO> storeListByPage(SearchVO searchvo){
+		return uStoreDAO.storeListByPage(searchvo);
 	}
 	
 
 	@Override
 	public List<StoreVO> UserPageChange(HashMap<String, Integer> param) {
 		return uStoreDAO.UserPageChange(param);
+	}
+
+	@Override
+	public int storeListByPageCount(String SearchWord) {
+		return uStoreDAO.storeListByPageCount(SearchWord);
 	}
 	
 	

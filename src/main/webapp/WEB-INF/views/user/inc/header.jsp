@@ -37,26 +37,37 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 
-$(document).ready(
-        function() {
+var myWishCount;
+
+$(document).ready( function() {
            $("#search_Sname").on(
                  "propertychange change keyup paste input", function() {
                     onEnter();
                  });
+           
 
         })
-  function onEnter() {
-     var keyCode = window.event.keyCode;
-     if (keyCode == 13) {
-        searchBtn();
-     }
+		  function onEnter() {
+		     var keyCode = window.event.keyCode;
+		     console.log("keyCode >>> " + keyCode);
+		     if (keyCode == 13) {
+		        searchBtn();
+		     }
   }
 
 //검색버튼 누르면~
 function searchBtn(){
 	var Sname = $("#search_Sname").val();
 	var searchUrl = $("#searchUrl").val();
-	if(Sname=="" || Sname == null){
+	var checkSession = $("#checkSession").val();
+	
+	console.log(Sname);
+	console.log(searchUrl);
+	console.log(checkSession);
+	if(checkSession == "no" && Sname ==""){
+		location.href="/storeList.user?search=";
+	}
+	else if(Sname=="" || Sname == null){
 		location.href=searchUrl;
 	}else{
 		location.href="/storeList.user?search="+Sname;
@@ -64,7 +75,7 @@ function searchBtn(){
 	
 }
 //---------------- NAVER ------------------------
-const naverLogin = new naver.LoginWithNaverId(
+/* const naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "<spring:eval expression='@config.getProperty("NAVER_API_KEY")'/>",
 			callbackUrl: "http://localhost:8080/login.user",
@@ -108,7 +119,7 @@ function kakaoLogout() {
 		})
 		Kakao.Auth.setAccessToken(undefined)
 	}
-}
+}  */
 
 //--------------로그아웃 ---------------------
 function logout(){
@@ -141,10 +152,12 @@ window.addEventListener('locationchange', function(){
 						<div class="top-end">
 							<ul class="user-login">
 								<c:if test="${empty userSession}">
+								<input type="hidden" id="checkSession" value="no"/>
 									<li><a href="login.user">로그인</a></li>
 									<li><a href="join.user">회원가입</a></li>
 								</c:if>
 								<c:if test="${!empty userSession}">
+								<input type="hidden" id="checkSession" value="yes"/>
 									<li style="color: black;">${userSession.u_name}님</li>
 									<li><a href="logout.user" onclick="logout()">로그아웃</a></li>
 								</c:if>
@@ -178,11 +191,11 @@ window.addEventListener('locationchange', function(){
 							<div class="navbar-search search-style-5">
 								<div class="search-select">
 									<div class="select-position">
-										<select id="select1">
+										<select id="select1" name = "searchType">
 											<option selected>All</option>
-											<option value="1">가게</option>
-											<option value="2">주소</option>
-											<option value="3">메뉴</option>
+											<option value="store">가게</option>
+											<option value="adress">주소</option>
+											<option value="menu">메뉴</option>
 										</select>
 									</div>
 								</div>
@@ -216,7 +229,12 @@ window.addEventListener('locationchange', function(){
 
 								<div class="wishlist">
 									<a href="myWishList.user"> <i class="lni lni-heart"></i> <span
-										class="total-items">0</span>
+										class="total-items">
+										<c:choose>
+											<c:when test="${!empty userSession}">${wishCount}</c:when>
+											<c:otherwise>0</c:otherwise>
+										</c:choose>
+										</span>
 									</a>
 								</div>
 								<div class="cart-items">

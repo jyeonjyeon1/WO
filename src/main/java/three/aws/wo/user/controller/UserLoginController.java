@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.service.UserLoginService;
+import three.aws.wo.user.service.UserMypageService;
 import three.aws.wo.user.service.UserOrderService;
 import three.aws.wo.user.vo.BasketVO;
 import three.aws.wo.user.vo.SearchKeywordVO;
@@ -34,6 +35,8 @@ public class UserLoginController {
 	private UserLoginService userLoginService;
 	@Autowired
 	private UserOrderService userOrderService;
+	@Autowired
+	private UserMypageService userMypageService;
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;
 
@@ -64,10 +67,11 @@ public class UserLoginController {
 		List<BasketVO> cartList = userOrderService.cartList(userID);
 		// 유저장바구니에 있는 가게 불러옴
 		StoreVO cartStore = userOrderService.cartStore(userID);
+		int wishCount = userMypageService.myWishListCount(userID);
 		
 		List<SearchKeywordVO> searchKeywords = userLoginService.searchKeywords();
 		session.setAttribute("searchKeywords", searchKeywords);
-		// 장바구니 출력함.
+
 		session.setAttribute("cartStoreSession", cartStore);
 		session.setAttribute("cartListSession", cartList);
 		// session에 vo 저장

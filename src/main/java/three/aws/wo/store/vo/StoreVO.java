@@ -5,6 +5,7 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import three.aws.wo.user.util.CriteriaStore;
 
 @Getter
 @Setter
@@ -51,6 +52,8 @@ public class StoreVO {
 	private String si_openSun;
 	private String si_closeSun;
 	private boolean si_holiday_gong;
+	
+	private CriteriaStore cri;
 	
 	
 }

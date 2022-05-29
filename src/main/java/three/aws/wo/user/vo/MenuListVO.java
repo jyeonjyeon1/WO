@@ -21,4 +21,11 @@ public class MenuListVO {
 	public String opb_code;
 	public String opb_name;
 	public int opb_price;
+	
+	public String og_code;
+	public String og_name;
+	public String op_code;
+	public String op_name;
+	public int op_price;
+	
 }

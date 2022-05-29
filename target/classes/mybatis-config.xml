@@ -35,6 +35,11 @@
 		<typeAlias alias="PointVO" type="three.aws.wo.admin.vo.PointVO" />
 		<typeAlias alias="UserWishVO" type="three.aws.wo.user.vo.UserWishVO" />
 		<typeAlias alias="MenuListVO" type="three.aws.wo.user.vo.MenuListVO" />
+		<typeAlias alias="SearchKeywordVO" type="three.aws.wo.user.vo.SearchKeywordVO" />
+		<typeAlias type="three.aws.wo.user.vo.MenuListVO" alias="MenuListVO"/>
+		<typeAlias alias="BannerVO" type="three.aws.wo.admin.vo.BannerVO" />
+		<typeAlias alias="SearchVO" type="three.aws.wo.user.vo.SearchVO" />
+		
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
 		<mapper resource="mappings/user/user-mapping.xml" /> 
@@ -45,6 +50,7 @@
 		<mapper resource="mappings/user/index-mapping.xml" /> 
 		<mapper resource="mappings/user/userMypage-mapping.xml" />
 		<mapper resource="mappings/user/userRegister-mapping.xml" />
+     
 		
 		<mapper resource="mappings/admin/admin-mapping.xml" />
 		<mapper resource="mappings/admin/adminPoint-mapping.xml" />
@@ -53,12 +59,15 @@
 		<mapper resource="mappings/admin/adminStore-mapping.xml" />
 		<mapper resource="mappings/admin/adminterms-mapping.xml" />
 		<mapper resource="mappings/admin/adminOrder-mapping.xml" /> 
-		
+		<mapper resource="mappings/admin/adminCoupon-mapping.xml" /> 
+		<mapper resource="mappings/admin/adminPage-mapping.xml" /> 
 		
 		<mapper resource="mappings/store/storeMenu-mapping.xml" /> 
 		<mapper resource="mappings/store/storeLogin-mapping.xml" />
 		<mapper resource="mappings/store/storePumjeol-mapping.xml" />
 		<mapper resource="mappings/store/storeInfo-mapping.xml" />
+		<mapper resource="mappings/store/storeIndex-mapping.xml" />
+        <mapper resource="mappings/store/storeReview-mapping.xml" />
 		
 	</mappers>
 </configuration>

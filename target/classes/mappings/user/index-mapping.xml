@@ -77,9 +77,9 @@
 	<select id="todayDrinkList" resultType="IndexVO" resultMap="indexVO">
 		SELECT * FROM TODAY_DRINK ORDER BY RANDOM() LIMIT 1
 	</select>
-	<select id="eventBoardList" resultType="IndexVO" resultMap="indexVO">
-		SELECT E_THUMBNAIL_IMAGE, E_URL 
-		FROM EVENT_BOARD EB 
-		WHERE E_STARTDATE <![CDATA[<=]]> CURRENT_DATE AND CURRENT_DATE <![CDATA[<=]]> E_ENDDATE; 
+	<select id="eventBoardList" resultType="BannerVO" >
+		SELECT B_IMAGE, B_CLICK_URL 
+		FROM BANNER  
+		WHERE B_STARTDATE <![CDATA[<=]]> CURRENT_DATE AND CURRENT_DATE <![CDATA[<=]]> B_ENDDATE 
 	</select>
 </mapper>

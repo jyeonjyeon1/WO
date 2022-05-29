@@ -21,27 +21,25 @@
 <script src="resources/assets/js/jquery-3.6.0.js"></script>
 <script>
 
-	var myWishListCount;
-	var pageNum;
+	var myWishListCount = ${myWishListCount} ;
+	var pageNum = ${cri.pageNum} ;
+
 	
 	$(document).ready(function(){
 		myWishListCount = ${myWishListCount};
-		console.log(myWishListCount);
 		pageNum = ${cri.pageNum};
-		console.log(pageNum);
-		
 		setPage(pageNum);
 		
 	})
 		
 	 function setPage(pageNum){ //paging
-          
+          console.log("setpage");
           var total = myWishListCount;
           var amount = 3;
-
+		console.log("total : " + total );
           var endPage = Math.ceil(pageNum/10.0)*10;
           var startPage = endPage - 9;
-
+          console.log("endPage : " + endPage +"/ startPage : "+ startPage);
           if(total == 0){
              var realEnd = 1;
           }else{
@@ -65,12 +63,13 @@
             
             if(pageNum == i){
                var li = '<li class="page-item active"><a class="page-link" href="'+i+'">'+i+'</a></li>';
+               //<li class= "paging"><a href="#">1</a></li>  
             }else{
                var li = '<li class="page-item"><a class="page-link" href="'+i+'">'+i+'</a></li>';
             }
             
             $(".page-layer").append(li);
-
+            
          }
          
           // paging a link click
@@ -78,40 +77,39 @@
 
              e.preventDefault();
              var changePageNum = $(this).attr("href");
-             movepage(changePageNum);
+             location.href= "myWishList.user?page="+changePageNum;
+
           });
 
           
        }
 
-	 // page 이동
-	 function movepage(changePageNum){
-	    
-	    // checkbox 초기화
-	   // $("#allCheck").prop("checked", false);
-	   
-	   pageNum = changePageNum;
-	   console.log(pageNum);
-	   
-	   searching();
-	 }
 	 
-	 function searching() {
-		 
-		 var param = {"pageNum": pageNum };
-			$.ajax({
-				type: "POST",
-	            url: "/myWishList.user",
-	            data: param,
-				success : function(data) {
-					alert("성공적으로 변경되었습니다.")
-				},
-				error : function(data) {
-					console.log("로그인 통신x")
-				}
+	 
+// 	 function paging() {
+// 		 console.log(pageNum);
+// 		 var param = {"pageNum": pageNum };
+// 			$.ajax({
+// 				type: "POST",
+// 	            url: "/myWishList.user",
+// 	            data: JSON.stringify(param),
+// 	            dataType: "json",
+// 		        contentType: "application/json",
+// 				success : function(data) {
+// 					pageNum = 2;
+// 					myWishListCount  = ${myWishListCount} ;
+					
+// 					console.log("myWishListCount :" + myWishListCount);
+// 					console.log("newpageNum :" + pageNum);
+// 					console.log("okok");
+// 					setPage(pageNum);
+// 				},
+// 				error : function(data) {
+// 					console.log("로그인 통신x")
+// 				}
 
-			});//ajax 끝 
-	 }
+// 			});//ajax 끝 
+// 	 }
 
 </script>
 </head>
@@ -200,6 +198,7 @@
 						
 						
 							<div class = "page-layer"></div>
+							
 					</div>
 					
 					

@@ -135,5 +135,24 @@
 		WHERE
 		KEY = 'point_percentage' 
 	</select>
+	
+	<select id="myCurrentList" resultType="OrdersVO">
+		SELECT * FROM ORDERS o
+		INNER JOIN
+		STORE_INFO SI
+		ON (o.SI_CODE = si.SI_CODE) 
+		WHERE
+		U_ID = #{u_id} AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
+		ORDER BY O_SEQ DESC
+	</select>
+	<select id="myOrderList" resultType="OrdersVO">
+		SELECT * FROM ORDERS o
+		INNER JOIN
+		STORE_INFO SI
+		ON (o.SI_CODE = si.SI_CODE) 
+		WHERE
+		U_ID = #{u_id} AND O_PAY_STATUS = TRUE
+		ORDER BY O_SEQ DESC
+	</select>
 </mapper>
  

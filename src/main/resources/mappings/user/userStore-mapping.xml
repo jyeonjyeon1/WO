@@ -42,28 +42,26 @@
 	</select>
 
 	
-	<select id="storeListByPage" resultType="StoreVO" resultMap="storeVO">
+	<select id="storeListByPage" resultType="StoreVO" parameterType="StoreVO">
 	SELECT *
       FROM STORE_INFO a
       JOIN
       STORE_ACCOUNT b
       USING (SI_CODE)
-      WHERE SI_NAME LIKE '%' || #{SearchWord} || '%'
+      WHERE SI_NAME LIKE '%' || #{search} || '%'
       ORDER BY SI_SEQ DESC
-     
+      limit #{cri.amount} offset (#{cri.pageNum}-1) * #{cri.amount}
 
 	</select> 
 	
-    <select id="UserPageChange" resultType="StoreVO">
-	SELECT * FROM
-      STORE_INFO a 
+    <select id="storeListByPageCount" resultType="int" parameterType="StoreVO">
+	SELECT COUNT(*)
+      FROM STORE_INFO a
       JOIN
-      STORE_ACCOUNT b 
+      STORE_ACCOUNT b
       USING (SI_CODE)
-      WHERE SI_SEQ BETWEEN #{startPageNum} AND #{endPageNum}
-      ORDER BY SI_SEQ DESC
+      WHERE SI_NAME LIKE '%' || #{search} || '%'
 	</select> 
-	
 	
 	
 	

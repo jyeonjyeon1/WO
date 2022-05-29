@@ -18,8 +18,6 @@
 		<result column="SI_DUE_TIME" property="si_due_time" jdbcType="VARCHAR" />
 		<result column="SI_HOLIDAY_FIX" property="si_holiday_fix" jdbcType="VARCHAR" />
 		<result column="SI_HOLIDAY_IMSI" property="si_holiday_imsi" jdbcType="VARCHAR" />
-		<result column="SI_OPEN" property="si_open" jdbcType="VARCHAR" />
-		<result column="SI_CLOSE" property="si_close" jdbcType="VARCHAR" />
 		<result column="SI_REFERINFO" property="si_referinfo" jdbcType="VARCHAR" />
 		<result column="SI_MAP_IMAGE" property="si_map_image" jdbcType="VARCHAR" />
 		<result column="SI_DIRECTIONS" property="si_directions" jdbcType="VARCHAR" />
@@ -73,9 +71,9 @@
 	
 	<insert id="insertStoreInfo" parameterType="StoreVO">
 		INSERT INTO STORE_INFO (SI_NAME, SI_CODE, SI_ZIPCODE, SI_ADDRESS, SI_ADDR_ROAD, SI_ADDR_DETAIL, SI_TEL,
-		SI_OPEN, SI_CLOSE, SI_PARKING_ABLE, SI_USESTORE, SI_REFERINFO)
+		 SI_PARKING_ABLE, SI_USESTORE, SI_REFERINFO)
 		VALUES(#{si_name}, #{si_code}, #{si_zipcode}, #{si_address}, #{si_address} , #{si_addr_detail}, #{si_tel},
-		#{si_open}, #{si_close}, #{si_parking_able}, #{si_usestore}, #{si_referinfo})
+		 #{si_parking_able}, #{si_usestore}, #{si_referinfo})
 	</insert>
 <!-- 	<insert id="insertStoreAccount" parameterType="StoreVO">
 		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL)
@@ -94,9 +92,9 @@
     </update>
     <insert id="insertStoreForm" parameterType="StoreFormVO">
     	INSERT INTO STORE_FORM (SF_CODE, SF_NAME, SF_LOC, SF_ZIPCODE, SF_ADDRESS, SF_ADDR_ROAD, SF_ADDR_DETAIL, SF_TEL,
-    	SF_OPEN, SF_CLOSE, SF_PARKING_ABLE, SF_USESTORE, SF_REFERINFO, SF_EMAIL, SF_ACC_NO, SF_BUSINESS_REGISTRATION_IMAGE, SF_BANKBOOK_IMAGE, SF_REP_NAME,SF_PASSWORD)
+    	 SF_PARKING_ABLE, SF_USESTORE, SF_REFERINFO, SF_EMAIL, SF_ACC_NO, SF_BUSINESS_REGISTRATION_IMAGE, SF_BANKBOOK_IMAGE, SF_REP_NAME,SF_PASSWORD)
     	VALUES (#{sf_code},#{sf_name},#{sf_loc},#{sf_zipcode},#{sf_address},#{sf_address},#{sf_addr_detail},#{sf_tel},
-    	#{sf_open},#{sf_close},#{sf_parking_able},#{sf_usestore},#{sf_referinfo},#{sf_email},#{sf_code},#{sf_business_registration_image},#{sf_bankbook_image}
+    	#{sf_parking_able},#{sf_usestore},#{sf_referinfo},#{sf_email},#{sf_code},#{sf_business_registration_image},#{sf_bankbook_image}
     	,#{sf_rep_name}, #{sf_password})
     </insert>
 	<select id="storePendingList" resultType="StoreFormVO">
@@ -127,9 +125,9 @@
     </insert>
     <insert id="replicateStoreInfo">
     	INSERT INTO 
-    	STORE_INFO (SI_CODE,SI_NAME,SI_LOC,SI_ZIPCODE,SI_ADDRESS,SI_ADDR_ROAD,SI_ADDR_DETAIL,SI_TEL,SI_PARKING_ABLE,SI_OPEN,SI_CLOSE,SI_REFERINFO,SI_USESTORE) 
+    	STORE_INFO (SI_CODE,SI_NAME,SI_LOC,SI_ZIPCODE,SI_ADDRESS,SI_ADDR_ROAD,SI_ADDR_DETAIL,SI_TEL,SI_PARKING_ABLE,SI_REFERINFO,SI_USESTORE) 
 		SELECT 
-		SF_CODE,SF_NAME,SF_LOC,SF_ZIPCODE,SF_ADDRESS,SF_ADDR_ROAD,SF_ADDR_DETAIL,SF_TEL,SF_PARKING_ABLE,SF_OPEN,SF_CLOSE,SF_REFERINFO,SF_USESTORE 
+		SF_CODE,SF_NAME,SF_LOC,SF_ZIPCODE,SF_ADDRESS,SF_ADDR_ROAD,SF_ADDR_DETAIL,SF_TEL,SF_PARKING_ABLE,SF_REFERINFO,SF_USESTORE 
 		FROM STORE_FORM 
 		WHERE SF_CODE = #{sf_code}
     </insert>
@@ -147,7 +145,6 @@
 		SI_ADDR_ROAD = #{si_address},
 		SI_ADDRESS = #{si_address},
 		SI_ADDR_DETAIL = #{si_addr_detail},
-		SI_OPEN = #{si_open}, SI_CLOSE = #{si_close}, 
 		SI_REFERINFO = #{si_referinfo},
 		SI_USESTORE = #{si_usestore}
 		WHERE SI_CODE = #{si_code}
@@ -172,5 +169,25 @@
 		SA_BUSINESS_REGISTRATION_IMAGE = #{sa_business_registration_image},
 		SA_EMAIL = #{sa_email}
 		WHERE SI_CODE = #{si_code}
+    </update>
+    <select id="pendingMenuImg" resultType="StoreMenuVO">
+    	SELECT * FROM MENU m
+    	INNER JOIN
+    	STORE_INFO si
+    	ON (m.SI_CODE = si.SI_CODE)
+    	WHERE m.M_PENDING_IMG IS NOT NULL
+    </select>
+    <update id="confirmMenuImg">
+	    UPDATE MENU SET 
+	    M_IMG_FILE = (SELECT M_PENDING_IMG FROM MENU WHERE M_CODE = #{m_code} AND SI_CODE = #{si_code}), 
+	    M_PENDING_IMG = NULL 
+	    WHERE 
+	    M_CODE = #{m_code} AND SI_CODE = #{si_code}
+    </update>
+    <update id="rejectMenuImg">
+	    UPDATE MENU SET 
+	    M_PENDING_IMG = NULL 
+	    WHERE 
+	    M_CODE = #{m_code} AND SI_CODE = #{si_code}
     </update>
 </mapper>

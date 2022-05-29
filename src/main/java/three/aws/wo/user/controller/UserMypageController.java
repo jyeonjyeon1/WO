@@ -75,7 +75,19 @@ public class UserMypageController {
 		return "/mypage/mypage_myPoint";
 	}
 	
+	// 위시리스트 
+	@RequestMapping(value="/myWishCount.user")
+	public void myWishCount(HttpSession session, Model model) {
+		
+		UserVO userSession = (UserVO) session.getAttribute("userSession");
+		String u_id = userSession.getU_id();
+		
+		int wishCount = userMypageService.myWishListCount(u_id);
+		System.out.println("wishCount --" + wishCount);
+		model.addAttribute("myWishListCount", wishCount);
 
+	}
+		
 	// 위시리스트 
 	@ResponseBody
 	@RequestMapping(value="/myWish.user", method=RequestMethod.POST)
@@ -98,10 +110,9 @@ public class UserMypageController {
 	}
 
 	// 위시리스트 
-	
 	@RequestMapping(value="/myWishList.user")
-	public String myWishList(HttpSession session, Model model) {
-		
+	public String myWishList(HttpSession session, Model model,HttpServletRequest request) {
+		String pagnum = request.getParameter("page");
 		UserVO userSession = (UserVO) session.getAttribute("userSession");
 		String u_id = userSession.getU_id();
 		int wishCount = userMypageService.myWishListCount(u_id);
@@ -119,30 +130,23 @@ public class UserMypageController {
 		model.addAttribute("myWishList", wishList);
 		model.addAttribute("myWishListCount", wishCount);
 		
-		return "/mypage/mypage_myWishList";
-	}
-	
-	// 위시리스트 
-	@ResponseBody
-	@RequestMapping(value="/myWishList.user", method=RequestMethod.POST)
-	public String myWishList(String param, Model model, HttpSession session, UserWishVO userWishVO) {
+		if(pagnum != null) {
+			int wish = Integer.parseInt(pagnum);
+			wishCount = userMypageService.myWishListCount(u_id);
+			
+			vo = new UserWishVO();
+			cri = new Criteria(wish, 3);
+			vo.setU_id(u_id);
+			vo.setCri(cri);
+			
+			wishList = userMypageService.myWishList(vo);
+			System.out.println(wishList);
+			System.out.println("wish ===>" + cri.getPageNum());
+			model.addAttribute("cri",cri);
+			model.addAttribute("myWishList", wishList);
+			model.addAttribute("myWishListCount", wishCount);
+		}
 		
-		System.out.println(param);
-		
-		UserVO userSession = (UserVO) session.getAttribute("userSession");
-		String u_id = userSession.getU_id();
-		int wishCount = userMypageService.myWishListCount(u_id);
-		
-		UserWishVO vo = new UserWishVO();
-		//Criteria cri = new Criteria(wish.get("pageNum"), 3);
-		vo.setU_id(u_id);
-		//vo.setCri(cri);
-		
-		List<UserWishVO> wishList = userMypageService.myWishList(vo);
-		
-		//model.addAttribute("cri", cri);
-		model.addAttribute("myWishList", wishList);
-		model.addAttribute("myWishListCount", wishCount);
 		
 		return "/mypage/mypage_myWishList";
 	}

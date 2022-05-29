@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SInfoDAO">
+	<update id="updateTel">
+		UPDATE STORE_INFO SET 
+		SI_TEL = #{si_tel} 
+		WHERE 
+		SI_CODE=#{si_code} 
+	</update>
+	
+	<update id="updatePyeon2">
+		UPDATE STORE_INFO SET 
+		SI_PARKING_ABLE = #{si_parking_able},
+		SI_ETC = #{si_etc},
+		SI_REFERINFO = #{si_referinfo}
+		WHERE 
+		SI_CODE=#{si_code} 
+	</update>
+	
+	<update id="updateSiStatus">
+		UPDATE STORE_INFO SET 
+		SI_STATUS = #{si_status}
+		WHERE 
+		SI_CODE = #{si_code} 
+	</update>
+	
+	<update id="updateAllday">
+		UPDATE STORE_INFO SET 
+		
+		
+		SI_ALLDAY = #{si_Allday},
+		SI_OPENA = #{si_openA},
+		SI_CLOSEA = #{si_closeA},
+		
+		
+		SI_OPENW = #{si_openW},
+		SI_CLOSEW = #{si_closeW},
+		SI_OPENSAT = #{si_openSat},
+		SI_CLOSESAT = #{si_closeSat},
+		SI_OPENSUN = #{si_openSun},
+		SI_CLOSESUN = #{si_closeSun}
+		
+		WHERE 
+		SI_CODE = #{si_code} 
+	</update>
+	
+	
+	<update id="updateHoliday">
+		UPDATE STORE_INFO SET 
+		SI_HOLIDAY_GONG = #{si_holiday_gong},
+		SI_HOLIDAY_FIX = #{si_holiday_fix},
+		SI_HOLIDAY_IMSI = #{si_holiday_imsi}
+		
+		WHERE 
+		SI_CODE = #{si_code} 
+	</update>
+	
+</mapper>
+ 

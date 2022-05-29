@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserRegisterDAO">
+	<insert id="insertSNSUser" parameterType="UserVO">
+		INSERT INTO USERS
+		(U_ID, U_PASSWORD, U_NAME, U_EMAIL, U_SMS_USABLE,U_EMAIL_USABLE,
+		U_TEL, U_TYPE)
+		VALUES(#{u_id}, #{u_password}, #{u_name}, #{u_email},
+		#{u_sms_usable}, #{u_email_usable}, #{u_tel}, #{u_type})
+	</insert>
+	<select id="getU_id" resultType="String">
+		SELECT SNS_ID FROM SNS_USERS
+		WHERE SNS_SEQ = #{sns_seq}
+	</select>
+	<update id="updateSNSUser">
+		UPDATE SNS_USERS
+		SET
+		U_ID = #{u_id}
+		WHERE 
+		SNS_ID =#{sns_id}
+	</update>
+</mapper>
+ 

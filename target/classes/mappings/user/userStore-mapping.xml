@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UStoreDAO">
+	<resultMap type="StoreVO" id="storeVO">
+		<id column="SI_CODE" property="si_code" jdbcType="VARCHAR"/>
+		<result column="SI_SEQ" property="si_seq" jdbcType="INTEGER" />
+		<result column="SI_NAME" property="si_name" jdbcType="VARCHAR" />
+		<result column="SI_REG_DATE" property="si_reg_date" jdbcType="TIMESTAMP"/>
+		<result column="SI_LOC" property="si_loc" jdbcType="VARCHAR"/>
+		<result column="SI_ZIPCODE" property="si_zipcode" jdbcType="VARCHAR" />
+		<result column="SI_ADDRESS" property="si_address" jdbcType="VARCHAR" />
+		<result column="SI_ADDR_ROAD" property="si_addr_road" jdbcType="VARCHAR" />
+		<result column="SI_ADDR_DETAIL" property="si_addr_detail" jdbcType="VARCHAR" />
+		<result column="SI_TEL" property="si_tel" jdbcType="VARCHAR" />
+		<result column="SI_PARKING_ABLE" property="si_parking_able" jdbcType="BOOLEAN" />
+		<result column="SI_DUE_TIME" property="si_due_time" jdbcType="VARCHAR" />
+		<result column="SI_HOLIDAY_FIX" property="si_holiday_fix" jdbcType="VARCHAR" />
+		<result column="SI_HOLIDAY_IMSI" property="si_holiday_imsi" jdbcType="VARCHAR" />
+		<result column="SI_OPEN" property="si_open" jdbcType="VARCHAR" />
+		<result column="SI_CLOSE" property="si_close" jdbcType="VARCHAR" />
+		<result column="SI_REFERINFO" property="si_referinfo" jdbcType="VARCHAR" />
+		<result column="SI_MAP_IMAGE" property="si_map_image" jdbcType="VARCHAR" />
+		<result column="SI_DIRECTIONS" property="si_directions" jdbcType="VARCHAR" />
+		<result column="SI_IMAGE" property="si_image" jdbcType="VARCHAR" />
+		<result column="SI_STATUS" property="si_status" jdbcType="VARCHAR" />
+		<result column="SI_USESTORE" property="si_usestore" jdbcType="VARCHAR" />
+		<result column="SA_EMAIL" property="sa_email" jdbcType="VARCHAR" />
+		<result column="SA_PASSWORD" property="sa_password" jdbcType="VARCHAR" />
+<!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
+	</resultMap>
+	
+	<select id="storeList" resultType="StoreVO" resultMap="storeVO">
+		SELECT * FROM 
+		STORE_INFO a 
+		INNER JOIN
+		STORE_ACCOUNT b 
+		ON (a.SI_CODE = b.SI_CODE)
+		ORDER BY SI_SEQ DESC
+	</select>
+
+	
+	<select id="storeListByPage" resultType="StoreVO" resultMap="storeVO">
+	SELECT *
+      FROM STORE_INFO a
+      JOIN
+      STORE_ACCOUNT b
+      USING (SI_CODE)
+      WHERE SI_NAME LIKE '%' || #{SearchWord} || '%'
+      ORDER BY SI_SEQ DESC
+     
+
+	</select> 
+	
+    <select id="UserPageChange" resultType="StoreVO">
+	SELECT * FROM
+      STORE_INFO a 
+      JOIN
+      STORE_ACCOUNT b 
+      USING (SI_CODE)
+      WHERE SI_SEQ BETWEEN #{startPageNum} AND #{endPageNum}
+      ORDER BY SI_SEQ DESC
+	</select> 
+	
+	
+	
+	
+</mapper>

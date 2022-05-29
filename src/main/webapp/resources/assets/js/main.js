@@ -60,36 +60,8 @@ if (selectHeader) {
 }
 });
 
-$(document).ready(function () {
-	$(".showdetail_btn").click(function () {
 
-		if ($('.option_select_form').hasClass('active') == false) {
-			$(".option_select_form").addClass("active");
-		} else {
-			$(".option_select_form").removeClass("active");
-		}
-	});
 
-});
-
-function count(type)  {
-    // 결과를 표시할 element
-    const resultElement = document.getElementById('result');
-    
-    // 현재 화면에 표시된 값
-    let number = resultElement.innerText;
-    
-    // 더하기/빼기
-    if(type === 'plus') {
-      number = parseInt(number) + 1;
-    }else if(type === 'minus')  {
-      number = parseInt(number) - 1;
-    }
-    
-    // 결과 출력
-    if(number<0){number=0;}
-    resultElement.innerText = number;
-  }
 
 (function ($) {
 	/*------------------
@@ -113,13 +85,6 @@ function count(type)  {
         $("body").removeClass("over_hid");
     });
 
-    /*------------------
-		Navigation
-	--------------------*/
-    $(".mobile-menu").slicknav({
-        prependTo: '#mobile-menu-wrap',
-        allowParentLinks: true
-    });
 
     /*-----------------------
         Categories Slider

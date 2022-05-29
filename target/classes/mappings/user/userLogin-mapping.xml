@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserLoginDAO">
+	<select id="userLoginCheck" resultType="int">
+		SELECT COUNT(*) FROM USERS 
+		WHERE U_ID = #{u_id} 
+		AND
+		U_PASSWORD = #{u_password}
+	</select>
+	<select id="loggedin" resultType="UserVO" parameterType="UserVO">
+		SELECT * FROM USERS
+		WHERE U_ID = #{u_id} 
+	</select>
+	
+	<select id="snsLogin" resultType="int">
+		SELECT SNS_SEQ FROM SNS_USERS 
+		WHERE SNS_ID = #{id} 
+	</select>
+
+	<select id="encryption" resultType="UserVO">
+		SELECT *
+		  FROM USERS
+		 WHERE U_ID = #{u_id}
+	</select>
+	<insert id="insertSNSUser">
+		INSERT INTO SNS_USERS 
+		VALUES (default, #{kakaoId}, null)
+	</insert>
+	<select id="checkSNSUser" resultType="int">
+		SELECT COUNT(*) FROM SNS_USERS
+		WHERE SNS_SEQ = #{sns_seq}
+		AND
+		U_ID IS NULL
+	</select>
+	
+</mapper>
+ 

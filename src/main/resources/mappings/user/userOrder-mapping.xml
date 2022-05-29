@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserOrderDAO">
+	<select id="cartList" resultType="BasketVO" parameterType="BasketVO">
+		SELECT b.b_seq,
+		b.u_id,
+		b.si_code,
+		b.m_seq,
+		b.b_quantity,
+		b.b_single_price,
+		b.b_total_price,
+		b.opb_code,
+		b.op_code1,
+		b.op_code2,
+		b.op_code3,
+		b.op_code4,
+		b.op_code5,
+		m.m_name,
+		m.m_img_file,
+		ob.opb_price,
+		ob.opb_name,
+		op.op_name as op_name1,
+		op.op_price as op_price1,
+		opp.op_name as op_name2,
+		opp.op_price as op_price2,
+		oppp.op_name as op_name3,
+		oppp.op_price as op_price3,
+		opppp.op_name as op_name4,
+		opppp.op_price as op_price4,
+		oppppp.op_name as op_name5,
+		oppppp.op_price as op_price5
+		FROM BASKET b
+		INNER JOIN
+		MENU m
+		ON (b.M_SEQ = m.M_SEQ)
+		INNER JOIN
+		option_basic ob 
+		ON (ob.opb_code = b.opb_code and ob.SI_CODE = b.SI_CODE)
+		JOIN
+		options op 
+		ON (op.op_code = b.op_code1 and op.SI_CODE = b.SI_CODE)
+		JOIN
+		options opp 
+		ON (opp.op_code = b.op_code2 and opp.SI_CODE = b.SI_CODE)
+		JOIN
+		options oppp 
+		ON (oppp.op_code = b.op_code3 and oppp.SI_CODE = b.SI_CODE)
+		JOIN
+		options opppp 
+		ON (opppp.op_code = b.op_code4 and opppp.SI_CODE = b.SI_CODE)
+		JOIN
+		options oppppp
+		ON (oppppp.op_code = b.op_code5 and oppppp.SI_CODE = b.SI_CODE)
+		WHERE U_ID = #{u_id}
+		ORDER BY B_SEQ asc
+	</select>
+	<select id="cartStore" resultType="StoreVO" parameterType="StoreVO">
+		SELECT * FROM STORE_INFO WHERE 
+		SI_CODE = 
+		(SELECT SI_CODE FROM BASKET
+		WHERE U_ID = #{u_id} LIMIT 1);
+	</select>
+	<insert id="insertCartItem" parameterType="BasketVO">
+	
+	</insert>
+	
+	<update id="updateCart">
+		UPDATE BASKET 
+		SET 
+		B_QUANTITY = #{b_quantity}, 
+		B_TOTAL_PRICE = #{b_total_price} 
+		WHERE 
+		B_SEQ = #{b_seq}
+	</update>
+
+	<select id="removeCartCheck" resultType="int">
+		SELECT COUNT(*) FROM BASKET WHERE B_SEQ = #{b_seq}
+	</select>
+	<delete id="removeCart" parameterType="BasketVO">
+		DELETE FROM BASKET WHERE B_SEQ = #{b_seq}
+	</delete>
+	
+	<select id="dailySeq" resultType="int">
+<!-- 		SELECT MAX(LPAD(o_daily_seq::text,4,'0')) FROM ORDERS  -->
+		SELECT MAX(o_daily_seq) FROM ORDERS
+		WHERE 
+		SUBSTRING(CAST(o_order_date AS TEXT),1,10) = CAST(CURRENT_DATE AS TEXT)
+	</select>
+	<insert id="insertOrder">
+		INSERT INTO ORDERS VALUES(default, #{o_code},#{u_id},#{si_code},default,false,null,#{o_point_status},#{o_point},#{o_payment_list},#{o_request},0,#{o_total_price},'결제실패',#{o_list},#{o_daily_seq},default,#{o_list_detail})
+	</insert>
+	<update id="successOrder">
+		UPDATE ORDERS
+		SET
+		O_PAY_STATUS = true,
+		O_ORDER_STATE = '주문접수'
+		WHERE
+		O_CODE = #{o_code}
+	</update>
+	<delete id="resetCart">
+		DELETE FROM BASKET WHERE
+		U_ID = #{u_id}
+	</delete>
+	<select id="orderComplete" resultType="OrdersVO">
+		SELECT
+		to_char(o_order_date, 'YYYY-MM-DD HH24:MI:SS') AS o_order_date,
+		O_CODE,
+		O_LIST,
+		O_REQUEST,
+		O_TOTAL_PRICE
+		FROM ORDERS WHERE O_CODE = #{o_code}
+	</select>
+	<insert id="orderPointAdd">
+		INSERT INTO POINT VALUES(default, #{u_id}, default, default, default,default,#{pt_amount})
+	</insert>
+	<insert id="orderPointUse">
+		INSERT INTO POINT VALUES(default, #{u_id}, default, '사용', '주문 시 이용',default,#{pt_amount})
+	</insert>
+	<update id="orderPointUpdate">
+		UPDATE USERS 
+		SET
+		U_POINT = U_POINT+ #{pt_amount}
+		WHERE
+		U_ID = #{u_id}
+	</update>
+	<select id="isPointUse" resultType="String">
+		SELECT VALUE FROM SYSTEM_SETTING
+		WHERE
+		KEY = 'point_use' 
+	</select>
+	<select id="getPointPercentage" resultType="String">
+		SELECT VALUE FROM SYSTEM_SETTING
+		WHERE
+		KEY = 'point_percentage' 
+	</select>
+	
+	<select id="myCurrentList" resultType="OrdersVO">
+		SELECT * FROM ORDERS o
+		INNER JOIN
+		STORE_INFO SI
+		ON (o.SI_CODE = si.SI_CODE) 
+		WHERE
+		U_ID = #{u_id} AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
+		ORDER BY O_SEQ DESC
+	</select>
+	<select id="myOrderList" resultType="OrdersVO">
+		SELECT * FROM ORDERS o
+		INNER JOIN
+		STORE_INFO SI
+		ON (o.SI_CODE = si.SI_CODE) 
+		WHERE
+		U_ID = #{u_id} AND O_PAY_STATUS = TRUE
+		ORDER BY O_SEQ DESC
+	</select>
+</mapper>
+ 

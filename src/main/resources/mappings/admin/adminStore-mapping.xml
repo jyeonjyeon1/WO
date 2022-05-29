@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AStoreDAO">
+	<resultMap type="StoreVO" id="storeVO">
+		<id column="SI_CODE" property="si_code" jdbcType="VARCHAR"/>
+		<result column="SI_SEQ" property="si_seq" jdbcType="INTEGER" />
+		<result column="SI_NAME" property="si_name" jdbcType="VARCHAR" />
+		<result column="SI_REG_DATE" property="si_reg_date" jdbcType="TIMESTAMP"/>
+		<result column="SI_LOC" property="si_loc" jdbcType="VARCHAR"/>
+		<result column="SI_ZIPCODE" property="si_zipcode" jdbcType="VARCHAR" />
+		<result column="SI_ADDRESS" property="si_address" jdbcType="VARCHAR" />
+		<result column="SI_ADDR_ROAD" property="si_addr_road" jdbcType="VARCHAR" />
+		<result column="SI_ADDR_DETAIL" property="si_addr_detail" jdbcType="VARCHAR" />
+		<result column="SI_TEL" property="si_tel" jdbcType="VARCHAR" />
+		<result column="SI_PARKING_ABLE" property="si_parking_able" jdbcType="BOOLEAN" />
+		<result column="SI_DUE_TIME" property="si_due_time" jdbcType="VARCHAR" />
+		<result column="SI_HOLIDAY_FIX" property="si_holiday_fix" jdbcType="VARCHAR" />
+		<result column="SI_HOLIDAY_IMSI" property="si_holiday_imsi" jdbcType="VARCHAR" />
+		<result column="SI_REFERINFO" property="si_referinfo" jdbcType="VARCHAR" />
+		<result column="SI_MAP_IMAGE" property="si_map_image" jdbcType="VARCHAR" />
+		<result column="SI_DIRECTIONS" property="si_directions" jdbcType="VARCHAR" />
+		<result column="SI_IMAGE" property="si_image" jdbcType="VARCHAR" />
+		<result column="SI_STATUS" property="si_status" jdbcType="VARCHAR" />
+		<result column="SI_USESTORE" property="si_usestore" jdbcType="VARCHAR" />
+		<result column="SA_EMAIL" property="sa_email" jdbcType="VARCHAR" />
+		<result column="SA_PASSWORD" property="sa_password" jdbcType="VARCHAR" />
+		
+ 		<result column="SA_BUSINESS_REGISTRATION_IMAGE" property="sa_business_registration_image" jdbcType="VARCHAR" />
+		<result column="SA_BANKBOOK_IMAGE" property="sa_bankbook_image" jdbcType="VARCHAR" />
+<!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
+	</resultMap>
+	<resultMap type="FranchiseVO" id="franchiseVO">
+		<id column="F_CODE" property="f_code" jdbcType="VARCHAR"/>
+		<result column="F_SEQ" property="f_seq" jdbcType="INTEGER" />
+		<result column="F_NAME" property="f_name" jdbcType="VARCHAR" />
+		<result column="F_TEL" property="f_tel" jdbcType="VARCHAR" />
+		<result column="F_EMAIL" property="f_email" jdbcType="VARCHAR" />
+		<result column="F_TITLE" property="f_title" jdbcType="VARCHAR" />
+		<result column="F_REGDATE" property="f_regdate" jdbcType="TIMESTAMP"/>
+		<result column="F_STATUS" property="f_status" jdbcType="BOOLEAN" />
+	</resultMap>
+	
+	<select id="storeInquiryList" resultType="FranchiseVO" resultMap="franchiseVO">
+		SELECT * FROM 
+		FRANCHISE
+		ORDER BY F_SEQ DESC
+	</select>
+	<insert id="insertStoreInquiry">
+		INSERT INTO FRANCHISE (F_CODE, F_NAME, F_TEL, F_EMAIL, F_TITLE)
+		VALUES (#{f_code}, #{f_name}, #{f_tel}, #{f_email}, #{f_title})
+	</insert>
+	
+	<select id="storeList" resultType="StoreVO" resultMap="storeVO">
+		SELECT * FROM 
+		STORE_INFO a 
+		INNER JOIN
+		STORE_ACCOUNT b 
+		ON (a.SI_CODE = b.SI_CODE)
+		ORDER BY SI_SEQ DESC
+	</select>
+	<select id="storeOne" resultType="StoreVO" resultMap="storeVO">
+		SELECT * FROM 
+		STORE_INFO a 
+		INNER JOIN
+		STORE_ACCOUNT b 
+		ON (a.SI_CODE = b.SI_CODE)
+		WHERE a.SI_CODE = #{si_code}
+	</select>
+	
+	<insert id="insertStoreInfo" parameterType="StoreVO">
+		INSERT INTO STORE_INFO (SI_NAME, SI_CODE, SI_ZIPCODE, SI_ADDRESS, SI_ADDR_ROAD, SI_ADDR_DETAIL, SI_TEL,
+		 SI_PARKING_ABLE, SI_USESTORE, SI_REFERINFO)
+		VALUES(#{si_name}, #{si_code}, #{si_zipcode}, #{si_address}, #{si_address} , #{si_addr_detail}, #{si_tel},
+		 #{si_parking_able}, #{si_usestore}, #{si_referinfo})
+	</insert>
+<!-- 	<insert id="insertStoreAccount" parameterType="StoreVO">
+		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL)
+		VALUES(#{si_code}, #{sa_password}, #{si_code}, #{sa_email})
+	</insert> -->
+	<insert id="insertStoreAccount" parameterType="StoreVO">
+		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL, SA_BUSINESS_REGISTRATION_IMAGE, SA_BANKBOOK_IMAGE,SA_REP_NAME)
+		VALUES(#{si_code}, #{sa_password}, #{si_code}, #{sa_email}, #{sa_business_registration_image}, #{sa_bankbook_image},#{sa_rep_name})
+	</insert> 
+	<update id="storeInqAccept">
+        UPDATE FRANCHISE
+        SET
+        F_STATUS = TRUE
+        WHERE
+        F_SEQ = #{f_seq}
+    </update>
+    <insert id="insertStoreForm" parameterType="StoreFormVO">
+    	INSERT INTO STORE_FORM (SF_CODE, SF_NAME, SF_LOC, SF_ZIPCODE, SF_ADDRESS, SF_ADDR_ROAD, SF_ADDR_DETAIL, SF_TEL,
+    	 SF_PARKING_ABLE, SF_USESTORE, SF_REFERINFO, SF_EMAIL, SF_ACC_NO, SF_BUSINESS_REGISTRATION_IMAGE, SF_BANKBOOK_IMAGE, SF_REP_NAME,SF_PASSWORD)
+    	VALUES (#{sf_code},#{sf_name},#{sf_loc},#{sf_zipcode},#{sf_address},#{sf_address},#{sf_addr_detail},#{sf_tel},
+    	#{sf_parking_able},#{sf_usestore},#{sf_referinfo},#{sf_email},#{sf_code},#{sf_business_registration_image},#{sf_bankbook_image}
+    	,#{sf_rep_name}, #{sf_password})
+    </insert>
+	<select id="storePendingList" resultType="StoreFormVO">
+		SELECT * FROM STORE_FORM 
+		ORDER BY SF_SEQ DESC
+	</select>
+	<update id="updateStore">
+		UPDATE STORE_FORM
+        SET
+        SF_STATUS = #{sf_status}
+        WHERE
+        SF_CODE = #{sf_code}
+	</update>
+	<select id="checkStore" resultType="int">
+		SELECT COUNT(*) FROM STORE_INFO
+		WHERE
+		SI_CODE = #{sf_code}
+	</select>
+	
+	<insert id="replicateStoreAccount">
+    	INSERT INTO 
+    	STORE_ACCOUNT(SA_ACC_NO,SA_PASSWORD,SI_CODE,SA_BANKBOOK_IMAGE,SA_BUSINESS_REGISTRATION_IMAGE,SA_EMAIL,SA_REP_NAME)
+		SELECT 
+		SF_CODE,SF_PASSWORD,SF_CODE,SF_BANKBOOK_IMAGE,SF_BUSINESS_REGISTRATION_IMAGE,SF_EMAIL,SF_REP_NAME 
+		FROM STORE_FORM 
+		WHERE 
+		SF_CODE = #{sf_code}
+    </insert>
+    <insert id="replicateStoreInfo">
+    	INSERT INTO 
+    	STORE_INFO (SI_CODE,SI_NAME,SI_LOC,SI_ZIPCODE,SI_ADDRESS,SI_ADDR_ROAD,SI_ADDR_DETAIL,SI_TEL,SI_PARKING_ABLE,SI_REFERINFO,SI_USESTORE) 
+		SELECT 
+		SF_CODE,SF_NAME,SF_LOC,SF_ZIPCODE,SF_ADDRESS,SF_ADDR_ROAD,SF_ADDR_DETAIL,SF_TEL,SF_PARKING_ABLE,SF_REFERINFO,SF_USESTORE 
+		FROM STORE_FORM 
+		WHERE SF_CODE = #{sf_code}
+    </insert>
+    <delete id="deleteJoinInq">
+    	DELETE FROM FRANCHISE WHERE F_SEQ = #{f_seq}
+    </delete>
+    <delete id="deletePending">
+    	DELETE FROM STORE_FORM WHERE SF_SEQ = #{sf_seq}
+    </delete>
+    <update id="updateStoreInfo">
+    	UPDATE STORE_INFO SET
+		SI_NAME = #{si_name}, SI_TEL = #{si_tel}, SI_PARKING_ABLE = #{si_parking_able}, 
+		SI_ZIPCODE = #{si_zipcode},
+		SI_LOC = #{si_loc},
+		SI_ADDR_ROAD = #{si_address},
+		SI_ADDRESS = #{si_address},
+		SI_ADDR_DETAIL = #{si_addr_detail},
+		SI_REFERINFO = #{si_referinfo},
+		SI_USESTORE = #{si_usestore}
+		WHERE SI_CODE = #{si_code}
+    </update>
+    <select id="getOriginalPass" resultType="String">
+    	SELECT SA_PASSWORD FROM STORE_ACCOUNT
+    	WHERE SI_CODE = #{si_code}
+    </select>
+    <select id="getOriginalBussReg" resultType="String">
+    	SELECT SA_BUSINESS_REGISTRATION_IMAGE FROM STORE_ACCOUNT
+    	WHERE SI_CODE = #{si_code}
+    </select>
+    <select id="getOriginalBankbook" resultType="String">
+    	SELECT SA_BANKBOOK_IMAGE FROM STORE_ACCOUNT
+    	WHERE SI_CODE = #{si_code}
+    </select>
+    <update id="updateStoreAccount">
+    	UPDATE STORE_ACCOUNT SET
+		SA_PASSWORD = #{sa_password},
+		SA_REP_NAME = #{sa_rep_name},
+		SA_BANKBOOK_IMAGE = #{sa_bankbook_image},
+		SA_BUSINESS_REGISTRATION_IMAGE = #{sa_business_registration_image},
+		SA_EMAIL = #{sa_email}
+		WHERE SI_CODE = #{si_code}
+    </update>
+    <select id="pendingMenuImg" resultType="StoreMenuVO">
+    	SELECT * FROM MENU m
+    	INNER JOIN
+    	STORE_INFO si
+    	ON (m.SI_CODE = si.SI_CODE)
+    	WHERE m.M_PENDING_IMG IS NOT NULL
+    </select>
+    <update id="confirmMenuImg">
+	    UPDATE MENU SET 
+	    M_IMG_FILE = (SELECT M_PENDING_IMG FROM MENU WHERE M_CODE = #{m_code} AND SI_CODE = #{si_code}), 
+	    M_PENDING_IMG = NULL 
+	    WHERE 
+	    M_CODE = #{m_code} AND SI_CODE = #{si_code}
+    </update>
+    <update id="rejectMenuImg">
+	    UPDATE MENU SET 
+	    M_PENDING_IMG = NULL 
+	    WHERE 
+	    M_CODE = #{m_code} AND SI_CODE = #{si_code}
+    </update>
+    
+</mapper>

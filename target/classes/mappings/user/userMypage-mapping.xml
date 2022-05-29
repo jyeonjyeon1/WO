@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMypageDAO">
+<resultMap type="ReviewVO" id="reviewVO">
+		<id column="UR_CODE" property="ur_code" jdbcType="VARCHAR"/>
+		<result column="U_ID" property="u_id" jdbcType="INTEGER" />
+		<result column="STR_CODE" property="str_code" jdbcType="VARCHAR" />
+		<result column="UR_REGDATE" property="ur_regdate" jdbcType="TIMESTAMP"/>
+		<result column="UR_STAR" property="ur_star" jdbcType="INTEGER"/>
+		<result column="UR_PIC_URL" property="ur_pic_url" jdbcType="VARCHAR" />
+		<result column="UR_CONTENT" property="ur_content" jdbcType="VARCHAR" />
+		<result column="O_CODE" property="o_code" jdbcType="VARCHAR" />
+		<result column="UR_OPEN" property="ur_open" jdbcType="BOOLEAN" />
+		<result column="UR_ANS" property="ur_ans" jdbcType="VARCHAR" />
+		<result column="O_LIST" property="o_list" jdbcType="VARCHAR" />
+		<result column="O_LIST_DETAIL" property="o_list_detail" jdbcType="VARCHAR" />
+		
+		<result column="SI_NAME" property="si_name" jdbcType="VARCHAR" />
+		<result column="SI_LOC" property="si_loc" jdbcType="VARCHAR" />
+		
+		<result column="DIF_DATE" property="dif_date" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<resultMap type="CouponVO" id="couponVO">
+		<id column="C_CODE" property="c_code" jdbcType="VARCHAR"/>
+		<result column="C_CODE" property="ct_code" jdbcType="VARCHAR" />
+		<result column="C_NANSU" property="c_nansu" jdbcType="VARCHAR" />
+		<result column="C_STARTDATE" property="c_startdate" jdbcType="VARCHAR"/>
+		<result column="C_ENDDATE" property="c_enddate" jdbcType="VARCHAR"/>
+		<result column="C_USED" property="c_used" jdbcType="BOOLEAN" />
+		<result column="C_USEDDATE" property="c_useddate" jdbcType="TIMESTAMP" />
+		
+		<result column="U_ID" property="u_id" jdbcType="VARCHAR" />
+		
+		<result column="SI_CODE" property="si_code" jdbcType="BOOLEAN" />
+		<result column="CT_NAME" property="ct_name" jdbcType="VARCHAR" />
+		<result column="CT_CONTENT" property="ct_content" jdbcType="VARCHAR"/>
+		<result column="CT_TYPE" property="ct_type" jdbcType="BOOLEAN" />
+		<result column="CT_NANSU" property="ct_nansu" jdbcType="VARCHAR" />
+		<result column="CT_STARTDATE" property="ct_startdate" jdbcType="VARCHAR" />
+		<result column="CT_ENDDATE" property="ct_enddate" jdbcType="VARCHAR" />
+		<result column="CT_DISCOUNT_TYPE" property="ct_discount_type" jdbcType="BOOLEAN" />
+		<result column="CT_DISCOUNT" property="ct_discount" jdbcType="INTEGER" />
+		<result column="CT_DAY" property="ct_day" jdbcType="INTEGER" />
+		
+	</resultMap>
+	<select id="reviewList" resultType="ReviewVO" resultMap="reviewVO">
+		SELECT UR.*, O.O_LIST, O.O_LIST_DETAIL, SI.SI_NAME, SI.SI_LOC,  DATE_PART('DAY', CURRENT_TIMESTAMP - UR.UR_REGDATE::DATE) AS DIF_DATE
+		FROM USER_REVIEW UR JOIN ORDERS O ON UR.O_CODE = O.O_CODE JOIN STORE_INFO SI ON SI.SI_CODE = O.SI_CODE 
+		WHERE UR.U_ID = #{u_id} ORDER BY UR_REGDATE DESC;
+	</select>
+	
+	
+	
+	<insert id="insertReview" parameterType="reviewVO">
+		INSERT INTO USER_REVIEW
+			VALUES(#{o_code}, #{u_id}, 
+				(SELECT SI_CODE FROM ORDERS WHERE O_CODE = #{o_code}), 
+				DEFAULT, #{ur_star}, #{ur_pic_url}, #{ur_content}, #{o_code}, DEFAULT, DEFAULT)
+	</insert>
+	<select id="userPointList" resultType="PointVO">
+		SELECT * FROM 
+		POINT a 
+		INNER JOIN 
+		USERS b ON (a.U_ID = b.U_ID)
+		INNER JOIN 
+		STORE_INFO c ON (a.SI_CODE = c.SI_CODE)
+		WHERE a.U_ID = #{u_id}
+		ORDER BY PT_SEQ DESC
+	</select>
+	
+	<insert id="myWish">
+		INSERT INTO LIKE_STORE VALUES(#{u_id}, #{si_code}, default)
+	</insert>
+	
+	<select id="myWishList" resultType="UserWishVO" parameterType="UserWishVO">
+		
+		SELECT * FROM LIKE_STORE store
+		INNER JOIN 
+		STORE_INFO info
+		ON (info.SI_CODE = store.SI_CODE )
+		WHERE store.U_ID = #{u_id}
+		ORDER BY
+        ls_seq DESC limit #{cri.amount} offset (#{cri.pageNum}-1) * #{cri.amount}
+      	
+		
+	</select>
+	
+	<select id="myWishListCount" resultType="int" parameterType="UserWishVO">
+		SELECT COUNT(*) FROM LIKE_STORE store
+		INNER JOIN 
+		STORE_INFO info
+		ON (info.SI_CODE = store.SI_CODE )
+		WHERE store.U_ID = #{u_id}
+	</select>
+	
+	
+	<select id="usableCouponList" resultType="CouponVO" resultMap="couponVO">
+		SELECT * 
+			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 
+			WHERE U_ID = #{u_id} AND C_USED='FALSE' AND CURRENT_DATE <![CDATA[<=]]> C_ENDDATE
+	</select>
+	
+	<select id="usedCouponList" resultType="CouponVO" resultMap="couponVO">
+		SELECT * 
+			FROM COUPON C JOIN COUPON_TEMPLATE CT ON C.CT_SEQ = CT.CT_SEQ 
+			WHERE U_ID = #{u_id} AND C_USED='TRUE' OR CURRENT_DATE <![CDATA[>=]]> C_ENDDATE
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,66 @@
+INSERT INTO menu (m_code,m_oos,m_name,m_img_file,mg_code,si_code,mg_seq) VALUES
+	 ('16003',false,'감자빵','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/%EC%B4%88%EC%BD%94%EC%B9%A9%EC%BF%A0%ED%82%A4.jpg','16','2222111212',30),
+	 ('16001',false,'조각케이크','imgurl_1','16','2222111212',30),
+	 ('11003',false,'캬라멜마끼아또','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%95%84%EC%9D%B4%EC%8A%A4.jpg','11','2222111212',25),
+	 ('16002',false,'마카롱','imgurl_1','16','2222111212',30),
+	 ('16004',false,'베이글','imgurl_1','16','2222111212',30),
+	 ('16005',false,'머핀샌드위치','imgurl_1','16','2222111212',30),
+	 ('15001',false,'1111','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','15','7845124578',82),
+	 ('25001',false,'야미','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('25002',false,'캬캬캬','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('11004',false,'카페 모카','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/ice_dutch.jpg','11','2222111212',25);
+INSERT INTO menu (m_code,m_oos,m_name,m_img_file,mg_code,si_code,mg_seq) VALUES
+	 ('25003',false,'울라라라','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('25004',false,'123123','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('25005',false,'오우야~','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('25006',false,'1232','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('11001',false,'아뭬리까노','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/americano.jpg','11','9988998888',74),
+	 ('11001',false,'아메리카노','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','2316512345',84),
+	 ('11002',false,'AA','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','7845124578',86),
+	 ('11002',false,'라떼~는 말야~','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','9988998888',74),
+	 ('12001',false,'고구마라떼','imgurl_1','12','2222111212',26),
+	 ('12002',false,'녹차라떼','imgurl_1','12','2222111212',26);
+INSERT INTO menu (m_code,m_oos,m_name,m_img_file,mg_code,si_code,mg_seq) VALUES
+	 ('12003',false,'곡물라떼','imgurl_1','12','2222111212',26),
+	 ('12004',false,'초코라떼','imgurl_1','12','2222111212',26),
+	 ('12005',false,'민트초코라떼','imgurl_1','12','2222111212',26),
+	 ('13001',false,'히비스커스 티','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/ice_dutch.jpg','13','2222111212',27),
+	 ('13002',false,'페퍼민트 티','imgurl_1','13','2222111212',27),
+	 ('13003',false,'얼그레이 티','imgurl_1','13','2222111212',27),
+	 ('13004',false,'캐모마일 티','imgurl_1','13','2222111212',27),
+	 ('13005',false,'샤인머스켓케일 주스','imgurl_1','13','2222111212',27),
+	 ('14002',false,'청포도에이드','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/%EC%B2%AD%ED%8F%AC%EB%8F%84%EC%97%90%EC%9D%B4%EB%93%9C.jpg','14','2222111212',28),
+	 ('14001',false,'복숭아에이드','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/%EB%B3%B5%EC%88%AD%EC%95%84%EC%97%90%EC%9D%B4%EB%93%9C.jpg','14','2222111212',28);
+INSERT INTO menu (m_code,m_oos,m_name,m_img_file,mg_code,si_code,mg_seq) VALUES
+	 ('14004',false,'딸기에이드','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/%EB%94%B8%EA%B8%B0%EC%97%90%EC%9D%B4%EB%93%9C.jpg','14','2222111212',28),
+	 ('14003',false,'레몬에이드','imgurl_1','14','2222111212',28),
+	 ('14005',false,'라임모히또에이드','imgurl_1','14','2222111212',28),
+	 ('15001',false,'플레인 요거트스무디','imgurl_1','15','2222111212',29),
+	 ('15002',false,'블루베리 요거트스무디','imgurl_1','15','2222111212',29),
+	 ('15003',false,'딸기 요거트스무디','imgurl_1','15','2222111212',29),
+	 ('15004',false,'망고 요거트스무디','imgurl_1','15','2222111212',29),
+	 ('15005',false,'커피 쉐이크','imgurl_1','15','2222111212',29),
+	 ('25007',false,'캬캬캬캬캬','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('24002',false,'음료입니다','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','24','2222111212',69);
+INSERT INTO menu (m_code,m_oos,m_name,m_img_file,mg_code,si_code,mg_seq) VALUES
+	 ('24003',false,'345345','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','24','2222111212',69),
+	 ('11003',false,'AAaaa12312314e','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','7845124578',86),
+	 ('25008',false,'이렇게바꿀것이다','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','25','2222111212',70),
+	 ('11001',false,'암뭬뤼칸오~','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','7854123659',77),
+	 ('22001',false,'드래곤의 피','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','22','2222111212',66),
+	 ('11005',false,'바닐라 라떼','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%95%84%EC%9D%B4%EC%8A%A4.jpg','11','2222111212',25),
+	 ('11001',false,'What''s Americano','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','7845124578',78),
+	 ('12001',false,'쥬스','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','12','7845124578',79),
+	 ('11002',true,'카페라떼','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%95%84%EC%9D%B4%EC%8A%A4.jpg','11','2222111212',25),
+	 ('17001',false,'헤헤','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','17','7845124578',87);
+INSERT INTO menu (m_code,m_oos,m_name,m_img_file,mg_code,si_code,mg_seq) VALUES
+	 ('17002',false,'지현이바보','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','17','7845124578',87),
+	 ('11004',false,'테스트테스트','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','7845124578',78),
+	 ('24004',false,'gkgkgk','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','24','2222111212',69),
+	 ('24005',false,'ggg','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','24','2222111212',69),
+	 ('12001',false,'아메리카노아님','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','12','8989564578',91),
+	 ('11001',false,'아메리카노','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','8989564578',90),
+	 ('11001',true,'아메리카노','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/americano.jpg','11','2222111212',25),
+	 ('11001',false,'아메리카노','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','1256963214',92),
+	 ('11002',false,'ㅁㄴㄹㄹ','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','1256963214',92),
+	 ('11001',false,'아메리카노','https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png','11','7788994455',94);

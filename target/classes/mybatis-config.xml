@@ -7,8 +7,58 @@
 <configuration>
 	<typeAliases> <!-- 특정 클래스의 별칭(Alias)을 선언 -->
 		<typeAlias alias="UserVO" type="three.aws.wo.user.vo.UserVO" />
+		<typeAlias alias="IndexVO" type="three.aws.wo.store.vo.IndexVO" />
+		<typeAlias alias="BasketVO" type="three.aws.wo.user.vo.BasketVO" />
+		<typeAlias alias="UserSMSListVO" type="three.aws.wo.user.vo.UserSMSListVO" />
+		<typeAlias alias="OrdersVO" type="three.aws.wo.user.vo.OrdersVO" />
+		<typeAlias alias="ReviewVO" type="three.aws.wo.user.vo.ReviewVO" />
+		<typeAlias alias="UserWishVO" type="three.aws.wo.user.vo.UserWishVO" />
+		<typeAlias alias="StoreVO" type="three.aws.wo.store.vo.StoreVO" />
+		<typeAlias alias="StoreFormVO" type="three.aws.wo.store.vo.StoreFormVO" />
+		<typeAlias alias="StoreKioskVO" type="three.aws.wo.store.vo.StoreKioskVO" />
+		<typeAlias alias="StoreMenuVO" type="three.aws.wo.store.vo.StoreMenuVO" />
+		<typeAlias alias="StoreMenuGroupVO" type="three.aws.wo.store.vo.StoreMenuGroupVO" />
+		<typeAlias alias="StoreOptionGroupVO" type="three.aws.wo.store.vo.StoreOptionGroupVO" />
+		<typeAlias alias="StoreOptionVO" type="three.aws.wo.store.vo.StoreOptionVO" />
+		<typeAlias alias="MenuBasicOptionVO" type="three.aws.wo.store.vo.MenuBasicOptionVO" />
+		<typeAlias alias="MenuAndOptionVO" type="three.aws.wo.store.vo.MenuAndOptionVO" />
+		<typeAlias alias="FranchiseVO" type="three.aws.wo.store.vo.FranchiseVO" />
+		<typeAlias alias="AdminVO" type="three.aws.wo.admin.vo.AdminVO" />
+		<typeAlias alias="CouponVO" type="three.aws.wo.admin.vo.CouponVO" />
+		<typeAlias alias="FAQStoreVO" type="three.aws.wo.admin.vo.FAQStoreVO" />
+		<typeAlias alias="FAQVO" type="three.aws.wo.admin.vo.FAQVO" />
+		<typeAlias alias="NoticeVO" type="three.aws.wo.admin.vo.NoticeVO" />
+		<typeAlias alias="OptionGroupVO" type="three.aws.wo.admin.vo.OptionGroupVO" />
+		<typeAlias alias="QnAVO" type="three.aws.wo.admin.vo.QnAVO" />
+		<typeAlias alias="TermsVO" type="three.aws.wo.admin.vo.TermsVO" />
+		<typeAlias alias="MessageVO" type="three.aws.wo.admin.vo.MessageVO" />
+		<typeAlias alias="PointVO" type="three.aws.wo.admin.vo.PointVO" />
+		<typeAlias alias="UserWishVO" type="three.aws.wo.user.vo.UserWishVO" />
+		<typeAlias alias="MenuListVO" type="three.aws.wo.user.vo.MenuListVO" />
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->
-		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mappings/user/user-mapping.xml" /> 
+ 		<mapper resource="mappings/user/userStore-mapping.xml" />  
+		<mapper resource="mappings/user/userLogin-mapping.xml" />
+		<mapper resource="mappings/user/userBoard-mapping.xml" />  
+		<mapper resource="mappings/user/userOrder-mapping.xml" /> 
+		<mapper resource="mappings/user/index-mapping.xml" /> 
+		<mapper resource="mappings/user/userMypage-mapping.xml" />
+		<mapper resource="mappings/user/userRegister-mapping.xml" />
+		
+		<mapper resource="mappings/admin/admin-mapping.xml" />
+		<mapper resource="mappings/admin/adminPoint-mapping.xml" />
+		<mapper resource="mappings/admin/adminSMS-mapping.xml" />
+		<mapper resource="mappings/admin/adminUser-mapping.xml" /> 
+		<mapper resource="mappings/admin/adminStore-mapping.xml" />
+		<mapper resource="mappings/admin/adminterms-mapping.xml" />
+		<mapper resource="mappings/admin/adminOrder-mapping.xml" /> 
+		
+		
+		<mapper resource="mappings/store/storeMenu-mapping.xml" /> 
+		<mapper resource="mappings/store/storeLogin-mapping.xml" />
+		<mapper resource="mappings/store/storePumjeol-mapping.xml" />
+		<mapper resource="mappings/store/storeInfo-mapping.xml" />
+		
 	</mappers>
 </configuration>

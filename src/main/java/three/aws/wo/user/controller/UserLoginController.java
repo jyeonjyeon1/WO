@@ -1,6 +1,3 @@
-session.setAttribute("wishCount", wishCount);
-
-
 package three.aws.wo.user.controller;
 
 import java.net.InetAddress;
@@ -74,7 +71,7 @@ public class UserLoginController {
 		
 		List<SearchKeywordVO> searchKeywords = userLoginService.searchKeywords();
 		session.setAttribute("searchKeywords", searchKeywords);
-session.setAttribute("wishCount", wishCount);
+		session.setAttribute("wishCount", wishCount);
 		session.setAttribute("cartStoreSession", cartStore);
 		session.setAttribute("cartListSession", cartList);
 		// session에 vo 저장

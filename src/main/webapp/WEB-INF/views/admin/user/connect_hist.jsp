@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,8 +9,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>워킹오더 관리자 페이지</title>
 
   <!-- Favicons -->
@@ -54,7 +54,7 @@
           <li><a id="user-mng" href="user_mng.admin">회원 관리</a></li>
           <li><a id="coupon-mng" href="coupon_mng.admin">쿠폰 관리</a></li>
           <li><a id="point-mng" href="point_mng.admin">포인트 관리</a></li>
-          <li class="active"><a id="connect-hist" href="connect_hist..admin">접속 이력</a></li>
+          <li class="active"><a id="connect-hist" href="connect_hist.admin">접속 이력</a></li>
         </ul>
         </li>
         <li class="sub-menu">
@@ -165,10 +165,10 @@
     <!-- allmenu import -->
     <%@ include file="../inc/admin_allmenu.jsp" %>
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 접속 이력</h3>
+        <h3><i class="fa fa-angle-right"></i> 로그인 내역</h3>
         <div class="row mt">
           <div class="col-lg-12">
-            <div class="card-header" style="font-size: 16px;">
+            <!-- <div class="card-header" style="font-size: 16px;">
               <i class="fa fa-search" style="font-size: 14px;"></i>
               접속 이력 검색
             </div>
@@ -263,7 +263,7 @@
                 </div>
 
               </div>
-            </form>
+            </form> -->
 
             <!-- 테이블 -->
             <div class="row mt">
@@ -279,124 +279,51 @@
                       <tr>
                         <th data-sortable="" style="max-width: 6%;"><a href="#" class="dataTable-sorter">번호</a></th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">IP</a></th>
-                        <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">방문화면</a></th>
-                        <th data-sortable="" style="width: 8%;"><a href="#" class="dataTable-sorter">요청방식</a></th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">아이디</a></th>
+                        <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">유형</a></th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">이름</a></th>
-                        <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">디바이스</a></th>
                         <th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">브라우저</a></th>
                         <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">시간</a></th>
                       </tr>
                     </thead>
 
                     <tbody>
+                    
+                    <c:forEach var="loghistory" items="${visitHistory}" varStatus="vs">
+                     <tr>
+                        <td>${vs.count }</td>
+                        <td>${loghistory.vh_ip }</td>
+                        <td>${loghistory.u_id }</td>
+                        <td>${loghistory.u_type }</td>
+                        <td>${loghistory.u_name }</td>
+                        <td>${loghistory.vh_browser }</td>
+                        <td><fmt:formatDate value="${loghistory.vh_time }" pattern="yy-MM-dd a hh:mm"/></td>
+                      </tr>
+                    </c:forEach>
                       <tr>
                         <td>1</td>
                         <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
                         <td>tommy</td>
+                        <td>일반</td>
                         <td>이승재</td>
-                        <td>Iphone</td>
                         <td>Safari</td>
                         <td>2022.04.16 02:20:46</td>
                       </tr>
                       <tr>
-                        <td>2</td>
+                        <td>1</td>
                         <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
-                        <td>etgohome8</td>
-                        <td>홍민지</td>
-                        <td>Mobile</td>
-                        <td>Safari</td>
-                        <td>2022.04.16 02:20:46</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
-                        <td>jyeon</td>
-                        <td>G마스터</td>
-                        <td>PC</td>
-                        <td>Chrome</td>
-                        <td>2022.04.16 02:20:46</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
-                        <td>yuki</td>
-                        <td>유키</td>
-                        <td>PC</td>
-                        <td>Edge</td>
-                        <td>2022.04.16 02:20:46</td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
-                        <td>gyublin</td>
-                        <td>규블린</td>
-                        <td>PC</td>
-                        <td>Safaris</td>
-                        <td>2022.04.16 02:20:46</td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
-                        <td>rabbit</td>
-                        <td>토끼</td>
-                        <td>Iphone</td>
-                        <td>Safari</td>
-                        <td>2022.04.16 02:20:46</td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
                         <td>tommy</td>
+                        <td>일반</td>
                         <td>이승재</td>
-                        <td>Iphone</td>
                         <td>Safari</td>
                         <td>2022.04.16 02:20:46</td>
                       </tr>
                       <tr>
-                        <td>8</td>
+                        <td>1</td>
                         <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
                         <td>tommy</td>
+                        <td>일반</td>
                         <td>이승재</td>
-                        <td>Iphone</td>
-                        <td>Safari</td>
-                        <td>2022.04.16 02:20:46</td>
-                      </tr>
-                      <tr>
-                        <td>9</td>
-                        <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
-                        <td>tommy</td>
-                        <td>이승재</td>
-                        <td>Iphone</td>
-                        <td>Safari</td>
-                        <td>2022.04.16 02:20:46</td>
-                      </tr>
-                      <tr>
-                        <td>10</td>
-                        <td>192.168.0.205</td>
-                        <td>/index</td>
-                        <td>GET</td>
-                        <td>tommy</td>
-                        <td>이승재</td>
-                        <td>Iphone</td>
                         <td>Safari</td>
                         <td>2022.04.16 02:20:46</td>
                       </tr>

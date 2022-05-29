@@ -64,4 +64,18 @@
 		SELECT COUNT(*) FROM SEARCH_BAR
 	</select>
 	
+	<insert id="insertKeyword">
+		INSERT INTO SEARCH_BAR VALUES (DEFAULT, #{sb_keyword},#{sb_url})
+	</insert>
+	<update id="updateKeyword">
+		UPDATE SEARCH_BAR SET SB_KEYWORD =#{sb_keyword}, 
+		SB_URL = #{sb_url} WHERE SB_SEQ = #{sb_seq}
+	</update>
+	<delete id="deleteKeyword">
+		DELETE FROM SEARCH_BAR 
+		<if test ="sb_seq != null">
+			WHERE SB_SEQ = #{sb_seq}
+		</if>
+	</delete>
+	
 </mapper>

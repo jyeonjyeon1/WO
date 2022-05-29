@@ -40,6 +40,13 @@
 	<select id="myorderDetail" resultType="OrdersVO">
 		SELECT * FROM ORDERS WHERE O_CODE = #{order}
 	</select>
+	<update id="updateLastDate">
+		UPDATE USERS SET U_LASTDATE = DEFAULT WHERE U_ID = #{u_id}
+	</update>
+	<insert id="visitHistory">
+		INSERT INTO VISIT_HISTORY(VH_SEQ,U_ID,VH_IP,VH_TIME,VH_BROWSER) VALUES
+		(DEFAULT, #{u_id}, #{vh_ip},DEFAULT, #{vh_browser})
+	</insert>
 	
 </mapper>
  

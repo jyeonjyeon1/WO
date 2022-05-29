@@ -56,4 +56,16 @@ public class APageDAO {
 	public int countSearchKeyword() {
 		return sqlSession.selectOne("APageDAO.countSearchKeyword");
 	}
+
+	public void insertKeyword(HashMap<String, Object> param) {
+		sqlSession.insert("APageDAO.insertKeyword",param);
+	}
+
+	public void updateKeyword(HashMap<String, Object> param) {
+		sqlSession.update("APageDAO.updateKeyword",param);
+	}
+
+	public void deleteKeyword(HashMap<String, Object> param) {
+		sqlSession.delete("APageDAO.deleteKeyword",param);
+	}
 }

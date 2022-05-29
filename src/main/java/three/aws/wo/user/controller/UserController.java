@@ -150,13 +150,13 @@ public class UserController {
 	@RequestMapping(value="/myChoice.user", method = RequestMethod.POST)
 	public String tomyInfoPage(UserVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		System.out.println("tomyInfoPage_post");
-		// ¼¼¼Ç¿¡ ÀÖ´Â member¸¦ °¡Á®¿Í memberº¯¼ö¿¡ ³Ö¾îÁÝ´Ï´Ù.
+		// ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Ö´ï¿½ memberï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ memberï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ý´Ï´ï¿½.
 		UserVO userSession = (UserVO) session.getAttribute("userSession");
-		System.out.println("¼¼¼Ç ¾òÀ½");
-		// ¼¼¼Ç¿¡ÀÖ´Â ºñ¹Ð¹øÈ£
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		// ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Ð¹ï¿½È£
 		String sessionPass = userSession.getU_password();
 		
-		// vo·Î µé¾î¿À´Â ºñ¹Ð¹øÈ£
+		// voï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£
 		String voPass = vo.getU_password();	
 		boolean pwdMatch = pwdEncoder.matches(voPass, sessionPass);
 		
@@ -165,7 +165,7 @@ public class UserController {
 			return "redirect:/myChoice.user";
 		}
 		
-		return "/mypage/mypage_choice2";
+		return "/mypage/mypage_info";
 	}
 	
 

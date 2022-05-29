@@ -16,4 +16,8 @@ public class AUserDAO {
 	public List<UserVO> userList(){
 		return sqlSession.selectList("AUserDAO.userList");
 	}
+
+	public List<UserVO> visitHistory() {
+		return sqlSession.selectList("AUserDAO.visitHistory");
+	}
 }

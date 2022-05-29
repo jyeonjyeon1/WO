@@ -310,11 +310,11 @@ public class AdminController {
 		return "/user/coupon_add";
 	}
 	
-	@GetMapping("/connect_hist.admin")
-	public String toconnect_hist() {
-		System.out.println("connect_hist");
-		return "/user/connect_hist";
-	}
+//	@GetMapping("/connect_hist.admin")
+//	public String toconnect_hist() {
+//		System.out.println("connect_hist");
+//		return "/user/connect_hist";
+//	}
 	
 	
 //	==================== etc ============================

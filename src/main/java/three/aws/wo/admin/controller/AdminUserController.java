@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +44,11 @@ public class AdminUserController {
 	private AOrderService aOrderService;
 	@Autowired
 	private UserOrderService userOrderService;
-	//회원 관리 화면
+	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
+
+	// 회원 관리 화면
 	@RequestMapping("/user_mng.admin")
 	public String userList(UserVO vo, Model model) {
 		List<UserVO> userList = aUserService.userList();
@@ -63,13 +69,13 @@ public class AdminUserController {
 		model.addAttribute("point_percentage", point_percentage);
 		return "/user/point_mng";
 	}
-	
-	//포인트 설정
+
+	// 포인트 설정
 	@ResponseBody
 	@RequestMapping("/changePoint.admin")
 	public int changePoint(@RequestBody HashMap<String, String> param) {
-		//***********false 면 포인트 사용 true면 포인트 미사용*********
-		String point_use = (param.get("point_use")).equals("true")? "false" : "true"; //반대임 ㅋㅋ
+		// ***********false 면 포인트 사용 true면 포인트 미사용*********
+		String point_use = (param.get("point_use")).equals("true") ? "false" : "true"; // 반대임 ㅋㅋ
 		String point_percentage = param.get("point_percentage");
 		HashMap<String, String> paramMapping = new HashMap<String, String>();
 		paramMapping.put("point_use", point_use);
@@ -77,7 +83,7 @@ public class AdminUserController {
 		System.out.println(point_use);
 		System.out.println(point_percentage);
 		aOrderService.changePoint(paramMapping);
-		
+
 		return 0;
 	}
 
@@ -265,4 +271,25 @@ public class AdminUserController {
 
 	}
 
+	@RequestMapping("/connect_hist.admin")
+	public String toconnect_hist(Model model) {
+		System.out.println("connect_hist");
+		List<UserVO> vo = aUserService.visitHistory();
+		model.addAttribute("visitHistory",vo);
+		
+		return "/user/connect_hist";
+	}
+	@RequestMapping("/updateUser.admin")
+	public String updateUser(UserVO vo) {
+		System.out.println(vo);
+		String u_id = vo.getU_id();
+		if (vo.getU_password() == null || (vo.getU_password()).equals("")) {
+			String pwd = "";//aUserService.getOriginalPass(vo);
+			vo.setU_password(pwd);
+		} else {
+			vo.setU_password(pwdEncoder.encode(vo.getU_password()));
+		}
+		System.out.println("유저 수정 완료 DB확인");
+		return "redirect:/user_mng.admin";
+	}
 }

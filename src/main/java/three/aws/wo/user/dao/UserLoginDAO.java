@@ -49,4 +49,12 @@ public class UserLoginDAO {
 		return sqlSession.selectList("UserLoginDAO.searchKeywords");
 	}
 
+	public void updateLastDate(String u_id) {
+		sqlSession.update("UserLoginDAO.updateLastDate",u_id);
+	}
+
+	public void visitHistory(HashMap<String, String> map) {
+		sqlSession.insert("UserLoginDAO.visitHistory", map);
+	}
+
 }

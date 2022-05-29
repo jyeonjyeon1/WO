@@ -46,4 +46,6 @@ public class BasketVO {
 	private String si_addr_road;
 	private String si_addr_detail;
 	
+	private int m_seq;
+	
 }

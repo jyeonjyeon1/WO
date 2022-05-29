@@ -22,5 +22,19 @@ public class UserMenuListImpl implements UserMenuListService {
 	public List<MenuListVO> menuList() {
 		return userMenuListDAO.menuList();
 	}
+	
+	@Override
+	public List<MenuListVO> optionList() {
+		return userMenuListDAO.optionList();
+	}
+	
+	@Override
+	public List<MenuListVO> basicOptionList() {
+		return userMenuListDAO.basicOptionList();
+	}
+	
+	/*
+	 * @Override public void addMenu(BasketVO vo) { userMenuListDAO.addMenu(vo); }
+	 */
 
 }

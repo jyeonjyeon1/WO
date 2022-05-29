@@ -141,11 +141,11 @@ public class AdminController {
 //		return "/page/banner_mng";
 //	}
 	
-	@GetMapping("/doc_form.admin")
-	public String todoc_form() {
-		System.out.println("doc_form");
-		return "/page/doc_form";
-	}
+//	@GetMapping("/doc_form.admin")
+//	public String todoc_form() {
+//		System.out.println("doc_form");
+//		return "/page/doc_form";
+//	}
 	
 	// @GetMapping("/drink_recom.admin")
 	// public String todrink_recom() {
@@ -153,23 +153,23 @@ public class AdminController {
 	// 	return "/page/drink_recom";
 	// }
 	
-	@GetMapping("/policy_add.admin")
-	public String topolicy_add() {
-		System.out.println("policy_add");
-		return "/page/policy_add";
-	}
-	
-	@GetMapping("/policy_mng.admin")
-	public String topolicy_mng() {
-		System.out.println("policy_mng");
-		return "/page/policy_mng";
-	}
-	
-	@GetMapping("/policy_update.admin")
-	public String topolicy_update() {
-		System.out.println("policy_update");
-		return "/page/policy_update";
-	}
+//	@GetMapping("/policy_add.admin")
+//	public String topolicy_add() {
+//		System.out.println("policy_add");
+//		return "/page/policy_add";
+//	}
+//	
+//	@GetMapping("/policy_mng.admin")
+//	public String topolicy_mng() {
+//		System.out.println("policy_mng");
+//		return "/page/policy_mng";
+//	}
+//	
+//	@GetMapping("/policy_update.admin")
+//	public String topolicy_update() {
+//		System.out.println("policy_update");
+//		return "/page/policy_update";
+//	}
 	
 	// @GetMapping("/searchbar_mng.admin")
 	// public String tosearchbar_mng() {
@@ -177,23 +177,23 @@ public class AdminController {
 	// 	return "/page/searchbar_mng";
 	// }
 	
-	@GetMapping("/terms_add.admin")
-	public String toterms_add() {
-		System.out.println("terms_add");
-		return "/page/terms_add";
-	}
-	
-	@GetMapping("/terms_mng.admin")
-	public String toterms_mng() {
-		System.out.println("terms_mng");
-		return "/page/terms_mng";
-	}
-	
-	@GetMapping("/terms_update.admin")
-	public String toterms_update() {
-		System.out.println("terms_update");
-		return "/page/terms_update";
-	}
+//	@GetMapping("/terms_add.admin")
+//	public String toterms_add() {
+//		System.out.println("terms_add");
+//		return "/page/terms_add";
+//	}
+//	
+//	@GetMapping("/terms_mng.admin")
+//	public String toterms_mng() {
+//		System.out.println("terms_mng");
+//		return "/page/terms_mng";
+//	}
+//	
+//	@GetMapping("/terms_update.admin")
+//	public String toterms_update() {
+//		System.out.println("terms_update");
+//		return "/page/terms_update";
+//	}
 //	==================== settlement ============================
 	@GetMapping("/pg_comm.admin")
 	public String topg_comm() {

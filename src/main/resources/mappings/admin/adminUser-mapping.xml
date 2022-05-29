@@ -23,4 +23,11 @@
 	<select id="userList" resultType="UserVO" resultMap="userVO">
 		SELECT * FROM USERS ORDER BY U_SEQ DESC
 	</select>
+	<select id="visitHistory" resultType="UserVO">
+		SELECT * FROM VISIT_HISTORY vh
+		INNER JOIN
+		USERS u
+		ON (vh.U_ID = u.U_ID)
+		ORDER BY vh.VH_SEQ DESC
+	</select>
 </mapper>

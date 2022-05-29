@@ -46,4 +46,12 @@ public class UserLoginServiceImpl implements UserLoginService {
 	public List<SearchKeywordVO> searchKeywords() {
 		return userLoginDAO.searchKeywords();
 	}
+	@Override
+	public void updateLastDate(String u_id) {
+		userLoginDAO.updateLastDate(u_id);
+	}
+	@Override
+	public void visitHistory(HashMap<String, String> map) {
+		userLoginDAO.visitHistory(map);
+	}
 }

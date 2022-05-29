@@ -38,43 +38,41 @@ public class AdminNoticeController {
 		}
 
 		
-//		ÀÚÁÖ ¹¯´Â Áú¹® ////////////////////////////////////////
 
 		List<FAQVO> toptenList =noticeService.toptenList();
-		List<FAQVO> orderfaqList =noticeService.orderfaqList();
-		List<FAQVO> cancelfaqList =noticeService.cancelfaqList();
-		List<FAQVO> userfaqList =noticeService.userfaqList();
-		List<FAQVO> pointfaqList =noticeService.pointfaqList();
-		List<FAQVO> etcfaqList =noticeService.etcfaqList();
+		List<FAQVO> faqList =noticeService.faqList();
+//		List<FAQVO> cancelfaqList =noticeService.cancelfaqList();
+//		List<FAQVO> userfaqList =noticeService.userfaqList();
+//		List<FAQVO> pointfaqList =noticeService.pointfaqList();
+//		List<FAQVO> etcfaqList =noticeService.etcfaqList();
 
-//		¿öÅ·¿À´õ ¼Ò½Ä ////////////////////////////////////////
+
 
 		List<NoticeVO> newsList =noticeService.newsList();
-		List<NoticeVO> noticeList =noticeService.noticeList();
-		List<NoticeVO> eventList =noticeService.eventList();
+//		List<NoticeVO> noticeList =noticeService.noticeList();
+//		List<NoticeVO> eventList =noticeService.eventList();
 		
-//		1:1 ¹®ÀÇ ////////////////////////////////////////
+//		1:1 
 
 		List<QnAVO> myqnaList =noticeService.myqnaList(u_id);
 		
 		
 		//System.out.println(noticeList);
-//		ÀÚÁÖ ¹¯´Â Áú¹® ////////////////////////////////////////
 
 		model.addAttribute("toptenList" ,toptenList);
-		model.addAttribute("orderfaqList" ,orderfaqList);
-		model.addAttribute("cancelList" ,cancelfaqList);
-		model.addAttribute("userfaqList" ,userfaqList);
-		model.addAttribute("pointfaqList" ,pointfaqList);
-		model.addAttribute("etcfaqList" ,etcfaqList);
+		model.addAttribute("faqList" ,faqList);
+//		model.addAttribute("cancelList" ,cancelfaqList);
+//		model.addAttribute("userfaqList" ,userfaqList);
+//		model.addAttribute("pointfaqList" ,pointfaqList);
+//		model.addAttribute("etcfaqList" ,etcfaqList);
 		
-//		¿öÅ·¿À´õ ¼Ò½Ä ////////////////////////////////////////
+
 
 		model.addAttribute("newsList" ,newsList);
-		model.addAttribute("noticeList" ,noticeList);
-		model.addAttribute("eventList" ,eventList);
+//		model.addAttribute("noticeList" ,noticeList);
+//		model.addAttribute("eventList" ,eventList);
 		
-//		1:1 ¹®ÀÇ ////////////////////////////////////////
+//		1:1
 
 		model.addAttribute("myqnaList" ,myqnaList);
 		
@@ -127,7 +125,7 @@ public class AdminNoticeController {
 		if(qa_title.length() > 15) {
 			qa_title = qa_title.substring(0,15) + "...";
 		}
-		String sms_text = "[" + qa_title + "] ¿¡ ´ëÇÑ ´äº¯ÀÌ µî·ÏµÇ¾ú½À´Ï´Ù.";
+		String sms_text = "[" + qa_title + "] ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½äº¯ï¿½ï¿½ ï¿½ï¿½ÏµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.";
 		System.out.println(u_tel);
 		int result = ms.sendSMS(u_tel, sms_text, "SMS");
 

@@ -15,7 +15,7 @@
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
   <!-- 테이블용 css -->
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-
+	
 </head>
 
 <body>
@@ -233,20 +233,76 @@
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">정책명</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">등록일시</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">수정일시</a></th>
+                      	<th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter"> </a></th>
                       </tr>
                     </thead>
 
                     <tbody>
                     <c:forEach items="${ policyList}" var="policyList" varStatus="vs">
-                    <tr>
+                    <tr id="deleteForm${vs.index }">
                         <td>${ vs.index}</td>
-                        <td>${ policyList.t_code}</td>
-                        <td><a href="policy_update.admin?t_code=${privacyList.t_code}">${ policyList.t_title}</a></td>
+                        <td id="t_code${vs.index}">${ policyList.t_code}</td>
+                        <td><a href="policy_update.admin?t_code=${policyList.t_code}">${ policyList.t_title}</a></td>
                         <td>${ policyList.t_regdate}</td>
                         <td>${ policyList.t_enfdate}</td>
+                        <td>
+                        <button onclick="deletePol${vs.index}()"
+							class="btn btn-danger btn-xs">
+								<i class="fa fa-trash-o "></i>
+							</button>
+                        </td>
                       </tr>
                     
-                    
+                    <script>
+	
+	function deletePol${vs.index}(){
+		console.log("ff");
+		var t_code = $("#t_code${vs.index}").text();
+		Swal.fire({
+			  title: "삭제하시겠습니까??",
+			  icon: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#3085d6",
+			  cancelButtonColor: "#d33",
+			  confirmButtonText: "삭제",
+				  cancelButtonText: "아니오"
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  $.ajax({
+			    	    type: "POST",
+			    	    url: "/deletePol.admin",
+			    	    data: JSON.stringify({"t_code": t_code}), 
+			    	    dataType: "json",
+			    	    contentType: "application/json",
+			    	    success: function (data) {
+			    	        if (data == 1) {
+				    	        Swal.fire({
+				    	            icon: "success",
+				    	            title: "정책 삭제 완료",
+				    	            showConfirmButton: false,
+				    	            timer: 1500
+				    	        });
+				    	        $("#deleteForm${vs.index}").remove();
+			    	        }else if(data == 0){
+			    	        	Swal.fire({
+				    	            icon: "warning",
+				    	            title: "문서 삭제 실패",
+				    	            showConfirmButton: false,
+				    	            timer: 1500
+				    	        });
+			    	        }
+			    	    },
+			    	    error: function (data) {
+			    	        console.log("배너 삭제 통신에러");
+			    	    }
+			 		});//ajax end  
+			  }//if (result.isConfirmed)
+			})//then((result)
+		
+		
+		
+	}
+	</script>
                     </c:forEach>
                       
                       

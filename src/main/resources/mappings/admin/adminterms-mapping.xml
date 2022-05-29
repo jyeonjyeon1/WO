@@ -49,6 +49,23 @@
 		SELECT * FROM TERMS WHERE T_CODE = #{t_code}
 		</select>
     
+	<select id="tPolicyCodeMax" resultType="int" >
+		SELECT MAX(CAST(SPLIT_PART(T_CODE::VARCHAR,'_',2) as INTEGER)) from TERMS 
+		WHERE T_TYPE='privacy';
+	</select>
+	
+	<insert id="insertPolicy">
+	INSERT INTO
+    	TERMS(T_TYPE, T_CODE, T_TITLE, T_CONTENT, T_REGDATE ) 
+    	VALUES (#{t_type},#{t_code} ,#{t_title}, #{t_content}, #{t_regdate})
+	
+	</insert>
+	
+	<delete id="deletePol">
+		DELETE FROM TERMS WHERE T_CODE = #{T_CODE}
+	</delete>
+	
+	
 	
 	
 	

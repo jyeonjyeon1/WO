@@ -256,23 +256,19 @@
 
 
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">등록날짜</label>
-                  <div class="col-sm-10">
+                  <label class="col-lg-3 control-label">등록날짜</label>
+                  <div class="col-lg-9">
                     
                    
                     <input class="form-control round-form" id="t_regdate_input" type="date" value="<fmt:formatDate value="${termsOne.t_regdate }" pattern="yyyy-MM-dd"/>"
                       style="width: 30%;  ;display: inline-block;" > 
 					
                   </div>
-          <!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
                 </div>
                 
                     <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">마지막 수정날짜</label>
-                  <div class="col-sm-10">
+                  <label class="col-lg-3 control-label">마지막 수정날짜</label>
+                  <div class="col-lg-9">
                     
                     
                     <input class="form-control round-form" type="date"  id="t_enfdate_input"  value="<fmt:formatDate value="${termsOne.t_enfdate }" pattern="yyyy-MM-dd"/>" 

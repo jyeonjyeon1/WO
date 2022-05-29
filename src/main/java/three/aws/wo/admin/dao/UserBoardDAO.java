@@ -17,49 +17,49 @@ public class UserBoardDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
 	
-//	자주 묻는 질문 ////////////////////////////////////////
+
 	
 	public List<FAQVO> toptenList() {
 		return sqlSession.selectList("UserBoardDAO.toptenList");
 	}
 	
-	public List<FAQVO> orderfaqList() {
-		return sqlSession.selectList("UserBoardDAO.orderfaqList");
+	public List<FAQVO> faqList() {
+		return sqlSession.selectList("UserBoardDAO.faqList");
 	}
 	
-	public List<FAQVO> cancelfaqList() {
-		return sqlSession.selectList("UserBoardDAO.cancelfaqList");
-	}
+//	public List<FAQVO> cancelfaqList() {
+//		return sqlSession.selectList("UserBoardDAO.cancelfaqList");
+//	}
+//	
+//	public List<FAQVO> userfaqList() {
+//		return sqlSession.selectList("UserBoardDAO.userfaqList");
+//	}
+//	
+//	public List<FAQVO> pointfaqList() {
+//		return sqlSession.selectList("UserBoardDAO.pointfaqList");
+//	}
+//	
+//	public List<FAQVO> etcfaqList() {
+//		return sqlSession.selectList("UserBoardDAO.etcfaqList");
+//	}
 	
-	public List<FAQVO> userfaqList() {
-		return sqlSession.selectList("UserBoardDAO.userfaqList");
-	}
-	
-	public List<FAQVO> pointfaqList() {
-		return sqlSession.selectList("UserBoardDAO.pointfaqList");
-	}
-	
-	public List<FAQVO> etcfaqList() {
-		return sqlSession.selectList("UserBoardDAO.etcfaqList");
-	}
-	
-//	워킹오더 소식 ////////////////////////////////////////
+
 
 
 	public List<NoticeVO> newsList() {
 		return sqlSession.selectList("UserBoardDAO.newsList");
 	}
+//	
+//	public List<NoticeVO> noticeList(){
+//		return sqlSession.selectList("UserBoardDAO.noticeList");
+//	}
+//	
+//	public List<NoticeVO> eventList() {
+//		return sqlSession.selectList("UserBoardDAO.eventList");
+//	}
 	
-	public List<NoticeVO> noticeList(){
-		return sqlSession.selectList("UserBoardDAO.noticeList");
-	}
-	
-	public List<NoticeVO> eventList() {
-		return sqlSession.selectList("UserBoardDAO.eventList");
-	}
-	
-//	user 1:1 문의 ////////////////////////////////////////
 
+//user 1:1
 
 	
 	public List<QnAVO> myqnaList(String u_id) { 
@@ -72,7 +72,7 @@ public class UserBoardDAO {
 	}
 	
 	
-//	admin 1:1 문의 ////////////////////////////////////////
+
 
 
 	
@@ -97,7 +97,7 @@ public class UserBoardDAO {
 	
 	
 	
-	////////////////////////////////////////////////////////
+
 	
 	public void updateVisits(HashMap<String, Integer> param) {
 		sqlSession.update("UserBoardDAO.updateVisits",param);		

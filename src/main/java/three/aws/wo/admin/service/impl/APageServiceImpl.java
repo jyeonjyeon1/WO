@@ -58,5 +58,16 @@ public class APageServiceImpl implements APageService {
 	public int countSearchKeyword() {
 		return aPageDAO.countSearchKeyword();
 	}
-	
+	@Override
+	public void insertKeyword(HashMap<String, Object> param) {
+		aPageDAO.insertKeyword(param);
+	}
+	@Override
+	public void updateKeyword(HashMap<String, Object> param) {
+		aPageDAO.updateKeyword(param);
+	}
+	@Override
+	public void deleteKeyword(HashMap<String, Object> param) {
+		aPageDAO.deleteKeyword(param);
+	}
 }

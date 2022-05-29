@@ -6,5 +6,6 @@ import three.aws.wo.user.vo.UserVO;
 
 public interface AUserService {
 	List<UserVO> userList();
+	List<UserVO> visitHistory();
 
 }

@@ -19,4 +19,9 @@ public class AUserServiceImpl implements AUserService{
 		return aUserDAO.userList();
 	}
 
+	@Override
+	public List<UserVO> visitHistory() {
+		return aUserDAO.visitHistory();
+	}
+
 }

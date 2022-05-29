@@ -19,11 +19,10 @@ public interface UserLoginService {
 	int snsLogin(String sns_id) throws Exception;
 
    	public UserVO encryption(String u_id) throws Exception;
-
 	void insertSNSUser(String kakaoId);
-
 	int checkSNSUser(int sns_seq);
-
 	List<SearchKeywordVO> searchKeywords();
+	void updateLastDate(String u_id);
+	void visitHistory(HashMap<String, String> map);
 
 }

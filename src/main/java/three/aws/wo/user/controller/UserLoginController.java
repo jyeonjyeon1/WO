@@ -1,5 +1,9 @@
 package three.aws.wo.user.controller;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,35 +46,71 @@ public class UserLoginController {
 		}
 	}
 
-	public void setLogin(String userID, String rememberId, HttpSession session, HttpServletResponse response)
+	public void setLogin(String userID, String rememberId, HttpSession session, HttpServletResponse response,HttpServletRequest request, String browser)
 			throws Exception {
 		UserVO vo = userLoginService.loggedin(userID, rememberId, session, response);
-		// System.out.println(vo);//¿©±â±îÁö vo ¹°°í µé¾î¿Â°Å
+		// System.out.println(vo);//ì—¬ê¸°ê¹Œì§€ vo ë¬¼ê³  ë“¤ì–´ì˜¨ê±°
 		Cookie cookie = new Cookie("rememberId", userID);
 		if (rememberId.equals("true")) {
 			cookie.setMaxAge(24 * 60 * 60 * 7);
 			response.addCookie(cookie);
 			System.out.println("rememberId true => " + cookie);
 		} else {
-			cookie.setMaxAge(0); // ÄíÅ° Á×ÀÎ ÈÄ Ãß°¡(¹Ù·Î ¼Ò¸ê)
+			cookie.setMaxAge(0); // ì¿ í‚¤ ì£½ì¸ í›„ ì¶”ê°€(ë°”ë¡œ ì†Œë©¸)
 			response.addCookie(cookie);
 		}
-		// À¯Àú ¾ÆÀÌµğ ¹Ş¾Æ¿È
-		// À¯Àú ¾ÆÀÌµğ·Î Àå¹Ù±¸´Ï Á¶È¸ ÇÔ.
+		// ìœ ì € ì•„ì´ë”” ë°›ì•„ì˜´
+		// ìœ ì € ì•„ì´ë””ë¡œ ì¥ë°”êµ¬ë‹ˆ ì¡°íšŒ í•¨.
 		List<BasketVO> cartList = userOrderService.cartList(userID);
-		// À¯ÀúÀå¹Ù±¸´Ï¿¡ ÀÖ´Â °¡°Ô ºÒ·¯¿È
+		// ìœ ì €ì¥ë°”êµ¬ë‹ˆì— ìˆëŠ” ê°€ê²Œ ë¶ˆëŸ¬ì˜´
 		StoreVO cartStore = userOrderService.cartStore(userID);
 		
 		List<SearchKeywordVO> searchKeywords = userLoginService.searchKeywords();
 		session.setAttribute("searchKeywords", searchKeywords);
-		// Àå¹Ù±¸´Ï Ãâ·ÂÇÔ.
+		// ì¥ë°”êµ¬ë‹ˆ ì¶œë ¥í•¨.
 		session.setAttribute("cartStoreSession", cartStore);
 		session.setAttribute("cartListSession", cartList);
-		// session¿¡ vo ÀúÀå
+		// sessionì— vo ì €ì¥
 		session.setAttribute("userSession", vo);
+		String ip = null;
+		//ë¡œê·¸ì¸ ê¸°ë¡
+		try {
+			boolean isLoopBack = true;
+			Enumeration<NetworkInterface> en;		
+			en = NetworkInterface.getNetworkInterfaces();
+			while(en.hasMoreElements()) {
+				NetworkInterface ni = en.nextElement();
+				if (ni.isLoopback())
+					continue;
+				Enumeration<InetAddress> inetAddresses = ni.getInetAddresses();
+				while(inetAddresses.hasMoreElements()) {
+					InetAddress ia = inetAddresses.nextElement();
+					if (ia.getHostAddress() != null && ia.getHostAddress().indexOf(".") != -1) {
+						ip = ia.getHostAddress();
+						System.out.println(ip);
+						isLoopBack = false;
+						break;
+					}
+				}
+				if (!isLoopBack)
+					break;
+			}
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+		visitHistory(userID,ip,browser);
 	}
 
-	// ¿ì¼± ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ ÈÄ ·Î±×ÀÎ ÁøÇà
+	private void visitHistory(String userID, String ip, String browser) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("u_id", userID);
+		map.put("vh_ip", ip);
+		map.put("vh_browser", browser);
+		System.out.println("visithistory"+map);
+		userLoginService.visitHistory(map);
+	}
+
+	// ìš°ì„  ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸ í›„ ë¡œê·¸ì¸ ì§„í–‰
 	@ResponseBody
 	@RequestMapping(value = "/loginCheck.user", method = RequestMethod.POST)
 	public int userLoginCheck(@RequestBody HashMap<String, String> param, HttpSession session,
@@ -83,42 +123,48 @@ public class UserLoginController {
 		if (encryption != null && pwdMatch == true) {
 			result = 1;
 		}
-		// ¿ì¼± ¾ÆÀÌµğ ºñ¹ø¹øÈ£°¡ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
+		// ìš°ì„  ì•„ì´ë”” ë¹„ë²ˆë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸
 		String userID = param.get("u_id");
-		// ¾ÆÀÌµğÀúÀåÇÏ±â Ã¼Å©Çß´ÂÁö °¡Á®¿È
+		// ì•„ì´ë””ì €ì¥í•˜ê¸° ì²´í¬í–ˆëŠ”ì§€ ê°€ì ¸ì˜´
 		String rememberId = param.get("rememberId");
 		System.out.println(rememberId);// true false
-		System.out.println("¼¼¼Ç : " + session);
-		if (result == 1) {// ÀÏÄ¡ÇÏ´Â °æ¿ì vo¸¦ °¡Á®¿È.
-			setLogin(userID, rememberId, session, response);
+		System.out.println("ì„¸ì…˜ : " + session);
+		String browser = param.get("browser");
+		System.out.println(param);
+		if (result == 1) {// ì¼ì¹˜í•˜ëŠ” ê²½ìš° voë¥¼ ê°€ì ¸ì˜´.
+			setLogin(userID, rememberId, session, response, request,browser);
+			userLoginService.updateLastDate(userID);
 		}
 		return result;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/kakaoLogin.user", method = RequestMethod.POST)
-	public int kakaoLogin(@RequestBody HashMap<String, Object> param, HttpSession session, HttpServletResponse response)
-			throws Exception {
+	public int kakaoLogin(@RequestBody HashMap<String, Object> param, HttpSession session, HttpServletResponse response,
+			HttpServletRequest request) throws Exception {
 		String id = Long.toString((long) param.get("id"));
 		System.out.println("kakao" + id);
 		String kakaoId = id.toString() + "@k";
-		// ·Î±×ÀÎ È®ÀÎ sns_seq °¡Á®¿À·Á´Â Çàµ¿,
+		// ë¡œê·¸ì¸ í™•ì¸ sns_seq ê°€ì ¸ì˜¤ë ¤ëŠ” í–‰ë™,
 		int sns_seq = userLoginService.snsLogin(kakaoId);
 		System.out.println(sns_seq);
-		if (sns_seq == 0) {// ¾Æ¿¹ Ã³À½ ·Î±×ÀÎ
-			// SNS_USERS Å×ÀÌºí¿¡ ¿ì¼± µî·Ï
+		if (sns_seq == 0) {// ì•„ì˜ˆ ì²˜ìŒ ë¡œê·¸ì¸
+			// SNS_USERS í…Œì´ë¸”ì— ìš°ì„  ë“±ë¡
 			userLoginService.insertSNSUser(kakaoId);
-			// ´Ù½Ã seq °¡Á®¿È
+			// ë‹¤ì‹œ seq ê°€ì ¸ì˜´
 			sns_seq = userLoginService.snsLogin(kakaoId);
 			System.out.println(sns_seq);
 		}
-		// °¡Á®¿Â sns_seq¿¡ u_id ÀÖ´ÂÁö È®ÀÎ
+		// ê°€ì ¸ì˜¨ sns_seqì— u_id ìˆëŠ”ì§€ í™•ì¸
 		System.out.println(sns_seq);
 		int result = userLoginService.checkSNSUser(sns_seq);
-		// result = 1ÀÌ¸é È¸¿ø°¡ÀÔ ¹ÌÁøÇà, 0ÀÏ°æ¿ì¿¡´Â È¸¿ø°¡ÀÔ ÁøÇàÇßÀ¸´Ï ¤¡¤º
+
+		// result = 1ì´ë©´ íšŒì›ê°€ì… ë¯¸ì§„í–‰, 0ì¼ê²½ìš°ì—ëŠ” íšŒì›ê°€ì… ì§„í–‰í–ˆìœ¼ë‹ˆ ã„±ã…Š
 		System.out.println(result);
+		String browser = (String)param.get("browser");
 		if (result == 0) {
-			setLogin(kakaoId, "false", session, response);
+			setLogin(kakaoId, "false", session, response, request,browser);
+			userLoginService.updateLastDate(kakaoId);
 			return result;
 		} else {
 			return sns_seq;
@@ -127,28 +173,30 @@ public class UserLoginController {
 
 	@ResponseBody
 	@RequestMapping("/naverLogin.user")
-	public int naverLogin(@RequestBody HashMap<String, String> param, HttpSession session, HttpServletResponse response)
-			throws Exception {
+	public int naverLogin(@RequestBody HashMap<String, String> param, HttpSession session, HttpServletResponse response,
+			HttpServletRequest request) throws Exception {
 		String id = param.get("id");
 		String naverId = id.toString() + "@n";
-		// ·Î±×ÀÎ È®ÀÎ sns_seq °¡Á®¿À·Á´Â Çàµ¿,
+		// ë¡œê·¸ì¸ í™•ì¸ sns_seq ê°€ì ¸ì˜¤ë ¤ëŠ” í–‰ë™,
 		int sns_seq = userLoginService.snsLogin(naverId);
 		System.out.println(sns_seq);
-		if (sns_seq == 0) {// ¾Æ¿¹ Ã³À½ ·Î±×ÀÎ
-			// SNS_USERS Å×ÀÌºí¿¡ ¿ì¼± µî·Ï
+		if (sns_seq == 0) {// ì•„ì˜ˆ ì²˜ìŒ ë¡œê·¸ì¸
+			// SNS_USERS í…Œì´ë¸”ì— ìš°ì„  ë“±ë¡
 			userLoginService.insertSNSUser(naverId);
-			// ´Ù½Ã seq °¡Á®¿È
+			// ë‹¤ì‹œ seq ê°€ì ¸ì˜´
 			sns_seq = userLoginService.snsLogin(naverId);
 			System.out.println(sns_seq);
 		}
-		// °¡Á®¿Â sns_seq¿¡ u_id ÀÖ´ÂÁö È®ÀÎ
+		// ê°€ì ¸ì˜¨ sns_seqì— u_id ìˆëŠ”ì§€ í™•ì¸
 		System.out.println(sns_seq);
 		int result = userLoginService.checkSNSUser(sns_seq);
-		// result = 1ÀÌ¸é È¸¿ø°¡ÀÔ ¹ÌÁøÇà, 0ÀÏ°æ¿ì¿¡´Â È¸¿ø°¡ÀÔ ÁøÇàÇßÀ¸´Ï ¤¡¤º
+		// result = 1ì´ë©´ íšŒì›ê°€ì… ë¯¸ì§„í–‰, 0ì¼ê²½ìš°ì—ëŠ” íšŒì›ê°€ì… ì§„í–‰í–ˆìœ¼ë‹ˆ ã„±ã…Š
 		System.out.println(result);
 		if (result == 0) {
+			String browser = param.get("browser");
 			String u_id = id.toString().substring(0, 10) + "@n";
-			setLogin(u_id, "false", session, response);
+			setLogin(u_id, "false", session, response, request,browser);
+			userLoginService.updateLastDate(u_id);
 			return result;
 		} else {
 			return sns_seq;

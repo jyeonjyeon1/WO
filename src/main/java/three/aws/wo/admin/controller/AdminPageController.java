@@ -176,9 +176,80 @@ public class AdminPageController {
 	@RequestMapping("/addSearchKeyword.admin")
 	public String addSearchKeyword(Model model) {
 		int cnt = aPageService.countSearchKeyword();
-		model.addAttribute("inputIndex",cnt+keyindex);
+		model.addAttribute("inputIndex",cnt+1);
 		keyindex++;
 		return "/page/searchbar_input";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping("/insertKeyword.admin")
+	public int insertKeyword(@RequestBody HashMap<String,Object> param) {
+		int result = 0;
+		System.out.println(param);
+		try {
+			aPageService.insertKeyword(param);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateKeyword.admin")
+	public int updateKeyword(@RequestBody HashMap<String,Object> param) {
+		int result = 0;
+		System.out.println(param);
+		try {
+			aPageService.updateKeyword(param);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteOneKeyword.admin")
+	public int deleteOneKeyword(@RequestBody HashMap<String,Object> param) {
+		int result = 0;
+		System.out.println(param);
+		try {
+			aPageService.deleteKeyword(param);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteKeyword.admin")
+	public int deleteKeyword(@RequestBody HashMap<String,String> param) {
+		int result = 0;
+		System.out.println(param);
+		String seqs = param.get("seqs");
+		String sb_seqs[] = seqs.split(",");
+		System.out.println("length"+sb_seqs.length);
+		System.out.println(sb_seqs);
+		try {
+			for(String seq : sb_seqs) {
+				System.out.println(seq);
+				HashMap<String,Object> map = new HashMap<String,Object>();
+				map.put("sb_seq", seq);
+				aPageService.deleteKeyword(map);
+			}
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@RequestMapping("/deleteAllKeyword.admin")
+	public String deleteAllKeyword(){
+		HashMap<String,Object> param = new HashMap<String,Object>();
+		aPageService.deleteKeyword(param);
+		return "redirect:/searchbar_mng.admin";
+	}
 }

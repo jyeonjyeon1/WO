@@ -24,5 +24,13 @@ public class UserVO {
 	private int u_point;				//보유 포인트
 	private boolean u_status;			//활성 상태
 	private Date u_regdate;
+	private Date u_lastdate; 
+	
+	///
+	private int vh_seq;
+	private Date vh_time;
+	private String vh_browser;
+	private String vh_ip;
+	
 
 }

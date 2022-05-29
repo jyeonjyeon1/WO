@@ -157,11 +157,25 @@
 							});
 				});
 		function loginCheck() {
+			var userAgent=navigator.userAgent.toLowerCase();
+			var browser;
+			if(userAgent.indexOf('edge')>-1){	
+				browser='Explorer Edge';
+			}else if(userAgent.indexOf('whale')>-1){	
+				browser='Naver Whale';
+			}else if(userAgent.indexOf('chrome')>-1){	
+				browser='Chrome';
+			}else if(userAgent.indexOf('firefox')>-1){	
+				browser='FireFox';
+			}else{	
+				browser='Explorer';
+			}
 			var rememberId = $("#rememberId").is(":checked");
 			var param = {
 				"u_id" : u_id_input,
 				"u_password" : u_pw_input,
-				"rememberId" : rememberId
+				"rememberId" : rememberId,
+				"browser" : browser
 			}
 			console.log(rememberId);
 			$.ajax({
@@ -224,11 +238,25 @@
 					console.log(Kakao.isInitialized()); // sdk초기화여부판단
 					//카카오로그인
 					function kakaoLogin() {
+						var userAgent=navigator.userAgent.toLowerCase();
+						var browser;
+						if(userAgent.indexOf('edge')>-1){	
+							browser='Explorer Edge';
+						}else if(userAgent.indexOf('whale')>-1){	
+							browser='Naver Whale';
+						}else if(userAgent.indexOf('chrome')>-1){	
+							browser='Chrome';
+						}else if(userAgent.indexOf('firefox')>-1){	
+							browser='FireFox';
+						}else{	
+							browser='Explorer';
+						}
 						Kakao.Auth.login({
 								success : function(response) {
 								Kakao.API.request({
 									url : '/v2/user/me',
 									success : function(response) {
+									response.browser = browser;
 									console.log(response);
 								//AJAX 카카오로그인
 									$.ajax({
@@ -291,10 +319,23 @@
 					});
 					
 					function naverLoginAjax(){
+						var userAgent=navigator.userAgent.toLowerCase();
+						var browser;
+						if(userAgent.indexOf('edge')>-1){	
+							browser='Explorer Edge';
+						}else if(userAgent.indexOf('whale')>-1){	
+							browser='Naver Whale';
+						}else if(userAgent.indexOf('chrome')>-1){	
+							browser='Chrome';
+						}else if(userAgent.indexOf('firefox')>-1){	
+							browser='FireFox';
+						}else{	
+							browser='Explorer';
+						}
 						$.ajax({
 							type : "post",
 							url : "/naverLogin.user",
-							data : JSON.stringify({"id": naverLogin.user.id}),
+							data : JSON.stringify({"id": naverLogin.user.id, "browser" : browser}),
 							dataType : "json",
 							contentType : "application/json",
 							success : function(data) {

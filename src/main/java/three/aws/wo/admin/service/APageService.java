@@ -18,5 +18,8 @@ public interface APageService {
 	void insertTodayDrink(HashMap<String, Object> param);
 	List<SearchKeywordVO> searchKeywordList();
 	int countSearchKeyword();
+	void insertKeyword(HashMap<String, Object> param);
+	void updateKeyword(HashMap<String, Object> param);
+	void deleteKeyword(HashMap<String, Object> param);
 
 }

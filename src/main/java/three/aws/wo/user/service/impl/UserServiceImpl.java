@@ -80,4 +80,8 @@ public class UserServiceImpl implements UserService {
 	public void updatePassword(HashMap<String, String> idpw) {
 		userDAO.updatePassword(idpw);
 	}
+	@Override
+	public void regPointRecord(String u_id) {
+		userDAO.regPointRecord(u_id);
+	}
 }

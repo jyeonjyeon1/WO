@@ -61,4 +61,8 @@ public class UserDAO {
 	public void updatePassword(HashMap<String, String> idpw) {
 		sqlSession.update("UserDAO.updatePassword", idpw);
 	}
+
+	public void regPointRecord(String u_id) {
+		sqlSession.insert("UserDAO.regPointRecord", u_id);
+	}
 }

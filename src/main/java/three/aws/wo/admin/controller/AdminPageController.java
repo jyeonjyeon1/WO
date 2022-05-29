@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.service.APageService;
+import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.BannerVO;
 import three.aws.wo.user.vo.SearchKeywordVO;
 
@@ -168,8 +169,6 @@ public class AdminPageController {
 		System.out.println("searchbar_mng");
 		List<SearchKeywordVO> searchKeywordList = aPageService.searchKeywordList();
 		model.addAttribute("searchKeywordList",searchKeywordList);
-		
-		
 		return "/page/searchbar_mng";
 	}
 	
@@ -251,5 +250,44 @@ public class AdminPageController {
 		HashMap<String,Object> param = new HashMap<String,Object>();
 		aPageService.deleteKeyword(param);
 		return "redirect:/searchbar_mng.admin";
+	}
+	
+	@RequestMapping("/doc_form.admin")
+	public String todoc_form(Model model) {
+		System.out.println("doc_form");
+		List<AdminVO> doc = aPageService.docList();
+		model.addAttribute("docList", doc);
+		return "/page/doc_form";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteDoc.admin")
+	public int deleteDoc(@RequestBody HashMap<String,String> param) {
+		int result = 0;
+		int d_seq = Integer.parseInt(param.get("d_seq"));
+		try {
+			aPageService.deleteDoc(d_seq);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/insertDoc.admin")
+	public int insertDoc(@RequestBody HashMap<String,String> param) {
+		int result = 0;
+		System.out.println(param);
+		String file_url = param.get("d_file_url");
+		String d_file_name = file_url.split("____")[1];
+		param.put("d_file_name", d_file_name);
+		try {
+			aPageService.insertDoc(param);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

@@ -22,6 +22,7 @@ public class UserVO {
 	private boolean u_sms_usable;		//문자 수신 동의
 	private boolean u_email_usable;		//이메일 수신 동의
 	private int u_point;				//보유 포인트
+	private String u_info;
 	private boolean u_status;			//활성 상태
 	private Date u_regdate;
 	private Date u_lastdate; 

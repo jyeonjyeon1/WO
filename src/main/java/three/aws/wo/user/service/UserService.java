@@ -20,4 +20,7 @@ public interface UserService {
 	// ¾ÏÈ£È­
 	int idChk(UserVO vo) throws Exception;
 	
+	//congrats point
+	void regPointRecord(String u_id);
+	
 }

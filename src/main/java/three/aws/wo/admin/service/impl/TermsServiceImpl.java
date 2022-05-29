@@ -1,5 +1,6 @@
 package three.aws.wo.admin.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,23 @@ public class TermsServiceImpl implements TermsService{
 		return termsDAO.infoList();
 	}
 	
+	@Override
+	public TermsVO termsOne(String t_code) {
+		return termsDAO.termsOne(t_code);
+	}
+	
+	@Override
+	public void updateTerms(HashMap<String, Object> map) {
+		termsDAO.updateTerms(map);
+	}
+	
+	@Override
+	public int tCodeMax() {
+		return termsDAO.tCodeMax();
+	}
+	
+	@Override 
+	public TermsVO infoOne(String t_code) {
+		return termsDAO.infoOne(t_code);
+	}
 }

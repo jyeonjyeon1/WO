@@ -231,45 +231,25 @@
                         <th data-sortable="" style="width: 7%;"><a href="#" class="dataTable-sorter">번호</a></th>
                         <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">정책코드</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">정책명</a></th>
-                        <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">마지막수정자</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">등록일시</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">수정일시</a></th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>RF001</td>
-                        <td><a href="policy_update.admin">환불정책</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
+                    <c:forEach items="${ policyList}" var="policyList" varStatus="vs">
+                    <tr>
+                        <td>${ vs.index}</td>
+                        <td>${ policyList.t_code}</td>
+                        <td><a href="policy_update.admin?t_code=${privacyList.t_code}">${ policyList.t_title}</a></td>
+                        <td>${ policyList.t_regdate}</td>
+                        <td>${ policyList.t_enfdate}</td>
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>TM002</td>
-                        <td><a href="policy_update.admin">리뷰정책</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>TM003</td>
-                        <td><a href="policy_update.admin">포인트정책</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>TM004</td>
-                        <td><a href="policy_update.admin">계정정책</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
-                      </tr>
+                    
+                    
+                    </c:forEach>
+                      
+                      
 
                     </tbody>
 

@@ -24,5 +24,32 @@
 		ORDER BY T_CODE
 	</select>
 	
+	<select id="termsOne" resultType="TermsVO" resultMap="termsVO">
+		SELECT * FROM TERMS WHERE T_CODE = #{t_code}
+	</select>
+	
+	<update id="updateTerms">
+        UPDATE TERMS
+        SET 
+        t_type=#{t_type},
+        t_title = #{t_title},
+        t_content = #{t_content},
+        t_enfdate = #{t_enfdate},
+        t_regdate = #{t_regdate}
+        WHERE
+        t_code = #{t_code}
+    </update>
+    
+    <select id="tCodeMax" resultType="int" >
+		SELECT MAX(CAST(SPLIT_PART(T_CODE::VARCHAR,'_',2) as INTEGER)) from TERMS 
+		WHERE T_TYPE='term';
+		</select>
+		
+		<select id="infoOne" resultType="TermsVO" resultMap="termsVO">
+		SELECT * FROM TERMS WHERE T_CODE = #{t_code}
+		</select>
+    
+	
+	
 	
 </mapper>

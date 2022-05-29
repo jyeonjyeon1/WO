@@ -27,4 +27,6 @@ public interface UserOrderService {
 	List<OrdersVO> myCurrentList(String u_id);
 	List<OrdersVO> myOrderList(String u_id);
 	OrdersVO myorderDetail(String order);
+	void replicateCart(String u_id);
+	void updateBasketOrder(HashMap<String, Object> map);
 }

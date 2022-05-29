@@ -3,5 +3,92 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace=dao이름 -->
 <mapper namespace="SIndexDAO">
-
+	<select id="storeOrders" resultType="OrdersVO">
+		SELECT * FROM ORDERS o
+		INNER JOIN
+		USERS u
+		ON (o.U_ID = u.U_ID)
+		WHERE SI_CODE = #{si_code} 
+		AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
+		ORDER BY O_SEQ DESC
+	</select>
+	<update id="changeDueTime">
+		UPDATE STORE_INFO SET SI_DUE_TIME = #{si_due_time} WHERE SI_CODE = #{si_code}
+	</update>
+	<select id="orderDetails" resultType="BasketVO">
+		SELECT b.b_seq,
+		b.o_code,
+		b.u_id,
+		b.si_code,
+		b.m_seq,
+		b.b_quantity,
+		b.b_single_price,
+		b.b_total_price,
+		b.opb_code,
+		b.op_code1,
+		b.op_code2,
+		b.op_code3,
+		b.op_code4,
+		b.op_code5,
+		m.m_name,
+		m.m_img_file,
+		ob.opb_price,
+		ob.opb_name,
+		op.op_name as op_name1,
+		op.op_price as op_price1,
+		opp.op_name as op_name2,
+		opp.op_price as op_price2,
+		oppp.op_name as op_name3,
+		oppp.op_price as op_price3,
+		opppp.op_name as op_name4,
+		opppp.op_price as op_price4,
+		oppppp.op_name as op_name5,
+		oppppp.op_price as op_price5
+		FROM BASKET_ORDER b
+		INNER JOIN
+		MENU m
+		ON (b.M_SEQ = m.M_SEQ)
+		INNER JOIN
+		option_basic ob 
+		ON (ob.opb_code = b.opb_code and ob.SI_CODE = b.SI_CODE)
+		JOIN
+		options op 
+		ON (op.op_code = b.op_code1 and op.SI_CODE = b.SI_CODE)
+		JOIN
+		options opp 
+		ON (opp.op_code = b.op_code2 and opp.SI_CODE = b.SI_CODE)
+		JOIN
+		options oppp 
+		ON (oppp.op_code = b.op_code3 and oppp.SI_CODE = b.SI_CODE)
+		JOIN
+		options opppp 
+		ON (opppp.op_code = b.op_code4 and opppp.SI_CODE = b.SI_CODE)
+		JOIN
+		options oppppp
+		ON (oppppp.op_code = b.op_code5 and oppppp.SI_CODE = b.SI_CODE)
+		WHERE b.SI_CODE = #{si_code}
+		ORDER BY B_SEQ ASC
+	</select>
+	<update id="changeOState">
+		UPDATE ORDERS SET O_ORDER_STATE = 
+		<choose>
+			<when test="o_order_state == 'junbijung'">'준비중'</when>
+			<when test="o_order_state == 'junbiwan'">'준비완료'</when>
+			<otherwise>'전달완료'</otherwise>
+		</choose>
+		WHERE O_CODE = #{o_code}
+	</update>
+	<delete id="deleteBasketOrder">
+		DELETE FROM BASKET_ORDER WHERE O_CODE = #{o_code}
+	</delete>
+	<select id="newOrder" resultType="OrdersVO">
+		SELECT * FROM ORDERS o
+		INNER JOIN
+		USERS u
+		ON (o.U_ID = u.U_ID)
+		WHERE SI_CODE = #{si_code} 
+		AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
+		ORDER BY O_SEQ DESC
+		LIMIT 1
+	</select>
 </mapper>

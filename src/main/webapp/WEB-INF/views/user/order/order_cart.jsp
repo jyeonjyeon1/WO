@@ -132,26 +132,28 @@
 										<td class="shoping__cart__price"><img
 											class="d-lg-inline-block d-md-inline-block"
 											src="${cartList.m_img_file}" alt=""> </td>
-											<td class="shoping__cart__item"><label
+										<td class="shoping__cart__item">
+											<label
 											id="name${vs.index}">${cartList.m_name} 
 												<h3>${cartList.opb_name}<span style="opacity:0;">splitting</span>
 												</h3>
-											<c:if test="${cartList.op_code1 ne ' '}">
-												<h4>└ ${cartList.op_name1} (<fmt:formatNumber value="${cartList.op_price1}" pattern="###,###"/>원)</h4>
-											</c:if>	
-											<c:if test="${cartList.op_code2 ne ' '}">
-												<h4>└ ${cartList.op_name2} (<fmt:formatNumber value="${cartList.op_price2}" pattern="###,###"/>원)</h4>
-											</c:if>	
-											<c:if test="${cartList.op_code3 ne ' '}">	
-												<h4>└ ${cartList.op_name3} (<fmt:formatNumber value="${cartList.op_price3}" pattern="###,###"/>원)</h4>
-											</c:if>	
-											<c:if test="${cartList.op_code4 ne ' '}">	
-												<h4>└ ${cartList.op_name4} (<fmt:formatNumber value="${cartList.op_price4}" pattern="###,###"/>원)</h4>
-											</c:if>	
-											<c:if test="${cartList.op_code5 ne ' '}">	
-												<h4>└ ${cartList.op_name5} (<fmt:formatNumber value="${cartList.op_price5}" pattern="###,###"/>원)</h4>
-											</c:if>
-										</label></td>
+												<c:if test="${cartList.op_code1 ne ' '}">
+													<h4>└ ${cartList.op_name1} (<fmt:formatNumber value="${cartList.op_price1}" pattern="###,###"/>원)</h4>
+												</c:if>	
+												<c:if test="${cartList.op_code2 ne ' '}">
+													<h4>└ ${cartList.op_name2} (<fmt:formatNumber value="${cartList.op_price2}" pattern="###,###"/>원)</h4>
+												</c:if>	
+												<c:if test="${cartList.op_code3 ne ' '}">	
+													<h4>└ ${cartList.op_name3} (<fmt:formatNumber value="${cartList.op_price3}" pattern="###,###"/>원)</h4>
+												</c:if>	
+												<c:if test="${cartList.op_code4 ne ' '}">	
+													<h4>└ ${cartList.op_name4} (<fmt:formatNumber value="${cartList.op_price4}" pattern="###,###"/>원)</h4>
+												</c:if>	
+												<c:if test="${cartList.op_code5 ne ' '}">	
+													<h4>└ ${cartList.op_name5} (<fmt:formatNumber value="${cartList.op_price5}" pattern="###,###"/>원)</h4>
+												</c:if>
+											</label>
+										</td>
 
 										<td class="shoping__cart__price">
 											<div class="qtyqty">

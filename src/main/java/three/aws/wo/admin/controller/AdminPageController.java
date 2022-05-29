@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -251,5 +252,12 @@ public class AdminPageController {
 		HashMap<String,Object> param = new HashMap<String,Object>();
 		aPageService.deleteKeyword(param);
 		return "redirect:/searchbar_mng.admin";
+	}
+	
+	
+	@GetMapping("/doc_form.admin")
+	public String todoc_form() {
+		System.out.println("doc_form");
+		return "/page/doc_form";
 	}
 }

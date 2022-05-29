@@ -231,29 +231,26 @@
                         <th data-sortable="" style="width: 7%;"><a href="#" class="dataTable-sorter">번호</a></th>
                         <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">약관코드</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">약관명</a></th>
-                        <th data-sortable="" style="width: 15%;"><a href="#" class="dataTable-sorter">마지막수정자</a></th>
+                        
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">등록일시</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">수정일시</a></th>
                       </tr>
                     </thead>
 
                     <tbody>
+                    <c:forEach  var="AtermsList"  items="${AtermsList}" varStatus="termsVs">
                       <tr>
-                        <td>1</td>
-                        <td>TM001</td>
-                        <td><a href="terms_update.admin">이용약관</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
+                        <td>${termsVs.count}</td>
+                        <td>${AtermsList.t_code}</td>
+                        <td><a href="terms_update.admin?t_code=${AtermsList.t_code}">${AtermsList.t_title}</a></td>
+                       
+                        <td>${AtermsList.t_regdate}</td>
+                        <td>${AtermsList.t_enfdate}</td>
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>TM002</td>
-                        <td><a href="terms_update.admin">개인정보처리방침</a></td>
-                        <td>홍오공</td>
-                        <td>2022.04.06 12:11:02</td>
-                        <td>2022.04.06 12:11:02</td>
-                      </tr>
+                    	
+                    </c:forEach>
+                    
+                      
 
                     </tbody>
 

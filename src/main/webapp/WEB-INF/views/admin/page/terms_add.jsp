@@ -176,10 +176,10 @@
             <div class="form-panel" style="margin-top:0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
               <form class="form-horizontal style-form" method="get">
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">약관코드</label>
+                  <label class="col-sm-2 col-sm-2 control-label" >약관코드</label>
 
                   <div class="col-sm-4 col-sm-4 col-sm-4">
-                    <input type="text" class="form-control round-form" placeholder="약관코드" value="" >
+                    <input type="text" class="form-control round-form" value="te_${current_max_code +1 }" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">

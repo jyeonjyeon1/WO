@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -179,13 +183,13 @@
                   <label class="col-sm-2 col-sm-2 control-label">정책코드</label>
 
                   <div class="col-sm-4 col-sm-4 col-sm-4">
-                    <input type="text" class="form-control round-form" placeholder="정책코드" value="RF001" >
+                    <input type="text" class="form-control round-form" placeholder="정책코드" value="${infoOne.t_code }" >
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">정책명</label>
                   <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="정책명" value="환불정책">
+                    <input class="form-control" type="text" placeholder="정책명" value="${infoOne.t_title }">
                   </div>
                   <!--
                     id="focusedInput" 빨간 테두리
@@ -195,43 +199,36 @@
                 <div class="form-group">
                   <div class="col-lg-12">
                     <textarea rows="8" class="form-control" placeholder="정책내용을 입력하세요">
- 주문 취소 및 반품
- 일반적으로 소비자는 자신이 체결한 전자상거래 계약에 대해 그 계약의 내용을 불문하고 그 청약철회 및 계약해제의 기간(통상 7일) 내에는 청약철회 등을 자유롭게 할 수 있습니다(「전자상거래 등에서의 소비자보호에 관한 법률」 제17조제1항).
-※ 소비자에게 불리한 규정(주문 취소나 반품 금지 등)이 포함된 구매계약은 효력이 없습니다(「전자상거래 등에서의 소비자보호에 관한 법률」 제35조).
- 하지만, 다음 어느 하나에 해당하는 경우에는 인터넷쇼핑몰 사업자의 의사에 반(反)해서 주문 취소 및 반품을 할 수 없습니다(「전자상거래 등에서의 소비자보호에 관한 법률」 제17조제2항 본문 및 「전자상거래 등에서의 소비자보호에 관한 법률 시행령」 제21조).
-1. 소비자의 잘못으로 물건이 멸실(물건의 기능을 할 수 없을 정도로 전부 파괴된 상태)되거나 훼손된 경우(다만, 내용물을 확인하기 위해 포장을 훼손한 경우에는 취소나 반품이 가능)
-2. 소비자가 사용해서 물건의 가치가 뚜렷하게 떨어진 경우
-3. 시간이 지나 다시 판매하기 곤란할 정도로 물건의 가치가 뚜렷하게 떨어진 경우
-4. 복제가 가능한 물건의 포장을 훼손한 경우
-5. 용역 또는 「문화산업진흥 기본법」 제2조제5호의 디지털콘텐츠의 제공이 개시된 경우. 다만, 가분적 용역 또는 가분적 디지털콘텐츠로 구성된 계약의 경우에는 제공이 개시되지 않은 부분은 제외
-6. 소비자의 주문에 따라 개별적으로 생산되는 상품 또는 이와 유사한 상품 등의 청약철회 및 계약해제를 인정하는 경우 인터넷쇼핑몰 사업자에게 회복할 수 없는 중대한 피해가 예상되는 경우로서 사전에 주문 취소 및 반품이 되지 않는다는 사실을 별도로 알리고 소비자의 서면(전자문서 포함)에 의한 동의를 받은 경우
- 인터넷쇼핑몰 사업자는 위 2.부터 5.까지의 사유에 해당하여 청약철회 등이 불가능한 상품에 대해 그 사실을 상품의 포장이나 그 밖에 소비자가 쉽게 알 수 있는 곳에 명확하게 적거나 시험 사용 상품을 제공하는 등의 방법으로 청약철회 등의 권리 행사가 방해받지 않도록 조치해야 합니다(「전자상거래 등에서의 소비자보호에 관한 법률」 제17조제6항 본문). 만약 사업자가 이와 같은 조치를 안했다면, 소비자는 청약철회 등의 제한사유에도 불구하고 청약철회 등을 할 수 있습니다(「전자상거래 등에서의 소비자보호에 관한 법률」 제17조제2항 단서).
-                    </textarea>
+ 				${infoOne.t_content }
+ 				</textarea>
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">노출상태</label>
-                  <div class="col-sm-10">
 
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio1" value="option1"> 공개
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio2" value="option2" checked> 비노출
-                    </label>
+                 <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">마지막 수정날짜</label>
+                  <div class="col-sm-10">
+                    
+                    
+                    <input class="form-control round-form" type="date"  id="t_enfdate_input"  value="<fmt:formatDate value="${infoOne.t_enfdate }" pattern="yyyy-MM-dd"/>" 
+                      style="width: 30%;display: inline-block;">
+
                   </div>
-                </div>
 
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">등록시간</label>
+
+                  <!--
+                    id="focusedInput" 빨간 테두리
+                    id="disabledInput" 못고치는거
+                  -->
+                </div>
+                
+                 <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">마지막 수정날짜</label>
                   <div class="col-sm-10">
-                    <label>시간조정</label>
-                    <input type="checkbox" checked style="display: inline-block;margin-right: 10px;">
-                    <input class="form-control round-form" type="datetime-local" value="2022-04-16T10:00"
-                      style="width: 30%;display: inline-block;margin-right: 10px;"> ~
-                    <input class="form-control round-form" type="datetime-local" value="2022-04-30T23:59"
-                      style="width: 30%;display: inline-block;margin-left: 10px;">
+                    
+                    
+                    <input class="form-control round-form" type="date"  id="t_enfdate_input"  value="<fmt:formatDate value="${infoOne.t_enfdate }" pattern="yyyy-MM-dd"/>" 
+                      style="width: 30%;display: inline-block;">
 
                   </div>
 

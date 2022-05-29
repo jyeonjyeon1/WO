@@ -39,6 +39,8 @@
 		<typeAlias type="three.aws.wo.user.vo.MenuListVO" alias="MenuListVO"/>
 		<typeAlias alias="BannerVO" type="three.aws.wo.admin.vo.BannerVO" />
 		<typeAlias alias="SearchVO" type="three.aws.wo.user.vo.SearchVO" />
+		<typeAlias alias="StoreReviewVO" type="three.aws.wo.store.vo.StoreReviewVO"/>
+		
 		
 	</typeAliases>
 	<mappers> <!-- SQL 명령어들이 저장된 SQL 파일을 등록 -->

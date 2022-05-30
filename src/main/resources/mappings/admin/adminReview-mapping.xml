@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminReviewDAO">
+
+	
+	<select id="reviewList" resultType="ReviewVO">
+		SELECT U.U_NAME, U.U_TEL, UR.*, O.O_LIST_DETAIL, O_TOTAL_PRICE, SI.SI_NAME, SI.SI_LOC 
+			FROM USER_REVIEW UR JOIN USERS U ON UR.U_ID = U.U_ID JOIN ORDERS O ON UR.O_CODE = O.O_CODE JOIN STORE_INFO SI ON UR.SI_CODE = SI.SI_CODE 
+			ORDER BY UR_SEQ DESC
+	</select>
+
+	<update id="updateReview" parameterType="ReviewVO">
+		UPDATE USER_REVIEW
+			SET UR_OPEN = #{ur_open}
+			WHERE UR_SEQ = #{ur_seq }
+	</update>
+</mapper>
+ 

@@ -113,7 +113,7 @@
 							<div class="product-info">
 								<span class="category">${myStoreList.si_addr }</span>
 								<h4 class="title">
-									<a href="product-grids.html">${myStoreList.si_name } ${myStoreList.si_loc }</a>
+									<a href="/menuList.user?store=${myStoreList.si_code}">${myStoreList.si_name } ${myStoreList.si_loc }</a>
 								</h4>
 								<ul class="review">
 									<c:forEach var="full_star" begin = "0" end = "${myStoreList.si_star}" step="10">
@@ -178,7 +178,7 @@
 							<div class="product-info">
 								<span class="category">${recStoreList.si_addr }</span>
 								<h4 class="title">
-									<a href="product-grids.html">${recStoreList.si_name } ${recStoreList.si_loc }</a>
+									<a href="/menuList.user?store=${recStoreList.si_code}">${recStoreList.si_name } ${recStoreList.si_loc }</a>
 								</h4>
 								<ul class="review">
 									<c:forEach var="full_star" begin = "0" end = "${recStoreList.si_star}" step="10">
@@ -244,7 +244,7 @@
 							<div class="product-info">
 								<span class="category">${newStoreList.si_addr }</span>
 								<h4 class="title">
-									<a href="product-grids.html">${newStoreList.si_name } ${newStoreList.si_loc }</a>
+									<a href="/menuList.user?store=${newStoreList.si_code}">${newStoreList.si_name } ${newStoreList.si_loc }</a>
 								</h4>
 								<ul class="review">
 									<c:forEach var="full_star" begin = "0" end = "${newStoreList.si_star}" step="10">

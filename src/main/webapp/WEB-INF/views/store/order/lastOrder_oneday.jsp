@@ -263,7 +263,7 @@ $('#datepicker1').datepicker();
           <td>딸기주스 외 2개</td>
           <td>15300원</td>
           <td>으라챠챠</td>
-          <td> <button onclick="receipt()" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></td>
+          <td> <button type="button" onclick="receipt()" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></td>
           
           <!--영수증 modal-->
           <div class="modalA" >
@@ -302,7 +302,7 @@ $('#datepicker1').datepicker();
              
               
               <div>
-              <button class="closeBtn" onclick="close_modalA()" >닫기</button>
+              <button type="button" class="closeBtn" onclick="close_modalA()" >닫기</button>
             </div>
             </div>
           </div>

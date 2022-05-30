@@ -143,7 +143,7 @@
                                 <div class="menubar_currentOrder_line">
                                 <div class="row">    
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="/myorder.user?order=${myOrderList.o_code}" class="menubar_btn">주문 확인 <span class="arrow_right"></span></a>
+                                    <a href="/myOrder.user?order=${myOrderList.o_code}" class="menubar_btn">주문 확인 <span class="arrow_right"></span></a>
                                 </div>
                                 </div>
                                 </div>

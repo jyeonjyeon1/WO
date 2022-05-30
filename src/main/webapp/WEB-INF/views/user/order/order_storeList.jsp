@@ -21,14 +21,38 @@
 
 		var search = "" ;      
 		var storeListByPageCount = ${storeListByPageCount} ;
-		var pageNum = ${cri.pageNum} ;
+		var pageNum = ${criStore.pageNum} ;
+		var searchType = "";
+		
+		// 조건검색 라디오
+		var parking = "";
+		// 조건검색 체크박스
+		
+		var room = "";
+		var seat = "";
+		var groupseat = "";
+		var wifi = "";
+		var babyseat = "";
+		var disabled = "";
+		var pet = "";
 		
 		$(document).ready(function(){
 			
-            search = $("#zz").val();
+            search = $("#searchCHK").val();
+            searchType = $("#searchTypeCHK").val();
+            
+            parking = $("#parkingCHK").val();
+            room = $("#roomCHK").val();
+            seat = $("#seatCHK").val();
+            groupseat = $("#groupseatCHK").val();
+            wifi = $("#wifiCHK").val();
+            babyseat = $("#babyseatCHK").val();
+            disabled = $("#disabledCHK").val();
+            pet = $("#petCHK").val();
+            
+            
             if(search== null){search="";}
             
-			
 			setPage(pageNum);
 			
 		})
@@ -38,19 +62,83 @@
             $(".showdetail_btn").click(function () {
                 if ($('.option_select_form').hasClass('active') == false) {
                     $(".option_select_form").addClass("active");
+                    
                 } else {
                     $(".option_select_form").removeClass("active");
                 }
             });
             
         });
-            //========= Hero Slider
-            
-	    
-		
-		
-            
-     
+		// 조건검색 펑션
+		function details_button() {
+			
+			parking = "";
+			room = "";
+			seat = "";
+			groupseat = "";
+			wifi = "";
+			babyseat = "";
+			disabled = "";
+			pet = "";
+			
+			// 라디오
+			parking = $('input:radio[name="inRad1"]:checked').val();
+			
+			// 룸 체크박스
+			const room_checkbox = document.getElementById('room');
+			const room_checked = room_checkbox.checked;
+			if (room_checked == true) {
+				room = $('input:checkbox[id="room"]').val();
+			} 
+			
+			// 좌석 체크박스
+			const seat_checkbox = document.getElementById('seat');
+			const seat_checked = seat_checkbox.checked;
+			if (seat_checked == true) {
+				seat = $('input:checkbox[id="seat"]').val();
+			} 
+			
+			// 단체석 체크박스
+			const groupseat_checkbox = document.getElementById('groupseat');
+			const groupseat_checked = groupseat_checkbox.checked;
+			if (groupseat_checked == true) {
+				groupseat = $('input:checkbox[id="groupseat"]').val();
+			} 
+			
+			// 무선인터넷 체크박스
+			const wifi_checkbox = document.getElementById('wifi');
+			const wifi_checked = wifi_checkbox.checked;
+			if (wifi_checked == true) {
+				wifi = $('input:checkbox[id="wifi"]').val();
+			} 
+			
+			// 유아용 체크박스
+			const babyseat_checkbox = document.getElementById('babyseat');
+			const babyseat_checked = babyseat_checkbox.checked;
+			if (babyseat_checked == true) {
+				babyseat = $('input:checkbox[id="babyseat"]').val();
+			} 
+			
+			// 장애인 편의시설 체크박스
+			const disabled_checkbox = document.getElementById('disabled');
+			const disabled_checked = disabled_checkbox.checked;
+			if (disabled_checked == true) {
+				disabled = $('input:checkbox[id="disabled"]').val();
+			} 
+			
+			// 반려동물 동반 체크박스
+			const pet_checkbox = document.getElementById('pet');
+			const pet_checked = pet_checkbox.checked;
+			if (pet_checked == true) {
+				pet = $('input:checkbox[id="pet"]').val();
+			} 
+			
+			
+			location.href= "/storeList.user?search=" + search +  "&searchType=" + searchType + "&parking=" + parking + "&room=" + room + 
+					 "&seat=" + seat + "&groupseat=" + groupseat + "&wifi=" + wifi + "&babyseat=" + babyseat + "&disabled=" + disabled + "&pet=" + pet;
+			
+			
+		}
     	  	
   // 일단 위시리스트를 하기 위해서 주석처리  	  	
 /*         	$("div a").click(function(){
@@ -90,7 +178,7 @@
             dataType: "text",
             contentType: "application/json",
 			success : function(data) {
-				alert("성공적으로 변경되었습니다.")
+				alert("성공적으로 반영 되었습니다.")
 			},
 			error : function(data) {
 				console.log("로그인 통신x")
@@ -102,14 +190,12 @@
    
 		
 	 function setPage(pageNum){ //paging
+		 
 		 storeListByPageCount = ${storeListByPageCount} ;
          var total = storeListByPageCount;
          var amount = 10;
-		console.log("total : " + total );
-		console.log("pageNum : " + pageNum );
          var endPage = Math.ceil(pageNum/10.0)*10;
          var startPage = endPage - 9;
-         console.log("endPage : " + endPage +"/ startPage : "+ startPage);
          if(total == 0){
             var realEnd = 1;
          }else{
@@ -142,8 +228,13 @@
           $(".page-item a").on("click", function(e){
 
             e.preventDefault();
+            
+            //searchType = ${searchType};
             var changePageNum = $(this).attr("href");
-            location.href= "/storeList.user?search=" + search + "&page="+changePageNum;
+            
+            location.href= "/storeList.user?search=" + search +  "&searchType="+searchType + "&page=" + changePageNum
+            		+ "&parking=" + parking + "&room=" + room + "&seat=" + seat + "&groupseat=" + groupseat + "&wifi=" 
+            		+ wifi + "&babyseat=" + babyseat + "&disabled=" + disabled + "&pet=" + pet;
             
 
          });
@@ -156,43 +247,19 @@
             
     </script>
 
-<style>
-< /*페이징처리 css*/
-* {
-	box-sizing: border-box;
-}
-
-.pagination a {
-	color: black;
-	text-decoration: none;
-	text-align: center;
-	width: 30px; /* 12개니까 대충 계산하기 */
-	float: left; /* a는 인라인이라 안먹으니까 추가 */
-	text-align: center;
-	/* 하고보니 빨간색 벗어남 => 오버플로 오토주기, pagination 가서 */
-}
-
-.pagination a:hover:not(.active) { /* .active 클래스를 가진 a태그는 제외시키자 (암기) */
-	background: #ddd;
-}
-
-.pagination a.active {
-	background: dodgerblue;
-	color: white;
-}
-
-.pagination {
-	/* border: 1px solid red; */ /* 기본적으로 보더는 부모꺼가 잡힌다 */
-	width: 50%; /* 누구의 반이란거야? 부모 (여기선 body) */
-	margin: 0 auto; /* border 가운데 정렬(항상 규칙마냥 씀) */
-	overflow: auto;
-}
-</style>
-
 </head>
 
 <body>
-<input type="hidden" id="zz" value="${search}"/>
+<input type="hidden" id="searchCHK" value="${search}"/>
+<input type="hidden" id="searchTypeCHK" value="${searchType}"/>
+<input type="hidden" id="parkingCHK" value="${parking}"/>
+<input type="hidden" id="roomCHK" value="${room}"/>
+<input type="hidden" id="seatCHK" value="${seat}"/>
+<input type="hidden" id="groupseatCHK" value="${groupseat}"/>
+<input type="hidden" id="wifiCHK" value="${wifi}"/>
+<input type="hidden" id="babyseatCHK" value="${babyseat}"/>
+<input type="hidden" id="disabledCHK" value="${disabled}"/>
+<input type="hidden" id="petCHK" value="${pet}"/>
 
 	<!-- header import -->
 	<%@ include file="/WEB-INF/views/user/inc/header.jsp"%>
@@ -212,7 +279,7 @@
 				<i class="fa fa-list"></i>
 			</button>
 			<!--조건 검색 자바스크립트-->
-			<form class="option_select_form_wrap">
+			<form class="option_select_form_wrap" >
 				<div class="form-panel option_select_form" style = "margin-left: -330px">
 					<div style="border-bottom: 1px dotted grey; padding-bottom: 13px;">
 						조건 검색</div>
@@ -232,44 +299,44 @@
 						<div class="col-sm-8">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox"
-									id="inlineCheckbox1" value="room"> <label
-									class="form-check-label" for="inlineCheckbox1">룸</label>
+									id="room" value="room"> <label
+									class="form-check-label" for="room">룸</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox"
-									id="inlineCheckbox2" value="seat"> <label
-									class="form-check-label" for="inlineCheckbox2">좌석</label>
+									id="seat" value="seat"> <label
+									class="form-check-label" for="seat">좌석</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox"
-									id="inlineCheckbox3" value="groupseat"> <label
-									class="form-check-label" for="inlineCheckbox2">단체석</label>
+									id="groupseat" value="groupseat"> <label
+									class="form-check-label" for="groupseat">단체석</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox"
-									id="inlineCheckbox4" value="wifi"> <label
-									class="form-check-label" for="inlineCheckbox2">무선인터넷</label>
+									id="wifi" value="wifi"> <label
+									class="form-check-label" for="wifi">무선인터넷</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox"
-									id="inlineCheckbox5" value="babyseat"> <label
-									class="form-check-label" for="inlineCheckbox2">유아용 의자</label>
+									id="babyseat" value="babyseat" > <label
+									class="form-check-label" for="babyseat">유아용 의자</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox"
-									id="inlineCheckbox6" value="disabled"> <label
-									class="form-check-label" for="inlineCheckbox2">장애인 편의시설</label>
+									id="disabled" value="disabled"> <label
+									class="form-check-label" for="disabled">장애인 편의시설</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox"
-									id="inlineCheckbox7" value="pet"> <label
-									class="form-check-label" for="inlineCheckbox2">반려동물 동반</label>
+									id="pet" value="pet"> <label
+									class="form-check-label" for="pet">반려동물 동반</label>
 							</div>
 						</div>
 					</div>
 
-					<div class="row" style="text-align: center; float: right; margin-right: 10px;">
-						<button type="submit" class="btn btn-theme">검색</button>
+					<div class="details_button" style="text-align: center; float: right; margin-right: 10px;">
+						<button type="button" class="btn btn-theme" onclick = "details_button();">검색</button>
 					</div>
 
 				</div>

@@ -32,9 +32,10 @@ public class UStoreServiceImpl implements UStoreService {
 	}
 
 	@Override
-	public int storeListByPageCount(String SearchWord) {
-		return uStoreDAO.storeListByPageCount(SearchWord);
+	public int storeListByPageCount(SearchVO searchvo) {
+		return uStoreDAO.storeListByPageCount(searchvo);
 	}
+
 	
 	
 }

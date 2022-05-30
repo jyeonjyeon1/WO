@@ -53,7 +53,8 @@ public class StoreVO {
 	private String si_closeSun;
 	private boolean si_holiday_gong;
 	
-	private CriteriaStore cri;
+	private String m_name;
 	
+	private CriteriaStore criStore;
 	
 }

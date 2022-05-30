@@ -29,8 +29,8 @@ public class UStoreDAO {
 		return sqlSession.selectList("UStoreDAO.UserPageChange", param);
 	}
 
-	public int storeListByPageCount(String SearchWord) {
-		return sqlSession.selectOne("UStoreDAO.storeListByPageCount", SearchWord);
+	public int storeListByPageCount(SearchVO searchvo) {
+		return sqlSession.selectOne("UStoreDAO.storeListByPageCount", searchvo);
 	}
 
 	

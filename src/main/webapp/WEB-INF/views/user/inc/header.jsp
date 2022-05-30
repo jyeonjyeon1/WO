@@ -49,7 +49,6 @@ $(document).ready( function() {
         })
 		  function onEnter() {
 		     var keyCode = window.event.keyCode;
-		     console.log("keyCode >>> " + keyCode);
 		     if (keyCode == 13) {
 		        searchBtn();
 		     }
@@ -60,22 +59,23 @@ function searchBtn(){
 	var Sname = $("#search_Sname").val();
 	var searchUrl = $("#searchUrl").val();
 	var checkSession = $("#checkSession").val();
+	var searchType = $("#searchType").val();
 	
 	console.log(Sname);
 	console.log(searchUrl);
 	console.log(checkSession);
 	if(checkSession == "no" && Sname ==""){
-		location.href="/storeList.user?search=";
+		location.href="/storeList.user?search=" + "&searchType="+searchType;
 	}
 	else if(Sname=="" || Sname == null){
 		location.href=searchUrl;
 	}else{
-		location.href="/storeList.user?search="+Sname;
+		location.href="/storeList.user?search="+Sname+ "&searchType="+searchType;
 	}
 	
 }
 //---------------- NAVER ------------------------
-/* const naverLogin = new naver.LoginWithNaverId(
+ const naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "<spring:eval expression='@config.getProperty("NAVER_API_KEY")'/>",
 			callbackUrl: "http://localhost:8080/login.user",
@@ -119,7 +119,7 @@ function kakaoLogout() {
 		})
 		Kakao.Auth.setAccessToken(undefined)
 	}
-}  */
+}  
 
 //--------------로그아웃 ---------------------
 function logout(){
@@ -135,7 +135,8 @@ window.addEventListener('locationchange', function(){
 </head>
 
 <body>
-
+<input type="hidden" id="searchCHK" value="${search}"/>
+<input type="hidden" id="searchTypeCHK" value="${searchType}"/>
 
 	<!-- Start Header Area -->
 	<header class="header navbar-area">
@@ -191,11 +192,11 @@ window.addEventListener('locationchange', function(){
 							<div class="navbar-search search-style-5">
 								<div class="search-select">
 									<div class="select-position">
-										<select id="select1" name = "searchType">
-											<option selected>All</option>
-											<option value="store">가게</option>
-											<option value="adress">주소</option>
-											<option value="menu">메뉴</option>
+										<select id="searchType" name = "searchType">
+											<option value="all" <c:if test="${searchType eq 'all'}">selected</c:if>>All</option>
+											<option value="store"<c:if test="${searchType eq 'store'}">selected</c:if>>가게</option>
+											<option value="adress"<c:if test="${searchType eq 'adress'}">selected</c:if>>주소</option>
+											<option value="menu"<c:if test="${searchType eq 'menu'}">selected</c:if>>메뉴</option>
 										</select>
 									</div>
 								</div>
@@ -203,13 +204,13 @@ window.addEventListener('locationchange', function(){
 								<c:if test="${!empty userSession}">
 									<c:forEach var="searchKeywords" items="${searchKeywords}" varStatus="vs">
 									<c:if test="${vs.last }">
-										<input id="search_Sname" type="text" placeholder="${searchKeywords.sb_keyword}">
+										<input id="search_Sname" type="text" placeholder="${searchKeywords.sb_keyword}" value="${search}">
 										<input type="hidden" id="searchUrl" value="${searchKeywords.sb_url}"/>
 									</c:if>
 									</c:forEach>
 								</c:if>
 								<c:if test="${empty userSession}">
-									<input id="search_Sname" type="text" placeholder="검색">
+									<input id="search_Sname" type="text" placeholder="검색" value="${search}">
 								</c:if>
 								</div>
 								<div class="search-btn">

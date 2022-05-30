@@ -11,5 +11,5 @@ public interface UStoreService {
 	List<StoreVO> storeList();
 	List<StoreVO> storeListByPage(SearchVO searchvo);
 	List<StoreVO> UserPageChange(HashMap<String, Integer> param);
-	int storeListByPageCount(String SearchWord);
+	int storeListByPageCount(SearchVO searchvo);
 }

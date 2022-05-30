@@ -28,49 +28,86 @@ public class UserStoreController {
 	@RequestMapping("/storeList.user")
 	public String storeList(StoreVO vo, Model model, HttpServletRequest request) {
 		String search = request.getParameter("search");
-		String pagnum = request.getParameter("page");
+		String searchType = request.getParameter("searchType");
+		String pagenum = request.getParameter("page");
+		
+		
+		String parking = request.getParameter("parking");
+		String room = request.getParameter("room");
+		String seat = request.getParameter("seat");
+		String groupseat = request.getParameter("groupseat");
+		String wifi = request.getParameter("wifi");
+		String babyseat = request.getParameter("babyseat");
+		String disabled = request.getParameter("disabled");
+		String pet = request.getParameter("pet");
 		
 		SearchVO searchvo = new SearchVO();
-		CriteriaStore cri = new CriteriaStore();
+		CriteriaStore criStore = new CriteriaStore();
 		
 		if(search==null) {
 			search="";
 		}
 		
 		searchvo.setSearch(search);
-		searchvo.setCri(cri);
+		searchvo.setCriStore(criStore);
+		searchvo.setSearchType(searchType);
 		
+		searchvo.setParking(parking);
+		searchvo.setRoom(room);
+		searchvo.setSeat(seat);
+		searchvo.setGroupseat(groupseat);
+		searchvo.setWifi(wifi);
+		searchvo.setBabyseat(babyseat);
+		searchvo.setDisabled(disabled);
+		searchvo.setPet(pet);
 		
 		List<StoreVO> storeListByPage = uStoreService.storeListByPage(searchvo);
-		int storeListByPageCount = uStoreService.storeListByPageCount(search);
+		int storeListByPageCount = uStoreService.storeListByPageCount(searchvo);
 		
-		System.out.println(storeListByPageCount);
-		System.out.println(search);
-		System.out.println(cri.getPageNum());
-		System.out.println(cri.getAmount());
-		
-		model.addAttribute("cri", cri);
+		model.addAttribute("criStore", criStore);
 		model.addAttribute("search", search);
+		model.addAttribute("searchType", searchType);
 		model.addAttribute("userPageChange", storeListByPage);
 		model.addAttribute("storeListByPageCount", storeListByPageCount);
 		
-		if(pagnum != null) {
-			int paging = Integer.parseInt(pagnum);
-			storeListByPageCount = uStoreService.storeListByPageCount(search);
+		model.addAttribute("parking", parking);
+		model.addAttribute("room", room);
+		model.addAttribute("seat", seat);
+		model.addAttribute("groupseat", groupseat);
+		model.addAttribute("wifi", wifi);
+		model.addAttribute("babyseat", babyseat);
+		model.addAttribute("disabled", disabled);
+		model.addAttribute("pet", pet);
+		
+		if(pagenum != null) {
+			int paging = Integer.parseInt(pagenum);
 			searchvo = new SearchVO();
-			cri = new CriteriaStore(paging, 10);
+			criStore = new CriteriaStore(paging, 10);
+			
+			search = request.getParameter("search");
+			searchType = request.getParameter("searchType");
+			pagenum = request.getParameter("page");
 			
 			searchvo.setSearch(search);
-			searchvo.setCri(cri);;
+			searchvo.setCriStore(criStore);
+			searchvo.setSearchType(searchType);
+			
+			searchvo.setParking(parking);
+			searchvo.setRoom(room);
+			searchvo.setSeat(seat);
+			searchvo.setGroupseat(groupseat);
+			searchvo.setWifi(wifi);
+			searchvo.setBabyseat(babyseat);
+			searchvo.setDisabled(disabled);
+			searchvo.setPet(pet);
 			
 			storeListByPage = uStoreService.storeListByPage(searchvo);
+			storeListByPageCount = uStoreService.storeListByPageCount(searchvo);
 			
-			System.out.println(search);
-			System.out.println(cri);
-			System.out.println(paging);
-			model.addAttribute("cri", cri);
-			model.addAttribute("search", search);
+			model.addAttribute("criStore", criStore);
 			model.addAttribute("userPageChange", storeListByPage);
+			model.addAttribute("search", search);
+			model.addAttribute("searchType", searchType);
 			model.addAttribute("storeListByPageCount", storeListByPageCount);
 		}
 		

@@ -43,24 +43,46 @@
 
 	
 	<select id="storeListByPage" resultType="StoreVO" parameterType="StoreVO">
-	SELECT *
-      FROM STORE_INFO a
-      JOIN
-      STORE_ACCOUNT b
+
+	SELECT * FROM STORE_INFO a
+      JOIN MENU b
       USING (SI_CODE)
-      WHERE SI_NAME LIKE '%' || #{search} || '%'
-      ORDER BY SI_SEQ DESC
-      limit #{cri.amount} offset (#{cri.pageNum}-1) * #{cri.amount}
+	      WHERE 
+			<if test='searchType == "all"'> (SI_NAME || SI_ADDRESS || SI_ADDR_ROAD || M_NAME) LIKE '%' || #{search} || '%'</if> 
+			<if test='searchType == "store"'> SI_NAME LIKE '%' || #{search} || '%'</if>
+			<if test='searchType == "adress"'> (SI_ADDRESS || SI_ADDR_ROAD) LIKE '%' || #{search} || '%'</if>
+			<if test='searchType == "menu"'> M_NAME LIKE '%' || #{search} || '%'</if>
+		  	<if test='parking == "option1"'> AND SI_PARKING_ABLE = 'true'</if>
+		  	<if test='parking == "option2"'> AND SI_PARKING_ABLE = 'false' </if>
+		  	<if test='room == "room"'> AND SI_ETC LIKE '%' || '룸' || '%'</if>
+		  	<if test='seat == "seat"'> AND SI_ETC LIKE '%' || '유아용' || '%'</if>
+		  	<if test='groupseat == "groupseat"'> AND SI_ETC LIKE '%' || '단체석' || '%'</if>
+		  	<if test='wifi == "wifi"'> AND SI_ETC LIKE '%' || '무선인터넷' || '%'</if>
+		  	<if test='babyseat == "babyseat"'> AND SI_ETC LIKE '%' || '유아용' || '%'</if>
+		  	<if test='disabled == "disabled"'> AND SI_ETC LIKE '%' || '장애인' || '%'</if>
+		  	<if test='pet == "pet"'> AND SI_ETC LIKE '%' || '반려동물' || '%'</if>
+	  limit #{criStore.amount} offset (#{criStore.pageNum}-1) * #{criStore.amount}
 
 	</select> 
 	
     <select id="storeListByPageCount" resultType="int" parameterType="StoreVO">
-	SELECT COUNT(*)
-      FROM STORE_INFO a
-      JOIN
-      STORE_ACCOUNT b
+	SELECT COUNT(*) FROM STORE_INFO a
+      JOIN MENU b
       USING (SI_CODE)
-      WHERE SI_NAME LIKE '%' || #{search} || '%'
+      WHERE 
+      		<if test='searchType == "all"'> (SI_NAME || SI_ADDRESS || SI_ADDR_ROAD || M_NAME) LIKE '%' || #{search} || '%'</if> 
+			<if test='searchType == "store"'> SI_NAME LIKE '%' || #{search} || '%'</if>
+			<if test='searchType == "adress"'> (SI_ADDRESS || SI_ADDR_ROAD) LIKE '%' || #{search} || '%'</if>
+			<if test='searchType == "menu"'> M_NAME LIKE '%' || #{search} || '%'</if>
+		  	<if test='parking == "option1"'> AND SI_PARKING_ABLE = 'true'</if>
+		  	<if test='parking == "option2"'> AND SI_PARKING_ABLE = 'false' </if>
+		  	<if test='room == "room"'> AND SI_ETC LIKE '%' || '룸' || '%'</if>
+		  	<if test='seat == "seat"'> AND SI_ETC LIKE '%' || '유아용' || '%'</if>
+		  	<if test='groupseat == "groupseat"'> AND SI_ETC LIKE '%' || '단체석' || '%'</if>
+		  	<if test='wifi == "wifi"'> AND SI_ETC LIKE '%' || '무선인터넷' || '%'</if>
+		  	<if test='babyseat == "babyseat"'> AND SI_ETC LIKE '%' || '유아용' || '%'</if>
+		  	<if test='disabled == "disabled"'> AND SI_ETC LIKE '%' || '장애인' || '%'</if>
+		  	<if test='pet == "pet"'> AND SI_ETC LIKE '%' || '반려동물' || '%'</if>
 	</select> 
 	
 	

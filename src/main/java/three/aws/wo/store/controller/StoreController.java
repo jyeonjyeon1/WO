@@ -67,11 +67,11 @@ public class StoreController {
 //	}
 	
 //====================order  ============================
-		@GetMapping("/Ooneday.store")
-		public String toOOnedayPage() {
-			System.out.println("store lastOrder_oneday");
-			return "/order/lastOrder_oneday";
-		}
+//		@GetMapping("/Ooneday.store")
+//		public String toOOnedayPage() {
+//			System.out.println("store lastOrder_oneday");
+//			return "/order/lastOrder_oneday";
+//		}
 		
 		@GetMapping("/Operiod.store")
 		public String toOPeriodPage() {
@@ -80,11 +80,11 @@ public class StoreController {
 		}
 		
 	//====================reviews  ============================
-	@GetMapping("/reviews.store")
-	public String toReviewsPage() {
-		System.out.println("store reviews");
-		return "/reviews/reviews";
-	}	
+//	@GetMapping("/reviews.store")
+//	public String toReviewsPage() {
+//		System.out.println("store reviews");
+//		return "/reviews/reviews";
+//	}	
 	
 	//====================statistics  ============================
 	@GetMapping("/SPeriod.store")

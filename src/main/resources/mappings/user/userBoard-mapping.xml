@@ -15,12 +15,14 @@
 		
     </resultMap>
     
-    
-    
-    <select id="toptenList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ ORDER BY FAC_VISITS DESC LIMIT 10;
+    <select id="faqList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ ORDER BY FAC_SEQ DESC;
 	</select>
-	
+    
+     <select id="toptenList" resultType="FAQVO" resultMap="faqVO">
+		SELECT * FROM FAQ ORDER BY FAC_VISITS DESC LIMIT 10;
+	</select> 
+	<!-- 
 	<select id="orderfaqList" resultType="FAQVO" resultMap="faqVO">
 		SELECT * FROM FAQ WHERE FAC_TYPE = 'order' or FAC_TYPE = 'payment' ORDER BY FAC_CODE DESC
 	</select>
@@ -40,7 +42,7 @@
 	<select id="etcfaqList" resultType="FAQVO" resultMap="faqVO">
 		SELECT * FROM FAQ WHERE FAC_TYPE = 'etc' ORDER BY FAC_CODE DESC
 	</select>
-	
+	 -->
 	<update id="updateVisits">
 		UPDATE FAQ SET FAC_VISITS = #{fac_visits} WHERE FAC_SEQ = #{fac_seq};
 	</update>
@@ -67,14 +69,14 @@
 	<select id="newsList" resultType="NoticeVO" resultMap="noticeVO">
 		SELECT * FROM NOTICE_BOARD WHERE n_status = 'TRUE' ORDER BY n_seq DESC
 	</select>
-	
+<!-- 	
 	<select id="noticeList" resultType="NoticeVO" resultMap="noticeVO">
 		SELECT * FROM NOTICE_BOARD WHERE n_type = 'notice' AND n_status = 'TRUE' ORDER BY n_seq DESC
 	</select>
 	
 	<select id="eventList" resultType="NoticeVO" resultMap="noticeVO">
 		SELECT * FROM NOTICE_BOARD WHERE n_type = 'event' AND n_status = 'TRUE' ORDER BY n_seq DESC
-	</select> 
+	</select> --> 
 	
 	<resultMap type="QnAVO" id="qnaVO">
 		<id column="QA_SEQ" property="qa_seq" jdbcType="INTEGER"/>

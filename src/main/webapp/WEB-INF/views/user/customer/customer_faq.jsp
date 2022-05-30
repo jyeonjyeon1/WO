@@ -130,6 +130,15 @@
         background-color: rgba(241, 241, 241, 0.573);
       }
     }
+    
+    .event_listtt {
+    	font-size:16px;
+    	color:black;
+    	padding:16px 20px;
+    	
+    
+    }
+   
   </style>
 
 
@@ -140,6 +149,8 @@
     jQuery(document).ready(function () {
       $('#headers').load("header.html");
       $('#footers').load("footer.html");
+      
+      
     });
          //========= Hero Slider
          
@@ -165,6 +176,9 @@
 	          }
 	       });
 	}
+     
+      
+
 	</script>
 
 </head>
@@ -205,15 +219,15 @@
             <input class="fag_choose" id="tab6" type="radio" name="tabsss">
             <label class="cus_lab" for="tab6">이벤트</label>
             <!-- 전체 시작-->
+           
             <div class="tapsection" id="content4" style="padding-top:20px; border-top: 1px solid rgba(0, 0, 0, .15);">
               <div class="col-12">
                 <section class="">
                   <div class="container-md ">
                     <!-- 전체의 1 -->
-                    
+                     
                      <div class="accordion" id="accordionPanelsStayOpenExample">
                       <c:forEach var="newsList" items="${newsList}" varStatus="vs">
-                      
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -230,7 +244,7 @@
                         </div>
                       </div>
                       
-                      </c:forEach>
+                     </c:forEach>
                      </div>
                      
                     </div>
@@ -249,24 +263,27 @@
                   
                     <!-- 공지사항 1 -->
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="noticeList" items="${noticeList}" varStatus="vs">
-                      
+                     
+                       <c:forEach var="newsList" items="${newsList}" varStatus="vs">
+                       <c:if test="${newsList.n_type eq 'notice' }">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-22${vs.index}" aria-expanded="false"
                             aria-controls="panelsStayOpen-22${vs.index}">
-                            ${noticeList.n_title}
+                            ${newsList.n_title}
                           </button>
                         </h2>
                         <div id="panelsStayOpen-22${vs.index}" class="accordion-collapse collapse"
                           aria-labelledby="panelsStayOpen-headingOne">
                           <div class="accordion-body">
-                            ${noticeList.n_content}
+                            ${newsList.n_content}
                           </div>
                         </div>
                       </div>
+                      </c:if>
                       </c:forEach>
+                     
                      </div>
                     </div>
                    </section>
@@ -283,24 +300,15 @@
                     <!-- 이벤트 1 -->
                       
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="eventList" items="${eventList}" varStatus="vs">
-                      
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-23${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-23${vs.index}">
-                            ${eventList.n_title}
-                          </button>
-                        </h2>
-                        <div id="panelsStayOpen-23${vs.index}" class="accordion-collapse collapse"
-                          aria-labelledby="panelsStayOpen-headingOne">
-                          <div class="accordion-body">
-                            ${eventList.n_content}
-                          </div>
-                        </div>
+                       <c:forEach var="newsList" items="${newsList}" varStatus="vs">
+                       <c:if test="${newsList.n_type eq 'event'}">
+                      <div class="row" style="border:1px solid rgba(0, 0, 0, .15) ; margin:0 5px 0 5px; ">
+                      <a class="event_listtt" href="">
+                     	 ${newsList.n_title }
+                      </a>
                       </div>
-                      </c:forEach>
+                     </c:if>
+                     </c:forEach>
                      </div>
                     </div>
                    </section>
@@ -373,24 +381,24 @@
                     <!-- top10의 1 -->
                     
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="orderfaqList" items="${orderfaqList}" varStatus="vs">
-                      
+                      <c:forEach var="faqList" items="${faqList}" varStatus="vs">
+                      <c:if test="${faqList.fac_type eq 'order' || faqList.fac_type eq 'payment'}">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-12${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-12${vs.index}" onclick="count_num(${orderfaqList.fac_visits}, ${orderfaqList.fac_seq});">
-                            ${orderfaqList.fac_title}
+                            aria-controls="panelsStayOpen-12${vs.index}" onclick="count_num(${faqList.fac_visits}, ${faqList.fac_seq});">
+                            ${faqList.fac_title}
                           </button>
                         </h2>
                         <div id="panelsStayOpen-12${vs.index}" class="accordion-collapse collapse"
                           aria-labelledby="panelsStayOpen-headingOne">
                           <div class="accordion-body">
-                            ${orderfaqList.fac_content}
+                            ${faqList.fac_content}
                           </div>
                         </div>
                       </div>
-                     
+                     </c:if>
                       </c:forEach>
                      </div>
                     </div>
@@ -408,24 +416,24 @@
                     <!-- top10의 1 -->
                     
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="cancelList" items="${cancelList}" varStatus="vs">
-                      
+                      <c:forEach var="faqList" items="${faqList}" varStatus="vs">
+                      <c:if test="${faqList.fac_type eq 'cancel' || faqList.fac_type eq 'refund'}">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-13${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-13${vs.index}" onclick="count_num(${cancelList.fac_visits}, ${cancelList.fac_seq});">
-                            ${cancelList.fac_title}
+                            aria-controls="panelsStayOpen-13${vs.index}" onclick="count_num(${faqList.fac_visits}, ${faqList.fac_seq});">
+                            ${faqList.fac_title}
                           </button>
                         </h2>
                         <div id="panelsStayOpen-13${vs.index}" class="accordion-collapse collapse"
                           aria-labelledby="panelsStayOpen-headingOne">
                           <div class="accordion-body">
-                            ${cancelList.fac_content}
+                            ${faqList.fac_content}
                           </div>
                         </div>
                       </div>
-                     
+                     </c:if>
                       </c:forEach>
                      </div>
                      
@@ -443,24 +451,24 @@
                     <!-- top10의 1 -->
                     
                      <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="userfaqList" items="${userfaqList}" varStatus="vs">
-                      
+                      <c:forEach var="faqList" items="${faqList}" varStatus="vs">
+                      <c:if test="${faqList.fac_type eq 'user'}">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-14${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-14${vs.index}" onclick="count_num(${userfaqList.fac_visits}, ${userfaqList.fac_seq});">
-                            ${userfaqList.fac_title}
+                            aria-controls="panelsStayOpen-14${vs.index}" onclick="count_num(${faqList.fac_visits}, ${faqList.fac_seq});">
+                            ${faqList.fac_title}
                           </button>
                         </h2>
                         <div id="panelsStayOpen-14${vs.index}" class="accordion-collapse collapse"
                           aria-labelledby="panelsStayOpen-headingOne">
                           <div class="accordion-body">
-                            ${userfaqList.fac_content}
+                            ${faqList.fac_content}
                           </div>
                         </div>
                       </div>
-                     
+                     </c:if>
                       </c:forEach>
                      </div>
  					</div>
@@ -477,24 +485,24 @@
                     <!-- top10의 1 -->
                     
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="pointfaqList" items="${pointfaqList}" varStatus="vs">
-                      
+                      <c:forEach var="faqList" items="${faqList}" varStatus="vs">
+                      <c:if test="${faqList eq 'coupon'}">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-15${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-15${vs.index}" onclick="count_num(${pointfaqList.fac_visits}, ${pointfaqList.fac_seq});">
-                            ${pointfaqList.fac_title}
+                            aria-controls="panelsStayOpen-15${vs.index}" onclick="count_num(${faqList.fac_visits}, ${faqList.fac_seq});">
+                            ${faqList.fac_title}
                           </button>
                         </h2>
                         <div id="panelsStayOpen-15${vs.index}" class="accordion-collapse collapse"
                           aria-labelledby="panelsStayOpen-headingOne">
                           <div class="accordion-body">
-                            ${pointfaqList.fac_content}
+                            ${faqList.fac_content}
                           </div>
                         </div>
                       </div>
-                     
+                     </c:if>
                       </c:forEach>
                      </div>
                     </div>
@@ -511,24 +519,24 @@
                     <!-- top10의 1 -->
                     
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <c:forEach var="etcfaqList" items="${etcfaqList}" varStatus="vs">
-                      
+                      <c:forEach var="faqList" items="${faqList}" varStatus="vs">
+                      <c:if test="${faqList eq 'etc'}">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-15${vs.index}" aria-expanded="false"
-                            aria-controls="panelsStayOpen-15${vs.index}" onclick="count_num(${etcfaqList.fac_visits}, ${etcfaqList.fac_seq});">
-                            ${etcfaqList.fac_title}
+                            aria-controls="panelsStayOpen-15${vs.index}" onclick="count_num(${faqList.fac_visits}, ${faqList.fac_seq});">
+                            ${faqList.fac_title}
                           </button>
                         </h2>
                         <div id="panelsStayOpen-15${vs.index}" class="accordion-collapse collapse"
                           aria-labelledby="panelsStayOpen-headingOne">
                           <div class="accordion-body">
-                            ${etcfaqList.fac_content}
+                            ${faqList.fac_content}
                           </div>
                         </div>
                       </div>
-                     
+                     </c:if>
                       </c:forEach>
                      </div>
                     </div>

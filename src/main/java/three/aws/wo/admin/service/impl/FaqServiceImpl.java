@@ -18,8 +18,7 @@ public class FaqServiceImpl implements FaqService {
 	@Autowired 
 	private UserBoardDAO userBoardDAO;
 	
-//	자주 묻는 질문 ////////////////////////////////////////
-
+	
 	
 	@Override
 	public List<FAQVO> toptenList() {
@@ -28,59 +27,58 @@ public class FaqServiceImpl implements FaqService {
 	}
 	
 	@Override
-	public List<FAQVO> orderfaqList() {
+	public List<FAQVO> faqList() {
 		
-		return userBoardDAO.orderfaqList();
+		return userBoardDAO.faqList();
 	}
 	
-	
-	@Override
-	public List<FAQVO> cancelfaqList() {
-		
-		return userBoardDAO.cancelfaqList();
-	}
-	
-	@Override
-	public List<FAQVO> userfaqList() {
-		
-		return userBoardDAO.userfaqList();
-	}
-	
-	@Override
-	public List<FAQVO> pointfaqList() {
-		
-		return userBoardDAO.pointfaqList();
-	}
-	
-	@Override
-	public List<FAQVO> etcfaqList() {
-		
-		return userBoardDAO.etcfaqList();
-	}
-	
-	
-//	워킹오더 소식 ////////////////////////////////////////
+//	
+//	@Override
+//	public List<FAQVO> cancelfaqList() {
+//		
+//		return userBoardDAO.cancelfaqList();
+//	}
+//	
+//	@Override
+//	public List<FAQVO> userfaqList() {
+//		
+//		return userBoardDAO.userfaqList();
+//	}
+//	
+//	@Override
+//	public List<FAQVO> pointfaqList() {
+//		
+//		return userBoardDAO.pointfaqList();
+//	}
+//	
+//	@Override
+//	public List<FAQVO> etcfaqList() {
+//		
+//		return userBoardDAO.etcfaqList();
+//	}
+//	
+
 	
 	@Override
 	public List<NoticeVO> newsList() {
 		
 		return userBoardDAO.newsList();
 	}
+//	
+//	@Override
+//	public List<NoticeVO> noticeList() {
+//		
+//		return userBoardDAO.noticeList();
+//	}
+//	
+//	@Override
+//	public List<NoticeVO> eventList() {
+//		
+//		return userBoardDAO.eventList();
+//	}
 	
-	@Override
-	public List<NoticeVO> noticeList() {
-		
-		return userBoardDAO.noticeList();
-	}
 	
-	@Override
-	public List<NoticeVO> eventList() {
-		
-		return userBoardDAO.eventList();
-	}
-	
-	
-//	user 1:1 문의 ////////////////////////////////////////
+//	user 1:1
 	
 	@Override
 	public List<QnAVO> myqnaList(String u_id) {
@@ -92,7 +90,7 @@ public class FaqServiceImpl implements FaqService {
 		userBoardDAO.addqna(vo);
 	}
 	
-//	admin 1:1 문의 ////////////////////////////////////////
+//	admin 1:1
 	
 	@Override
 	public List<QnAVO> adminqnaList() {

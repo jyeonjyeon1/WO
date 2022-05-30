@@ -234,19 +234,74 @@
                         
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">등록일시</a></th>
                         <th data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">수정일시</a></th>
+                      	<th data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter"> </a></th>
+                      
                       </tr>
                     </thead>
 
                     <tbody>
                     <c:forEach  var="AtermsList"  items="${AtermsList}" varStatus="termsVs">
-                      <tr>
+                      <tr id="deleteForm${termsVs.index}">
                         <td>${termsVs.count}</td>
-                        <td>${AtermsList.t_code}</td>
+                        <td id="t_code${termsVs.index}">${AtermsList.t_code}</td>
                         <td><a href="terms_update.admin?t_code=${AtermsList.t_code}">${AtermsList.t_title}</a></td>
                        
                         <td>${AtermsList.t_regdate}</td>
                         <td>${AtermsList.t_enfdate}</td>
+                        <td>
+                         <button onclick="deletePol${termsVs.index}()"
+							class="btn btn-danger btn-xs">
+								<i class="fa fa-trash-o "></i>
+							</button>
+                        </td>
                       </tr>
+                      <script>
+                      function deletePol${termsVs.index}() {
+                    	  var t_code = $("#t_code${termsVs.index}").text();
+                  		Swal.fire({
+                  			  title: "삭제하시겠습니까??",
+                  			  icon: "warning",
+                  			  showCancelButton: true,
+                  			  confirmButtonColor: "#3085d6",
+                  			  cancelButtonColor: "#d33",
+                  			  confirmButtonText: "삭제",
+                  				  cancelButtonText: "아니오"
+                  			}).then((result) => {
+                  			  if (result.isConfirmed) {
+                  				  $.ajax({
+                  			    	    type: "POST",
+                  			    	    url: "/deleteTerm.admin",
+                  			    	    data: JSON.stringify({"t_code": t_code}), 
+                  			    	    dataType: "json",
+                  			    	    contentType: "application/json",
+                  			    	    success: function (data) {
+                  			    	        if (data == 1) {
+                  				    	        Swal.fire({
+                  				    	            icon: "success",
+                  				    	            title: "약관 삭제 완료",
+                  				    	            showConfirmButton: false,
+                  				    	            timer: 1500
+                  				    	        });
+                  				    	        $("#deleteForm${termsVs.index}").remove();
+                  			    	        }else if(data == 0){
+                  			    	        	Swal.fire({
+                  				    	            icon: "warning",
+                  				    	            title: "약관 삭제 실패",
+                  				    	            showConfirmButton: false,
+                  				    	            timer: 1500
+                  				    	        });
+                  			    	        }
+                  			    	    },
+                  			    	    error: function (data) {
+                  			    	        console.log("약관 삭제 통신에러");
+                  			    	    }
+                  			 		});//ajax end  
+                  			  }//if (result.isConfirmed)
+                  			})//then((result)
+                    	  
+                    	  
+                      }
+                      </script>
                     	
                     </c:forEach>
                     

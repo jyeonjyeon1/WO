@@ -107,6 +107,42 @@ public class TermsController {
       return 1;
    }
    
+   
+   @ResponseBody
+   @RequestMapping(value="/insertTerms.admin", method = RequestMethod.POST)
+   public int insertTerms(@RequestBody HashMap<String, String > param, TermsVO vo ) throws ParseException {
+	   
+	   String t_code = param.get("t_code");
+	   String t_title = param.get("t_title");
+	   String t_content = param.get("t_content");
+	   String t_regdate_input = param.get("t_regdate");
+	   String t_type = "term";
+	   
+	   SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
+	   Date t_regdate = fo.parse(t_regdate_input);
+	   
+	   System.out.println(t_type + t_code);
+	   System.out.println(t_title);
+	   System.out.println(t_content);
+	   System.out.println(t_regdate);
+	   
+	   
+	   
+	   
+	   HashMap<String, Object> map = new HashMap<String, Object>();
+	   map.put("t_type", t_type);
+	   map.put("t_code", t_code);
+	   map.put("t_title", t_title);
+	   map.put("t_content", t_content);
+	   map.put("t_regdate", t_regdate);
+	   
+	   termsService.insertPolicy(map); 
+	      
+	   
+      return 1;
+   }
+   
+   
    @GetMapping("/terms_add.admin")
 	public String toterms_add(Model model) {
 	   
@@ -154,20 +190,109 @@ public class TermsController {
 				model.addAttribute("infoOne", vo);
 				return "/page/policy_update";
 			} 
-		
 	
 	}
+	
+	 @ResponseBody
+	   @RequestMapping(value="/updatePolicy.admin", method = RequestMethod.POST)
+	   public int updatePolicy(@RequestBody HashMap<String, String > param, TermsVO vo ) throws ParseException {
+		   
+		   String t_code = param.get("t_code");
+		   String t_title = param.get("t_title");
+		   String t_content = param.get("t_content");
+		   String t_regdate_input = param.get("t_regdate");
+		   String t_enfdate_input = param.get("t_enfdate");
+		   String t_type = "privacy";
+		   
+		   SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
+		   
+		   Date t_regdate = fo.parse(t_regdate_input);
+		   Date t_enfdate = fo.parse(t_enfdate_input);
+		   
+		   
+		   HashMap<String, Object> map = new HashMap<String, Object>();
+		   map.put("t_type", t_type);
+		   map.put("t_code", t_code);
+		   map.put("t_title", t_title);
+		   map.put("t_content", t_content);
+		   map.put("t_regdate", t_regdate);
+		   map.put("t_enfdate", t_enfdate);
+		   
+		   termsService.updateTerms(map); 
+		      
+		   
+	      return 1;
+	   }
+	
+
    
 	
 	@GetMapping("/policy_add.admin")
-	public String topolicy_add() {
+	public String topolicy_add(Model model) {
+		int current_max_code = termsService.tPolicyCodeMax();
+		System.out.println(current_max_code);
 		
-		
-		System.out.println("policy_add");
+		model.addAttribute("current_max_code",current_max_code);
 		
 		
 		return "/page/policy_add";
 	}
+	
+	
+	 @ResponseBody
+	   @RequestMapping(value="/insertPolicy.admin", method = RequestMethod.POST)
+	   public int insertPolicy(@RequestBody HashMap<String, String > param, TermsVO vo ) throws ParseException {
+		   
+		   String t_code = param.get("t_code");
+		   String t_title = param.get("t_title");
+		   String t_content = param.get("t_content");
+		   String t_regdate_input = param.get("t_regdate");
+		   String t_type = "privacy";
+		   
+		   SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
+		   Date t_regdate = fo.parse(t_regdate_input);
+		   
+		   System.out.println(t_type + t_code);
+		   System.out.println(t_title);
+		   System.out.println(t_content);
+		   System.out.println(t_regdate);
+		   
+		   
+		   
+		   
+		   HashMap<String, Object> map = new HashMap<String, Object>();
+		   map.put("t_type", t_type);
+		   map.put("t_code", t_code);
+		   map.put("t_title", t_title);
+		   map.put("t_content", t_content);
+		   map.put("t_regdate", t_regdate);
+		   
+		   termsService.insertPolicy(map); 
+		      
+		   
+	      return 1;
+	   }
+	 
+	 @ResponseBody
+	   @RequestMapping(value="/deletePol.admin", method = RequestMethod.POST)
+	   public int deletePol(@RequestBody HashMap<String, String > param, TermsVO vo ) {
+		   
+		   String t_code = param.get("t_code");
+		   System.out.println(t_code + "->삭제");
+		  termsService.deletePol(t_code); 
+	      return 1;
+	   }
+	 
+	 @ResponseBody
+	   @RequestMapping(value="/deleteTerm.admin", method = RequestMethod.POST)
+	   public int deleteTerm(@RequestBody HashMap<String, String > param, TermsVO vo ) {
+		   
+		   String t_code = param.get("t_code");
+		   System.out.println(t_code + "->삭제");
+		  termsService.deletePol(t_code); 
+	      return 1;
+	   }
+	
   
    
   

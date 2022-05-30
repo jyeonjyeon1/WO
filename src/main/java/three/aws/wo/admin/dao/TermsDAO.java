@@ -38,5 +38,17 @@ public class TermsDAO {
 		return sqlSession.selectOne("TermsDAO.infoOne",t_code);
 	}
 	
+	public int tPolicyCodeMax() {
+		return sqlSession.selectOne("TermsDAO.tPolicyCodeMax");
+	}
+	
+	public void insertPolicy(HashMap<String, Object> map) {
+		sqlSession.insert("TermsDAO.insertPolicy", map);
+	}
+	
+	public void deletePol(String t_code) {
+		sqlSession.delete("TermsDAO.deletePol",t_code);
+	}
+	
 	
 }

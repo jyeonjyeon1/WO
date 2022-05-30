@@ -8,28 +8,27 @@ import three.aws.wo.admin.vo.NoticeVO;
 import three.aws.wo.admin.vo.QnAVO;
 
 public interface FaqService {
-	
-//	자주 묻는 질문 ////////////////////////////////////////
+
 
 	List<FAQVO> toptenList();
-	List<FAQVO> orderfaqList();
-	List<FAQVO> cancelfaqList();
-	List<FAQVO> userfaqList();
-	List<FAQVO> pointfaqList();
-	List<FAQVO> etcfaqList();
+	List<FAQVO> faqList();
+//	List<FAQVO> cancelfaqList();
+//	List<FAQVO> userfaqList();
+//	List<FAQVO> pointfaqList();
+//	List<FAQVO> etcfaqList();
 
-//	워킹오더 소식 ////////////////////////////////////////
+
 	
 	List<NoticeVO> newsList();
-	List<NoticeVO> noticeList();
-	List<NoticeVO> eventList();
+//	List<NoticeVO> noticeList();
+//	List<NoticeVO> eventList();
 	
-//	user 1:1 문의 ////////////////////////////////////////
+//	user 1:1 
 	
 	List<QnAVO> myqnaList(String u_id);
 	void addqna(QnAVO vo) throws Exception;
 	
-//	admin 1:1 문의 ////////////////////////////////////////
+//	admin 1:1 
 	
 	List<QnAVO> adminqnaList();
 	

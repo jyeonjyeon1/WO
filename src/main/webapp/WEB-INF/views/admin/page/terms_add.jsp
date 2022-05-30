@@ -15,7 +15,60 @@
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
   <!-- 테이블용 css -->
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<script>
+	$(document).ready(function() {
 
+		document.getElementById("t_regdate_input").value = new Date();
+		
+		
+	})
+
+
+
+		function insertTerms() {
+			
+			var t_code = $("#t_code_input").val();
+			var t_title = $("#t_title_input").val();
+			var t_content = $("#t_content_input").val();
+			var t_regdate = $("#t_regdate_input").val();
+			
+			param = {
+				"t_code" : 	t_code,
+				"t_title" : 	t_title,
+				"t_content" : 	t_content,
+				"t_regdate" : 	t_regdate
+					
+			}
+			console.log(t_regdate);
+			
+			$.ajax({
+		 	    	    type: "POST",
+		 	    	    url: "/insertTerms.admin",
+		 	    	    data: JSON.stringify(param), 
+		 	    	    dataType: "json",
+		 	    	    contentType: "application/json",
+		 	    	    success: function (data) {
+		 	    	        if (data == 1) {
+		 	    	        	
+		 		    	        Swal.fire({
+		 		    	            icon: "success",
+		 		    	            title: "약관등록 완료",
+		 		    	            showConfirmButton: false,
+		 		    	            timer: 1500
+		 		    	        });
+		 		    	        location.href="/policy_mng.admin";
+		 		    	        
+		 		    	  
+		 	    	        }else{alert("통신은됨");}
+		 	    	    },
+		 	    	    error: function (data) {
+		 	    	        console.log("정책 insert 통신에러");
+		 	    	    }
+		 		});//ajax end
+			
+		}
+	
+	</script>
 </head>
 
 <body>
@@ -179,13 +232,13 @@
                   <label class="col-sm-2 col-sm-2 control-label" >약관코드</label>
 
                   <div class="col-sm-4 col-sm-4 col-sm-4">
-                    <input type="text" class="form-control round-form" value="te_${current_max_code +1 }" disabled="disabled">
+                    <input type="text" class="form-control round-form" id="t_code_input" value="te_${current_max_code +1 }" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">약관명</label>
                   <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="약관명" value="">
+                    <input class="form-control" id="t_title_input" type="text" placeholder="약관명" value="">
                   </div>
                   <!--
                     id="focusedInput" 빨간 테두리
@@ -194,45 +247,23 @@
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <textarea rows="8" class="form-control" placeholder="약관내용을 입력하세요"></textarea>
+                    <textarea rows="8" class="form-control" id="t_content_input" placeholder="약관내용을 입력하세요"></textarea>
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">노출상태</label>
-                  <div class="col-sm-10">
 
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio1" value="option1"> 공개
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio2" value="option2" checked> 비노출
-                    </label>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">등록시간</label>
+				<div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">등록날짜</label>
                   <div class="col-sm-10">
-                    <label>시간조정</label>
-                    <input type="checkbox" checked style="display: inline-block;margin-right: 10px;">
-                    <input class="form-control round-form" type="datetime-local" value="2022-04-16T10:00"
-                      style="width: 30%;display: inline-block;margin-right: 10px;"> ~
-                    <input class="form-control round-form" type="datetime-local" value="2022-04-30T23:59"
-                      style="width: 30%;display: inline-block;margin-left: 10px;">
+                    <input class="form-control round-form" id ="t_regdate_input"  type="date"   
+                      style="width: 30%;display: inline-block;" >
 
                   </div>
-
-
-                  <!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
                 </div>
 
                 <button type="button" onclick="window.history.back()" class="btn btn-theme"
                   style="width:70px;float: right; margin-left: 10px;">뒤로</button>
-                <button type="button" onclick="location.href='terms_mng.html'" class="btn btn-theme"
+                <button type="button" onclick="insertTerms()" class="btn btn-theme"
                   style="width:70px;float: right;">
                   등록
                 </button>

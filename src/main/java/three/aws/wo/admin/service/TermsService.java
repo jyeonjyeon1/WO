@@ -12,5 +12,9 @@ public interface TermsService {
 	void updateTerms(HashMap<String, Object> map);
 	int tCodeMax();
 	TermsVO infoOne(String t_code);
+	int tPolicyCodeMax();
+	void insertPolicy(HashMap<String, Object> map);
+	void deletePol(String t_code);
+	
 }
 

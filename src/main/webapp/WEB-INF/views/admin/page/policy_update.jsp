@@ -22,6 +22,54 @@
 
 </head>
 
+<script>
+
+function updatePolicy() {
+	var t_code = $("#t_code_input").val();
+	var t_title = $("#t_title_input").val();
+	var t_content = $("#t_content_input").val();
+	var t_enfdate = $("#t_enfdate_input").val();
+	var t_regdate = $("#t_regdate_input").val();
+	
+	param = {
+		"t_code" : 	t_code,
+		"t_title" : 	t_title,
+		"t_content" : 	t_content,
+		"t_enfdate" : 	t_enfdate,
+		"t_regdate" : 	t_regdate
+			
+	}
+	console.log(t_regdate);
+	
+	$.ajax({
+ 	    	    type: "POST",
+ 	    	    url: "/updatePolicy.admin",
+ 	    	    data: JSON.stringify(param), 
+ 	    	    dataType: "json",
+ 	    	    contentType: "application/json",
+ 	    	    success: function (data) {
+ 	    	        if (data == 1) {
+ 	    	        	
+ 		    	        Swal.fire({
+ 		    	            icon: "success",
+ 		    	            title: "정책수정 완료",
+ 		    	            showConfirmButton: false,
+ 		    	            timer: 1500
+ 		    	        });
+ 		    	        location.href="/policy_mng.admin";
+ 		    	        
+ 		    	  
+ 	    	        }else{alert("통신은됨");}
+ 	    	    },
+ 	    	    error: function (data) {
+ 	    	        console.log("정책 update 통신에러");
+ 	    	    }
+ 		});//ajax end
+	
+}
+
+</script>
+
 <body>
   <section id="container">
         <!-- 헤더 import -->
@@ -183,13 +231,13 @@
                   <label class="col-sm-2 col-sm-2 control-label">정책코드</label>
 
                   <div class="col-sm-4 col-sm-4 col-sm-4">
-                    <input type="text" class="form-control round-form" placeholder="정책코드" value="${infoOne.t_code }" >
+                    <input type="text" id="t_code_input" class="form-control round-form" placeholder="정책코드" value="${infoOne.t_code }" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">정책명</label>
                   <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="정책명" value="${infoOne.t_title }">
+                    <input class="form-control" id="t_title_input" type="text" placeholder="정책명" value="${infoOne.t_title }">
                   </div>
                   <!--
                     id="focusedInput" 빨간 테두리
@@ -198,7 +246,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <textarea rows="8" class="form-control" placeholder="정책내용을 입력하세요">
+                    <textarea rows="8" class="form-control" id="t_content_input" placeholder="정책내용을 입력하세요">
  				${infoOne.t_content }
  				</textarea>
                   </div>
@@ -206,42 +254,30 @@
 
 
                  <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">마지막 수정날짜</label>
-                  <div class="col-sm-10">
+                  <label class="col-lg-3 control-label">등록날짜</label>
+                  <div class="col-lg-9">
                     
                     
-                    <input class="form-control round-form" type="date"  id="t_enfdate_input"  value="<fmt:formatDate value="${infoOne.t_enfdate }" pattern="yyyy-MM-dd"/>" 
+                    <input class="form-control round-form" type="date"  id="t_regdate_input"  value="<fmt:formatDate value="${infoOne.t_regdate }" pattern="yyyy-MM-dd"/>" 
                       style="width: 30%;display: inline-block;">
 
                   </div>
-
-
-                  <!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
                 </div>
                 
                  <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">마지막 수정날짜</label>
-                  <div class="col-sm-10">
+                  <label class="col-lg-3 control-label">마지막 수정날짜</label>
+                  <div class="col-lg-9">
                     
                     
                     <input class="form-control round-form" type="date"  id="t_enfdate_input"  value="<fmt:formatDate value="${infoOne.t_enfdate }" pattern="yyyy-MM-dd"/>" 
                       style="width: 30%;display: inline-block;">
 
                   </div>
-
-
-                  <!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
                 </div>
 
                 <button type="button" onclick="window.history.back()" class="btn btn-theme"
                   style="width:70px;float: right; margin-left: 10px;">뒤로</button>
-                <button type="button" onclick="location.href='policy_mng.html'" class="btn btn-theme"
+                <button type="button" onclick="updatePolicy()" class="btn btn-theme"
                   style="width:70px;float: right;">
                   등록
                 </button>

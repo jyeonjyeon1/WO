@@ -44,4 +44,20 @@ public class TermsServiceImpl implements TermsService{
 	public TermsVO infoOne(String t_code) {
 		return termsDAO.infoOne(t_code);
 	}
+	
+	@Override
+	public int tPolicyCodeMax() {
+		return termsDAO.tPolicyCodeMax();
+	}
+	
+	@Override
+	public void insertPolicy(HashMap<String, Object> map) {
+		termsDAO.insertPolicy(map);
+	}
+	
+	@Override
+	public void deletePol(String t_code) {
+		termsDAO.deletePol(t_code);
+	}
+	
 }

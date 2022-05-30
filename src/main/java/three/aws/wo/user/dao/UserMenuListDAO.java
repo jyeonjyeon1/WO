@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import three.aws.wo.user.vo.BasketVO;
+import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.MenuListVO;
 
 @Repository
@@ -15,20 +15,24 @@ public class UserMenuListDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<MenuListVO> menuTitle() {
-		return sqlSession.selectList("UserMenuListDAO.menuTitle");
+	public List<StoreVO> storeInfo(String si_code) {
+		return sqlSession.selectList("UserMenuListDAO.storeInfo", si_code);
 	}
 	
-	public List<MenuListVO> menuList() {
-		return sqlSession.selectList("UserMenuListDAO.menuList");
+	public List<MenuListVO> menuTitle(String si_code) {
+		return sqlSession.selectList("UserMenuListDAO.menuTitle", si_code);
 	}
 	
-	public List<MenuListVO> optionList() {
-		return sqlSession.selectList("UserMenuListDAO.optionList");
+	public List<MenuListVO> menuList(String si_code) {
+		return sqlSession.selectList("UserMenuListDAO.menuList", si_code);
 	}
 	
-	public List<MenuListVO> basicOptionList() {
-		return sqlSession.selectList("UserMenuListDAO.basicOptionList");
+	public List<MenuListVO> optionList(String si_code) {
+		return sqlSession.selectList("UserMenuListDAO.optionList", si_code);
+	}
+	
+	public List<MenuListVO> basicOptionList(String si_code) {
+		return sqlSession.selectList("UserMenuListDAO.basicOptionList", si_code);
 	}
 	
 	/*

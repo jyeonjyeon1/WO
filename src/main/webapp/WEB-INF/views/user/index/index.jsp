@@ -106,7 +106,7 @@
 							<div class="product-image">
 								<img src=${fn:toLowerCase(myStoreList.si_image) } alt="#">
 								<div class="button">
-									<a href="product-details.html" class="btn"><i
+									<a href="/menuList.user?store=${myStoreList.si_code}" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
 								</div>
 							</div>
@@ -171,7 +171,7 @@
 							<div class="product-image">
 								<img src=${fn:toLowerCase(recStoreList.si_image) } alt="#">
 								<div class="button">
-									<a href="product-details.html" class="btn"><i
+									<a href="/menuList.user?store=${recStoreList.si_code}" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
 								</div>
 							</div>
@@ -237,7 +237,7 @@
 								<img src=${fn:toLowerCase(newStoreList.si_image) } alt="#">
 								<span class="new-tag">New</span>
 								<div class="button">
-									<a href="product-details.html" class="btn"><i
+									<a href="/menuList.user?store=${newStoreList.si_code}" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
 								</div>
 							</div>
@@ -429,6 +429,7 @@
                 }
             }
         });
+        
         
     </script>
 </body>

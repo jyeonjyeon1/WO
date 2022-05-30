@@ -33,40 +33,40 @@
 		<!-- 매장소개 -->
 		<section style="margin: 40px;">
 			<div class="container">
-				<div class="row">
-					<div class="col-lg-5 col-md-5 col-sm-12 col-12">
-						<div class="kio_img_bg">
-							<img src="resources/assets/images/cafe/no-image-cafe.png"
-								alt="cafe" class="kio_img">
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-12" style="margin-left: 20px">
-						<div class="product__details__text">
-							<h3>스타벅스 종로3가점</h3>
-							<div class="product__details__rating">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star-half-o"></i> <span>(18 reviews)</span>
+				<c:forEach var="storeInfo" items="${storeInfo }" varStatus="sVs">
+					<div class="row">
+						<div class="col-lg-5 col-md-5 col-sm-12 col-12">
+							<div class="kio_img_bg">
+								<img src="resources/assets/images/cafe/no-image-cafe.png"
+									alt="cafe" class="kio_img">
 							</div>
-							<p style="margin-bottom: 20px">Mauris blandit aliquet elit,
-								eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-								vehicula elementum sed sit amet dui. Sed porttitor lectus nibh.</p>
-							<button type="button" class="btn btn-warning btn-sm">리뷰
-								바로가기</button>
-							&nbsp&nbsp&nbsp&nbsp&nbsp
-							<!-- 간격띄우기 -->
-							<button type="button" class="btn btn-warning btn-sm">찾아오시는
-								길</button>
-							<ul style="margin: 30px 0 0; padding: 30px 0 0">
-								<li><b>전화번호</b> <span>1522-3232</span></li>
-								<li><b>주소</b> <span>서울 송파구 백제고분로 358 </span></li>
-								<li><b>영업시간</b> <span>07:00 - 21:00</span></li>
-								<li><b>정기휴무</b> <span>일요일/공휴일</span></li>
-								<li><b>임시휴무</b> <span>5월5일</span></li>
-							</ul>
+						</div>
+						<div class="col-lg-6 col-md-6 col-12" style="margin-left: 20px">
+							<div class="product__details__text">
+								<h3>${storeInfo.si_name }&nbsp;${storeInfo.si_loc }</h3>
+								<div class="product__details__rating">
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										class="fa fa-star-half-o"></i> <span>(18 reviews)</span>
+								</div>
+								<p style="margin-bottom: 20px">${storeInfo.si_referinfo }</p>
+								<button type="button" class="btn btn-warning btn-sm"><a href="#myReview" style="color:black;">리뷰
+									바로가기</a></button>
+								&nbsp&nbsp&nbsp&nbsp&nbsp
+								<!-- 간격띄우기 -->
+								<button type="button" class="btn btn-warning btn-sm">찾아오시는
+									길</button>
+								<ul style="margin: 30px 0 0; padding: 30px 0 0">
+									<li><b>전화번호</b> <span>${storeInfo.si_tel }</span></li>
+									<li><b>주소</b> <span>${storeInfo.si_address } ${storeInfo.si_addr_detail } </span></li>
+									<li><b>영업시간</b> <span>07:00 - 21:00</span></li>
+									<li><b>정기휴무</b> <span>${storeInfo.si_holiday_fix }</span></li>
+									<li><b>임시휴무</b> <span>${storeInfo.si_holiday_imsi }</span></li>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</section>
 	
@@ -105,7 +105,7 @@
 													<ul class="product__item__pic__hover">
 														<div class="button">
 															<a class="btn" id="chooseMenu" data-bs-toggle="modal"
-																data-bs-target="#menu_updateOption${tVs.count }${mVs.count }">
+																data-bs-target="#menu_select${tVs.count }${mVs.count }">
 																<i class="lni lni-cart"></i> 주문하기
 															</a>
 														</div>
@@ -124,7 +124,7 @@
 									<c:if test="${menuList.mg_code eq mgcode }">
 										<!------------- 모달 -------------->
 										<div class="modal fade"
-											id="menu_updateOption${tVs.count }${mVs.count }" role="dialog">
+											id="menu_select${tVs.count }${mVs.count }" role="dialog">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -197,8 +197,10 @@
 		</div>
 	
 		<section>
+		
 			<div class="container" style="padding: 40px; background-color: white;">
-				<div class="product__details__text">
+			<a name="myReview">
+				<div class="product__details__text"">
 					<h3>우리매장 Reviews</h3>
 					<div class="product__details__rating">
 						<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i

@@ -553,14 +553,14 @@
         <div class="tapsection" id="content3" style="padding-top:20px; border-top: 1px solid rgba(0, 0, 0, .15);">
           <div class="col-12">
 
-            <input class="fag_choose" id="tab13" type="radio" name="tabss" checked>
+            <input class="fag_choose" id="tab13" type="radio" name="tabssbs" checked>
             <!--디폴트 메뉴-->
             <label class="faq_label" for="tab13">내 문의</label>
-            <input class="fag_choose" id="tab14" type="radio" name="tabss">
+            <input class="fag_choose" id="tab14" type="radio" name="tabssbs">
             <label class="faq_label" for="tab14">진행중</label>
-            <input class="fag_choose" id="tab15" type="radio" name="tabss">
+            <input class="fag_choose" id="tab15" type="radio" name="tabssbs">
             <label class="faq_label" for="tab15">답변 완료</label>
-            <input class="fag_choose" id="tab16" type="radio" name="tabss">
+            <input class="fag_choose" id="tab16" type="radio" name="tabssbs">
             <label class="faq_label" for="tab16">문의 하기</label>
             
             <!-- 내 문의 시작-->
@@ -571,7 +571,6 @@
                     
                      <div class="accordion" id="accordionPanelsStayOpenExample">
                       <c:forEach var="myqnaList" items="${myqnaList}" varStatus="vs">
-                      
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"

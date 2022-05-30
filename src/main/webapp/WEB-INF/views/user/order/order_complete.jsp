@@ -35,7 +35,8 @@
 					<label>주문일시</label>
 				</div>
 				<div class="col-6" style="padding-left: 10px;">
-					<label> ${completeOrder.o_order_date} </label>
+					<label><fmt:formatDate value="${completeOrder.o_order_date}"
+									pattern="yyyy.MM.dd  |  a hh:mm" /> </label>
 				</div>
 			</div>
 			<div class="row">

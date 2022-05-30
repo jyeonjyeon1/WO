@@ -7,9 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>워킹오더 관리자 페이지</title>
+  <title>워킹오더 FAQ 관리</title>
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">

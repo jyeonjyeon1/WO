@@ -106,6 +106,10 @@ public class AStoreDAO {
 	public void rejectMenuImg(HashMap<String, String> param) {
 		sqlSession.update("AStoreDAO.rejectMenuImg",param);
 	}
+
+	public void updateStoreImage(HashMap<String, String> param) {
+		sqlSession.update("AStoreDAO.updateStoreImage",param);
+	}
 	
 	
 }

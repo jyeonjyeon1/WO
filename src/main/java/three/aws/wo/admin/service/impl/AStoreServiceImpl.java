@@ -131,4 +131,8 @@ public class AStoreServiceImpl implements AStoreService {
 	public void rejectMenuImg(HashMap<String, String> param) {
 		aStoreDAO.rejectMenuImg(param);
 	}
+	@Override
+	public void updateStoreImage(HashMap<String, String> param) {
+		aStoreDAO.updateStoreImage(param);
+	}
 }

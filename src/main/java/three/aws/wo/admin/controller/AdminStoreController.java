@@ -159,11 +159,14 @@ public class AdminStoreController {
 	public String regisStoreForm(StoreFormVO vo) {
 		String bankUrl = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/bankcopy/";
 		String bussUrl = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/businessreg/";
+		String imageUrl = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/store_image/";
 		String sf_code = vo.getSf_code();
 		String sf_bank = vo.getSf_bankbook_image();
 		String sf_buss = vo.getSf_business_registration_image();
+		String image = vo.getSf_image();
 		vo.setSf_bankbook_image(bankUrl + sf_code + sf_bank);
 		vo.setSf_business_registration_image(bussUrl + sf_code + sf_buss);
+		vo.setSf_image(imageUrl + sf_code + image);
 		vo.setSf_password(pwdEncoder.encode(vo.getSf_code()));
 		aStoreService.insertStoreForm(vo);
 		System.out.println("승인목록 확인+ DB확인");
@@ -316,4 +319,19 @@ public class AdminStoreController {
 		}
 		return result;
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateStoreImage.admin", method = RequestMethod.POST)
+	public int updateStoreImage(@RequestBody HashMap<String, String> param) {
+		int result = 0;
+		try {
+			aStoreService.updateStoreImage(param);
+			result = 1;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return result;
+	}
+
 }

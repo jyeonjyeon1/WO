@@ -406,7 +406,7 @@ function modifyNumber(time){
 window.onload = function(){
     setClock();
     setInterval(setClock,1000); //1초마다 setClock 함수 실행
-//     setInterval(checkNewOrder,1000);//1초마다 새로운 주문 확인
+    setInterval(checkNewOrder,1000);//1초마다 새로운 주문 확인
 }
 
 function checkNewOrder(){
@@ -415,22 +415,61 @@ function checkNewOrder(){
         dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
         type: "get",
         success: function(data) {
-        	$("#newOrder").prepend(data); // 반환된 data를 body태그에 추가
-        	for(i=0;i<20;i++){
-  				try{//원래 있던 친구들
-  					var indexCount = document.getElementById("indexCount"+i.toString());
-  					var imsi = parseInt(indexCount.innerText)+1;
-  					indexCount.innerText = imsi;
-  				}catch(error){}
-  				try{//새로들어온친구들
-  					var indexCounta = document.getElementById("indexCounta"+i.toString());
-  					var imsia = parseInt(indexCounta.innerText)+1;
-  					indexCounta.innerText = imsia;
-  				}catch(error){}
-  			}
+        	if(data!="blank"){
+        		Swal.fire({
+        			  title: "신규 주문!!",
+        			  width: 400,
+        			  height:100,
+        			  icon: "warning",
+        			  html: "<br>",
+        		      showConfirmButton: false,
+        		      timer: 1500,
+        			  color: '#000000',
+        			  background: '#fff',
+        			  backdrop: `
+        			    rgba(0,0,123,0.4)
+        			    url("resources/assets/images/admin/logo/dancing-banana.gif") 
+        			    left top
+        			    no-repeat
+        			  `
+        			});
+	        	$("#newOrder").prepend(data); // 반환된 data를 body태그에 추가
+	        	for(i=0;i<20;i++){
+	  				try{//원래 있던 친구들
+	  					var indexCount = document.getElementById("indexCount"+i.toString());
+	  					var imsi = parseInt(indexCount.innerText)+1;
+	  					indexCount.innerText = imsi;
+	  				}catch(error){}
+	  				try{//새로들어온친구들
+	  					var indexCounta = document.getElementById("indexCounta"+i.toString());
+	  					var imsia = parseInt(indexCounta.innerText)+1;
+	  					indexCounta.innerText = imsia;
+	  				}catch(error){}
+	  			}
+        	}
         },
-        error: function (){alert("실패");}
+        error: function (){console.log("새주문 못 받아오는 중")}
     });
+}
+
+function zzzz(){
+	Swal.fire({
+		  title: "신규 주문!!",
+		  width: 400,
+		  height:100,
+		  icon: "warning",
+		  html: "<br>",
+	      showConfirmButton: false,
+	      timer: 1500,
+		  color: '#000000',
+		  background: '#fff',
+		  backdrop: `
+		    rgba(0,0,123,0.4)
+		    url("resources/assets/images/admin/logo/dancing-banana.gif") 
+		    left top
+		    no-repeat
+		  `
+		})
 }
 </script>
 </head>
@@ -562,7 +601,8 @@ function checkNewOrder(){
           <div class="col-lg-6">
           <div class="current_date"> 
             <div id="date" class="date" ></div>
-        </div><button style="font-size:16px;padding:10px 20px" onclick="checkNewOrder()">화면 불러오기용 원하는 시간마다 자동으로 돌게할 수 있음</button>
+        </div>
+<!--         <button style="font-size:16px;padding:10px 20px" onclick="zzzz()">화면 불러오기용 원하는 시간마다 자동으로 돌게할 수 있음</button> -->
           </div>
           <!--현재 시간-->
           <div class="col-lg-6" >

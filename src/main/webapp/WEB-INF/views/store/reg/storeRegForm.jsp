@@ -139,6 +139,13 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="col-sm-2 control-label">가게로고/이미지</label>
+									<div class="col-sm-5">
+										<input id="sf_image" type="file" 
+											accept="image/*" name="sf_image">
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="col-sm-2 control-label">사업자등록증</label>
 									<div class="col-sm-5">
 										<input id="businessreg" type="file" 
@@ -309,6 +316,33 @@
         
     }
     
+ // 통장사본 업로드 
+    uploadImgSf_image = () => {
+        AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+            })
+        })
+
+        let files = document.getElementById("sf_image").files;
+        let file = files[0];
+        let fileNamesf_image = file.name;
+        fileNamesf_image = code + fileNamesf_image;
+
+        let upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: 'walkingorder/store_image',
+                Key: fileNamesf_image,
+                ContentType : "image/jpeg",
+                Body: file
+            }
+        })
+
+        const promise = upload.promise();
+        
+    }
+    
     function getPostCode() {
         new daum.Postcode({
           oncomplete: function (data) {
@@ -451,6 +485,7 @@
 	if(ch7 &&ch3 && ch5 && ch6 && $("#post__code").val()!=''&& $("#road__Address").val()!=''	) {
 		uploadImgbusinessreg();
 		uploadImgbankcopy();
+		uploadImgSf_image();
 		document.storeRegForm.submit();
 	}else{
 		Swal.fire({

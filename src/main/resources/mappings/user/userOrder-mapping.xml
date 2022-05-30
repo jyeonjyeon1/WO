@@ -95,7 +95,8 @@
 		UPDATE ORDERS
 		SET
 		O_PAY_STATUS = true,
-		O_ORDER_STATE = '접수대기'
+		O_ORDER_STATE = '접수대기',
+		O_ORDER_DATE = CURRENT_TIMESTAMP
 		WHERE
 		O_CODE = #{o_code}
 	</update>

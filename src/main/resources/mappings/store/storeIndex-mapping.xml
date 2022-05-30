@@ -82,13 +82,18 @@
 		DELETE FROM BASKET_ORDER WHERE O_CODE = #{o_code}
 	</delete>
 	<select id="newOrder" resultType="OrdersVO">
-		SELECT * FROM ORDERS o
+		<!-- SELECT * FROM ORDERS o
 		INNER JOIN
 		USERS u
 		ON (o.U_ID = u.U_ID)
 		WHERE SI_CODE = #{si_code} 
 		AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
 		ORDER BY O_SEQ DESC
-		LIMIT 1
+		LIMIT 1 -->
+		SELECT * FROM ORDERS WHERE O_ORDER_DATE <![CDATA[<]]> CURRENT_TIMESTAMP 
+		AND O_ORDER_DATE <![CDATA[>]]> (SELECT CURRENT_TIMESTAMP - INTERVAL '1' SECOND)
+		AND SI_CODE = #{si_code} 
+		AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
+		ORDER BY O_SEQ DESC 
 	</select>
 </mapper>

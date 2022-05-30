@@ -87,9 +87,9 @@ public class StoreIndexController {
 			result = 1;
 			
 			//if order is completely complete(?) then delete basket_order
-			if((param.get("o_order_state")).equals("byedrink")) {
-				sIndexService.deleteBasketOrder(param);
-			}
+//			if((param.get("o_order_state")).equals("byedrink")) {
+//				sIndexService.deleteBasketOrder(param);
+//			}
 		} catch (Exception e) {
 			System.err.println("changeOState FAIL");
 		}
@@ -105,14 +105,20 @@ public class StoreIndexController {
 		} else {
 			si_code = "2222111212";
 		}
+		
 		//check db for new order comparing nowdate
 		OrdersVO orderVO = sIndexService.newOrder(si_code);
-		List<BasketVO> orderDetails =sIndexService.orderDetails(si_code);
-		model.addAttribute("orderNewDetail", orderDetails);
-		
-		model.addAttribute("newOrder",orderVO);
-		model.addAttribute("inputIndex",index);
-		index++;
-		return "/inc/neworder";
+		if(orderVO != null) {
+			List<BasketVO> orderDetails =sIndexService.orderDetails(si_code);
+			model.addAttribute("orderNewDetail", orderDetails);
+			
+			model.addAttribute("newOrder",orderVO);
+			model.addAttribute("inputIndex",index);
+			index++;
+			return "/inc/neworder";
+		}else {
+//			System.out.println("NO new order");
+			return "/inc/blank";
+		}
 	}
 }

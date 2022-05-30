@@ -98,6 +98,7 @@ input::-webkit-inner-spin-button {
 								</tr>
 							</thead>
 							<tbody>
+								<c:set var="totalB_Seq" value="" /><!-- 총 b_seq -->
 								<c:set var="totalPrice" value="0" /><!-- 총 금액 -->
 								<c:set var="totalNum" value="0" /><!-- 총 수량 -->
 								<c:set var="totalList" value="0" /><!-- 중복제거 총 아이템 수 -->
@@ -152,6 +153,8 @@ input::-webkit-inner-spin-button {
 													  if (result.isConfirmed) {
 														  var b_seq = $("#${cartList.b_seq}").val();
 														  var param = {"b_seq" : b_seq };
+														  var B_Seq = (document.getElementById("totalB_Seq").innerText).replace(b_seq,"");
+														  document.getElementById("totalB_Seq").innerText = B_Seq;
 														  $.ajax({
 													             type: "POST",
 													             url: "/removeCart.user",
@@ -299,6 +302,7 @@ input::-webkit-inner-spin-button {
 									<c:set var="totalPrice"
 										value="${totalPrice + cartList.b_total_price}" />
 									<c:set var="totalNum" value="${totalNum + cartList.b_quantity}" />
+									<c:set var="totalB_Seq" value="${totalB_Seq},,,${cartList.b_seq}" />
 									<c:set var="totalList" value="${totalList + 1}" />
 									<c:set var="list_detail" value="${list_detail},,,${cartList.m_name} ${cartList.opb_name}" />
 								</c:forEach>
@@ -306,6 +310,7 @@ input::-webkit-inner-spin-button {
 						</table>
 						<span id="totalList" style="display:none;">${totalList}</span>
 						<span id="list_detail" style="display:none;">${list_detail}</span>
+						<span id="totalB_Seq" style="display:none;">${totalB_Seq}</span>
 					</div>
 				</div>
 			</div>
@@ -704,11 +709,13 @@ function usePoint(){
  	    		  showConfirmButton: false,
  	    		  timer: 2500
  				});
+	    	  var totalB_Seq = document.getElementById("totalB_Seq").innerText;
 	    	  //결제 완료시, o_payment_status = true로 변경
 	    	  $.ajax({
 	              type: "POST",
 	              url: "/successOrder.user",
 	              data: JSON.stringify({
+	            	  "b_seqs" : totalB_Seq,
 	            	  "o_code":orderNum,
 	            	  "u_id":u_id, 
 	            	  "o_point":(o_point).toString(),

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko" class="">
 
@@ -167,8 +169,8 @@
         *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
-			<!-- allmenu import -->
-			<%@ include file="../inc/admin_allmenu.jsp"%>
+<!-- 			<!-- allmenu import --> -->
+<%-- 			<%@ include file="../inc/admin_allmenu.jsp"%> --%>
 			<section class="wrapper site-min-height">
 				<h3 style="margin-bottom: 5px;">
 					<i class="fa fa-angle-right"></i> 매장 수정
@@ -199,7 +201,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">비밀번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" id="" name="sa_password" type="password" placeholder="비밀번호">
+										<input class="form-control"  name="sa_password" type="password" placeholder="비밀번호">
 									</div>
 								</div>
 								<div class="form-group">
@@ -309,17 +311,17 @@
 										<c:choose>
 										<c:when test="${storeOne.si_parking_able eq true}">
 										<label class="radio-inline"> <input type="radio"
-												name="si_parking_able" id="" value="true" checked> 가능
+												name="si_parking_able"  value="true" checked> 가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="si_parking_able" id="" value="false" >
+												name="si_parking_able"  value="false" >
 												불가
 											</label>
 										</c:when>
 										<c:otherwise>
 										<label class="radio-inline"> <input type="radio"
-												name="si_parking_able" id="" value="true"> 가능
+												name="si_parking_able"  value="true"> 가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="si_parking_able" id="" value="false" checked>
+												name="si_parking_able"  value="false" checked>
 												불가
 											</label>
 										</c:otherwise>
@@ -335,17 +337,17 @@
 										<c:choose>
 										<c:when test="${storeOne.si_usestore eq true}">
 										<label class="radio-inline"> <input type="radio"
-												name="si_usestore" id="" value="true" checked> 가능
+												name="si_usestore"  value="true" checked> 가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="si_usestore" id="" value="false" >
+												name="si_usestore"  value="false" >
 												불가
 											</label>
 										</c:when>
 										<c:otherwise>
 										<label class="radio-inline"> <input type="radio"
-												name="si_usestore" id="" value="true"> 가능
+												name="si_usestore"  value="true"> 가능
 											</label> <label class="radio-inline"> <input type="radio"
-												name="si_usestore" id="" value="false" checked>
+												name="si_usestore"  value="false" checked>
 												불가
 											</label>
 										</c:otherwise>
@@ -380,15 +382,15 @@
 							style="margin-top: 0; padding-bottom: 38px; border-radius: 0 0 10px 10px;">
 							<form class="form-horizontal style-form" method="get">
 								<div class="row mt">
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+									<div class="col-lg-11 col-md-11 col-sm-11 col-xs-12 desc">
 										<div class="project-wrapper">
 											<div class="project">
 												<div class="photo-wrapper_">
 													<div class="photo store_image_small">
 													<a class="fancybox"
-                                                            href="${storeOne.si_image}"><img
+                                                            href=${fn:toLowerCase(storeOne.si_image) }><img
                                                             class="img-responsive"
-                                                            src="${storeOne.si_image}"></a>
+                                                            src=${fn:toLowerCase(storeOne.si_image) }></a>
 													</div>
 													<div class="overlay"></div>
 												</div>
@@ -396,77 +398,20 @@
 										</div>
 										<div class="row" style="padding: 7px 15px">
 											<div class="col-lg-7" style="padding: 0;">
-												<input id="" type="file" class="cut__side" value="수정"
+												<input id="input-imagee" type="file" class="cut__side" value="수정"
 													name="">
-
-											</div>
-											<div class="col-lg-5">
-												<input id="" type="button" class="cut__side" value="제거">
 
 											</div>
 										</div>
 									</div>
 									<!-- col-lg-4 -->
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-										<div class="project-wrapper">
-											<div class="project">
-												<div class="photo-wrapper_">
-													<div class="photo store_image_small">
-														<a class="fancybox"
-                                                            href="${storeOne.si_image2}"><img
-                                                            class="img-responsive"
-                                                            src="${storeOne.si_image2}"></a>
-													</div>
-													<div class="overlay"></div>
-												</div>
-											</div>
-											<div class="row" style="padding: 7px 15px">
-												<div class="col-lg-7" style="padding: 0;">
-													<input id="" type="file" class="cut__side" value="수정"
-														name="">
-
-												</div>
-												<div class="col-lg-5">
-													<input id="" type="button" class="cut__side" value="제거">
-
-												</div>
-											</div>
-										</div>
-
-									</div>
 									<!-- col-lg-4 -->
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-										<div class="project-wrapper">
-											<div class="project">
-												<div class="photo-wrapper_">
-													<div class="photo store_image_small">
-														<a class="fancybox"
-                                                            href="${storeOne.si_image3}"><img
-                                                            class="img-responsive"
-                                                            src="${storeOne.si_image3}"></a>
-													</div>
-													<div class="overlay"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" style="padding: 7px 15px">
-											<div class="col-lg-7" style="padding: 0;">
-												<input id="" type="file" class="cut__side" value="수정"
-													name="">
-
-											</div>
-											<div class="col-lg-5">
-												<input id="" type="button" class="cut__side" value="제거">
-
-											</div>
-										</div>
-									</div>
 									<!-- col-lg-4 -->
 								</div>
 
 
 
-								<button type="button" onclick="" class="btn btn-theme"
+								<button type="button" onclick="updateImage()" class="btn btn-theme"
 									style="float: right;">수정</button>
 							</form>
 						</div>
@@ -489,6 +434,7 @@
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	let nansu = 0;
 	var code = $("#si_code").val();
 	function fileUpload(){
 		var fileInput = document.getElementsByClassName("ex_file");
@@ -555,6 +501,99 @@
         const promise = upload.promise();
         
     }
+   function updateImage(){
+	   nansu = Math.floor(Math.random() * 1000); //0~999 
+		Swal.fire({
+			title: "사진을 변경하시겠습니까??",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "등록",
+			cancelButtonText: "아니오"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				updateImagee();
+			}//if (result.isConfirmed)
+		})//then((result)
+   }
+    
+    
+  //이미지 업로드 실제 S3로 
+    updateImagee = () => {
+    	AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+            })
+        })
+		let files = document.getElementById('input-imagee').files;
+        let file = files[0];
+        
+        let storeImagefile = "z";
+        if(file != null){
+        	
+            storeImagefile = file.name;
+            storeImagefile = code +"__"+nansu+"__"+ storeImagefile;
+
+            let upload = new AWS.S3.ManagedUpload({
+                params: {
+                    Bucket: 'walkingorder/store_image',
+                    Key: storeImagefile,
+                    ContentType : "image/jpeg",
+                    Body: file
+                }
+            })
+
+            const promise = upload.promise();
+        }else{
+        	Swal.fire({
+                icon: "warning",
+                title: "이미지 등록하세요",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        	return;
+        }
+      //ajax
+      var si_imageee = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/store_image/"+storeImagefile;
+    	var parammm = {
+    		"si_code" : code,
+    		"si_image" : si_imageee
+    	};
+    	$.ajax({
+    	    type: "POST",
+    	    url: "/updateStoreImage.admin",
+    	    data: JSON.stringify(parammm), 
+    	    dataType: "json",
+    	    contentType: "application/json",
+    	    success: function (data) {
+    	        if (data == 1) {
+        	        Swal.fire({
+        	            icon: "success",
+        	            title: "가게 이미지 변경 완료",
+        	            showConfirmButton: false,
+        	            timer: 1500
+        	        });
+    	        }else if(data == 0){
+    	        	Swal.fire({
+        	            icon: "warning",
+        	            title: "가게 이미지 변경 실패",
+        	            showConfirmButton: false,
+        	            timer: 1500
+        	        });
+    	        }
+    	    },
+    	    error: function (data) {
+    	        console.log("가게 이미지 변경 통신에러");
+    	    }
+    	});//ajax end 
+    }    
+    
+    
+    
+    
+    
     
     function getPostCode() {
         new daum.Postcode({

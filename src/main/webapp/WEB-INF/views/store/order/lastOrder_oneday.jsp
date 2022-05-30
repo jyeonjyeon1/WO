@@ -276,7 +276,7 @@ $('#datepicker1').datepicker();
                   <div class="col-lg-2" style="font-weight: bolder;">주문시각</div> <div class="col-lg-10">2022 05.08 / 오후 03:12:01</div>
                   <div class="col-lg-2" style="font-weight: bolder;">요청사항</div> <div class="col-lg-10">아메리카노얼음 많이넣어주세용쀵~</div>
                   <div class="col-lg-2" style="font-weight: bolder;">주문번호</div> <div class="col-lg-10">1</div>
-                </div>
+               </div>
                 
               </div>
 
@@ -306,6 +306,7 @@ $('#datepicker1').datepicker();
             </div>
             </div>
           </div>
+          
           
 
 

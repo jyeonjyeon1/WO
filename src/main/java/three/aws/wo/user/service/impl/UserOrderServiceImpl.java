@@ -103,4 +103,12 @@ public class UserOrderServiceImpl implements UserOrderService {
 	public OrdersVO myorderDetail(String order) {
 		return userOrderDAO.myorderDetail(order);
 	}
+	@Override
+	public void replicateCart(String u_id) {
+		userOrderDAO.replicateCart(u_id);
+	}
+	@Override
+	public void updateBasketOrder(HashMap<String, Object> map) {
+		userOrderDAO.updateBasketOrder(map);
+	}
 }

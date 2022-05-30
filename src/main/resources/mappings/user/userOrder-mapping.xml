@@ -54,7 +54,7 @@
 		options oppppp
 		ON (oppppp.op_code = b.op_code5 and oppppp.SI_CODE = b.SI_CODE)
 		WHERE U_ID = #{u_id}
-		ORDER BY B_SEQ asc
+		ORDER BY B_SEQ ASC
 	</select>
 	<select id="cartStore" resultType="StoreVO" parameterType="StoreVO">
 		SELECT * FROM STORE_INFO WHERE 
@@ -95,7 +95,8 @@
 		UPDATE ORDERS
 		SET
 		O_PAY_STATUS = true,
-		O_ORDER_STATE = '주문접수'
+		O_ORDER_STATE = '접수대기',
+		O_ORDER_DATE = CURRENT_TIMESTAMP
 		WHERE
 		O_CODE = #{o_code}
 	</update>
@@ -154,5 +155,11 @@
 		U_ID = #{u_id} AND O_PAY_STATUS = TRUE
 		ORDER BY O_SEQ DESC
 	</select>
+	<insert id="replicateCart">
+		INSERT INTO BASKET_ORDER SELECT * FROM BASKET WHERE U_ID=#{u_id};
+	</insert>
+	<update id="updateBasketOrder">
+		UPDATE BASKET_ORDER SET O_CODE=#{o_code} WHERE B_SEQ=#{b_seq};
+	</update>
 </mapper>
  

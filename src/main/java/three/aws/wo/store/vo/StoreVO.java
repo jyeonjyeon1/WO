@@ -27,7 +27,7 @@ public class StoreVO {
 	private String si_image3;
 	private String si_holiday_imsi;
 	private String si_holiday_fix;
-	private String si_due_time;
+	private int si_due_time;
 	private String si_directions;
 	private String si_code;
 	private String si_address;

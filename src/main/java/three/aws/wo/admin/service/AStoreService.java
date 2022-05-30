@@ -33,4 +33,5 @@ public interface AStoreService {
 	List<StoreMenuVO> pendingMenuImg();
 	void confirmMenuImg(HashMap<String, String> param);
 	void rejectMenuImg(HashMap<String, String> param);
+	void updateStoreImage(HashMap<String, String> param);
 }

@@ -75,7 +75,7 @@
 		VALUES(#{si_name}, #{si_code}, #{si_zipcode}, #{si_address}, #{si_address} , #{si_addr_detail}, #{si_tel},
 		 #{si_parking_able}, #{si_usestore}, #{si_referinfo})
 	</insert>
-<!-- 	<insert id="insertStoreAccount" parameterType="StoreVO">
+<!-- 	<insert id="insertStoreAccount" parameterType="replicateStoreInfo">
 		INSERT INTO STORE_ACCOUNT (SA_ACC_NO, SA_PASSWORD, SI_CODE, SA_EMAIL)
 		VALUES(#{si_code}, #{sa_password}, #{si_code}, #{sa_email})
 	</insert> -->
@@ -91,9 +91,9 @@
         F_SEQ = #{f_seq}
     </update>
     <insert id="insertStoreForm" parameterType="StoreFormVO">
-    	INSERT INTO STORE_FORM (SF_CODE, SF_NAME, SF_LOC, SF_ZIPCODE, SF_ADDRESS, SF_ADDR_ROAD, SF_ADDR_DETAIL, SF_TEL,
+    	INSERT INTO STORE_FORM (SF_IMAGE,SF_CODE, SF_NAME, SF_LOC, SF_ZIPCODE, SF_ADDRESS, SF_ADDR_ROAD, SF_ADDR_DETAIL, SF_TEL,
     	 SF_PARKING_ABLE, SF_USESTORE, SF_REFERINFO, SF_EMAIL, SF_ACC_NO, SF_BUSINESS_REGISTRATION_IMAGE, SF_BANKBOOK_IMAGE, SF_REP_NAME,SF_PASSWORD)
-    	VALUES (#{sf_code},#{sf_name},#{sf_loc},#{sf_zipcode},#{sf_address},#{sf_address},#{sf_addr_detail},#{sf_tel},
+    	VALUES (#{sf_image},#{sf_code},#{sf_name},#{sf_loc},#{sf_zipcode},#{sf_address},#{sf_address},#{sf_addr_detail},#{sf_tel},
     	#{sf_parking_able},#{sf_usestore},#{sf_referinfo},#{sf_email},#{sf_code},#{sf_business_registration_image},#{sf_bankbook_image}
     	,#{sf_rep_name}, #{sf_password})
     </insert>
@@ -125,9 +125,9 @@
     </insert>
     <insert id="replicateStoreInfo">
     	INSERT INTO 
-    	STORE_INFO (SI_CODE,SI_NAME,SI_LOC,SI_ZIPCODE,SI_ADDRESS,SI_ADDR_ROAD,SI_ADDR_DETAIL,SI_TEL,SI_PARKING_ABLE,SI_REFERINFO,SI_USESTORE) 
+    	STORE_INFO (SI_IMAGE,SI_CODE,SI_NAME,SI_LOC,SI_ZIPCODE,SI_ADDRESS,SI_ADDR_ROAD,SI_ADDR_DETAIL,SI_TEL,SI_PARKING_ABLE,SI_REFERINFO,SI_USESTORE) 
 		SELECT 
-		SF_CODE,SF_NAME,SF_LOC,SF_ZIPCODE,SF_ADDRESS,SF_ADDR_ROAD,SF_ADDR_DETAIL,SF_TEL,SF_PARKING_ABLE,SF_REFERINFO,SF_USESTORE 
+		SF_IMAGE,SF_CODE,SF_NAME,SF_LOC,SF_ZIPCODE,SF_ADDRESS,SF_ADDR_ROAD,SF_ADDR_DETAIL,SF_TEL,SF_PARKING_ABLE,SF_REFERINFO,SF_USESTORE 
 		FROM STORE_FORM 
 		WHERE SF_CODE = #{sf_code}
     </insert>
@@ -189,5 +189,11 @@
 	    M_PENDING_IMG = NULL 
 	    WHERE 
 	    M_CODE = #{m_code} AND SI_CODE = #{si_code}
+    </update>
+    <update id="updateStoreImage">
+    	UPDATE STORE_INFO SET 
+	    SI_IMAGE = #{si_image} 
+	    WHERE 
+	    SI_CODE = #{si_code}
     </update>
 </mapper>

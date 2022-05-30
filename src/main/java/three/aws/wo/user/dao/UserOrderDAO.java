@@ -92,5 +92,13 @@ public class UserOrderDAO {
 	public OrdersVO myorderDetail(String order) {
 		return sqlSession.selectOne("UserOrderDAO.myorderDetail", order);
 	}
+
+	public void replicateCart(String u_id) {
+		sqlSession.insert("UserOrderDAO.replicateCart",u_id);
+	}
+
+	public void updateBasketOrder(HashMap<String, Object> map) {
+		sqlSession.update("UserOrderDAO.updateBasketOrder",map);
+	}
 	
 }

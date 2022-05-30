@@ -161,9 +161,19 @@ public class UserOrderController {
 		int o_point = Integer.parseInt(param.get("o_point"));
 		// 결제 성공하면 o_pay_status true로 바꿈
 		userOrderService.successOrder(o_code);
-
-		// 결제 성공하면 장바구니 내역 비움
-		userOrderService.resetCart(u_id);
+		String allBseq = param.get("b_seqs");
+		String b_seqs[] = allBseq.split(",,,");
+		//장바구니 내역 복제 및 o_code 주입
+		userOrderService.replicateCart(u_id);
+		for(String b : b_seqs) {
+			if(!b.equals("")) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				int b_seq = Integer.parseInt(b);
+				map.put("b_seq", b_seq);
+				map.put("o_code", o_code);
+				userOrderService.updateBasketOrder(map);
+			}
+		}
 
 		// 결제 성공하면 포인트 주입
 		HashMap<String, Object> insertPoint = new HashMap<String, Object>();
@@ -188,6 +198,9 @@ public class UserOrderController {
 			userOrderService.orderPointUse(insertPoint);
 			userOrderService.orderPointUpdate(insertPoint);
 		}
+		
+		// 결제 성공하면 장바구니 내역 비움
+		userOrderService.resetCart(u_id);
 
 		List<BasketVO> cartList = userOrderService.cartList(u_id);
 		// 유저장바구니에 있는 가게 불러옴

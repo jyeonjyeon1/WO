@@ -48,4 +48,6 @@ public class BasketVO {
 	
 	private int m_seq;
 	
+	private String o_code;
+	
 }

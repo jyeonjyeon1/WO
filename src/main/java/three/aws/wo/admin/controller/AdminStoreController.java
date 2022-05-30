@@ -293,7 +293,7 @@ public class AdminStoreController {
 			MessageSend ms = new MessageSend();
 			String sms_text = "[워킹오더]\n신청하신 메뉴("+param.get("m_name")+") 이미지가 승인되었습니다";
 //			int aa = ms.sendSMS(param.get("si_tel"),sms_text, "SMS");
-			int aa = ms.sendSMS("01091722555",sms_text, "SMS");
+//			int aa = ms.sendSMS("01091722555",sms_text, "SMS");
 			result = 1;
 		} catch (Exception e) {
 			e.printStackTrace();

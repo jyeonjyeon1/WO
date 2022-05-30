@@ -236,31 +236,17 @@ $(document).ready(function () {
       });
     }
     // 메뉴그룹 추가 버튼
-    $("#add_menugroup_btn").click(function () {
+    $("#add_menugroup_btn1").click(function () {
 
-      if ($(".add_menugroup").hasClass('active')==false) {
-        $(".add_menugroup").addClass("active");
-        $("#add_menugroup_btn").val("추가하기");
+      if ($("#add_menugroup1").hasClass('active')==false) {
+        $("#add_menugroup1").addClass("active");
+        $("#add_menugroup_btn1").val("추가하기");
       }else{
-        $(".add_menugroup").removeClass("active");
-        $("#add_menugroup_btn").val("메뉴그룹 추가");
+        $("#add_menugroup1").removeClass("active");
+        $("#add_menugroup_btn1").val("질문 추가");
       }
     });
 
-
-    $("#faq__update__btn").click(function () {
-
-      if ($("#faq__update__ta").hasClass('active')==false) {
-        $("#faq__update__ta").addClass("active");
-        $(".fa-pencil").addClass("fa-check");
-        $(".fa-pencil").removeClass("fa-pencil");
-      }else{
-        $("#faq__update__ta").removeClass("active");
-        $(".fa-check").addClass("fa-pencil");
-        $(".fa-check").removeClass("fa-check");
-      }
-    });
-    
 //    $(".search_change1").click(function () {
 //
 //      if ($("#search__text1").hasClass('active')==false) {

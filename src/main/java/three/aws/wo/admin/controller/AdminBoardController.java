@@ -1,20 +1,28 @@
 package three.aws.wo.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.service.AdminService;
+import three.aws.wo.admin.service.FaqService;
+import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 @Controller
 public class AdminBoardController {
 	@Autowired
 	private AdminService adminService;
+	@Resource
+	private FaqService noticeService;
 	
 	@RequestMapping("/notices.admin")
 	public String noticeList(NoticeVO vo, Model model) throws Exception {
@@ -47,4 +55,46 @@ public class AdminBoardController {
 		model.addAttribute("oneNotice" ,oneNotice);
 		return "/board/notices_update";
 	}
+	
+	@RequestMapping("/faq_mng.admin")
+	public String tofag_Mng(Model model) {
+		List<FAQVO> faqList =noticeService.faqList();
+		model.addAttribute("faqList" ,faqList);
+		System.out.println("faq_mng");
+		return "/board/faq_mng";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateFaq.admin")
+	public int updateFaq(@RequestBody HashMap<String,Object> param,Model model) {
+		int result = 0;
+		System.out.println(param);
+		try {
+			adminService.updateFaq(param);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteFaq.admin")
+	public int deleteFaq(@RequestBody HashMap<String,Object> param,Model model) {
+		int result = 0;
+		try {
+			adminService.deleteFaq(param);
+			result = 1;
+		} catch (Exception e) {
+		}
+		
+		return result;
+	}
+	@RequestMapping("/insertFaq.admin")
+	public String insertFaq(FAQVO vo) {
+		adminService.insertFaq(vo);
+		return "redirect:/faq_mng.admin";
+	}
+	
 }

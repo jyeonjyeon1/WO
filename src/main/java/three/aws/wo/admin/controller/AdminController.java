@@ -37,11 +37,11 @@ public class AdminController {
 		return "/board/board_mng";
 	}
 	
-	@GetMapping("/faq_mng.admin")
-	public String tofag_Mng() {
-		System.out.println("faq_mng");
-		return "/board/faq_mng";
-	}
+//	@GetMapping("/faq_mng.admin")
+//	public String tofag_Mng() {
+//		System.out.println("faq_mng");
+//		return "/board/faq_mng";
+//	}
 	
 	@GetMapping("/inquiry.admin")
 	public String toinquiry() {

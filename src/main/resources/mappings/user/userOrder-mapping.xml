@@ -62,8 +62,84 @@
 		(SELECT SI_CODE FROM BASKET
 		WHERE U_ID = #{u_id} LIMIT 1);
 	</select>
-	<insert id="insertCartItem" parameterType="BasketVO">
 	
+	<insert id="insertCartItem" parameterType="BasketVO">
+		insert into basket values(
+		default,#{u_id},#{si_code}, #{m_seq}, #{b_quantity}, 
+		1*(select opb_price from option_basic where si_code=#{si_code} and opb_code = #{opb_code}) 
+		<if test="op_code1 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code1}) as integer)
+		</if>
+		<if test="op_code2 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code2}) as integer)
+		</if>
+		<if test="op_code3 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code3}) as integer)
+		</if>
+		<if test="op_code4 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code4}) as integer)
+		</if>
+		<if test="op_code5 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code5}) as integer)
+		</if>
+		,#{opb_code},
+		<choose>
+			<when test="op_code1 != null">
+				#{op_code1},
+			</when>
+			<otherwise>
+				' ',
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="op_code2 != null">
+				#{op_code2},
+			</when>
+			<otherwise>
+				' ',
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="op_code3 != null">
+				#{op_code3},
+			</when>
+			<otherwise>
+				' ',
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="op_code4 != null">
+				#{op_code4},
+			</when>
+			<otherwise>
+				' ',
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="op_code5 != null">
+				#{op_code5},
+			</when>
+			<otherwise>
+				' ',
+			</otherwise>
+		</choose>
+		(select opb_price from option_basic where si_code=#{si_code} and opb_code = #{opb_code}) 
+		<if test="op_code1 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code1}) as integer)
+		</if>
+		<if test="op_code2 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code2}) as integer)
+		</if>
+		<if test="op_code3 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code3}) as integer)
+		</if>
+		<if test="op_code4 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code4}) as integer)
+		</if>
+		<if test="op_code5 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code5}) as integer)
+		</if>
+		);
 	</insert>
 	
 	<update id="updateCart">
@@ -160,6 +236,33 @@
 	</insert>
 	<update id="updateBasketOrder">
 		UPDATE BASKET_ORDER SET O_CODE=#{o_code} WHERE B_SEQ=#{b_seq};
+	</update>
+	<select id="siBasket" resultType="String">
+		SELECT SI_CODE FROM BASKET WHERE U_ID = #{u_id} limit 1
+	</select>
+	<select id="checkSameCart" resultType="int">
+		select b_seq from basket where si_code=#{si_code} and u_id = #{u_id} and m_seq=#{m_seq} and opb_code = #{opb_code} and 
+		b_single_price = (select opb_price from option_basic where si_code=#{si_code} and opb_code = #{opb_code}) 
+		<if test="op_code1 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code1}) as integer)
+		</if>
+		<if test="op_code2 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code2}) as integer)
+		</if>
+		<if test="op_code3 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code3}) as integer)
+		</if>
+		<if test="op_code4 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code4}) as integer)
+		</if>
+		<if test="op_code5 != null">
+			+ cast((select op_price from options where si_code=#{si_code} and op_code = #{op_code5}) as integer)
+		</if>
+	</select>
+	<update id="updateSameCart">
+		update basket set b_quantity = b_quantity + 1, 
+		b_total_price = b_total_price + (select b_single_price from basket where b_seq = #{b_seq})
+		 where b_seq = #{b_seq}
 	</update>
 </mapper>
  

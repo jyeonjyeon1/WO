@@ -15,8 +15,8 @@ public class UserMenuListDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<StoreVO> storeInfo(String si_code) {
-		return sqlSession.selectList("UserMenuListDAO.storeInfo", si_code);
+	public StoreVO storeInfo(String si_code) {
+		return sqlSession.selectOne("UserMenuListDAO.storeInfo", si_code);
 	}
 	
 	public List<MenuListVO> menuTitle(String si_code) {

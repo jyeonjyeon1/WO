@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Walking Order</title>
+<title>워킹오더 결제</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
@@ -104,7 +104,7 @@ input::-webkit-inner-spin-button {
 								<c:set var="totalList" value="0" /><!-- 중복제거 총 아이템 수 -->
 								<c:set var="list_detail"></c:set><!-- 주문목록 전체 -->
 								<c:forEach var="cartList" items="${cartList}" varStatus="vs">
-									<input id="${cartList.b_seq}" type="hidden"
+									<input id="b_seq${vs.index}" type="hidden"
 										value="${cartList.b_seq}" />
 									<tr id="cartRow${vs.index}">
 										<td class="shoping__cart__price"><img
@@ -151,7 +151,7 @@ input::-webkit-inner-spin-button {
 													  confirmButtonText: "삭제"
 													}).then((result) => {
 													  if (result.isConfirmed) {
-														  var b_seq = $("#${cartList.b_seq}").val();
+														  var b_seq = $("#b_seq${vs.index}").val();
 														  var param = {"b_seq" : b_seq };
 														  var B_Seq = (document.getElementById("totalB_Seq").innerText).replace(b_seq,"");
 														  document.getElementById("totalB_Seq").innerText = B_Seq;
@@ -255,7 +255,7 @@ input::-webkit-inner-spin-button {
 												head_tot_price.innerText=totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 												head_tot_quan.innerText=totalItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 												head_tot_quan2.innerText=totalItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +  "   개";
-												var b_seq = $("#${cartList.b_seq}").val();
+												var b_seq = $("#b_seq${vs.index}").val();
 												var param = {
 														"b_seq" : parseInt(b_seq) ,
 														"b_quantity" : parseInt(number) , 
@@ -641,7 +641,6 @@ function usePoint(){
 	}
 	  //결제 시도했을 때 우선 db에 넣음
 	  var o_payment_list = $("input[type=radio][name=o_payment_list]:checked").val();
-	  alert(o_payment_list);
 	  if(o_payment_list=="카드"){
 		  paymethod = "kcp";
 	  } else if(o_payment_list=="카카오페이"){
@@ -658,7 +657,6 @@ function usePoint(){
 		  o_list = document.getElementById("name0").innerText.split("splitting")[0] +" 외 " + isZero
 	  }
 	  let o_list_detaill = document.getElementById("list_detail").innerText.replace(",,,","");
-	 alert("o_list_detaill:"+o_list_detaill);
 	  var param = {
 			  "o_code": currentDate,
 			  "u_id": u_id,
@@ -731,7 +729,12 @@ function usePoint(){
 	        }); //ajax 끝
 	    	  
 	      } else {
-			alert("결제실패");
+	    	  Swal.fire({
+	    		  icon: "error",
+	    		  title: "결제 실패",
+	    		  showConfirmButton: false,
+	    		  timer: 2500
+				});
 	      }
 	  });  
   }

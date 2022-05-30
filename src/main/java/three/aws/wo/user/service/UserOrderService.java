@@ -29,4 +29,6 @@ public interface UserOrderService {
 	OrdersVO myorderDetail(String order);
 	void replicateCart(String u_id);
 	void updateBasketOrder(HashMap<String, Object> map);
+	void insertCartItem(BasketVO vo);
+	String siBasket(String u_id);
 }

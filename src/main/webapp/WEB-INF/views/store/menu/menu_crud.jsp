@@ -1052,9 +1052,9 @@ function addMgName(){
    		var m_seq = $("#sub_menu_one${vs.index}${vss.index}").attr("m_seq");
    		var param = {"m_code":m_code,"m_seq":m_seq};
    		Swal.fire({
-			  title: "진짜삭제되니까 테스트용 메뉴만 삭제하세요",
-//			  title: "삭제하시겠습니까??",
-			  html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
+// 			  title: "진짜삭제되니까 테스트용 메뉴만 삭제하세요",
+			  title: "삭제하시겠습니까??",
+// 			  html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
 			  icon: "warning",
 			  showCancelButton: true,
 			  confirmButtonColor: "#3085d6",
@@ -2685,9 +2685,9 @@ function deleteOption${ogVs.index}${optionVs.index}(){
 	var toggle = "optiontoggle_${ogVs.index}${optionVs.index}"; //열림 토글도 삭제
 	
 	Swal.fire({
-		  title: "진짜삭제되니까 테스트용 옵션만 삭제하세요",
-//		  title: "삭제하시겠습니까??",
-		  html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
+// 		  title: "진짜삭제되니까 테스트용 옵션만 삭제하세요",
+		  title: "삭제하시겠습니까??",
+// 		  html: "<p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p><p>진짜 삭제된다!@!@#</p>",
 		  icon: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#3085d6",

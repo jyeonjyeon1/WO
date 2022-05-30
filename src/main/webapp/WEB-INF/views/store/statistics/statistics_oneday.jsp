@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -215,16 +219,22 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>판매건수</td><td>95</td>
+                                        <td>판매건수</td><td>
+                                         <c:set var = "total" value = "0" />
+								<c:forEach var="orderList" items="${orderList}" varStatus="status"> 
+								<c:set var= "total" value="${total + 1}"/>
+								</c:forEach>
+								${total } 건
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>매출액</td><td>1,189,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>환불건수</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>환불금액</td><td>0</td>
+                                        <td>매출액</td><td>
+                                         <c:set var = "total1" value = "0" />
+								<c:forEach var="orderList" items="${orderList}" varStatus="status"> 
+								<c:set var= "total1" value="${total1 + orderList.o_total_price}"/>
+								</c:forEach>
+								<fmt:formatNumber value="${total1}" pattern="###,###"/> 원
+                                        </td>
                                     </tr>
                                 </tbody>
                                
@@ -247,24 +257,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        
-                                            <tr>
-                                                <td>07:56:38</td><td>00001</td><td>6,300</td>
-                                            </tr>
-                                            <tr>
-                                                <td>07:56:38</td><td>00002</td><td>6,300</td>
-                                            </tr>
-                                            <tr>
-                                                <td>07:56:38</td><td>00003</td><td>6,300</td>
-                                            </tr>>
-                                            <tr>
-                                                <td>07:56:38</td><td>00004</td><td>6,300</td>
-                                            </tr>
+                                        <c:forEach items="${ orderList}" var="orderList" varStatus="vsvs">
+                                        	<tr>
+                                        	<td><fmt:formatDate value="${orderList.o_order_date}" pattern="yyyy.MM.dd  |  a hh:mm"/></td>
+                                        	
+                                        	<td>${ orderList.o_code}</td>
+                                        	<td>${orderList.o_total_price}</td>
+                                        	</tr>
+                                        </c:forEach>
                                         </tbody>
                                             </table>
-
-                                        
-                                
                                 </div>
                             </div>
                                     
@@ -292,15 +294,12 @@
                                             </tr>
                                             <tr>
                                                 <td>밀크쉐이크</td><td>9</td><td>90,000</td><td>11%</td>
-                                            </tr>>
+                                            </tr>
                                             <tr>
                                                 <td>카페라떼</td><td>8</td><td>80,000</td><td>10%</td>
                                             </tr>
                                         </tbody>
                                             </table>
-
-                                        
-                                
                                 </div>
                             </div>
                                 <!-- /메뉴관리 -->
@@ -317,8 +316,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	 
                                     <tr>
-                                        <td>00~01</td><td>0</td><td>0</td>
+                                        <td>00~01</td><td> </td><td>0</td>
                                     </tr>
                                     <tr>
                                         <td>01~02</td><td>0</td><td>0</td>
@@ -336,11 +336,60 @@
                                         <td>05~06</td><td>0</td><td>0</td>
                                     </tr>
                                     <tr>
+                                        <td>06~07</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
                                         <td>07~08</td><td>0</td><td>0</td>
                                     </tr>
                                     <tr>
-                                        <td>08~09</td><td>22</td><td>69,000</td>
+                                        <td>08~09</td><td>0</td><td>0</td>
                                     </tr>
+                                    <tr>
+                                        <td>09~10</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10~11</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11~12</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12~13</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13~14</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14~15</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15~16</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16~17</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>17~18</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18~19</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19~20</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20~21</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21~22</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>22~23</td><td>0</td><td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23~24</td><td>0</td><td>0</td>
+                                    </tr>
+                                    
 
                                 </tbody>
                                

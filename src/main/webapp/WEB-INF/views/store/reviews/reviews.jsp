@@ -302,7 +302,7 @@ function count_length(){
 			<c:if test="${reviewlist.ur_ans eq NULL }">
 				<c:set var="noAnswerNum" value="${noAnswerNum + 1 }" />
 			</c:if>
-			<c:if test="${reviewlist.ur_open eq true }">
+			<c:if test="${reviewlist.ur_open eq false }">
 				<c:set var="reportNum" value="${reportNum + 1 }" />
 			</c:if>
 			
@@ -569,7 +569,7 @@ function count_length(){
 													
 													<div id="faq__333" class="tab-pane">
 														<c:forEach var="reviewlist" items="${reviewlist}" varStatus="vsss">
-															<c:if test="${reviewlist.ur_open eq true }">
+															<c:if test="${reviewlist.ur_open eq false }">
 																<div class="review_container"
 																	style="border: 1px solid rgba(0, 0, 0, 0.308); padding: 20px; margin-top: 10px; border-radius: 5px;">
 																	<div class="row">

@@ -19,8 +19,6 @@
 		<result column="SI_DUE_TIME" property="si_due_time" jdbcType="VARCHAR" />
 		<result column="SI_HOLIDAY_FIX" property="si_holiday_fix" jdbcType="VARCHAR" />
 		<result column="SI_HOLIDAY_IMSI" property="si_holiday_imsi" jdbcType="VARCHAR" />
-		<result column="SI_OPEN" property="si_open" jdbcType="VARCHAR" />
-		<result column="SI_CLOSE" property="si_close" jdbcType="VARCHAR" />
 		<result column="SI_REFERINFO" property="si_referinfo" jdbcType="VARCHAR" />
 		<result column="SI_MAP_IMAGE" property="si_map_image" jdbcType="VARCHAR" />
 		<result column="SI_DIRECTIONS" property="si_directions" jdbcType="VARCHAR" />

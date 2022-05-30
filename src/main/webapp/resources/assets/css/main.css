@@ -2007,14 +2007,14 @@ ol {
   width: 100%;
 }
 
-/* �옉�� �솕硫댁뿉�꽌�뒗 寃��깋李� �븞蹂댁엫 */
+/* 占쎌삂占쏙옙 占쎌넅筌롫똻肉됵옙苑뚳옙�뮉 野껓옙占쎄퉳筌∽옙 占쎈툧癰귣똻�뿫 */
 @media (max-width: 767px) {
   .header .main-menu-search {
     display: none;
   }
 }
 
-/* �슫吏곸씠�뒗 stickys */
+/* 占쎌뒲筌욊낯�뵠占쎈뮉 stickys */
 .header .stickys {
   position: fixed;
   top: 0;
@@ -5343,7 +5343,7 @@ ol {
   height: auto
 }
 
-/*吏��룄�씠誘몄�*/
+/*筌욑옙占쎈즲占쎌뵠沃섎챷占�*/
 .map_image {
   position: relative;
   text-align: center;
@@ -6327,10 +6327,10 @@ mypage_menubar
 
 #myform fieldset {
   display: inline-block;
-  /* �븯�쐞 蹂꾩젏 �씠誘몄��뱾�씠 �엳�뒗 �쁺�뿭留� �옄由щ�� 李⑥��븿.*/
+  /* 占쎈릭占쎌맄 癰귢쑴�젎 占쎌뵠沃섎챷占쏙옙諭억옙�뵠 占쎌뿳占쎈뮉 占쎌겫占쎈열筌랃옙 占쎌쁽�뵳�됵옙占� 筌△뫁占쏙옙釉�.*/
   direction: rtl;
   border: 0;
-  /* �븘�뱶�뀑 �뀒�몢由� �젣嫄� */
+  /* 占쎈툡占쎈굡占쎈�� 占쎈�믭옙紐®뵳占� 占쎌젫椰꾬옙 */
 }
 
 #myform input[type=radio] {
@@ -6339,16 +6339,16 @@ mypage_menubar
 
 #myform input[type=radio]:checked~label {
   text-shadow: 0 0 0 rgb(255, 208, 0);
-  /* 留덉슦�뒪 �겢由� 泥댄겕 */
+  /* 筌띾뜆�뒭占쎈뮞 占쎄깻�뵳占� 筌ｋ똾寃� */
 }
 
 #myform label {
   font-size: 3em;
-  /* �씠紐⑥� �겕湲� */
+  /* 占쎌뵠筌뤴뫁占� 占쎄쾿疫뀐옙 */
   color: transparent;
-  /* 湲곗〈 �씠紐⑥� 而щ윭 �젣嫄� */
+  /* 疫꿸퀣�� 占쎌뵠筌뤴뫁占� �뚎됱쑎 占쎌젫椰꾬옙 */
   text-shadow: 0 0 0 #f0f0f0;
-  /* �깉 �씠紐⑥� �깋�긽 遺��뿬 */
+  /* 占쎄퉱 占쎌뵠筌뤴뫁占� 占쎄퉳占쎄맒 �겫占쏙옙肉� */
 }
 
 #myform fieldset legend {
@@ -6565,7 +6565,7 @@ mypage_menubar
   padding: 20px 0 0;
 }
 
-/*�씪�뵒�삤踰꾪듉 �닲源�*/
+/*占쎌뵬占쎈탵占쎌궎甕곌쑵�뱣 占쎈떜繹먲옙*/
 .tabinput {
   display: none;
 }
@@ -6584,7 +6584,7 @@ mypage_menubar
   cursor: pointer;
 }
 
-/*input �겢由��떆, label �뒪���씪*/
+/*input 占쎄깻�뵳占쏙옙�뻻, label 占쎈뮞占쏙옙占쎌뵬*/
 .tabinput:checked+label {
   border-radius: 10px;
   color: #000000;
@@ -6616,7 +6616,7 @@ mypage_menubar
   width: 100%;
 }
 
-/* 議곌굔 寃��깋 踰꾪듉 */
+/* 鈺곌퀗援� 野껓옙占쎄퉳 甕곌쑵�뱣 */
 .showdetail_btn {
   font-weight: 700;
   background-color: transparent;
@@ -6692,9 +6692,9 @@ mypage_menubar
 }
 
 
-/* style.css 移댄뵾移댄뵾移댄뵾 */
-/* style.css 移댄뵾移댄뵾移댄뵾 */
-/* style.css 移댄뵾移댄뵾移댄뵾 */
+/* style.css 燁삳똾逾양㎉�똾逾양㎉�똾逾� */
+/* style.css 燁삳똾逾양㎉�똾逾양㎉�똾逾� */
+/* style.css 燁삳똾逾양㎉�똾逾양㎉�똾逾� */
 /******************************************************************
   Template Name: Ogani
   Description:  Ogani eCommerce  HTML Template
@@ -9578,7 +9578,7 @@ mypage_menubar
   }
 }
 
-/* �겙嫄곗엫 */
+/* 占쎄쿃椰꾧퀣�뿫 */
 @media (min-width: 768px) {
   .search_result_list_col {
     color: #888;
@@ -9668,15 +9668,15 @@ mypage_menubar
 }
 
 .kio_img_bg {
-  border-radius: 10px;
+  border-radius: 20px;
   width: 100%;
   padding: 10px;
   aspect-ratio: 5/4;
-  background-color: red;
+  background-color: white;
+  border: 1px solid #00000010;
   justify-content: center;
-  height: 480px;
+  height: 400px;
   margin-bottom: 20px;
-
 }
 
 .kio_img {
@@ -9685,6 +9685,7 @@ mypage_menubar
   border-radius: 10px;
   display: block;
   margin: auto;
+  border-radius: 20px;
 }
 
 .kio_review {

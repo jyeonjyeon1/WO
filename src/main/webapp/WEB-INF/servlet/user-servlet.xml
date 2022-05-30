@@ -20,5 +20,34 @@
 		<property name="suffix" value=".jsp" />
 		
 	</bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+		<mvc:mapping path="/*.user"/>
+		<mvc:exclude-mapping path="/register.user"/>
+		<mvc:exclude-mapping path="/idcheck.user"/>
+		<mvc:exclude-mapping path="/emailcheck.user"/>
+		<mvc:exclude-mapping path="/menuList.user"/>
+		<mvc:exclude-mapping path="/storeList.user"/>
+		<mvc:exclude-mapping path="/map.user"/>
+		<mvc:exclude-mapping path="/list.user"/>
+		<mvc:exclude-mapping path="/index.user"/>
+		<mvc:exclude-mapping path="/aboutWO.user"/>
+		<mvc:exclude-mapping path="/howToUse.user"/>
+		<mvc:exclude-mapping path="/joined.user"/>
+		<mvc:exclude-mapping path="/kakaoLogin.user"/>
+		<mvc:exclude-mapping path="/naverLogin.user"/>
+		<mvc:exclude-mapping path="/telcheck.user"/>
+		<mvc:exclude-mapping path="/findUser.user"/>
+		<mvc:exclude-mapping path="/findId.user"/>
+		<mvc:exclude-mapping path="/findPassword.user"/>
+		<mvc:exclude-mapping path="/sns_join.user"/>
+		<mvc:exclude-mapping path="/sns_register.user"/>
+		<mvc:exclude-mapping path="/login.user"/>
+		<mvc:exclude-mapping path="/loginCheck.user"/>
+		<mvc:exclude-mapping path="/sendResetPassword.user"/>
+		<bean id="UserInterceptor" class="three.aws.wo.admin.util.UserInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 </beans>

@@ -52,7 +52,7 @@ public class AdminUserController {
 	@RequestMapping("/user_mng.admin")
 	public String userList(UserVO vo, Model model) {
 		List<UserVO> userList = aUserService.userList();
-		System.out.println(userList);
+//		System.out.println(userList);
 		model.addAttribute("userList", userList);
 		return "/user/user_mng";
 	}
@@ -63,7 +63,7 @@ public class AdminUserController {
 		List<PointVO> pointList = aOrderService.pointList();
 		String point_use = userOrderService.isPointUse();
 		String point_percentage = userOrderService.getPointPercentage();
-		System.out.println(pointList);
+//		System.out.println(pointList);
 		model.addAttribute("pointList", pointList);
 		model.addAttribute("point_use", point_use);
 		model.addAttribute("point_percentage", point_percentage);
@@ -80,8 +80,8 @@ public class AdminUserController {
 		HashMap<String, String> paramMapping = new HashMap<String, String>();
 		paramMapping.put("point_use", point_use);
 		paramMapping.put("point_percentage", point_percentage);
-		System.out.println(point_use);
-		System.out.println(point_percentage);
+//		System.out.println(point_use);
+//		System.out.println(point_percentage);
 		aOrderService.changePoint(paramMapping);
 
 		return 0;
@@ -171,7 +171,7 @@ public class AdminUserController {
 		d_style2.setAlignment(HorizontalAlignment.LEFT);
 
 		List<UserVO> userList = aUserService.userList();
-		System.out.println(userList.get(1).getU_type());
+//		System.out.println(userList.get(1).getU_type());
 
 		for (int i = 0; i < userList.size(); i++) {
 			cellNum = 0;
@@ -273,7 +273,7 @@ public class AdminUserController {
 
 	@RequestMapping("/connect_hist.admin")
 	public String toconnect_hist(Model model) {
-		System.out.println("connect_hist");
+//		System.out.println("connect_hist");
 		List<UserVO> vo = aUserService.visitHistory();
 		model.addAttribute("visitHistory",vo);
 		
@@ -281,7 +281,7 @@ public class AdminUserController {
 	}
 	@RequestMapping("/updateUser.admin")
 	public String updateUser(UserVO vo) {
-		System.out.println(vo);
+//		System.out.println(vo);
 		String u_id = vo.getU_id();
 		if (vo.getU_password() == null || (vo.getU_password()).equals("")) {
             String pwd = aUserService.getOriginalPass(u_id);
@@ -294,7 +294,7 @@ public class AdminUserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-		System.out.println("유저 수정 완료 DB확인");
+//		System.out.println("유저 수정 완료 DB확인");
 		return "redirect:/user_mng.admin";
 	}
 }

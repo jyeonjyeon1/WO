@@ -7,7 +7,7 @@ import three.aws.wo.user.vo.MenuListVO;
 
 public interface UserMenuListService {
 	
-	List<StoreVO> storeInfo(String si_code);
+	StoreVO storeInfo(String si_code);
 	
 	List<MenuListVO> menuTitle(String si_code);
 

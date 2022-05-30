@@ -100,5 +100,13 @@ public class UserOrderDAO {
 	public void updateBasketOrder(HashMap<String, Object> map) {
 		sqlSession.update("UserOrderDAO.updateBasketOrder",map);
 	}
+
+	public void insertCartItem(BasketVO vo) {
+		sqlSession.insert("UserOrderDAO.insertCartItem",vo);
+	}
+
+	public String siBasket(String u_id) {
+		return sqlSession.selectOne("UserOrderDAO.siBasket",u_id);
+	}
 	
 }

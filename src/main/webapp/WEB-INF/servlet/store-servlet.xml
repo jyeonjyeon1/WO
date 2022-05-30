@@ -19,5 +19,15 @@
 		<property name="prefix" value="/WEB-INF/views/store/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+		<mvc:mapping path="/*.store"/>
+		<mvc:exclude-mapping path="/login.store"/>
+		<mvc:exclude-mapping path="/loginCheck.store"/>
+		<mvc:exclude-mapping path="/sendResetPassword.store"/>
+		<bean id="StoreInterceptor" class="three.aws.wo.admin.util.StoreInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 </beans>

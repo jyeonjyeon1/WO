@@ -111,4 +111,12 @@ public class UserOrderServiceImpl implements UserOrderService {
 	public void updateBasketOrder(HashMap<String, Object> map) {
 		userOrderDAO.updateBasketOrder(map);
 	}
+	@Override
+	public void insertCartItem(BasketVO vo) {
+		userOrderDAO.insertCartItem(vo);
+	}
+	@Override
+	public String siBasket(String u_id) {
+		return userOrderDAO.siBasket(u_id);
+	}
 }

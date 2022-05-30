@@ -44,6 +44,10 @@ public class UserOrderController {
 		// 장바구니 출력함.
 		model.addAttribute("cartStore", cartStore);
 		model.addAttribute("cartList", cartList);
+		// 유저장바구니에 있는 가게 불러옴
+		// 장바구니 출력함.
+		session.setAttribute("cartStoreSession", cartStore);
+		session.setAttribute("cartListSession", cartList);
 		return "/order/order_cart";
 	}
 
@@ -277,5 +281,20 @@ public class UserOrderController {
 		model.addAttribute("myorderDetail", myorderDetail);
 		return "/mypage/mypage_currentOrder";
 	}
-
+	
+	//유저의 장바구니에 있는지 확인
+	@ResponseBody
+	@RequestMapping(value = "/siBasket.user", method = RequestMethod.POST)
+	public int siBasket(@RequestBody HashMap<String, String> param) {
+		int result = 0;
+		String u_id = param.get("u_id");
+		String si_code = param.get("si_code");
+		String siBasket = userOrderService.siBasket(u_id);
+		if(siBasket==null) {
+			result = 1;
+		}else if(siBasket.equals(si_code)) {
+			result = 1;
+		}
+		return result;
+	}
 }

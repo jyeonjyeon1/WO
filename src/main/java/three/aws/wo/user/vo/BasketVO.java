@@ -9,7 +9,7 @@ public class BasketVO {
 	private String u_id;
 	private String si_code;
 	private String m_code;
-	private String b_quantity;
+	private int b_quantity;
 	private String ob_code;
 	private int b_single_price;
 	private int b_total_price;

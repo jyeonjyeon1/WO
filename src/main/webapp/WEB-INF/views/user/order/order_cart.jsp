@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Walking Order</title>
+<title>워킹오더 내 카트</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
@@ -126,7 +126,7 @@
 							<c:set var = "totalPrice" value = "0" />
 							<c:set var = "totalNum" value = "0" />
 								<c:forEach var="cartList" items="${cartList}" varStatus="vs">
-									<input id="${cartList.b_seq}" type="hidden"
+									<input id="b_seq${vs.index}" type="hidden"
 										value="${cartList.b_seq}" />
 									<tr id="cartRow${vs.index}">
 										<td class="shoping__cart__price"><img
@@ -173,7 +173,7 @@
 													  confirmButtonText: "삭제"
 													}).then((result) => {
 													  if (result.isConfirmed) {
-														  var b_seq = $("#${cartList.b_seq}").val();
+														  var b_seq = $("#b_seq${vs.index}").val();
 														  var param = {"b_seq" : b_seq };
 														  $.ajax({
 													             type: "POST",
@@ -272,7 +272,7 @@
 												head_tot_price.innerText=totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 												head_tot_quan.innerText=totalItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 												head_tot_quan2.innerText=totalItem.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +  "   개";
-												var b_seq = $("#${cartList.b_seq}").val();
+												var b_seq = $("#b_seq${vs.index}").val();
 												var param = {
 														"b_seq" : parseInt(b_seq) ,
 														"b_quantity" : parseInt(number) , 

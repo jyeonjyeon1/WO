@@ -15,7 +15,7 @@ public class UserMenuListImpl implements UserMenuListService {
 	private UserMenuListDAO userMenuListDAO;
 	
 	@Override
-	public List<StoreVO> storeInfo(String si_code) {
+	public StoreVO storeInfo(String si_code) {
 		return userMenuListDAO.storeInfo(si_code);
 	}
 	

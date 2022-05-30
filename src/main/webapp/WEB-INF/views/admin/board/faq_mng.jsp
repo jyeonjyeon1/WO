@@ -161,9 +161,9 @@
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content"> 
-    <!-- allmenu import -->
-    <%@ include file="../inc/admin_allmenu.jsp" %>
-      <section class="wrapper">
+<!--     allmenu import -->
+<%--     <%@ include file="../inc/admin_allmenu.jsp" %> --%>
+      <section class="wrapper site-min-height">
         <h3 style="margin-bottom: 5px;"><i class="fa fa-angle-right"></i> FAQ 관리</h3>
         <div class="row mt" style="margin-top: 5px;">
           <!-- 영역 시작 -->
@@ -175,11 +175,72 @@
             </div>
 
             <div class="form-panel" style="margin-top:0;  border-radius: 0 0 10px 10px;">
+                 <a type="button" class="grey__button btn"
+                   style="margin:0px 0px 10px 11px" data-toggle="modal" href="#addModal">질문 추가</a>
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel"
+	role="dialog" tabindex="-1" id="addModal"
+	class="modal fade" style="margin: 20px auto 0;">
+	<form method="post" action="insertFaq.admin" name="insertFaq">
+	<div class="modal-dialog store">
+		<div class="modal-content">
+			<div class="modal-header_store">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title"> 자주 묻는 질문 추가하기</h4>
+			</div>
+			<!-- 	정보시작 -->
+			<div class="modal_wrapbody" style="height:300px">
+				<div class="modal-body" style="padding-bottom: 0;">
+					<p style="margin-bottom: 2px;">FAQ 제목</p>
+					<input type="text" name="fac_title" class="form-control">
+				</div>
+				
+				<div class="modal-body" style="padding-bottom: 0;">
+				<p style="margin-bottom: 2px;">FAQ 유형</p>
+<!-- 					<label style="margin-bottom: 2px;margin-left:20px;">FAQ 유형</label> -->
+					<select name="fac_type" class="form-control">
+						<option value="order" selected="selected">주문 및 결제</option>
+						<option value="cancel">취소 및 환불</option>
+						<option value="user">회원</option>
+						<option value="point">포인트 및 쿠폰</option>
+						<option value="etc">기타</option>
+					</select>
+				</div>
+				
+				<!-- 마지막 정보는 아래 패딩 유지 -->
+				<div class="modal-body">
+					<p style="margin-bottom: 2px;">FAQ 내용</p>
+					<textarea rows="5" name="fac_content" class="form-control"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-default"
+					type="button">확인</button>
+				<button
+					class="btn btn-theme" type="button" onclick="newFaqAdd()">등록</button>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+<script>
+function newFaqAdd(){
+	Swal.fire({
+        icon: "success",
+        title: "FAQ 등록 완료",
+        showConfirmButton: false,
+        timer: 1500
+    });
+	document.insertFaq.submit();
+}
+</script>
+<!-- Modal END -->
               <form class="form-horizontal style-form" method="get">
                 <div class="row content-panel" style="border: none; box-shadow: none;padding: 0;margin:0 5px">
                   
                   <!-- /panel-heading -->
-                  <div class="panel-body col-lg-12" style="padding: 0 11px 11px 11px;">
+                  <div class="panel-body col-lg-12" style="padding: 0 0px 11px 0px;">
                     <div class="tab-content">
                       <!-- 메뉴관리 -->
                       <div id="menu" class="tab-pane active no-padding">
@@ -189,25 +250,19 @@
                             style="margin-bottom: 5px;">
                             <ul class="nav nav-tabs nav-justified">
                               <li class="active">
-                                <a data-toggle="tab" href="#faq__111">TOP FAQ</a>
+                                <a data-toggle="tab" href="#faq__111">주문 및 결제</a>
                               </li>
                               <li>
-                                <a data-toggle="tab" href="#faq__222">카드등록</a>
+                                <a data-toggle="tab" href="#faq__222">취소 및 환불</a>
                               </li>
                               <li>
-                                <a data-toggle="tab" href="#faq__333">주문및결제</a>
+                                <a data-toggle="tab" href="#faq__333">회원</a>
                               </li>
                               <li>
-                                <a data-toggle="tab" href="#faq__444">포인트및쿠폰</a>
-                              </li>
-                              <li>
-                                <a data-toggle="tab" href="#faq__555">회원</a>
+                                <a data-toggle="tab" href="#faq__444">포인트 및 쿠폰</a>
                               </li>
                               <li>
                                 <a data-toggle="tab" href="#faq__555">기타</a>
-                              </li>
-                              <li>
-                                <a href="#"><i class="fa fa-plus"></i></a>
                               </li>
                             </ul>
                           </div>
@@ -216,173 +271,159 @@
                             <div class="tab-content">
                               <!-- 메뉴편집 -->
                               <div id="faq__111" class="tab-pane active">
-                                <div class="row">
-                                  <input type="button" id="add_menugroup_btn" value="질문 추가" class="grey__button btn"
-                                    style="margin-right: 10px;">
-                                  <div class="add_menugroup col-md-3 " style="padding-left: 0;">
-                                    <input type="text" id="" value="" class="form-control round-form"
-                                      style="display: inline-block;height: 30px;;">
-
-                                    <!-- </div>
-                                  <div class="col-sm-1"> -->
-                                  </div>
-
-                                </div>
+                                
 
                                 <div class="row">
                                   <div class="col-md-12 no-padding">
                                     <div class="accordion" id="accordion11">
+<c:forEach var="faqList" items="${faqList}" varStatus="vs">
+                      <c:if test="${faqList.fac_type eq 'order' || faqList.fac_type eq 'payment'}">
                                       <!-- 열리기1 -->
-                                      <div class="accordion-group">
+                                      <div class="accordion-group" id="deletePay${vs.index}">
                                         <div class="accordion-heading">
                                           <a class="accordion-toggle collapsed" style="border-top: 0;display: inline-block;margin-right: 20px;"
-                                            data-toggle="collapse" data-parent="#accordion11" href="#collapse111">
+                                            data-toggle="collapse" data-parent="#accordion11" href="#collapse11${vs.index }">
                                             <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
-                                            어떻게 사용하나요
+                                            ${faqList.fac_title}
                                           </a>
-                                          <input type="text" id="faq__update__ta" class="form-control round-form" style="margin-right:10px;width:200px;height:30px;">
-                                          <a type="button" id="faq__update__btn" href="#" style="margin-right: 10px;"><i class="fa fa-pencil"></i></a>
-                                          <a type="button" id="faq__delete__btn" href="javascript:deleteAlert();"><i class="fa fa-trash"></i></a>
+                                          <input type="hidden" id="f_seq${vs.index }" value="${faqList.fac_seq}"/>
+                                          <input type="text" id="faq__update__ta_pay${vs.index }" value="${faqList.fac_title}" class="faq__update__ta form-control round-form" style="margin-right:10px;width:200px;height:30px;">
+                                          <a type="button" id="zzzz${vs.index }" class="btn btn-primary btn-xs" onclick="updatepay${vs.index}()" style="margin-right: 10px;"><i id="faq__update__btn${vs.index }" class="fa fa-pencil"></i></a>
+                                          <a type="button" id="faq__delete__btn${vs.index }" class="btn btn-danger btn-xs" onclick="deletepay${vs.index}()"><i class="fa fa-trash"></i></a>
                                         </div>
-                                        <div id="collapse111" class="accordion-body collapse in">
+                                        <div id="collapse11${vs.index }" class="accordion-body collapse">
                                           <div class="accordion-inner">
-                                            <textarea rows="3" class="form-control round-form">
-몰라몰라><
-                                            </textarea>
-
-
+                                            <textarea rows="3" id="faq__update__co_pay${vs.index }" class="form-control round-form"
+>${faqList.fac_content}</textarea>
                                           </div>
                                         </div>
                                       </div>
+<script>
+function deletepay${vs.index}(){
+	var seq = $("#f_seq${vs.index }").val();
+	var title = $("#faq__update__ta_pay${vs.index }").val();
+	var content = $("#faq__update__co_pay${vs.index }").val();
+	Swal.fire({
+		  title: "삭제하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $.ajax({
+		    	    type: "POST",
+		    	    url: "/deleteFaq.admin",
+		    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}),
+		    	    dataType: "json",
+		    	    contentType: "application/json",
+		    	    success: function (data) {
+		    	        if (data == 1) {
+			    	        Swal.fire({
+			    	            icon: "success",
+			    	            title: "FAQ 삭제 완료",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+		    	        }else if(data == 0){
+		    	        	Swal.fire({
+			    	            icon: "warning",
+			    	            title: "FAQ 삭제 실패",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+		    	        }
+		    	    },
+		    	    error: function (data) {
+		    	        console.log("FAQ 삭제 통신에러");
+		    	    }
+		 		});//ajax end  
+			  
+	        $("#deletePay${vs.index}").remove();
+		  }//if (result.isConfirmed)
+		})//then((result)
+}
 
-                                      <!-- 열리기2 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion11" href="#collapse112">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
-                                            질문2
-                                          </a>
-                                        </div>
-                                        <div id="collapse112" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <textarea rows="3" class="form-control round-form">
-몰라몰라><
-                                            </textarea>
+function updatepay${vs.index}(){
+// 	Swal.fire({
+//         icon: "success",
+//         title: "FAQ 삭제 완료",
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+     if ($("#faq__update__ta_pay${vs.index }").hasClass('active')==false) {
+       $("#faq__update__ta_pay${vs.index }").addClass("active");
+       $("#faq__update__btn${vs.index }").removeClass("fa-pencil");
+       $("#faq__update__btn${vs.index }").addClass("fa-check");
+       $("#zzzz${vs.index }").removeClass("btn-primary");
+       $("#zzzz${vs.index }").addClass("btn-success");
+       $("#collapse11${vs.index }").addClass("in");
+     }else{
+    	 var seq = $("#f_seq${vs.index }").val();
+    	 var title = $("#faq__update__ta_pay${vs.index }").val();
+    	 var content = $("#faq__update__co_pay${vs.index }").val();
+    	 Swal.fire({
+   		  title: "수정하시겠습니까??",
+   		  icon: "warning",
+   		  showCancelButton: true,
+   		  confirmButtonColor: "#3085d6",
+   		  cancelButtonColor: "#d33",
+   		  confirmButtonText: "수정",
+   			  cancelButtonText: "아니오"
+   		}).then((result) => {
+   		  if (result.isConfirmed) {
+   			$.ajax({
+	    	    type: "POST",
+	    	    url: "/updateFaq.admin",
+	    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "수정 실패",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("FAQ 삭제 통신에러");
+	    	    }
+	 		});//ajax end  
+   		  }//if (result.isConfirmed)
+   		})//then((result)
+   	}
+     
+     //화면
+    	 $("#faq__update__ta_pay${vs.index }").removeClass("active");
+         $("#faq__update__btn${vs.index }").addClass("fa-pencil");
+         $("#faq__update__btn${vs.index }").removeClass("fa-check");
+         $("#zzzz${vs.index }").addClass("btn-primary");
+         $("#zzzz${vs.index }").removeClass("btn-success");
+         $("#collapse11${vs.index }").removeClass("in");
+     
+}
 
 
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기3 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion11" href="#collapse113">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
-                                            질문3
-                                          </a>
-                                        </div>
-                                        <div id="collapse113" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <textarea rows="3" class="form-control round-form">
-몰라몰라><
-                                            </textarea>
-
-
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기4 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion11" href="#collapse114">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
-                                            질문4
-                                          </a>
-                                        </div>
-                                        <div id="collapse114" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <textarea rows="3" class="form-control round-form">
-몰라몰라><
-                                            </textarea>
-
-
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기5 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion11" href="#collapse115">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
-                                            질문5
-                                          </a>
-                                        </div>
-                                        <div id="collapse115" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <textarea rows="3" class="form-control round-form">
-몰라몰라><
-                                            </textarea>
-
-
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기6 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion11" href="#collapse116">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
-                                            질문6
-                                          </a>
-                                        </div>
-                                        <div id="collapse116" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <textarea rows="3" class="form-control round-form">
-몰라몰라><
-                                            </textarea>
-
-
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기7 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion11" href="#collapse117">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
-                                            질문8
-                                          </a>
-                                        </div>
-                                        <div id="collapse117" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <textarea rows="3" class="form-control round-form">
-몰라몰라><
-                                            </textarea>
-
-
-                                          </div>
-                                        </div>
-                                      </div>
-
-
+</script>                                      
+</c:if>
+</c:forEach>
 
 
                                     </div>
                                     <!-- end accordion -->
                                   </div>
-                                  
-                                  <button type="submit" class="btn btn-theme" style="float: right;margin-left: 10px;">
-                                    저장
-                                  </button>
-                                  <button type="reset" class="btn btn-theme" style="float: right;">
-                                    초기화
-                                  </button>
                                   <!-- /col-md-6 -->
                                 </div>
                                 <!-- /메뉴관리 -->
@@ -392,301 +433,160 @@
                               <div id="faq__222" class="tab-pane">
                                 <div class="row">
                                   <div class="col-md-12 no-padding">
-                                    <div class="accordion" id="accordion22">
+                                    <div class="accordion" id="accordion12">
+                                      <c:forEach var="faqList" items="${faqList}" varStatus="vs">
+                      <c:if test="${faqList.fac_type eq 'cancel' || faqList.fac_type eq 'refund'}">
                                       <!-- 열리기1 -->
-                                      <div class="accordion-group">
+                                      <div class="accordion-group" id="deleteCancel${vs.index}">
                                         <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed"
-                                            style="padding:0;margin:5px 0; border-top: 0;background-color: beige;"
-                                            data-toggle="collapse" data-parent="#accordion22" href="#collapseOne2">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em> 메뉴 품절
+                                          <a class="accordion-toggle collapsed" style="border-top: 0;display: inline-block;margin-right: 20px;"
+                                            data-toggle="collapse" id="cancelTitle${vs.index }" data-parent="#accordion12" href="#collapse12${vs.index }">
+                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
+                                            ${faqList.fac_title}
                                           </a>
+                                          <input type="hidden" id="f_seqcancel${vs.index }" value="${faqList.fac_seq}"/>
+                                          <input type="text" id="faq__update__ta_Cancel${vs.index }" value="${faqList.fac_title}" class="faq__update__ta form-control round-form" style="margin-right:10px;width:200px;height:30px;">
+                                          <a type="button" id="zzzzcancel${vs.index }" class="btn btn-primary btn-xs" onclick="updateCancel${vs.index}()" style="margin-right: 10px;"><i id="faq__update__btncancel${vs.index }" class="fa fa-pencil"></i></a>
+                                          <a type="button" id="faq__delete__btncancel${vs.index }" class="btn btn-danger btn-xs" onclick="deleteCancel${vs.index}()"><i class="fa fa-trash"></i></a>
                                         </div>
-                                        <div id="collapseOne2" class="accordion-body collapse">
+                                        <div id="collapse12${vs.index }" class="accordion-body collapse">
                                           <div class="accordion-inner">
-                                            <div class="row" style="margin: 0;">
-                                              <!-- 메뉴그룹1 -->
-                                              <div class="faq__group col-md-12">
-                                                <span>(New) 시즌메뉴 1</span>
-                                              </div>
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-
-                                                <div class="faq__name">
-                                                  연유귀리라떼
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원</li>
-                                                    <li>ICE 벤티: 5000 원</li>
-                                                    <li>HOT 벤티: 5000 원</li>
-                                                  </ul>
-                                                </div>
-                                                <input id="faq___1" type="button" class="sold_out_btn active"
-                                                  value="품절">
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  햇쌀귀리라떼
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원</li>
-                                                    <li>ICE 벤티: 5000 원</li>
-                                                    <li>HOT 벤티: 5000 원</li>
-                                                  </ul>
-                                                </div>
-                                                <input id="faq___2" type="button" class="sold_out_btn" value="품절">
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  민트귀리라떼
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원</li>
-                                                    <li>ICE 벤티: 5000 원</li>
-                                                    <li>HOT 벤티: 5000 원</li>
-                                                  </ul>
-                                                </div>
-                                                <input id="faq___3" type="button" class="sold_out_btn" value="품절">
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-
-
-                                              <!-- end row -->
-                                            </div>
-                                            <!-- row 끝 -->
-                                            <div class="row" style="margin: 0;">
-                                              <!-- 메뉴그룹2 -->
-                                              <div class="faq__group col-md-12">
-                                                <span>(New) 시즌메뉴 2</span>
-                                              </div>
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-
-                                                <div class="faq__name">
-                                                  콜라겐 THE하기
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원</li>
-                                                    <li>ICE 벤티: 5000 원</li>
-                                                    <li>HOT 벤티: 5000 원</li>
-                                                  </ul>
-                                                </div>
-                                                <input id="faq___4" type="button" class="sold_out_btn" value="품절">
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  콜라겐 MINUS하기
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원</li>
-                                                    <li>ICE 벤티: 5000 원</li>
-                                                    <li>HOT 벤티: 5000 원</li>
-                                                  </ul>
-                                                </div>
-                                                <input id="faq___5" type="button" class="sold_out_btn active"
-                                                  value="품절">
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  콜라겐 DIVIDE하기
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원</li>
-                                                    <li>ICE 벤티: 5000 원</li>
-                                                    <li>HOT 벤티: 5000 원</li>
-                                                  </ul>
-                                                </div>
-                                                <input id="faq___6" type="button" class="sold_out_btn" value="품절">
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-
-
-                                              <!-- end row -->
-                                            </div>
-
-
-
+                                            <textarea rows="3" id="faq__update__co_Cancel${vs.index }" class="form-control round-form"
+>${faqList.fac_content}</textarea>
                                           </div>
                                         </div>
                                       </div>
+<script>
+function deleteCancel${vs.index}(){
+	var seq = $("#f_seqcancel${vs.index }").val();
+	 var title = $("#faq__update__ta_Cancel${vs.index }").val();
+	 var content = $("#faq__update__co_Cancel${vs.index }").val();
+	Swal.fire({
+		  title: "삭제하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $.ajax({
+		    	    type: "POST",
+		    	    url: "/deleteFaq.admin",
+		    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}),
+		    	    dataType: "json",
+		    	    contentType: "application/json",
+		    	    success: function (data) {
+		    	        if (data == 1) {
+			    	        Swal.fire({
+			    	            icon: "success",
+			    	            title: "FAQ 삭제 완료",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+			    	        
+		    	        }else if(data == 0){
+		    	        	Swal.fire({
+			    	            icon: "warning",
+			    	            title: "FAQ 삭제 실패",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+		    	        }
+		    	    },
+		    	    error: function (data) {
+		    	        console.log("FAQ 삭제 통신에러");
+		    	    }
+		 		});//ajax end  
+			  
+	        $("#deleteCancel${vs.index}").remove();
+		  }//if (result.isConfirmed)
+		})//then((result)
+}
 
-                                      <!-- 열리기2 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed"
-                                            style="padding:0;margin:5px 0;background-color: beige;"
-                                            data-toggle="collapse" data-parent="#accordion22" href="#collapseTwo2">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em> 옵션 품절
-                                          </a>
-                                        </div>
-                                        <div id="collapseTwo2" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <div class="row" style="margin: 0;">
-                                              <!-- 메뉴그룹1 -->
-                                              <div class="faq__group col-md-12">
-                                                <span>(New) 시즌메뉴 1</span>
-                                              </div>
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-
-                                                <div class="faq__name">
-                                                  연유귀리라떼
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn active" value="품절"></li>
-                                                    <li>ICE 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>HOT 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  햇쌀귀리라떼
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>ICE 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>HOT 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn active" value="품절"></li>
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  민트귀리라떼
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>ICE 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>HOT 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-
-
-                                              <!-- end row -->
-                                            </div>
-                                            <!-- row 끝 -->
-                                            <div class="row" style="margin: 0;">
-                                              <!-- 메뉴그룹2 -->
-                                              <div class="faq__group col-md-12">
-                                                <span>(New) 시즌메뉴 2</span>
-                                              </div>
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-
-                                                <div class="faq__name">
-                                                  콜라겐 THE하기
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn " value="품절"></li>
-                                                    <li>ICE 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn active" value="품절"></li>
-                                                    <li>HOT 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  콜라겐 MINUS하기
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>ICE 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>HOT 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
-
-                                              <!-- 하나의 메뉴 -->
-                                              <div class="col-md-4 faq__gulp">
-                                                <div class="faq__name">
-                                                  콜라겐 DIVIDE하기
-                                                </div>
-                                                <div class="faq__option">
-                                                  <ul>
-                                                    <li>ICE 리터: 6000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>ICE 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn" value="품절"></li>
-                                                    <li>HOT 벤티: 5000 원<input id="faq___1" type="button"
-                                                        class="sold_out_option_btn active" value="품절"></li>
-                                                  </ul>
-                                                </div>
-                                              </div>
-                                              <!-- /하나의메뉴 끝 -->
+function updateCancel${vs.index}(){
+// 	Swal.fire({
+//         icon: "success",
+//         title: "FAQ 삭제 완료",
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+     if ($("#faq__update__ta_Cancel${vs.index }").hasClass('active')==false) {
+       $("#faq__update__ta_Cancel${vs.index }").addClass("active");
+       $("#faq__update__btncancel${vs.index }").removeClass("fa-pencil");
+       $("#faq__update__btncancel${vs.index }").addClass("fa-check");
+       $("#zzzzcancel${vs.index }").removeClass("btn-primary");
+       $("#zzzzcancel${vs.index }").addClass("btn-success");
+       $("#collapse12${vs.index }").addClass("in");
+     }else{
+    	 var seq = $("#f_seqcancel${vs.index }").val();
+    	 var title = $("#faq__update__ta_Cancel${vs.index }").val();
+    	 var content = $("#faq__update__co_Cancel${vs.index }").val();
+    	 Swal.fire({
+   		  title: "수정하시겠습니까??",
+   		  icon: "warning",
+   		  showCancelButton: true,
+   		  confirmButtonColor: "#3085d6",
+   		  cancelButtonColor: "#d33",
+   		  confirmButtonText: "수정",
+   			  cancelButtonText: "아니오"
+   		}).then((result) => {
+   		  if (result.isConfirmed) {
+   			$.ajax({
+	    	    type: "POST",
+	    	    url: "/updateFaq.admin",
+	    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+		    	        document.getElementById("cancelTitle${vs.index }").innerText = title;
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "수정 실패",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("FAQ 삭제 통신에러");
+	    	    }
+	 		});//ajax end  
+   		  }//if (result.isConfirmed)
+   		})//then((result)
+   				
+   	 //화면
+   	 $("#faq__update__ta_Cancel${vs.index }").removeClass("active");
+        $("#faq__update__btncancel${vs.index }").addClass("fa-pencil");
+        $("#faq__update__btncancel${vs.index }").removeClass("fa-check");
+        $("#zzzzcancel${vs.index }").addClass("btn-primary");
+        $("#zzzzcancel${vs.index }").removeClass("btn-success");
+        $("#collapse12${vs.index }").removeClass("in");
+   				
+   	}
+     
+    
+     
+}
 
 
-
-                                              <!-- end row -->
-                                            </div>
-
-
-
-                                          </div>
-                                        </div>
-                                      </div>
+</script>                                      
+</c:if>
+</c:forEach>
 
                                     </div>
                                     <!-- end accordion -->
                                   </div>
                                   
-                                  <button type="submit" class="btn btn-theme" style="float: right;margin-left: 10px;">
-                                    저장
-                                  </button>
-                                  <button type="button" class="no_soldout btn btn-theme" style="float: right;">
-                                    초기화
-                                  </button>
                                   <!-- /col-md-6 -->
                                 </div>
                                 <!-- /row -->
@@ -698,131 +598,157 @@
                                   <div class="col-md-12 no-padding">
                                     <div class="accordion" id="accordion13">
                                       <!-- 열리기1 -->
-                                      <div class="accordion-group">
+<c:forEach var="faqList" items="${faqList}" varStatus="vs">
+ <c:if test="${faqList.fac_type eq 'user'}">
+                                      <!-- 열리기1 -->
+                                      <div class="accordion-group" id="deleteUser${vs.index}">
                                         <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" style="border-top: 0;"
-                                            data-toggle="collapse" data-parent="#accordion13" href="#collapse131">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            purchase
-                                            this template?
+                                          <a class="accordion-toggle collapsed" style="border-top: 0;display: inline-block;margin-right: 20px;"
+                                            data-toggle="collapse" id="UserTitle${vs.index }" data-parent="#accordion13" href="#collapse13${vs.index }">
+                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
+                                            ${faqList.fac_title}
                                           </a>
+                                          <input type="hidden" id="f_seqUser${vs.index }" value="${faqList.fac_seq}"/>
+                                          <input type="text" id="faq__update__ta_User${vs.index }" value="${faqList.fac_title}" class="faq__update__ta form-control round-form" style="margin-right:10px;width:200px;height:30px;">
+                                          <a type="button" id="zzzzUser${vs.index }" class="btn btn-primary btn-xs" onclick="updateUser${vs.index}()" style="margin-right: 10px;"><i id="faq__update__btnUser${vs.index }" class="fa fa-pencil"></i></a>
+                                          <a type="button" id="faq__delete__btnUser${vs.index }" class="btn btn-danger btn-xs" onclick="deleteUser${vs.index}()"><i class="fa fa-trash"></i></a>
                                         </div>
-                                        <div id="collapse131" class="accordion-body collapse">
+                                        <div id="collapse13${vs.index }" class="accordion-body collapse">
                                           <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
+                                            <textarea rows="3" id="faq__update__co_User${vs.index }" class="form-control round-form"
+>${faqList.fac_content}</textarea>
                                           </div>
                                         </div>
                                       </div>
+<script>
+function deleteUser${vs.index}(){
+	var seq = $("#f_seqUser${vs.index }").val();
+	 var title = $("#faq__update__ta_User${vs.index }").val();
+	 var content = $("#faq__update__co_Cancel${vs.index }").val();
+	Swal.fire({
+		  title: "삭제하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $.ajax({
+		    	    type: "POST",
+		    	    url: "/deleteFaq.admin",
+		    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}),
+		    	    dataType: "json",
+		    	    contentType: "application/json",
+		    	    success: function (data) {
+		    	        if (data == 1) {
+			    	        Swal.fire({
+			    	            icon: "success",
+			    	            title: "FAQ 삭제 완료",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+			    	        
+		    	        }else if(data == 0){
+		    	        	Swal.fire({
+			    	            icon: "warning",
+			    	            title: "FAQ 삭제 실패",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+		    	        }
+		    	    },
+		    	    error: function (data) {
+		    	        console.log("FAQ 삭제 통신에러");
+		    	    }
+		 		});//ajax end  
+			  
+	        $("#deleteUser${vs.index}").remove();
+		  }//if (result.isConfirmed)
+		})//then((result)
+}
 
-                                      <!-- 열리기2 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion13" href="#collapse132">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How can
-                                            I
-                                            install my server?
-                                          </a>
-                                        </div>
-                                        <div id="collapse132" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기3 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion13" href="#collapse133">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            change
-                                            color schemes?
-                                          </a>
-                                        </div>
-                                        <div id="collapse133" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기4 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion13" href="#collapse134">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            integrate
-                                            Revolution Slider?
-                                          </a>
-                                        </div>
-                                        <div id="collapse134" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기5 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion13" href="#collapse135">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How Can
-                                            I get
-                                            Support?
-                                          </a>
-                                        </div>
-                                        <div id="collapse135" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
+function updateUser${vs.index}(){
+// 	Swal.fire({
+//         icon: "success",
+//         title: "FAQ 삭제 완료",
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+     if ($("#faq__update__ta_User${vs.index }").hasClass('active')==false) {
+       $("#faq__update__ta_User${vs.index }").addClass("active");
+       $("#faq__update__btnUser${vs.index }").removeClass("fa-pencil");
+       $("#faq__update__btnUser${vs.index }").addClass("fa-check");
+       $("#zzzzUser${vs.index }").removeClass("btn-primary");
+       $("#zzzzUser${vs.index }").addClass("btn-success");
+       $("#collapse13${vs.index }").addClass("in");
+     }else{
+    	 var seq = $("#f_seqUser${vs.index }").val();
+    	 var title = $("#faq__update__ta_User${vs.index }").val();
+    	 var content = $("#faq__update__co_User${vs.index }").val();
+    	 Swal.fire({
+   		  title: "수정하시겠습니까??",
+   		  icon: "warning",
+   		  showCancelButton: true,
+   		  confirmButtonColor: "#3085d6",
+   		  cancelButtonColor: "#d33",
+   		  confirmButtonText: "수정",
+   			  cancelButtonText: "아니오"
+   		}).then((result) => {
+   		  if (result.isConfirmed) {
+   			$.ajax({
+	    	    type: "POST",
+	    	    url: "/updateFaq.admin",
+	    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+		    	        document.getElementById("UserTitle${vs.index }").innerText = title;
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "수정 실패",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("FAQ 삭제 통신에러");
+	    	    }
+	 		});//ajax end  
+   		  }//if (result.isConfirmed)
+   		})//then((result)
+   				
+   	 //화면
+   	 $("#faq__update__ta_User${vs.index }").removeClass("active");
+        $("#faq__update__btnUser${vs.index }").addClass("fa-pencil");
+        $("#faq__update__btnUser${vs.index }").removeClass("fa-check");
+        $("#zzzzUser${vs.index }").addClass("btn-primary");
+        $("#zzzzUser${vs.index }").removeClass("btn-success");
+        $("#collapse13${vs.index }").removeClass("in");
+   				
+   	}
+     
+    
+     
+}
+
+
+</script>                                      
+</c:if>
+</c:forEach>
                                     </div>
                                     <!-- end accordion -->
                                   </div>
-                                  
-                                  <button type="submit" class="btn btn-theme" style="float: right;margin-left: 10px;">
-                                    저장
-                                  </button>
-                                  <button type="reset" class="btn btn-theme" style="float: right;">
-                                    초기화
-                                  </button>
                                   <!-- /col-md-6 -->
                                 </div>
                                 <!-- /메뉴관리 -->
@@ -834,131 +760,158 @@
                                   <div class="col-md-12 no-padding">
                                     <div class="accordion" id="accordion14">
                                       <!-- 열리기1 -->
-                                      <div class="accordion-group">
+ <c:forEach var="faqList" items="${faqList}" varStatus="vs">
+ <c:if test="${faqList.fac_type eq 'point'}">
+                                      <!-- 열리기1 -->
+                                      <div class="accordion-group" id="deletePoint${vs.index}">
                                         <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" style="border-top: 0;"
-                                            data-toggle="collapse" data-parent="#accordion14" href="#collapse141">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            purchase
-                                            this template?
+                                          <a class="accordion-toggle collapsed" style="border-top: 0;display: inline-block;margin-right: 20px;"
+                                            data-toggle="collapse" id="PointTitle${vs.index }" data-parent="#accordion14" href="#collapse14${vs.index }">
+                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
+                                            ${faqList.fac_title}
                                           </a>
+                                          <input type="hidden" id="f_seqPoint${vs.index }" value="${faqList.fac_seq}"/>
+                                          <input type="text" id="faq__update__ta_Point${vs.index }" value="${faqList.fac_title}" class="faq__update__ta form-control round-form" style="margin-right:10px;width:200px;height:30px;">
+                                          <a type="button" id="zzzzPoint${vs.index }" class="btn btn-primary btn-xs" onclick="updatePoint${vs.index}()" style="margin-right: 10px;"><i id="faq__update__btnPoint${vs.index }" class="fa fa-pencil"></i></a>
+                                          <a type="button" id="faq__delete__btnPoint${vs.index }" class="btn btn-danger btn-xs" onclick="deletePoint${vs.index}()"><i class="fa fa-trash"></i></a>
                                         </div>
-                                        <div id="collapse141" class="accordion-body collapse">
+                                        <div id="collapse14${vs.index }" class="accordion-body collapse">
                                           <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
+                                            <textarea rows="3" id="faq__update__co_Point${vs.index }" class="form-control round-form"
+>${faqList.fac_content}</textarea>
                                           </div>
                                         </div>
                                       </div>
+<script>
+function deletePoint${vs.index}(){
+	var seq = $("#f_seqPoint${vs.index }").val();
+	 var title = $("#faq__update__ta_Point${vs.index }").val();
+	 var content = $("#faq__update__co_Cancel${vs.index }").val();
+	Swal.fire({
+		  title: "삭제하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $.ajax({
+		    	    type: "POST",
+		    	    url: "/deleteFaq.admin",
+		    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}),
+		    	    dataType: "json",
+		    	    contentType: "application/json",
+		    	    success: function (data) {
+		    	        if (data == 1) {
+			    	        Swal.fire({
+			    	            icon: "success",
+			    	            title: "FAQ 삭제 완료",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+			    	        
+		    	        }else if(data == 0){
+		    	        	Swal.fire({
+			    	            icon: "warning",
+			    	            title: "FAQ 삭제 실패",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+		    	        }
+		    	    },
+		    	    error: function (data) {
+		    	        console.log("FAQ 삭제 통신에러");
+		    	    }
+		 		});//ajax end  
+			  
+	        $("#deletePoint${vs.index}").remove();
+		  }//if (result.isConfirmed)
+		})//then((result)
+}
 
-                                      <!-- 열리기2 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion14" href="#collapse142">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How can
-                                            I
-                                            install my server?
-                                          </a>
-                                        </div>
-                                        <div id="collapse142" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기3 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion14" href="#collapse143">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            change
-                                            color schemes?
-                                          </a>
-                                        </div>
-                                        <div id="collapse143" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기4 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion14" href="#collapse144">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            integrate
-                                            Revolution Slider?
-                                          </a>
-                                        </div>
-                                        <div id="collapse144" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기5 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion14" href="#collapse145">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How Can
-                                            I get
-                                            Support?
-                                          </a>
-                                        </div>
-                                        <div id="collapse145" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
+function updatePoint${vs.index}(){
+// 	Swal.fire({
+//         icon: "success",
+//         title: "FAQ 삭제 완료",
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+     if ($("#faq__update__ta_Point${vs.index }").hasClass('active')==false) {
+       $("#faq__update__ta_Point${vs.index }").addClass("active");
+       $("#faq__update__btnPoint${vs.index }").removeClass("fa-pencil");
+       $("#faq__update__btnPoint${vs.index }").addClass("fa-check");
+       $("#zzzzPoint${vs.index }").removeClass("btn-primary");
+       $("#zzzzPoint${vs.index }").addClass("btn-success");
+       $("#collapse14${vs.index }").addClass("in");
+     }else{
+    	 var seq = $("#f_seqPoint${vs.index }").val();
+    	 var title = $("#faq__update__ta_Point${vs.index }").val();
+    	 var content = $("#faq__update__co_Point${vs.index }").val();
+    	 Swal.fire({
+   		  title: "수정하시겠습니까??",
+   		  icon: "warning",
+   		  showCancelButton: true,
+   		  confirmButtonColor: "#3085d6",
+   		  cancelButtonColor: "#d33",
+   		  confirmButtonText: "수정",
+   			  cancelButtonText: "아니오"
+   		}).then((result) => {
+   		  if (result.isConfirmed) {
+   			$.ajax({
+	    	    type: "POST",
+	    	    url: "/updateFaq.admin",
+	    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+		    	        document.getElementById("PointTitle${vs.index }").innerText = title;
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "수정 실패",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("FAQ 삭제 통신에러");
+	    	    }
+	 		});//ajax end  
+   		  }//if (result.isConfirmed)
+   		})//then((result)
+   				
+   	 //화면
+   	 $("#faq__update__ta_Point${vs.index }").removeClass("active");
+        $("#faq__update__btnPoint${vs.index }").addClass("fa-pencil");
+        $("#faq__update__btnPoint${vs.index }").removeClass("fa-check");
+        $("#zzzzPoint${vs.index }").addClass("btn-primary");
+        $("#zzzzPoint${vs.index }").removeClass("btn-success");
+        $("#collapse14${vs.index }").removeClass("in");
+   				
+   	}
+     
+    
+     
+}
+
+
+</script>                                      
+</c:if>
+</c:forEach>
                                     </div>
                                     <!-- end accordion -->
                                   </div>
                                   
-                                  <button type="submit" class="btn btn-theme" style="float: right;margin-left: 10px;">
-                                    저장
-                                  </button>
-                                  <button type="reset" class="btn btn-theme" style="float: right;">
-                                    초기화
-                                  </button>
                                   <!-- /col-md-6 -->
                                 </div>
                                 <!-- /메뉴관리 -->
@@ -970,131 +923,158 @@
                                   <div class="col-md-12 no-padding">
                                     <div class="accordion" id="accordion15">
                                       <!-- 열리기1 -->
-                                      <div class="accordion-group">
+<c:forEach var="faqList" items="${faqList}" varStatus="vs">
+ <c:if test="${faqList.fac_type eq 'etc'}">
+                                      <!-- 열리기1 -->
+                                      <div class="accordion-group" id="deleteETC${vs.index}">
                                         <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" style="border-top: 0;"
-                                            data-toggle="collapse" data-parent="#accordion15" href="#collapse151">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            purchase
-                                            this template?
+                                          <a class="accordion-toggle collapsed" style="border-top: 0;display: inline-block;margin-right: 20px;"
+                                            data-toggle="collapse" id="ETCTitle${vs.index }" data-parent="#accordion15" href="#collapse15${vs.index }">
+                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>
+                                            ${faqList.fac_title}
                                           </a>
+                                          <input type="hidden" id="f_seqETC${vs.index }" value="${faqList.fac_seq}"/>
+                                          <input type="text" id="faq__update__ta_ETC${vs.index }" value="${faqList.fac_title}" class="faq__update__ta form-control round-form" style="margin-right:10px;width:200px;height:30px;">
+                                          <a type="button" id="zzzzETC${vs.index }" class="btn btn-primary btn-xs" onclick="updateETC${vs.index}()" style="margin-right: 10px;"><i id="faq__update__btnETC${vs.index }" class="fa fa-pencil"></i></a>
+                                          <a type="button" id="faq__delete__btnETC${vs.index }" class="btn btn-danger btn-xs" onclick="deleteETC${vs.index}()"><i class="fa fa-trash"></i></a>
                                         </div>
-                                        <div id="collapse151" class="accordion-body collapse">
+                                        <div id="collapse15${vs.index }" class="accordion-body collapse">
                                           <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
+                                            <textarea rows="3" id="faq__update__co_ETC${vs.index }" class="form-control round-form"
+>${faqList.fac_content}</textarea>
                                           </div>
                                         </div>
                                       </div>
+<script>
+function deleteETC${vs.index}(){
+	var seq = $("#f_seqETC${vs.index }").val();
+	 var title = $("#faq__update__ta_ETC${vs.index }").val();
+	 var content = $("#faq__update__co_Cancel${vs.index }").val();
+	Swal.fire({
+		  title: "삭제하시겠습니까??",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+			  cancelButtonText: "아니오"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $.ajax({
+		    	    type: "POST",
+		    	    url: "/deleteFaq.admin",
+		    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}),
+		    	    dataType: "json",
+		    	    contentType: "application/json",
+		    	    success: function (data) {
+		    	        if (data == 1) {
+			    	        Swal.fire({
+			    	            icon: "success",
+			    	            title: "FAQ 삭제 완료",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+			    	        
+		    	        }else if(data == 0){
+		    	        	Swal.fire({
+			    	            icon: "warning",
+			    	            title: "FAQ 삭제 실패",
+			    	            showConfirmButton: false,
+			    	            timer: 1500
+			    	        });
+		    	        }
+		    	    },
+		    	    error: function (data) {
+		    	        console.log("FAQ 삭제 통신에러");
+		    	    }
+		 		});//ajax end  
+			  
+	        $("#deleteETC${vs.index}").remove();
+		  }//if (result.isConfirmed)
+		})//then((result)
+}
 
-                                      <!-- 열리기2 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion15" href="#collapse152">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How can
-                                            I
-                                            install my server?
-                                          </a>
-                                        </div>
-                                        <div id="collapse152" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기3 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion15" href="#collapse153">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            change
-                                            color schemes?
-                                          </a>
-                                        </div>
-                                        <div id="collapse153" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기4 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion15" href="#collapse154">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How to
-                                            integrate
-                                            Revolution Slider?
-                                          </a>
-                                        </div>
-                                        <div id="collapse154" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 열리기5 -->
-                                      <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse"
-                                            data-parent="#accordion15" href="#collapse155">
-                                            <em class="glyphicon glyphicon-chevron-right icon-fixed-width"></em>How Can
-                                            I get
-                                            Support?
-                                          </a>
-                                        </div>
-                                        <div id="collapse155" class="accordion-body collapse">
-                                          <div class="accordion-inner">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                              industry. Lorem
-                                              Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                              when an
-                                              unknown printer took a galley of type and scrambled it to make a type
-                                              specimen book. It has survived not only five centuries, but also the leap
-                                              into
-                                              electronic typesetting, remaining essentially unchanged.</p>
-                                          </div>
-                                        </div>
-                                      </div>
+function updateETC${vs.index}(){
+// 	Swal.fire({
+//         icon: "success",
+//         title: "FAQ 삭제 완료",
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+     if ($("#faq__update__ta_ETC${vs.index }").hasClass('active')==false) {
+       $("#faq__update__ta_ETC${vs.index }").addClass("active");
+       $("#faq__update__btnETC${vs.index }").removeClass("fa-pencil");
+       $("#faq__update__btnETC${vs.index }").addClass("fa-check");
+       $("#zzzzETC${vs.index }").removeClass("btn-primary");
+       $("#zzzzETC${vs.index }").addClass("btn-success");
+       $("#collapse15${vs.index }").addClass("in");
+     }else{
+    	 var seq = $("#f_seqETC${vs.index }").val();
+    	 var title = $("#faq__update__ta_ETC${vs.index }").val();
+    	 var content = $("#faq__update__co_ETC${vs.index }").val();
+    	 Swal.fire({
+   		  title: "수정하시겠습니까??",
+   		  icon: "warning",
+   		  showCancelButton: true,
+   		  confirmButtonColor: "#3085d6",
+   		  cancelButtonColor: "#d33",
+   		  confirmButtonText: "수정",
+   			  cancelButtonText: "아니오"
+   		}).then((result) => {
+   		  if (result.isConfirmed) {
+   			$.ajax({
+	    	    type: "POST",
+	    	    url: "/updateFaq.admin",
+	    	    data: JSON.stringify({"fac_seq": parseInt(seq), "fac_title":title,"fac_content":content}), 
+	    	    dataType: "json",
+	    	    contentType: "application/json",
+	    	    success: function (data) {
+	    	        if (data == 1) {
+		    	        Swal.fire({
+		    	            icon: "success",
+		    	            title: "수정 완료",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+		    	        document.getElementById("ETCTitle${vs.index }").innerText = title;
+	    	        }else if(data == 0){
+	    	        	Swal.fire({
+		    	            icon: "warning",
+		    	            title: "수정 실패",
+		    	            showConfirmButton: false,
+		    	            timer: 1500
+		    	        });
+	    	        }
+	    	    },
+	    	    error: function (data) {
+	    	        console.log("FAQ 삭제 통신에러");
+	    	    }
+	 		});//ajax end  
+   		  }//if (result.isConfirmed)
+   		})//then((result)
+   				
+   	 //화면
+   	 $("#faq__update__ta_ETC${vs.index }").removeClass("active");
+        $("#faq__update__btnETC${vs.index }").addClass("fa-pencil");
+        $("#faq__update__btnETC${vs.index }").removeClass("fa-check");
+        $("#zzzzETC${vs.index }").addClass("btn-primary");
+        $("#zzzzETC${vs.index }").removeClass("btn-success");
+        $("#collapse15${vs.index }").removeClass("in");
+   				
+   	}
+     
+    
+     
+}
+
+
+</script>                                      
+</c:if>
+</c:forEach>
                                     </div>
                                     <!-- end accordion -->
                                   </div>
                                   
-                                  <button type="submit" class="btn btn-theme" style="float: right;margin-left: 10px;">
-                                    저장
-                                  </button>
-                                  <button type="reset" class="btn btn-theme" style="float: right;">
-                                    초기화
-                                  </button>
                                   <!-- /col-md-6 -->
                                 </div>
                                 <!-- /메뉴관리 -->
@@ -1134,7 +1114,9 @@
   </section>
  
   <!--script for this page-->
+  <script>
   
+  </script>
   
   
 </body>

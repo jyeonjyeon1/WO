@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 
 @Repository
@@ -34,5 +35,14 @@ public class AdminDAO {
 	}
 	public NoticeVO oneNotice(int n_seq) {
 		return sqlSession.selectOne("AdminDAO.oneNotice",n_seq);
+	}
+	public void updateFaq(HashMap<String, Object> param) {
+		sqlSession.update("AdminDAO.updateFaq",param);
+	}
+	public void deleteFaq(HashMap<String, Object> param) {
+		sqlSession.delete("AdminDAO.deleteFaq",param);
+	}
+	public void insertFaq(FAQVO vo) {
+		sqlSession.insert("AdminDAO.insertFaq", vo);
 	}
 }

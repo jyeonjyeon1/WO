@@ -3739,7 +3739,7 @@ ul.chat-available-user li a:hover {
   color: #fff;
 }
 
-/* 데이터테이블용 */
+/* �뜲�씠�꽣�뀒�씠釉붿슜 */
 /*
 .cardd {
     position: relative;
@@ -4579,7 +4579,7 @@ ul.chat-available-user li a:hover {
 <i class=" fa fa-krw"></i>
   */
 
-  /* 상단내용 */
+  /* �긽�떒�궡�슜 */
   .dash-div{
     min-width: 100px;
     padding-left: 0px;
@@ -4841,15 +4841,15 @@ ul.chat-available-user li a:hover {
     height: 100px;
   }
 
-  #faq__update__btn:hover{
+  .faq__update__btn:hover{
     color: orange;
   }
 
-  #faq__update__ta.active{
+  .faq__update__ta.active{
     display: inline-block;
   }
 
-  #faq__update__ta{
+  .faq__update__ta{
     display: none;
   }
 

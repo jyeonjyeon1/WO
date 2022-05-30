@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import three.aws.wo.admin.dao.AdminDAO;
 import three.aws.wo.admin.service.AdminService;
+import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 
 @Service
@@ -44,6 +45,17 @@ public class AdminServiceImpl implements AdminService {
 	public NoticeVO oneNotice(int n_seq) {
 		return adminDAO.oneNotice(n_seq);
 	}
-	
+	@Override
+	public void updateFaq(HashMap<String, Object> param) {
+		adminDAO.updateFaq(param);
+	}
+	@Override
+	public void deleteFaq(HashMap<String, Object> param) {
+		adminDAO.deleteFaq(param);
+	}
+	@Override
+	public void insertFaq(FAQVO vo) {
+		adminDAO.insertFaq(vo);
+	}
 
 }

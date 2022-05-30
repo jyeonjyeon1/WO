@@ -15,17 +15,37 @@
 	<link rel="stylesheet" href="resources/assets/css/font-awesome.min.css"
 		type="text/css">
 	<!-- ========================= JS here ========================= -->
-	<script src="resources/assets/js/jquery-3.6.0.js"></script>
-
-		<script type="text/javascript">
-            jQuery(document).ready(function () {
-                $('#headers').load("header.user");
-                $('#footers').load("footer.user");
-            });
-            //========= Hero Slider
-        </script>
-	</head>
 	
+	<style>
+	
+/*모달*/
+.modal-title {
+	font-size: 20px;
+	text-align: center;
+	font-weight: bolder;
+}
+
+.modal_table {
+	width: 100%;
+}
+
+.gotoorder {
+	border: 0;
+	text-align: center;
+	width: relative;
+	background-color: white;
+	font-size: 20px;
+}
+
+.gotoorder:hover {
+	font-weight: bolder;
+	cursor: pointer;
+	color: rgb(218, 60, 12);
+}
+	</style>
+	
+	<script src="resources/assets/js/jquery-3.6.0.js"></script>
+	</head>
 	<body>
 		<!-- header import -->
 		<%@ include file="/WEB-INF/views/user/inc/header.jsp"%>
@@ -33,7 +53,7 @@
 		<!-- 매장소개 -->
 		<section style="margin: 40px;">
 			<div class="container">
-				<c:forEach var="storeInfo" items="${storeInfo }" varStatus="sVs">
+				
 					<div class="row">
 						<div class="col-lg-5 col-md-5 col-sm-12 col-12">
 							<div class="kio_img_bg">
@@ -66,11 +86,9 @@
 							</div>
 						</div>
 					</div>
-				</c:forEach>
+			
 			</div>
 		</section>
-	
-	
 	
 		<!-- 키오스크 -->
 		<div class="container"
@@ -126,10 +144,10 @@
 										<div class="modal fade"
 											id="menu_select${tVs.count }${mVs.count }" role="dialog">
 											<div class="modal-dialog">
-												<div class="modal-content">
+												<div class="modal-content" style="height: auto; padding-bottom: 30px;">
 													<div class="modal-header">
 														<!-- header -->
-														<h4 class="modal-title" style="text-align: center">주문하기</h4>
+														<h4 class="modal-title" style="text-align: center">옵션을 선택해 주세요</h4>
 														<button type="button" class="btn btn-secondary"
 															data-bs-dismiss="modal">취소</button>
 													</div>
@@ -144,15 +162,19 @@
 															<c:set var="opbcode" value="" />
 															<c:set var="opcode" value="" />
 															<c:set var="ogcode" value="" />
-															<h3 style="color: black; font-weight: bolder; text-align: center;">${menuList.m_code } ${menuList.m_name }</h3>
+															<h3 style="color: black; font-weight: bolder; text-align: center;"> ${menuList.m_name }</h3>
+															<div class="row" style="border-top: 1px solid black; margin:15px 7px 0 7px;">
+																				<label style="font-weight:bolder; font-size:20px; margin:5px 0 5px 0; ">기본옵션(필수)</label>
+																				</div>
 															<c:forEach var="basicOptionList" items="${basicOptionList }" varStatus="oVs">
 																<c:if test="${basicOptionList.m_code eq mcode }">
 																	<div class="form-check">
-																		${basicOptionList.opb_code }
 																		<input class="form-check-input" type="radio"
-																			name="opb_code" id="opb_code${mVs }${oVs }" value="${basicOptionList.opb_code }">
-																		<label class="form-check-label" for="opb_code${mVs }${oVs }">
-																			${basicOptionList.opb_name }</br> ${basicOptionList.opb_price }원 </label>
+																			name="opb_code" id="opb_code${mVs.index }${oVs.index }" value="${basicOptionList.opb_code }">
+																			
+																			<label for="opb_code${mVs.index }${oVs.index }" class="form-check-label" style="font-size:15px;"> 
+																				${basicOptionList.opb_name} &nbsp&nbsp&nbsp <span style="color:blue">+ ${basicOptionList.opb_price }원</span> </label>
+																		
 																	</div>
 																	<%-- <button type="button">
 																		${basicOptionList.opb_name }</br> ${basicOptionList.opb_price }원
@@ -160,29 +182,44 @@
 																</c:if>
 															</c:forEach>
 															<c:set var="count" value="0" />
+															
 															<c:forEach var="optionList" items="${optionList }" varStatus="oVs">
+															
 																<c:if test="${menuList.mg_code eq mgcode }">
+																
 																	<c:if test="${optionList.m_code eq mcode }">
 																		<c:if test="${opcode ne optionList.op_code }">
+																		
 																			<c:if test="${ogcode ne optionList.og_code }">
-																				</br>
+																			<div class="row" style="border-top: 1px solid black; margin:15px 7px 0 7px;">
+																				<label style="font-weight:bolder; font-size:20px; margin:5px 0 5px 0; ">${optionList.og_name }</label>
+																				</div>
 																				<c:set var="ogcode" value="${optionList.og_code }" />
 																				<c:set var="count" value="${count + 1 }" />
 																			</c:if>
-																			<div class="form-check">
-																				op_code${count }
-																				<input class="form-check-input" type="radio"
-																					name="op_code${count }" id="op_code${mVs }${oVs }" value="${optionList.op_code }">
-																				<label class="form-check-label">
-																					${optionList.op_name }</br> + ${optionList.op_price } </label>
+																			<div class="form-check" style="margin:5px;">
+																				
+																				<input class="form-check-input" type="checkbox"
+																					name="op_code${count }" id="op_code${mVs.index }${oVs.index }" value="${optionList.op_code }">
+																				
+																				<label for="op_code${mVs.index }${oVs.index }" class="form-check-label" style="font-size:15px;"> 
+																				${optionList.op_name } &nbsp&nbsp&nbsp <span style="color:blue">+ ${optionList.op_price }원</span> </label>
 																			</div>
 																			<c:set var="opcode" value="${optionList.op_code }" />
+																			
 																		</c:if>
 																	</c:if>
+																	
 																</c:if>
+																
 															</c:forEach>
-															<button type="submit">확인</button>
+															
+															<div class="row" style="height:20px;">
+															<button class="gotoorder" type="submit" style=" padding:10px;">주문하기</button>
+															</div>
+															
 														</form>
+														</div>
 													</div>
 												</div>
 											</div>

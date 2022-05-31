@@ -35,6 +35,7 @@
 		<mvc:exclude-mapping path="/index.user"/>
 		<mvc:exclude-mapping path="/aboutWO.user"/>
 		<mvc:exclude-mapping path="/howToUse.user"/>
+		<mvc:exclude-mapping path="/join.user"/>
 		<mvc:exclude-mapping path="/joined.user"/>
 		<mvc:exclude-mapping path="/kakaoLogin.user"/>
 		<mvc:exclude-mapping path="/naverLogin.user"/>

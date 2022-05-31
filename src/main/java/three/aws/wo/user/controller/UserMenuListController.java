@@ -50,23 +50,25 @@ public class UserMenuListController {
 	public String addMenu(BasketVO vo) {		
 		//userMenuListDAO.addMenu(vo);
 		System.out.println(vo);
-		vo.setB_quantity(1);
-		try {
-			userOrderService.insertCartItem(vo);
-		} catch (Exception e) {
-			e.printStackTrace();
+		
+		int b_seq = userOrderService.checkSameCart(vo);
+		if(b_seq == 0) {//없을 경우
+			vo.setB_quantity(1);
+			try {
+				userOrderService.insertCartItem(vo);
+			} catch (Exception e) {
+				System.err.println("insertCartItem");
+				e.printStackTrace();
+			}
+		}else {
+			vo.setB_seq(b_seq);
+			try {
+				userOrderService.updateSameCart(b_seq);
+			} catch (Exception e) {
+				System.err.println("updateSameCart");
+				e.printStackTrace();
+			}
 		}
-//		String u_id = vo.getU_id();
-//		String si_code = vo.getSi_code();
-//		int mg_seq = vo.getM_seq();
-//		String opb_code = vo.getOpb_code();
-//		int b_quantity = 1;
-//		String op_code1 = vo.getOp_code1();
-//		String op_code2 = vo.getOp_code2();
-//		String op_code3 = vo.getOp_code3();
-//		String op_code4 = vo.getOp_code4();
-//		String op_code5 = vo.getOp_code5();
-//		HashMap<String,Object> map = new HashMap<String,Object>();
 		
 		return "/order/addcartPro";
 	}

@@ -43,7 +43,7 @@
 
                         <div class="col-lg-2 col-md-4 col-4">
                             <li>
-                                <a href="javascript:void(0)">싸장님 영역</a>
+                                <a href="login.store">싸장님 영역</a>
                             </li>
                         </div>
 

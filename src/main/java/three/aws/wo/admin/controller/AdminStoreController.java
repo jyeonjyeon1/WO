@@ -326,10 +326,11 @@ public class AdminStoreController {
 	public int updateStoreImage(@RequestBody HashMap<String, String> param) {
 		int result = 0;
 		try {
+			System.out.println(param);
 			aStoreService.updateStoreImage(param);
 			result = 1;
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return result;
 	}

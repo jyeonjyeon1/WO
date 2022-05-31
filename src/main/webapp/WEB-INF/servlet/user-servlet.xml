@@ -24,6 +24,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 		<mvc:mapping path="/*.user"/>
+		<mvc:exclude-mapping path="/addMap.user"/>
 		<mvc:exclude-mapping path="/register.user"/>
 		<mvc:exclude-mapping path="/idcheck.user"/>
 		<mvc:exclude-mapping path="/emailcheck.user"/>

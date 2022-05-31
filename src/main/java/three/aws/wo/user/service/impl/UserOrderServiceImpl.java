@@ -119,4 +119,13 @@ public class UserOrderServiceImpl implements UserOrderService {
 	public String siBasket(String u_id) {
 		return userOrderDAO.siBasket(u_id);
 	}
+
+	@Override
+	public int checkSameCart(BasketVO vo) {
+		return userOrderDAO.checkSameCart(vo);
+	}
+	@Override
+	public void updateSameCart(int b_seq) {
+		userOrderDAO.updateSameCart(b_seq);
+	}
 }

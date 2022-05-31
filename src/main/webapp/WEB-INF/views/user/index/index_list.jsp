@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Walking Order</title>
+    <title>워킹오더 카페 목록</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="resources/assets/images/logo/logo_only.svg" rel="icon"/>
@@ -59,14 +59,14 @@
 							<div class="product-image">
 								<img src=${fn:toLowerCase(myStoreList.si_image) } alt="#">
 								<div class="button">
-									<a href="product-details.html" class="btn"><i
+									<a href="/menuList.user?store=${myStoreList.si_code }" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
 								</div>
 							</div>
 							<div class="product-info">
 								<span class="category">${myStoreList.si_addr }</span>
 								<h4 class="title">
-									<a href="product-grids.html">${myStoreList.si_name } ${myStoreList.si_loc }</a>
+									<a href="/menuList.user?store=${myStoreList.si_code }">${myStoreList.si_name } ${myStoreList.si_loc }</a>
 								</h4>
 								<ul class="review">
 									<c:forEach var="full_star" begin = "0" end = "${myStoreList.si_star}" step="10">
@@ -89,7 +89,13 @@
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
-									<li><a>${myStoreList.si_due_time }분</a></li>
+									<li><a>
+									<c:choose>
+									<c:when test="${myStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${myStoreList.si_due_time } 분</c:otherwise>
+									</c:choose>
+									
+									</a></li>
 									<li><span class="icon-location-pin"></span></li>
 									<li><a>1.2km</a></li>
 								</ul>
@@ -123,14 +129,14 @@
 							<div class="product-image">
 								<img src=${fn:toLowerCase(recStoreList.si_image) } alt="#">
 								<div class="button">
-									<a href="product-details.html" class="btn"><i
+									<a href="/menuList.user?store=${recStoreList.si_code }" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
 								</div>
 							</div>
 							<div class="product-info">
 								<span class="category">${recStoreList.si_addr }</span>
 								<h4 class="title">
-									<a href="product-grids.html">${recStoreList.si_name } ${recStoreList.si_loc }</a>
+									<a href="/menuList.user?store=${recStoreList.si_code }">${recStoreList.si_name } ${recStoreList.si_loc }</a>
 								</h4>
 								<ul class="review">
 									<c:forEach var="full_star" begin = "0" end = "${recStoreList.si_star}" step="10">
@@ -153,7 +159,12 @@
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
-									<li><a>${recStoreList.si_due_time }분</a></li>
+									<li><a>${recStoreList.si_due_time }분
+									<c:choose>
+									<c:when test="${recStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${recStoreList.si_due_time } 분</c:otherwise>
+									</c:choose>
+									</a></li>
 									<li><span class="icon-location-pin"></span></li>
 									<li><a>2.9km</a></li>
 								</ul>
@@ -189,14 +200,14 @@
 								<img src=${fn:toLowerCase(newStoreList.si_image) } alt="#">
 								<span class="new-tag">New</span>
 								<div class="button">
-									<a href="product-details.html" class="btn"><i
+									<a href="/menuList.user?store=${newStoreList.si_code }" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
 								</div>
 							</div>
 							<div class="product-info">
 								<span class="category">${newStoreList.si_addr }</span>
 								<h4 class="title">
-									<a href="product-grids.html">${newStoreList.si_name } ${newStoreList.si_loc }</a>
+									<a href="/menuList.user?store=${newStoreList.si_code }">${newStoreList.si_name } ${newStoreList.si_loc }</a>
 								</h4>
 								<ul class="review">
 									<c:forEach var="full_star" begin = "0" end = "${newStoreList.si_star}" step="10">
@@ -219,7 +230,12 @@
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
-									<li><a>${newStoreList.si_due_time }분</a></li>
+									<li><a>
+									<c:choose>
+									<c:when test="${newStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${newStoreList.si_due_time } 분</c:otherwise>
+									</c:choose>
+									</a></li>
 									<li><span class="icon-location-pin"></span></li>
 									<li><a>0.9km</a></li>
 								</ul>
@@ -248,11 +264,6 @@
     <script src="resources/assets/js/jquery-3.6.0.js"></script>
     <script src="resources/assets/js/main.js"></script>
     <script type="text/javascript">
-         jQuery(document).ready(function () {
-            $('#headers').load("header.html");
-            $('#footers').load("footer.html");  
-        });
-        
         // owl-carousel
         $(document).ready(function () {
             $(".owl-carousel").owlCarousel({

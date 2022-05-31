@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Walking Order</title>
+<title>워킹오더 주소로~</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
@@ -38,6 +40,17 @@
 
                     //부모창의 주소칸에 받아온 주소를 넣는다
                     $("#c_main_address").val(addr);
+                    var param = {"addr":addr};
+                    $.ajax({
+            	        url : "addMap.user?addr="+addr,
+            	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+            	        type: "get",
+            	        success: function(data) {
+            	          $("#forprepend").append(data); // forprepend
+            	          $("#deleteOriginal").remove();
+            	        },
+            	        error: function (){alert("실패");}
+            	    });
                 }
             }).open();
         }
@@ -95,9 +108,9 @@
 
 					<ul class="address_hide">
 						<div class="col-lg-7" style="padding: 15px 10px 10px 10px;">
-							<label class="col-2" for="c_main_address"
+							<label class="col-2" for="c_main_address" onclick="findAddr()"
 								style="margin-right: 5px;"> 주소로 입력하기</label> <input type="text"
-								class="col-6" id="c_main_address" placeholder="주소를 검색해주세요"
+								class="col-6" id="c_main_address" placeholder="주소를 검색해주세요" onclick="findAddr()"
 								style="padding: 2px 5px; height: 33px; border-color: rgba(124, 124, 138, 0.589); border-radius: 6px;"
 								readonly>
 							<button class="col-3" type="button" id="addressSearch"
@@ -140,167 +153,56 @@
 			<div class="col-lg-6 col-md-6 col-sm-12">
 
 
-				<div style="overflow: auto; height: 630px;">
-					<div class="card mb-3" style="height: 140px;">
-						<div class="row g-0" style="height: 140px;">
-							<div class="col-md-4" style="height: 140px; width: 140px;">
-								<img src="resources/assets/images/product/discount/pd-5.jpg"
-									class="img-fluid rounded-start" alt="..."
-									style="height: 140px; width: 140px;">
+				<div style="overflow: auto; height: 630px;"><div id="forprepend"></div><div id="deleteOriginal">
+				<c:forEach var="addrStoreList" items="${addrStoreList}" varStatus="vs">
+					<!-- 한개 -->
+					<div class="card mb-3" style="max-width: 700px; max-height: auto;">
+						<div class="row g-0" style="height: auto;">
+							<div class="col-md-4" style="height: 130px; width: 140px;">
+								<img src=${fn:toLowerCase(addrStoreList.si_image) }
+									class="img-fluid rounded-start"
+									style="height: 130px; width: 140px;">
 							</div>
 							<div class="col-md-8">
 								<div class="card-body" style="padding: 22px 16px 16px 16px;">
-									<h5 class="card-title">메가커피 종로3가점</h5>
+									<h5 class="card-title"><a href="/menuList.user?store=${addrStoreList.si_code}">${addrStoreList.si_name} ${addrStoreList.si_loc}</a></h5>
+									<h6 class="card-title">${addrStoreList.si_addr_road}<c:if test="${addrStoreList.si_addr_detail eq '' || addrStoreList.si_addr_detail eq null }"></c:if> ${addrStoreList.si_addr_detail}</h6>
 									<div class="row">
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
+										<div class="col-lg-8 col-md-8 col-sm-12">
+											<p class="card-text">
+												<ul class="reviewwww">
+									<c:forEach var="full_star" begin = "0" end = "${addrStoreList.si_star}" step="10">
+										<c:if test="${ full_star gt 5 }">
+											<li><i class="lni lni-star-filled"></i></li>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="half_star" begin = "10" end = "${addrStoreList.si_star}" step="10">
+										<c:if test="${ (addrStoreList.si_star-half_star) eq 5 }">
+											<li><i class="fa fa-star-half">&nbsp&nbsp</i></li>
+										</c:if>
+									</c:forEach>
+									
+									<c:forEach var="no_star" begin = "${addrStoreList.si_star}" end = "40" step="10">
+										<c:if test="${no_star lt 45 }">
+											<li><i class="lni lni-star"></i></li>
+										</c:if>
+									</c:forEach>
+									<li><span>${addrStoreList.si_star /10 } 점 / 리뷰</span>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대기시간 : &nbsp;<span><c:choose>
+									<c:when test="${addrStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${addrStoreList.si_due_time } 분</c:otherwise>
+									</c:choose></span></li>
+								</ul>
+											</p>
 										</div>
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-									</div>
-									<div class="row">
-
-										<p class="card-text">지금수령가능</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="card mb-3" style="max-width: 700px; max-height: 140px;">
-						<div class="row g-0" style="height: 140px;">
-							<div class="col-md-4" style="height: 140px; width: 140px;">
-								<img src="resources/assets/images/product/discount/pd-5.jpg"
-									class="img-fluid rounded-start" alt="..."
-									style="height: 140px; width: 140px;">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body" style="padding: 22px 16px 16px 16px;">
-									<h5 class="card-title">메가커피 종로3가점</h5>
-									<div class="row">
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-									</div>
-									<div class="row">
-
-										<p class="card-text">지금수령가능</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3" style="max-width: 700px; max-height: 140px;">
-						<div class="row g-0" style="height: 140px;">
-							<div class="col-md-4" style="height: 140px; width: 140px;">
-								<img src="resources/assets/images/product/discount/pd-5.jpg"
-									class="img-fluid rounded-start" alt="..."
-									style="height: 140px; width: 140px;">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body" style="padding: 22px 16px 16px 16px;">
-									<h5 class="card-title">메가커피 종로3가점</h5>
-									<div class="row">
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-									</div>
-									<div class="row">
-
-										<p class="card-text">지금수령가능</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3" style="max-width: 700px; max-height: 140px;">
-						<div class="row g-0" style="height: 140px;">
-							<div class="col-md-4" style="height: 140px; width: 140px;">
-								<img src="resources/assets/images/product/discount/pd-5.jpg"
-									class="img-fluid rounded-start" alt="..."
-									style="height: 140px; width: 140px;">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body" style="padding: 22px 16px 16px 16px;">
-									<h5 class="card-title">메가커피 종로3가점</h5>
-									<div class="row">
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-									</div>
-									<div class="row">
-
-										<p class="card-text">지금수령가능</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3" style="max-width: 700px; max-height: 140px;">
-						<div class="row g-0" style="height: 140px;">
-							<div class="col-md-4" style="height: 140px; width: 140px;">
-								<img src="resources/assets/images/product/discount/pd-5.jpg"
-									class="img-fluid rounded-start" alt="..."
-									style="height: 140px; width: 140px;">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body" style="padding: 22px 16px 16px 16px;">
-									<h5 class="card-title">메가커피 종로3가점</h5>
-									<div class="row">
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-									</div>
-									<div class="row">
-
-										<p class="card-text">지금수령가능</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3" style="max-width: 700px; max-height: 140px;">
-						<div class="row g-0" style="height: 140px;">
-							<div class="col-md-4" style="height: 140px; width: 140px;">
-
-								<img src="resources/assets/images/product/discount/pd-5.jpg"
-									class="img-fluid rounded-start" alt="..."
-									style="height: 140px; width: 140px;">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body" style="padding: 22px 16px 16px 16px;">
-									<h5 class="card-title">메가커피 종로3가점</h5>
-									<div class="row">
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-										<div class="col-lg-3 col-md-6 col-sm-12">
-											<p class="card-text">하트328</p>
-										</div>
-									</div>
-									<div class="row">
-
-										<p class="card-text">지금수령가능</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
+					<!-- 한개 -->
+					</c:forEach></div>
+					
 
 				</div>
 			</div>
@@ -317,293 +219,63 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="section-title">
-						<h4>근처 카페</h4>
+						<h4>신규 카페</h4>
 					</div>
 				</div>
 			</div>
 			<div class="owl-carousel owl-theme">
+				<c:forEach var="newStoreList" items="${newStoreList}" varStatus="vs">
 				<div class="ms-2 me-4">
 					<div class="card">
 						<!-- Start Single Product -->
 						<div class="single-product">
 							<div class="product-image">
-								<img src="resources/assets/images/cafe/5.jpg" alt="#">
+								<img src=${fn:toLowerCase(newStoreList.si_image) } alt="#">
+								<span class="new-tag">New</span>
 								<div class="button">
-									<a href="product-details.html" class="btn"><i
+									<a href="/menuList.user?store=${newStoreList.si_code}" class="btn"><i
 										class="lni lni-cart"></i> 주문하기</a>
 								</div>
 							</div>
 							<div class="product-info">
-								<span class="category">서울시 광양구</span>
+								<span class="category">${newStoreList.si_addr }</span>
 								<h4 class="title">
-									<a href="product-grids.html">온더그라운드</a>
+									<a href="/menuList.user?store=${newStoreList.si_code}">${newStoreList.si_name } ${newStoreList.si_loc }</a>
 								</h4>
 								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star"></i></li>
-									<li><span>4.99 리뷰</span></li>
+									<c:forEach var="full_star" begin = "0" end = "${newStoreList.si_star}" step="10">
+										<c:if test="${ full_star gt 5 }">
+											<li><i class="lni lni-star-filled"></i></li>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="half_star" begin = "10" end = "${newStoreList.si_star}" step="10">
+										<c:if test="${ (newStoreList.si_star-half_star) eq 5 }">
+											<li><i class="fa fa-star-half">&nbsp&nbsp</i></li>
+										</c:if>
+									</c:forEach>
+									
+									<c:forEach var="no_star" begin = "${newStoreList.si_star}" end = "40" step="10">
+										<c:if test="${no_star lt 45 }">
+											<li><i class="lni lni-star"></i></li>
+										</c:if>
+									</c:forEach>
+									<li><span>${newStoreList.si_stars } 점 / 리뷰</span></li>
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
-									<li><a>6분</a></li>
+									<li><a><c:choose>
+									<c:when test="${newStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${newStoreList.si_due_time } 분</c:otherwise>
+									</c:choose></a></li>
 									<li><span class="icon-location-pin"></span></li>
-									<li><a>2.9km</a></li>
+									<li><a>0.9km</a></li>
 								</ul>
 							</div>
 						</div>
 						<!-- End Single Product -->
 					</div>
 				</div>
-				<div class="ms-2 me-4">
-					<div class="card">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="resources/assets/images/cafe/6.jpg" alt="#"> <span
-									class="sale-tag">-20%</span>
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> 주문하기</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<span class="category">서울시 목동</span>
-								<h4 class="title">
-									<a href="product-grids.html">신일룡의 호두파이</a>
-								</h4>
-								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><span>4.87 리뷰</span></li>
-								</ul>
-								<ul class="location">
-									<li><span class="icon-clock"></span></li>
-									<li><a>16분</a></li>
-									<li><span class="icon-location-pin"></span></li>
-									<li><a>2.9km</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Single Product -->
-					</div>
-				</div>
-				<div class="ms-2 me-4">
-					<div class="card">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="resources/assets/images/cafe/7.jpg" alt="#">
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> 주문하기</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<span class="category">경기도 용인시</span>
-								<h4 class="title">
-									<a href="product-grids.html">스타벅스 기흥점</a>
-								</h4>
-								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><span>4.12 리뷰</span></li>
-								</ul>
-								<ul class="location">
-									<li><span class="icon-clock"></span></li>
-									<li><a>6분</a></li>
-									<li><span class="icon-location-pin"></span></li>
-									<li><a>20.9km</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Single Product -->
-					</div>
-				</div>
-				<div class="ms-2 me-4">
-					<div class="card">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="resources/assets/images/cafe/8.jpg" alt="#">
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> 주문하기</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<span class="category">일본 도쿄</span>
-								<h4 class="title">
-									<a href="product-grids.html">곤니찌와</a>
-								</h4>
-								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><span>5.00 리뷰</span></li>
-								</ul>
-								<ul class="location">
-									<li><span class="icon-clock"></span></li>
-									<li><a>6분</a></li>
-									<li><span class="icon-location-pin"></span></li>
-									<li><a>543.9km</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Single Product -->
-					</div>
-				</div>
-				<div class="ms-2 me-4">
-					<div class="card">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="resources/assets/images/cafe/5.jpg" alt="#">
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> 주문하기</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<span class="category">서울시 광양구</span>
-								<h4 class="title">
-									<a href="product-grids.html">온더그라운드</a>
-								</h4>
-								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star"></i></li>
-									<li><span>4.99 리뷰</span></li>
-								</ul>
-								<ul class="location">
-									<li><span class="icon-clock"></span></li>
-									<li><a>6분</a></li>
-									<li><span class="icon-location-pin"></span></li>
-									<li><a>2.9km</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Single Product -->
-					</div>
-				</div>
-				<div class="ms-2 me-4">
-					<div class="card">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="resources/assets/images/cafe/6.jpg" alt="#"> <span
-									class="sale-tag">-20%</span>
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> 주문하기</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<span class="category">서울시 목동</span>
-								<h4 class="title">
-									<a href="product-grids.html">신일룡의 호두파이</a>
-								</h4>
-								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><span>4.87 리뷰</span></li>
-								</ul>
-								<ul class="location">
-									<li><span class="icon-clock"></span></li>
-									<li><a>16분</a></li>
-									<li><span class="icon-location-pin"></span></li>
-									<li><a>2.9km</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Single Product -->
-					</div>
-				</div>
-				<div class="ms-2 me-4">
-					<div class="card">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="resources/assets/images/cafe/7.jpg" alt="#">
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> 주문하기</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<span class="category">경기도 용인시</span>
-								<h4 class="title">
-									<a href="product-grids.html">스타벅스 기흥점</a>
-								</h4>
-								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><span>4.12 리뷰</span></li>
-								</ul>
-								<ul class="location">
-									<li><span class="icon-clock"></span></li>
-									<li><a>6분</a></li>
-									<li><span class="icon-location-pin"></span></li>
-									<li><a>20.9km</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Single Product -->
-					</div>
-				</div>
-				<div class="ms-2 me-4">
-					<div class="card">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="resources/assets/images/cafe/8.jpg" alt="#">
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> 주문하기</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<span class="category">일본 도쿄</span>
-								<h4 class="title">
-									<a href="product-grids.html">곤니찌와</a>
-								</h4>
-								<ul class="review">
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><i class="lni lni-star-filled"></i></li>
-									<li><span>5.00 리뷰</span></li>
-								</ul>
-								<ul class="location">
-									<li><span class="icon-clock"></span></li>
-									<li><a>6분</a></li>
-									<li><span class="icon-location-pin"></span></li>
-									<li><a>543.9km</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Single Product -->
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>

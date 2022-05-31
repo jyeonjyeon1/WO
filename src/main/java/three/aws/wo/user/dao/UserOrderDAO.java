@@ -108,5 +108,17 @@ public class UserOrderDAO {
 	public String siBasket(String u_id) {
 		return sqlSession.selectOne("UserOrderDAO.siBasket",u_id);
 	}
+
+	public int checkSameCart(BasketVO vo) {
+		if(sqlSession.selectOne("UserOrderDAO.checkSameCart",vo) == null) {
+			return 0;
+		}
+		return sqlSession.selectOne("UserOrderDAO.checkSameCart",vo);
+	}
+
+	public void updateSameCart(int b_seq) {
+		sqlSession.update("UserOrderDAO.updateSameCart", b_seq);
+	}
+
 	
 }

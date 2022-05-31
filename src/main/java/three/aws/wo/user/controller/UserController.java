@@ -42,11 +42,11 @@ public class UserController {
 //		return "/index/index_list";
 //	}
 
-	@GetMapping("/map.user")
-	public String tomapPage() {
-		System.out.println("map");
-		return "/index/index_map";
-	}
+//	@GetMapping("/map.user")
+//	public String tomapPage() {
+//		System.out.println("map");
+//		return "/index/index_map";
+//	}
 
 //	@GetMapping("/index.user")
 //	public String toIndexPage() {
@@ -150,13 +150,9 @@ public class UserController {
 	@RequestMapping(value="/myChoice.user", method = RequestMethod.POST)
 	public String tomyInfoPage(UserVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		System.out.println("tomyInfoPage_post");
-		// ���ǿ� �ִ� member�� ������ member������ �־��ݴϴ�.
 		UserVO userSession = (UserVO) session.getAttribute("userSession");
-		System.out.println("���� ����");
-		// ���ǿ��ִ� ��й�ȣ
 		String sessionPass = userSession.getU_password();
 		
-		// vo�� ������ ��й�ȣ
 		String voPass = vo.getU_password();	
 		boolean pwdMatch = pwdEncoder.matches(voPass, sessionPass);
 		

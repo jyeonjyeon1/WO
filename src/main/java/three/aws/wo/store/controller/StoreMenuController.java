@@ -419,7 +419,7 @@ public class StoreMenuController {
 		// getting max_og_code
 		String current_max_Ogcode = sMenuService.maxOgCode(si_code);
 		System.out.println("zzz" + current_max_Ogcode + "zzz");
-		if (current_max_Ogcode == null) {
+		if (current_max_Ogcode == null || current_max_Ogcode.equals(" ")) {
 			og_code = "11";
 		} else {
 			og_code = String.valueOf(Integer.parseInt(current_max_Ogcode) + 1);

@@ -23,7 +23,7 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
     </script>
 <script>
-
+var nansu = 0;
         function findAddr() {
             new daum.Postcode({
                 oncomplete: function (data) {
@@ -42,12 +42,26 @@
                     $("#c_main_address").val(addr);
                     var param = {"addr":addr};
                     $.ajax({
-            	        url : "addMap.user?addr="+addr,
+            	        url : "addMap.user?addr="+addr+"&nansu="+nansu,
             	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
             	        type: "get",
             	        success: function(data) {
+            	        	 if(nansu==0){
+               	        	  try{
+                   	        	  $("#deleteOriginal").remove();
+                   	          }catch(error){}
+               	          }
+            	        	 else if(nansu != 0){
+								try{
+									var newnan = parseInt(nansu) -1;
+		             	        	  $("#searchDiv"+newnan.toString()).remove();
+		              	          }catch(error){
+		              	        	  console.log(error);
+		              	          }
+							}
+            	        	nansu++;
             	          $("#forprepend").append(data); // forprepend
-            	          $("#deleteOriginal").remove();
+            	          
             	        },
             	        error: function (){alert("실패");}
             	    });
@@ -153,7 +167,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-12">
 
 
-				<div style="overflow: auto; height: 630px;"><div id="forprepend"></div><div id="deleteOriginal">
+				<div class="mapListss"><div id="forprepend"></div><div id="deleteOriginal">
 				<c:forEach var="addrStoreList" items="${addrStoreList}" varStatus="vs">
 					<!-- 한개 -->
 					<div class="card mb-3" style="max-width: 700px; max-height: auto;">

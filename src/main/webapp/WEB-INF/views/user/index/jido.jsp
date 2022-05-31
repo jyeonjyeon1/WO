@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!--  -->
+<div id="searchDiv${indexNum}">
 <c:forEach var="addrSearchList" items="${addrSearchList}" varStatus="vs">
 <div class="card mb-3" style="max-width: 700px; max-height: auto;">
 	<div class="row g-0" style="height: auto;">
@@ -58,3 +59,4 @@
 </div>
 <!-- 한개 -->
 </c:forEach>
+</div>

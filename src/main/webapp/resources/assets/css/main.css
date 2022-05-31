@@ -5463,6 +5463,27 @@ ol {
   width: 10px;
 }
 
+.mapListss{
+	overflow: auto; 
+	height: 630px;
+}
+.mapListss::-webkit-scrollbar {
+  width: 5px;
+}
+
+.mapListss::-webkit-scrollbar-thumb {
+  background-color: #F0CB85;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.mapListss::-webkit-scrollbar-track {
+  background-color: #c2c2c2;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+}
+
 .container-md-will::-webkit-scrollbar-thumb {
   background-color: #F0CB85;
   border-radius: 10px;

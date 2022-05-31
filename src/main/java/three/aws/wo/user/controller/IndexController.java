@@ -94,12 +94,14 @@ public class IndexController {
 	@RequestMapping("/addMap.user")
 	public String addMap(HttpServletRequest request, Model model) {
 		String juso = request.getParameter("addr");
-		String cut = juso.split(" ")[2].substring(0,2);
+		int index = Integer.parseInt(request.getParameter("nansu"));
+		String cut = juso.split(" ")[1].substring(0,2);
 		System.out.println(cut);
 		HashMap<String,String> zzz = new HashMap<String,String>();
 		zzz.put("loc",cut);
 		List<IndexVO> addrSearchList = indexService.addrStoreList(zzz);
 		model.addAttribute("addrSearchList" ,addrSearchList);
+		model.addAttribute("indexNum" ,index);
 		return "/index/jido";
 	}
 	

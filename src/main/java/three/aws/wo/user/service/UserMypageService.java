@@ -5,11 +5,13 @@ import java.util.List;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
+import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.ReviewVO;
 import three.aws.wo.user.vo.UserWishVO;
 
 public interface UserMypageService {
 	List<ReviewVO> reviewList(String u_id);
+	StoreVO storeInfo(String o_code);
 	void insertReview(ReviewVO vo) throws Exception;
 	String getOrderCode() throws Exception;
 	void myWish(HashMap<String, String> wish);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.MenuListVO;
+import three.aws.wo.user.vo.ReviewVO;
 
 public interface UserMenuListService {
 	
@@ -17,5 +18,5 @@ public interface UserMenuListService {
 	
 	List<MenuListVO> basicOptionList(String si_code);
 	
-	/* void addMenu(BasketVO vo) throws Exception; */
+	List<ReviewVO> storeReview(String si_code);
 }

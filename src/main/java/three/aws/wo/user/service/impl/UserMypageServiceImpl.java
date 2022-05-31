@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
+import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.dao.UserMypageDAO;
 import three.aws.wo.user.service.UserMypageService;
 import three.aws.wo.user.vo.ReviewVO;
@@ -20,6 +21,11 @@ public class UserMypageServiceImpl implements UserMypageService {
 	@Override
 	public List<ReviewVO> reviewList(String u_id) {
 		return userMypageDAO.reviewList(u_id);
+	}
+	
+	@Override
+	public StoreVO storeInfo(String o_code) {
+		return userMypageDAO.storeInfo(o_code);
 	}
 
 	@Override
@@ -64,6 +70,7 @@ public class UserMypageServiceImpl implements UserMypageService {
 		return userMypageDAO.usedCouponList(u_id);
 	}
 
-	
+
+
 	
 }

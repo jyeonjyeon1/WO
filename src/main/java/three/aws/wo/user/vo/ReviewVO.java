@@ -11,6 +11,7 @@ public class ReviewVO {
 	private int ur_seq;
 	private String u_id;
 	private String u_name;
+	private String u_nickname;
 	private String u_tel;
 	private String str_code;
 	private String ur_regdate;
@@ -28,5 +29,7 @@ public class ReviewVO {
 	private int o_total_price;
 
 	private String dif_date;
+	private int avgstar;
+	
 
 }

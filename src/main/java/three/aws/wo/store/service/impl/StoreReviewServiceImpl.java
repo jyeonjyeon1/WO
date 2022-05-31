@@ -15,8 +15,8 @@ public class StoreReviewServiceImpl implements StoreReviewService {
 	private StoreReviewDAO storeReviewDAO;
 
 	@Override
-	public List<StoreReviewVO> reviewlist() {
-		return storeReviewDAO.reviewlist();
+	public List<StoreReviewVO> reviewlist(String si_code) {
+		return storeReviewDAO.reviewlist(si_code);
 	}
 	
 	@Override

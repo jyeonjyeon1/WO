@@ -85,8 +85,9 @@
             <div class="mypage_myCoupon_sort">
 
               <ul class="nav coupon_tab" id="myTab" role="tablist">
+              	<c:set var="usableNum" value="0" />
 				<c:forEach var="usableCouponList" items="${usableCouponList}" varStatus="vs">
-					<c:set var="usableNum" value="${vs.index + 1 }" />
+					<c:set var="usableNum" value="${vs.count }" />
 				</c:forEach>
                 <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
                   <button class="coupon_link" id="tab_use" data-bs-toggle="tab" data-bs-target="#home" type="button"
@@ -95,9 +96,9 @@
                   </button>
 
                 </li>
-
+				<c:set var="usedNum" value="0" />
 				<c:forEach var="usedCouponList" items="${usedCouponList}" varStatus="vs">
-					<c:set var="usedNum" value="${vs.index + 1 }" />
+					<c:set var="usedNum" value="${vs.count }" />
 				</c:forEach>
                 <li class="col-lg-6 col-md-7 coupon_item" role="presentation">
                   <button class="coupon_link" id="tab_used" data-bs-toggle="tab" data-bs-target="#profile" type="button"

@@ -67,10 +67,10 @@
 	<!-- header import -->
 	<%@ include file="/WEB-INF/views/user/inc/header.jsp"%>
 	<div class="container" style="max-width: 1000px;">
-
+		
 		<div class="row">
 			<div class="review_title">
-				<h1>컴포즈커피 종로3가점</h1>
+				<h1>${storeInfo.si_name }&nbsp; ${storeInfo.si_loc }</h1>
 			</div>
 			<div class="review_star">
 				<form name="reviewForm" id="reviewForm" method="post" action="/insertReview.user">

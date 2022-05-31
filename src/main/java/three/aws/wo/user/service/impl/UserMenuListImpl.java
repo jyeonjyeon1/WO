@@ -9,6 +9,7 @@ import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.dao.UserMenuListDAO;
 import three.aws.wo.user.service.UserMenuListService;
 import three.aws.wo.user.vo.MenuListVO;
+import three.aws.wo.user.vo.ReviewVO;
 @Service
 public class UserMenuListImpl implements UserMenuListService {
 	@Autowired
@@ -39,8 +40,9 @@ public class UserMenuListImpl implements UserMenuListService {
 		return userMenuListDAO.basicOptionList(si_code);
 	}
 	
-	/*
-	 * @Override public void addMenu(BasketVO vo) { userMenuListDAO.addMenu(vo); }
-	 */
+	@Override
+	public List<ReviewVO> storeReview(String si_code) {
+		return userMenuListDAO.storeReview(si_code);
+	}
 
 }

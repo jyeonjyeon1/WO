@@ -12,8 +12,8 @@ public class StoreReviewDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<StoreReviewVO> reviewlist() {
-		return sqlSession.selectList("StoreReviewDAO.reviewlist");
+	public List<StoreReviewVO> reviewlist(String si_code) {
+		return sqlSession.selectList("StoreReviewDAO.reviewlist", si_code);
 
 	}
 

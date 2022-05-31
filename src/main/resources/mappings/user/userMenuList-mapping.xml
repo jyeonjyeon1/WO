@@ -32,5 +32,14 @@
 			ORDER BY OB2.OPB_CODE
 	</select>
 	
+	<select id="storeReview" resultType="ReviewVO" parameterType="ReviewVO">
+		SELECT O.O_LIST, U.U_NICKNAME, 
+			UR.UR_SEQ, UR.U_ID, UR.SI_CODE, UR.UR_REGDATE, UR.UR_STAR, UR.UR_PIC_URL, UR.UR_CONTENT, UR.O_CODE, UR.UR_OPEN, UR.UR_ANS, 
+				(SELECT AVG(UR_STAR) FROM USER_REVIEW) AS AVGSTAR
+			FROM USER_REVIEW UR JOIN USERS U ON UR.U_ID = U.U_ID JOIN ORDERS O ON UR.O_CODE = O.O_CODE
+			WHERE UR.SI_CODE = #{si_code}
+			ORDER BY UR.UR_SEQ DESC
+	</select>
+	
 </mapper>
  

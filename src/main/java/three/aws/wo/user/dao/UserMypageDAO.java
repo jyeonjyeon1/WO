@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
+import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.ReviewVO;
 import three.aws.wo.user.vo.UserWishVO;
 
@@ -19,6 +20,10 @@ public class UserMypageDAO {
 
 	public List<ReviewVO> reviewList(String u_id) {
 		return sqlSession.selectList("UserMypageDAO.reviewList", u_id);
+	}
+	
+	public StoreVO storeInfo(String o_code) {
+		return sqlSession.selectOne("UserMypageDAO.storeInfo", o_code);
 	}
 
 	public void insertReview(ReviewVO vo) {

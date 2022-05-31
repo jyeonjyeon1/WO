@@ -43,11 +43,10 @@ public class AdminController {
 //		return "/board/faq_mng";
 //	}
 	
-	@GetMapping("/inquiry.admin")
-	public String toinquiry() {
-		System.out.println("inquiry");
-		return "/board/inquiry";
-	}
+	/*
+	 * @GetMapping("/inquiry.admin") public String toinquiry() {
+	 * System.out.println("inquiry"); return "/board/inquiry"; }
+	 */
 	
 	// @GetMapping("/inquiry_answer.admin")
 	// public String toinquiry_answer() {
@@ -73,11 +72,10 @@ public class AdminController {
 	// 	return "/board/notices_update";
 	// }
 	
-	@GetMapping("/review_mng.admin")
-	public String toreview_mng() {
-		System.out.println("review_mng");
-		return "/board/review_mng";
-	}
+	/*
+	 * @GetMapping("/review_mng.admin") public String toreview_mng() {
+	 * System.out.println("review_mng"); return "/board/review_mng"; }
+	 */
 	
 //	==================== message ============================
 	@GetMapping("/ka_hist.admin")

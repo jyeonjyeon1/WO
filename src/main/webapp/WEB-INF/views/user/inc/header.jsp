@@ -262,7 +262,7 @@ window.addEventListener('locationchange', function(){
 												<!-- 3개까지만 출력되게하기위함. -->
 												<li style="display:${none};">
 													<div class="cart-img-head">
-														<a class="cart-img" href="product-details.html"><img
+														<a class="cart-img" href="/menuList.user?store=${cartStoreSession.si_code}"><img
 															src="${cartListSession.m_img_file}" alt="#"></a>
 													</div>
 
@@ -351,7 +351,7 @@ window.addEventListener('locationchange', function(){
 									<li class="nav-item left"><a href="list.user"
 										aria-label="Toggle navigation">리스트로 주문</a></li>
 									<li class="nav-item right"><a href="map.user"
-										aria-label="Toggle navigation">지도로 주문</a>
+										aria-label="Toggle navigation">주소로 주문</a>
 								</ul>
 							</div>
 							<!-- navbar collapse -->

@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Walking Order</title>
+    <title>워킹오더 카페 목록</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="resources/assets/images/logo/logo_only.svg" rel="icon"/>
@@ -89,7 +89,13 @@
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
-									<li><a>${myStoreList.si_due_time }분</a></li>
+									<li><a>
+									<c:choose>
+									<c:when test="${myStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${myStoreList.si_due_time } 분</c:otherwise>
+									</c:choose>
+									
+									</a></li>
 									<li><span class="icon-location-pin"></span></li>
 									<li><a>1.2km</a></li>
 								</ul>
@@ -153,7 +159,12 @@
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
-									<li><a>${recStoreList.si_due_time }분</a></li>
+									<li><a>${recStoreList.si_due_time }분
+									<c:choose>
+									<c:when test="${recStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${recStoreList.si_due_time } 분</c:otherwise>
+									</c:choose>
+									</a></li>
 									<li><span class="icon-location-pin"></span></li>
 									<li><a>2.9km</a></li>
 								</ul>
@@ -219,7 +230,12 @@
 								</ul>
 								<ul class="location">
 									<li><span class="icon-clock"></span></li>
-									<li><a>${newStoreList.si_due_time }분</a></li>
+									<li><a>
+									<c:choose>
+									<c:when test="${newStoreList.si_due_time eq 0}">즉시 수령 가능</c:when>
+									<c:otherwise>${newStoreList.si_due_time } 분</c:otherwise>
+									</c:choose>
+									</a></li>
 									<li><span class="icon-location-pin"></span></li>
 									<li><a>0.9km</a></li>
 								</ul>
@@ -248,11 +264,6 @@
     <script src="resources/assets/js/jquery-3.6.0.js"></script>
     <script src="resources/assets/js/main.js"></script>
     <script type="text/javascript">
-         jQuery(document).ready(function () {
-            $('#headers').load("header.html");
-            $('#footers').load("footer.html");  
-        });
-        
         // owl-carousel
         $(document).ready(function () {
             $(".owl-carousel").owlCarousel({

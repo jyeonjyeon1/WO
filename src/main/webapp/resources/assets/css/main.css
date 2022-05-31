@@ -3559,6 +3559,7 @@ ol {
 .single-product .product-image {
   overflow: hidden;
   position: relative;
+  height: 175px;
 }
 
 .single-product .product-image .sale-tag {
@@ -3661,7 +3662,24 @@ ol {
 .single-product .product-info .review {
   margin-top: 5px;
 }
+.reviewwww li {
+  display: inline-block;
+}
 
+.reviewwww li i {
+  color: #fecb00;
+}
+
+.reviewww li i {
+  color: #fecb00;
+  font-size: 13px;
+}
+.reviewww li span {
+  display: inline-block;
+  margin-left: 4px;
+  color: #888;
+  font-size: 13px;
+}
 .single-product .product-info .review li {
   display: inline-block;
 }

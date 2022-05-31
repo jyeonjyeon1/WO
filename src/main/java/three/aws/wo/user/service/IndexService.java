@@ -1,5 +1,6 @@
 package three.aws.wo.user.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import three.aws.wo.admin.vo.BannerVO;
@@ -17,4 +18,6 @@ public interface IndexService {
 	List<IndexVO> todayDrinkList();
 
 	List<BannerVO> eventBoardList();
+
+	List<IndexVO> addrStoreList(HashMap<String,String> loc);
 }

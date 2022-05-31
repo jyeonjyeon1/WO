@@ -1,5 +1,6 @@
 package three.aws.wo.user.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -34,6 +35,10 @@ public class IndexDAO {
 	
 	public List<BannerVO> eventBoardList(){
 		return sqlSession.selectList("IndexDAO.eventBoardList");
+	}
+
+	public List<IndexVO> addrStoreList(HashMap<String,String> loc) {
+		return sqlSession.selectList("IndexDAO.addrStoreList",loc);
 	}
 
 }

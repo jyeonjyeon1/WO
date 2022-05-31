@@ -26,6 +26,8 @@
 		<mvc:exclude-mapping path="/login.store"/>
 		<mvc:exclude-mapping path="/loginCheck.store"/>
 		<mvc:exclude-mapping path="/sendResetPassword.store"/>
+		<mvc:exclude-mapping path="/register.store"/>
+		<mvc:exclude-mapping path="/registed.store"/>
 		<bean id="StoreInterceptor" class="three.aws.wo.admin.util.StoreInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

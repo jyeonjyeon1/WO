@@ -133,10 +133,8 @@
 				pet = $('input:checkbox[id="pet"]').val();
 			} 
 			
-			
 			location.href= "/storeList.user?search=" + search +  "&searchType=" + searchType + "&parking=" + parking + "&room=" + room + 
 					 "&seat=" + seat + "&groupseat=" + groupseat + "&wifi=" + wifi + "&babyseat=" + babyseat + "&disabled=" + disabled + "&pet=" + pet;
-			
 			
 		}
     	  	
@@ -146,7 +144,6 @@
         		var pageN = $(this).html();
         		var pageNum = parseInt(pageN);
         		console.log(pageNum);
-        		
         		
         		$.ajax({
             		type: "POST",
@@ -183,11 +180,8 @@
 			error : function(data) {
 				console.log("로그인 통신x")
 			}
-
 		});//ajax 끝 
 	}  
-        
-   
 		
 	 function setPage(pageNum){ //paging
 		 

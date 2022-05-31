@@ -31,4 +31,6 @@ public interface UserOrderService {
 	void updateBasketOrder(HashMap<String, Object> map);
 	void insertCartItem(BasketVO vo);
 	String siBasket(String u_id);
+	int checkSameCart(BasketVO vo);
+	void updateSameCart(int b_seq);
 }

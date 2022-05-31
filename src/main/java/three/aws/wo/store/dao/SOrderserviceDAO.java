@@ -1,5 +1,6 @@
 package three.aws.wo.store.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,10 +17,26 @@ public class SOrderserviceDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public List<OrdersVO> orderList(String si_code) {
-		return sqlSession.selectList("SIndexDAO.orderList",si_code);
+		return sqlSession.selectList("SOrderserviceDAO.orderList",si_code);
 	}
 
 	public List<BasketVO> orderDetailList(String si_code) {
-		return sqlSession.selectList("SIndexDAO.orderDetailList",si_code);
+		return sqlSession.selectList("SOrderserviceDAO.orderDetailList",si_code);
+	}
+	
+	public List<OrdersVO> dateOoneday(HashMap<String, String> map) {
+		return sqlSession.selectList("SOrderserviceDAO.dateOoneday",map);
+	}
+	
+	public List<BasketVO> dateOonedayDt(HashMap<String, String> map) {
+		return sqlSession.selectList("SOrderserviceDAO.dateOonedayDt",map);
+	}
+	
+	public List<OrdersVO> dateOPeriod(HashMap<String, String> map) {
+		return sqlSession.selectList("SOrderserviceDAO.dateOPeriod",map);
+	}
+	
+	public List<BasketVO> dateOPeriodDt(HashMap<String, String> map) {
+		return sqlSession.selectList("SOrderserviceDAO.dateOPeriodDt",map);
 	}
 }

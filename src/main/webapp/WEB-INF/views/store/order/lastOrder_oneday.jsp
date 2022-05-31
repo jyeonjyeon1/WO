@@ -102,42 +102,30 @@ line-height:23px;
 
     </style>
 <script>
+
 $(document).ready(function(){
-	var picked_date1 ="";
+	
 	 $( 'input[name="dateOneday"]' ).change( function() {
-		 picked_date1 = $("#dateOneday").val();
-		console.log(picked_date1);
+		 var picked_date1 = $("#dateOneday").val();
+			console.log(picked_date1);
+			
 		 var param = {"picked_date1" : picked_date1}
-		/*  $.ajax({
-		        url : "getOrderList1.store",
-		        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
-		        type: "get",
-		        success: function(data) {
-		        	
-		        	$("#testtest").prepend(data); // 반환된 data를 body태그에 추가
-			        	
-		        	
-		        },error: function(data){
-		        	console.log("새주문 못 받아오는 중");
-		        	}
-		        
-		    });  */
-		/*  $.ajax({
-		        type: "POST",
-		        url: "/getOrderList1.store",
-		        data: JSON.stringify(param),
-		        dataType: "json",
-		        contentType: "application/json",
-		     success:function(data){
-		    	console.log("날짜는 보내짐");
-		     },
-		     error:function(data){
-		        console.log("날짜도 안보내짐");
-		     }
-		  }); */
+        
+         $.ajax({
+ 	        url : "dateOoneday.store?picked_date1="+picked_date1,
+ 	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+ 	        type: "get",
+ 	        success: function(data) {
+ 	        	console.log("성공");
+ 	        	
+ 	          $("#datatablesSimple tbody").html(data); // forprepend
+ 	        
+ 	        },
+ 	        error: function (){alert("실패");}
+ 	    });
 	 });
 
-})
+});
 
 
 </script>
@@ -253,8 +241,6 @@ $(document).ready(function(){
                         
 </div>
         
-</div> 
-        
       </div>
           <div class="row content-panel" style="border: none; box-shadow: none;padding: 40px; margin:0 5px">
             
@@ -263,6 +249,7 @@ $(document).ready(function(){
   <div class="row">
 
     <div class="col-lg-12" >
+   
       <table id="datatablesSimple">
       <thead>
           <tr>
@@ -285,12 +272,9 @@ $(document).ready(function(){
           <th>내역 확인</th>
       </tr>
       </tfoot>
+      
       <tbody>
-      	
-      	<tr id="testtest">
-      	
-      	</tr>
-      	
+       
       	  <c:forEach items="${orderList}" var="orderList" varStatus="vs">
         <tr>
           <td>${orderList.o_code }</td>
@@ -390,11 +374,10 @@ $(document).ready(function(){
 	</div>
 </div>
 <!-- Modal END -->
-        
-        
-        
         </c:forEach>
+        
       </tbody>
+      
   </table>
 
         

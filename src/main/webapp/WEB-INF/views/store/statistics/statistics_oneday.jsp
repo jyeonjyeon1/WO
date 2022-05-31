@@ -197,9 +197,7 @@
                               <li>
                                 <a data-toggle="tab" href="#faq__333">상품별 매출</a>
                               </li>
-                              <li>
-                                <a data-toggle="tab" href="#faq__444">시간대별 매출</a>
-                              </li>
+                             
                               
                             </ul>
                           </div>
@@ -304,106 +302,6 @@
                             </div>
                                 <!-- /메뉴관리 -->
                               </div>
-                              <!-- /tab-pane -->
-                              <!-- 메뉴모음컷 -->
-                              <div id="faq__444" class="tab-pane">
-                                <div class="row" >
-                                    <div class="col-lg-12" >
-                                <table class=table15_2 style="width:100%; margin:15px 0; border:0;">
-                                    <thead>
-                                    <tr>
-                                        <th>시간대</th><th>판매건수</th><th>매출액</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	 
-                                    <tr>
-                                        <td>00~01</td><td> </td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01~02</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>02~03</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>03~04</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>04~05</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>05~06</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>06~07</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>07~08</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>08~09</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>09~10</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10~11</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>11~12</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12~13</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>13~14</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>14~15</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>15~16</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>16~17</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>17~18</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>18~19</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>19~20</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20~21</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>21~22</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>22~23</td><td>0</td><td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>23~24</td><td>0</td><td>0</td>
-                                    </tr>
-                                    
-
-                                </tbody>
-                               
-                                    
-                                    </table>
-                                </div>
-                            </div>
-          
-                                <!-- /메뉴관리 -->
-                              </div>
-                              <!-- /tab-pane -->
-                              
-                              
-                              <!-- /tab-pane -->
                             </div>
                             <!-- /tab-content -->
                           </div>

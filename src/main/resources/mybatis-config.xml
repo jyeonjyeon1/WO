@@ -62,7 +62,8 @@
 		<mapper resource="mappings/admin/adminterms-mapping.xml" />
 		<mapper resource="mappings/admin/adminOrder-mapping.xml" /> 
 		<mapper resource="mappings/admin/adminCoupon-mapping.xml" /> 
-		<mapper resource="mappings/admin/adminPage-mapping.xml" /> 
+		<mapper resource="mappings/admin/adminPage-mapping.xml" />
+		<mapper resource="mappings/admin/adminReview-mapping.xml" />
 		
 		<mapper resource="mappings/store/storeMenu-mapping.xml" /> 
 		<mapper resource="mappings/store/storeLogin-mapping.xml" />
@@ -70,6 +71,7 @@
 		<mapper resource="mappings/store/storeInfo-mapping.xml" />
 		<mapper resource="mappings/store/storeIndex-mapping.xml" />
         <mapper resource="mappings/store/storeReview-mapping.xml" />
+        <mapper resource="mappings/store/storeLastOrder-mapping.xml" />
         
 		
 	</mappers>

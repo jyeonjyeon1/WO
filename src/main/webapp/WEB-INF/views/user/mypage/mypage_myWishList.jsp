@@ -112,6 +112,33 @@
 // 	 }
 
 </script>
+<style>
+.pagi {
+    width: 100%;
+}
+
+.pagination {
+    justify-content: flex-end;
+}
+
+.page-item.active .page-link{
+   background-color: #ff778e;
+   border-color: #ff778e;
+}
+
+.page-link{
+   border: 0px;
+    padding: 0.15rem 0.5rem;
+    color: #828282;
+   /*  margin-right:10px; */
+}
+
+.page-layer{
+   display: flex;
+   text-align : center;
+}
+
+</style>
 </head>
 
 <body>
@@ -166,7 +193,9 @@
 						</c:forEach>
 						
 						
-							<div class = "page-layer"></div>
+							<ul style="list-style-type:none; margin:30px 40%;">
+									<div class = "page-layer"></div>
+							</ul> 
 							
 					</div>
 					

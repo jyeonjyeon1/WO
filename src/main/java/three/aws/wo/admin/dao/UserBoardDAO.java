@@ -51,7 +51,7 @@ public class UserBoardDAO {
 	}
 	public NoticeVO eventCHK(int eventNum) {
 		System.out.println(eventNum);
-		return sqlSession.selectOne("UserBoardDAO.eventCHK");
+		return sqlSession.selectOne("UserBoardDAO.eventCHK", eventNum);
 	}
 //	
 //	public List<NoticeVO> noticeList(){

@@ -52,4 +52,16 @@ public class AdminDAO {
 	public void deleteNotice(HashMap<String, Object> param) {
 		sqlSession.delete("AdminDAO.deleteNotice",param);
 	}
+	public int dailySales() {
+		return sqlSession.selectOne("AdminDAO.dailySales");
+	}
+	public int monthlySales() {
+		return sqlSession.selectOne("AdminDAO.monthlySales");
+	}
+	public int dailyReg() {
+		return sqlSession.selectOne("AdminDAO.dailyReg");
+	}
+	public int dailyVisit() {
+		return sqlSession.selectOne("AdminDAO.dailyVisit");
+	}
 }

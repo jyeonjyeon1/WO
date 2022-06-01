@@ -1,5 +1,7 @@
 package three.aws.wo.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,8 +29,25 @@ public class AdminController {
 	public String toindex(NoticeVO vo, Model model) throws Exception {
 		List<NoticeVO> noticeList =adminService.noticeList();
 		List<QnAVO> adminqnaList =noticeService.adminqnaList();
+		int dailySales = adminService.dailySales();
+		int monthlySales = adminService.monthlySales();
+		int dailyReg = adminService.dailyReg();
+		int dailyVisit = adminService.dailyVisit();
+		Date todayDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+		System.out.println(todayDate);
+		String formatDate = dateFormat.format(todayDate);
+		System.out.println(formatDate);
+		
+		
 		model.addAttribute("adminqnaList" ,adminqnaList);
 		model.addAttribute("noticeList" ,noticeList);
+		model.addAttribute("dailySales",dailySales);
+		model.addAttribute("monthlySales",monthlySales);
+		model.addAttribute("formatDate",formatDate);
+		model.addAttribute("dailyReg",dailyReg);
+		model.addAttribute("dailyVisit",dailyVisit);
+		
 		return "/index";
 	}
 	

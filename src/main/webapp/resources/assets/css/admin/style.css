@@ -5,10 +5,8 @@
 * License: https://templatemag.com/license/
 */
 /*
-Template Name: DASHIO - Bootstrap 3.1.1 Admin Theme
 Template Version: 1.0
 Author: Carlos Alvarez
-Website: http://Alvarez.is/
 */
 
 /* Import fonts */
@@ -4579,10 +4577,12 @@ ul.chat-available-user li a:hover {
 <i class=" fa fa-krw"></i>
   */
 
-  /* 占쎄맒占쎈뼊占쎄땀占쎌뒠 */
   .dash-div{
     min-width: 100px;
     padding-left: 0px;
+  }
+  .dash-div:hover{
+  	cursor: pointer;
   }
   
   .dash-top{

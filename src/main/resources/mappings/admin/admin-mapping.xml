@@ -50,4 +50,17 @@
 		DELETE FROM NOTICE_BOARD WHERE N_SEQ = #{n_seq}
 	</delete>
 	
+	<select id="dailySales" resultType="int">
+		SELECT SUM(O_TOTAL_PRICE) FROM ORDERS WHERE TO_CHAR(O_ORDER_DATE, 'yyyy-MM-dd') = TO_CHAR(CURRENT_DATE-1,'yyyy-MM-dd') AND O_PAY_STATUS =TRUE
+	</select>
+	<select id="monthlySales" resultType="int">
+		SELECT SUM(O_TOTAL_PRICE) FROM ORDERS WHERE TO_CHAR(O_ORDER_DATE, 'yyyy-MM') = TO_CHAR(CURRENT_DATE,'yyyy-MM') AND O_PAY_STATUS =TRUE
+	</select>
+	<select id="dailyReg" resultType="int">
+		SELECT COUNT(*) FROM USERS WHERE TO_CHAR(U_REGDATE,'YYYY-MM-DD') = TO_CHAR(CURRENT_DATE-1,'yyyy-MM-dd')
+	</select>
+	<select id="dailyVisit" resultType="int">
+		SELECT COUNT(*) FROM VISIT_HISTORY WHERE TO_CHAR(VH_TIME,'yyyy-MM-dd') = TO_CHAR(CURRENT_DATE-1,'yyyy-MM-dd')
+	</select>
+	
 </mapper>

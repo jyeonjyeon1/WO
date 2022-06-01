@@ -121,4 +121,38 @@ public class StoreIndexController {
 			return "/inc/blank";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping("/OrderCancel.store")
+	public int OrderCancel(@RequestBody HashMap<String, String> param, HttpSession session) {
+		int result = 0;
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		String si_code = "";
+		if (svo != null) {
+			si_code = svo.getSi_code();
+		} else {
+			si_code = "2222111212";
+		}
+		String o_code = param.get("o_code");
+		System.out.println("OrderCancel");
+		System.out.println(o_code);
+		System.out.println(si_code);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("si_code", si_code);
+		map.put("o_code", o_code);
+		sIndexService.OrderCancel(map);
+		try {
+			
+		sIndexService.OrderCancel(map);
+		result = 1;
+		
+		} catch (Exception e) {
+			System.err.println("OrderCancel FAIL");
+		}
+		
+		return result;
+	}
+	
+	
 }

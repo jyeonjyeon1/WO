@@ -122,8 +122,10 @@
 										</c:if>
 									</c:forEach>
 									<c:forEach var="half_star" begin = "10" end = "${myStoreList.si_star}" step="10">
-										<c:if test="${ (myStoreList.si_star-half_star) eq 5 }">
-											<li><i class="fa fa-star-half">&nbsp&nbsp</i></li>
+										<c:if test="${ (myStoreList.si_star-half_star) lt 10 }">
+											<c:if test="${ (myStoreList.si_star-half_star) gt 5 }">
+												<li><i class="fa fa-star-half">&nbsp&nbsp</i></li>
+											</c:if>
 										</c:if>
 									</c:forEach>
 									

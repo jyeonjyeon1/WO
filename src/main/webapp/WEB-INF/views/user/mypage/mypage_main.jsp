@@ -7,17 +7,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Walking Order</title>
+    <title>워킹오더 마이페이지</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="resources/assets/images/logo/logo_only.svg" rel="icon"/>
-
-    
-    <!-- ========================= CSS here ========================= -->
-    <!-- Css Styles 추가 -->
-
-    <!--Css icon from mings-->
-
      <!-- ========================= JS here ========================= -->
      <script src="resources/assets/js/jquery-3.6.0.js"></script> 
     
@@ -27,7 +20,7 @@
 <!-- header import -->
 <%@ include file="/WEB-INF/views/user/inc/header.jsp" %>
 
-<!--mypage_main_jihyeon body 시작-->
+<!--mypage body 시작-->
 <section class="product spad">
     <div class="container">
         <div class="row">
@@ -40,7 +33,7 @@
                     <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='currentOrder.user'" style="width: 100%;">
                         <div class="mypage_menubar_text" >
                             <h5><a href="currentOrder.user">현재 주문 확인하기</a></h5>
-                            <p>7분후 조리완료</p>
+<!--                             <p>7분후 조리완료</p> -->
                         </div>
                     </button>
                     </div>
@@ -49,25 +42,17 @@
                         <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myCoupon.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myCoupon.user">My쿠폰</a></h5>
-                                <p>3장</p>
+<!--                                 <p>3장</p> -->
                             </div>
                         </button>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: center;">
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myPoint.user'" style="width: 100%;">
-                            <div class="mypage_menubar_text" >
-                                <h5><a href="myPoint.user">My포인트</a></h5>
-                                <p>100point</p>
-                            </div>
-                        </button>
-
-                    </div>
+                    
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: left;">
 
                         <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myReview.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myReview.user">My리뷰</a></h5>
-                                <p>11개</p>
+<!--                                 <p>11개</p> -->
                             </div>
                         </button>
 
@@ -76,7 +61,16 @@
                         <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='OrderList.user'"  style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myOrderList.user">주문내역</a></h5>
-                                <p>31개</p>
+<!--                                 <p>31개</p> -->
+                            </div>
+                        </button>
+
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: center;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myPoint.user'" style="width: 100%;">
+                            <div class="mypage_menubar_text" >
+                                <h5><a href="myPoint.user">My포인트</a></h5>
+                                <p>${userSession.u_point} point</p>
                             </div>
                         </button>
 

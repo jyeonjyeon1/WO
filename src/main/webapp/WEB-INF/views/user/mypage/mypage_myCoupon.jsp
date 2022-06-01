@@ -75,8 +75,9 @@
                 </li>
 
               </ul>
-              <div class="tab-content" id="myTabContent">
+              <div class="tab-content" id="myTabContent" style="background:#ffffff50;min-height:100px;width:70%;">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="tab_use">
+                <c:set var="coupCount" value="0"/>
                 <c:forEach var="usableCouponList" items="${usableCouponList}" varStatus="vs">
                   <div class="coupon_card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
@@ -98,8 +99,17 @@
                       </div>
                     </div>
                   </div>
+                  <c:set var="coupCount" value="${coupCount +1}"/>
 				</c:forEach>
+				<c:if test="${coupCount == 0}">
+				<br>
+				<div style="padding:20px 50px;">
+					<h5 style="color:#00000090;">사용 가능한 쿠폰이 없습니다</h5>
+				</div>
+				</c:if>
                 </div>
+                
+                
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="tab_used">
 				<c:forEach var="usedCouponList" items="${usedCouponList}" varStatus="vs">
                   <div class="coupon_usedcard mb-3" style="max-width: 540px;">

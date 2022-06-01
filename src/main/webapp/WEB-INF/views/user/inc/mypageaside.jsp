@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="col-lg-3 col-md-5">
          <div class="mypage_sidebar">
-             <h4>My Page</h4>
+             <h4><a href="mypage.user">My Page</a></h4>
              <ul>
                  <li><a class="mypage_side_hover" href="myCoupon.user"><i class="lni lni-ticket"> My쿠폰</i></a></li>
                  <li><a class="mypage_side_hover" href="myPoint.user"><i class="lni lni-database"> My포인트</i></a></li>

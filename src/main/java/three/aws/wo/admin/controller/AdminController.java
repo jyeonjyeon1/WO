@@ -2,6 +2,8 @@ package three.aws.wo.admin.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,17 +11,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import three.aws.wo.admin.service.AdminService;
+import three.aws.wo.admin.service.FaqService;
 import three.aws.wo.admin.vo.NoticeVO;
+import three.aws.wo.admin.vo.QnAVO;
 
 @Controller
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
+	@Resource
+	private FaqService noticeService;
 	
 //	==================== index ============================
 	@RequestMapping("/index.admin")
 	public String toindex(NoticeVO vo, Model model) throws Exception {
 		List<NoticeVO> noticeList =adminService.noticeList();
+		List<QnAVO> adminqnaList =noticeService.adminqnaList();
+		model.addAttribute("adminqnaList" ,adminqnaList);
 		model.addAttribute("noticeList" ,noticeList);
 		return "/index";
 	}

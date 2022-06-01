@@ -62,4 +62,8 @@ public class AdminServiceImpl implements AdminService {
 	public AdminVO adminLoggin(String a_id) {
 		return adminDAO.adminLoggin(a_id);
 	}
+	@Override
+	public void deleteNotice(HashMap<String, Object> param) {
+		adminDAO.deleteNotice(param);
+	}
 }

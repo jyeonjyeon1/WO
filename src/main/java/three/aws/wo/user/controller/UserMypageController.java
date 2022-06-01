@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +33,17 @@ public class UserMypageController {
 	@Autowired
 	private UserMypageService userMypageService;
 
+	@RequestMapping("/mypage.user")
+	public String tomainPage(Model model, HttpSession session) {
+		
+		UserVO uv = (UserVO) session.getAttribute("userSession");
+		String u_id = uv.getU_id();
+		
+		System.out.println("main");
+		return "/mypage/mypage_main";
+	}
+	
+	
 	@RequestMapping("/myReviewList.user")
 	public String reviewList(ReviewVO vo, Model model, HttpSession session) {
 		

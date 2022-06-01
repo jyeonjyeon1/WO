@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Walking Order</title>
+<title>워킹오더 포인트 조회</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="resources/assets/images/logo/logo_only.svg" rel="icon" />
@@ -117,8 +117,12 @@
 									varStatus="vs">
 									<tr>
 
-										<td colspan="3"><h4>${userPointList.si_name}(${userPointList.si_loc})</h4>
-											<p><fmt:formatDate value="${pointList.pt_regdate}" pattern="yy-MM-dd a hh:mm:ss"/> (2022.03.23 만료)</p></td>
+										<td colspan="3">
+										<c:choose><c:when test="${empty userPointList.si_name}"></c:when>
+										<c:otherwise><a href="/menuList.user?store=${userPointList.si_code }"><h6>${userPointList.si_name}(${userPointList.si_loc})</h6></a></c:otherwise></c:choose>
+										
+										<h4>${userPointList.pt_description}</h4>
+											<p>${(userPointList.pt_regdate).substring(0,19)} (2022.03.23 만료)</p></td>
 										<td>
 											
 											<c:choose>

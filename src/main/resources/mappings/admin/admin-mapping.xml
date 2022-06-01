@@ -46,6 +46,8 @@
 		INSERT INTO FAQ(FAC_TYPE,FAC_TITLE,FAC_CONTENT)
 		VALUES (#{fac_type},#{fac_title},#{fac_content})
 	</insert>
-
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE_BOARD WHERE N_SEQ = #{n_seq}
+	</delete>
 	
 </mapper>

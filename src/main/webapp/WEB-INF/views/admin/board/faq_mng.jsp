@@ -204,10 +204,10 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button data-dismiss="modal" class="btn btn-default"
-					type="button">확인</button>
 				<button
 					class="btn btn-theme" type="button" onclick="newFaqAdd()">등록</button>
+					<button data-dismiss="modal" class="btn btn-default"
+					type="button">취소</button>
 			</div>
 		</div>
 	</div>

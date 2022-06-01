@@ -67,7 +67,7 @@
 		POINT a 
 		INNER JOIN 
 		USERS b ON (a.U_ID = b.U_ID)
-		INNER JOIN 
+		FULL OUTER JOIN 
 		STORE_INFO c ON (a.SI_CODE = c.SI_CODE)
 		WHERE a.U_ID = #{u_id}
 		ORDER BY PT_SEQ DESC

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html class="no-js" lang="kor">
 
@@ -69,13 +70,14 @@
 			<div class="row">
 				<div class="col-lg-5 col-md-5 col-sm-12 col-12">
 					<div class="kio_img_bg">
-						<img src="${storeInfo.si_image }"
+						<img src="${storeInfo.si_image}"
 							alt="cafe" class="kio_img">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-12" style="margin-left: 20px">
 					<div class="product__details__text">
 						<h3>${storeInfo.si_name }&nbsp;${storeInfo.si_loc }</h3>
+						<a style="margin-bottom:10px;" onclick="myWish()"><label style="color:red;"><i class="lni lni-heart"></i> 찜하기</label></a>
 						<div class="product__details__rating">
 							<c:forEach var="full_star" begin = "0" end = "${avgStar}" step="10">
 								<c:if test="${ full_star gt 5 }">
@@ -479,6 +481,48 @@ function addMenu__${tVs.count}_${mVs.count}(){
 	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>
 	<!-- Js Plugins -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+	  function myWish() {
+		  var userInSession = $("#userInSession").val();
+			if(userInSession == "no"){
+				Swal.fire({
+				  title: "로그인이 필요합니다",
+				  content: "로그인페이지로 이동하시겠습니까?",
+				  icon: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3085d6",
+				  cancelButtonColor: "#d33",
+				  confirmButtonText: "로그인",
+				  cancelButtonText: "아니오"
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					  location.href="/login.user";
+				  }//if (result.isConfirmed)
+				})//then((result)
+			}else{
+			var si_code = $("#si_code").val();
+			//alert(storecode);
+			 var param = {"storecode": si_code };
+			$.ajax({
+				type: "POST",
+	            url: "/myWish.user",
+	            data: JSON.stringify(param),
+	            dataType: "text",
+	            contentType: "application/json",
+				success : function(data) {
+					Swal.fire({
+			       		  icon: "success",
+			       		  title: "찜했당",
+			       		  confirmButtonText:"확인"
+			         	})
+				},
+				error : function(data) {
+					console.log("로그인 통신x")
+				}
+			});//ajax 끝 
+		}  
+	  }	
+	</script>
 </body>
 
 </html>

@@ -49,6 +49,10 @@ public class UserBoardDAO {
 	public List<NoticeVO> newsList() {
 		return sqlSession.selectList("UserBoardDAO.newsList");
 	}
+	public NoticeVO eventCHK(int eventNum) {
+		System.out.println(eventNum);
+		return sqlSession.selectOne("UserBoardDAO.eventCHK");
+	}
 //	
 //	public List<NoticeVO> noticeList(){
 //		return sqlSession.selectList("UserBoardDAO.noticeList");
@@ -95,11 +99,9 @@ public class UserBoardDAO {
 		sqlSession.update("UserBoardDAO.addanswer", vo);
 	}
 	
-	
-	
-
-	
 	public void updateVisits(HashMap<String, Integer> param) {
 		sqlSession.update("UserBoardDAO.updateVisits",param);		
 	}
+
+
 }

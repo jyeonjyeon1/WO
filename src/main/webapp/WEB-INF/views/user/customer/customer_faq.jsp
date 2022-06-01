@@ -146,12 +146,6 @@
 
   <script src="resources/assets/js/main_1.js"></script>
   <script type="text/javascript">
-    jQuery(document).ready(function () {
-      $('#headers').load("header.html");
-      $('#footers').load("footer.html");
-      
-      
-    });
          //========= Hero Slider
          
   
@@ -176,6 +170,9 @@
 	          }
 	       });
 	}
+    
+    
+	
      
       
 
@@ -303,10 +300,18 @@
                        <c:forEach var="newsList" items="${newsList}" varStatus="vs">
                        <c:if test="${newsList.n_type eq 'event'}">
                       <div class="row" style="border:1px solid rgba(0, 0, 0, .15) ; margin:0 5px 0 5px; ">
-                      <a class="event_listtt" href="">
+                      <a class="event_listtt" onclick = "eventClick${vs.index}()" id="eventID">
                      	 ${newsList.n_title }
+                     	 <input type="hidden" id="newsList_seq${vs.index}" value="${newsList.n_seq }">
                       </a>
                       </div>
+                      
+						    <script>
+							      function eventClick${vs.index}() {
+							  		var eventNum = $("#newsList_seq${vs.index}").val();
+							  		location.href= "/event.user?eventNum=" + eventNum;
+							  	  } 
+						      </script>
                      </c:if>
                      </c:forEach>
                      </div>

@@ -4,7 +4,7 @@
 
 <mapper namespace="UserMypageDAO">
 <resultMap type="ReviewVO" id="reviewVO">
-		<id column="UR_CODE" property="ur_code" jdbcType="VARCHAR"/>
+		<id column="UR_SEQ" property="ur_seq" jdbcType="VARCHAR"/>
 		<result column="U_ID" property="u_id" jdbcType="INTEGER" />
 		<result column="STR_CODE" property="str_code" jdbcType="VARCHAR" />
 		<result column="UR_REGDATE" property="ur_regdate" jdbcType="TIMESTAMP"/>

@@ -18,6 +18,7 @@ import three.aws.wo.admin.util.MessageSend;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 import three.aws.wo.admin.vo.QnAVO;
+import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.UserVO;
 
 @Controller
@@ -36,47 +37,33 @@ public class AdminNoticeController {
 		else if (uv != null) {
 			u_id = uv.getU_id();
 		}
-
-		
-
 		List<FAQVO> toptenList =noticeService.toptenList();
 		List<FAQVO> faqList =noticeService.faqList();
-//		List<FAQVO> cancelfaqList =noticeService.cancelfaqList();
-//		List<FAQVO> userfaqList =noticeService.userfaqList();
-//		List<FAQVO> pointfaqList =noticeService.pointfaqList();
-//		List<FAQVO> etcfaqList =noticeService.etcfaqList();
-
-
-
 		List<NoticeVO> newsList =noticeService.newsList();
-//		List<NoticeVO> noticeList =noticeService.noticeList();
-//		List<NoticeVO> eventList =noticeService.eventList();
 		
 //		1:1 
 
 		List<QnAVO> myqnaList =noticeService.myqnaList(u_id);
-		
-		
-		//System.out.println(noticeList);
-
 		model.addAttribute("toptenList" ,toptenList);
 		model.addAttribute("faqList" ,faqList);
-//		model.addAttribute("cancelList" ,cancelfaqList);
-//		model.addAttribute("userfaqList" ,userfaqList);
-//		model.addAttribute("pointfaqList" ,pointfaqList);
-//		model.addAttribute("etcfaqList" ,etcfaqList);
-		
-
-
 		model.addAttribute("newsList" ,newsList);
-//		model.addAttribute("noticeList" ,noticeList);
-//		model.addAttribute("eventList" ,eventList);
 		
 //		1:1
 
 		model.addAttribute("myqnaList" ,myqnaList);
 		
 		return "/customer/customer_faq";
+	}
+	
+	@RequestMapping("/event.user")
+	public String noticeEvent( NoticeVO vo, Model model,  HttpServletRequest request) {
+		
+		int eventNum = Integer.parseInt(request.getParameter("eventNum"));
+		NoticeVO eventCHK = noticeService.eventCHK(eventNum);
+		
+		model.addAttribute("eventCHK" ,eventCHK);
+		
+		return "/customer/customer_event";
 	}
 	
 	@ResponseBody
@@ -125,7 +112,7 @@ public class AdminNoticeController {
 		if(qa_title.length() > 15) {
 			qa_title = qa_title.substring(0,15) + "...";
 		}
-		String sms_text = "[" + qa_title + "] �� ���� �亯�� ��ϵǾ����ϴ�.";
+		String sms_text = "[" + qa_title + "] 占쏙옙 占쏙옙占쏙옙 占썰변占쏙옙 占쏙옙溝퓸占쏙옙占쏙옙求占�.";
 		System.out.println(u_tel);
 		int result = ms.sendSMS(u_tel, sms_text, "SMS");
 

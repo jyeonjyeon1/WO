@@ -38,4 +38,5 @@ public interface FaqService {
 	void addanswer(QnAVO vo) throws Exception;
 	
 	void updateVisits(HashMap<String, Integer> param);
+	NoticeVO eventCHK(int eventNum);
 }

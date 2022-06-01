@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,9 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>워킹오더 관리자 페이지</title>
+  <title>워킹오더 약관관리</title>
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
@@ -65,7 +64,7 @@
               </a>
             <ul class="sub">
               <li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
-              <li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
+              <li><a id="store-menu" href="pending_menuimg.admin">매장 메뉴 관리</a></li>
               <li><a id="store-pending" href="store_pending.admin">승인 대기</a></li>
               <li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>
             </ul>
@@ -79,7 +78,7 @@
               <li><a id="total-order" href="total_order.admin">전체 주문 관리</a></li>
               <li><a id="store-order" href="store_order.admin">매장별 주문 관리</a></li>
               <li><a id="cancel-order" href="cancel_order.admin">취소 주문 관리</a></li>
-              <li><a id="refund-order" href="refund_order.admin">환불 주문 관리</a></li>
+              
             </ul>
           </li>
           <li class="sub-menu">
@@ -115,26 +114,14 @@
               <span>메세지 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="ka-tmplt" href="ka_tmplt.admin">알림톡 템플릿</a></li>
-              <li><a id="ka-hist" href="ka_hist.admin">알림톡 전송이력</a></li>
+              
+              
               <li><a id="mess-send" href="mess_send.admin">문자 전송</a></li>
               <li><a id="mess-send-group" href="mess_send_group.admin">단체 문자 전송</a></li>
               <li><a id="mess-hist" href="mess_hist.admin">문자 전송 이력</a></li>
             </ul>
           </li>
-          <li class="sub-menu">
-            <a id="settlement" href="javascript:;">
-              <i class=" fa fa-krw"></i>
-              <span>정산</span>
-              </a>
-            <ul class="sub">
-              <li><a id="pg-comm" href="pg_comm.admin">PG 수수료</a></li>
-              <li><a id="pg-stlmt" href="pg_stlmt.admin">PG 정산</a></li>
-              <li><a id="store-rev" href="store_rev.admin">매장별 수익</a></li>
-              <li><a id="store-stlmt" href="store_stlmt.admin">매장별 정산</a></li>
-              <li><a id="stlmt-hist" href="stlmt_hist.admin">정산 내역</a></li>
-            </ul>
-          </li>
+          
           <li class="sub-menu">
             <a id="statistics" href="javascript:;">
               <i class=" fa fa-bar-chart-o"></i>
@@ -143,7 +130,7 @@
             <ul class="sub">
               <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li>
               <li><a id="store-sales" href="store_sales.admin">매장별 매출 통계</a></li>
-              <li><a id="user-sales" href="user_sales.admin">사용자별 매출 통계</a></li>
+              
               <li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
               <li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
             </ul>
@@ -162,58 +149,15 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content"> 
+    <section id="main-content">
+<%@ include file="../inc/admin_allmenu.jsp" %> 
     <!-- allmenu import -->
-    <%@ include file="../inc/admin_allmenu.jsp" %>
+    
       <section class="wrapper site-min-height">
         <h3><i class="fa fa-angle-right"></i> 약관 관리</h3>
-        <div class="row mt">
-          <div class="col-lg-12">
-            <div class="card-header" style="font-size: 16px;">
-              <i class="fa fa-search" style="font-size: 14px;"></i>
-              약관 검색
-            </div>
-            <div class="form-panel" style="margin-top:0; padding-bottom: 38px;">
-              <form class="form-horizontal style-form" method="get">
-                
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">구분</label>
-                  <div class="col-sm-10">
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio1" value="option1" checked> 약관코드
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="inRad" id="inlineRadio2" value="option2"> 약관명
-                    </label>
-                   
-                    <input type="text" class="form-control round-form" placeholder="이용약관" style="margin-left:15px; width:35%;display: inline;">
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">등록일</label>
-                  <div class="col-sm-10"> 
-                    <input class="form-control round-form" type="date" style="margin-right: 10px; width: 15%;min-width: 120px; display: inline-block;"> ~ 
-                    <input class="form-control round-form" type="date" style="margin-left: 10px;width: 15%;min-width: 120px;display: inline-block;">
-                  </div>
-                  <!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
-                </div>
-                
-                
-                <button type="button" onclick="location.href='terms_add.admin'" class="btn btn-theme" style="font-size: 14px; width:60px;float: left;">
-                  추가
-                </button>
-                <button type="submit" class="btn btn-theme" style="width:70px;float: right;">검색</button>
-              </form>
-            </div>
-
-
-            </form>
-          </div>
-        </div>
+        <a type="button" class="btn btn-theme" href="terms_add.admin"
+        style="margin-left:20px;margin-top:10px;width:100px;float: left;">약관등록</a>
+        
         <!-- 테이블 -->
         <div class="row mt">
           <div class="col-lg-12 cardd mb-4" style="height: fit-content;">
@@ -246,8 +190,8 @@
                         <td id="t_code${termsVs.index}">${AtermsList.t_code}</td>
                         <td><a href="terms_update.admin?t_code=${AtermsList.t_code}">${AtermsList.t_title}</a></td>
                        
-                        <td>${AtermsList.t_regdate}</td>
-                        <td>${AtermsList.t_enfdate}</td>
+                        <td><fmt:formatDate value="${AtermsList.t_regdate }" pattern="yy-MM-dd a hh:mm:ss"/></td>
+                        <td><fmt:formatDate value="${AtermsList.t_regdate }" pattern="yy-MM-dd a hh:mm:ss"/></td>
                         <td>
                          <button onclick="deletePol${termsVs.index}()"
 							class="btn btn-danger btn-xs">

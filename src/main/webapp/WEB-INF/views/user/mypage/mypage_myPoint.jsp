@@ -31,38 +31,7 @@
 	<section class="product spad">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 col-md-5">
-					<div class="mypage_sidebar">
-						<h4>My Page</h4>
-						<ul>
-
-							<li><a class="mypage_side_hover" href="myCoupon.user"><i
-									class="lni lni-ticket"> My쿠폰</i></a></li>
-							<li class="active"><a class="mypage_side_hover"
-								href="myPoint.user"><i class="lni lni-database"> My포인트</i></a></li>
-							<li><a class="mypage_side_hover" href="myReviewList.user"><i
-									class="lni lni-pencil-alt"> My리뷰</i></a></li>
-							<div class="sidebar_line">
-								<li><a class="mypage_side_hover" href="myOrderList.user"><i
-										class="lni lni-radio-button"> 주문내역</i></a></li>
-							</div>
-							<li><a class="mypage_side_hover" href="myWishList.user"><i
-									class="lni lni-heart"> 위시리스트</i></a></li>
-							<li><a class="mypage_side_hover" href="cart.user"><i
-									class="lni lni-cart"> 장바구니</i></a></li>
-
-							<div class="sidebar_line">
-								<li><a class="mypage_side_hover" href="#"><i
-										class="lni lni-user"> 회원정보변경/탈퇴</i></a></li>
-							</div>
-							<li><a class="mypage_side_hover" href="faq.user"><i
-									class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
-							<li><a class="mypage_side_hover" href="currentOrder.user"><i
-									class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
-
-						</ul>
-					</div>
-				</div>
+				<%@ include file="/WEB-INF/views/user/inc/mypageaside.jsp" %>
 
 				<div class="col-lg-9 col-md-7">
 					<div class="mypage_mypoint_top" role="alert">
@@ -149,7 +118,7 @@
 									<tr>
 
 										<td colspan="3"><h4>${userPointList.si_name}(${userPointList.si_loc})</h4>
-											<p>${userPointList.pt_regdate} (2022.03.23 만료)</p></td>
+											<p><fmt:formatDate value="${pointList.pt_regdate}" pattern="yy-MM-dd a hh:mm:ss"/> (2022.03.23 만료)</p></td>
 										<td>
 											
 											<c:choose>
@@ -168,70 +137,6 @@
 
 								</c:forEach>
 
-
-								<tr>
-
-									<td colspan="3"><h4>메머드커피(종로3가점)</h4>
-										<p>2021.03.23 (2022.03.23 만료)</p></td>
-									<td>
-										<h3>+200</h3>
-										<p class="plus">적립</p>
-									</td>
-								</tr>
-								<tr>
-
-									<td colspan="3"><h4>커피온리(종각점)</h4>
-										<p>2021.03.24 (2022.03.24 만료)</p></td>
-									<td>
-										<h3>+230</h3>
-										<p class="plus">적립</p>
-									</td>
-								</tr>
-								<tr>
-
-									<td colspan="3"><h4>컴포즈커피(강남점)</h4>
-										<p>2021.03.26 (2022.03.26 만료)</p></td>
-									<td>
-										<h3>+120</h3>
-										<p class="plus">적립</p>
-									</td>
-								</tr>
-								<tr>
-
-									<td colspan="3"><h4>메머드커피(종로3가점)</h4>
-										<p>2021.04.01 (2022.04.01 만료)</p></td>
-									<td>
-										<h2>-310</h2>
-										<p class="minus">사용</p>
-									</td>
-								</tr>
-								<tr>
-
-									<td colspan="3"><h4>더리터카페(위례점)</h4>
-										<p>2021.03.29 (2022.03.29 만료)</p></td>
-									<td>
-										<h3>+310</h3>
-										<p class="plus">적립</p>
-									</td>
-								</tr>
-								<tr>
-
-									<td colspan="3"><h4>메머드커피(위례점)</h4>
-										<p>2021.03.29 (2022.03.29 만료)</p></td>
-									<td>
-										<h3>+310</h3>
-										<p class="plus">적립</p>
-									</td>
-								</tr>
-								<tr>
-
-									<td colspan="3"><h4>메머드커피(종로3가점)</h4>
-										<p>2021.03.29 (2022.03.29 만료)</p></td>
-									<td>
-										<h3>+310</h3>
-										<p class="plus">적립</p>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 

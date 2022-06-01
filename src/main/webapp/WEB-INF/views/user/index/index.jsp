@@ -38,7 +38,7 @@
 							<!-- Start Single Slider -->
 							<c:forEach var="eventBoardList" items="${eventBoardList}" varStatus="vs">
 							<div class="single-slider"
-								style="background-image: url(${fn:toLowerCase(eventBoardList.b_image)}); border-radius: 20px 20px 20px 20px;">
+								style="background-image: url(${eventBoardList.b_image}); border-radius: 20px 20px 20px 20px;">
 								<div class="content">
 									<div class="button">
 										<a href="${eventBoardList.b_click_url}" class="btn">이벤트 보러가기</a>

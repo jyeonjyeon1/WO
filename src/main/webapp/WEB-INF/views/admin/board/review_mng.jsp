@@ -9,20 +9,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="author" content="Dashboard">
-<meta name="keyword"
-	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-<title>워킹오더 관리자 페이지</title>
+<title>워킹오더 리뷰관리</title>
 
 <!-- Favicons -->
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
 <link href="resources/assets/images/admin/apple-touch-icon.png"
 	rel="apple-touch-icon">
-
-<!-- Bootstrap core CSS -->
-
-<!--external css-->
-
 <style>
 
 .switch-button {
@@ -129,7 +121,7 @@
 					</a>
 						<ul class="sub">
 							<li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
-							<li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
+							<li><a id="store-menu" href="pending_menuimg.admin">매장 메뉴 관리</a></li>
 							<li><a id="store-pending" href="store_pending.admin">승인
 									대기</a></li>
 							<li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>
@@ -144,8 +136,7 @@
 									관리</a></li>
 							<li><a id="cancel-order" href="cancel_order.admin">취소 주문
 									관리</a></li>
-							<li><a id="refund-order" href="refund_order.admin">환불 주문
-									관리</a></li>
+							
 						</ul></li>
 					<li class="sub-menu dcjq-parent-li"><a id="board-manage"
 						class="active dcjq-parent" href="javascript:;"> <i
@@ -176,23 +167,14 @@
 								관리</span>
 					</a>
 						<ul class="sub">
-							<li><a id="ka-tmplt" href="ka_tmplt.admin">알림톡 템플릿</a></li>
-							<li><a id="ka-hist" href="ka_hist.admin">알림톡 전송이력</a></li>
+							
+							
 							<li><a id="mess-send" href="mess_send.admin">문자 전송</a></li>
 							<li><a id="mess-send-group" href="mess_send_group.admin">단체
 									문자 전송</a></li>
 							<li><a id="mess-hist" href="mess_hist.admin">문자 전송 이력</a></li>
 						</ul></li>
-					<li class="sub-menu"><a id="settlement" href="javascript:;">
-							<i class=" fa fa-krw"></i> <span>정산</span>
-					</a>
-						<ul class="sub">
-							<li><a id="pg-comm" href="pg_comm.admin">PG 수수료</a></li>
-							<li><a id="pg-stlmt" href="pg_stlmt.admin">PG 정산</a></li>
-							<li><a id="store-rev" href="store_rev.admin">매장별 수익</a></li>
-							<li><a id="store-stlmt" href="store_stlmt.admin">매장별 정산</a></li>
-							<li><a id="stlmt-hist" href="stlmt_hist.admin">정산 내역</a></li>
-						</ul></li>
+					
 					<li class="sub-menu"><a id="statistics" href="javascript:;">
 							<i class=" fa fa-bar-chart-o"></i> <span>통계</span>
 					</a>
@@ -201,8 +183,7 @@
 									주문 통계</a></li>
 							<li><a id="store-sales" href="store_sales.admin">매장별 매출
 									통계</a></li>
-							<li><a id="user-sales" href="user_sales.admin">사용자별 매출
-									통계</a></li>
+							
 							<li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
 							<li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
 						</ul></li>
@@ -221,177 +202,17 @@
         *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
-			<form class="allmenu-form">
-				<section class="allmenu site-min-height">
-
-					<span class="all"><b> All Menu</b></span> <span class="reset_btn"><button
-							type="reset">reset</button></span> <span class="reset_btn"><button
-							class="all_menu_save_btn" type="button">save</button> </span>
-					<div class="row mt">
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class="fa fa-user" style="font-size: 12px;"></i> <span>&nbsp;회원
-											관리</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>회원
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>쿠폰
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>포인트
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>접속
-												이력</span></li>
-									</ul></li>
-							</ul>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class="fa fa-group" style="font-size: 12px;"></i> <span>매장
-											관리</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>매장
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>매장
-												메뉴 관리</span></li>
-										<li><input id="" type="checkbox"><span>승인
-												대기</span></li>
-										<li><input id="" type="checkbox"><span>입점
-												문의</span></li>
-									</ul></li>
-							</ul>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class="fa fa-shopping-cart"></i> <span>주문 관리</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>전체
-												주문 관리</span></li>
-										<li><input id="" type="checkbox"><span>매장별
-												주문 관리</span></li>
-										<li><input id="" type="checkbox"><span>취소
-												주문</span></li>
-										<li><input id="" type="checkbox"><span>환불
-												주문</span></li>
-									</ul></li>
-							</ul>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class="fa fa-pencil-square"></i> <span>보드 관리</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>공지사항</span></li>
-										<li><input id="" type="checkbox"><span>FAQ
-												관리</span></li>
-
-										<li><input id="" type="checkbox"><span>리뷰
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>1:1
-												문의</span></li>
-									</ul></li>
-							</ul>
-						</div>
-					</div>
-					<div class="row mt">
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class="fa fa-sticky-note" style="font-size: 12px;"></i> <span>페이지
-											관리</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>배너
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>오늘의
-												음료</span></li>
-										<li><input id="" type="checkbox"><span>검색어
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>약관/정책
-												관리</span></li>
-										<li><input id="" type="checkbox"><span>증빙서류</span></li>
-									</ul></li>
-							</ul>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class="fa fa-envelope-open-o" style="font-size: 13px;"></i> <span>메세지
-											관리</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>알림톡
-												템플릿</span></li>
-										<li><input id="" type="checkbox"><span>알림톡
-												전송이력</span></li>
-										<li><input id="" type="checkbox"><span>문자
-												전송</span></li>
-										<li><input id="" type="checkbox"><span>단체
-												문자 전송</span></li>
-										<li><input id="" type="checkbox"><span>문자
-												전송 이력</span></li>
-									</ul></li>
-							</ul>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class=" fa fa-krw"></i> <span>정산</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>PG
-												수수료</span></li>
-										<li><input id="" type="checkbox"><span>PG
-												정산 내역</span></li>
-										<li><input id="" type="checkbox"><span>매장별
-												수익</span></li>
-										<li><input id="" type="checkbox"><span>매장별
-												정산</span></li>
-										<li><input id="" type="checkbox"><span>정산
-												내역</span></li>
-									</ul></li>
-							</ul>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<ul class="all_menu">
-								<li class="sub-menu"><a id="user-manage"> <i
-										class=" fa fa-bar-chart-o"></i> <span>통계</span>
-								</a>
-									<ul class="sub">
-										<li><input id="" type="checkbox"><span>기간별
-												주문 통계</span></li>
-										<li><input id="" type="checkbox"><span>매장별
-												매출 통계</span></li>
-										<li><input id="" type="checkbox"><span>사용자별
-												매출 통계</span></li>
-										<li><input id="" type="checkbox"><span>차트로
-												확인</span></li>
-										<li><input id="" type="checkbox"><span>그래프로
-												확인</span></li>
-									</ul></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-			</form>
+<%@ include file="../inc/admin_allmenu.jsp" %>
 			<section class="wrapper site-min-height">
 				<h3>
 					<i class="fa fa-angle-right"></i> 리뷰 관리
 				</h3>
-				<div class="row mt">
+				<!-- <div class="row mt">
 					<div class="col-lg-12">
 						<div class="card-header" style="font-size: 16px;">
 							<i class="fa fa-search" style="font-size: 14px;"></i> 리뷰 검색
 						</div>
-						<!-- 작성일 -->
+						작성일
 						<div class="form-panel"
 							style="margin-top: 0; padding-bottom: 38px;">
 							<form class="form-horizontal style-form" method="get">
@@ -411,7 +232,7 @@
 											style="margin-left: 10px; width: 15%; min-width: 120px; display: inline-block;">
 									</div>
 								</div>
-								<!-- 리뷰타입 -->
+								리뷰타입
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">리뷰타입</label>
 									<div class="col-sm-10">
@@ -426,7 +247,7 @@
 										</label>
 									</div>
 								</div>
-								<!-- 리뷰조건 -->
+								리뷰조건
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">리뷰조건</label>
 									<div class="col-sm-10">
@@ -452,7 +273,7 @@
 												5점
 											</label>
 										</div>
-										<!-- /row1 -->
+										/row1
 										<div class="row"
 											style="padding-left: 15px; margin-bottom: 5px;">
 											<label class="checkbox-inline" style="padding-left: 0;">
@@ -467,7 +288,7 @@
 												블라인드
 											</label>
 										</div>
-										<!-- /row2 -->
+										/row2
 									</div>
 								</div>
 								<div class="form-group">
@@ -500,7 +321,7 @@
 
 						</form>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- 테이블 -->
 				<div class="row mt">

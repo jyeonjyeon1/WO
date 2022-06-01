@@ -72,7 +72,7 @@ let nansu = 0;
 					</a>
 						<ul class="sub">
 							<li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
-							<li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
+							<li><a id="store-menu" href="pending_menuimg.admin">매장 메뉴 관리</a></li>
 							<li><a id="store-pending" href="store_pending.admin">승인
 									대기</a></li>
 							<li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>
@@ -87,8 +87,7 @@ let nansu = 0;
 									관리</a></li>
 							<li><a id="cancel-order" href="cancel_order.admin">취소 주문
 									관리</a></li>
-							<li><a id="refund-order" href="refund_order.admin">환불 주문
-									관리</a></li>
+							
 						</ul></li>
 					<li class="sub-menu"><a id="board-manage" href="javascript:;">
 							<i class="fa fa-pencil-square-o" style="font-size: 13px;"></i> <span>보드
@@ -119,23 +118,14 @@ let nansu = 0;
 								관리</span>
 					</a>
 						<ul class="sub">
-							<li><a id="ka-tmplt" href="ka_tmplt.admin">알림톡 템플릿</a></li>
-							<li><a id="ka-hist" href="ka_hist.admin">알림톡 전송이력</a></li>
+							
+							
 							<li><a id="mess-send" href="mess_send.admin">문자 전송</a></li>
 							<li><a id="mess-send-group" href="mess_send_group.admin">단체
 									문자 전송</a></li>
 							<li><a id="mess-hist" href="mess_hist.admin">문자 전송 이력</a></li>
 						</ul></li>
-					<li class="sub-menu"><a id="settlement" href="javascript:;">
-							<i class=" fa fa-krw"></i> <span>정산</span>
-					</a>
-						<ul class="sub">
-							<li><a id="pg-comm" href="pg_comm.admin">PG 수수료</a></li>
-							<li><a id="pg-stlmt" href="pg_stlmt.admin">PG 정산</a></li>
-							<li><a id="store-rev" href="store_rev.admin">매장별 수익</a></li>
-							<li><a id="store-stlmt" href="store_stlmt.admin">매장별 정산</a></li>
-							<li><a id="stlmt-hist" href="stlmt_hist.admin">정산 내역</a></li>
-						</ul></li>
+					
 					<li class="sub-menu"><a id="statistics" href="javascript:;">
 							<i class=" fa fa-bar-chart-o"></i> <span>통계</span>
 					</a>
@@ -144,8 +134,7 @@ let nansu = 0;
 									주문 통계</a></li>
 							<li><a id="store-sales" href="store_sales.admin">매장별 매출
 									통계</a></li>
-							<li><a id="user-sales" href="user_sales.admin">사용자별 매출
-									통계</a></li>
+							
 							<li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
 							<li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
 						</ul></li>
@@ -164,8 +153,9 @@ let nansu = 0;
         *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
+<%@ include file="../inc/admin_allmenu.jsp" %>
 			<!-- allmenu import -->
-			<%@ include file="../inc/admin_allmenu.jsp"%>
+			
 			<section class="wrapper site-min-height">
 				<h3>
 					<i class="fa fa-angle-right"></i> 배너 관리

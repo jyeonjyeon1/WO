@@ -35,5 +35,9 @@ public class AOrderServiceImpl implements AOrderService {
 	public void changePoint(HashMap<String, String> paramMapping) {
 		aOrderDAO.changePoint(paramMapping);
 	}
+	@Override
+	public List<OrdersVO> orderCancelList() {
+		return aOrderDAO.orderCancelList();
+	}
 
 }

@@ -14,14 +14,16 @@
 		SELECT A_NAME FROM ADMINS 
 		WHERE A_ID = #{a_id} 
 	</select>
-	
+	<select id="adminLoggin" resultType="AdminVO">
+		select * from admins where a_id=#{a_id}
+	</select>
 	<select id="getNextNoticeSeq" resultType="int">
 		select (max(n_seq)+1) from notice_board
 	</select>
 	
 	<insert id="insertNotice" parameterType="NoticeVO">
-		INSERT INTO NOTICE_BOARD(N_SEQ,N_TITLE,N_CONTENT, N_FIX, N_TYPE, N_STATUS)
-		VALUES(#{n_seq},#{n_title},#{n_content},#{n_fix},#{n_type},#{n_status} )
+		INSERT INTO NOTICE_BOARD(N_SEQ,N_TITLE,N_CONTENT, N_FIX, N_TYPE, N_STATUS,N_FILE_URL)
+		VALUES(#{n_seq},#{n_title},#{n_content},#{n_fix},#{n_type},#{n_status},#{n_file_url} )
 	</insert>
 	
 	<select id="noticeList" resultType="NoticeVO">

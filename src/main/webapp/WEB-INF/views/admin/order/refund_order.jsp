@@ -7,8 +7,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  
+  
   <title>워킹오더 관리자 페이지</title>
 
   <!-- Favicons -->
@@ -32,9 +32,10 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content"> 
+    <section id="main-content">
+<%@ include file="../inc/admin_allmenu.jsp" %> 
     <!-- allmenu import -->
-    <%@ include file="../inc/admin_allmenu.jsp" %>
+    
       <section class="wrapper site-min-height">
         <h3><i class="fa fa-angle-right"></i> 테스트용, 환불주문 일괄 삭제예정</h3>
         <div class="row mt">

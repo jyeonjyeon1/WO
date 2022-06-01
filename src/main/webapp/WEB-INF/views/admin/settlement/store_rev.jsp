@@ -7,9 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>워킹오더 관리자 페이지</title>
+  <title>워킹오더</title>
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
@@ -65,7 +63,7 @@
               </a>
             <ul class="sub">
               <li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
-              <li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
+              <li><a id="store-menu" href="pending_menuimg.admin">매장 메뉴 관리</a></li>
               <li><a id="store-pending" href="store_pending.admin">승인 대기</a></li>
               <li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>
             </ul>
@@ -79,7 +77,7 @@
               <li><a id="total-order" href="total_order.admin">전체 주문 관리</a></li>
               <li><a id="store-order" href="store_order.admin">매장별 주문 관리</a></li>
               <li><a id="cancel-order" href="cancel_order.admin">취소 주문 관리</a></li>
-              <li><a id="refund-order" href="refund_order.admin">환불 주문 관리</a></li>
+              
             </ul>
           </li>
           <li class="sub-menu">
@@ -115,8 +113,8 @@
               <span>메세지 관리</span>
               </a>
             <ul class="sub">
-              <li><a id="ka-tmplt" href="ka_tmplt.admin">알림톡 템플릿</a></li>
-              <li><a id="ka-hist" href="ka_hist.admin">알림톡 전송이력</a></li>
+              
+              
               <li><a id="mess-send" href="mess_send.admin">문자 전송</a></li>
               <li><a id="mess-send-group" href="mess_send_group.admin">단체 문자 전송</a></li>
               <li><a id="mess-hist" href="mess_hist.admin">문자 전송 이력</a></li>
@@ -143,7 +141,7 @@
             <ul class="sub">
               <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li>
               <li><a id="store-sales" href="store_sales.admin">매장별 매출 통계</a></li>
-              <li><a id="user-sales" href="user_sales.admin">사용자별 매출 통계</a></li>
+              
               <li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
               <li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
             </ul>
@@ -162,9 +160,10 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <section id="main-content"> 
+    <section id="main-content">
+<%@ include file="../inc/admin_allmenu.jsp" %> 
     <!-- allmenu import -->
-    <%@ include file="../inc/admin_allmenu.jsp" %>
+    
       <section class="wrapper site-min-height">
         <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
         <div class="row mt">

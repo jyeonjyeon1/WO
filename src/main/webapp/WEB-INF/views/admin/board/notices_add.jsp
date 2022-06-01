@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,17 +8,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="author" content="Dashboard">
-<meta name="keyword"
-	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-<title>워킹오더 관리자 페이지</title>
+
+
+<title>워킹오더 공지 등록</title>
 
 <!-- Favicons -->
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
-
-
-
-
 
 </head>
 
@@ -63,7 +59,7 @@
 					</a>
 						<ul class="sub">
 							<li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
-							<li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
+							<li><a id="store-menu" href="pending_menuimg.admin">매장 메뉴 관리</a></li>
 							<li><a id="store-pending" href="store_pending.admin">승인
 									대기</a></li>
 							<li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>
@@ -78,8 +74,7 @@
 									관리</a></li>
 							<li><a id="cancel-order" href="cancel_order.admin">취소 주문
 									관리</a></li>
-							<li><a id="refund-order" href="refund_order.admin">환불 주문
-									관리</a></li>
+							
 						</ul></li>
 					<li class="sub-menu dcjq-parent-li"><a id="board-manage"
 						class="active dcjq-parent" href="javascript:;"> <i
@@ -109,23 +104,14 @@
 								관리</span>
 					</a>
 						<ul class="sub">
-							<li><a id="ka-tmplt" href="ka_tmplt.admin">알림톡 템플릿</a></li>
-							<li><a id="ka-hist" href="ka_hist.admin">알림톡 전송이력</a></li>
+							
+							
 							<li><a id="mess-send" href="mess_send.admin">문자 전송</a></li>
 							<li><a id="mess-send-group" href="mess_send_group.admin">단체
 									문자 전송</a></li>
 							<li><a id="mess-hist" href="mess_hist.admin">문자 전송 이력</a></li>
 						</ul></li>
-					<li class="sub-menu"><a id="settlement" href="javascript:;">
-							<i class=" fa fa-krw"></i> <span>정산</span>
-					</a>
-						<ul class="sub">
-							<li><a id="pg-comm" href="pg_comm.admin">PG 수수료</a></li>
-							<li><a id="pg-stlmt" href="pg_stlmt.admin">PG 정산</a></li>
-							<li><a id="store-rev" href="store_rev.admin">매장별 수익</a></li>
-							<li><a id="store-stlmt" href="store_stlmt.admin">매장별 정산</a></li>
-							<li><a id="stlmt-hist" href="stlmt_hist.admin">정산 내역</a></li>
-						</ul></li>
+					
 					<li class="sub-menu"><a id="statistics" href="javascript:;">
 							<i class=" fa fa-bar-chart-o"></i> <span>통계</span>
 					</a>
@@ -134,8 +120,7 @@
 									주문 통계</a></li>
 							<li><a id="store-sales" href="store_sales.admin">매장별 매출
 									통계</a></li>
-							<li><a id="user-sales" href="user_sales.admin">사용자별 매출
-									통계</a></li>
+							
 							<li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
 							<li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
 						</ul></li>
@@ -154,8 +139,9 @@
         *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
+<%@ include file="../inc/admin_allmenu.jsp" %>
 			<!-- allmenu import -->
-			<%@ include file="../inc/admin_allmenu.jsp"%>
+			
 			<section class="wrapper site-min-height">
 				<h3>
 					<i class="fa fa-angle-right"></i> 공지사항 등록
@@ -174,9 +160,9 @@
 
 									<label class="col-sm-2 col-sm-2 control-label">글번호</label>
 									<div class="col-sm-4 col-sm-4 col-sm-4">
-										<input type="text" name="n_seq"
+										<input type="text" name="n_seq" id="n_seq"
 											class="form-control round-form" value="${getNextNoticeSeq}"
-											>
+											readonly>
 									</div>
 								</div>
 								<div class="form-group">
@@ -203,31 +189,17 @@
 										<input class="form-control" name="n_title" type="text"
 											placeholder="제목을 입력해주세요">
 									</div>
-									<!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
 								</div>
-								<div class="form-group">
-									<div class="col-lg-12">
-											<textarea name="n_content" id="smarteditor" rows="20" cols="10"
-												placeholder="내용을 입력해주세요" style="width: 100%;"></textarea>
-									</div>
-
-									<!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
-								</div>
-
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                            <textarea name="n_content" id="smarteditor" rows="20" cols="10"
+                                                placeholder="내용을 입력해주세요" style="width: 100%;"></textarea>
+                                    </div>
+                                    </div>
 								<div class="form-group">
 									<div class="col-sm-8">
-										<input class="form-control grey__button" type="file">
+										<input class="form-control grey__button" name="n_file_url" type="file" id="input-imagee">
 									</div>
-									<!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
 								</div>
 
 								<div class="form-group">
@@ -243,7 +215,7 @@
 									</div>
 								</div>
 
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">등록시간</label>
 									<div class="col-sm-10">
 										<label>시간조정</label> <input type="checkbox" checked
@@ -256,18 +228,12 @@
 											style="width: 30%; display: inline-block; margin-left: 10px;">
 
 									</div>
-
-
-									<!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
-								</div>
+								</div> -->
 
 								<button type="button" onclick="window.history.back()"
 									class="btn btn-theme"
 									style="width: 70px; float: right; margin-left: 10px;">뒤로</button>
-								<button type="submit" class="btn btn-theme"
+								<button type="submit" class="btn btn-theme" onclick="updateImagee()"
 									style="width: 70px; float: right;">등록</button>
 							</form>
 						</div>
@@ -280,7 +246,6 @@
 			</section>
 			<!-- /wrapper -->
 		</section>
-		<!-- /MAIN CONTENT -->
 		<!--main content end-->
 
 
@@ -313,6 +278,38 @@
 		$(document).ready(function() {
 			smartEditor();
 		})
+		
+		
+	//이미지 업로드 실제 S3로 
+    updateImagee = () => {
+    	AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+            })
+        })
+		let files = document.getElementById('input-imagee').files;
+        let file = files[0];
+        
+        let noticeFile = "";
+        let n_seq = $("#n_seq").val();
+        if(file != null){
+        	
+            storeImagefile = file.name;
+            storeImagefile = n_seq+"___"+ storeImagefile;
+
+            let upload = new AWS.S3.ManagedUpload({
+                params: {
+                    Bucket: 'walkingorder/notice',
+                    Key: storeImagefile,
+                    ContentType : "image/jpeg",
+                    Body: file
+                }
+            })
+
+            const promise = upload.promise();
+        }
+    }
 	</script>
 
 
@@ -320,6 +317,7 @@
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
 	<script
 		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+		<script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>
 </body>
 
 </html>

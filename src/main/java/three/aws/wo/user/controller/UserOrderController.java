@@ -188,16 +188,23 @@ public class UserOrderController {
 			// 시스템에 설정된 point_percentage 불러옴
 			point_percentage = Integer.parseInt(userOrderService.getPointPercentage());
 		}
-
+		String si_code = param.get("si_code");
+		// 포인트 사용한 경우 차감
+		if (o_point != 0) {
+			insertPoint.put("si_code", si_code);
+			insertPoint.replace("pt_amount", -(o_point));
+			userOrderService.orderPointUse(insertPoint);
+			userOrderService.orderPointUpdate(insertPoint);
+		}
 		int point = Integer.parseInt(param.get("o_total_price")) * point_percentage / 100;
 		System.out.println(point);
 		insertPoint.put("u_id", u_id);
 		insertPoint.put("pt_amount", point);
 		userOrderService.orderPointUpdate(insertPoint);
 		userOrderService.orderPointAdd(insertPoint);
-
 		// 포인트 사용한 경우 차감
 		if (o_point != 0) {
+			insertPoint.put("si_code", si_code);
 			insertPoint.replace("pt_amount", -(o_point));
 			userOrderService.orderPointUse(insertPoint);
 			userOrderService.orderPointUpdate(insertPoint);
@@ -217,11 +224,20 @@ public class UserOrderController {
 
 	// 결제완료 페이지
 	@RequestMapping(value = "/orderc.user", method = RequestMethod.GET)
-	public String orderComplete(HttpServletRequest request, Model model) {
+	public String orderComplete(HttpSession session, HttpServletRequest request, Model model) {
 		// 주문번호 불러옴
+		UserVO vo = (UserVO) session.getAttribute("userSession");
+		// 유저 아이디 받아옴
+		String u_id = vo.getU_id();
 		String o_code = request.getParameter("o");
-		OrdersVO vo = userOrderService.orderComplete(o_code);
-		model.addAttribute("completeOrder", vo);
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("u_id",u_id);
+		map.put("o_code", o_code);
+		OrdersVO Ovo = userOrderService.orderComplete(map);
+		if(Ovo == null) {
+			return "/mypage/mypage_main";
+		}
+		model.addAttribute("completeOrder", Ovo);
 		return "/order/order_complete";
 	}
 
@@ -242,6 +258,8 @@ public class UserOrderController {
 		String u_id = vo.getU_id();
 		List<OrdersVO> myOrderList = userOrderService.myOrderList(u_id);
 		model.addAttribute("myOrderList", myOrderList);
+		List<BasketVO> orderDetails = userOrderService.myorderDetail(u_id);
+		model.addAttribute("orderDetails", orderDetails);
 		
 		Date now = new Date();
 		model.addAttribute("nowDate",now);
@@ -262,25 +280,31 @@ public class UserOrderController {
 		String u_id = vo.getU_id();
 		List<OrdersVO> myCurrentList = userOrderService.myCurrentList(u_id);
 		model.addAttribute("myCurrentList", myCurrentList);
+		List<BasketVO> orderDetails = userOrderService.myorderDetail(u_id);
+		model.addAttribute("orderDetails", orderDetails);
+		
 		return "/mypage/mypage_currentOrder";
 	}
 	
-	@RequestMapping("/myorder.user")
-	public String myorderDetail(HttpSession session, Model model,HttpServletRequest request) {
-		String order = request.getParameter("order");
-		///myorder.user?order=${myCurrentList.o_code}
-		System.out.println("myorderDetail");
-		// 세션에 있는 유저를 가져옴
-		UserVO vo = (UserVO) session.getAttribute("userSession");
-		if (vo == null) { // 이거는 나중에 interceptor에서 처리할 것
-			return "/login/login_login";
-		}
-		// 유저 아이디 받아옴
-		String u_id = vo.getU_id();
-		OrdersVO myorderDetail = userOrderService.myorderDetail(order);
-		model.addAttribute("myorderDetail", myorderDetail);
-		return "/mypage/mypage_currentOrder";
-	}
+//	@RequestMapping("/myorderDetail.user")
+//	public String myorderDetail(HttpSession session, Model model,HttpServletRequest request) {
+//		String o_code = request.getParameter("order");
+//		///myorder.user?order=${myCurrentList.o_code}
+//		System.out.println("myorderDetail");
+//		// 세션에 있는 유저를 가져옴
+//		UserVO vo = (UserVO) session.getAttribute("userSession");
+//		if (vo == null) { // 이거는 나중에 interceptor에서 처리할 것
+//			return "/login/login_login";
+//		}
+//		// 유저 아이디 받아옴
+//		String u_id = vo.getU_id();
+//		HashMap<String,String> map = new HashMap<String,String>();
+//		map.put("u_id",u_id);
+//		map.put("o_code", o_code);
+//		List<BasketVO> myorderDetail = userOrderService.myorderDetail(map);
+//		model.addAttribute("myorderDetail", myorderDetail);
+//		return "/mypage/mypage_currentOrder";
+//	}
 	
 	//유저의 장바구니에 있는지 확인
 	@ResponseBody

@@ -29,4 +29,8 @@ public class AOrderDAO {
 	public void changePoint(HashMap<String, String> paramMapping) {
 		sqlSession.update("AOrderDAO.changePoint",paramMapping);
 	}
+
+	public List<OrdersVO> orderCancelList() {
+		return sqlSession.selectList("AOrderDAO.orderCancelList");
+	}
 }

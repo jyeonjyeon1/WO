@@ -41,7 +41,15 @@ public class AdminBoardController {
 	
 	@RequestMapping("/insertNotice.admin")
 	public String insertNotice(NoticeVO vo) throws Exception {
+		String n_file_url = vo.getN_file_url();
+		if(n_file_url=="" || n_file_url==null) {}
+		else {
+			String n_seq = String.valueOf(vo.getN_seq());
+			String aaa = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/notice/" + n_seq+"___"+n_file_url;
+			vo.setN_file_url(aaa);
+		}
 		adminService.insertNotice(vo);
+		
 		System.out.println("공지등록");
 		return "redirect:/notices.admin";
 	}

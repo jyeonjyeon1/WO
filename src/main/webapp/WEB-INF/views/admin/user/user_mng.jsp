@@ -78,7 +78,7 @@
 					</a>
 						<ul class="sub">
 							<li><a id="store-mng" href="store_mng.admin">매장 관리</a></li>
-							<li><a id="store-menu" href="store_menu.admin">매장 메뉴 관리</a></li>
+							<li><a id="store-menu" href="pending_menuimg.admin">매장 메뉴 관리</a></li>
 							<li><a id="store-pending" href="store_pending.admin">승인
 									대기</a></li>
 							<li><a id="join-inq" href="join_inq.admin">입점 문의</a></li>
@@ -93,8 +93,7 @@
 									관리</a></li>
 							<li><a id="cancel-order" href="cancel_order.admin">취소 주문
 									관리</a></li>
-							<li><a id="refund-order" href="refund_order.admin">환불 주문
-									관리</a></li>
+							
 						</ul></li>
 					<li class="sub-menu"><a id="board-manage" href="javascript:;">
 							<i class="fa fa-pencil-square-o" style="font-size: 13px;"></i> <span>보드
@@ -123,21 +122,13 @@
 								관리</span>
 					</a>
 						<ul class="sub">
-							<li><a id="ka-tmplt" href="ka_tmplt.admin">알림톡 템플릿</a></li>
-							<li><a id="ka-hist" href="ka_hist.admin">알림톡 전송이력</a></li>
+							
+							
 							<li><a id="mess-send" href="mess_send.admin">문자 전송</a></li>
+							<li><a id="mess-send-group" href="mess_send_group.admin">단체 문자 전송</a></li>
 							<li><a id="mess-hist" href="mess_hist.admin">문자 전송 이력</a></li>
 						</ul></li>
-					<li class="sub-menu"><a id="settlement" href="javascript:;">
-							<i class=" fa fa-krw"></i> <span>정산</span>
-					</a>
-						<ul class="sub">
-							<li><a id="pg-comm" href="pg_comm.admin">PG 수수료</a></li>
-							<li><a id="pg-stlmt" href="pg_stlmt.admin">PG 정산</a></li>
-							<li><a id="store-rev" href="store_rev.admin">매장별 수익</a></li>
-							<li><a id="store-stlmt" href="store_stlmt.admin">매장별 정산</a></li>
-							<li><a id="stlmt-hist" href="stlmt_hist.admin">정산 내역</a></li>
-						</ul></li>
+					
 					<li class="sub-menu"><a id="statistics" href="javascript:;">
 							<i class=" fa fa-bar-chart-o"></i> <span>통계</span>
 					</a>
@@ -146,8 +137,7 @@
 									주문 통계</a></li>
 							<li><a id="store-sales" href="store_sales.admin">매장별 매출
 									통계</a></li>
-							<li><a id="user-sales" href="user_sales.admin">사용자별 매출
-									통계</a></li>
+							
 							<li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
 							<li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
 						</ul></li>
@@ -166,105 +156,13 @@
         *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
-			<!-- allmenu import -->
-			<%@ include file="../inc/admin_allmenu.jsp"%>
+<%@ include file="../inc/admin_allmenu.jsp" %>
 			<section class="wrapper">
 				<h3>
 					<i class="fa fa-angle-right"></i> 회원 관리
 				</h3>
-				<!-- BASIC FORM ELELEMNTS -->
-				<div class="row mt">
-					<div class="col-lg-12">
-						<div class="card-header" style="font-size: 16px;">
-							<i class="fa fa-search" style="font-size: 14px;"></i> 회원 검색
-						</div>
-						<div class="form-panel"
-							style="margin-top: 0; padding-bottom: 38px;">
-							<form class="form-horizontal style-form" method="get" id="searchUser">
-
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">구분</label>
-									<div class="col-sm-2 dropthebeat">
-										<div class="dataTable-dropdown">
-											<select class="dataTable-selector">
-												<option value="all">전체</option>
-												<option value="id">이름</option>
-												<option value="name">아이디</option>
-												<option value="nick">닉네임</option>
-
-											</select>
-										</div>
-									</div>
-									<div class="col-sm-8 col-sm-8 col-sm-8">
-										<input type="text" class="form-control round-form"
-											placeholder="홍길동" style="width: 35%;">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">전화번호</label>
-									<div class="col-sm-10">
-										<input class="form-control" type="text"
-											placeholder="01012345678" value="" style="width: 50%;">
-									</div>
-									<!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">이메일</label>
-									<div class="col-sm-10">
-										<input class="form-control" type="text"
-											placeholder="admin@walkingorder.com" style="width: 50%;">
-									</div>
-									<!--
-                    id="focusedInput" 빨간 테두리
-                    id="disabledInput" 못고치는거
-                  -->
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">유형</label>
-									<div class="col-sm-10">
-										<label class="checkbox-inline"> <input type="checkbox"
-											id="inlineCheckbox1" value="option1" checked> 전체
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2">
-											Naver
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2">
-											Google
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2">
-											Facebook
-										</label>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">계정상태</label>
-									<div class="col-sm-10">
-										<label class="checkbox-inline"> <input type="checkbox"
-											id="inlineCheckbox1" value="option1"> 전체
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2" checked>
-											활동
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2">
-											휴면
-										</label> <label class="checkbox-inline"> <input
-											type="checkbox" id="inlineCheckbox2" value="option2">
-											정지
-										</label>
-									</div>
-								</div>
-								<button type="button" onclick="excelDownloadProcess()"
-									class="btn btn-theme"
-									style="font-size: 12px; width: 80px; float: left;" >엑셀다운</button>
-								<button type="submit" class="btn btn-theme"
-									style="width: 70px; float: right;">검색</button>
-							</form>
-						</div>
-					</div>
-				</div>
+				<a type="button" onclick="excelDownloadProcess()" class="btn btn-theme" 
+        style="margin-left:20px;margin-top:10px;width:100px;float: left;">엑셀다운</a>
 				<!-- 테이블 -->
 				<div class="row mt">
 					<div class="col-lg-12 cardd mb-4" style="height: fit-content;">

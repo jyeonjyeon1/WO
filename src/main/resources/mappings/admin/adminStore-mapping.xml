@@ -55,7 +55,7 @@
 	<select id="storeList" resultType="StoreVO" resultMap="storeVO">
 		SELECT * FROM 
 		STORE_INFO a 
-		INNER JOIN
+		FULL OUTER JOIN
 		STORE_ACCOUNT b 
 		ON (a.SI_CODE = b.SI_CODE)
 		ORDER BY SI_SEQ DESC
@@ -63,7 +63,7 @@
 	<select id="storeOne" resultType="StoreVO" resultMap="storeVO">
 		SELECT * FROM 
 		STORE_INFO a 
-		INNER JOIN
+		FULL OUTER JOIN
 		STORE_ACCOUNT b 
 		ON (a.SI_CODE = b.SI_CODE)
 		WHERE a.SI_CODE = #{si_code}

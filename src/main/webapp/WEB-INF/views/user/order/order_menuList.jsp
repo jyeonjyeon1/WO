@@ -269,7 +269,7 @@
 																		</c:if>
 																		<div class="form-check" style="margin: 5px;">
 
-																			<input class="form-check-input" type="checkbox"
+																			<input class="form-check-input" type="radio"
 																				name="op_code${count }"
 																				id="op_code${mVs.index }${oVs.index }"
 																				value="${optionList.op_code }"> <label

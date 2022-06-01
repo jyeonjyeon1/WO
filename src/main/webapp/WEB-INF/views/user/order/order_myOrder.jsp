@@ -713,6 +713,7 @@ function usePoint(){
 	              type: "POST",
 	              url: "/successOrder.user",
 	              data: JSON.stringify({
+	            	  "si_code" : document.getElementById("si_code").innerText,
 	            	  "b_seqs" : totalB_Seq,
 	            	  "o_code":orderNum,
 	            	  "u_id":u_id, 

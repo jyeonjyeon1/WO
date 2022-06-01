@@ -121,11 +121,11 @@ public class AdminController {
 //		return "/order/total_order";
 //	}
 	
-	@GetMapping("/cancel_order.admin")
-	public String tocancel_order() {
-		System.out.println("cancel_order");
-		return "/order/cancel_order";
-	}
+//	@GetMapping("/cancel_order.admin")
+//	public String tocancel_order() {
+//		System.out.println("cancel_order");
+//		return "/order/cancel_order";
+//	}
 	
 	@GetMapping("/refund_order.admin")
 	public String torefund_order() {

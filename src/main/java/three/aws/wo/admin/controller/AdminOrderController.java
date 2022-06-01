@@ -44,5 +44,14 @@ public class AdminOrderController {
 		return "/order/store_order";
 	}
 	
+	@RequestMapping("/cancel_order.admin")
+	public String tocancel_order(OrdersVO vo, Model model) {
+		System.out.println("cancel_order");
+		List<OrdersVO> orderList =aOrderService.orderCancelList();
+		System.out.println(orderList);
+		model.addAttribute("orderList" ,orderList);
+		return "/order/cancel_order";
+	}
+	
 	
 }

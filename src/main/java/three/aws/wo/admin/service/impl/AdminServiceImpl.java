@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import three.aws.wo.admin.dao.AdminDAO;
 import three.aws.wo.admin.service.AdminService;
+import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 
@@ -57,5 +58,8 @@ public class AdminServiceImpl implements AdminService {
 	public void insertFaq(FAQVO vo) {
 		adminDAO.insertFaq(vo);
 	}
-
+	@Override
+	public AdminVO adminLoggin(String a_id) {
+		return adminDAO.adminLoggin(a_id);
+	}
 }

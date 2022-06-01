@@ -2007,14 +2007,14 @@ ol {
   width: 100%;
 }
 
-/* 占쎌삂占쏙옙 占쎌넅筌롫똻肉됵옙苑뚳옙�뮉 野껓옙占쎄퉳筌∽옙 占쎈툧癰귣똻�뿫 */
+/* �뜝�럩�굚�뜝�룞�삕 �뜝�럩�꼨嶺뚮∥�샍�굢�맮�삕�땻�슪�삕占쎈츎 �뇦猿볦삕�뜝�럡�돰嶺뚢댙�삕 �뜝�럥�닱�솻洹ｋ샍占쎈엮 */
 @media (max-width: 767px) {
   .header .main-menu-search {
     display: none;
   }
 }
 
-/* 占쎌뒲筌욊낯�뵠占쎈뮉 stickys */
+/* �뜝�럩�뮧嶺뚯쉳�궚占쎈턄�뜝�럥裕� stickys */
 .header .stickys {
   position: fixed;
   top: 0;
@@ -5361,7 +5361,7 @@ ol {
   height: auto
 }
 
-/*筌욑옙占쎈즲占쎌뵠沃섎챷占�*/
+/*嶺뚯쉻�삕�뜝�럥利꿨뜝�럩逾졿쾬�꼶梨룟뜝占�*/
 .map_image {
   position: relative;
   text-align: center;
@@ -6366,10 +6366,10 @@ mypage_menubar
 
 #myform fieldset {
   display: inline-block;
-  /* 占쎈릭占쎌맄 癰귢쑴�젎 占쎌뵠沃섎챷占쏙옙諭억옙�뵠 占쎌뿳占쎈뮉 占쎌겫占쎈열筌랃옙 占쎌쁽�뵳�됵옙占� 筌△뫁占쏙옙釉�.*/
+  /* �뜝�럥由��뜝�럩留� �솻洹��뫒占쎌젍 �뜝�럩逾졿쾬�꼶梨룟뜝�룞�삕獄��뼲�삕占쎈턄 �뜝�럩肉녑뜝�럥裕� �뜝�럩寃ュ뜝�럥�뿴嶺뚮엪�삕 �뜝�럩�겱占쎈뎨占쎈맮�삕�뜝占� 嶺뚢뼰維곩뜝�룞�삕�뇡占�.*/
   direction: rtl;
   border: 0;
-  /* 占쎈툡占쎈굡占쎈�� 占쎈�믭옙紐®뵳占� 占쎌젫椰꾬옙 */
+  /* �뜝�럥�닡�뜝�럥援▼뜝�럥占쏙옙 �뜝�럥占쎈���삕筌뤒�逾녑뜝占� �뜝�럩�젷濾곌쒀�삕 */
 }
 
 #myform input[type=radio] {
@@ -6378,16 +6378,16 @@ mypage_menubar
 
 #myform input[type=radio]:checked~label {
   text-shadow: 0 0 0 rgb(255, 208, 0);
-  /* 筌띾뜆�뒭占쎈뮞 占쎄깻�뵳占� 筌ｋ똾寃� */
+  /* 嶺뚮씭�쐠占쎈뮡�뜝�럥裕� �뜝�럡源삼옙逾녑뜝占� 嶺뚳퐢�샑野껓옙 */
 }
 
 #myform label {
   font-size: 3em;
-  /* 占쎌뵠筌뤴뫁占� 占쎄쾿疫뀐옙 */
+  /* �뜝�럩逾좂춯琉대쳛�뜝占� �뜝�럡苡욜뼨�먯삕 */
   color: transparent;
-  /* 疫꿸퀣�� 占쎌뵠筌뤴뫁占� �뚎됱쑎 占쎌젫椰꾬옙 */
+  /* �뼨轅명�ｏ옙占� �뜝�럩逾좂춯琉대쳛�뜝占� 占쎈쉸�맩�몠 �뜝�럩�젷濾곌쒀�삕 */
   text-shadow: 0 0 0 #f0f0f0;
-  /* 占쎄퉱 占쎌뵠筌뤴뫁占� 占쎄퉳占쎄맒 �겫占쏙옙肉� */
+  /* �뜝�럡�돮 �뜝�럩逾좂춯琉대쳛�뜝占� �뜝�럡�돰�뜝�럡留� 占쎄껀�뜝�룞�삕�굢占� */
 }
 
 #myform fieldset legend {
@@ -6604,7 +6604,7 @@ mypage_menubar
   padding: 20px 0 0;
 }
 
-/*占쎌뵬占쎈탵占쎌궎甕곌쑵�뱣 占쎈떜繹먲옙*/
+/*�뜝�럩逾у뜝�럥�꺏�뜝�럩沅롧뵓怨뚯뫓占쎈괏 �뜝�럥�뼔濚밸㉡�삕*/
 .tabinput {
   display: none;
 }
@@ -6623,7 +6623,7 @@ mypage_menubar
   cursor: pointer;
 }
 
-/*input 占쎄깻�뵳占쏙옙�뻻, label 占쎈뮞占쏙옙占쎌뵬*/
+/*input �뜝�럡源삼옙逾녑뜝�룞�삕占쎈뻣, label �뜝�럥裕욃뜝�룞�삕�뜝�럩逾�*/
 .tabinput:checked+label {
   border-radius: 10px;
   color: #000000;
@@ -6655,7 +6655,7 @@ mypage_menubar
   width: 100%;
 }
 
-/* 鈺곌퀗援� 野껓옙占쎄퉳 甕곌쑵�뱣 */
+/* �댖怨뚰�쀦뤃占� �뇦猿볦삕�뜝�럡�돰 �뵓怨뚯뫓占쎈괏 */
 .showdetail_btn {
   font-weight: 700;
   background-color: transparent;
@@ -6731,9 +6731,9 @@ mypage_menubar
 }
 
 
-/* style.css 燁삳똾逾양㎉�똾逾양㎉�똾逾� */
-/* style.css 燁삳똾逾양㎉�똾逾양㎉�똾逾� */
-/* style.css 燁삳똾逾양㎉�똾逾양㎉�똾逾� */
+/* style.css �뇖�궠�샑�얠뼇�럦占쎈샑�얠뼇�럦占쎈샑�억옙 */
+/* style.css �뇖�궠�샑�얠뼇�럦占쎈샑�얠뼇�럦占쎈샑�억옙 */
+/* style.css �뇖�궠�샑�얠뼇�럦占쎈샑�얠뼇�럦占쎈샑�억옙 */
 /******************************************************************
   Template Name: Ogani
   Description:  Ogani eCommerce  HTML Template
@@ -9617,7 +9617,7 @@ mypage_menubar
   }
 }
 
-/* 占쎄쿃椰꾧퀣�뿫 */
+/* �뜝�럡荑껅ㅀ袁㏉�ｏ옙肉� */
 @media (min-width: 768px) {
   .search_result_list_col {
     color: #888;
@@ -9809,4 +9809,28 @@ mypage_menubar
 .primary-btn:hover{
   color: black;
   background-color: #eeb200;
+}
+
+.modal_wrapbodyy {
+	padding: 0;
+	overflow: auto;
+	height: 70vh;
+	overflow-x: hidden;
+}
+
+.modal_wrapbodyy::-webkit-scrollbar {
+	width: 6px;
+}
+
+.modal_wrapbodyy::-webkit-scrollbar-track {
+	background-color: #ed475960;
+}
+
+.modal_wrapbodyy::-webkit-scrollbar-thumb {
+	background-color: #ed475990;
+}
+
+.modal_wrapbodyy::-webkit-scrollbar-button {
+	background-color: #ed475990;
+	height: 10px;
 }

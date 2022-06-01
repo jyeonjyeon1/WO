@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <title>워킹오더 관리자 페이지</title>
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <!-- Favicons -->
 <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
 
@@ -54,20 +53,6 @@
 					 <hr>
 					<div class="login-social-link centered">
 					
-						<p>소셜 로그인</p>
-						<div id="button_area">
-        <div id="naverIdLogin"></div>
-      </div>
-						<button class="btn btn-naver" type="submit">
-							<b>N</b> Naver
-						</button>
-						<button class="btn btn-google" type="submit">
-							<i class="fa fa-google"></i> Google
-						</button>
-						<button class="btn btn-facebook" type="submit">
-							<i class="fa fa-facebook"></i> Facebook
-						</button>
-					</div> 
 					<div id="message">
         로그인 버튼을 눌러 로그인 해주세요.
       </div>
@@ -84,55 +69,12 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
 <script>
-const naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "22RAYixMi5pHSV4f5s4t",
-			callbackUrl: "http://localhost:8080/login.admin",
-			loginButton: {color: "green", type: 1, height: 40}
-		}
-	);
-naverLogin.init(); // 로그인 설정
-
-naverLogin.getLoginStatus(function (status) {
-    if (status == true) {
-    	naverLoginAjax();
-    	alert(naverLogin.user.id);
-    }
-  });
-console.log(naverLogin);
-
-function naverLoginAjax(){
-	$.ajax({
-		type : "post",
-		url : "/naverLogin.admin",
-		data : JSON.stringify({"id": naverLogin.user.id}),
-		dataType : "json",
-		contentType : "application/json",
-		success : function(data) {
-			location.href ="/index.admin";
-		},
-		error : function(data) {
-			console.log("로그인 통신x")
-		}
-	});
-//ajax 끝
-}
 
 ch1 = false;
-var a_id_input = "";
-var a_pw_input = "";
 
-jQuery(document).ready(function() {
-	$("#a_id").on("propertychange change keyup paste input", function() {
-		a_id_input = $("#a_id").val();
-		onEnter();
-	});
-	$("#a_password").on("propertychange change keyup paste input", function() {
-		a_pw_input = $("#a_password").val();
-		onEnter();
-	});
-});
 function loginCheck(){
+	var a_id_input = $("#a_id").val();
+	var a_pw_input = $("#a_password").val();
 	var param = {"a_id":a_id_input, "a_password":a_pw_input}
 	$.ajax({
 		type: "post",
@@ -159,6 +101,8 @@ function loginCheck(){
 }
 
 function finalCheck(){
+	var a_id_input = $("#a_id").val();
+	var a_pw_input = $("#a_password").val();
 	console.log(a_id_input+"   "+a_pw_input);
 	if(a_id_input != "" && a_pw_input !=""){//둘다 입력한 경우 ajax로 체크
 		loginCheck();//아이디 비번 일치 확인

@@ -3,6 +3,7 @@ package three.aws.wo.admin.service;
 import java.util.HashMap;
 import java.util.List;
 
+import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 
@@ -16,4 +17,5 @@ public interface AdminService {
 	void updateFaq(HashMap<String, Object> param);
 	void deleteFaq(HashMap<String, Object> param);
 	void insertFaq(FAQVO vo);
+	AdminVO adminLoggin(String a_id);
 }

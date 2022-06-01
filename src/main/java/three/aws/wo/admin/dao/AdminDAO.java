@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
 
@@ -44,5 +45,8 @@ public class AdminDAO {
 	}
 	public void insertFaq(FAQVO vo) {
 		sqlSession.insert("AdminDAO.insertFaq", vo);
+	}
+	public AdminVO adminLoggin(String a_id) {
+		return sqlSession.selectOne("AdminDAO.adminLoggin", a_id);
 	}
 }

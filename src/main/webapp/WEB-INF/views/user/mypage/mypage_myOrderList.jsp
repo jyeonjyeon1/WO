@@ -30,29 +30,7 @@
 <section class="product spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-5">
-                    <div class="mypage_sidebar">
-                        <h4>My Page</h4>
-                        <ul>
-                            
-                            <li><a class="mypage_side_hover" href="myCoupon.user"><i class="lni lni-ticket"> My쿠폰</i></a></li>
-                            <li><a class="mypage_side_hover" href="myPoint.user"><i class="lni lni-database"> My포인트</i></a></li>
-                            <li><a class="mypage_side_hover" href="myReview.user"><i class="lni lni-pencil-alt"> My리뷰</i></a></li>
-                            <div class="sidebar_line">
-                            <li><a class="mypage_side_hover" href="myOrderList.user"><i class="lni lni-radio-button"> 주문내역</i></a></li>
-                            </div>
-                            <li><a class="mypage_side_hover" href="myWishList.user"><i class="lni lni-heart"> 위시리스트</i></a></li>
-                            <li><a class="mypage_side_hover" href="cart.user"><i class="lni lni-cart"> 장바구니</i></a></li>
-                            
-                            <div class="sidebar_line">
-                            <li><a class="mypage_side_hover" href="#"><i class="lni lni-user"> 회원정보변경/탈퇴</i></a></li>
-                            </div>
-                            <li><a class="mypage_side_hover" href="faq.user"><i class="lni lni-headphone-alt"> 고객센터 문의하기</i></a></li>
-                            <li class="active"><a class="mypage_side_hover" href="currentOrder.user"><i class="lni lni-ticket-alt"> 현재주문 확인하기</i></a></li>
-                            
-                        </ul>
-                    </div>
-            </div>
+            <%@ include file="/WEB-INF/views/user/inc/mypageaside.jsp" %>
             
             <div class="col-lg-9 col-md-7">
                 
@@ -93,8 +71,8 @@
                         
 
                     </div>
-                    <c:forEach var="myOrderList" items="${myOrderList}">
-                    <c:if test="${myOrderList.o_order_state eq '전달완료' }">
+                    <c:forEach var="myOrderList" items="${myOrderList}" varStatus="vs">
+                    <c:if test="${myOrderList.o_order_state ne '전달완료' }">
                     <div class="row" style="margin-top: 25px;">
                     <div class="col-lg-12 col-md-6 col-sm-12">
                         
@@ -143,7 +121,8 @@
                                 <div class="menubar_currentOrder_line">
                                 <div class="row">    
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="/myOrder.user?order=${myOrderList.o_code}" class="menubar_btn">주문 확인 <span class="arrow_right"></span></a>
+                                    <a data-bs-toggle="modal"
+															data-bs-target="#orderDetail${vs.index}" class="menubar_btn">주문 확인 <span class="arrow_right"></span></a>
                                 </div>
                                 </div>
                                 </div>
@@ -151,10 +130,103 @@
                         </div>
                        </div>
                     </div>
-                    </c:if>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel"
+	role="dialog" tabindex="-1" id="orderDetail${vs.index}"
+	class="modal fade" style="margin: 20px auto 0; ">
+	<div class="modal-dialog store modal_centerr">
+		<div class="modal-content" style="background:transparent;">
+			<div class="modal-header_store" style="background-color: #ed4759;height:50px; border-radius :10px 10px 0 0;">
+				<h4 class="modal-title" style="padding:7px 0 7px 20px">${myOrderList.o_code} 주문상세</h4>
+			</div>
+			<!-- 	정보시작 -->
+	<div class="modal_wrapbodyy"  style="height:500px;background:#eaeaea;padding:30px 30px 0;color:black;">
+		<div class="col-lg-12">
+			<div class="" style="border-bottom: 1px solid rgba(0, 0, 0, 0.459); margin: 15px;">
+                <div class="row" style="text-align: left; margin:5px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">결제방법</div> <div class="col-lg-9">
+                  	${myOrderList.o_payment_list}
+                  </div>
+               </div>
+               <div class="row" style="text-align: left; margin:5px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">주문시각</div> <div class="col-lg-9">
+                  	<fmt:formatDate value="${myOrderList.o_order_date}" pattern="yyyy.MM.dd  |  a hh:mm"/>
+                  </div>
+               </div>
+               <div class="row" style="text-align: left; margin:5px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">요청사항</div> <div class="col-lg-9">
+                  	${myOrderList.o_request}
+                  </div>
+               </div>
+               <div class="row" style="text-align: left; margin:5px 10px 15px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">주문번호</div> <div class="col-lg-9">
+                  	${myOrderList.o_code}
+                  </div>
+               </div>
+             </div>
+              <div class="order_product" style="border-bottom: 1px solid rgba(0, 0, 0, 0.459); margin: 15px;">
+                <div class="row" style="text-align: left; margin: 15px;">
+                  <div class="row" style="margin-bottom:15px;padding-bottom:5px;border-bottom:1px solid rgba(0, 0, 0, 0.1);font-weight: 900;font-size:16px;">
+	                  <div class="col-lg-7">주문정보 </div>
+	                  <div class="col-lg-2">수량</div> 
+	                  <div class="col-lg-3" style="text-align: right;padding-right:30px;">금액</div>
+                  </div>
+<c:forEach var="orderDetails" items="${orderDetails}" varStatus="vvs">
+<c:if test="${myOrderList.o_code eq orderDetails.o_code}">
+                  <div class="row" style="margin-bottom:15px;font-size:14px;">
+	                  <!-- OPB -->
+	                  <div class="col-lg-7" style="font-weight: bolder;">${orderDetails.m_name}  </div>
+	                  <div class="col-lg-2">${orderDetails.b_quantity} 개</div>
+					  <div class="col-lg-3" style="text-align: right;"><fmt:formatNumber value="${orderDetails.b_total_price}" pattern="###,###"/> 원</div>
+					  <div class="col-lg-12">${orderDetails.opb_name}(<fmt:formatNumber value="${orderDetails.opb_price}" pattern="###,###"/> 원)</div>
+					  <!-- /OPB -->
+					  <c:if test="${orderDetails.op_code1 ne ' '}">
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name1} (<fmt:formatNumber value="${orderDetails.op_price1}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code2 ne ' '}">
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name2} (<fmt:formatNumber value="${orderDetails.op_price2}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code3 ne ' '}">	
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name3} (<fmt:formatNumber value="${orderDetails.op_price3}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code4 ne ' '}">	
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name4} (<fmt:formatNumber value="${orderDetails.op_price4}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code5 ne ' '}">	
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name5} (<fmt:formatNumber value="${orderDetails.op_price5}" pattern="###,###"/> 원)</div>
+						</c:if>
+                  </div>
+</c:if>
+</c:forEach>
+                  <br>
+                  <div class="col-lg-9" style="font-weight: bolder; font-size: 16px; color: black;padding:0;">총 금액</div>
+                  <div class="col-lg-3" style="font-weight: bolder; font-size: 16px; text-align: right; padding:0;"><fmt:formatNumber value="${myOrderList.o_total_price}" pattern="###,###"/> 원</div>
+                
+                </div>
+                
+              </div>
+              
+              
+			
+		</div><!-- <div class="col-lg-12"> -->
+
+
+
+
+	</div><!-- wrap body -->
+			<div class="modal-footer" style="background:#eaeaea;border-radius: 0 0 10px 10px">
+				<button data-bs-dismiss="modal" style="border:none"
+					type="button">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal END -->                     
+                    </c:if>                   
                     </c:forEach >
-                    <c:forEach var="myOrderList" items="${myOrderList}">
-                    <c:if test="${myOrderList.o_order_state ne '전달완료' }">
+                    <c:forEach var="myOrderList" items="${myOrderList}" varStatus="vs">
+                    <c:if test="${myOrderList.o_order_state eq '전달완료' }">
 					<fmt:formatDate var="todayd" value="${nowDate}" pattern="yyyy-MM-dd"/>
 					<fmt:formatDate var="ordd_date" value="${myOrderList.o_order_date}" pattern="yyyy-MM-dd"/>
 					<fmt:parseDate var="today" value="${todayd}" pattern="yyyy-MM-dd"></fmt:parseDate>
@@ -209,7 +281,8 @@
                                 <div class="menubar_lastOrder_line">
                                 <div class="row">    
                                     <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <a href="#" class="menubar_btn">재주문할게요! <span class="arrow_right"></span></a>
+                                    <a data-bs-toggle="modal"
+															data-bs-target="#orderDetaill${vs.index}" class="menubar_btn">주문확인 <span class="arrow_right"></span></a>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                 	<c:choose>
@@ -235,7 +308,98 @@
                         </div>
                        </div>
                     </div>
-                    
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel"
+	role="dialog" tabindex="-1" id="orderDetaill${vs.index}"
+	class="modal fade" style="margin: 20px auto 0; ">
+	<div class="modal-dialog store modal_centerr">
+		<div class="modal-content" style="background:transparent;">
+			<div class="modal-header_store" style="background-color: #ed4759;height:50px; border-radius :10px 10px 0 0;">
+				<h4 class="modal-title" style="padding:7px 0 7px 20px">${myOrderList.o_code} 주문상세</h4>
+			</div>
+			<!-- 	정보시작 -->
+	<div class="modal_wrapbodyy"  style="height:500px;background:#eaeaea;padding:30px 30px 0;color:black;">
+		<div class="col-lg-12">
+			<div class="" style="border-bottom: 1px solid rgba(0, 0, 0, 0.459); margin: 15px;">
+                <div class="row" style="text-align: left; margin:5px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">결제방법</div> <div class="col-lg-9">
+                  	${myOrderList.o_payment_list}
+                  </div>
+               </div>
+               <div class="row" style="text-align: left; margin:5px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">주문시각</div> <div class="col-lg-9">
+                  	<fmt:formatDate value="${myOrderList.o_order_date}" pattern="yyyy.MM.dd  |  a hh:mm"/>
+                  </div>
+               </div>
+               <div class="row" style="text-align: left; margin:5px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">요청사항</div> <div class="col-lg-9">
+                  	${myOrderList.o_request}
+                  </div>
+               </div>
+               <div class="row" style="text-align: left; margin:5px 10px 15px 10px;">
+                  <div class="col-lg-3" style="font-weight: bolder;">주문번호</div> <div class="col-lg-9">
+                  	${myOrderList.o_code}
+                  </div>
+               </div>
+             </div>
+              <div class="order_product" style="border-bottom: 1px solid rgba(0, 0, 0, 0.459); margin: 15px;">
+                <div class="row" style="text-align: left; margin: 15px;">
+                  <div class="row" style="margin-bottom:15px;padding-bottom:5px;border-bottom:1px solid rgba(0, 0, 0, 0.1);font-weight: 900;font-size:16px;">
+	                  <div class="col-lg-7">주문정보 </div>
+	                  <div class="col-lg-2">수량</div> 
+	                  <div class="col-lg-3" style="text-align: right;padding-right:30px;">금액</div>
+                  </div>
+<c:forEach var="orderDetails" items="${orderDetails}" varStatus="vvs">
+<c:if test="${myOrderList.o_code eq orderDetails.o_code}">
+                  <div class="row" style="margin-bottom:15px;font-size:14px;">
+	                  <!-- OPB -->
+	                  <div class="col-lg-7" style="font-weight: bolder;">${orderDetails.m_name}  </div>
+	                  <div class="col-lg-2">${orderDetails.b_quantity} 개</div>
+					  <div class="col-lg-3" style="text-align: right;"><fmt:formatNumber value="${orderDetails.b_total_price}" pattern="###,###"/> 원</div>
+					  <div class="col-lg-12">${orderDetails.opb_name}(<fmt:formatNumber value="${orderDetails.opb_price}" pattern="###,###"/> 원)</div>
+					  <!-- /OPB -->
+					  <c:if test="${orderDetails.op_code1 ne ' '}">
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name1} (<fmt:formatNumber value="${orderDetails.op_price1}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code2 ne ' '}">
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name2} (<fmt:formatNumber value="${orderDetails.op_price2}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code3 ne ' '}">	
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name3} (<fmt:formatNumber value="${orderDetails.op_price3}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code4 ne ' '}">	
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name4} (<fmt:formatNumber value="${orderDetails.op_price4}" pattern="###,###"/> 원)</div>
+						</c:if>	
+						<c:if test="${orderDetails.op_code5 ne ' '}">	
+							<div class="col-lg-12" style="font-size:12px;">└ ${orderDetails.op_name5} (<fmt:formatNumber value="${orderDetails.op_price5}" pattern="###,###"/> 원)</div>
+						</c:if>
+                  </div>
+</c:if>
+</c:forEach>
+                  <br>
+                  <div class="col-lg-9" style="font-weight: bolder; font-size: 16px; color: black;padding:0;">총 금액</div>
+                  <div class="col-lg-3" style="font-weight: bolder; font-size: 16px; text-align: right; padding:0;"><fmt:formatNumber value="${myOrderList.o_total_price}" pattern="###,###"/> 원</div>
+                
+                </div>
+                
+              </div>
+              
+              
+			
+		</div><!-- <div class="col-lg-12"> -->
+
+
+
+
+	</div><!-- wrap body -->
+			<div class="modal-footer" style="background:#eaeaea;border-radius: 0 0 10px 10px">
+				<button data-bs-dismiss="modal" style="border:none"
+					type="button">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal END -->                    
                     </c:if>
                     </c:forEach>
                         

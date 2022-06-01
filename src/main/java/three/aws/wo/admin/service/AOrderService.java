@@ -11,4 +11,5 @@ public interface AOrderService {
 	List<OrdersVO> orderList(String si_code);
 	List<OrdersVO> orderList();
 	void changePoint(HashMap<String, String> paramMapping);
+	List<OrdersVO> orderCancelList();
 }

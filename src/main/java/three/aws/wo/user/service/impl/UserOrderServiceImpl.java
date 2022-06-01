@@ -62,7 +62,7 @@ public class UserOrderServiceImpl implements UserOrderService {
 	}
 
 	@Override
-	public OrdersVO orderComplete(String o_code) {
+	public OrdersVO orderComplete(HashMap<String,String> o_code) {
 		return userOrderDAO.orderComplete(o_code);
 	}
 
@@ -100,8 +100,8 @@ public class UserOrderServiceImpl implements UserOrderService {
 	}
 	
 	@Override
-	public OrdersVO myorderDetail(String order) {
-		return userOrderDAO.myorderDetail(order);
+	public List<BasketVO> myorderDetail(String u_id) {
+		return userOrderDAO.myorderDetail(u_id);
 	}
 	@Override
 	public void replicateCart(String u_id) {

@@ -18,7 +18,7 @@ public interface UserOrderService {
 	void insertOrder(HashMap<String, Object> insertInfo);
 	void successOrder(String o_code);
 	void resetCart(String u_id);
-	OrdersVO orderComplete(String o_code);
+	OrdersVO orderComplete(HashMap<String,String> o_code);
 	void orderPointUpdate(HashMap<String, Object> insertPoint);
 	void orderPointAdd(HashMap<String, Object> insertPoint);
 	String getPointPercentage();
@@ -26,7 +26,7 @@ public interface UserOrderService {
 	void orderPointUse(HashMap<String, Object> insertPoint);
 	List<OrdersVO> myCurrentList(String u_id);
 	List<OrdersVO> myOrderList(String u_id);
-	OrdersVO myorderDetail(String order);
+	List<BasketVO> myorderDetail(String u_id);
 	void replicateCart(String u_id);
 	void updateBasketOrder(HashMap<String, Object> map);
 	void insertCartItem(BasketVO vo);

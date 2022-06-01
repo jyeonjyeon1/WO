@@ -10,6 +10,8 @@
 		<div class="row">
 			<label id="order_statea${inputIndex}"
 				class="order_status daegi">접수대기</label>
+				
+			<a class="order_cancel"  onclick="order_cancel${inputIndex}()"> X 주문취소하기</a>
 		</div>
 
 		<div class="info_user">
@@ -21,8 +23,7 @@
 						0</td>
 					<td style="font-size: 20px; color: #000; padding: 0;">Takeout</td>
 					<td rowspan="2" style="padding-left: 30px;"><a
-						class="order_detail" data-toggle="modal"
-						href="#orderDetaila${inputIndex}">상세보기</a></td>
+						class="order_detail" onclick="#orderDetaila${inputIndex}">상세보기</a></td>
 				</tr>
 				<tr>
 					<td style="padding-bottom: 15px;">${(newOrder.u_name).substring(0,1)}**</td>
@@ -121,6 +122,52 @@ function orderChangea${inputIndex}(){
 //			indexCount.innerText = change;
 //		}
 }
+
+
+function order_cancel${inputIndex}(){
+	
+	var o_code = $("#o_codea${inputIndex}").val();
+	
+	param = {"o_code" : o_code};
+	Swal.fire({
+		  title: '[주문취소]',
+		  text: "주문을 취소하시겠습니까?",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '주문 취소',
+		  cancelButtonText :'아니요'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		   
+		    $.ajax({
+		        type: "POST",
+		        url: "/OrderCancel.store",
+		        data: JSON.stringify(param),
+		        dataType: "json",
+		        contentType: "application/json",
+		     success:function(data){
+		    	 Swal.fire({
+		   	        icon: "success",
+		   	        title: "삭제완료",
+		   	        showConfirmButton: false,
+		   	        timer: 1500
+		   	    });
+		    	 
+		    	 $("#order_wrapa${inputIndex}").remove();
+		     },
+		     error:function(data){
+		        console.log("주문삭제 통신에러");
+		     }
+			  
+			  
+		  });
+		  }
+		})
+	
+}
+
 
 </script>
 <!-- Modal -->

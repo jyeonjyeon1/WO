@@ -96,4 +96,15 @@
 		AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
 		ORDER BY O_SEQ DESC 
 	</select>
+	
+		
+		
+	<update id="OrderCancel">
+	UPDATE ORDERS
+		SET
+		O_ORDER_STATE = '주문취소'
+		WHERE
+		O_CODE = #{o_code} 
+		AND SI_CODE = #{si_code} 
+	</update>
 </mapper>

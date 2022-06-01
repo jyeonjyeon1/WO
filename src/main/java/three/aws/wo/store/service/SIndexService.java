@@ -14,5 +14,6 @@ public interface SIndexService {
 	void changeOState(HashMap<String, String> param);
 	void deleteBasketOrder(HashMap<String, String> param);
 	OrdersVO newOrder(String si_code);
+	void OrderCancel(HashMap<String, String> map);
 
 }

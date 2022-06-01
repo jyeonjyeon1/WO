@@ -275,6 +275,8 @@ to {
 	background-color: #ed4759;
 }
 
+
+
 .order_status.making_drink {
 	background-color: #02c0cc;
 }
@@ -305,6 +307,22 @@ to {
 .order_detail:hover {
 	background-color: #ffffff80;
 	color: black;
+}
+
+.order_cancel {
+	background-color: #00000024;
+	padding:5px;
+	border-radius: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.342);
+	font-weight: 700;
+	color: black;
+	margin-bottom: 5px;
+}
+
+.order_cancel:hover {
+	background-color: #0000008f;
+	color: white;
+	cursor: pointer;
 }
 
 .order_Btn {
@@ -625,7 +643,11 @@ function zzzz(){
                      	<c:when test="${storeOrders.o_order_state eq '준비완료' }">drink_ready</c:when>
                      	<c:when test="${storeOrders.o_order_state eq '준비중' }">making_drink</c:when>
                      	<c:otherwise>daegi</c:otherwise>
-                     </c:choose>">${storeOrders.o_order_state}</label></div>
+                     </c:choose>">${storeOrders.o_order_state}</label>
+                     <a class="order_cancel"  onclick="order_cancel${inputIndex}${vs.index}()"> X 주문취소하기</a>
+		
+                     </div>
+                     
                
                  <div class="info_user">
                    <table style=" margin-left: 30px;" >
@@ -737,6 +759,51 @@ function orderChange${vs.index}(){
 //		}
 }
 
+
+
+function order_cancel${inputIndex}${vs.index}(){
+	
+	var o_code = $("#o_code${vs.index}").val();
+	console.log(o_code);
+	param = {"o_code" : o_code};
+	Swal.fire({
+		  title: '[주문취소]',
+		  text: "주문을 취소하시겠습니까?",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '주문 취소',
+		  cancelButtonText :'아니요'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		   
+		    $.ajax({
+		        type: "POST",
+		        url: "/OrderCancel.store",
+		        data: JSON.stringify(param),
+		        dataType: "json",
+		        contentType: "application/json",
+		     success:function(data){
+		    	 Swal.fire({
+		   	        icon: "success",
+		   	        title: "삭제완료",
+		   	        showConfirmButton: false,
+		   	        timer: 1500
+		   	    });
+		     },
+		     error:function(data){
+		        console.log("주문삭제 통신에러");
+		     }
+			  
+			  
+		  });
+		  }
+		})
+	
+}
+
+
 </script>           
 <!-- Modal -->
 <div aria-hidden="true" aria-labelledby="myModalLabel"
@@ -748,6 +815,7 @@ function orderChange${vs.index}(){
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
 				<h4 class="modal-title" style="padding-top:7px">${storeOrders.o_code} 주문상세</h4>
+				
 			</div>
 			<!-- 	정보시작 -->
 	<div class="modal_wrapbodyy"  style="height:500px;background:#eaeaea;padding:30px 30px 0;color:black;">

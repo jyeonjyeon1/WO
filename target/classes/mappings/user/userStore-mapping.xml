@@ -19,8 +19,6 @@
 		<result column="SI_DUE_TIME" property="si_due_time" jdbcType="VARCHAR" />
 		<result column="SI_HOLIDAY_FIX" property="si_holiday_fix" jdbcType="VARCHAR" />
 		<result column="SI_HOLIDAY_IMSI" property="si_holiday_imsi" jdbcType="VARCHAR" />
-		<result column="SI_OPEN" property="si_open" jdbcType="VARCHAR" />
-		<result column="SI_CLOSE" property="si_close" jdbcType="VARCHAR" />
 		<result column="SI_REFERINFO" property="si_referinfo" jdbcType="VARCHAR" />
 		<result column="SI_MAP_IMAGE" property="si_map_image" jdbcType="VARCHAR" />
 		<result column="SI_DIRECTIONS" property="si_directions" jdbcType="VARCHAR" />
@@ -44,13 +42,15 @@
 	
 	<select id="storeListByPage" resultType="StoreVO" parameterType="StoreVO">
 
-	SELECT * FROM STORE_INFO a
+	SELECT DISTINCT SI_NAME,SI_LOC,SI_ADDRESS,SI_ADDR_ROAD,SI_ADDR_DETAIL,SI_TEL,SI_HOLIDAY_FIX,
+	SI_HOLIDAY_IMSI,SI_OPENA,SI_CLOSEA,SI_IMAGE,SI_ETC 
+	FROM STORE_INFO a
       JOIN MENU b
       USING (SI_CODE)
 	      WHERE 
-			<if test='searchType == "all"'> (SI_NAME || SI_ADDRESS || SI_ADDR_ROAD || M_NAME) LIKE '%' || #{search} || '%'</if> 
+			<if test='searchType == "all"'> (SI_NAME || SI_ADDRESS || SI_ADDR_ROAD) LIKE '%' || #{search} || '%'</if> 
 			<if test='searchType == "store"'> SI_NAME LIKE '%' || #{search} || '%'</if>
-			<if test='searchType == "adress"'> (SI_ADDRESS || SI_ADDR_ROAD) LIKE '%' || #{search} || '%'</if>
+			<if test='searchType == "adress"'> (SI_ADDRESS || SI_ADDR_ROAD || SI_LOC) LIKE '%' || #{search} || '%'</if>
 			<if test='searchType == "menu"'> M_NAME LIKE '%' || #{search} || '%'</if>
 		  	<if test='parking == "option1"'> AND SI_PARKING_ABLE = 'true'</if>
 		  	<if test='parking == "option2"'> AND SI_PARKING_ABLE = 'false' </if>
@@ -66,13 +66,13 @@
 	</select> 
 	
     <select id="storeListByPageCount" resultType="int" parameterType="StoreVO">
-	SELECT COUNT(*) FROM STORE_INFO a
+	SELECT COUNT(DISTINCT SI_NAME) FROM STORE_INFO a
       JOIN MENU b
       USING (SI_CODE)
       WHERE 
-      		<if test='searchType == "all"'> (SI_NAME || SI_ADDRESS || SI_ADDR_ROAD || M_NAME) LIKE '%' || #{search} || '%'</if> 
+      		<if test='searchType == "all"'> (SI_NAME || SI_ADDRESS || SI_ADDR_ROAD) LIKE '%' || #{search} || '%'</if> 
 			<if test='searchType == "store"'> SI_NAME LIKE '%' || #{search} || '%'</if>
-			<if test='searchType == "adress"'> (SI_ADDRESS || SI_ADDR_ROAD) LIKE '%' || #{search} || '%'</if>
+			<if test='searchType == "adress"'> (SI_ADDRESS || SI_ADDR_ROAD || SI_LOC) LIKE '%' || #{search} || '%'</if>
 			<if test='searchType == "menu"'> M_NAME LIKE '%' || #{search} || '%'</if>
 		  	<if test='parking == "option1"'> AND SI_PARKING_ABLE = 'true'</if>
 		  	<if test='parking == "option2"'> AND SI_PARKING_ABLE = 'false' </if>

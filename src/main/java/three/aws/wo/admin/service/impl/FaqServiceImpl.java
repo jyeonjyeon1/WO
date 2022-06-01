@@ -64,6 +64,12 @@ public class FaqServiceImpl implements FaqService {
 		
 		return userBoardDAO.newsList();
 	}
+	
+	@Override
+	public NoticeVO eventCHK(int eventNum) {
+		
+		return userBoardDAO.eventCHK(eventNum);
+	}
 //	
 //	@Override
 //	public List<NoticeVO> noticeList() {
@@ -120,5 +126,7 @@ public class FaqServiceImpl implements FaqService {
 	public void updateVisits(HashMap<String, Integer> param) {
 		userBoardDAO.updateVisits(param);	
 	}
+
+	
 	
 }

@@ -3,8 +3,14 @@ package three.aws.wo.admin.vo;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Data
+@Getter
+@Setter
+@ToString
 public class NoticeVO {
 	private int n_seq;
 	private String n_code;

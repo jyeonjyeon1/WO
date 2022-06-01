@@ -22,44 +22,23 @@
      <select id="toptenList" resultType="FAQVO" resultMap="faqVO">
 		SELECT * FROM FAQ ORDER BY FAC_VISITS DESC LIMIT 10;
 	</select> 
-	<!-- 
-	<select id="orderfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'order' or FAC_TYPE = 'payment' ORDER BY FAC_CODE DESC
-	</select>
-	
-	<select id="cancelfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'cancel' or FAC_TYPE = 'refund' ORDER BY FAC_CODE DESC
-	</select>
-	
-	<select id="userfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'user' ORDER BY FAC_CODE DESC
-	</select>
-	
-	<select id="pointfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'point' or FAC_TYPE = 'coupon' ORDER BY FAC_CODE DESC
-	</select>
-	
-	<select id="etcfaqList" resultType="FAQVO" resultMap="faqVO">
-		SELECT * FROM FAQ WHERE FAC_TYPE = 'etc' ORDER BY FAC_CODE DESC
-	</select>
-	 -->
 	<update id="updateVisits">
 		UPDATE FAQ SET FAC_VISITS = #{fac_visits} WHERE FAC_SEQ = #{fac_seq};
 	</update>
 
 	<!-- 워킹오더 소식 -->
 	<resultMap type="NoticeVO" id="noticeVO">
-		<id column="N_seq" property="n_seq" jdbcType="INTEGER"/>
-		<result column="N_code" property="n_code" jdbcType="VARCHAR" />
-		<result column="N_title" property="n_title" jdbcType="VARCHAR" />
-		<result column="N_content" property="n_content" jdbcType="VARCHAR"/>
-		<result column="N_regdate" property="n_regdate" jdbcType="DATE"/>
-		<result column="N_fix" property="n_fix" jdbcType="BOOLEAN" />
-		<result column="N_status" property="n_status" jdbcType="BOOLEAN" />
-		<result column="N_type" property="n_type" jdbcType="VARCHAR" />
-		<result column="N_pic_url" property="n_pic_url" jdbcType="VARCHAR" />
-		<result column="N_file_url" property="n_file_url" jdbcType="VARCHAR" />
-		<result column="N_enddate" property="n_enddate" jdbcType="DATE" />
+		<id column="N_SEQ" property="n_seq" jdbcType="INTEGER"/>
+		<result column="N_CODE" property="n_code" jdbcType="VARCHAR" />
+		<result column="N_TITLE" property="n_title" jdbcType="VARCHAR" />
+		<result column="N_CONTENT" property="n_content" jdbcType="VARCHAR"/>
+		<result column="N_REGDATE" property="n_regdate" jdbcType="DATE"/>
+		<result column="N_FIX" property="n_fix" jdbcType="BOOLEAN" />
+		<result column="N_STATUS" property="n_status" jdbcType="BOOLEAN" />
+		<result column="N_TYPE" property="n_type" jdbcType="VARCHAR" />
+		<result column="N_PIC_URL" property="n_pic_url" jdbcType="VARCHAR" />
+		<result column="N_FILE_URL" property="n_file_url" jdbcType="VARCHAR" />
+		<result column="N_ENDDATE" property="n_enddate" jdbcType="DATE" />
 
 <!-- 		<collection property="StoreVO" resultMap="StoreVO"></collection> -->
 	
@@ -69,14 +48,9 @@
 	<select id="newsList" resultType="NoticeVO" resultMap="noticeVO">
 		SELECT * FROM NOTICE_BOARD WHERE n_status = 'TRUE' ORDER BY n_seq DESC
 	</select>
-<!-- 	
-	<select id="noticeList" resultType="NoticeVO" resultMap="noticeVO">
-		SELECT * FROM NOTICE_BOARD WHERE n_type = 'notice' AND n_status = 'TRUE' ORDER BY n_seq DESC
+		<select id="eventCHK" resultType="NoticeVO">
+		SELECT * FROM NOTICE_BOARD WHERE n_seq = #{eventNum}
 	</select>
-	
-	<select id="eventList" resultType="NoticeVO" resultMap="noticeVO">
-		SELECT * FROM NOTICE_BOARD WHERE n_type = 'event' AND n_status = 'TRUE' ORDER BY n_seq DESC
-	</select> --> 
 	
 	<resultMap type="QnAVO" id="qnaVO">
 		<id column="QA_SEQ" property="qa_seq" jdbcType="INTEGER"/>

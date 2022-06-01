@@ -33,7 +33,17 @@
 		WHERE
 		N_SEQ = #{n_seq}
 	</select>
-	
+	<update id="updateFaq">
+		UPDATE FAQ SET FAC_TITLE = #{fac_title}, FAC_CONTENT = #{fac_content}
+		WHERE FAC_SEQ = #{fac_seq}
+	</update>
+	<delete id="deleteFaq">
+		DELETE FROM FAQ WHERE FAC_SEQ = #{fac_seq}
+	</delete>
+	<insert id="insertFaq">
+		INSERT INTO FAQ(FAC_TYPE,FAC_TITLE,FAC_CONTENT)
+		VALUES (#{fac_type},#{fac_title},#{fac_content})
+	</insert>
 
 	
 </mapper>

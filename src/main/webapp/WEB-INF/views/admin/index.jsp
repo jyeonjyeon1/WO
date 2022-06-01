@@ -146,14 +146,11 @@
     <!-- allmenu import -->
     <%@ include file="inc/admin_allmenu.jsp" %>
       <section class="wrapper">
-         
-
-
         
         <div class="row">
           
-          <!-- 이용자수 그래프 -->
-          <div class="col-lg-9 main-chart">
+          <!-- 이용자수 수치 -->
+          <div class="col-lg-12 main-chart">
             <!-- 위에 4개 친구들 -->
        
             <div class="col-lg-3 col-md-6 dash-div" >
@@ -174,11 +171,11 @@
             </div>
             <div class="col-lg-3 col-md-6 dash-div" >
               <div id= "" class="dash-top">방문자
-                <a href="by_graph.admin"><i class=" fa fa-angle-right" ></i>
+                <a href="connect_hist.admin"><i class=" fa fa-angle-right" ></i>
                 </a>
               </div>
               <div id= "" class="dash-bottom incr">
-                <i class=" fa fa-user"></i>&nbsp; zz</div>
+                <i class=" fa fa-user"></i>&nbsp; 1,230</div>
             </div>
             <div class="col-lg-3 col-md-6 dash-div" >
               <div id= "" class="dash-top">최고 매출 매장
@@ -193,13 +190,14 @@
             <div class="border-head" >
               <h3>이용자 수</h3>
             </div>
+            <div class="col-6-lg">
             <div class="custom-bar-chart">
               <ul class="y-axis">
-                <li><span>10.000</span></li>
-                <li><span>8.000</span></li>
-                <li><span>6.000</span></li>
-                <li><span>4.000</span></li>
-                <li><span>2.000</span></li>
+                <li><span>1000</span></li>
+                <li><span>800</span></li>
+                <li><span>600</span></li>
+                <li><span>400</span></li>
+                <li><span>200</span></li>
                 <li><span>0</span></li>
               </ul>
               <div class="bar">
@@ -207,50 +205,51 @@
                 <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
               </div>
               <div class="bar ">
-                <div class="title">FEB</div>
+                <div class="title">2월</div>
                 <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
               </div>
               <div class="bar ">
-                <div class="title">MAR</div>
+                <div class="title">3월</div>
                 <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
               </div>
               <div class="bar ">
-                <div class="title">APR</div>
+                <div class="title">4월</div>
                 <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
               </div>
               <div class="bar">
-                <div class="title">MAY</div>
+                <div class="title">5월</div>
                 <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
               </div>
               <div class="bar ">
-                <div class="title">JUN</div>
+                <div class="title">6월</div>
                 <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
               </div>
               <div class="bar">
-                <div class="title">JUL</div>
+                <div class="title">7월</div>
                 <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
               </div>
               <div class="bar">
-                <div class="title">AUG</div>
+                <div class="title">8월</div>
                 <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
               </div>
               <div class="bar ">
-                <div class="title">SEP</div>
+                <div class="title">9월</div>
                 <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
               </div>
               <div class="bar ">
-                <div class="title">OCT</div>
+                <div class="title">10월</div>
                 <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
               </div>
               <div class="bar ">
-                <div class="title">NOV</div>
+                <div class="title">11월</div>
                 <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
               </div>
               <div class="bar">
-                <div class="title">DEC</div>
-                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
+                <div class="title">12월</div>
+                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">2%</div>
               </div>
               
+            </div>
             </div>
             <!--custom chart end-->
             <div class="row mt">
@@ -284,12 +283,11 @@
                   <div class="row">
                     <div class="goleft dash-list white">
                       <ul>
-                        <a href="notices.admin"><li>[이용] 어떤 문의 1</li></a>
-                        <a href="notices.admin"><li>[건의] 어떤 문의 2</li></a>
-                        <a href="notices.admin"><li>[신고] 어떤 문의 3</li></a>
-                        <a href="notices.admin"><li>[기타] 어떤 문의 4</li></a>
-                        <a href="notices.admin"><li>[이벤트] 어떤 문의 5</li></a>
-                        <a href="notices.admin"><li>[이용] 어떤 문의 6</li></a>
+                      <c:forEach var="adminqnaList" items="${adminqnaList}" varStatus="vs">
+                      	<c:if test="${vs.index lt 8 }">
+                      		<a href="/inquiry_answer.admin?qa_seq=${adminqnaList.qa_seq}"><li>${adminqnaList.qa_title}</li></a>
+                      	</c:if>
+                      </c:forEach>
                       </ul>
                     </div>
                   </div>
@@ -319,8 +317,8 @@
           <!-- **********************************************************************************************************************************************************
               RIGHT SIDEBAR CONTENT
               *********************************************************************************************************************************************************** -->
-          <div class="col-lg-3 ds">
-            <!--COMPLETED ACTIONS DONUTS CHART-->
+          <!-- <div class="col-lg-3 ds">
+            COMPLETED ACTIONS DONUTS CHART
             <div class="donut-main">
               <h4>COMPLETED ACTIONS & PROGRESS</h4>
               <canvas id="newchart" height="130" width="130"></canvas>
@@ -337,7 +335,7 @@
                 var myDoughnut = new Chart(document.getElementById("newchart").getContext("2d")).Doughnut(doughnutData);
               </script>
             </div>
-            <!--NEW EARNING STATS -->
+            NEW EARNING STATS
             <div class="panel terques-chart">
               <div class="panel-body">
                 <div class="chart">
@@ -350,10 +348,10 @@
                 </div>
               </div>
             </div>
-            <!--new earning end-->
-            <!-- RECENT ACTIVITIES SECTION -->
+            new earning end
+            RECENT ACTIVITIES SECTION
             <h4 class="centered mt">RECENT ACTIVITY</h4>
-            <!-- First Activity -->
+            First Activity
             <div class="desc">
               <div class="thumb">
                 <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
@@ -366,7 +364,7 @@
                 </p>
               </div>
             </div>
-            <!-- Second Activity -->
+            Second Activity
             <div class="desc">
               <div class="thumb">
                 <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
@@ -379,7 +377,7 @@
                 </p>
               </div>
             </div>
-            <!-- Third Activity -->
+            Third Activity
             <div class="desc">
               <div class="thumb">
                 <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
@@ -392,7 +390,7 @@
                 </p>
               </div>
             </div>
-            <!-- Fourth Activity -->
+            Fourth Activity
             <div class="desc">
               <div class="thumb">
                 <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
@@ -405,9 +403,9 @@
                 </p>
               </div>
             </div>
-            <!-- USERS ONLINE SECTION -->
+            USERS ONLINE SECTION
             <h4 class="centered mt">TEAM MEMBERS ONLINE</h4>
-            <!-- First Member -->
+            First Member
             <div class="desc">
               <div class="thumb">
                 <img class="img-circle" src="resources/assets/images/admin/ui-divya.jpg" width="35px" height="35px" align="">
@@ -419,7 +417,7 @@
                 </p>
               </div>
             </div>
-            <!-- Second Member -->
+            Second Member
             <div class="desc">
               <div class="thumb">
                 <img class="img-circle" src="resources/assets/images/admin/ui-sherman.jpg" width="35px" height="35px" align="">
@@ -431,7 +429,7 @@
                 </p>
               </div>
             </div>
-            <!-- Third Member -->
+            Third Member
             <div class="desc">
               <div class="thumb">
                 <img class="img-circle" src="resources/assets/images/admin/ui-danro.jpg" width="35px" height="35px" align="">
@@ -443,7 +441,7 @@
                 </p>
               </div>
             </div>
-            <!-- Fourth Member -->
+            Fourth Member
             <div class="desc">
               <div class="thumb">
                 <img class="img-circle" src="resources/assets/images/admin/ui-zac.jpg" width="35px" height="35px" align="">
@@ -455,7 +453,7 @@
                 </p>
               </div>
             </div>
-            <!-- CALENDAR-->
+            CALENDAR
             <div id="calendar" class="mb">
               <div class="panel green-panel no-margin">
                 <div class="panel-body">
@@ -468,8 +466,8 @@
                 </div>
               </div>
             </div>
-            <!-- / calendar -->
-          </div>
+            / calendar
+          </div> -->
           <!-- /col-lg-3 -->
         </div>
         <!-- /row -->

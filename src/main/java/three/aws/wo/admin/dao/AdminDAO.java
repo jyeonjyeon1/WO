@@ -49,4 +49,7 @@ public class AdminDAO {
 	public AdminVO adminLoggin(String a_id) {
 		return sqlSession.selectOne("AdminDAO.adminLoggin", a_id);
 	}
+	public void deleteNotice(HashMap<String, Object> param) {
+		sqlSession.delete("AdminDAO.deleteNotice",param);
+	}
 }

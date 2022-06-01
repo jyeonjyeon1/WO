@@ -18,4 +18,5 @@ public interface AdminService {
 	void deleteFaq(HashMap<String, Object> param);
 	void insertFaq(FAQVO vo);
 	AdminVO adminLoggin(String a_id);
+	void deleteNotice(HashMap<String, Object> param);
 }

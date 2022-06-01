@@ -190,14 +190,14 @@
 
 								<tbody>
 								<c:forEach var="noticeList" items="${noticeList}" varStatus="vs">
-										<tr>
+										<tr id="noticeRow${vs.index}">
 											<td>${noticeList.n_seq}</td>
 											<td><c:choose>
 													<c:when test="${noticeList.n_type eq 'event'}">이벤트</c:when>
 													<c:otherwise>공지</c:otherwise>
 												</c:choose></td>
 											<td>${noticeList.n_title}</td>
-											<td>관리자</td>
+											<td>관리자 <input type="hidden" id="n_eq${vs.index }" value="${noticeList.n_seq}"></td>
 											<td>
 												<c:choose>
 													<c:when test="${noticeList.n_status eq 'true'}">공개</c:when>
@@ -211,11 +211,12 @@
 													class="btn btn-primary btn-xs">
 													<i class="fa fa-pencil"></i>
 												</button>
-												<button type="button" onclick="javascript:deleteAlert();"
+												<button type="button" onclick="deleteRow${vs.index}()"
 													class="btn btn-danger btn-xs">
 													<i class="fa fa-trash-o "></i>
 												</button></td>
 										</tr>
+
 			<div aria-hidden="true" aria-labelledby="myModalLabel"
 				role="dialog" tabindex="-1" id="myModal${vs.index}"
 				class="modal fade" style="margin: 20px auto 0;">
@@ -276,6 +277,44 @@
 					</div>
 				</div>
 				<!-- /modal -->
+<script>
+function deleteRow${vs.index}(){
+	  Swal.fire({
+		    title: "정말 삭제하시겠습니까?",
+		    text: "삭제시 복구할 수 없습니다.",
+		    icon: "warning",
+		    showCancelButton: true,
+		    confirmButtonColor: "#3085d6",
+		    cancelButtonColor: "#d33",
+		    confirmButtonText: "네",
+		    cancelButtonText: "아니오"
+	  }).then((result) => {
+	    if (result.isConfirmed) {
+	    	//DB에서 삭제
+			let n_seq = parseInt($("#n_seq${vs.index}").val());
+	    	$.ajax({
+	             type: "POST",
+	             url: "/deleteNotice.admin",
+	             data: JSON.stringify({"n_seq":n_seq}),
+	             dataType: "json",
+	             contentType: "application/json",
+	          success:function(data){
+	        	//화면에서 삭제
+	        	  document.getElementById("noticeRow${vs.index}").style.display = "none"
+	          },
+	          error:function(data){
+	             console.log("확인");
+	          }
+	       }); //ajax 끝 
+	      Swal.fire(
+	        "삭제완료",
+	        "삭제되었습니다.",
+	        "success"
+	      );
+	    }
+	  });
+}
+</script>
 		</c:forEach>
 								
 									<tr>

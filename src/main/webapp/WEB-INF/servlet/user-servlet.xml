@@ -30,6 +30,8 @@
 		<mvc:exclude-mapping path="/emailcheck.user"/>
 		<mvc:exclude-mapping path="/menuList.user"/>
 		<mvc:exclude-mapping path="/storeList.user"/>
+		<mvc:exclude-mapping path="/event.user"/>
+		<mvc:exclude-mapping path="/faq.user"/>
 		<mvc:exclude-mapping path="/map.user"/>
 		<mvc:exclude-mapping path="/list.user"/>
 		<mvc:exclude-mapping path="/index.user"/>

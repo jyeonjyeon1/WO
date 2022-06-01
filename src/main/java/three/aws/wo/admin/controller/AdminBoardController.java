@@ -105,4 +105,17 @@ public class AdminBoardController {
 		return "redirect:/faq_mng.admin";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/deleteNotice.admin")
+	public int deleteNotice(@RequestBody HashMap<String,Object> param) {
+		int result = 0;
+		try {
+			adminService.deleteNotice(param);
+			result = 1;
+		} catch (Exception e) {
+		}
+		
+		return result;
+	}
+	
 }

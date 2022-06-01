@@ -98,11 +98,11 @@ public class UserController {
 //		return "/mypage/mypage_currentOrder";
 //	}
 	
-	@GetMapping("/mypage.user")
-	public String tomainPage() {
-		System.out.println("main");
-		return "/mypage/mypage_main";
-	}
+//	@GetMapping("/mypage.user")
+//	public String tomainPage() {
+//		System.out.println("main");
+//		return "/mypage/mypage_main";
+//	}
 	
 //	@GetMapping("/myCoupon.user")
 //	public String tomyCouponPage() {

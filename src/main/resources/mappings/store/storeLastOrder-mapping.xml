@@ -4,7 +4,7 @@
 <!-- namespace=dao이름 -->
 <mapper namespace="SOrderserviceDAO">
 	<select id="orderList" resultType="OrdersVO">
-		SELECT * FROM ORDERS o
+		SELECT *, to_char(o.o_order_date,'yyyy-MM-dd') as o__date FROM ORDERS o
 		INNER JOIN
 		USERS u
 		ON (o.U_ID = u.U_ID)
@@ -213,7 +213,12 @@
 	
 	</select>
 	
+	<select id="dailyOutput">
+	SELECT DATE(O_ORDER_DATE) AS O__DATE, COUNT(O_CODE) AS O_SEQ, SUM(O_TOTAL_PRICE) AS O_TOTAL_PRICE FROM ORDERS 
+	WHERE O_ORDER_DATE <![CDATA[>]]> #{inputStrDate} AND O_ORDER_DATE <![CDATA[<=]]> #{inputEndDate}
+	AND SI_CODE = #{si_code}
+	GROUP BY DATE(O_ORDER_DATE) ORDER BY DATE(O_ORDER_DATE) DESC;
+	</select>
 
-	
 	
 </mapper>

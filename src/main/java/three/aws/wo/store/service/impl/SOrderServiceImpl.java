@@ -47,6 +47,10 @@ public class SOrderServiceImpl implements SOrderService {
 	public List<BasketVO> dateOPeriodDt(HashMap<String , String> map) {
 		return sOrderServiceDAO.dateOPeriodDt(map);
 	}
+	@Override
+	public List<OrdersVO> dailyOutput(HashMap<String , String> map) {
+		return sOrderServiceDAO.dailyOutput(map);
+	}
 	
 	
 }

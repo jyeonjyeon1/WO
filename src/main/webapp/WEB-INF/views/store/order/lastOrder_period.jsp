@@ -196,7 +196,7 @@ $(document).ready(function(){
       <section class="wrapper" style="height: 1500px;">
        
 
-  <div class="col-lg-11" style="min-width: 500px;">
+  
       <div class="card-header" style="font-size: 16px;">
         <i class="fa fa-plus-circle" style="font-size: 14px; margin-bottom: 15px; "></i>지난주문 관리
         <div class="row">

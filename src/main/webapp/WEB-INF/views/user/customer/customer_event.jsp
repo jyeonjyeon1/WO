@@ -33,7 +33,7 @@
               <div style="padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; color: #232323; background: #fff8e8; border-left: solid 10px #ffc06e;">
                 <h3 style="margin-bottom: 15px; float:left;"> ${eventCHK.n_title } </h3><br>
                 <div class="product__details__rating" style="margin-top: 15px; margin-bottom: 15px; margin-left: 20px; "></div>
-                  <br><div><span>${eventCHK.n_regdate}</span></div>
+                  <br><div><span><fmt:formatDate value="${eventCHK.n_regdate}" pattern="yy-MM-dd a hh:mm"/></span></div>
                 </div>
                 <div style="text-align: center;">
                 <img src="${eventCHK.n_file_url}" style="max-width: 100%; height: auto;"></div>

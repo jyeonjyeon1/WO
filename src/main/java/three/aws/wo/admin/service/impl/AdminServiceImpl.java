@@ -66,4 +66,23 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteNotice(HashMap<String, Object> param) {
 		adminDAO.deleteNotice(param);
 	}
+	
+	@Override
+	public int dailySales() {
+		return adminDAO.dailySales();
+	}
+	@Override
+	public int monthlySales() {
+		return adminDAO.monthlySales();
+	}
+
+	@Override
+	public int dailyReg() {
+		return adminDAO.dailyReg();
+	}
+
+	@Override
+	public int dailyVisit() {
+		return adminDAO.dailyVisit();
+	}
 }

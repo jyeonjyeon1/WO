@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,31 +155,31 @@
           <div class="col-lg-12 main-chart">
             <!-- 위에 4개 친구들 -->
        
-            <div class="col-lg-3 col-md-6 dash-div" >
-              <div id= "" class="dash-top">일 매출
+            <div class="col-lg-3 col-md-6 dash-div" onclick="location.href='order_period.admin'">
+              <div id= "" class="dash-top">일 매출 (${formatDate})
                 <a href="order_period.admin"><i class=" fa fa-angle-right" ></i>
                   </a>
                 </div>
               <div id= "" class="dash-bottom incr">
-                <i class=" fa fa-krw"></i> 775,600</div>
+                 <i class=" fa fa-krw"></i> <fmt:formatNumber value="${dailySales}" pattern="###,###"/></div>
             </div>
-            <div class="col-lg-3 col-md-6 dash-div" >
+            <div class="col-lg-3 col-md-6 dash-div" onclick="location.href='order_period.admin'">
               <div id= "" class="dash-top">신규 회원
                 <a href="user_mng.admin"><i class=" fa fa-angle-right" ></i>
                 </a>
               </div>
               <div id= "" class="dash-bottom decr">
-                <i class=" fa fa-user"></i> &nbsp;48</div>
+                <i class=" fa fa-user"></i> &nbsp;${dailyReg }</div>
             </div>
-            <div class="col-lg-3 col-md-6 dash-div" >
+            <div class="col-lg-3 col-md-6 dash-div" onclick="location.href='connect_hist.admin'">
               <div id= "" class="dash-top">방문자
                 <a href="connect_hist.admin"><i class=" fa fa-angle-right" ></i>
                 </a>
               </div>
               <div id= "" class="dash-bottom incr">
-                <i class=" fa fa-user"></i>&nbsp; 1,230</div>
+                <i class=" fa fa-user"></i>&nbsp; <fmt:formatNumber value="${dailyVisit}" pattern="###,###"></fmt:formatNumber>  </div>
             </div>
-            <div class="col-lg-3 col-md-6 dash-div" >
+            <div class="col-lg-3 col-md-6 dash-div" onclick="location.href='store_mng.admin'">
               <div id= "" class="dash-top">최고 매출 매장
                 <a href="store_mng.admin"><i class=" fa fa-angle-right" ></i>
                 </a>
@@ -304,7 +306,7 @@
                   <div class="chart mt">
                     <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
                   </div>
-                  <p class="mt"><b>￦ 17,980,500</b><br/>Month Income</p>
+                  <h4 class="mt"><b>￦ <fmt:formatNumber value="${monthlySales}" pattern="###,###"/></b><br/>${formatDate.substring(0,7) }</h4>
                 </div>
               </div>
               <!-- /col-md-4 -->

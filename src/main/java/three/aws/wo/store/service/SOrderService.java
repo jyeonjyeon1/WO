@@ -16,6 +16,6 @@ public interface SOrderService {
 	
 	List<OrdersVO> dateOPeriod(HashMap<String, String> map);
 	List<BasketVO> dateOPeriodDt(HashMap<String, String> map);
-
+	List<OrdersVO> dailyOutput(HashMap<String, String> map);
 	
 }

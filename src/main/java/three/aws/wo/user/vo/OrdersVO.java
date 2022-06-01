@@ -14,21 +14,23 @@ public class OrdersVO {
 	private boolean o_coupon_status;
 	private String c_code;
 	private String o_list;
-	private boolean o_point_status;	//Æ÷ÀÎ½º »ç¿ë¿©ºÎ
+	private boolean o_point_status;	//ï¿½ï¿½ï¿½Î½ï¿½ ï¿½ï¿½ë¿©ï¿½ï¿½
 	private String o_point;
-	private String o_payment_list;	//°áÁ¦ ¹æ¹ý
-	private String o_request;		//¿äÃ»»çÇ×
-	private int o_discount_price;	//ÇÒÀÎµÈ ±Ý¾×
-	private int o_total_price;		//ÃÑ ±Ý¾×
-	private String o_order_state;	//ÁÖ¹® »óÅÂ (°áÁ¦¿Ï·á Á¢¼ö ÁØºñ µî)
-	private int o_daily_seq;		//ÁÖ¹®¹øÈ£ »ý¼ºÀ» À§ÇÔ)
-	private boolean o_payment_status;	//°áÁ¦¼ºÅÂ
-	private boolean o_review;	//¸®ºä»óÅÂ
+	private String o_payment_list;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private String o_request;		//ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½
+	private int o_discount_price;	//ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ý¾ï¿½
+	private int o_total_price;		//ï¿½ï¿½ ï¿½Ý¾ï¿½
+	private String o_order_state;	//ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ ï¿½ï¿½)
+	private int o_daily_seq;		//ï¿½Ö¹ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+	private boolean o_payment_status;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private boolean o_review;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	//¿Ü·¡
+	//ï¿½Ü·ï¿½
 	private String u_name;
 	private String u_tel;
 	private String si_name;
 	private String si_loc;
+	
+	private String o__date;
 
 }

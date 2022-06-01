@@ -39,4 +39,10 @@ public class SOrderserviceDAO {
 	public List<BasketVO> dateOPeriodDt(HashMap<String, String> map) {
 		return sqlSession.selectList("SOrderserviceDAO.dateOPeriodDt",map);
 	}
+	
+	public List<OrdersVO> dailyOutput(HashMap<String, String> map) {
+		return sqlSession.selectList("SOrderserviceDAO.dailyOutput",map);
+	}
+	
+	
 }

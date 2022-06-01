@@ -63,7 +63,33 @@
     }
     </style>
 
+<script>
 
+
+$(document).ready(function(){
+	
+	 $( 'input[name="dateOneday"]' ).change( function() {
+		 var picked_date1 = $("#dateOneday").val();
+			console.log(picked_date1);
+			
+		 var param = {"picked_date1" : picked_date1}
+        
+         $.ajax({
+ 	        url : "dateSoneday.store?picked_date1="+picked_date1,
+ 	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+ 	        type: "get",
+ 	        success: function(data) {
+ 	        	console.log("성공");
+ 	        	
+ 	           $("#SSOneday").html(data);  // forprepend 
+ 	        
+ 	        },
+ 	        error: function(data){alert("실패");}
+ 	    });
+	 });
+
+});
+</script>
     
 
 </head>
@@ -83,8 +109,8 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">더리터 위례점</h5>
+          <p class="centered"><a><img src="${storeSession.si_image}" class="img-circle" width="80"></a></p>
+          <h5 class="centered">${storeSession.si_name } ${storeSession.si_loc}</h5>
           <p class="sidebar-title" >주문 확인</p>
           <li class="sub-menu">
             <a  href="index.store">
@@ -168,10 +194,13 @@
               <i class="fa fa-plus-circle" style="font-size: 14px; "></i>
               오늘 매출
               </div>
-              <i class="fa fa-plus-circle" style="font-size: 14px; "></i> 날짜설정<input id="datepicker" width="276" />
-              <script>
-                $('#datepicker').datepicker();
-            </script>
+               <div class="row">
+        <div class="col-lg-3" style="margin-bottom: 20px;"> 
+<input id="dateOneday" name="dateOneday" class="form-control round-form" type="date" value="년.월.일" style="width: 70%; display: inline-block; float:left;"> 
+                        
+</div>
+        
+      </div>
             </div>
 
             <div class="form-panel" style="margin-top:0;  border-radius: 0 0 10px 10px;">
@@ -179,7 +208,7 @@
                 <div class="row content-panel" style="border: none; box-shadow: none;padding: 0;margin:0 5px">
                   
                   <!-- /panel-heading -->
-                  <div class="panel-body col-lg-12" style="padding: 0 11px 11px 11px;">
+                  <div class="panel-body col-lg-12" id="SSOneday" style="padding: 0 11px 11px 11px;">
                     <div class="tab-content">
                       <!-- 메뉴관리 -->
                       <div id="menu" class="tab-pane active no-padding">

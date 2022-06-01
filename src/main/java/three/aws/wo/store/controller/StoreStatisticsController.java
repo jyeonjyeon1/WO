@@ -25,16 +25,16 @@ import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.BasketVO;
 import three.aws.wo.user.vo.OrdersVO;
 @Controller
-public class StoreLastOrderController {
+public class StoreStatisticsController {
 	
 	@Inject
 	private SOrderService sOrderService;
 	
-	
 
 	
-	@RequestMapping("/Ooneday.store")
-	public String toOOnedayPage(HttpSession session, Model model) {
+
+	@RequestMapping("/SOneday.store")
+	public String SOnedayPage(HttpSession session, Model model) {
 		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
 		String si_code = "";
 		if(svo != null) {
@@ -42,23 +42,17 @@ public class StoreLastOrderController {
 		} else {
 			si_code ="2222111212";
 		}
-
 		
 		List<OrdersVO> orderList = sOrderService.orderList(si_code);
 		model.addAttribute("orderList", orderList);
 		List<BasketVO> orderDetailList =sOrderService.orderDetailList(si_code);
 		model.addAttribute("orderDetailList", orderDetailList);
 		
-		
-		
-		return "/order/lastOrder_oneday";
+		return "/statistics/statistics_oneday";
 	}
 	
-	
-	
-	
-	@RequestMapping("/dateOoneday.store")
-	public String dateOoneday(HttpServletRequest request, HttpSession session, Model model) {
+	@RequestMapping("/dateSoneday.store")
+	public String dateSoneday(HttpServletRequest request, HttpSession session, Model model) {
 		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
 		String si_code = "";
 		if (svo != null) {
@@ -69,9 +63,6 @@ public class StoreLastOrderController {
 		
 		String picked_date1 = request.getParameter("picked_date1");
 		System.out.println(picked_date1);
-		
-		
-			
 		
 		LocalDate inputDate = LocalDate.parse(picked_date1, DateTimeFormatter.ISO_DATE);
 		
@@ -86,12 +77,31 @@ public class StoreLastOrderController {
 		List<BasketVO> dateOonedayDt = sOrderService.dateOonedayDt(map);
 		model.addAttribute("orderDetailList", dateOonedayDt);
 		
-
-		return "/order/orderByDate";
+		System.out.println("ddd");
+		
+		return "/statistics/SSoneday";
 	}
 	
 	
-	@RequestMapping("/dateOPeriod.store")
+	@GetMapping("/SPeriod.store")
+	public String toSOnedayPage(HttpSession session, Model model) {
+		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
+		String si_code = "";
+		if(svo != null) {
+			si_code = svo.getSi_code();
+		} else {
+			si_code ="2222111212";
+		}
+		
+		List<OrdersVO> orderList = sOrderService.orderList(si_code);
+		model.addAttribute("orderList", orderList);
+		List<BasketVO> orderDetailList =sOrderService.orderDetailList(si_code);
+		model.addAttribute("orderDetailList", orderDetailList);
+		
+		return "/statistics/statistics_period";
+	}
+	
+	@RequestMapping("/dateSPeriod.store")
 	public String dateOPeriod(HttpServletRequest request, HttpSession session, Model model) {
 		
 		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
@@ -114,35 +124,11 @@ public class StoreLastOrderController {
 		model.addAttribute("dateOPeriod", dateOPeriod);
 		List<BasketVO> dateOPeriodDt =sOrderService.dateOPeriodDt(map);
 		model.addAttribute("dateOPeriodDt", dateOPeriodDt);
-		return "/order/orderByDate_period";
-	}
-	
-	
-	@RequestMapping("/Operiod.store")
-	public String OperiodPage(HttpSession session, Model model) {
-		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
-		String si_code = "";
-		if(svo != null) {
-			si_code = svo.getSi_code();
-		} else {
-			si_code ="2222111212";
-		}
+		List<OrdersVO> dailyOutput = sOrderService.dailyOutput(map);
+		model.addAttribute("dailyOutput", dailyOutput);
 		
-		List<OrdersVO> orderList = sOrderService.orderList(si_code);
-		model.addAttribute("orderList", orderList);
-		List<BasketVO> orderDetailList =sOrderService.orderDetailList(si_code);
-		model.addAttribute("orderDetailList", orderDetailList);
-		
-		return "/order/lastOrder_period";
+		return "/statistics/SSperiod";
 	}
-	
-	
-
-
-	
-	
-
-	
 	
 	
 }

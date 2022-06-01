@@ -61,21 +61,20 @@
 							<div class="col-lg-2 col-md-7">
 								<select class="dateSelect" id="specificSizeSelect">
 									<!--오늘날짜로 selected 하기-->
-									<option selected>2021년</option>
 									<option value="2019">2010년</option>
 									<option value="2020">2020년</option>
 									<option value="2021">2021년</option>
+									<option value="2022" selected>2022년</option>
 								</select>
 							</div>
 							<div class="col-lg-2 col-md-7">
 								<select class="dateSelect" id="specificSizeSelect">
-									<option selected>4월</option>
 									<option value="1">1월</option>
 									<option value="2">2월</option>
 									<option value="3">3월</option>
 									<option value="4">4월</option>
 									<option value="5">5월</option>
-									<option value="6">6월</option>
+									<option value="6" selected>6월</option>
 									<option value="7">7월</option>
 									<option value="8">8월</option>
 									<option value="9">9월</option>
@@ -86,10 +85,9 @@
 							</div>
 							<div class="col-lg-2 col-md-7">
 								<select class="dateSelect" id="specificSizeSelect">
-									<option selected>7일</option>
 									<option value="1">1일</option>
 									<option value="2">2일</option>
-									<option value="3">3일</option>
+									<option value="3" selected>3일</option>
 								</select>
 							</div>
 
@@ -122,16 +120,18 @@
 										<c:otherwise><a href="/menuList.user?store=${userPointList.si_code }"><h6>${userPointList.si_name}(${userPointList.si_loc})</h6></a></c:otherwise></c:choose>
 										
 										<h4>${userPointList.pt_description}</h4>
-											<p>${(userPointList.pt_regdate).substring(0,19)} (2022.03.23 만료)</p></td>
+											<p>${(userPointList.pt_regdate).substring(0,19)} (${(userPointList.pt_regdate).substring(0,10).replace("2022","2023")} 만료)</p></td>
 										<td>
 											
 											<c:choose>
 													<c:when test="${userPointList.pt_amount gt 0}">
-														<h3>+${userPointList.pt_amount}</h3>
+														<h3>+<fmt:formatNumber value="${userPointList.pt_amount }"
+										pattern="###,###" /></h3>
 														<p class="plus">적립</p>
 													</c:when>
 													<c:otherwise>
-														<h2>${userPointList.pt_amount}</h2>
+														<h2><fmt:formatNumber value="${userPointList.pt_amount }"
+										pattern="###,###" /></h2>
 														<p class="minus">사용</p>
 													</c:otherwise>
 												</c:choose>

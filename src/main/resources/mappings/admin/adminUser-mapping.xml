@@ -21,14 +21,14 @@
 	</resultMap>
 	
 	<select id="userList" resultType="UserVO" resultMap="userVO">
-		SELECT * FROM USERS ORDER BY U_SEQ DESC
+		SELECT * FROM USERS ORDER BY U_REGDATE DESC
 	</select>
 	<select id="visitHistory" resultType="UserVO">
 		SELECT * FROM VISIT_HISTORY vh
 		INNER JOIN
 		USERS u
 		ON (vh.U_ID = u.U_ID)
-		ORDER BY vh.VH_SEQ DESC
+		ORDER BY vh.VH_TIME DESC
 	</select>
 	<select id="getOriginalPass" resultType="String">
     	SELECT U_PASSWORD FROM USERS

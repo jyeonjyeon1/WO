@@ -26,7 +26,7 @@ public class StoreIndexController {
 
 	@RequestMapping("/index.store")
 	public String toindexPage(HttpSession session, Model model) {
-		System.out.println("store index");
+//		System.out.println("store index");
 		StoreVO svo = (StoreVO) session.getAttribute("storeSession");
 		String si_code = "";
 		if (svo != null) {

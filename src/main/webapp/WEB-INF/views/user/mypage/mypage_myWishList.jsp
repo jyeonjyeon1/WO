@@ -161,7 +161,7 @@
 						<c:forEach var="myWishList" items="${myWishList}"
 							varStatus="vs">
 							
-							<a class="col-11 search_result_list_col" href="jw3.html">
+							<a class="col-11 search_result_list_col" href="/menuList.user?store=${myWishList.si_code }">
 								<div class="row">
 									<div class="col-2 search_list_img_bg">
 										<img src="${myWishList.si_image}"
@@ -184,7 +184,7 @@
 										</div>
 										<div class="row">
 											<lable class="col-4 search_list_option">영업시간 </lable>
-											<lable class="col-7 search_list_option_re ">${myWishList.si_open}~${myWishList.si_close} </lable>
+											<lable class="col-7 search_list_option_re ">${myWishList.si_openA}~${myWishList.si_closeA} </lable>
 										</div>
 
 									</div>

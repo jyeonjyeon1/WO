@@ -19,8 +19,8 @@ public class UserWishVO {
 	private String si_loc;
 	private String si_addr_road;
 	private String si_tel;
-	private String si_open;
-	private String si_close;
+	private String si_openA;
+	private String si_closeA;
 	private String si_image;
 	private Criteria cri;
 	

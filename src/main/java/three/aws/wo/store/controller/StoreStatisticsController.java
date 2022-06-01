@@ -120,6 +120,7 @@ public class StoreStatisticsController {
 		map.put("si_code", si_code);
 		map.put("inputStrDate", dateOneday);
 		map.put("inputEndDate", dateOneday2);
+		System.out.println("map : "+map);
 		List<OrdersVO> dateOPeriod = sOrderService.dateOPeriod(map);
 		model.addAttribute("dateOPeriod", dateOPeriod);
 		List<BasketVO> dateOPeriodDt =sOrderService.dateOPeriodDt(map);

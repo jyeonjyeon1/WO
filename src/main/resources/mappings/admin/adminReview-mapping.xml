@@ -8,7 +8,7 @@
 	<select id="reviewList" resultType="ReviewVO">
 		SELECT U.U_NAME, U.U_TEL, UR.*, O.O_LIST_DETAIL, O_TOTAL_PRICE, SI.SI_NAME, SI.SI_LOC 
 			FROM USER_REVIEW UR JOIN USERS U ON UR.U_ID = U.U_ID JOIN ORDERS O ON UR.O_CODE = O.O_CODE JOIN STORE_INFO SI ON UR.SI_CODE = SI.SI_CODE 
-			ORDER BY UR_SEQ DESC
+			ORDER BY UR_REGDATE DESC
 	</select>
 
 	<update id="updateReview" parameterType="ReviewVO">

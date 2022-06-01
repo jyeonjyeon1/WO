@@ -135,4 +135,12 @@ public class AStoreServiceImpl implements AStoreService {
 	public void updateStoreImage(HashMap<String, String> param) {
 		aStoreDAO.updateStoreImage(param);
 	}
+	@Override
+	public void makeOption(String sf_code) {
+		aStoreDAO.makeOption(sf_code);
+	}
+	@Override
+	public void makeOptionGroup(String sf_code) {
+		aStoreDAO.makeOptionGroup(sf_code);
+	}
 }

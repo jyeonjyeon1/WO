@@ -100,8 +100,7 @@
 							class=" fa fa-bar-chart-o"></i> <span>통계</span>
 					</a>
 						<ul class="sub">
-							<li><a href="order_period.admin">기간별 주문
-									통계</a></li>
+							
 							<li><a href="store_sales.admin">매장별 매출
 									통계</a></li>
 							<li><a href="by_chart.admin">차트로 확인</a></li>

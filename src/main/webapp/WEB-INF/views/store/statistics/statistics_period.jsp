@@ -258,25 +258,24 @@ $(document).ready(function(){
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr>
-                                          <td>판매건수</td><td>
-                                          <c:set var = "total" value = "0" />
+                                     <tr>
+                                        <td>판매건수</td><td>
+                                         <c:set var = "total" value = "0" />
 								<c:forEach var="orderList" items="${orderList}" varStatus="status"> 
 								<c:set var= "total" value="${total + 1}"/>
 								</c:forEach>
 								${total } 건
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td>매출액</td><td>
-                                           <c:set var = "total1" value = "0" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>매출액</td><td>
+                                         <c:set var = "total1" value = "0" />
 								<c:forEach var="orderList" items="${orderList}" varStatus="status"> 
 								<c:set var= "total1" value="${total1 + orderList.o_total_price}"/>
 								</c:forEach>
-                                          
-                                          
-                                          </td>
-                                      </tr>
+								<fmt:formatNumber value="${total1}" pattern="###,###"/> 원
+                                        </td>
+                                    </tr>
                                       
                                   </tbody>
                                  
@@ -291,67 +290,28 @@ $(document).ready(function(){
                                 <div id="faq__222" class="tab-pane">
 
                                    
-                                    <div class="row">
-                                    <div class="custom-bar-chart">
+                                  <!--   <div class="row">
+                                    <div class="custom-bar-chart" data-placement="center">
                                         <ul class="y-axis">
-                                          <li><span>10.000</span></li>
-                                          <li><span>8.000</span></li>
-                                          <li><span>6.000</span></li>
-                                          <li><span>4.000</span></li>
-                                          <li><span>2.000</span></li>
+                                        	<li><span>50만</span></li>
+                                          <li><span>40만</span></li>
+                                          <li><span>30만</span></li>
+                                          <li><span>20만</span></li>
+                                          <li><span>10만</span></li>
                                           <li><span>0</span></li>
                                         </ul>
                                         <div class="bar">
                                           <div class="title">01.01</div>
-                                          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
+                                          <div class="value tooltips"   data-toggle="tooltip" data-placement="top">18.74%</div>
                                         </div>
                                         <div class="bar ">
                                           <div class="title">01.02</div>
-                                          <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-                                        </div>
-                                        <div class="bar ">
-                                          <div class="title">01.03</div>
-                                          <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-                                        </div>
-                                        <div class="bar ">
-                                          <div class="title">01.04</div>
-                                          <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-                                        </div>
-                                        <div class="bar">
-                                          <div class="title">01.05</div>
-                                          <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-                                        </div>
-                                        <div class="bar ">
-                                          <div class="title">01.06</div>
-                                          <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-                                        </div>
-                                        <div class="bar">
-                                          <div class="title">01.07</div>
-                                          <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-                                        </div>
-                                        <div class="bar">
-                                          <div class="title">01.08</div>
-                                          <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
-                                        </div>
-                                        <div class="bar ">
-                                          <div class="title">01.09</div>
-                                          <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-                                        </div>
-                                        <div class="bar ">
-                                          <div class="title">01.10</div>
-                                          <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-                                        </div>
-                                        <div class="bar ">
-                                          <div class="title">01.11</div>
-                                          <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-                                        </div>
-                                        <div class="bar">
-                                          <div class="title">01.12</div>
-                                          <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
+                                          <div class="value tooltips"  data-toggle="tooltip" data-placement="top">34.28%</div>
                                         </div>
                                         
+                                        
                                       </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
 
                                         <div class="col-lg-12" >
@@ -363,10 +323,7 @@ $(document).ready(function(){
                                                 </tr>  
                                             </thead>
                                             <tbody>
-                             					             
-                                     
-                    
-                    						
+                             					        
                                             </tbody>
                                                 </table>
     
@@ -383,10 +340,7 @@ $(document).ready(function(){
                                   <div class="row">
                                       <div class="col-lg-12" >
                                       <table class=table15_2 style="width:100%; margin:15px 0; border:0;">
-                                        <h4 style="font-size: 20px;">2022.01.01~2022.01.31</h4> 
-
-                                        <div class="card-body"><canvas id="myPieChart" width="200%" height="50"></canvas></div>
-                                              <thead>
+                                        <thead>
                                               <tr>
                                                   <th>메뉴명</th><th>판매수량</th><th>판매금액</th><th>비율</th>
                                               </tr>  
@@ -401,7 +355,7 @@ $(document).ready(function(){
                                               </tr>
                                               <tr>
                                                   <td>밀크쉐이크</td><td>9</td><td>90,000</td><td>11%</td>
-                                              </tr>>
+                                              </tr>
                                               <tr>
                                                   <td>카페라떼</td><td>8</td><td>80,000</td><td>10%</td>
                                               </tr>

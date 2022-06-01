@@ -49,7 +49,7 @@
                     
                     <div class="col-lg-4 col-md-6 col-sm-6" style="text-align: left;">
 
-                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myReview.user'" style="width: 100%;">
+                        <button class="w-btn-outline w-btn-skin-outline" type="button" onclick="location.href='myReviewList.user'" style="width: 100%;">
                             <div class="mypage_menubar_text" >
                                 <h5><a href="myReview.user">My리뷰</a></h5>
 <!--                                 <p>11개</p> -->

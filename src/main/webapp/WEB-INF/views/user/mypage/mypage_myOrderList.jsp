@@ -37,21 +37,21 @@
                     <h5>나의 주문내역</h5>
                     <div class="mypage_mypoint_middle1">
                     <div class="row" style="margin: 30px 0 0 0;">
-                        <div class="col-lg-3 col-md-7">
+                        <!-- <div class="col-lg-3 col-md-7">
                             
                                 <h5 style="font-size: 15px; text-align: right;" >날짜를 선택해 주세요<i class="lni lni-heart-filled"></i> </h5>
                         
                         </div>
                         <div class="col-lg-2 col-md-7">
                             <select class="dateSelect" id="specificSizeSelect" >
-                                <!--오늘날짜로 selected 하기-->
+                                오늘날짜로 selected 하기
                                 <option selected>2021년</option>
                                 <option value="2019">2010년</option>
                                 <option value="2020">2020년</option>
                                 <option value="2021">2021년</option>
                               </select>
-                        </div>
-                        <div class="col-lg-2 col-md-7">
+                        </div> -->
+                        <!-- <div class="col-lg-2 col-md-7">
                             <select class="dateSelect" id="specificSizeSelect">
                                 <option selected>4월</option>
                                 <option value="1">1월</option>
@@ -67,7 +67,7 @@
                                 <option value="11">11월</option>
                                 <option value="12">12월</option>
                               </select>
-                        </div>
+                        </div> -->
                         
 
                     </div>

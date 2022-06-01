@@ -110,6 +110,14 @@ public class AStoreDAO {
 	public void updateStoreImage(HashMap<String, String> param) {
 		sqlSession.update("AStoreDAO.updateStoreImage",param);
 	}
+
+	public void makeOptionGroup(String sf_code) {
+		sqlSession.insert("AStoreDAO.makeOptionGroup",sf_code);
+	}
+	
+	public void makeOption(String sf_code) {
+		sqlSession.insert("AStoreDAO.makeOption",sf_code);
+	}
 	
 	
 }

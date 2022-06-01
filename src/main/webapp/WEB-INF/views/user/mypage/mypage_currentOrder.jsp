@@ -39,6 +39,14 @@
             <!-- 메뉴바 끝!-->
             <!-- 현재주문확인하기 content 시작!-->
             <div class="col-lg-9 col-md-7 col-sm-12" >
+            <c:if test="${empty myCurrentList }">
+            <div class="col-lg-12" style="margin-bottom:20px;background-color: #ffffff70;height:300px;">
+            	<div align="center">
+            	<br><br><br><br><br><br>
+            	<h5>현재 진행중인 주문이 없습니다</h5>
+            	</div>
+            </div>
+            </c:if>
             <c:forEach var="myCurrentList" items="${myCurrentList }">
             
             <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom:20px;">

@@ -34,4 +34,6 @@ public interface AStoreService {
 	void confirmMenuImg(HashMap<String, String> param);
 	void rejectMenuImg(HashMap<String, String> param);
 	void updateStoreImage(HashMap<String, String> param);
+	void makeOptionGroup(String sf_code);
+	void makeOption(String sf_code);
 }

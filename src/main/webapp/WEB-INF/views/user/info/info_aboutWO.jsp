@@ -51,10 +51,10 @@
 		<div class="div_mainT">
 		  
 			<div class="infoT">
-				<img src="resources/assets/images/sajang.png" width=6000px, height=900px >
-				<img src="resources/assets/images/sajang2.png" width=6000px, height=900px >
-				<img src="resources/assets/images/sajang3.png" width=6000px, height=900px >
-				<img src="resources/assets/images/sajang4.png" width=6000px, height=900px >
+				<img src="resources/assets/images/sajang.png" style="width:100%; height:auto;" >
+				<img src="resources/assets/images/sajang2.png" style="width:100%; height:auto;" >
+				<img src="resources/assets/images/sajang3.png" style="width:100%; height:auto;" >
+				<img src="resources/assets/images/sajang4.png" style="width:100%; height:auto;" >
 			</div>
 	
 	

@@ -57,7 +57,7 @@
                 <c:forEach var="reviewList" items="${reviewList}" varStatus="vs">
 	                <div class="myreview_content" style="margin-top: 10px;">
 	                <div class="row"  style="margin-left:10px; margin-top: 10px;">
-	                    <h3 class="mypage_myreview_middle_storename"><a href="#">${reviewList.si_name} ${reviewList.si_loc} > </a></h3>
+	                    <h3 class="mypage_myreview_middle_storename"><a href="/menuList.user?store=${reviewList.si_code }">${reviewList.si_name} ${reviewList.si_loc} > </a></h3>
 	                    
 	                </div>
 	                <div class="row"  style="margin-left:10px;">
@@ -88,7 +88,14 @@
 	                </div>
 	                <div class="row" >
 	                    <div class="col-lg-4 col-md-6" style="margin: 10px;"> 
-	                        <img src="resources/assets/images/blog/blog-6.jpg" style="border-radius: 20px;">
+	                    <c:choose>
+		                    <c:when test="${(reviewList.ur_pic_url).indexOf('http') eq -1}">
+		                   	 <img src="https://walkingorder.s3.ap-northeast-2.amazonaws.com/reviews/no-image-available1.png" style="border-radius: 20px;">
+		                    </c:when>
+		                    <c:otherwise>
+		                   	 <img src="${reviewList.ur_pic_url}" style="border-radius: 20px;">
+		                    </c:otherwise>
+	                    </c:choose>
 	
 	                    </div>
 	                    <div class="col-lg-6 col-md-6" style="margin: 15px;">

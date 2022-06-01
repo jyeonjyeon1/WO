@@ -21,6 +21,6 @@
 		POINT a 
 		INNER JOIN 
 		USERS b ON (a.U_ID = b.U_ID)
-		ORDER BY PT_SEQ DESC
+		ORDER BY PT_REGDATE DESC
 	</select>
 </mapper>

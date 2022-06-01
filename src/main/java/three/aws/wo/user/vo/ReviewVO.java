@@ -24,12 +24,14 @@ public class ReviewVO {
 	
 	private String o_list;
 	private String o_list_detail;
+	private String si_code;
 	private String si_name;
 	private String si_loc;
 	private int o_total_price;
 
 	private String dif_date;
 	private int avgstar;
+	
 	
 
 }

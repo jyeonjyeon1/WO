@@ -141,7 +141,7 @@
               <span>통계</span>
               </a>
             <ul class="sub">
-              <li><a id="order-period" href="../statistics/order_period.html">기간별 주문 통계</a></li>
+              
               <li><a id="store-sales" href="../statistics/store_sales.html">매장별 매출 통계</a></li>
               <li><a id="user-sales" href="../statistics/user_sales.html">사용자별 매출 통계</a></li>
               <li><a id="by-chart" href="../statistics/by_chart.html">표로 확인</a></li>

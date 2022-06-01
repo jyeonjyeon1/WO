@@ -213,12 +213,13 @@
 	
 	</select>
 	
-	<select id="dailyOutput">
-	SELECT DATE(O_ORDER_DATE) AS O__DATE, COUNT(O_CODE) AS O_SEQ, SUM(O_TOTAL_PRICE) AS O_TOTAL_PRICE FROM ORDERS 
-	WHERE O_ORDER_DATE <![CDATA[>]]> #{inputStrDate} AND O_ORDER_DATE <![CDATA[<=]]> #{inputEndDate}
-	AND SI_CODE = #{si_code}
-	GROUP BY DATE(O_ORDER_DATE) ORDER BY DATE(O_ORDER_DATE) DESC;
-	</select>
+	
+	<select id="dailyOutput" resultType="OrdersVO">
+   SELECT DATE(O_ORDER_DATE) AS O__DATE, COUNT(O_CODE) AS O_SEQ, SUM(O_TOTAL_PRICE) AS O_TOTAL_PRICE FROM ORDERS 
+   WHERE O_ORDER_DATE <![CDATA[>]]> #{inputStrDate}::timestamp AND O_ORDER_DATE <![CDATA[<=]]> #{inputEndDate}::timestamp
+   AND SI_CODE = #{si_code}
+   GROUP BY DATE(O_ORDER_DATE) ORDER BY DATE(O_ORDER_DATE) DESC;
+   </select>
 
 	
 </mapper>

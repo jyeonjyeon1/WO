@@ -15,10 +15,7 @@
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>워킹오더 매장관리자 페이지</title>
 
-  <!--datepicker-->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
@@ -245,15 +242,7 @@ $(document).ready(function(){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>판매건수</td><td>
-                                         <c:set var = "total" value = "0" />
-								<c:forEach var="orderList" items="${orderList}" varStatus="status"> 
-								<c:set var= "total" value="${total + 1}"/>
-								</c:forEach>
-								${total } 건
-                                        </td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td>매출액</td><td>
                                          <c:set var = "total1" value = "0" />
@@ -289,7 +278,9 @@ $(document).ready(function(){
                                         	<td><fmt:formatDate value="${orderList.o_order_date}" pattern="yyyy.MM.dd  |  a hh:mm"/></td>
                                         	
                                         	<td>${ orderList.o_code}</td>
-                                        	<td>${orderList.o_total_price}</td>
+                                        	<td>
+											<fmt:formatNumber value="${orderList.o_total_price}" pattern="###,###"/> 원                                        	
+                                        	</td>
                                         	</tr>
                                         </c:forEach>
                                         </tbody>

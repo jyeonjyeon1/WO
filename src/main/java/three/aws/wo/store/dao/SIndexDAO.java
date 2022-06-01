@@ -40,4 +40,8 @@ public class SIndexDAO {
 		return sqlSession.selectOne("SIndexDAO.newOrder",si_code);
 	}
 	
+	public void OrderCancel(HashMap<String, String> map) {
+		sqlSession.update("SIndexDAO.OrderCancel",map);
+	}
+	
 }

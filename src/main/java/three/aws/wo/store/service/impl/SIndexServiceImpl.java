@@ -40,4 +40,9 @@ public class SIndexServiceImpl implements SIndexService {
 	public OrdersVO newOrder(String si_code) {
 		return sIndexDAO.newOrder(si_code);
 	}
+	
+	@Override
+	public void OrderCancel(HashMap<String, String> map) {
+		sIndexDAO.OrderCancel(map);
+	}
 }

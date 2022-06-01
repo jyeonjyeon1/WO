@@ -311,12 +311,14 @@ to {
 
 .order_cancel {
 	background-color: #00000024;
-	padding:5px;
+	padding:5px 10px;
+	font-size:17px;
 	border-radius: 10px;
 	border: 1px solid rgba(0, 0, 0, 0.342);
 	font-weight: 700;
 	color: black;
-	margin-bottom: 5px;
+	margin: 10px 25px 0 0;
+	float:right;
 }
 
 .order_cancel:hover {
@@ -644,7 +646,7 @@ function zzzz(){
                      	<c:when test="${storeOrders.o_order_state eq '준비중' }">making_drink</c:when>
                      	<c:otherwise>daegi</c:otherwise>
                      </c:choose>">${storeOrders.o_order_state}</label>
-                     <a class="order_cancel"  onclick="order_cancel${inputIndex}${vs.index}()"> X 주문취소하기</a>
+                     <a class="order_cancel"  onclick="order_cancel${inputIndex}${vs.index}()"> 주문취소하기</a>
 		
                      </div>
                      

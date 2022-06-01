@@ -178,9 +178,10 @@ public class UserOrderController {
 				userOrderService.updateBasketOrder(map);
 			}
 		}
-
+		String si_code = param.get("si_code");
 		// 결제 성공하면 포인트 주입
 		HashMap<String, Object> insertPoint = new HashMap<String, Object>();
+		insertPoint.put("si_code", si_code);
 		// 시스템에 적립금 설정이 true인지 확인
 		String point_use = userOrderService.isPointUse();
 		int point_percentage = 0;
@@ -188,27 +189,25 @@ public class UserOrderController {
 			// 시스템에 설정된 point_percentage 불러옴
 			point_percentage = Integer.parseInt(userOrderService.getPointPercentage());
 		}
-		String si_code = param.get("si_code");
 		// 포인트 사용한 경우 차감
 		if (o_point != 0) {
-			insertPoint.put("si_code", si_code);
-			insertPoint.replace("pt_amount", -(o_point));
+			
+			insertPoint.put("pt_amount", -(o_point));
 			userOrderService.orderPointUse(insertPoint);
 			userOrderService.orderPointUpdate(insertPoint);
 		}
 		int point = Integer.parseInt(param.get("o_total_price")) * point_percentage / 100;
 		System.out.println(point);
 		insertPoint.put("u_id", u_id);
-		insertPoint.put("pt_amount", point);
+		if(insertPoint.get("pt_amount")==null) {
+			insertPoint.put("pt_amount", point);
+		}else {
+			insertPoint.replace("pt_amount", point);
+		}
+		
 		userOrderService.orderPointUpdate(insertPoint);
 		userOrderService.orderPointAdd(insertPoint);
 		// 포인트 사용한 경우 차감
-		if (o_point != 0) {
-			insertPoint.put("si_code", si_code);
-			insertPoint.replace("pt_amount", -(o_point));
-			userOrderService.orderPointUse(insertPoint);
-			userOrderService.orderPointUpdate(insertPoint);
-		}
 		
 		// 결제 성공하면 장바구니 내역 비움
 		userOrderService.resetCart(u_id);

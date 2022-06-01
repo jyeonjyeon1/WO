@@ -164,25 +164,6 @@
         	
         }); */
         
-   function myWish() {
-		var storecode = $("#storecode").val();
-		//alert(storecode);
-		 var param = {"storecode": storecode };
-		$.ajax({
-			type: "POST",
-            url: "/myWish.user",
-            data: JSON.stringify(param),
-            dataType: "text",
-            contentType: "application/json",
-			success : function(data) {
-				alert("성공적으로 반영 되었습니다.")
-			},
-			error : function(data) {
-				console.log("로그인 통신x")
-			}
-		});//ajax 끝 
-	}  
-		
 	 function setPage(pageNum){ //paging
 		 
 		 storeListByPageCount = ${storeListByPageCount} ;
@@ -377,8 +358,8 @@
 									varStatus="vs">
 
 
-									<a href="#" class="col-5 search_result_big_col"
-										onclick="myWish()"> <input type="hidden"
+									<a href="/menuList.user?store=${userPageChange.si_code}" class="col-5 search_result_big_col"
+										> <input type="hidden"
 										value="${userPageChange.si_code }" id="storecode">
 
 										<div class="d-lg-block">

@@ -371,13 +371,10 @@
 											</c:if>
 											<td><a data-toggle="modal" href="#myModal${vs.count }"
 												class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-												<button class="btn btn-primary btn-xs">
-													<i class="fa fa-pencil"></i>
-												</button>
-												<button type="button" onclick="javascript:deleteAlert();"
+													<!-- <button type="button" onclick="javascript:deleteAlert();"
 													class="btn btn-danger btn-xs">
 													<i class="fa fa-trash-o "></i>
-												</button></td>
+												</button> --></td>
 										</tr>
 
 

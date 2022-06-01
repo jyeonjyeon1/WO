@@ -35,7 +35,38 @@
 <!-- 테이블용 css -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
-  
+  <script>
+
+$(document).ready(function(){
+	
+	 $( 'input[name="dateOneday2"]' ).change( function() {
+		 console.log("fff");
+		 var dateOneday = $("#dateOneday").val();
+		 var dateOneday2 = $("#dateOneday2").val();
+			
+			
+		 var param = {"dateOneday" : dateOneday,
+				 "dateOneday2" : dateOneday2
+		 }
+        
+         $.ajax({
+ 	        url : "dateOPeriod.store?dateOneday=" + dateOneday +"&dateOneday2="+dateOneday2,	
+ 	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+ 	        type: "get",
+ 	        success: function(data) {
+ 	        	console.log("성공");
+ 	        	
+ 	          $("#datatablesSimple tbody").html(data); // forprepend
+ 	        
+ 	        },
+ 	        error: function (){alert("실패");}
+ 	    });
+	 });
+
+});
+
+
+</script>
   <style>
     
     .table15_2 thead th {
@@ -174,19 +205,13 @@
         </div> 
         <div class="row">
         <div class="col-lg-3" style="margin-bottom: 20px;"> 
-<input value="start date" id="datepicker1" width="200" />
-<script>
-$('#datepicker1').datepicker();
-</script>
+<input id="dateOneday" name="dateOneday" class="form-control round-form" type="date" value="년.월.일" style="width: 70%; display: inline-block; float:left;"> 
+                        
 </div>
 <div class="col-lg-3" style="margin-bottom: 20px;"> 
-    <input value="end date" id="datepicker2" width="200" />
-    <script>
-    $('#datepicker2').datepicker();
-    </script>
-    </div>
-        
-</div> 
+<input id="dateOneday2" name="dateOneday2" class="form-control round-form" type="date" value="년.월.일" style="width: 70%; display: inline-block; float:left;"> 
+                        
+</div>
         
       </div>
 
@@ -222,9 +247,6 @@ $('#datepicker1').datepicker();
       </tr>
       </tfoot>
       <tbody>
-        <tr id="testtest">
-      	
-      	</tr>
       	
       	  <c:forEach items="${orderList}" var="orderList" varStatus="vs">
         <tr>

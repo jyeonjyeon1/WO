@@ -1,5 +1,6 @@
 package three.aws.wo.store.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,5 +26,27 @@ public class SOrderServiceImpl implements SOrderService {
 	public List<BasketVO> orderDetailList(String si_code) {
 		return sOrderServiceDAO.orderDetailList(si_code);
 	}
+	
+	
+	@Override
+	public List<OrdersVO> dateOoneday(HashMap<String , String> map) {
+		return sOrderServiceDAO.dateOoneday(map);
+	}
+	
+	@Override
+	public List<BasketVO> dateOonedayDt(HashMap<String , String> map) {
+		return sOrderServiceDAO.dateOonedayDt(map);
+	}
+	
+	@Override
+	public List<OrdersVO> dateOPeriod(HashMap<String , String> map) {
+		return sOrderServiceDAO.dateOPeriod(map);
+	}
+	
+	@Override
+	public List<BasketVO> dateOPeriodDt(HashMap<String , String> map) {
+		return sOrderServiceDAO.dateOPeriodDt(map);
+	}
+	
 	
 }

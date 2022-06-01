@@ -19,4 +19,8 @@ public interface AdminService {
 	void insertFaq(FAQVO vo);
 	AdminVO adminLoggin(String a_id);
 	void deleteNotice(HashMap<String, Object> param);
+	int dailySales();
+	int monthlySales();
+	int dailyReg();
+	int dailyVisit();
 }

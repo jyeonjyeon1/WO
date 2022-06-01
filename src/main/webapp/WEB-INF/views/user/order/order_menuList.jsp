@@ -61,6 +61,11 @@
 <input type="hidden" id="userInSession" value="${userInSession}">
 <input type="hidden" id="si_code" value="${storeInfo.si_code }">
 
+			<c:set var="reviewNum" value="0" />
+			<c:forEach var="storeReview" items="${storeReview }" varStatus="vs">
+				<c:set var="reviewNum" value="${vs.count }" />
+				<c:set var="avgStar" value="${storeReview.avgstar }" />
+			</c:forEach>
 			<div class="row">
 				<div class="col-lg-5 col-md-5 col-sm-12 col-12">
 					<div class="kio_img_bg">
@@ -72,9 +77,22 @@
 					<div class="product__details__text">
 						<h3>${storeInfo.si_name }&nbsp;${storeInfo.si_loc }</h3>
 						<div class="product__details__rating">
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-								class="fa fa-star-half-o"></i> <span>(18 reviews)</span>
+							<c:forEach var="full_star" begin = "0" end = "${avgStar}" step="10">
+								<c:if test="${ full_star gt 5 }">
+									<i class="lni lni-star-filled"></i>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="half_star" begin = "10" end = "${avgStar}" step="10">
+								<c:if test="${ (myStoreList.si_star-half_star) eq 5 }">
+									<i class="fa fa-star-half">&nbsp&nbsp</i>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="no_star" begin = "${avgStar}" end = "45" step="10">
+								<c:if test="${no_star lt 45 }">
+									<i class="lni lni-star"></i>
+								</c:if>
+							</c:forEach>
+							<span>${avgStar / 10 }점 (${reviewNum } reviews)</span>
 						</div>
 						<p style="margin-bottom: 20px">${storeInfo.si_referinfo }</p>
 						<button type="button" class="btn btn-warning btn-sm">
@@ -343,106 +361,67 @@ function addMenu__${tVs.count}_${mVs.count}(){
 	</div>
 
 	<section>
-
+		
 		<div class="container" style="padding: 40px; background-color: white;">
 			<a name="myReview">
-				<div class="product__details__text"">
+				<div class="product__details__text">
 					<h3>우리매장 Reviews</h3>
-					<div class="product__details__rating">
-						<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-							class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-							class="fa fa-star-half-o"></i> <span>(3 reviews)</span>
+					
+						<div class="product__details__rating">
+						<c:forEach var="full_star" begin = "0" end = "${avgStar}" step="10">
+							<c:if test="${ full_star gt 5 }">
+								<i class="lni lni-star-filled"></i>
+							</c:if>
+						</c:forEach>
+						<c:forEach var="half_star" begin = "10" end = "${avgStar}" step="10">
+							<c:if test="${ (myStoreList.si_star-half_star) eq 5 }">
+								<i class="fa fa-star-half">&nbsp&nbsp</i>
+							</c:if>
+						</c:forEach>
+						<c:forEach var="no_star" begin = "${avgStar}" end = "45" step="10">
+							<c:if test="${no_star lt 45 }">
+								<i class="lni lni-star"></i>
+							</c:if>
+						</c:forEach>
+					<span>${avgStar / 10 }점 (${reviewNum } reviews)</span>
 					</div>
 
-
-					<!-- 리뷰한개 -->
-					<div style="text-align: center;">
-						<div class="col-lg-11 kio_review">
-							<div class="kio_review_img_bg">
-								<img src="resources/assets/images/jaewoo/starbucks_img.jpg"
-									alt="cafe" class="search_big_img">
-
-							</div>
-							<div class="kio_review_center">
-								<h5>김재우</h5>
-								<h6>아이스아메리카노</h6>
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star-half-o"></i>
-								<div>2020.04.08</div>
-							</div>
-							<div class="kio_review_content">
-								<h6>아아존맛탱!!!</h6>
-								<p style="margin-bottom: 20px; margin-top: 5px;">Mauris
-									blandit aliquet elit, eget tincidunt nibh pulvinar a.
-									Vestibulum ac diam sit amet quam vehicula elementum sed sit
-									amet dui. Sed porttitor lectus nibh.</p>
-							</div>
-						</div>
-					</div>
-					<!-- 리뷰한개 -->
-					<div style="text-align: center;">
-						<div class="col-lg-11"
-							style="float: none; display: inline-block; text-align: center; background-color: white; padding: 0px; border-radius: 10px; padding: auto; margin: auto; margin-bottom: 10px; margin-top: 10px; display: inline-block; border: 1px solid gray; box-shadow: 0 2px 2px gray;">
-
-							<div style="width: 30%; height: 150px; float: left;">
-								<img src="resources/assets/images/jaewoo/starbucks_img.jpg"
-									alt="cafe"
-									style="width: 130px; height: 130px; margin: 10px 0 0 10px; border-radius: 10px;">
-								<img src="resources/assets/images/jaewoo/latte.jpg" alt="cafe"
-									style="width: 130px; height: 130px; margin: 10px 0 0 10px; border-radius: 10px;">
-
-							</div>
-							<div
-								style="width: 15%; height: 100px; float: left; margin-left: 20px; margin-top: 20px; text-align: left">
-								<h5>김재우</h5>
-								<h6>아이스아메리카노</h6>
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star-half-o"></i>
-								<div>2020.04.08</div>
-							</div>
-							<div
-								style="width: 40%; height: 100px; float: left; text-align: left; margin-top: 18px;">
-								<h6>아아존맛탱!!!</h6>
-								<p style="margin-bottom: 20px; margin-top: 5px;">Mauris
-									blandit aliquet elit, eget tincidunt nibh pulvinar a.
-									Vestibulum ac diam sit amet quam vehicula elementum sed sit
-									amet dui. Sed porttitor lectus nibh.</p>
-							</div>
-						</div>
-						<!-- 리뷰한개 -->
+					<c:forEach var="storeReview" items="${storeReview }" varStatus="vs">
 						<div style="text-align: center;">
-							<div class="col-lg-11"
-								style="float: none; display: inline-block; text-align: center; background-color: white; padding: 0px; border-radius: 10px; padding: auto; margin: auto; margin-bottom: 10px; margin-top: 10px; display: inline-block; border: 1px solid gray; box-shadow: 0 2px 2px gray;">
-
-								<div style="width: 30%; height: 150px; float: left;">
+							<div class="col-lg-11 kio_review">
+								<div class="kio_review_img_bg">
 									<img src="resources/assets/images/jaewoo/starbucks_img.jpg"
-										alt="cafe"
-										style="width: 130px; height: 130px; margin: 10px 0 0 10px; border-radius: 10px;">
-									<img src="resources/assets/images/jaewoo/latte.jpg" alt="cafe"
-										style="width: 130px; height: 130px; margin: 10px 0 0 10px; border-radius: 10px;">
-
+										alt="cafe" class="search_big_img">
+	
 								</div>
-								<div
-									style="width: 15%; height: 100px; float: left; margin-left: 20px; margin-top: 20px; text-align: left">
-									<h5>김재우</h5>
-									<h6>아이스아메리카노</h6>
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star-half-o"></i>
-									<div>2020.04.08</div>
+								<div class="kio_review_center">
+									<h5>${storeReview.u_nickname }</h5>
+									<h6>${storeReview.o_list }</h6>
+									<c:forEach var="full_star" begin = "0" end = "${storeReview.ur_star}" step="10">
+										<c:if test="${ full_star gt 5 }">
+											<i class="lni lni-star-filled"></i>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="half_star" begin = "10" end = "${storeReview.ur_star}" step="10">
+										<c:if test="${ (myStoreList.si_star-half_star) eq 5 }">
+											<i class="fa fa-star-half">&nbsp&nbsp</i>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="no_star" begin = "${storeReview.ur_star}" end = "45" step="10">
+										<c:if test="${no_star lt 45 }">
+											<i class="lni lni-star"></i>
+										</c:if>
+									</c:forEach>
+									<div>${storeReview.ur_regdate.substring(0,16)}</div>
 								</div>
-								<div
-									style="width: 40%; height: 100px; float: left; text-align: left; margin-top: 18px;">
-									<h6>아아존맛탱!!!</h6>
-									<p style="margin-bottom: 20px; margin-top: 5px;">Mauris
-										blandit aliquet elit, eget tincidunt nibh pulvinar a.
-										Vestibulum ac diam sit amet quam vehicula elementum sed sit
-										amet dui. Sed porttitor lectus nibh.</p>
+								<div class="kio_review_content">
+									<h6>${storeReview.ur_content}</h6>
+									<p style="margin-bottom: 20px; margin-top: 5px;">${storeReview.ur_content}</p>
 								</div>
 							</div>
 						</div>
+					</c:forEach>
+					
 						<div style="text-align: center; margin-bottom: 50px;">
 
 							<div style="display: inline-block">

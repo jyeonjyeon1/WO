@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.vo.CouponVO;
 import three.aws.wo.admin.vo.PointVO;
-import three.aws.wo.store.vo.MenuBasicOptionVO;
+import three.aws.wo.store.vo.StoreVO;
+import three.aws.wo.user.dao.UserMypageDAO;
 import three.aws.wo.user.service.UserMypageService;
 import three.aws.wo.user.util.Criteria;
 import three.aws.wo.user.vo.ReviewVO;
@@ -25,6 +26,9 @@ import three.aws.wo.user.vo.UserWishVO;
 
 @Controller
 public class UserMypageController {
+	@Autowired
+	private UserMypageDAO userMypageDAO;
+	
 	@Autowired
 	private UserMypageService userMypageService;
 
@@ -47,9 +51,11 @@ public class UserMypageController {
 	
 	
 	@RequestMapping("/myReview.user")
-	public String insertReview(Model model,HttpServletRequest request) throws Exception {
+	public String myReview(Model model,HttpServletRequest request) throws Exception {
 		String o_code = request.getParameter("order");
-		System.out.println("mypage_myReview");
+		StoreVO storeInfo = userMypageDAO.storeInfo(o_code);
+		model.addAttribute("storeInfo", storeInfo);
+		
 		model.addAttribute("getOrderCode", o_code);
 		return "/mypage/mypage_myReview";
 	}

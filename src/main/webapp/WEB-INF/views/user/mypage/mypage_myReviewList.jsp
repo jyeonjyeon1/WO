@@ -55,9 +55,9 @@
                     </div>
             </div>
  
-            
+            <c:set var="reviewNum" value="0" />
             <c:forEach var="reviewList" items="${reviewList}" varStatus="vs">
-            	<c:set var="reviewNum" value="${vs.index + 1 }" />
+            	<c:set var="reviewNum" value="${vs.count }" />
             </c:forEach>
             
             <div class="col-lg-9 col-md-7">

@@ -52,13 +52,15 @@
 		WHERE UR.U_ID = #{u_id} ORDER BY UR_REGDATE DESC;
 	</select>
 	
+	<select id="storeInfo" parameterType="StoreVO" resultType="StoreVO">
+		SELECT * FROM STORE_INFO WHERE SI_CODE = (SELECT SI_CODE FROM ORDERS WHERE O_CODE = #{o_code })
+	</select>
 	
-	
-	<insert id="insertReview" parameterType="reviewVO">
+	<insert id="insertReview" parameterType="reviewVO">	
 		INSERT INTO USER_REVIEW
-			VALUES(#{o_code}, #{u_id}, 
-				(SELECT SI_CODE FROM ORDERS WHERE O_CODE = #{o_code}), 
-				DEFAULT, #{ur_star}, #{ur_pic_url}, #{ur_content}, #{o_code}, DEFAULT, DEFAULT)
+			VALUES(DEFAULT, #{u_id }, (SELECT SI_CODE FROM ORDERS WHERE O_CODE = #{o_code }),  
+			DEFAULT,  #{ur_star }, #{ur_pic_url }, #{ur_content }, #{o_code }, DEFAULT, DEFAULT);
+
 	</insert>
 	<select id="userPointList" resultType="PointVO">
 		SELECT * FROM 

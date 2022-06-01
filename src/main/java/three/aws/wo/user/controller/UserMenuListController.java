@@ -16,6 +16,7 @@ import three.aws.wo.user.service.UserMenuListService;
 import three.aws.wo.user.service.UserOrderService;
 import three.aws.wo.user.vo.BasketVO;
 import three.aws.wo.user.vo.MenuListVO;
+import three.aws.wo.user.vo.ReviewVO;
 
 @Controller
 public class UserMenuListController {
@@ -42,6 +43,9 @@ public class UserMenuListController {
 		
 		List<MenuListVO> basicOptionList = userMenuListDAO.basicOptionList(si_code);
 		model.addAttribute("basicOptionList", basicOptionList);
+		
+		List<ReviewVO> storeReview = userMenuListDAO.storeReview(si_code);
+		model.addAttribute("storeReview", storeReview);
 		
 		return "/order/order_menuList";
 	}

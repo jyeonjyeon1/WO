@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import three.aws.wo.store.vo.StoreVO;
 import three.aws.wo.user.vo.MenuListVO;
+import three.aws.wo.user.vo.ReviewVO;
 
 @Repository
 public class UserMenuListDAO {
@@ -35,9 +36,9 @@ public class UserMenuListDAO {
 		return sqlSession.selectList("UserMenuListDAO.basicOptionList", si_code);
 	}
 	
-	/*
-	 * public void addMenu(BasketVO vo) {
-	 * sqlSession.update("UserMenuListDAO.addMenu", vo); }
-	 */
+
+	public List<ReviewVO> storeReview(String si_code) {
+		return sqlSession.selectList("UserMenuListDAO.storeReview", si_code);
+	}
 	
 }

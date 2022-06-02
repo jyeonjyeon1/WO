@@ -50,6 +50,9 @@
 		<mvc:exclude-mapping path="/login.user"/>
 		<mvc:exclude-mapping path="/loginCheck.user"/>
 		<mvc:exclude-mapping path="/sendResetPassword.user"/>
+		
+		
+		<mvc:exclude-mapping path="/storeInquiry.user"/>
 		<bean id="UserInterceptor" class="three.aws.wo.admin.util.UserInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

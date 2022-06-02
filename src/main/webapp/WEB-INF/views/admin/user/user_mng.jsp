@@ -17,6 +17,10 @@
 	rel="apple-touch-icon">
 
 <!-- 테이블용 css -->
+<script
+		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
+	<script
+		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	rel="stylesheet" />
@@ -133,8 +137,7 @@
 							<i class=" fa fa-bar-chart-o"></i> <span>통계</span>
 					</a>
 						<ul class="sub">
-							<li><a >기간별
-									주문 통계</a></li>
+							
 							<li><a id="store-sales" href="store_sales.admin">매장별 매출
 									통계</a></li>
 							
@@ -431,10 +434,7 @@ function updateComp${vs.index}(){
 		<!-- 푸더 import -->
 		<%@ include file="../inc/admin_footer.jsp"%>
 	</section>
-	<script
-		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
-	<script
-		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+	
 	<script>
 	$(document).ready(function(){
 		

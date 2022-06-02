@@ -72,7 +72,7 @@
                                 <div id="faq__222" class="tab-pane">
 
                                    
-                                   <%--  <div class="row">
+                                    <%-- <div class="row">
                                     <div class="custom-bar-chart">
                                         <ul class="y-axis">
                                           <li><span>50만</span></li>
@@ -86,14 +86,14 @@
                                         <c:forEach items="${ dailyOutput}" var="dailyOutput" varStatus="vsvsvs">
                                         <div class="bar">
                                           <div class="title">${dailyOutput.o__date}</div>
-                                          <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">
-                                          ${dailyOutput.o_total_price div 5000}%</div>
+                                          <div class="value tooltips" data-original-title="${dailyOutput.o_total_price *10}" data-toggle="tooltip" data-placement="top">
+                                          ${dailyOutput.o_total_price/500}%</div>
                                         </div>
                                         </c:forEach>
                                         
                                       </div>
-                                    </div> --%>
-                                    <div class="row">
+                                    </div>
+                                    <div class="row"> --%>
 
                                         <div class="col-lg-12" >
                                         <table class=table15_2 style="width:100%; margin:15px 0; border:0;">

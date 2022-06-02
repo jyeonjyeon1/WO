@@ -54,7 +54,7 @@ public class AdminStoreController {
 		vo.setSa_business_registration_image(bussUrl + si_code + sa_buss);
 		vo.setSa_password(pwdEncoder.encode(vo.getSi_code()));
 		aStoreService.insertStoreAccount(vo);
-		String sf_code=vo.getSi_code();
+		String sf_code = vo.getSi_code();
 		aStoreService.makeOptionGroup(sf_code);
 		aStoreService.makeOption(sf_code);
 		System.out.println("가게 등록 완료 DB확인");
@@ -136,11 +136,11 @@ public class AdminStoreController {
 		String f_tel = param.get("f_tel");
 		// 이부분은 문자가 가니까 일단 막았음
 		MessageSend ms = new MessageSend();
-//		String sms_title = "[워킹오더] 가게등록 안내";
-//		String sms_text = "http://localhost:8080/join_inq.admin\n영업일 기준 1~3일 내로 연락드립니다.";
-//		int result = ms.sendLMS(f_tel,sms_title, sms_text);
+		String sms_title = "[워킹오더] 가게등록 안내";
+		String sms_text = "http://3.101.138.142/join_inq.admin\n영업일 기준 1~3일 내로 연락드립니다.";
+		int result = ms.sendLMS(f_tel, sms_title, sms_text);
 		aStoreService.storeInqAccept(f_seq);
-		return 1;
+		return result;
 	}
 
 	// 입점문의 2단계
@@ -193,6 +193,7 @@ public class AdminStoreController {
 		HashMap<String, String> change = new HashMap<String, String>();
 		change.put("sf_status", sf_status);
 		change.put("sf_code", sf_code);
+		int result=0;
 		// 승인일 경우 계정 만들어줌 (id,pw = 사업자번호)
 		if (sf_status.equals("승인")) {
 			aStoreService.updateStore(change);
@@ -202,9 +203,9 @@ public class AdminStoreController {
 			String tel = param.get("tel");
 			// 이부분은 문자가 가니까 일단 막았음
 			MessageSend ms = new MessageSend();
-//				String sms_title = "[워킹오더] 서류보안 요청";
-//				String sms_text = "요청내용:"+message+"\nhttp://localhost:8080/join_inq.admin";
-//				int result = ms.sendLMS(tel,sms_title, sms_text);
+			String sms_title = "[워킹오더] 서류보안 요청";
+			String sms_text = "요청내용:" + message + "\nhttp://3.101.138.142/join_inq.admin";
+			result = ms.sendLMS(tel, sms_title, sms_text);
 			System.out.println(param);
 		} else if (sf_status.equals("검토")) {
 			aStoreService.updateStore(change);
@@ -214,10 +215,10 @@ public class AdminStoreController {
 
 		// 이부분은 문자가 가니까 일단 막았음
 		MessageSend ms = new MessageSend();
-//			String sms_title = "[워킹오더] 가게등록 안내";
-//			String sms_text = "http://localhost:8080/join_inq.admin\n영업일 기준 1~3일 내로 연락드립니다.";
-//			int result = ms.sendLMS(f_tel,sms_title, sms_text);
-		return 1;
+		String sms_title = "[워킹오더] 가게등록 안내";
+		String sms_text = "http://3.101.138.142/join_inq.admin\n영업일 기준 1~3일 내로 연락드립니다.";
+		result = ms.sendLMS(param.get("tel"), sms_title, sms_text);
+		return result;
 	}
 
 	// 매장생성 전, 동일 사업자로 등록된 계정이 있는지 확인
@@ -230,28 +231,28 @@ public class AdminStoreController {
 		// 일치하는 매장코드가 없을 경우에는 매장 생성을 해줌
 		if (result == 0) {
 			// store_form 테이블에서 sf_code= #{sf_code}인 정보를 info랑 account에 만듬.
-			try{
+			try {
 				aStoreService.replicateStoreInfo(sf_code);
 				aStoreService.replicateStoreAccount(sf_code);
-			}catch (Exception e) {
+			} catch (Exception e) {
 				System.err.println("스토어 복제 오류");
 			}
-			
-			//op 및 og 하나씩 등록해줄것임.
-			try{
+
+			// op 및 og 하나씩 등록해줄것임.
+			try {
 				aStoreService.makeOptionGroup(sf_code);
 				aStoreService.makeOption(sf_code);
-			}catch (Exception e) {
+			} catch (Exception e) {
 				System.err.println("스토어 og op 등록 오류");
 			}
-			
-			
+
 			// 이부분은 문자가 가니까 일단 막았음
 			// 계정 생성 후 문자로 로그인 정보 알림
-//			MessageSend ms = new MessageSend();
-//			String sms_title = "[워킹오더] 가게 등록 완료";
-//			String sms_text = "http://localhost:8080/login.store\n아이디: " + sf_code + "\n비밀번호: " + sf_code;
-//			int esult = ms.sendLMS(tel, sms_title, sms_text);
+			MessageSend ms = new MessageSend();
+			String sms_title = "[워킹오더] 가게 등록 완료";
+			String sms_text = "http://3.101.138.142/login.store\n아이디: " + sf_code + "\n비밀번호: " + sf_code;
+			int esult = ms.sendLMS(tel, sms_title, sms_text);
+			System.out.println(esult);
 		}
 		return result;
 	}
@@ -307,8 +308,9 @@ public class AdminStoreController {
 		try {
 			aStoreService.confirmMenuImg(param);
 			MessageSend ms = new MessageSend();
-			String sms_text = "[워킹오더]\n신청하신 메뉴("+param.get("m_name")+") 이미지가 승인되었습니다";
-//			int aa = ms.sendSMS(param.get("si_tel"),sms_text, "SMS");
+			String sms_text = "	";
+			int aa = ms.sendSMS(param.get("si_tel"), sms_text, "SMS");
+			System.out.println(aa);
 //			int aa = ms.sendSMS("01091722555",sms_text, "SMS");
 			result = 1;
 		} catch (Exception e) {
@@ -324,19 +326,19 @@ public class AdminStoreController {
 		System.out.println(param);
 		try {
 			aStoreService.rejectMenuImg(param);
-			
+
 			MessageSend ms = new MessageSend();
-			String sms_text = "[워킹오더]\n신청하신 메뉴("+param.get("m_name")+") 이미지는 승인 거절되었습니다";
-//			int aa = ms.sendSMS(param.get("si_tel"),sms_text, "SMS");
-			int aa = ms.sendSMS("01091722555",sms_text, "SMS");
+			String sms_text = "[워킹오더]\n신청하신 메뉴(" + param.get("m_name") + ") 이미지는 승인 거절되었습니다";
+			int aa = ms.sendSMS(param.get("si_tel"), sms_text, "SMS");
+//			int aa = ms.sendSMS("01091722555",sms_text, "SMS");
+			System.out.println(aa);
 			result = 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/updateStoreImage.admin", method = RequestMethod.POST)
 	public int updateStoreImage(@RequestBody HashMap<String, String> param) {

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -9,7 +11,7 @@
   <meta name="description" content="">
   
   
-  <title>워킹오더 관리자 페이지</title>
+  <title>워킹오더 통계 그래프</title>
 
   <!-- Favicons -->
   <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
@@ -155,7 +157,82 @@
     <!-- allmenu import -->
     
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 그래프로 확인(토끼)</h3>
+        <h3><i class="fa fa-angle-right"></i> 그래프로 확인</h3>
+        
+        <!--CUSTOM CHART START -->
+            <div class="border-head" >
+              <h3>이용자 수</h3>
+            </div>
+            <div class="col-6-lg">
+            <div class="custom-bar-chart">
+              <ul class="y-axis">
+                <li><span>1000</span></li>
+                <li><span>800</span></li>
+                <li><span>600</span></li>
+                <li><span>400</span></li>
+                <li><span>200</span></li>
+                <li><span>0</span></li>
+              </ul>
+              <c:forEach var="visHisCount" items="${visHisCount }">
+              <div class="bar" style="margin: 0 0 0 1%;width:2%;">
+                <div class="title" style="font-size:9px;"><fmt:formatDate value="${visHisCount.u_regdate }" pattern="MM-dd"></fmt:formatDate></div>
+                <div class="value tooltips" data-original-title="${visHisCount.u_seq}" data-toggle="tooltip" data-placement="top">${visHisCount.u_seq/10 }%</div>
+              </div>
+              </c:forEach>
+              <!-- <div class="bar">
+                <div class="title">1월</div>
+                <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">2월</div>
+                <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">3월</div>
+                <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">4월</div>
+                <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
+              </div>
+              <div class="bar">
+                <div class="title">5월</div>
+                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">6월</div>
+                <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
+              </div>
+              <div class="bar">
+                <div class="title">7월</div>
+                <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
+              </div>
+              <div class="bar">
+                <div class="title">8월</div>
+                <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">9월</div>
+                <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">10월</div>
+                <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
+              </div>
+              <div class="bar ">
+                <div class="title">11월</div>
+                <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
+              </div>
+              <div class="bar">
+                <div class="title">12월</div>
+                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">2%</div>
+              </div> -->
+              
+            </div>
+            </div>
+            <!--custom chart end-->
+        
+        
         <!-- page start-->
         <div id="morris">
           <div class="row mt">
@@ -178,90 +255,161 @@
             <div class="col-lg-6">
               <div class="content-panel">
                 <h4><i class="fa fa-angle-right"></i> 차트 2</h4>
-                <div class="panel-body">
-                  <div id="hero-bar" class="graph" style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><svg height="342" version="1.1" width="555" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative; left: -0.545436px; top: -0.193177px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="41.56249809265137" y="273.165955899193" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.090938446953032" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#aaaaaa" d="M54.06249809265137,273.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="41.56249809265137" y="211.12446692439477" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.090907602037589" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">500</tspan></text><path fill="none" stroke="#aaaaaa" d="M54.06249809265137,211.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="41.56249809265137" y="149.0829779495965" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.0909225334893335" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">1,000</tspan></text><path fill="none" stroke="#aaaaaa" d="M54.06249809265137,149.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="41.56249809265137" y="87.04148897479826" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.090914576757484" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">1,500</tspan></text><path fill="none" stroke="#aaaaaa" d="M54.06249809265137,87.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="41.56249809265137" y="25" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.090909481048584" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2,000</tspan></text><path fill="none" stroke="#aaaaaa" d="M54.06249809265137,25.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="490.33854150772095" y="285.665955899193" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(0.8192,-0.5736,0.5736,0.8192,-94.364,352.8758)"><tspan dy="4.090938446953032" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 5</tspan></text><text x="411.01562452316284" y="285.665955899193" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(0.8192,-0.5736,0.5736,0.8192,-111.3797,309.2479)"><tspan dy="4.090938446953032" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 4S</tspan></text><text x="331.69270753860474" y="285.665955899193" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(0.8192,-0.5736,0.5736,0.8192,-123.2658,262.2597)"><tspan dy="4.090938446953032" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 4</tspan></text><text x="252.36979055404663" y="285.665955899193" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(0.8192,-0.5736,0.5736,0.8192,-143.5205,220.6681)"><tspan dy="4.090938446953032" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 3GS</tspan></text><text x="173.04687356948853" y="285.665955899193" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(0.8192,-0.5736,0.5736,0.8192,-155.1955,173.3005)"><tspan dy="4.090938446953032" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 3G</tspan></text><text x="93.72395658493042" y="285.665955899193" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(0.8192,-0.5736,0.5736,0.8192,-161.6577,122.2829)"><tspan dy="4.090938446953032" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone</tspan></text><rect x="63.97786271572113" y="256.2906708980479" width="59.49218773841858" height="16.87528500114513" r="0" rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="143.30077970027924" y="256.1665879200983" width="59.49218773841858" height="16.9993679790947" r="0" rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="222.62369668483734" y="239.043136963054" width="59.49218773841858" height="34.122818936139026" r="0" rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="301.94661366939545" y="226.01442427834635" width="59.49218773841858" height="47.15153162084667" r="0" rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="381.26953065395355" y="191.8916053422073" width="59.49218773841858" height="81.27435055698572" r="0" rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="460.59244763851166" y="78.2315975403769" width="59.49218773841858" height="194.93435835881613" r="0" rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect></svg><div class="morris-hover morris-default-style" style="left: 0px; top: 174px; display: block;"><div class="morris-hover-row-label">iPhone 5</div><div class="morris-hover-point" style="color: #ac92ec">
-  Geekbench:
-  1,571
-</div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt">
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 차트 3</h4>
-                <div class="panel-body">
-                  <div id="hero-area" class="graph" style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><svg height="342" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative; left: -0.999995px; top: -0.502825px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="48.18181610107422" y="306.54545497894287" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.090951442718506" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#aaaaaa" d="M60.68181610107422,306.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="48.18181610107422" y="236.15909123420715" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.090924978256226" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">7,500</tspan></text><path fill="none" stroke="#aaaaaa" d="M60.68181610107422,236.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="48.18181610107422" y="165.77272748947144" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.09092903137207" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">15,000</tspan></text><path fill="none" stroke="#aaaaaa" d="M60.68181610107422,165.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="48.18181610107422" y="95.38636374473572" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.0909178256988525" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">22,500</tspan></text><path fill="none" stroke="#aaaaaa" d="M60.68181610107422,95.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="48.18181610107422" y="25" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4.090909481048584" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">30,000</tspan></text><path fill="none" stroke="#aaaaaa" d="M60.68181610107422,25.5H530" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="443.32155048282294" y="319.04545497894287" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.7273)"><tspan dy="4.090951442718506" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012</tspan></text><text x="235.17922105012804" y="319.04545497894287" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7.7273)"><tspan dy="4.090951442718506" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2011</tspan></text><path fill="#cee1b5" stroke="none" d="M60.68181610107422,256.6837549021721C73.79763412012075,251.52208822755813,100.0292701582138,240.81045677167177,113.14508817726033,236.03708820371628C126.26090619630686,231.2637196357608,152.49254223439993,225.03132764694652,165.60836025344645,218.49680635852815C178.58161503315551,212.03331247541865,204.52812459257365,185.97365277170437,217.5013793722827,184.04502751760484C230.33207091265433,182.1375959476163,255.9934539933975,201.74987938469138,268.8241455337691,203.15257906217576C281.93996355281564,204.58644984360424,308.1715995909087,194.43640101845267,321.28741760995524,195.39130935325625C334.40323562900176,196.34621768805982,360.63487166709484,227.7426770467164,373.75068968614136,210.7918457406044C386.7239444658504,194.0252626008632,412.67045402526855,68.70054703698159,425.6437088049776,60.5216515698433C438.6169635846867,52.34275610270501,464.5634731441048,133.36821745034243,477.5367279238139,145.36068200349808C490.6525459428604,157.4849318814137,516.8841819809535,154.08155247147084,530,156.98850929412842L530,306.54545497894287L60.68181610107422,306.54545497894287Z" fill-opacity="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.5;"></path><path fill="none" stroke="#a9d86e" d="M60.68181610107422,256.6837549021721C73.79763412012075,251.52208822755813,100.0292701582138,240.81045677167177,113.14508817726033,236.03708820371628C126.26090619630686,231.2637196357608,152.49254223439993,225.03132764694652,165.60836025344645,218.49680635852815C178.58161503315551,212.03331247541865,204.52812459257365,185.97365277170437,217.5013793722827,184.04502751760484C230.33207091265433,182.1375959476163,255.9934539933975,201.74987938469138,268.8241455337691,203.15257906217576C281.93996355281564,204.58644984360424,308.1715995909087,194.43640101845267,321.28741760995524,195.39130935325625C334.40323562900176,196.34621768805982,360.63487166709484,227.7426770467164,373.75068968614136,210.7918457406044C386.7239444658504,194.0252626008632,412.67045402526855,68.70054703698159,425.6437088049776,60.5216515698433C438.6169635846867,52.34275610270501,464.5634731441048,133.36821745034243,477.5367279238139,145.36068200349808C490.6525459428604,157.4849318814137,516.8841819809535,154.08155247147084,530,156.98850929412842" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="60.68181610107422" cy="256.6837549021721" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="113.14508817726033" cy="236.03708820371628" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="165.60836025344645" cy="218.49680635852815" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="217.5013793722827" cy="184.04502751760484" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="268.8241455337691" cy="203.15257906217576" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="321.28741760995524" cy="195.39130935325625" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="373.75068968614136" cy="210.7918457406044" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="425.6437088049776" cy="60.5216515698433" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="477.5367279238139" cy="145.36068200349808" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="530" cy="156.98850929412842" r="5" fill="#a9d86e" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><path fill="#f6c4c0" stroke="none" d="M60.68181610107422,281.5254488798141C73.79763412012075,275.8804625074863,100.0292701582138,263.89014544357065,113.14508817726033,258.94550339050295C126.26090619630686,254.00086133743525,152.49254223439993,244.67176422297212,165.60836025344645,241.96831245527267C178.58161503315551,239.2942460328743,204.52812459257365,239.6094100449774,217.5013793722827,237.43543063011168C230.33207091265433,235.2853410989258,255.9934539933975,227.68743490248224,268.8241455337691,224.67203667106628C281.93996355281564,221.5896295900633,308.1715995909087,212.916340819633,321.28741760995524,213.04420938043594C334.40323562900176,213.17207794123888,360.63487166709484,238.76048918489238,373.75068968614136,225.69498515748978C386.7239444658504,212.77149747821113,412.67045402526855,116.75097135338785,425.6437088049776,109.08824255371096C438.6169635846867,101.42551375403406,464.5634731441048,156.3487882755909,477.5367279238139,164.39315476007462C490.6525459428604,172.52592087625598,516.8841819809535,171.44586840729716,530,173.7967729563713L530,306.54545497894287L60.68181610107422,306.54545497894287Z" fill-opacity="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.5;"></path><path fill="none" stroke="#ff6c60" d="M60.68181610107422,281.5254488798141C73.79763412012075,275.8804625074863,100.0292701582138,263.89014544357065,113.14508817726033,258.94550339050295C126.26090619630686,254.00086133743525,152.49254223439993,244.67176422297212,165.60836025344645,241.96831245527267C178.58161503315551,239.2942460328743,204.52812459257365,239.6094100449774,217.5013793722827,237.43543063011168C230.33207091265433,235.2853410989258,255.9934539933975,227.68743490248224,268.8241455337691,224.67203667106628C281.93996355281564,221.5896295900633,308.1715995909087,212.916340819633,321.28741760995524,213.04420938043594C334.40323562900176,213.17207794123888,360.63487166709484,238.76048918489238,373.75068968614136,225.69498515748978C386.7239444658504,212.77149747821113,412.67045402526855,116.75097135338785,425.6437088049776,109.08824255371096C438.6169635846867,101.42551375403406,464.5634731441048,156.3487882755909,477.5367279238139,164.39315476007462C490.6525459428604,172.52592087625598,516.8841819809535,171.44586840729716,530,173.7967729563713" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="60.68181610107422" cy="281.5254488798141" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="113.14508817726033" cy="258.94550339050295" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="165.60836025344645" cy="241.96831245527267" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="217.5013793722827" cy="237.43543063011168" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="268.8241455337691" cy="224.67203667106628" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="321.28741760995524" cy="213.04420938043594" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="373.75068968614136" cy="225.69498515748978" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="425.6437088049776" cy="109.08824255371096" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="477.5367279238139" cy="164.39315476007462" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="530" cy="173.7967729563713" r="5" fill="#ff6c60" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><path fill="#86aac8" stroke="none" d="M60.68181610107422,281.5254488798141C73.79763412012075,281.2626731218338,100.0292701582138,283.10914206407074,113.14508817726033,280.4743458478928C126.26090619630686,277.8395496317148,152.49254223439993,261.6136209471859,165.60836025344645,260.4470791503906C178.58161503315551,259.2932171557344,204.52812459257365,273.43158739907835,217.5013793722827,271.19273068208696C230.33207091265433,268.9784767861614,255.9934539933975,244.842525438386,268.8241455337691,242.63463669872283C281.93996355281564,240.37768376484493,308.1715995909087,250.99888292372225,321.28741760995524,253.33336398792267C334.40323562900176,255.66784505212308,360.63487166709484,272.40147865546646,373.75068968614136,261.31048521232606C386.7239444658504,250.3400460457415,412.67045402526855,171.97024681719543,425.6437088049776,165.08763354902268C438.6169635846867,158.20502028084994,464.5634731441048,198.50155327674014,477.5367279238139,206.24957906694414C490.6525459428604,214.0827479976998,516.8841819809535,222.12170409138204,530,227.41241243286134L530,306.54545497894287L60.68181610107422,306.54545497894287Z" fill-opacity="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.5;"></path><path fill="none" stroke="#4a8bc2" d="M60.68181610107422,281.5254488798141C73.79763412012075,281.2626731218338,100.0292701582138,283.10914206407074,113.14508817726033,280.4743458478928C126.26090619630686,277.8395496317148,152.49254223439993,261.6136209471859,165.60836025344645,260.4470791503906C178.58161503315551,259.2932171557344,204.52812459257365,273.43158739907835,217.5013793722827,271.19273068208696C230.33207091265433,268.9784767861614,255.9934539933975,244.842525438386,268.8241455337691,242.63463669872283C281.93996355281564,240.37768376484493,308.1715995909087,250.99888292372225,321.28741760995524,253.33336398792267C334.40323562900176,255.66784505212308,360.63487166709484,272.40147865546646,373.75068968614136,261.31048521232606C386.7239444658504,250.3400460457415,412.67045402526855,171.97024681719543,425.6437088049776,165.08763354902268C438.6169635846867,158.20502028084994,464.5634731441048,198.50155327674014,477.5367279238139,206.24957906694414C490.6525459428604,214.0827479976998,516.8841819809535,222.12170409138204,530,227.41241243286134" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="60.68181610107422" cy="281.5254488798141" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="113.14508817726033" cy="280.4743458478928" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="165.60836025344645" cy="260.4470791503906" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="217.5013793722827" cy="271.19273068208696" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="268.8241455337691" cy="242.63463669872283" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="321.28741760995524" cy="253.33336398792267" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="373.75068968614136" cy="261.31048521232606" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="425.6437088049776" cy="165.08763354902268" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="477.5367279238139" cy="206.24957906694414" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="530" cy="227.41241243286134" r="5" fill="#4a8bc2" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle></svg><div class="morris-hover morris-default-style" style="left: 0px; top: 142px; display: none;"><div class="morris-hover-row-label">2012 Q2</div><div class="morris-hover-point" style="color: #689bc3">
-  iPhone:
-  8,432
-</div><div class="morris-hover-point" style="color: #a2b3bf">
-  iPad:
-  5,713
-</div><div class="morris-hover-point" style="color: #64b764">
-  iPod Touch:
-  1,791
-</div></div></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 차트 4</h4>
-                <div class="panel-body">
-                 <div id="hero-donut" class="graph"><svg height="342" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative; left: -0.545436px; top: -0.502825px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><path fill="none" stroke="#3498db" d="M277.5,282.5A109,109,0,0,0,386.4999996638166,173.50856083997223" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#3498db" stroke="#ffffff" d="M277.5,285.5A112,112,0,0,0,389.49999965456385,173.508796459421L435.99999951114614,173.51244856087703A158.5,158.5,0,0,1,277.5,332Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#2980b9" d="M386.4999996638166,173.50856083997223A109,109,0,0,0,191.12725385519667,107.01128875210951" stroke-width="2" opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path><path fill="#2980b9" stroke="#ffffff" d="M389.49999965456385,173.508796459421A112,112,0,0,0,188.75002230992686,105.18132422235105L147.940880782795,73.76693312816425A163.5,163.5,0,0,1,440.99999949572486,173.51284125995835Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#34495e" d="M191.12725385519667,107.01128875210951A109,109,0,0,0,211.00450525756543,259.8675238672434" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#34495e" stroke="#ffffff" d="M188.75002230992686,105.18132422235105A112,112,0,0,0,209.17435402612227,262.2446116801033L180.8070099387534,299.0894727794319A158.5,158.5,0,0,1,151.9029333582447,76.81687401109501Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#3498db" d="M211.00450525756543,259.8675238672434A109,109,0,0,0,277.46575664063926,282.49999462106564" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#3498db" stroke="#ffffff" d="M209.17435402612227,262.2446116801033A112,112,0,0,0,277.4648141628587,285.4999944730216L277.4502057572598,331.9999921783386A158.5,158.5,0,0,1,180.8070099387534,299.0894727794319Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="277.5" y="163.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 800 15px Arial;" font-size="15px" font-weight="800" transform="matrix(2.6032,0,0,2.6032,-445.2778,-278.9524)" stroke-width="0.38414634146341464"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">오우맨</tspan></text><text x="277.5" y="183.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Arial;" font-size="14px" transform="matrix(2.4296,0,0,2.4296,-396.7222,-251.6148)" stroke-width="0.41158536585365857"><tspan dy="4.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">40%</tspan></text></svg></div>
-                </div>
-              </div>
+								<div class="panel-body">
+									<div id="hero-bar" class="graph"
+										style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+										<svg height="342" version="1.1" width="555"
+											xmlns="http://www.w3.org/2000/svg"
+											style="overflow: hidden; position: relative; left: -0.545436px; top: -0.193177px;">
+											<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc>
+											<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+											<text x="41.56249809265137" y="273.165955899193"
+												text-anchor="end" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal">
+											<tspan dy="4.090938446953032"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text>
+											<path fill="none" stroke="#aaaaaa"
+												d="M54.06249809265137,273.5H530" stroke-width="0.5"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+											<text x="41.56249809265137" y="211.12446692439477"
+												text-anchor="end" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal">
+											<tspan dy="4.090907602037589"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">500</tspan></text>
+											<path fill="none" stroke="#aaaaaa"
+												d="M54.06249809265137,211.5H530" stroke-width="0.5"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+											<text x="41.56249809265137" y="149.0829779495965"
+												text-anchor="end" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal">
+											<tspan dy="4.0909225334893335"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">1,000</tspan></text>
+											<path fill="none" stroke="#aaaaaa"
+												d="M54.06249809265137,149.5H530" stroke-width="0.5"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+											<text x="41.56249809265137" y="87.04148897479826"
+												text-anchor="end" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal">
+											<tspan dy="4.090914576757484"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">1,500</tspan></text>
+											<path fill="none" stroke="#aaaaaa"
+												d="M54.06249809265137,87.5H530" stroke-width="0.5"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+											<text x="41.56249809265137" y="25" text-anchor="end"
+												font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal">
+											<tspan dy="4.090909481048584"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2,000</tspan></text>
+											<path fill="none" stroke="#aaaaaa"
+												d="M54.06249809265137,25.5H530" stroke-width="0.5"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+											<text x="490.33854150772095" y="285.665955899193"
+												text-anchor="middle" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal"
+												transform="matrix(0.8192,-0.5736,0.5736,0.8192,-94.364,352.8758)">
+											<tspan dy="4.090938446953032"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 5</tspan></text>
+											<text x="411.01562452316284" y="285.665955899193"
+												text-anchor="middle" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal"
+												transform="matrix(0.8192,-0.5736,0.5736,0.8192,-111.3797,309.2479)">
+											<tspan dy="4.090938446953032"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 4S</tspan></text>
+											<text x="331.69270753860474" y="285.665955899193"
+												text-anchor="middle" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal"
+												transform="matrix(0.8192,-0.5736,0.5736,0.8192,-123.2658,262.2597)">
+											<tspan dy="4.090938446953032"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 4</tspan></text>
+											<text x="252.36979055404663" y="285.665955899193"
+												text-anchor="middle" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal"
+												transform="matrix(0.8192,-0.5736,0.5736,0.8192,-143.5205,220.6681)">
+											<tspan dy="4.090938446953032"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 3GS</tspan></text>
+											<text x="173.04687356948853" y="285.665955899193"
+												text-anchor="middle" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal"
+												transform="matrix(0.8192,-0.5736,0.5736,0.8192,-155.1955,173.3005)">
+											<tspan dy="4.090938446953032"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone 3G</tspan></text>
+											<text x="93.72395658493042" y="285.665955899193"
+												text-anchor="middle" font="10px &quot;Arial&quot;"
+												stroke="none" fill="#888888"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 12px sans-serif;"
+												font-size="12px" font-family="sans-serif"
+												font-weight="normal"
+												transform="matrix(0.8192,-0.5736,0.5736,0.8192,-161.6577,122.2829)">
+											<tspan dy="4.090938446953032"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">iPhone</tspan></text>
+											<rect x="63.97786271572113" y="256.2906708980479"
+												width="59.49218773841858" height="16.87528500114513" r="0"
+												rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+											<rect x="143.30077970027924" y="256.1665879200983"
+												width="59.49218773841858" height="16.9993679790947" r="0"
+												rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+											<rect x="222.62369668483734" y="239.043136963054"
+												width="59.49218773841858" height="34.122818936139026" r="0"
+												rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+											<rect x="301.94661366939545" y="226.01442427834635"
+												width="59.49218773841858" height="47.15153162084667" r="0"
+												rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+											<rect x="381.26953065395355" y="191.8916053422073"
+												width="59.49218773841858" height="81.27435055698572" r="0"
+												rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+											<rect x="460.59244763851166" y="78.2315975403769"
+												width="59.49218773841858" height="194.93435835881613" r="0"
+												rx="0" ry="0" fill="#ac92ec" stroke="none" fill-opacity="1"
+												style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect></svg>
+										<div class="morris-hover morris-default-style"
+											style="left: 0px; top: 174px; display: block;">
+											<div class="morris-hover-row-label">iPhone 5</div>
+											<div class="morris-hover-point" style="color: #ac92ec">
+												Geekbench: 1,571</div>
+										</div>
+									</div>
+								</div>
+							</div>
             </div>
           </div>
         </div>
         <!-- page end-->
       </section>
-      <!-- /wrapper -->
-      <section class="wrapper site-min-height">
-        <main>
-          <div class="container-fluid px-4" style="padding:0;">
-              <h1 class="mt-4"> Charts(규진)</h1>
-              
-              <div class="cardd mb-4" style="height:fit-content;">
-                  <div class="card-header">
-                      <i class="fas fa-chart-area me-1"></i>
-                      일일 이용자 수
-                  </div>
-                  <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
-                  <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-              </div>
-              <div class="row">
-                  <div class="col-lg-6">
-                      <div class="cardd mb-4" style="height:fit-content;">
-                          <div class="card-header">
-                              <i class="fas fa-chart-bar me-1"></i>
-                              Bar Chart Example
-                          </div>
-                          <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
-                          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                      </div>
-                  </div>
-                  <div class="col-lg-6">
-                      <div class="cardd mb-4" style="height:fit-content;">
-                          <div class="card-header">
-                              <i class="fas fa-chart-pie me-1"></i>
-                              Pie Chart Example
-                          </div>
-                          <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
-                          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </main>
-      </section>
-    </section>
-    <!-- /MAIN CONTENT -->
     <!--main content end-->
-
-    <!-- //다른 방법 -->
-    
 
     <!-- 푸더 import -->
 		<%@ include file="../inc/admin_footer.jsp" %>

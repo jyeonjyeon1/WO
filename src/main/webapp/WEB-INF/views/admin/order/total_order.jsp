@@ -121,8 +121,7 @@
 							<i class=" fa fa-bar-chart-o"></i> <span>통계</span>
 					</a>
 						<ul class="sub">
-							<li><a >기간별
-									주문 통계</a></li>
+							
 							<li><a id="store-sales" href="store_sales.admin">매장별 매출
 									통계</a></li>
 							

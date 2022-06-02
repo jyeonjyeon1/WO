@@ -123,7 +123,7 @@
               <span>통계</span>
               </a>
             <ul class="sub">
-<!--               <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li> -->
+<!--                -->
               <li><a id="store-sales" href="store_sales.admin">매장별 매출 통계</a></li>
               
               <li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
@@ -261,6 +261,8 @@
             </div>
             </div>
             <!--custom chart end-->
+            
+            
             <div class="row mt">
               <!-- SERVER STATUS PANELS -->
               <div class="col-md-4 col-sm-4 mb">

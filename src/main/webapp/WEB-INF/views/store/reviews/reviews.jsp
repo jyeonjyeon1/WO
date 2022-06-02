@@ -335,7 +335,7 @@ function count_length(){
 							<div class="col-lg-2">
 								<div class="row" style="text-align: center; margin-top: 30px;">
 									<h5 style="font-weight: bolder">평균별점</h5>
-									<h6>최근 6개월 기준</h6>
+									<h6>최근 30일 기준</h6>
 								</div>
 								<div class="row" style="text-align: center;">
 									<h1 style="margin-top: 0; font-weight: bolder;">${avgStar / 10 }</h1>

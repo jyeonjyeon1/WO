@@ -1,0 +1,582 @@
+
+CREATE TABLE admins (
+	a_seq serial4 NOT NULL,
+	a_id varchar(20) NOT NULL,
+	a_password varchar(30) NOT NULL,
+	a_name varchar(30) NOT NULL,
+	CONSTRAINT admins_pkey PRIMARY KEY (a_id)
+);
+
+
+
+
+CREATE TABLE banner (
+	b_seq serial4 NOT NULL,
+	e_code varchar(20) NULL,
+	b_title varchar(100) NOT NULL,
+	b_click_url varchar(2500) NOT NULL,
+	b_image varchar(255) NOT NULL,
+	b_regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	b_startdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	b_enddate timestamp NOT NULL DEFAULT '2099-12-31 00:00:00'::timestamp without time zone,
+	b_settime bool NOT NULL DEFAULT false,
+	b_memo varchar(200) NULL,
+	CONSTRAINT banner_pk PRIMARY KEY (b_seq)
+);
+
+
+
+CREATE TABLE basket_order (
+	b_seq int4 NULL,
+	u_id varchar(20) NULL,
+	si_code varchar(20) NULL,
+	m_seq int4 NULL,
+	b_quantity int4 NULL,
+	b_total_price int4 NULL,
+	opb_code varchar(20) NULL,
+	op_code1 varchar(10) NULL DEFAULT ' '::character varying,
+	op_code2 varchar(10) NULL DEFAULT ' '::character varying,
+	op_code3 varchar(10) NULL DEFAULT ' '::character varying,
+	op_code4 varchar(10) NULL DEFAULT ' '::character varying,
+	op_code5 varchar(10) NULL DEFAULT ' '::character varying,
+	b_single_price int4 NULL,
+	o_code varchar(30) NULL
+);
+
+
+
+
+CREATE TABLE coupon_template (
+	ct_seq serial4 NOT NULL,
+	ct_name varchar(50) NOT NULL,
+	ct_content varchar(500) NOT NULL DEFAULT ' '::character varying,
+	ct_type bool NOT NULL DEFAULT false,
+	ct_nansu varchar(20) NOT NULL DEFAULT ' '::character varying,
+	ct_day int4 NULL DEFAULT 0,
+	ct_startdate varchar(20) NULL,
+	ct_enddate varchar(20) NULL,
+	ct_regdate timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	ct_discount_type bool NOT NULL DEFAULT false,
+	ct_discount int4 NOT NULL DEFAULT 0,
+	CONSTRAINT coupon_template_pkey PRIMARY KEY (ct_seq)
+);
+
+
+
+
+CREATE TABLE documents (
+	d_seq serial4 NOT NULL,
+	d_name varchar(100) NOT NULL,
+	d_file_name varchar(100) NOT NULL,
+	d_file_url varchar(200) NOT NULL,
+	d_regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	d_memo varchar(300) NULL,
+	CONSTRAINT documents_pk PRIMARY KEY (d_seq)
+);
+
+
+
+
+CREATE TABLE event_board (
+	e_seq serial4 NOT NULL,
+	e_code varchar(20) NOT NULL,
+	e_title varchar(100) NOT NULL,
+	e_thumbnail_image varchar(255) NOT NULL,
+	e_comtent_image varchar(255) NOT NULL,
+	e_url varchar(1000) NOT NULL,
+	e_regtdate timestamp NOT NULL,
+	e_startdate timestamp NOT NULL,
+	e_enddate timestamp NOT NULL,
+	CONSTRAINT event_board_pkey PRIMARY KEY (e_code)
+);
+
+
+
+
+CREATE TABLE faq (
+	fac_seq serial4 NOT NULL,
+	fac_code varchar(20) NULL,
+	fac_type varchar(20) NOT NULL,
+	fac_title varchar(100) NOT NULL,
+	fac_content varchar(4000) NOT NULL,
+	fac_visits int4 NOT NULL DEFAULT 0,
+	CONSTRAINT faq_pk PRIMARY KEY (fac_seq)
+);
+
+
+
+
+CREATE TABLE franchise (
+	f_seq serial4 NOT NULL,
+	f_code varchar(40) NOT NULL,
+	f_name varchar(100) NOT NULL,
+	f_tel varchar(20) NOT NULL,
+	f_email varchar(100) NOT NULL,
+	f_title varchar(100) NOT NULL,
+	f_regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	f_status bool NOT NULL DEFAULT false
+);
+
+
+
+
+CREATE TABLE menuandoption (
+	si_code varchar(20) NULL,
+	si_loc varchar(20) NULL,
+	mg_code varchar(20) NULL,
+	mg_name varchar(50) NULL,
+	m_code varchar(20) NULL,
+	m_name varchar(50) NULL,
+	m_oos bool NULL DEFAULT false,
+	m_img_file varchar(255) NULL,
+	og_code varchar(50) NULL,
+	og_name varchar(50) NULL,
+	op_code varchar(20) NULL,
+	og_ros bool NULL DEFAULT false,
+	op_name varchar(1000) NULL,
+	op_price varchar(1000) NULL,
+	op_oos bool NULL DEFAULT false,
+	mg_seq int4 NULL,
+	m_seq int4 NULL,
+	og_seq int4 NULL,
+	op_seq int4 NULL
+);
+
+
+
+
+CREATE TABLE notice_board (
+	n_seq serial4 NOT NULL,
+	n_title varchar(30) NOT NULL,
+	n_content varchar(3000) NOT NULL,
+	n_regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	n_fix bool NOT NULL DEFAULT false,
+	n_type varchar(10) NOT NULL DEFAULT '공지'::character varying,
+	n_pic_url varchar(300) NULL,
+	n_file_url varchar(300) NULL,
+	n_enddate timestamp NULL,
+	n_status bool NOT NULL DEFAULT true,
+	CONSTRAINT notice_board_pk PRIMARY KEY (n_seq)
+);
+
+
+
+
+CREATE TABLE search_bar (
+	sb_seq serial4 NOT NULL,
+	sb_keyword varchar(100) NOT NULL,
+	sb_url varchar(200) NOT NULL,
+	CONSTRAINT search_bar_pk PRIMARY KEY (sb_seq),
+	CONSTRAINT search_bar_un UNIQUE (sb_keyword)
+);
+
+
+
+
+CREATE TABLE sms_message (
+	sms_seq serial4 NOT NULL,
+	sms_tonum varchar(20) NOT NULL,
+	sms_type varchar(10) NOT NULL DEFAULT 'SMS'::character varying,
+	isadvertise bool NOT NULL DEFAULT false,
+	sms_text varchar(1000) NOT NULL,
+	sms_size varchar(10) NULL,
+	sms_sendtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	sms_result bool NOT NULL DEFAULT true,
+	CONSTRAINT sms_message_pk PRIMARY KEY (sms_seq)
+);
+
+
+
+CREATE TABLE store_form (
+	sf_seq serial4 NOT NULL,
+	sf_code varchar(20) NOT NULL,
+	sf_name varchar(100) NOT NULL,
+	sf_reg_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	sf_loc varchar(20) NULL,
+	sf_zipcode varchar(20) NOT NULL,
+	sf_address varchar(255) NOT NULL,
+	sf_addr_road varchar(255) NOT NULL,
+	sf_addr_detail varchar(255) NULL,
+	sf_tel varchar(20) NOT NULL,
+	sf_parking_able bool NOT NULL DEFAULT false,
+	sf_due_time varchar(20) NULL,
+	sf_holiday_fix varchar(20) NULL,
+	sf_holiday_imsi varchar(20) NULL,
+	sf_referinfo varchar(4000) NULL,
+	sf_map_image varchar(255) NULL,
+	sf_directions varchar(1000) NULL,
+	sf_image varchar(255) NOT NULL DEFAULT 'HTTPS://WALKINGORDER.S3.AP-NORTHEAST-2.AMAZONAWS.COM/CAFE_IMAGES/NO-IMAGE-CAFE.PNG'::character varying,
+	sf_status varchar(20) NOT NULL DEFAULT '신청'::character varying,
+	sf_usestore bool NOT NULL DEFAULT false,
+	sf_email varchar(100) NOT NULL DEFAULT 'NO_EMAIL_T_T'::character varying,
+	sf_acc_no varchar(20) NOT NULL,
+	sf_bankbook_image varchar(255) NOT NULL,
+	sf_business_registration_image varchar(255) NOT NULL,
+	sf_rep_name varchar(20) NOT NULL,
+	sf_password varchar(300) NOT NULL DEFAULT '1122'::character varying
+);
+
+
+
+
+CREATE TABLE store_info (
+	si_seq serial4 NOT NULL,
+	si_code varchar(20) NOT NULL,
+	si_name varchar(100) NOT NULL,
+	si_reg_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	si_loc varchar(20) NULL,
+	si_zipcode varchar(20) NOT NULL,
+	si_address varchar(255) NOT NULL,
+	si_addr_road varchar(255) NOT NULL,
+	si_addr_detail varchar(255) NULL,
+	si_tel varchar(20) NOT NULL,
+	si_parking_able bool NOT NULL DEFAULT false,
+	si_due_time int4 NULL DEFAULT 5,
+	si_holiday_gong bool NULL DEFAULT false,
+	si_holiday_fix varchar(20) NULL,
+	si_holiday_imsi varchar(20) NULL,
+	si_allday bool NULL DEFAULT true,
+	si_opena varchar(40) NULL DEFAULT '09:00'::character varying,
+	si_closea varchar(40) NULL DEFAULT '18:00'::character varying,
+	si_openw varchar(40) NULL,
+	si_closew varchar(40) NULL,
+	si_opensat varchar(40) NULL,
+	si_closesat varchar(40) NULL,
+	si_opensun varchar(40) NULL,
+	si_closesun varchar(40) NULL,
+	si_referinfo varchar(4000) NULL,
+	si_map_image varchar(255) NULL,
+	si_directions varchar(1000) NULL,
+	si_status bool NOT NULL DEFAULT true,
+	si_usestore bool NOT NULL DEFAULT true,
+	si_image varchar(255) NOT NULL DEFAULT 'https://walkingorder.s3.ap-northeast-2.amazonaws.com/cafe_images/no-image-cafe.png'::character varying,
+	si_image2 varchar(255) NULL,
+	si_image3 varchar(255) NULL,
+	si_etc varchar(200) NULL,
+	si_wonsanji varchar(15000) NULL,
+	CONSTRAINT store_info_pkey PRIMARY KEY (si_code)
+);
+
+
+
+
+CREATE TABLE system_setting (
+	"key" varchar(20) NOT NULL,
+	value varchar(200) NOT NULL,
+	CONSTRAINT system_setting_pk PRIMARY KEY (key)
+);
+
+
+
+
+CREATE TABLE terms (
+	t_code varchar(20) NOT NULL,
+	t_type varchar(20) NOT NULL,
+	t_title varchar(1000) NOT NULL,
+	t_content varchar(2048) NOT NULL,
+	t_regdate timestamp NOT NULL,
+	t_enfdate timestamp NULL,
+	CONSTRAINT terms_pkey PRIMARY KEY (t_code)
+);
+
+
+
+CREATE TABLE today_drink (
+	td_seq serial4 NOT NULL,
+	td_name varchar(100) NOT NULL,
+	td_content varchar(4000) NOT NULL,
+	td_image varchar(255) NOT NULL,
+	td_url varchar(2500) NOT NULL,
+	CONSTRAINT today_drink_pkey PRIMARY KEY (td_seq)
+);
+
+
+
+CREATE TABLE users (
+	u_seq serial4 NOT NULL,
+	u_id varchar(150) NOT NULL,
+	u_password varchar(100) NOT NULL,
+	u_type varchar(10) NOT NULL DEFAULT 'normal'::character varying,
+	u_name varchar(50) NOT NULL,
+	u_nickname varchar(50) NULL,
+	u_tel varchar(20) NOT NULL,
+	u_email varchar(100) NOT NULL,
+	u_birthday varchar(20) NULL,
+	u_sms_usable bool NOT NULL DEFAULT false,
+	u_email_usable bool NOT NULL DEFAULT false,
+	u_point int4 NOT NULL DEFAULT 1000,
+	u_regdate timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	u_status bool NOT NULL DEFAULT true,
+	u_raw_pwd varchar(50) NULL,
+	u_lastdate timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	u_info varchar(200) NULL,
+	CONSTRAINT users_pkey PRIMARY KEY (u_id),
+	CONSTRAINT users_u_nickname_key UNIQUE (u_nickname)
+);
+
+
+
+
+CREATE TABLE coupon (
+	c_seq serial4 NOT NULL,
+	ct_seq serial4 NOT NULL,
+	c_nansu varchar(20) NOT NULL DEFAULT NULL::character varying,
+	c_startdate date NULL,
+	c_enddate date NULL,
+	c_used bool NOT NULL DEFAULT false,
+	c_useddate timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	u_id varchar(20) NOT NULL,
+	si_code varchar(20) NULL,
+	CONSTRAINT coupon_pkey PRIMARY KEY (c_seq),
+	CONSTRAINT coupon_ct_seq_fkey FOREIGN KEY (ct_seq) REFERENCES coupon_template(ct_seq) ON DELETE CASCADE,
+	CONSTRAINT coupon_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE,
+	CONSTRAINT coupon_u_id_fkey FOREIGN KEY (u_id) REFERENCES users(u_id)
+);
+
+
+
+
+CREATE TABLE like_store (
+	u_id varchar(20) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	ls_seq serial4 NOT NULL,
+	CONSTRAINT like_store_pkey PRIMARY KEY (u_id, si_code),
+	CONSTRAINT like_store_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE,
+	CONSTRAINT like_store_u_id_fkey FOREIGN KEY (u_id) REFERENCES users(u_id)
+);
+
+
+
+CREATE TABLE menu_group (
+	mg_seq serial4 NOT NULL,
+	mg_code varchar(20) NOT NULL,
+	mg_name varchar(50) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	CONSTRAINT menu_group_pk PRIMARY KEY (mg_seq),
+	CONSTRAINT menu_group_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE option_group (
+	og_seq serial4 NOT NULL,
+	og_code varchar(20) NOT NULL,
+	og_name varchar(50) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	og_ros bool NOT NULL DEFAULT false,
+	og_oos bool NOT NULL DEFAULT false,
+	CONSTRAINT option_group_pkey PRIMARY KEY (og_seq),
+	CONSTRAINT option_group_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE "options" (
+	op_seq int4 NOT NULL DEFAULT nextval('menu_option_op_seq_seq'::regclass),
+	op_code varchar(20) NOT NULL,
+	og_seq int4 NOT NULL,
+	si_code varchar(20) NOT NULL,
+	op_name varchar(1000) NOT NULL,
+	op_price int4 NOT NULL DEFAULT 0,
+	op_oos bool NULL DEFAULT false,
+	CONSTRAINT options_pk PRIMARY KEY (op_seq),
+	CONSTRAINT menu_option_og_code_fkey FOREIGN KEY (og_seq) REFERENCES option_group(og_seq) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT menu_option_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE orders (
+	o_seq serial4 NOT NULL,
+	o_code varchar(20) NOT NULL,
+	u_id varchar(20) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	o_order_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	o_coupon_status bool NOT NULL DEFAULT false,
+	c_seq varchar(20) NULL,
+	o_point_status bool NOT NULL DEFAULT false,
+	o_point varchar(20) NULL,
+	o_payment_list varchar(20) NOT NULL,
+	o_request varchar(255) NULL DEFAULT '-'::character varying,
+	o_discount_price int4 NOT NULL,
+	o_total_price int4 NOT NULL,
+	o_order_state varchar(20) NOT NULL DEFAULT '결제확인'::character varying,
+	o_list varchar(100) NOT NULL,
+	o_daily_seq int4 NULL,
+	o_pay_status bool NOT NULL DEFAULT false,
+	o_list_detail varchar(300) NULL,
+	o_review bool NOT NULL DEFAULT false,
+	CONSTRAINT orders_pkey PRIMARY KEY (o_code),
+	CONSTRAINT orders_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code),
+	CONSTRAINT orders_u_id_fkey FOREIGN KEY (u_id) REFERENCES users(u_id)
+);
+
+
+
+CREATE TABLE point (
+	pt_seq serial4 NOT NULL,
+	u_id varchar(30) NOT NULL,
+	pt_regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	pt_type varchar(10) NOT NULL DEFAULT '적립'::character varying,
+	pt_description varchar(100) NOT NULL DEFAULT '음료 구매'::character varying,
+	pt_handler varchar(20) NOT NULL DEFAULT '시스템'::character varying,
+	pt_amount int4 NOT NULL,
+	si_code varchar(20) NULL,
+	CONSTRAINT point_pkey PRIMARY KEY (pt_seq),
+	CONSTRAINT point_fk FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON UPDATE CASCADE,
+	CONSTRAINT point_u_id_fkey FOREIGN KEY (u_id) REFERENCES users(u_id) ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE qna (
+	qa_seq serial4 NOT NULL,
+	u_id varchar(20) NOT NULL,
+	si_code varchar(20) NULL,
+	qa_type varchar(10) NOT NULL,
+	qa_title varchar(1000) NOT NULL,
+	qa_type_ans bool NOT NULL DEFAULT false,
+	qa_content_q varchar(4000) NOT NULL,
+	qa_content_a varchar(4000) NULL,
+	qa_date_q timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	qa_date_a timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT qna_pkey PRIMARY KEY (qa_seq),
+	CONSTRAINT qna_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE,
+	CONSTRAINT qna_u_id_fkey FOREIGN KEY (u_id) REFERENCES users(u_id)
+);
+
+
+
+
+CREATE TABLE sns_users (
+	sns_seq serial4 NOT NULL,
+	sns_id varchar(150) NOT NULL,
+	u_id varchar(100) NULL,
+	CONSTRAINT sns_users_pkey PRIMARY KEY (sns_seq),
+	CONSTRAINT sns_users_sns_id_key UNIQUE (sns_id),
+	CONSTRAINT sns_users_fk FOREIGN KEY (u_id) REFERENCES users(u_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+
+CREATE TABLE store_account (
+	sa_seq serial4 NOT NULL,
+	sa_acc_no varchar(20) NOT NULL,
+	sa_password varchar(300) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	sa_bankbook_image varchar(255) NOT NULL DEFAULT 'https://walkingorder.s3.ap-northeast-2.amazonaws.com/bankcopy/%ED%86%B5%EC%9E%A5%EC%82%AC%EB%B3%B8%EC%83%98%ED%94%8C.jpg'::character varying,
+	sa_business_registration_image varchar(255) NOT NULL DEFAULT 'https://walkingorder.s3.ap-northeast-2.amazonaws.com/businessreg/%EC%82%AC%EC%97%85%EC%9E%90%EC%83%98%ED%94%8C1.gif'::character varying,
+	sa_regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	sa_status bool NOT NULL DEFAULT true,
+	sa_email varchar(100) NOT NULL DEFAULT 'imsi@email.com'::character varying,
+	sa_rep_name varchar(20) NOT NULL,
+	CONSTRAINT store_account_pkey PRIMARY KEY (sa_acc_no),
+	CONSTRAINT store_account_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE user_review (
+	ur_seq serial4 NOT NULL,
+	u_id varchar(20) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	ur_regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	ur_star int4 NOT NULL DEFAULT 0,
+	ur_pic_url varchar(255) NULL,
+	ur_content varchar(4000) NULL,
+	o_code varchar(20) NULL,
+	ur_open bool NOT NULL DEFAULT true,
+	ur_ans varchar(4000) NULL DEFAULT NULL::character varying,
+	CONSTRAINT user_review_pkey PRIMARY KEY (ur_seq),
+	CONSTRAINT user_review_o_code_fkey FOREIGN KEY (o_code) REFERENCES orders(o_code),
+	CONSTRAINT user_review_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE,
+	CONSTRAINT user_review_u_id_fkey FOREIGN KEY (u_id) REFERENCES users(u_id)
+);
+
+
+
+
+CREATE TABLE visit_history (
+	vh_seq serial4 NOT NULL,
+	u_id varchar(100) NOT NULL,
+	vh_ip varchar(20) NULL,
+	vh_time timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	vh_browser varchar(100) NULL,
+	CONSTRAINT visit_history_pk PRIMARY KEY (vh_seq),
+	CONSTRAINT visit_history_fk FOREIGN KEY (u_id) REFERENCES users(u_id) ON UPDATE CASCADE
+);
+
+
+
+CREATE TABLE menu (
+	m_seq serial4 NOT NULL,
+	m_code varchar(20) NOT NULL,
+	m_oos bool NOT NULL DEFAULT false,
+	m_name varchar(50) NOT NULL,
+	m_img_file varchar(255) NOT NULL DEFAULT 'https://walkingorder.s3.ap-northeast-2.amazonaws.com/menuimg/glasses.png'::character varying,
+	mg_code varchar(20) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	mg_seq int4 NOT NULL,
+	m_pending_img varchar(255) NULL,
+	CONSTRAINT menu_pk PRIMARY KEY (m_seq),
+	CONSTRAINT menu_fk FOREIGN KEY (mg_seq) REFERENCES menu_group(mg_seq) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT menu_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE optiongroup_basic (
+	ogb_seq int4 NOT NULL DEFAULT nextval('og_basic_ogb_seq_seq'::regclass),
+	si_code varchar(20) NOT NULL,
+	m_code varchar(20) NOT NULL,
+	m_name varchar(50) NULL,
+	ogb_code varchar(20) NOT NULL,
+	m_seq int4 NOT NULL,
+	CONSTRAINT og_basic_pkey PRIMARY KEY (ogb_seq),
+	CONSTRAINT og_basic_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE,
+	CONSTRAINT optiongroup_basic_m_seq_fk FOREIGN KEY (m_seq) REFERENCES menu(m_seq) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+
+CREATE TABLE basket (
+	b_seq serial4 NOT NULL,
+	u_id varchar(20) NOT NULL,
+	si_code varchar(20) NOT NULL,
+	m_seq int4 NOT NULL,
+	b_quantity int4 NOT NULL,
+	b_total_price int4 NOT NULL,
+	opb_code varchar(20) NOT NULL,
+	op_code1 varchar(10) NOT NULL DEFAULT ' '::character varying,
+	op_code2 varchar(10) NOT NULL DEFAULT ' '::character varying,
+	op_code3 varchar(10) NOT NULL DEFAULT ' '::character varying,
+	op_code4 varchar(10) NOT NULL DEFAULT ' '::character varying,
+	op_code5 varchar(10) NOT NULL DEFAULT ' '::character varying,
+	b_single_price int4 NULL,
+	CONSTRAINT basket_pk PRIMARY KEY (b_seq),
+	CONSTRAINT basket_m_seq_fk FOREIGN KEY (m_seq) REFERENCES menu(m_seq) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT basket_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code),
+	CONSTRAINT basket_u_id_fkey FOREIGN KEY (u_id) REFERENCES users(u_id) ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE option_basic (
+	opb_seq int4 NOT NULL DEFAULT nextval('op_basic_opb_seq_seq'::regclass),
+	si_code varchar(20) NOT NULL,
+	ogb_seq int4 NOT NULL DEFAULT nextval('op_basic_ogb_seq_seq'::regclass),
+	opb_code varchar(20) NOT NULL,
+	opb_name varchar(50) NULL,
+	opb_price int4 NOT NULL,
+	CONSTRAINT op_basic_pkey PRIMARY KEY (opb_seq),
+	CONSTRAINT op_basic_ogb_seq_fkey FOREIGN KEY (ogb_seq) REFERENCES optiongroup_basic(ogb_seq) ON DELETE CASCADE,
+	CONSTRAINT op_basic_si_code_fkey FOREIGN KEY (si_code) REFERENCES store_info(si_code) ON DELETE CASCADE
+);

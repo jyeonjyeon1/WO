@@ -28,7 +28,7 @@
 		INNER JOIN
 		USERS u
 		ON (vh.U_ID = u.U_ID)
-		ORDER BY vh.VH_TIME DESC
+		ORDER BY vh.VH_TIME DESC limit 101
 	</select>
 	<select id="getOriginalPass" resultType="String">
     	SELECT U_PASSWORD FROM USERS

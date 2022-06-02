@@ -269,26 +269,27 @@ input::-webkit-inner-spin-button {
 			});
 
 	function finalCheck() {
-		if (!ch7) {
-			Swal.fire({
-				icon : "error",
-				text : "이용약관 미동의"
-			});
-		} else if (!ch8) {
-			Swal.fire({
-				icon : "error",
-				text : "개인정보처리방침 미동의"
-			});
-		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8 && ch9) {
-			document.regForm.submit();
-		} else {
-			Swal.fire({
-				icon : "error",
-				text : "어딘가 잘못 작성"
-			});
-			console.log("실패")
-			return false;
-		}
+		document.regForm.submit();
+// 		if (!ch7) {
+// 			Swal.fire({
+// 				icon : "error",
+// 				text : "이용약관 미동의"
+// 			});
+// 		} else if (!ch8) {
+// 			Swal.fire({
+// 				icon : "error",
+// 				text : "개인정보처리방침 미동의"
+// 			});
+// 		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8 && ch9) {
+// 			document.regForm.submit();
+// 		} else {
+// 			Swal.fire({
+// 				icon : "error",
+// 				text : "어딘가 잘못 작성"
+// 			});
+// 			console.log("실패")
+// 			return false;
+// 		}
 	}
 	var verifNum = []; //인증번호
 	var verifTime = 180;// 180초=3분
@@ -322,6 +323,7 @@ input::-webkit-inner-spin-button {
 	    		"u_tel":$("#u_tel").val(),
 		    	"verifNumMade": verifNumMade
 		    }
+		    alert(verifNum);
 		    $.ajax({
 	             type: "POST",
 	             url: "/phoneVerif.admin",

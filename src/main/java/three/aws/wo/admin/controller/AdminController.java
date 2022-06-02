@@ -16,6 +16,7 @@ import three.aws.wo.admin.service.AdminService;
 import three.aws.wo.admin.service.FaqService;
 import three.aws.wo.admin.vo.NoticeVO;
 import three.aws.wo.admin.vo.QnAVO;
+import three.aws.wo.user.vo.UserVO;
 
 @Controller
 public class AdminController {
@@ -33,6 +34,7 @@ public class AdminController {
 		int monthlySales = adminService.monthlySales();
 		int dailyReg = adminService.dailyReg();
 		int dailyVisit = adminService.dailyVisit();
+		List<UserVO> visHisCount = adminService.visHisCount();
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 		System.out.println(todayDate);
@@ -42,11 +44,13 @@ public class AdminController {
 		
 		model.addAttribute("adminqnaList" ,adminqnaList);
 		model.addAttribute("noticeList" ,noticeList);
+		model.addAttribute("visHisCount" ,visHisCount);
 		model.addAttribute("dailySales",dailySales);
 		model.addAttribute("monthlySales",monthlySales);
 		model.addAttribute("formatDate",formatDate);
 		model.addAttribute("dailyReg",dailyReg);
 		model.addAttribute("dailyVisit",dailyVisit);
+		
 		
 		return "/index";
 	}

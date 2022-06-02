@@ -62,5 +62,9 @@
 	<select id="dailyVisit" resultType="int">
 		SELECT COUNT(*) FROM VISIT_HISTORY WHERE TO_CHAR(VH_TIME,'yyyy-MM-dd') = TO_CHAR(CURRENT_DATE-1,'yyyy-MM-dd')
 	</select>
+	<select id="visHisCount" resultType="UserVO">
+		SELECT DATE(VH_TIME) AS U_REGDATE, COUNT(VH_SEQ) AS U_SEQ FROM VISIT_HISTORY VH  
+		GROUP BY DATE(VH_TIME) ORDER BY DATE(VH_TIME) ASC
+	</select>
 	
 </mapper>

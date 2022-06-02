@@ -25,6 +25,7 @@
 		<mvc:mapping path="/*.admin"/>
 		<mvc:exclude-mapping path="/login.admin"/>
 		<mvc:exclude-mapping path="/loginCheck.admin"/>
+		<mvc:exclude-mapping path="/regisStoreForm.admin"/>
 		<bean id="AdminInterceptor" class="three.aws.wo.admin.util.AdminInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

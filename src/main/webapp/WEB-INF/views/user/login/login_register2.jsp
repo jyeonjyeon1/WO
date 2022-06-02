@@ -269,27 +269,26 @@ input::-webkit-inner-spin-button {
 			});
 
 	function finalCheck() {
-		document.regForm.submit();
-// 		if (!ch7) {
-// 			Swal.fire({
-// 				icon : "error",
-// 				text : "이용약관 미동의"
-// 			});
-// 		} else if (!ch8) {
-// 			Swal.fire({
-// 				icon : "error",
-// 				text : "개인정보처리방침 미동의"
-// 			});
-// 		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8 && ch9) {
-// 			document.regForm.submit();
-// 		} else {
-// 			Swal.fire({
-// 				icon : "error",
-// 				text : "어딘가 잘못 작성"
-// 			});
-// 			console.log("실패")
-// 			return false;
-// 		}
+		if (!ch7) {
+			Swal.fire({
+				icon : "error",
+				text : "이용약관 미동의"
+			});
+		} else if (!ch8) {
+			Swal.fire({
+				icon : "error",
+				text : "개인정보처리방침 미동의"
+			});
+		} else if (ch1 && ch2 && ch3 && ch4 && ch5 && ch6 && ch7 && ch8 && ch9) {
+			document.regForm.submit();
+		} else {
+			Swal.fire({
+				icon : "error",
+				text : "어딘가 잘못 작성"
+			});
+			console.log("실패")
+			return false;
+		}
 	}
 	var verifNum = []; //인증번호
 	var verifTime = 180;// 180초=3분
@@ -354,6 +353,9 @@ input::-webkit-inner-spin-button {
 			$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
 			$("#u_tel").attr("readonly", true);
 			clearInterval(tid);
+			document.getElementById("phoneVerifTime").innerHTML = "인증 성공";
+			document.getElementById("phoneVerifTime").style.color = "green";
+			document.getElementById("phoneVerifTime").style.display = "inline-block";
 		}else{
 			alert("실패"+$("#verif_num").val()+":"+verifNum);
 		}

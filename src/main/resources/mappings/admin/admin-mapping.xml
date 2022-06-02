@@ -66,5 +66,9 @@
 		SELECT DATE(VH_TIME) AS U_REGDATE, COUNT(VH_SEQ) AS U_SEQ FROM VISIT_HISTORY VH  
 		GROUP BY DATE(VH_TIME) ORDER BY DATE(VH_TIME) ASC
 	</select>
+	<select id="maxSalesStore" resultType="OrdersVO">
+		SELECT o.si_code, si.si_name , si.si_loc,DATE(O_ORDER_DATE), SUM(O_TOTAL_PRICE) as o_total_price FROM ORDERS o inner join store_info si on si.si_code = o.si_code where to_char(o_order_date, 'yyyy-MM-dd') = to_char(current_date-1,'yyyy-MM-dd')
+   GROUP BY o.si_code, si.si_name,si.si_loc,DATE(O_ORDER_DATE)
+	</select>
 	
 </mapper>

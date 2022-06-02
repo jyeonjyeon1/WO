@@ -16,6 +16,7 @@ import three.aws.wo.admin.service.AdminService;
 import three.aws.wo.admin.service.FaqService;
 import three.aws.wo.admin.vo.NoticeVO;
 import three.aws.wo.admin.vo.QnAVO;
+import three.aws.wo.user.vo.OrdersVO;
 import three.aws.wo.user.vo.UserVO;
 
 @Controller
@@ -35,6 +36,26 @@ public class AdminController {
 		int dailyReg = adminService.dailyReg();
 		int dailyVisit = adminService.dailyVisit();
 		List<UserVO> visHisCount = adminService.visHisCount();
+		List<OrdersVO> maxSalesStore = adminService.maxSalesStore();
+		String maxStore = (maxSalesStore.get(0)).getSi_code();
+		int maxsales = (maxSalesStore.get(0)).getO_total_price();
+		String maxStoreName = (maxSalesStore.get(0)).getSi_name();
+		String maxStoreLoc = (maxSalesStore.get(0)).getSi_loc();
+		System.out.println(maxSalesStore);
+		for (int i = 1; i<maxSalesStore.size();i++) {
+			if((maxSalesStore.get(i)).getO_total_price() > maxsales) {
+				maxsales = (maxSalesStore.get(i)).getO_total_price();
+				maxStore = (maxSalesStore.get(i)).getSi_code();
+				maxStoreName = (maxSalesStore.get(i)).getSi_name();
+				maxStoreLoc = (maxSalesStore.get(i)).getSi_loc();
+			}
+		}
+		OrdersVO ovo = new OrdersVO();
+		ovo.setSi_loc(maxStore);
+		ovo.setO_total_price(maxsales);
+		ovo.setSi_name(maxStoreName);
+		ovo.setSi_loc(maxStoreLoc);
+		
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 		System.out.println(todayDate);
@@ -50,6 +71,7 @@ public class AdminController {
 		model.addAttribute("formatDate",formatDate);
 		model.addAttribute("dailyReg",dailyReg);
 		model.addAttribute("dailyVisit",dailyVisit);
+		model.addAttribute("maxSalesStore",ovo);
 		
 		
 		return "/index";

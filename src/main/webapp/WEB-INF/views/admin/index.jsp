@@ -123,7 +123,7 @@
               <span>통계</span>
               </a>
             <ul class="sub">
-              <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li>
+<!--               <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li> -->
               <li><a id="store-sales" href="store_sales.admin">매장별 매출 통계</a></li>
               
               <li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
@@ -185,7 +185,8 @@
                 </a>
               </div>
               <div id= "" class="dash-bottom">
-                <i class=" fa fa-shopping-bag"></i> 메가커피 종로3가</div>
+                <i class=" fa fa-shopping-bag"></i> ${maxSalesStore.si_name } ${maxSalesStore.si_loc } 
+                (<fmt:formatNumber value="${maxSalesStore.o_total_price }" pattern="###,###,###"></fmt:formatNumber> 원)</div>
             </div>
           
             <!--CUSTOM CHART START -->

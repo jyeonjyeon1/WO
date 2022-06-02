@@ -45,7 +45,7 @@
 						<label for="useCookie" class="checkbox">
 							<input type="checkbox" id="useCookie" name="useCookie"
 							 style="font-size: 12px; margin-top: 2px; margin-left: 0px;">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디/비밀번호 저장
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디 저장
 					</label>
 					<button type="button" class="btn btn-theme btn-block" onclick="finalCheck()">
 						<i class="fa fa-lock"></i> 로그인

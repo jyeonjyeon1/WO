@@ -38,7 +38,7 @@
 						<a><img src="resources/assets/images/admin/doggy.jpg"
 							class="img-circle" width="80"></a>
 					</p>
-					<h5 class="centered">김 버터</h5>
+					<h5 class="centered">${adminSession.a_name}</h5>
 					<p class="sidebar-title">설정</p>
 					<li class="sub-menu"><a href="../index.admin"> <i
 							class="fa fa-h-square"></i> <span>Home</span>

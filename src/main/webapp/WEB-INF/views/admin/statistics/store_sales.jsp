@@ -22,34 +22,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	rel="stylesheet" />
-  <script>
   
-  $(document).ready(function(){
-		
-		 $( 'input[name="dateOneday2"]' ).change( function() {
-			 console.log("fff");
-			 var si_code = $("#input_siCode").val();
-			 console.log(si_code);
-			 var dateOneday = $("#dateOneday").val();
-			 var dateOneday2 = $("#dateOneday2").val();
-		
-	        
-	         $.ajax({
-	 	        url : "datePeriodAdmin.admin?dateOneday=" + dateOneday +"&dateOneday2="+dateOneday2 + "&si_code="+si_code,	
-	 	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
-	 	        type: "get",
-	 	        success: function(data) {
-	 	        	console.log("성공");
-	 	        	
-	 	          $("#datatablesSimple tbody").html(data); // forprepend
-	 	        
-	 	        },
-	 	        error: function (){alert("실패");}
-	 	    });
-		 });
-
-	});
-  </script>
   
   <style>
     .table15_2 thead th {
@@ -96,7 +69,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">김 버터</h5>
+          <h5 class="centered">${adminSession.a_name}</h5>
           <p class="sidebar-title" >설정</p>
           <li class="sub-menu">
             <a href="../index.admin">
@@ -311,7 +284,34 @@
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
 	<script
 		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
-	
+	<script>
+  
+  $(document).ready(function(){
+		
+		 $( 'input[name="dateOneday2"]' ).change( function() {
+			 console.log("fff");
+			 var si_code = $("#input_siCode").val();
+			 console.log(si_code);
+			 var dateOneday = $("#dateOneday").val();
+			 var dateOneday2 = $("#dateOneday2").val();
+		
+	        
+	         $.ajax({
+	 	        url : "datePeriodAdmin.admin?dateOneday=" + dateOneday +"&dateOneday2="+dateOneday2 + "&si_code="+si_code,	
+	 	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+	 	        type: "get",
+	 	        success: function(data) {
+	 	        	console.log("성공");
+	 	        	
+	 	          $("#datatablesSimple tbody").html(data); // forprepend
+	 	        
+	 	        },
+	 	        error: function (){alert("실패");}
+	 	    });
+		 });
+
+	});
+  </script>
 </body>
 
 </html>

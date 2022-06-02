@@ -33,7 +33,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">김 버터</h5>
+          <h5 class="centered">${adminSession.a_name}</h5>
           <p class="sidebar-title">설정</p>
           <li class="sub-menu">
             <a href="../index.admin">
@@ -205,7 +205,7 @@
 									var si_code = document.getElementById("si_code${vs.index }").innerText;
 									var m_code = document.getElementById("m_code${vs.index }").innerText;
 									var m_name = document.getElementById("m_name${vs.index }").innerText;
-									alert(m_code);
+// 									alert(m_code);
 									Swal.fire({
 									    title: "승인하시겠습니까?",
 									    html: "승인 시, 신청 이미지가 등록됩니다<br>",

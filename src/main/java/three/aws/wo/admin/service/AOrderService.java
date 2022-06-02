@@ -12,4 +12,5 @@ public interface AOrderService {
 	List<OrdersVO> orderList();
 	void changePoint(HashMap<String, String> paramMapping);
 	List<OrdersVO> orderCancelList();
+	List<OrdersVO> dailySales();
 }

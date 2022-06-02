@@ -39,5 +39,9 @@ public class AOrderServiceImpl implements AOrderService {
 	public List<OrdersVO> orderCancelList() {
 		return aOrderDAO.orderCancelList();
 	}
+	@Override
+	public List<OrdersVO> dailySales() {
+		return aOrderDAO.dailySales();
+	}
 
 }

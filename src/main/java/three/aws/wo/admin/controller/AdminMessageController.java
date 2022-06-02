@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import three.aws.wo.admin.service.AMessageService;
@@ -87,17 +88,17 @@ public class AdminMessageController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/phoneVerif.admin")
+	@RequestMapping(value = "/phoneVeriff.admin", method = RequestMethod.POST)
 	public int phoneVerif(@RequestBody HashMap<String, String> param) {
-		System.out.println(param);
+		System.out.println("zzzz");
 		// 연락완료 여부 변경
-		// 연락처에 등록 form 보냄
+//		// 연락처에 등록 form 보냄
 		String u_tel = param.get("u_tel");
 		MessageSend ms = new MessageSend();
 		String sms_text = "[워킹오더 인증번호]\n\n"+param.get("verifNumMade");
-//		int result = ms.sendSMS(u_tel,sms_text, "SMS");
+		int result = ms.sendSMS(u_tel,sms_text, "SMS");
 
-		return 1;
+		return result;
 	}
 
 }

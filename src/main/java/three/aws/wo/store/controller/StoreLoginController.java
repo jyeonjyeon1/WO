@@ -53,7 +53,7 @@ public class StoreLoginController {
 	public void setLogin(String sa_acc_no, HttpSession session, HttpServletResponse response) throws Exception {
 		StoreVO vo = storeLoginService.storeLoggin(sa_acc_no);
 		session.setAttribute("storeSession", vo);
-		System.out.println(session);
+//		System.out.println(session);
 	}
 
 	@ResponseBody

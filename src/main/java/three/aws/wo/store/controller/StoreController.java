@@ -35,7 +35,7 @@ public class StoreController {
 	
 	@GetMapping("/login.store")
 	public String tologinPage() {
-		System.out.println("store login");
+//		System.out.println("store login");
 		return "/login";
 	}
 

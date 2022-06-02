@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
+import three.aws.wo.user.vo.OrdersVO;
+import three.aws.wo.user.vo.UserVO;
 
 @Repository
 public class AdminDAO {
@@ -63,5 +65,11 @@ public class AdminDAO {
 	}
 	public int dailyVisit() {
 		return sqlSession.selectOne("AdminDAO.dailyVisit");
+	}
+	public List<UserVO> visHisCount() {
+		return sqlSession.selectList("AdminDAO.visHisCount");
+	}
+	public List<OrdersVO> maxSalesStore() {
+		return sqlSession.selectList("AdminDAO.maxSalesStore");
 	}
 }

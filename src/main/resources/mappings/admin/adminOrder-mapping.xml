@@ -21,7 +21,7 @@
 		POINT a 
 		INNER JOIN 
 		USERS b ON (a.U_ID = b.U_ID)
-		ORDER BY PT_SEQ DESC
+		ORDER BY PT_REGDATE DESC
 	</select>
 	<select id="orderCancelList" resultType="OrdersVO">
 		SELECT * FROM
@@ -33,7 +33,7 @@
 		STORE_INFO si
 		ON (o.SI_CODE = si.SI_CODE)
 		WHERE O_ORDER_STATE = '주문취소' 
-		ORDER BY O_SEQ DESC
+		ORDER BY O_ORDER_DATE DESC
 	</select>
 	<select id="orderList" resultType="OrdersVO">
 		SELECT * FROM
@@ -49,7 +49,7 @@
 		<!-- 이거는 매장 별 조회 용도 -->
 			AND o.SI_CODE = #{si_code}
 		</if>
-		ORDER BY O_SEQ DESC
+		ORDER BY O_ORDER_DATE DESC
 	</select>
 	<update id="changePoint">
 		UPDATE SYSTEM_SETTING

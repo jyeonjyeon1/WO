@@ -11,6 +11,8 @@ import three.aws.wo.admin.service.AdminService;
 import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
+import three.aws.wo.user.vo.OrdersVO;
+import three.aws.wo.user.vo.UserVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -84,5 +86,13 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int dailyVisit() {
 		return adminDAO.dailyVisit();
+	}
+	@Override
+	public List<UserVO> visHisCount() {
+		return adminDAO.visHisCount();
+	}
+	@Override
+	public List<OrdersVO> maxSalesStore() {
+		return adminDAO.maxSalesStore();
 	}
 }

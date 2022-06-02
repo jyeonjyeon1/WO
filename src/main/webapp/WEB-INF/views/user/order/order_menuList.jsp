@@ -204,7 +204,7 @@
 													<h4 class="modal-title" style="text-align: center">옵션을
 														선택해 주세요</h4>
 													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">취소</button>
+														data-bs-dismiss="modal" id="modalClose${tVs.count }_${mVs.count}">취소</button>
 												</div>
 												<div class="modal-body">
 													<!-- body -->
@@ -329,6 +329,7 @@ function addMenu__${tVs.count}_${mVs.count}(){
        		  title: "장바구니에 담았습니다.",
        		  confirmButtonText:"확인"
          	})
+         	document.getElementById("modalClose${tVs.count }_${mVs.count}").click();
        		document.addMenuForm_${tVs.count }${mVs.count }.submit();
        	  }else{
        		Swal.fire({
@@ -392,9 +393,14 @@ function addMenu__${tVs.count}_${mVs.count}(){
 						<div style="text-align: center;">
 							<div class="col-lg-11 kio_review">
 								<div class="kio_review_img_bg">
-									<img src="resources/assets/images/jaewoo/starbucks_img.jpg"
-										alt="cafe" class="search_big_img">
-	
+								<c:choose>
+		                    <c:when test="${(storeReview.ur_pic_url).indexOf('http') eq -1}">
+		                   	 <img src="https://walkingorder.s3.ap-northeast-2.amazonaws.com/reviews/no-image-available1.png" class="search_big_img">
+		                    </c:when>
+		                    <c:otherwise>
+		                   	 <img src="${storeReview.ur_pic_url}" class="search_big_img">
+		                    </c:otherwise>
+	                    </c:choose>
 								</div>
 								<div class="kio_review_center">
 									<h5>${storeReview.u_nickname }</h5>

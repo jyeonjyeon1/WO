@@ -322,6 +322,7 @@ input::-webkit-inner-spin-button {
 	    		"u_tel":$("#u_tel").val(),
 		    	"verifNumMade": verifNumMade
 		    }
+		    alert(verifNum);
 		    $.ajax({
 	             type: "POST",
 	             url: "/phoneVerif.admin",
@@ -352,6 +353,9 @@ input::-webkit-inner-spin-button {
 			$("#phoneVerif_btn").attr("onclick","phoneVerif()");//phoneverif 추가
 			$("#u_tel").attr("readonly", true);
 			clearInterval(tid);
+			document.getElementById("phoneVerifTime").innerHTML = "인증 성공";
+			document.getElementById("phoneVerifTime").style.color = "green";
+			document.getElementById("phoneVerifTime").style.display = "inline-block";
 		}else{
 			alert("실패"+$("#verif_num").val()+":"+verifNum);
 		}

@@ -1,5 +1,6 @@
 package three.aws.wo.user.controller;
 
+import java.io.NotSerializableException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -50,7 +51,7 @@ public class UserLoginController {
 	}
 
 	public void setLogin(String userID, String rememberId, HttpSession session, HttpServletResponse response,HttpServletRequest request, String browser)
-			throws Exception {
+			throws Exception,NotSerializableException {
 		UserVO vo = userLoginService.loggedin(userID, rememberId, session, response);
 		// System.out.println(vo);
 		Cookie cookie = new Cookie("rememberId", userID);

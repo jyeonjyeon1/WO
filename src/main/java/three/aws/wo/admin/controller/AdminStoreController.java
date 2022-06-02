@@ -54,6 +54,9 @@ public class AdminStoreController {
 		vo.setSa_business_registration_image(bussUrl + si_code + sa_buss);
 		vo.setSa_password(pwdEncoder.encode(vo.getSi_code()));
 		aStoreService.insertStoreAccount(vo);
+		String sf_code=vo.getSi_code();
+		aStoreService.makeOptionGroup(sf_code);
+		aStoreService.makeOption(sf_code);
 		System.out.println("가게 등록 완료 DB확인");
 		return "redirect:/store_mng.admin";
 	}
@@ -227,9 +230,22 @@ public class AdminStoreController {
 		// 일치하는 매장코드가 없을 경우에는 매장 생성을 해줌
 		if (result == 0) {
 			// store_form 테이블에서 sf_code= #{sf_code}인 정보를 info랑 account에 만듬.
-			aStoreService.replicateStoreInfo(sf_code);
-			aStoreService.replicateStoreAccount(sf_code);
-			System.out.println(param);
+			try{
+				aStoreService.replicateStoreInfo(sf_code);
+				aStoreService.replicateStoreAccount(sf_code);
+			}catch (Exception e) {
+				System.err.println("스토어 복제 오류");
+			}
+			
+			//op 및 og 하나씩 등록해줄것임.
+			try{
+				aStoreService.makeOptionGroup(sf_code);
+				aStoreService.makeOption(sf_code);
+			}catch (Exception e) {
+				System.err.println("스토어 og op 등록 오류");
+			}
+			
+			
 			// 이부분은 문자가 가니까 일단 막았음
 			// 계정 생성 후 문자로 로그인 정보 알림
 //			MessageSend ms = new MessageSend();

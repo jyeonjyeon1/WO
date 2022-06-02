@@ -6,6 +6,8 @@ import java.util.List;
 import three.aws.wo.admin.vo.AdminVO;
 import three.aws.wo.admin.vo.FAQVO;
 import three.aws.wo.admin.vo.NoticeVO;
+import three.aws.wo.user.vo.OrdersVO;
+import three.aws.wo.user.vo.UserVO;
 
 public interface AdminService {
 	int adminLogin(HashMap<String, String> param) throws Exception;
@@ -23,4 +25,6 @@ public interface AdminService {
 	int monthlySales();
 	int dailyReg();
 	int dailyVisit();
+	List<UserVO> visHisCount();
+	List<OrdersVO> maxSalesStore();
 }

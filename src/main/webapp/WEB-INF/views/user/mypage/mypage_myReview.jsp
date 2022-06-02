@@ -37,27 +37,7 @@
 			}
 		}
 		
-		function Completed(){
-			document.reviewForm.submit();
-		}
 		
-		
-		$('#insert').click(function(){
-			console.log(JSON.serialize(reviewData));
-			$.ajax({
-				type: "POST",
-		        url: "/insertReview.user",
-		        dataType: "json",
-		        contentType: "application/json",
-		        data: $('#reviewForm').serialize(),
-		        success:function(result){
-		        	console.log("성공");
-		        },
-		        error:function(result){
-		        	console.log("실패");
-		        }
-		    });
-		});
 		
      </script>
 
@@ -75,15 +55,15 @@
 			<div class="review_star">
 				<form name="reviewForm" id="reviewForm" method="post" action="/insertReview.user">
 					<fieldset>
-						<input type="radio" name="ur_star" value="50" id="rate1" checked>
+						<input type="radio" name="ur_star" value="10" id="rate1">
 							<label for="rate1">⭐</label> 
-						<input type="radio" name="ur_star" value="40" id="rate2">
+						<input type="radio" name="ur_star" value="20" id="rate2">
 							<label for="rate2">⭐</label> 
 						<input type="radio" name="ur_star" value="30" id="rate3">
 							<label for="rate3">⭐</label> 
-						<input type="radio" name="ur_star" value="20" id="rate4">
+						<input type="radio" name="ur_star" value="40" id="rate4">
 							<label for="rate4">⭐</label>
-						<input type="radio" name="ur_star" value="10" id="rate5">
+						<input type="radio" name="ur_star" value="50" id="rate5" checked>
 							<label for="rate5">⭐</label>
 					</fieldset>
 				<div class="row">
@@ -100,17 +80,16 @@
 					</div>
 					<div id="images_container"></div>
 				</div>
-				<div class="col-lg-12" style="text-align: right;">
-					<button class="review_submitBtn" data-bs-toggle="modal"
-					data-bs-target="#review" id="insert">작성완료</button>
-				</div>
-				<input type="hidden" name="o_code" value="${getOrderCode}" />
+				<input type="hidden" name="o_code" id="o_code" value="${getOrderCode}" />
 				<input type="hidden" name="u_id" value="${userSession.u_id}" />
+				<div class="col-lg-12" style="text-align: right;">
+					<button class="review_submitBtn" onclick="Completed()">작성완료</button>
+				</div>
 				
 			</form>
 
 			<!-- Modal -->
-			<div class="modal fade" id="review" tabindex="-1"
+			<!-- <div class="modal fade" id="review" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -126,11 +105,85 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		</div>
 	</div>
 	<!-- footer import -->
 	<%@ include file="/WEB-INF/views/user/inc/footer.jsp"%>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.891.0.min.js"></script>	
+
+	<script>
+	function Completed(){
+		updateImagee();
+	}
+	
+	
+	/* $('#insert').click(function(){
+		console.log(JSON.serialize(reviewData));
+		$.ajax({
+			type: "POST",
+	        url: "/insertReview.user",
+	        dataType: "json",
+	        contentType: "application/json",
+	        data: $('#reviewForm').serialize(),
+	        success:function(result){
+	        	console.log("성공");
+	        },
+	        error:function(result){
+	        	console.log("실패");
+	        }
+	    });
+	}); */
+	
+	
+	updateImagee = () => {
+    	AWS.config.update({
+            region: 'ap-northeast-2',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: '<spring:eval expression='@config.getProperty("S3_POOL_ID")'/>',
+            })
+        })
+		let files = document.getElementById("product_detail_image").files;
+        let file = files[0];
+        
+        let noticeFile = "";
+        let o_code = $("#o_code").val();
+        if(file != null){
+        	
+            let storeImagefile = file.name;
+            storeImagefile = o_code+"___"+ storeImagefile;
+
+            let upload = new AWS.S3.ManagedUpload({
+                params: {
+                    Bucket: 'walkingorder/reviews',
+                    Key: storeImagefile,
+                    ContentType : "image/jpeg",
+                    Body: file
+                }
+            })
+
+            const promise = upload.promise();
+            Swal.fire({
+                icon: "success",
+                title: "리뷰 작성이 완료되었습니다.",
+                showConfirmButton: false,
+                timer: 1500
+            });
+    		document.reviewForm.submit();
+            
+        }else{
+        	Swal.fire({
+                icon: "warning",
+                title: "사진은 필수입니다!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        	return;
+        }
+    }
+	
+	</script>
 </body>
 </html>

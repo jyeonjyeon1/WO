@@ -131,6 +131,12 @@
 		FROM STORE_FORM 
 		WHERE SF_CODE = #{sf_code}
     </insert>
+    <insert id="makeOptionGroup">
+    	INSERT INTO OPTION_GROUP(OG_CODE,OG_NAME,SI_CODE) VALUES(' ',' ',#{sf_code})
+    </insert>
+    <insert id="makeOption">
+    	INSERT INTO OPTIONS(OP_CODE,OG_SEQ,SI_CODE,OP_NAME,OP_PRICE) VALUES (' ',(SELECT OG_SEQ FROM OPTION_GROUP WHERE SI_CODE=#{sf_code}),#{sf_code},' ',0);
+    </insert>
     <delete id="deleteJoinInq">
     	DELETE FROM FRANCHISE WHERE F_SEQ = #{f_seq}
     </delete>
@@ -196,4 +202,5 @@
 	    WHERE 
 	    SI_CODE = #{si_code}
     </update>
+    
 </mapper>

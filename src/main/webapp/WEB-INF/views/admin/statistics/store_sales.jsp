@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,14 +10,76 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  
-  
+ 
   <title>워킹오더 관리자 페이지</title>
 
-  <!-- Favicons -->
-  <link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
-  <!-- 테이블용 css -->
-  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<!-- Favicons -->
+<link href="resources/assets/images/admin/logo/logo_only.svg" rel="icon">
+<link href="resources/assets/images/admin/apple-touch-icon.png"
+	rel="apple-touch-icon">
+
+<!-- 테이블용 css -->
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
+  <script>
+  
+  $(document).ready(function(){
+		
+		 $( 'input[name="dateOneday2"]' ).change( function() {
+			 console.log("fff");
+			 var si_code = $("#input_siCode").val();
+			 console.log(si_code);
+			 var dateOneday = $("#dateOneday").val();
+			 var dateOneday2 = $("#dateOneday2").val();
+		
+	        
+	         $.ajax({
+	 	        url : "datePeriodAdmin.admin?dateOneday=" + dateOneday +"&dateOneday2="+dateOneday2 + "&si_code="+si_code,	
+	 	        dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
+	 	        type: "get",
+	 	        success: function(data) {
+	 	        	console.log("성공");
+	 	        	
+	 	          $("#datatablesSimple tbody").html(data); // forprepend
+	 	        
+	 	        },
+	 	        error: function (){alert("실패");}
+	 	    });
+		 });
+
+	});
+  </script>
+  
+  <style>
+    .table15_2 thead th {
+        font-size: 15px;
+        font-weight:bold;
+        background-color:#d8d8d8;
+        color:#202020;
+        border: 1px solid #d8d8d8;
+        border-width:1px
+    }
+    .table15_2,.table15_2 th,.table15_2 td {  
+        text-align:center;
+        padding:4px;
+        border-collapse:collapse;
+    }
+    
+    .table15_2 tbody td {
+        border: 1px solid #d8d8d8;
+        border-width:1px
+    }
+    .table15_2 tbody tr {
+        border: 1px solid #ffffff;
+    }
+    .table15_2 tbody tr:nth-child(odd){
+        background-color:#f7f7f7;
+    }
+    .table15_2 tbody tr:nth-child(even){
+        background-color:#ffffff;
+    }
+    </style>
 
 </head>
 
@@ -129,9 +194,8 @@
               <span>통계</span>
               </a>
             <ul class="sub">
-              <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li>
+               
               <li class="active"><a id="store-sales" href="store_sales.admin">매장별 매출 통계</a></li>
-              
               <li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
               <li><a id="by-graph" href="by_graph.admin">그래프로 확인</a></li>
             </ul>
@@ -153,14 +217,83 @@
     <section id="main-content">
 <%@ include file="../inc/admin_allmenu.jsp" %> 
     <!-- allmenu import -->
-    
-      <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-        <div class="row mt">
-          <div class="col-lg-12">
-            <p>Place your content here.</p>
-          </div>
+     <section class="wrapper" style="height: 1500px;">
+       
+
+  
+      <div class="card-header" style="font-size: 16px;">
+        <i class="fa fa-plus-circle" style="font-size: 14px; margin-bottom: 15px; "></i>지난주문 관리
+        
+        <div class="row" style="margin-bottom:20px;">
+        <h4 style="margin:10px 0 0 15px;">매장코드를 입력해 주세요 :)</h4>
+        <div class="col-lg-4">
+        <input class="form-control" type="text" id="input_siCode" placeholder="매장코드">
         </div>
+        </div>
+        
+        <div class="row">
+        <h4 style="margin:10px 0 0 15px;">기간을 설정해 주세요 :)</h4>
+        <div class="col-lg-3" style="margin-bottom: 20px;"> 
+<input id="dateOneday" name="dateOneday" class="form-control round-form" type="date" value="년.월.일" style="width: 70%; display: inline-block; float:left;"> 
+                        
+</div>
+<div class="col-lg-3" style="margin-bottom: 20px;"> 
+<input id="dateOneday2" name="dateOneday2" class="form-control round-form" type="date" value="년.월.일" style="width: 70%; display: inline-block; float:left;"> 
+                        
+</div>
+        
+      </div>
+
+    
+      
+          <div class="row content-panel" style="border: none; box-shadow: none;padding: 40px; margin:0 5px">
+            
+ 
+                                           
+  <div class="row">
+
+    <div class="col-lg-12" >
+      <table id="datatablesSimple">
+      <thead>
+          <tr>
+            <th>주문번호</th>
+            <th>주문시간</th>
+            <th>주문내역</th>
+            <th>결제금액</th>
+            <th>닉네임</th>
+            <th>내역 확인</th>
+              
+          </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th>주문번호</th>
+          <th>주문시간</th>
+          <th>주문내역</th>
+          <th>결제금액</th>
+          <th>닉네임</th>
+          <th>내역 확인</th>
+      </tr>
+      </tfoot>
+      <tbody>
+      		
+        
+      </tbody>
+  </table>
+
+        
+
+</div>
+</div>
+    
+
+        
+          </div>
+
+      
+    </div>
+
+
       </section>
       <!-- /wrapper -->
     </section>
@@ -174,9 +307,11 @@
     <!--footer end-->
   </section>
  
-  <!--script for this page-->
-  
-  
+ <script
+		src="https://cdn.jsdelivr.net/npm/simple-datatables@3.2.0/dist/umd/simple-datatables.js"></script>
+	<script
+		src="resources/assets/js/admin/datatable/datatables-simple-demo.js"></script>
+	
 </body>
 
 </html>

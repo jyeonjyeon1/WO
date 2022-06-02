@@ -1,9 +1,12 @@
 package three.aws.wo.user.vo;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
+@SuppressWarnings("serial")
 @Data
-public class BasketVO {
+public class BasketVO implements Serializable{
 	private int b_seq;
 	private String b_code;
 	private String u_id;

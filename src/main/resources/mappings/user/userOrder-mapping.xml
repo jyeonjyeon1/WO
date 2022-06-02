@@ -220,7 +220,7 @@
 		ON (o.SI_CODE = si.SI_CODE) 
 		WHERE
 		U_ID = #{u_id} AND O_PAY_STATUS = TRUE AND O_ORDER_STATE != '전달완료'
-		ORDER BY O_SEQ DESC
+		ORDER BY O_ORDER_DATE DESC
 	</select>
 	<select id="myOrderList" resultType="OrdersVO">
 		SELECT * FROM ORDERS o
@@ -229,7 +229,7 @@
 		ON (o.SI_CODE = si.SI_CODE) 
 		WHERE
 		U_ID = #{u_id} AND O_PAY_STATUS = TRUE
-		ORDER BY O_SEQ DESC
+		ORDER BY O_ORDER_DATE DESC
 	</select>
 	<insert id="replicateCart">
 		INSERT INTO BASKET_ORDER SELECT * FROM BASKET WHERE U_ID=#{u_id};

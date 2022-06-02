@@ -276,17 +276,17 @@ public class AdminController {
 		return "/settlement/store_stlmt";
 	}
 //	==================== statistics ============================
-	@GetMapping("/by_chart.admin")
-	public String toby_chart() {
-		System.out.println("by_chart");
-		return "/statistics/by_chart";
-	}
+//	@GetMapping("/by_chart.admin")
+//	public String toby_chart() {
+//		System.out.println("by_chart");
+//		return "/statistics/by_chart";
+//	}
 	
-	@GetMapping("/by_graph.admin")
-	public String toby_graph() {
-		System.out.println("by_graph");
-		return "/statistics/by_graph";
-	}
+//	@GetMapping("/by_graph.admin")
+//	public String toby_graph() {
+//		System.out.println("by_graph");
+//		return "/statistics/by_graph";
+//	}
 	
 	@GetMapping("/order_period.admin")
 	public String toorder_period() {

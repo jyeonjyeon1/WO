@@ -27,7 +27,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a><img src="resources/assets/images/admin/doggy.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">김 버터</h5>
+          <h5 class="centered">${adminSession.a_name}</h5>
           <p class="sidebar-title" >설정</p>
           <li class="sub-menu">
             <a class="active" href="index.admin">
@@ -123,7 +123,7 @@
               <span>통계</span>
               </a>
             <ul class="sub">
-<!--               <li><a id="order-period" href="order_period.admin">기간별 주문 통계</a></li> -->
+<!--                -->
               <li><a id="store-sales" href="store_sales.admin">매장별 매출 통계</a></li>
               
               <li><a id="by-chart" href="by_chart.admin">표로 확인</a></li>
@@ -261,6 +261,8 @@
             </div>
             </div>
             <!--custom chart end-->
+            
+            
             <div class="row mt">
               <!-- SERVER STATUS PANELS -->
               <div class="col-md-4 col-sm-4 mb">

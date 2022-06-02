@@ -50,127 +50,6 @@
 	</div>
 	<!-- order_card -->
 </div>
-<!-- col-lg-3 -->
-<script>
-function orderChangea${inputIndex}(){
-	let indexa = parseInt($("#hiddenindexa${inputIndex}").val());
-	let o_code = $("#o_codea${inputIndex}").val();
-	let o_order_state = "";
-	if($("#order_Btna${inputIndex}").hasClass("daegi")==true){//접수대기 상태 -> 준비중으로 변경
-		//버튼 색 변경
-		$("#order_statea${inputIndex}").removeClass("daegi");
-		$("#order_statea${inputIndex}").addClass("making_drink");
-		$("#order_Btna${inputIndex}").removeClass("daegi");
-		$("#order_Btna${inputIndex}").addClass("making_drink");
-		
-		//글자 변경
-		document.getElementById("order_statea${inputIndex}").innerText = "준비중";
-		document.getElementById("order_Btna${inputIndex}").innerText = "준비완료";
-		o_order_state = "junbijung";
-	}else if($("#order_Btna${inputIndex}").hasClass("making_drink")==true){//준비중 상태 ->준비완료로 바꿀거임
-		//버튼 색 변경
-		$("#order_statea${inputIndex}").removeClass("making_drink");
-		$("#order_statea${inputIndex}").addClass("drink_ready");
-		$("#order_Btna${inputIndex}").removeClass("making_drink");
-		$("#order_Btna${inputIndex}").addClass("drink_ready");
-		
-		//글자 변경
-		document.getElementById("order_statea${inputIndex}").innerText = "준비완료";
-		document.getElementById("order_Btna${inputIndex}").innerText = "전달완료";
-		o_order_state = "junbiwan";
-	}else if($("#order_Btna${inputIndex}").hasClass("drink_ready")==true){//준비완료 상태 -> 전달완료로 바꾸면서 화면에서 삭제
-		for(i=1;i<20;i++){
-			try{
-				var zz = i+indexa
-				var indexCount = document.getElementById("indexCounta"+zz.toString());
-				var imsi = parseInt(indexCount.innerText)-1;
-				indexCount.innerText = imsi;
-			}catch(error){}
-		}
-		$("#order_wrapa${inputIndex}").remove();
-		o_order_state = "byedrink"	;	
-	}
-	var param = {
-		"o_code" : o_code,
-		"o_order_state" : o_order_state
-	}
-	
-	$.ajax({
-        type: "POST",
-        url: "/changeOState.store",
-        data: JSON.stringify(param),
-        dataType: "json",
-        contentType: "application/json",
-     success:function(data){
-    	 Swal.fire({
-   	        icon: "success",
-   	        title: "상태 변경 완료",
-   	        showConfirmButton: false,
-   	        timer: 1500
-   	    });
-     },
-     error:function(data){
-        console.log("장바구니 삭제 통신에러");
-     }
-  }); //ajax 끝
-	
-	
-//	앞에 숫자들이 커짐
-//	 	for(i=0;i<=index;i++){
-//			var indexCount = document.getElementById("indexCount"+i.toString());
-//			var change = i+2;
-//			indexCount.innerText = change;
-//		}
-}
-
-
-function order_cancel${inputIndex}(){
-	
-	var o_code = $("#o_codea${inputIndex}").val();
-	
-	param = {"o_code" : o_code};
-	Swal.fire({
-		  title: '[주문취소]',
-		  text: "주문을 취소하시겠습니까?",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: '주문 취소',
-		  cancelButtonText :'아니요'
-		}).then((result) => {
-		  if (result.isConfirmed) {
-		   
-		    $.ajax({
-		        type: "POST",
-		        url: "/OrderCancel.store",
-		        data: JSON.stringify(param),
-		        dataType: "json",
-		        contentType: "application/json",
-		     success:function(data){
-		    	 Swal.fire({
-		   	        icon: "success",
-		   	        title: "삭제완료",
-		   	        showConfirmButton: false,
-		   	        timer: 1500
-		   	    });
-		    	 
-		    	 $("#order_wrapa${inputIndex}").remove();
-		     },
-		     error:function(data){
-		        console.log("주문삭제 통신에러");
-		     }
-			  
-			  
-		  });
-		  }
-		})
-	
-}
-
-
-</script>
-<!-- Modal -->
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
 	tabindex="-1" id="orderDetaila${inputIndex}" class="modal fade"
 	style="margin: 20px auto 0;">
@@ -313,3 +192,124 @@ function order_cancel${inputIndex}(){
 		</div>
 	</div>
 </div>
+<!-- col-lg-3 -->
+<script>
+function orderChangea${inputIndex}(){
+	let indexa = parseInt($("#hiddenindexa${inputIndex}").val());
+	let o_code = $("#o_codea${inputIndex}").val();
+	let o_order_state = "";
+	if($("#order_Btna${inputIndex}").hasClass("daegi")==true){//접수대기 상태 -> 준비중으로 변경
+		//버튼 색 변경
+		$("#order_statea${inputIndex}").removeClass("daegi");
+		$("#order_statea${inputIndex}").addClass("making_drink");
+		$("#order_Btna${inputIndex}").removeClass("daegi");
+		$("#order_Btna${inputIndex}").addClass("making_drink");
+		
+		//글자 변경
+		document.getElementById("order_statea${inputIndex}").innerText = "준비중";
+		document.getElementById("order_Btna${inputIndex}").innerText = "준비완료";
+		o_order_state = "junbijung";
+	}else if($("#order_Btna${inputIndex}").hasClass("making_drink")==true){//준비중 상태 ->준비완료로 바꿀거임
+		//버튼 색 변경
+		$("#order_statea${inputIndex}").removeClass("making_drink");
+		$("#order_statea${inputIndex}").addClass("drink_ready");
+		$("#order_Btna${inputIndex}").removeClass("making_drink");
+		$("#order_Btna${inputIndex}").addClass("drink_ready");
+		
+		//글자 변경
+		document.getElementById("order_statea${inputIndex}").innerText = "준비완료";
+		document.getElementById("order_Btna${inputIndex}").innerText = "전달완료";
+		o_order_state = "junbiwan";
+	}else if($("#order_Btna${inputIndex}").hasClass("drink_ready")==true){//준비완료 상태 -> 전달완료로 바꾸면서 화면에서 삭제
+		for(i=1;i<20;i++){
+			try{
+				var zz = i+indexa
+				var indexCount = document.getElementById("indexCounta"+zz.toString());
+				var imsi = parseInt(indexCount.innerText)-1;
+				indexCount.innerText = imsi;
+			}catch(error){}
+		}
+		$("#order_wrapa${inputIndex}").remove();
+		o_order_state = "byedrink"	;	
+	}
+	var param = {
+		"o_code" : o_code,
+		"o_order_state" : o_order_state
+	}
+	
+	$.ajax({
+        type: "POST",
+        url: "/changeOState.store",
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "application/json",
+     success:function(data){
+    	 Swal.fire({
+   	        icon: "success",
+   	        title: "상태 변경 완료",
+   	        showConfirmButton: false,
+   	        timer: 1500
+   	    });
+     },
+     error:function(data){
+        console.log("장바구니 삭제 통신에러");
+     }
+  }); //ajax 끝
+	
+	
+//	앞에 숫자들이 커짐
+//	 	for(i=0;i<=index;i++){
+//			var indexCount = document.getElementById("indexCount"+i.toString());
+//			var change = i+2;
+//			indexCount.innerText = change;
+//		}
+}
+
+
+function order_cancel${inputIndex}(){
+	
+	var o_code = $("#o_codea${inputIndex}").val();
+	
+	param = {"o_code" : o_code};
+	Swal.fire({
+		  title: '[주문취소]',
+		  text: "주문을 취소하시겠습니까?",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '주문 취소',
+		  cancelButtonText :'아니요'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		   
+		    $.ajax({
+		        type: "POST",
+		        url: "/OrderCancel.store",
+		        data: JSON.stringify(param),
+		        dataType: "json",
+		        contentType: "application/json",
+		     success:function(data){
+		    	 Swal.fire({
+		   	        icon: "success",
+		   	        title: "삭제완료",
+		   	        showConfirmButton: false,
+		   	        timer: 1500
+		   	    });
+		    	 
+		    	 $("#order_wrapa${inputIndex}").remove();
+		     },
+		     error:function(data){
+		        console.log("주문삭제 통신에러");
+		     }
+			  
+			  
+		  });
+		  }
+		})
+	
+}
+
+
+</script>
+<!-- Modal -->

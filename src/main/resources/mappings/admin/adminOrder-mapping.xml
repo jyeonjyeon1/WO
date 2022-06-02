@@ -59,6 +59,9 @@
 		KEY IN ('point_use','point_percentage')
 	</update>
 	
-	
+	<select id="dailySales" resultType="OrdersVO">
+		SELECT DATE(O_ORDER_DATE) AS O__DATE, COUNT(O_CODE) AS O_SEQ, SUM(O_TOTAL_PRICE) AS O_TOTAL_PRICE FROM ORDERS 
+	   GROUP BY DATE(O_ORDER_DATE) ORDER BY DATE(O_ORDER_DATE) DESC;
+	</select>
 	
 </mapper>

@@ -740,12 +740,12 @@ function orderChange${vs.index}(){
         dataType: "json",
         contentType: "application/json",
      success:function(data){
-    	 Swal.fire({
-   	        icon: "success",
-   	        title: "상태 변경 완료",
-   	        showConfirmButton: false,
-   	        timer: 1500
-   	    });
+//     	 Swal.fire({
+//    	        icon: "success",
+//    	        title: "상태 변경 완료",
+//    	        showConfirmButton: false,
+//    	        timer: 1500
+//    	    });
      },
      error:function(data){
         console.log("장바구니 삭제 통신에러");

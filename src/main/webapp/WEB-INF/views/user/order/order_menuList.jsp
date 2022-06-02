@@ -390,6 +390,7 @@ function addMenu__${tVs.count}_${mVs.count}(){
 					</div>
 
 					<c:forEach var="storeReview" items="${storeReview }" varStatus="vs">
+					<c:if test="${vs.index lt 4 }">
 						<div style="text-align: center;">
 							<div class="col-lg-11 kio_review">
 								<div class="kio_review_img_bg">
@@ -428,6 +429,7 @@ function addMenu__${tVs.count}_${mVs.count}(){
 								</div>
 							</div>
 						</div>
+						</c:if>
 					</c:forEach>
 					
 						<div style="text-align: center; margin-bottom: 50px;">

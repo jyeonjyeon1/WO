@@ -89,7 +89,7 @@
 	                <div class="row" >
 	                    <div class="col-lg-4 col-md-6" style="margin: 10px;"> 
 	                    <c:choose>
-		                    <c:when test="${(reviewList.ur_pic_url).indexOf('http') eq -1}">
+		                    <c:when test="${(reviewList.ur_pic_url).indexOf('__') eq -1}">
 		                   	 <img src="https://walkingorder.s3.ap-northeast-2.amazonaws.com/reviews/no-image-available1.png" style="border-radius: 20px;">
 		                    </c:when>
 		                    <c:otherwise>

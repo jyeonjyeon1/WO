@@ -33,4 +33,8 @@ public class AOrderDAO {
 	public List<OrdersVO> orderCancelList() {
 		return sqlSession.selectList("AOrderDAO.orderCancelList");
 	}
+
+	public List<OrdersVO> dailySales() {
+		return sqlSession.selectList("AOrderDAO.dailySales");
+	}
 }

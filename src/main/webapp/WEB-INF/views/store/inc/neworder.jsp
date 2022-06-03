@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <input type="hidden" id="hiddenindexa${inputIndex}" value="${inputIndex}"/>
 <input type="hidden" id="o_codea${inputIndex}" value="${newOrder.o_code}"/>
+<input type="hidden" value="neworderneworderneworderneworderneworderneworder"/>
 <div id="order_wrapa${inputIndex}" class="col-lg-3"
 	style="margin-bottom: 20px;">
 	<div class="order_card box_shadowzz">

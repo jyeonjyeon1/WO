@@ -77,7 +77,10 @@ public class UserMypageController {
 	public String insertNotice(ReviewVO vo) throws Exception {
 		String file_name = vo.getUr_pic_url();
 		String o_code = vo.getO_code();
-		String full_url = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/reviews/" + o_code+"___"+file_name;
+		String full_url = "";
+		if(!file_name.equals("")) {
+			full_url = "https://walkingorder.s3.ap-northeast-2.amazonaws.com/reviews/" + o_code+"___"+file_name;
+		}
 		vo.setUr_pic_url(full_url);
 		userMypageService.insertReview(vo);
 		System.out.println("insertNotice");

@@ -435,7 +435,8 @@ function checkNewOrder(){
         dataType: "html",	// 이 부분이 반환 타입을 핸들링하는 곳이다.
         type: "get",
         success: function(data) {
-        	if(data!="blank"){
+        	console.log(data);
+        	if(data.indexOf("neworderneworderneworderneworderneworderneworder") != -1){
         		Swal.fire({
         			  title: "신규 주문!!",
         			  width: 400,

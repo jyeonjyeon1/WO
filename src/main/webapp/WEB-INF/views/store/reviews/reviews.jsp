@@ -419,8 +419,14 @@ function count_length(){
 
 																	<div class="col-lg-10">
 																		<h3>${reviewlist.ur_content }</h3>
-																		<img src="${reviewlist.ur_pic_url }"
-																			style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
+																		                                                                        <c:choose>
+                            <c:when test="${(reviewlist.ur_pic_url).indexOf('__') eq -1}">
+                                <img src="https://walkingorder.s3.ap-northeast-2.amazonaws.com/reviews/no-image-available1.png" style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="${reviewlist.ur_pic_url}" style="width: 100px; height: 100px; padding-top: 10px; margin-bottom: 10px; border-radius: 5px;">
+                            </c:otherwise>
+                        </c:choose>
 																		<h4>주문메뉴</h4>
 																		<c:set var="listVar">${reviewlist.o_list_detail}</c:set>
 																		<c:forTokens items="${listVar}" delims=",,,"
